@@ -29,3 +29,6 @@ SOURCES += main.cpp\
 HEADERS  += frmGTA5Sync.h
 
 FORMS    += frmGTA5Sync.ui
+
+RESOURCES += \
+    res.qrc

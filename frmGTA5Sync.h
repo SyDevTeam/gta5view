@@ -33,6 +33,8 @@ public:
     ~frmGTA5Sync();
 
 private:
+    QString GTAV_Folder;
+    QString GTAV_ProfilesFolder;
     Ui::frmGTA5Sync *ui;
 };
 
