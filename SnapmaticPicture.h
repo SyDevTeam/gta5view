@@ -15,15 +15,30 @@
 * limitations under the License.
 *****************************************************************************/
 
-#include "frmGTA5Sync.h"
-#include <QApplication>
+#ifndef SNAPMATICPICTURE_H
+#define SNAPMATICPICTURE_H
 
-int main(int argc, char *argv[])
+#include <QObject>
+#include <QPixmap>
+
+class SnapmaticPicture : public QObject
 {
-    QApplication a(argc, argv);
+    Q_OBJECT
+public:
+    explicit SnapmaticPicture(QObject *parent = 0);
+    bool readingPictureFromFile(QString fileName);
+    bool setPicture(QPixmap pixmap);
+    QPixmap getPixmap();
 
-    frmGTA5Sync w;
-    w.show();
+private:
+    QPixmap cachePicture;
+    QString picDate;
+    QString picTime;
+    QString jsonStr;
 
-    return a.exec();
-}
+signals:
+
+public slots:
+};
+
+#endif // SNAPMATICPICTURE_H

@@ -24,11 +24,16 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        frmGTA5Sync.cpp
+    SnapmaticPicture.cpp \
+    PictureDialog.cpp
 
-HEADERS  += frmGTA5Sync.h
+HEADERS  += \
+    SnapmaticPicture.h \
+    PictureDialog.h
 
-FORMS    += frmGTA5Sync.ui
+FORMS    += \
+    PictureDialog.ui
 
-RESOURCES += \
-    res.qrc
+RESOURCES +=
+
+OTHER_FILES +=

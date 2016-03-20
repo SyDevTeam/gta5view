@@ -15,27 +15,9 @@
 * limitations under the License.
 *****************************************************************************/
 
-#ifndef FRMGTA5SYNC_H
-#define FRMGTA5SYNC_H
+#include "SnapmaticPicture.h"
 
-#include <QMainWindow>
-
-namespace Ui {
-class frmGTA5Sync;
-}
-
-class frmGTA5Sync : public QMainWindow
+SnapmaticPicture::SnapmaticPicture(QObject *parent) : QObject(parent)
 {
-    Q_OBJECT
 
-public:
-    explicit frmGTA5Sync(QWidget *parent = 0);
-    ~frmGTA5Sync();
-
-private:
-    QString GTAV_Folder;
-    QString GTAV_ProfilesFolder;
-    Ui::frmGTA5Sync *ui;
-};
-
-#endif // FRMGTA5SYNC_H
+}
