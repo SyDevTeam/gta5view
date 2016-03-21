@@ -32,10 +32,12 @@ class PictureDialog : public QDialog
 public:
     explicit PictureDialog(QWidget *parent = 0);
     void setSnapmaticPicture(QPixmap pixmap);
+    void setJsonString(QString jsonStr);
     ~PictureDialog();
 
 private:
     Ui::PictureDialog *ui;
+    QString jsonDrawString;
 };
 
 #endif // PICTUREDIALOG_H

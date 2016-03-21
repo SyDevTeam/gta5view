@@ -48,9 +48,10 @@ int main(int argc, char *argv[])
         qDebug() << picture.readingPictureFromFile(arg1);
         qDebug() << picture.getLastStep();
         PictureDialog picDialog;
+        picDialog.setWindowFlags(picDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
         picDialog.setWindowTitle(picture.getPictureStr());
-        qDebug() << picture.getJsonStr();
         picDialog.setSnapmaticPicture(picture.getPixmap());
+        picDialog.setJsonString(picture.getJsonStr());
         picDialog.show();
 
         return a.exec();

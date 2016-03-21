@@ -33,6 +33,14 @@
      </property>
     </widget>
    </item>
+   <item>
+    <widget class="QLabel" name="labJSON">
+     <property name="text">
+      <string>Location: X: %1 Y: %2 Z: %3
+Players: %4</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <resources/>

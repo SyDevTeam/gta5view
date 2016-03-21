@@ -92,15 +92,12 @@ bool SnapmaticPicture::readingPicture()
     if (!picFile->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,NOJSON";
-        qDebug() << lastStep;
     }
     else if (picFile->read(4) != "JSON")
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,CTJSON";
-        qDebug() << lastStep;
     }
     QByteArray jsonRawContent = picFile->read(jsonStreamLength);
-    qDebug() << jsonRawContent.toHex();
     jsonStr = getSnapmaticJSONString(jsonRawContent);
 
     return cachePicture.loadFromData(jpegRawContent);
@@ -111,7 +108,7 @@ QString SnapmaticPicture::getSnapmaticPictureString(QByteArray snapmaticHeader)
     QByteArray snapmaticUsefulBytes = snapmaticHeader.left(snapmaticUsefulLength);
     snapmaticUsefulBytes.replace(QByteArray::fromHex("00"),"");
     snapmaticUsefulBytes.replace(QByteArray::fromHex("01"),"");
-    return QString::fromAscii(snapmaticUsefulBytes);
+    return QString::fromLatin1(snapmaticUsefulBytes);
 }
 
 QString SnapmaticPicture::getSnapmaticJSONString(QByteArray jsonBytes)
@@ -119,7 +116,7 @@ QString SnapmaticPicture::getSnapmaticJSONString(QByteArray jsonBytes)
     QByteArray jsonUsefulBytes = jsonBytes;
     jsonUsefulBytes.replace(QByteArray::fromHex("00"),"");
     jsonUsefulBytes.replace(QByteArray::fromHex("0C"),"");
-    return QString::fromAscii(jsonUsefulBytes);
+    return QString::fromLatin1(jsonUsefulBytes);
 }
 
 bool SnapmaticPicture::readingPictureFromFile(QString fileName)
