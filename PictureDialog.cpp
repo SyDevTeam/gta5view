@@ -42,7 +42,17 @@ PictureDialog::~PictureDialog()
 
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
 {
-    if (readOk)
+    // Showing error if reading error
+    if (!readOk)
+    {
+        QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep())); return;
+    }
+
+    if (picture->isPicOk())
+    {
+        ui->labPicture->setPixmap(picture->getPixmap());
+    }
+    if (picture->isJsonOk())
     {
         QString locX = QString::number(picture->getLocationX());
         QString locY = QString::number(picture->getLocationY());
@@ -51,19 +61,28 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
         QStringList plyrsList = picture->getPlayers();
 
         QString plyrsStr;
-        foreach (const QString &player, plyrsList)
+        if (plyrsList.length() >= 1)
         {
-            plyrsStr.append(", ");
-            plyrsStr.append(player);
+            foreach (const QString &player, plyrsList)
+            {
+                plyrsStr.append(", ");
+                plyrsStr.append(player);
+            }
+            plyrsStr.remove(0,2);
         }
-        if (plyrsStr.length() >= 1) { plyrsStr.remove(0,2); }
+        else
+        {
+            plyrsStr = tr("No player");
+        }
+
+        if (crewID == "") { crewID = tr("No crew"); }
 
         this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
-        ui->labPicture->setPixmap(picture->getPixmap());
     }
     else
     {
+        ui->labJSON->setText(jsonDrawString.arg("0.0", "0.0", "0.0", tr("No player"), tr("No crew")));
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
     }
 }
