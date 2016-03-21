@@ -61,3 +61,8 @@ void PictureDialog::setJsonString(SnapmaticPicture *picture)
 
     ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
 }
+
+void PictureDialog::on_cmdClose_clicked()
+{
+    this->close();
+}

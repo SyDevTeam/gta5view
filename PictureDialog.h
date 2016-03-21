@@ -35,6 +35,9 @@ public:
     void setJsonString(SnapmaticPicture *picture);
     ~PictureDialog();
 
+private slots:
+    void on_cmdClose_clicked();
+
 private:
     Ui::PictureDialog *ui;
     QString jsonDrawString;

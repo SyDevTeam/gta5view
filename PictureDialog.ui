@@ -34,13 +34,47 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="labJSON">
-     <property name="text">
-      <string>Location: X: %1 Y: %2 Z: %3
-Players: %4
-Crew ID: %5</string>
+    <layout class="QHBoxLayout" name="hlJSON">
+     <property name="leftMargin">
+      <number>4</number>
      </property>
-    </widget>
+     <property name="topMargin">
+      <number>4</number>
+     </property>
+     <property name="rightMargin">
+      <number>4</number>
+     </property>
+     <property name="bottomMargin">
+      <number>4</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="labJSON">
+       <property name="text">
+        <string>&lt;span style=&quot; font-weight:600;&quot;&gt;Location:&lt;/span&gt; X: %1, Y: %2, Z: %3 &lt;br&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Players:&lt;/span&gt; %4&lt;br&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID:&lt;/span&gt; %5</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="hsJSON">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>0</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cmdClose">
+       <property name="text">
+        <string>Close</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
