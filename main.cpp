@@ -21,7 +21,7 @@
 #include <QApplication>
 #include <QStringList>
 #include <QString>
-#include <QDebug>
+#include <QFile>
 
 int main(int argc, char *argv[])
 {
@@ -30,6 +30,7 @@ int main(int argc, char *argv[])
     QStringList applicationArgs = a.arguments();
     QString selectedAction;
     QString arg1;
+    applicationArgs.removeAt(0);
 
     foreach(QString currentArg, applicationArgs)
     {
@@ -39,6 +40,15 @@ int main(int argc, char *argv[])
             reworkedArg = currentArg.remove(0,9);
             arg1 = reworkedArg;
             selectedAction = "showpic";
+        }
+        else if (selectedAction == "")
+        {
+            QFile argumentFile(currentArg);
+            if (argumentFile.exists())
+            {
+                arg1 = currentArg;
+                selectedAction = "showpic";
+            }
         }
     }
 
