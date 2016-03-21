@@ -39,6 +39,7 @@ public:
     QString getPictureStr();
 
     // JSON
+    int getCrewNumber();
     QString getJsonStr();
     double getLocationX();
     double getLocationY();
@@ -55,8 +56,17 @@ private:
     QString pictureStr;
     QString lastStep;
 
+    // PARSE INT
+    int snapmaticHeaderLength;
+    int snapmaticUsefulLength;
+    int jpegHeaderLineDifStr;
+    int jpegPreHeaderLength;
+    int jpegPicStreamLength;
+    int jsonStreamLength;
+
     // JSON
     void parseJsonContent();
+    int jsonCrewID;
     QString jsonStr;
     double jsonLocX;
     double jsonLocY;

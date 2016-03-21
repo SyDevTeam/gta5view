@@ -37,7 +37,8 @@
     <widget class="QLabel" name="labJSON">
      <property name="text">
       <string>Location: X: %1 Y: %2 Z: %3
-Players: %4</string>
+Players: %4
+Crew ID: %5</string>
      </property>
     </widget>
    </item>

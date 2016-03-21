@@ -25,22 +25,32 @@
 #include <QString>
 #include <QDebug>
 #include <QFile>
-int snapmaticHeaderLength = 278;
-int snapmaticUsefulLength = 256;
-int jpegPreHeaderLength = 14;
-int jpegPicStreamLength = 524288;
-int jsonStreamLength = 3076;
 
 SnapmaticPicture::SnapmaticPicture(QObject *parent, QString fileName) : QObject(parent)
 {
-    // Init
+    // PARSE INT INIT - DO NOT CHANGE THIS VALUES
+    snapmaticHeaderLength = 278;
+    snapmaticUsefulLength = 256;
+    jpegHeaderLineDifStr = 2;
+    jpegPreHeaderLength = 14;
+    jpegPicStreamLength = 524288;
+    jsonStreamLength = 3076;
+
+    // INIT PIC
     cachePicture = QPixmap(0,0);
     picFileName = "";
     pictureStr = "";
     lastStep = "";
-    jsonStr = "";
 
-    // Set pic fileName
+    // INIT JSON
+    jsonStr = "";
+    jsonLocX = 0;
+    jsonLocY = 0;
+    jsonLocZ = 0;
+    jsonCrewID = 0;
+    jsonPlyrsList = QStringList();
+
+    // SET PIC FILENAME
     if (fileName != "")
     {
         picFileName = fileName;
@@ -77,7 +87,7 @@ bool SnapmaticPicture::readingPicture()
     QByteArray jpegHeaderLine = picFile->read(jpegPreHeaderLength);
 
     // Checking for JPEG
-    jpegHeaderLine.remove(0,2);
+    jpegHeaderLine.remove(0, jpegHeaderLineDifStr);
     if (jpegHeaderLine.left(4) != "JPEG")
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",2,NOJPEG";
@@ -183,6 +193,10 @@ void SnapmaticPicture::parseJsonContent()
         if (locMap.contains("y")) { jsonLocY = locMap["y"].toDouble(); }
         if (locMap.contains("z")) { jsonLocZ = locMap["z"].toDouble(); }
     }
+    if (jsonMap.contains("crewid"))
+    {
+        jsonCrewID = jsonMap["crewid"].toInt();
+    }
     if (jsonMap.contains("plyrs"))
     {
         jsonPlyrsList = jsonMap["plyrs"].toStringList();
@@ -192,6 +206,11 @@ void SnapmaticPicture::parseJsonContent()
 QString SnapmaticPicture::getJsonStr()
 {
     return jsonStr;
+}
+
+int SnapmaticPicture::getCrewNumber()
+{
+    return jsonCrewID;
 }
 
 double SnapmaticPicture::getLocationX()

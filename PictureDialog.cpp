@@ -48,6 +48,7 @@ void PictureDialog::setJsonString(SnapmaticPicture *picture)
     QString locX = QString::number(picture->getLocationX());
     QString locY = QString::number(picture->getLocationY());
     QString locZ = QString::number(picture->getLocationZ());
+    QString crewID = QString::number(picture->getCrewNumber());
     QStringList plyrsList = picture->getPlayers();
 
     QString plyrsStr;
@@ -58,5 +59,5 @@ void PictureDialog::setJsonString(SnapmaticPicture *picture)
     }
     if (plyrsStr.length() >= 1) { plyrsStr.remove(0,2); }
 
-    ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr));
+    ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
 }
