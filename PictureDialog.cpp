@@ -20,6 +20,7 @@
 #include "ui_PictureDialog.h"
 
 #include <QJsonDocument>
+#include <QMessageBox>
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QJsonArray>
@@ -39,25 +40,32 @@ PictureDialog::~PictureDialog()
     delete ui;
 }
 
-void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture)
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
 {
-    QString locX = QString::number(picture->getLocationX());
-    QString locY = QString::number(picture->getLocationY());
-    QString locZ = QString::number(picture->getLocationZ());
-    QString crewID = QString::number(picture->getCrewNumber());
-    QStringList plyrsList = picture->getPlayers();
-
-    QString plyrsStr;
-    foreach (const QString &player, plyrsList)
+    if (readOk)
     {
-        plyrsStr.append(", ");
-        plyrsStr.append(player);
-    }
-    if (plyrsStr.length() >= 1) { plyrsStr.remove(0,2); }
+        QString locX = QString::number(picture->getLocationX());
+        QString locY = QString::number(picture->getLocationY());
+        QString locZ = QString::number(picture->getLocationZ());
+        QString crewID = QString::number(picture->getCrewNumber());
+        QStringList plyrsList = picture->getPlayers();
 
-    this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
-    ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
-    ui->labPicture->setPixmap(picture->getPixmap());
+        QString plyrsStr;
+        foreach (const QString &player, plyrsList)
+        {
+            plyrsStr.append(", ");
+            plyrsStr.append(player);
+        }
+        if (plyrsStr.length() >= 1) { plyrsStr.remove(0,2); }
+
+        this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
+        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
+        ui->labPicture->setPixmap(picture->getPixmap());
+    }
+    else
+    {
+        QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
+    }
 }
 
 void PictureDialog::on_cmdClose_clicked()

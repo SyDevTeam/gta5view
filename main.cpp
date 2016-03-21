@@ -46,9 +46,9 @@ int main(int argc, char *argv[])
     {
         PictureDialog picDialog;
         SnapmaticPicture picture;
-        picture.readingPictureFromFile(arg1);
+        bool readOk = picture.readingPictureFromFile(arg1);
         picDialog.setWindowFlags(picDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-        picDialog.setSnapmaticPicture(&picture);
+        picDialog.setSnapmaticPicture(&picture, readOk);
         picDialog.show();
 
         return a.exec();

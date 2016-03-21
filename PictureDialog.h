@@ -31,7 +31,7 @@ class PictureDialog : public QDialog
     Q_OBJECT
 public:
     explicit PictureDialog(QWidget *parent = 0);
-    void setSnapmaticPicture(SnapmaticPicture *picture);
+    void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
     ~PictureDialog();
 
 private slots:
