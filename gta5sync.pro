@@ -18,7 +18,7 @@
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets json
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 isEqual(QT_MAJOR_VERSION, 5): DEFINES += QT5_MODE
 
 TARGET = gta5sync

@@ -65,5 +65,5 @@ int main(int argc, char *argv[])
         return a.exec();
     }
 
-    return a.exec();
+    return 0;
 }
