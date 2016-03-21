@@ -31,8 +31,7 @@ class PictureDialog : public QDialog
     Q_OBJECT
 public:
     explicit PictureDialog(QWidget *parent = 0);
-    void setSnapmaticPicture(QPixmap pixmap);
-    void setJsonString(SnapmaticPicture *picture);
+    void setSnapmaticPicture(SnapmaticPicture *picture);
     ~PictureDialog();
 
 private slots:
@@ -41,6 +40,7 @@ private slots:
 private:
     Ui::PictureDialog *ui;
     QString jsonDrawString;
+    QString windowTitleStr;
 };
 
 #endif // PICTUREDIALOG_H

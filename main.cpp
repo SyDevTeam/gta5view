@@ -48,9 +48,7 @@ int main(int argc, char *argv[])
         SnapmaticPicture picture;
         picture.readingPictureFromFile(arg1);
         picDialog.setWindowFlags(picDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-        picDialog.setWindowTitle(picture.getPictureStr());
-        picDialog.setSnapmaticPicture(picture.getPixmap());
-        picDialog.setJsonString(&picture);
+        picDialog.setSnapmaticPicture(&picture);
         picDialog.show();
 
         return a.exec();

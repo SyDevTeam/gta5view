@@ -30,6 +30,7 @@ PictureDialog::PictureDialog(QWidget *parent) :
     ui(new Ui::PictureDialog)
 {
     ui->setupUi(this);
+    windowTitleStr = this->windowTitle();
     jsonDrawString = ui->labJSON->text();
 }
 
@@ -38,12 +39,7 @@ PictureDialog::~PictureDialog()
     delete ui;
 }
 
-void PictureDialog::setSnapmaticPicture(QPixmap pixmap)
-{
-    ui->labPicture->setPixmap(pixmap);
-}
-
-void PictureDialog::setJsonString(SnapmaticPicture *picture)
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture)
 {
     QString locX = QString::number(picture->getLocationX());
     QString locY = QString::number(picture->getLocationY());
@@ -59,7 +55,9 @@ void PictureDialog::setJsonString(SnapmaticPicture *picture)
     }
     if (plyrsStr.length() >= 1) { plyrsStr.remove(0,2); }
 
+    this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
     ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
+    ui->labPicture->setPixmap(picture->getPixmap());
 }
 
 void PictureDialog::on_cmdClose_clicked()

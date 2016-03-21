@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>%1 - Simple Image Viewer</string>
   </property>
   <layout class="QVBoxLayout" name="vlPictureLayout">
    <property name="leftMargin">
@@ -50,7 +50,7 @@
      <item>
       <widget class="QLabel" name="labJSON">
        <property name="text">
-        <string>&lt;span style=&quot; font-weight:600;&quot;&gt;Location:&lt;/span&gt; X: %1, Y: %2, Z: %3 &lt;br&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Players:&lt;/span&gt; %4&lt;br&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID:&lt;/span&gt; %5</string>
+        <string>&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%1, %2, %3 &lt;br&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</string>
        </property>
       </widget>
      </item>
