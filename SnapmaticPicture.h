@@ -34,11 +34,13 @@ public:
     bool readingPicture();
     void setPixmap(QPixmap pixmap);
     void resetValues();
+    bool isPicOk();
     QPixmap getPixmap();
     QString getLastStep();
     QString getPictureStr();
 
     // JSON
+    bool isJsonOk();
     int getCrewNumber();
     QString getJsonStr();
     double getLocationX();
@@ -55,6 +57,7 @@ private:
     QString picFileName;
     QString pictureStr;
     QString lastStep;
+    bool picOk;
 
     // PARSE INT
     int snapmaticHeaderLength;
@@ -66,6 +69,7 @@ private:
 
     // JSON
     void parseJsonContent();
+    bool jsonOk;
     int jsonCrewID;
     QString jsonStr;
     double jsonLocX;

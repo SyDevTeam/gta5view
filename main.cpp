@@ -52,8 +52,6 @@ int main(int argc, char *argv[])
         picDialog.show();
 
         return a.exec();
-
-        qDebug() << "showpic runned";
     }
 
     return a.exec();

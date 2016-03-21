@@ -41,8 +41,10 @@ SnapmaticPicture::SnapmaticPicture(QObject *parent, QString fileName) : QObject(
     picFileName = "";
     pictureStr = "";
     lastStep = "";
+    picOk = 0;
 
     // INIT JSON
+    jsonOk = 0;
     jsonStr = "";
     jsonLocX = 0;
     jsonLocY = 0;
@@ -101,21 +103,25 @@ bool SnapmaticPicture::readingPicture()
         return false;
     }
     QByteArray jpegRawContent = picFile->read(jpegPicStreamLength);
+    picOk = cachePicture.loadFromData(jpegRawContent);
 
     // Read JSON Stream
     if (!picFile->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,NOJSON";
+        return picOk;
     }
     else if (picFile->read(4) != "JSON")
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,CTJSON";
+        return picOk;
     }
     QByteArray jsonRawContent = picFile->read(jsonStreamLength);
     jsonStr = getSnapmaticJSONString(jsonRawContent);
     parseJsonContent(); // JSON parsing is own function
 
-    return cachePicture.loadFromData(jpegRawContent);
+    return picOk;
+
 }
 
 QString SnapmaticPicture::getSnapmaticPictureString(QByteArray snapmaticHeader)
@@ -177,6 +183,11 @@ QString SnapmaticPicture::convertLogStringForDraw(QString inputStr)
     return inputStr.replace("&c;",",").replace("&u;","&");
 }
 
+bool SnapmaticPicture::isPicOk()
+{
+    return picOk;
+}
+
 // JSON part
 
 void SnapmaticPicture::parseJsonContent()
@@ -201,6 +212,13 @@ void SnapmaticPicture::parseJsonContent()
     {
         jsonPlyrsList = jsonMap["plyrs"].toStringList();
     }
+
+    jsonOk = true;
+}
+
+bool SnapmaticPicture::isJsonOk()
+{
+    return jsonOk;
 }
 
 QString SnapmaticPicture::getJsonStr()
