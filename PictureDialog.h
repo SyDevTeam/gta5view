@@ -13,6 +13,7 @@ class PictureDialog : public QDialog
 
 public:
     explicit PictureDialog(QWidget *parent = 0);
+    void setSnapmaticPicture(QPixmap pixmap);
     ~PictureDialog();
 
 private:

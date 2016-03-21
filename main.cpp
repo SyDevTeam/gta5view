@@ -15,15 +15,46 @@
 * limitations under the License.
 *****************************************************************************/
 
-#include "frmGTA5Sync.h"
+#include "SnapmaticPicture.h"
+#include "PictureDialog.h"
 #include <QApplication>
+#include <QStringList>
+#include <QString>
+#include <QDebug>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    frmGTA5Sync w;
-    w.show();
+    QStringList applicationArgs = a.arguments();
+    QString selectedAction;
+    QString arg1;
+
+    foreach(QString currentArg, applicationArgs)
+    {
+        QString reworkedArg;
+        if (currentArg.left(9) == "-showpic=" && selectedAction == "")
+        {
+            reworkedArg = currentArg.remove(0,9);
+            arg1 = reworkedArg;
+            selectedAction = "showpic";
+        }
+    }
+
+    if (selectedAction == "showpic")
+    {
+        SnapmaticPicture picture;
+        qDebug() << picture.readingPictureFromFile(arg1);
+        qDebug() << picture.getLastStep();
+        PictureDialog picDialog;
+        picDialog.setWindowTitle(picture.getPictureStr());
+        picDialog.setSnapmaticPicture(picture.getPixmap());
+        picDialog.show();
+
+        return a.exec();
+
+        qDebug() << "showpic runned";
+    }
 
     return a.exec();
 }

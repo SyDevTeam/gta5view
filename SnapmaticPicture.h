@@ -20,20 +20,30 @@
 
 #include <QObject>
 #include <QPixmap>
+#include <QString>
+#include <QFile>
 
 class SnapmaticPicture : public QObject
 {
     Q_OBJECT
 public:
-    explicit SnapmaticPicture(QObject *parent = 0);
+    explicit SnapmaticPicture(QObject *parent = 0, QString fileName = "");
     bool readingPictureFromFile(QString fileName);
-    bool setPicture(QPixmap pixmap);
+    bool readingPicture();
+    void setPixmap(QPixmap pixmap);
+    void resetValues();
     QPixmap getPixmap();
+    QString getLastStep();
+    QString getPictureStr();
 
 private:
+    QString getSnapmaticPictureString(QByteArray snapmaticHeader);
+    QString convertDrawStringForLog(QString inputStr);
+    QString convertLogStringForDraw(QString inputStr);
     QPixmap cachePicture;
-    QString picDate;
-    QString picTime;
+    QString picFileName;
+    QString pictureStr;
+    QString lastStep;
     QString jsonStr;
 
 signals:

@@ -12,3 +12,8 @@ PictureDialog::~PictureDialog()
 {
     delete ui;
 }
+
+void PictureDialog::setSnapmaticPicture(QPixmap pixmap)
+{
+    ui->labPicture->setPixmap(pixmap);
+}
