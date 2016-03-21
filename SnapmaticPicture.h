@@ -19,6 +19,7 @@
 #ifndef SNAPMATICPICTURE_H
 #define SNAPMATICPICTURE_H
 
+#include <QStringList>
 #include <QObject>
 #include <QPixmap>
 #include <QString>
@@ -34,9 +35,15 @@ public:
     void setPixmap(QPixmap pixmap);
     void resetValues();
     QPixmap getPixmap();
-    QString getJsonStr();
     QString getLastStep();
     QString getPictureStr();
+
+    // JSON
+    QString getJsonStr();
+    double getLocationX();
+    double getLocationY();
+    double getLocationZ();
+    QStringList getPlayers();
 
 private:
     QString getSnapmaticPictureString(QByteArray snapmaticHeader);
@@ -47,7 +54,14 @@ private:
     QString picFileName;
     QString pictureStr;
     QString lastStep;
+
+    // JSON
+    void parseJsonContent();
     QString jsonStr;
+    double jsonLocX;
+    double jsonLocY;
+    double jsonLocZ;
+    QStringList jsonPlyrsList;
 
 signals:
 

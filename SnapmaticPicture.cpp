@@ -17,6 +17,10 @@
 *****************************************************************************/
 
 #include "SnapmaticPicture.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QVariantMap>
+#include <QJsonArray>
 #include <QPixmap>
 #include <QString>
 #include <QDebug>
@@ -99,6 +103,7 @@ bool SnapmaticPicture::readingPicture()
     }
     QByteArray jsonRawContent = picFile->read(jsonStreamLength);
     jsonStr = getSnapmaticJSONString(jsonRawContent);
+    parseJsonContent(); // JSON parsing is own function
 
     return cachePicture.loadFromData(jpegRawContent);
 }
@@ -147,11 +152,6 @@ QString SnapmaticPicture::getLastStep()
     return lastStep;
 }
 
-QString SnapmaticPicture::getJsonStr()
-{
-    return jsonStr;
-}
-
 QPixmap SnapmaticPicture::getPixmap()
 {
     return cachePicture;
@@ -165,4 +165,51 @@ QString SnapmaticPicture::convertDrawStringForLog(QString inputStr)
 QString SnapmaticPicture::convertLogStringForDraw(QString inputStr)
 {
     return inputStr.replace("&c;",",").replace("&u;","&");
+}
+
+// JSON part
+
+void SnapmaticPicture::parseJsonContent()
+{
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonStr.toLatin1());
+    QJsonObject jsonObject = jsonDocument.object();
+    QVariantMap jsonMap = jsonObject.toVariantMap();
+
+    if (jsonMap.contains("loc"))
+    {
+        QJsonObject locObject = jsonObject["loc"].toObject();
+        QVariantMap locMap = locObject.toVariantMap();
+        if (locMap.contains("x")) { jsonLocX = locMap["x"].toDouble(); }
+        if (locMap.contains("y")) { jsonLocY = locMap["y"].toDouble(); }
+        if (locMap.contains("z")) { jsonLocZ = locMap["z"].toDouble(); }
+    }
+    if (jsonMap.contains("plyrs"))
+    {
+        jsonPlyrsList = jsonMap["plyrs"].toStringList();
+    }
+}
+
+QString SnapmaticPicture::getJsonStr()
+{
+    return jsonStr;
+}
+
+double SnapmaticPicture::getLocationX()
+{
+    return jsonLocX;
+}
+
+double SnapmaticPicture::getLocationY()
+{
+    return jsonLocY;
+}
+
+double SnapmaticPicture::getLocationZ()
+{
+    return jsonLocZ;
+}
+
+QStringList SnapmaticPicture::getPlayers()
+{
+    return jsonPlyrsList;
 }

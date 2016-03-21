@@ -43,29 +43,12 @@ void PictureDialog::setSnapmaticPicture(QPixmap pixmap)
     ui->labPicture->setPixmap(pixmap);
 }
 
-void PictureDialog::setJsonString(QString jsonStr)
+void PictureDialog::setJsonString(SnapmaticPicture *picture)
 {
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonStr.toLatin1());
-    QJsonObject jsonObject = jsonDocument.object();
-    QVariantMap jsonMap = jsonObject.toVariantMap();
-
-    QString locX;
-    QString locY;
-    QString locZ;
-    QStringList plyrsList;
-
-    if (jsonMap.contains("loc"))
-    {
-        QJsonObject locObject = jsonObject["loc"].toObject();
-        QVariantMap locMap = locObject.toVariantMap();
-        if (locMap.contains("x")) { locX = locMap["x"].toString(); }
-        if (locMap.contains("y")) { locY = locMap["y"].toString(); }
-        if (locMap.contains("z")) { locZ = locMap["z"].toString(); }
-    }
-    if (jsonMap.contains("plyrs"))
-    {
-        plyrsList = jsonMap["plyrs"].toStringList();
-    }
+    QString locX = QString::number(picture->getLocationX());
+    QString locY = QString::number(picture->getLocationY());
+    QString locZ = QString::number(picture->getLocationZ());
+    QStringList plyrsList = picture->getPlayers();
 
     QString plyrsStr;
     foreach (const QString &player, plyrsList)

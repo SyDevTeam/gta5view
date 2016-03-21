@@ -44,14 +44,13 @@ int main(int argc, char *argv[])
 
     if (selectedAction == "showpic")
     {
-        SnapmaticPicture picture;
-        qDebug() << picture.readingPictureFromFile(arg1);
-        qDebug() << picture.getLastStep();
         PictureDialog picDialog;
+        SnapmaticPicture picture;
+        picture.readingPictureFromFile(arg1);
         picDialog.setWindowFlags(picDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
         picDialog.setWindowTitle(picture.getPictureStr());
         picDialog.setSnapmaticPicture(picture.getPixmap());
-        picDialog.setJsonString(picture.getJsonStr());
+        picDialog.setJsonString(&picture);
         picDialog.show();
 
         return a.exec();
