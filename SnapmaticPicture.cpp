@@ -2,17 +2,18 @@
 * gta5sync GRAND THEFT AUTO V SYNC
 * Copyright (C) 2016 Syping Gaming Team
 *
-* Licensed under the Apache License, Version 2.0 (the "License");
-* you may not use this file except in compliance with the License.
-* You may obtain a copy of the License at
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
 *
-*     http://www.apache.org/licenses/LICENSE-2.0
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
 *
-* Unless required by applicable law or agreed to in writing, software
-* distributed under the License is distributed on an "AS IS" BASIS,
-* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-* See the License for the specific language governing permissions and
-* limitations under the License.
+* You should have received a copy of the GNU General Public License
+* along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
 #include "SnapmaticPicture.h"
@@ -24,6 +25,7 @@ int snapmaticHeaderLength = 278;
 int snapmaticUsefulLength = 256;
 int jpegPreHeaderLength = 14;
 int jpegPicStreamLength = 524288;
+int jsonStreamLength = 3076;
 
 SnapmaticPicture::SnapmaticPicture(QObject *parent, QString fileName) : QObject(parent)
 {
@@ -78,8 +80,29 @@ bool SnapmaticPicture::readingPicture()
         return false;
     }
 
-    lastStep = "3;/1,ReadedFile," + convertDrawStringForLog(picFileName);
+    // Read JPEG Stream
+    if (!picFile->isReadable())
+    {
+        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,NOPIC";
+        return false;
+    }
     QByteArray jpegRawContent = picFile->read(jpegPicStreamLength);
+
+    // Read JSON Stream
+    if (!picFile->isReadable())
+    {
+        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,NOJSON";
+        qDebug() << lastStep;
+    }
+    else if (picFile->read(4) != "JSON")
+    {
+        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,CTJSON";
+        qDebug() << lastStep;
+    }
+    QByteArray jsonRawContent = picFile->read(jsonStreamLength);
+    qDebug() << jsonRawContent.toHex();
+    jsonStr = getSnapmaticJSONString(jsonRawContent);
+
     return cachePicture.loadFromData(jpegRawContent);
 }
 
@@ -89,6 +112,14 @@ QString SnapmaticPicture::getSnapmaticPictureString(QByteArray snapmaticHeader)
     snapmaticUsefulBytes.replace(QByteArray::fromHex("00"),"");
     snapmaticUsefulBytes.replace(QByteArray::fromHex("01"),"");
     return QString::fromAscii(snapmaticUsefulBytes);
+}
+
+QString SnapmaticPicture::getSnapmaticJSONString(QByteArray jsonBytes)
+{
+    QByteArray jsonUsefulBytes = jsonBytes;
+    jsonUsefulBytes.replace(QByteArray::fromHex("00"),"");
+    jsonUsefulBytes.replace(QByteArray::fromHex("0C"),"");
+    return QString::fromAscii(jsonUsefulBytes);
 }
 
 bool SnapmaticPicture::readingPictureFromFile(QString fileName)
@@ -117,6 +148,11 @@ QString SnapmaticPicture::getPictureStr()
 QString SnapmaticPicture::getLastStep()
 {
     return lastStep;
+}
+
+QString SnapmaticPicture::getJsonStr()
+{
+    return jsonStr;
 }
 
 QPixmap SnapmaticPicture::getPixmap()

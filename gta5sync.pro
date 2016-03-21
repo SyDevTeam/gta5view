@@ -2,22 +2,23 @@
 #* gta5sync GRAND THEFT AUTO V SYNC
 #* Copyright (C) 2015-2016 Syping Gaming Team
 #*
-#* Licensed under the Apache License, Version 2.0 (the "License");
-#* you may not use this file except in compliance with the License.
-#* You may obtain a copy of the License at
+#* This program is free software: you can redistribute it and/or modify
+#* it under the terms of the GNU General Public License as published by
+#* the Free Software Foundation, either version 3 of the License, or
+#* (at your option) any later version.
 #*
-#*     http://www.apache.org/licenses/LICENSE-2.0
+#* This program is distributed in the hope that it will be useful,
+#* but WITHOUT ANY WARRANTY; without even the implied warranty of
+#* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#* GNU General Public License for more details.
 #*
-#* Unless required by applicable law or agreed to in writing, software
-#* distributed under the License is distributed on an "AS IS" BASIS,
-#* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-#* See the License for the specific language governing permissions and
-#* limitations under the License.
+#* You should have received a copy of the GNU General Public License
+#* along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #*****************************************************************************/
 
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets json
 
 TARGET = gta5sync
 TEMPLATE = app
@@ -37,3 +38,24 @@ FORMS    += \
 RESOURCES +=
 
 OTHER_FILES +=
+
+# QT4 ONLY STUFF
+
+isEqual(QT_MAJOR_VERSION, 4): INCLUDEPATH += ./qjson4
+
+isEqual(QT_MAJOR_VERSION, 4): HEADERS += qjson4/QJsonArray.h \
+    qjson4/QJsonDocument.h \
+    qjson4/QJsonObject.h \
+    qjson4/QJsonParseError.h \
+    qjson4/QJsonValue.h \
+    qjson4/QJsonValueRef.h \
+    qjson4/QJsonParser.h \
+    qjson4/QJsonRoot.h
+
+isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
+    qjson4/QJsonDocument.cpp \
+    qjson4/QJsonObject.cpp \
+    qjson4/QJsonParseError.cpp \
+    qjson4/QJsonValue.cpp \
+    qjson4/QJsonValueRef.cpp \
+    qjson4/QJsonParser.cpp
