@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>%1 - Simple Image Viewer</string>
+   <string>%1 - Snapmatic Picture Viewer</string>
   </property>
   <layout class="QVBoxLayout" name="vlPictureLayout">
    <property name="leftMargin">
