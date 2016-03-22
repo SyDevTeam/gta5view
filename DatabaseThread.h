@@ -16,34 +16,28 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef PICTUREDIALOG_H
-#define PICTUREDIALOG_H
+#ifndef DATABASETHREAD_H
+#define DATABASETHREAD_H
 
-#include "SnapmaticPicture.h"
-#include "ProfileDatabase.h"
-#include <QDialog>
+#include "CrewDatabase.h"
+#include <QObject>
+#include <QThread>
 
-namespace Ui {
-class PictureDialog;
-}
-
-class PictureDialog : public QDialog
+class DatabaseThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit PictureDialog(ProfileDatabase *profileDB, QWidget *parent = 0);
-    void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
-    ~PictureDialog();
-
-private slots:
-    void on_cmdClose_clicked();
-    void on_cmdExport_clicked();
+    explicit DatabaseThread(CrewDatabase *crewDB, QObject *parent = 0);
 
 private:
-    Ui::PictureDialog *ui;
-    QString jsonDrawString;
-    QString windowTitleStr;
-    ProfileDatabase *profileDB;
+    CrewDatabase *crewDB;
+
+protected:
+    void run();
+
+signals:
+    void playerNameFound(int playerID, QString playerName);
+
 };
 
-#endif // PICTUREDIALOG_H
+#endif // DATABASETHREAD_H

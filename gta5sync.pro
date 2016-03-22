@@ -16,7 +16,7 @@
 #* along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #*****************************************************************************/
 
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 isEqual(QT_MAJOR_VERSION, 5): DEFINES += QT5_MODE
@@ -27,11 +27,17 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     SnapmaticPicture.cpp \
-    PictureDialog.cpp
+    PictureDialog.cpp \
+    ProfileDatabase.cpp \
+    DatabaseThread.cpp \
+    CrewDatabase.cpp
 
 HEADERS  += \
     SnapmaticPicture.h \
-    PictureDialog.h
+    PictureDialog.h \
+    ProfileDatabase.h \
+    DatabaseThread.h \
+    CrewDatabase.h
 
 FORMS    += \
     PictureDialog.ui

@@ -34,6 +34,19 @@
     </widget>
    </item>
    <item>
+    <spacer name="vsDialog">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="hlJSON">
      <property name="leftMargin">
       <number>4</number>
@@ -71,6 +84,13 @@
       <widget class="QPushButton" name="cmdClose">
        <property name="text">
         <string>Close</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cmdExport">
+       <property name="text">
+        <string>Export</string>
        </property>
       </widget>
      </item>

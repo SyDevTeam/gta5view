@@ -17,15 +17,21 @@
 *****************************************************************************/
 
 #include "SnapmaticPicture.h"
+#include "ProfileDatabase.h"
+#include "DatabaseThread.h"
 #include "PictureDialog.h"
+#include "CrewDatabase.h"
 #include <QApplication>
 #include <QStringList>
+#include <QObject>
 #include <QString>
 #include <QFile>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    a.setApplicationName("gta5sync");
+    a.setApplicationVersion("1.0.0");
 
     QStringList applicationArgs = a.arguments();
     QString selectedAction;
@@ -52,15 +58,23 @@ int main(int argc, char *argv[])
         }
     }
 
+    CrewDatabase *crewDB = new CrewDatabase();
+    ProfileDatabase *profileDB = new ProfileDatabase();
+    DatabaseThread *threadDB = new DatabaseThread(crewDB);
+    QObject::connect(threadDB, SIGNAL(playerNameFound(int,QString)), profileDB, SLOT(setPlayerName(int,QString)));
+    threadDB->start();
+
     if (selectedAction == "showpic")
     {
-        PictureDialog picDialog;
+        PictureDialog *picDialog = new PictureDialog(profileDB);
         SnapmaticPicture picture;
         bool readOk = picture.readingPictureFromFile(arg1);
-        picDialog.setWindowFlags(picDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-        picDialog.setSnapmaticPicture(&picture, readOk);
+        picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+        picDialog->setSnapmaticPicture(&picture, readOk);
+        int crewID = picture.getCrewNumber();
+        if (crewID != 0) { crewDB->addCrew(crewID); }
         if (!readOk) { return 1; }
-        picDialog.show();
+        picDialog->show();
 
         return a.exec();
     }

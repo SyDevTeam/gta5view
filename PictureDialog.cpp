@@ -17,22 +17,29 @@
 *****************************************************************************/
 
 #include "PictureDialog.h"
+#include "ProfileDatabase.h"
 #include "ui_PictureDialog.h"
 
 #include <QJsonDocument>
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QJsonArray>
+#include <QTimer>
 #include <QDebug>
 
-PictureDialog::PictureDialog(QWidget *parent) :
-    QDialog(parent),
+PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
+    QDialog(parent), profileDB(profileDB),
     ui(new Ui::PictureDialog)
 {
     ui->setupUi(this);
     windowTitleStr = this->windowTitle();
     jsonDrawString = ui->labJSON->text();
+    ui->cmdExport->setEnabled(0);
+    ui->cmdExport->setDefault(0);
+    ui->cmdClose->setDefault(1);
+    ui->cmdClose->setFocus();
 }
 
 PictureDialog::~PictureDialog()
@@ -51,6 +58,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
     if (picture->isPicOk())
     {
         ui->labPicture->setPixmap(picture->getPixmap());
+        ui->cmdExport->setEnabled(true);
     }
     if (picture->isJsonOk())
     {
@@ -66,7 +74,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
             foreach (const QString &player, plyrsList)
             {
                 plyrsStr.append(", ");
-                plyrsStr.append(player);
+                plyrsStr.append(profileDB->getPlayerName(player.toInt()));
             }
             plyrsStr.remove(0,2);
         }
@@ -90,4 +98,9 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
 void PictureDialog::on_cmdClose_clicked()
 {
     this->close();
+}
+
+void PictureDialog::on_cmdExport_clicked()
+{
+
 }
