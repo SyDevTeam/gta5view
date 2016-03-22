@@ -43,8 +43,8 @@ private slots:
     void on_cmdExport_clicked();
 
 private:
-    Ui::PictureDialog *ui;
     ProfileDatabase *profileDB;
+    Ui::PictureDialog *ui;
     QString jsonDrawString;
     QString windowTitleStr;
     QStringList plyrsList;
