@@ -35,15 +35,23 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
     ~PictureDialog();
 
+public slots:
+    void on_playerNameUpdated();
+
 private slots:
     void on_cmdClose_clicked();
     void on_cmdExport_clicked();
 
 private:
     Ui::PictureDialog *ui;
+    ProfileDatabase *profileDB;
     QString jsonDrawString;
     QString windowTitleStr;
-    ProfileDatabase *profileDB;
+    QStringList plyrsList;
+    QString crewID;
+    QString locX;
+    QString locY;
+    QString locZ;
 };
 
 #endif // PICTUREDIALOG_H

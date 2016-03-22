@@ -71,9 +71,12 @@ int main(int argc, char *argv[])
         bool readOk = picture.readingPictureFromFile(arg1);
         picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
         picDialog->setSnapmaticPicture(&picture, readOk);
+
         int crewID = picture.getCrewNumber();
         if (crewID != 0) { crewDB->addCrew(crewID); }
         if (!readOk) { return 1; }
+
+        QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(on_playerNameUpdated()));
         picDialog->show();
 
         return a.exec();

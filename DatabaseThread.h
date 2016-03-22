@@ -37,6 +37,7 @@ protected:
 
 signals:
     void playerNameFound(int playerID, QString playerName);
+    void playerNameUpdated();
 
 };
 

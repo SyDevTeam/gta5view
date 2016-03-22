@@ -46,7 +46,7 @@ void DatabaseThread::run()
         QString memberListUrl = "http://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=" + crewID;
 
         QNetworkRequest netRequest(memberListUrl);
-        netRequest.setRawHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:45.0) Gecko/20100101 Firefox/45.0");
+        netRequest.setRawHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64; rv:45.0) Gecko/20100101 Firefox/45.0 gta5sync/1.0");
         netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
         netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
         netRequest.setRawHeader("Connection", "keep-alive");
@@ -83,6 +83,8 @@ void DatabaseThread::run()
             }
         }
     }
+
+    emit playerNameUpdated();
 
     QTimer::singleShot(300000, &threadLoop, SLOT(quit()));
     threadLoop.exec();

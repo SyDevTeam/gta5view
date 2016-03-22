@@ -40,6 +40,11 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->cmdExport->setDefault(0);
     ui->cmdClose->setDefault(1);
     ui->cmdClose->setFocus();
+    plyrsList = QStringList();
+    crewID = "";
+    locX = "";
+    locY = "";
+    locZ = "";
 }
 
 PictureDialog::~PictureDialog()
@@ -62,11 +67,11 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
     }
     if (picture->isJsonOk())
     {
-        QString locX = QString::number(picture->getLocationX());
-        QString locY = QString::number(picture->getLocationY());
-        QString locZ = QString::number(picture->getLocationZ());
-        QString crewID = QString::number(picture->getCrewNumber());
-        QStringList plyrsList = picture->getPlayers();
+        locX = QString::number(picture->getLocationX());
+        locY = QString::number(picture->getLocationY());
+        locZ = QString::number(picture->getLocationZ());
+        crewID = QString::number(picture->getCrewNumber());
+        plyrsList = picture->getPlayers();
 
         QString plyrsStr;
         if (plyrsList.length() >= 1)
@@ -92,6 +97,21 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
     {
         ui->labJSON->setText(jsonDrawString.arg("0.0", "0.0", "0.0", tr("No player"), tr("No crew")));
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
+    }
+}
+
+void PictureDialog::on_playerNameUpdated()
+{
+    if (plyrsList.count() >= 1)
+    {
+        QString plyrsStr;
+        foreach (const QString &player, plyrsList)
+        {
+            plyrsStr.append(", ");
+            plyrsStr.append(profileDB->getPlayerName(player.toInt()));
+        }
+        plyrsStr.remove(0,2);
+        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
     }
 }
 
