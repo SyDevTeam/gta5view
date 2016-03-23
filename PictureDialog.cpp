@@ -45,9 +45,6 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     windowTitleStr = this->windowTitle();
     jsonDrawString = ui->labJSON->text();
     ui->cmdExport->setEnabled(0);
-    ui->cmdExport->setDefault(0);
-    ui->cmdClose->setDefault(1);
-    ui->cmdClose->setFocus();
     plyrsList = QStringList();
     crewID = "";
     locX = "";
