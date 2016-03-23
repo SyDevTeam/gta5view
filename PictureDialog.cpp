@@ -26,8 +26,16 @@
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QJsonArray>
-#include <QTimer>
 #include <QDebug>
+#include <QList>
+#include <QUrl>
+#include <QDir>
+
+#if QT5_MODE
+#include <QStandardPaths>
+#else
+#include <QDesktopServices>
+#endif
 
 PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     QDialog(parent), profileDB(profileDB),
@@ -123,5 +131,95 @@ void PictureDialog::on_cmdClose_clicked()
 
 void PictureDialog::on_cmdExport_clicked()
 {
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileDialog.setViewMode(QFileDialog::Detail);
+    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+    fileDialog.setDefaultSuffix("suffix");
+    fileDialog.setNameFilter(tr("JPEG picture (*.jpg);;Portable Network Graphics (*.png)"));
+    fileDialog.setWindowTitle(tr("Export picture"));
+    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
 
+    QList<QUrl> sidebarUrls = fileDialog.sidebarUrls();
+    QDir dir;
+
+    // Get Documents + Desktop Location
+#ifdef QT5_MODE
+    QString documentsLocation = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+    QString desktopLocation = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+#else
+    QString documentsLocation = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+    QString desktopLocation = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+#endif
+
+    // Add Desktop Location to Sidebar
+    dir.setPath(desktopLocation);
+    if (dir.exists())
+    {
+        sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
+    }
+
+    // Add Documents + GTA V Location to Sidebar
+    dir.setPath(documentsLocation);
+    if (dir.exists())
+    {
+        sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
+        if (dir.cd("Rockstar Games/GTA V"))
+        {
+            sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
+        }
+    }
+
+    fileDialog.setSidebarUrls(sidebarUrls);
+
+fileDialogPreSave:
+    if (fileDialog.exec())
+    {
+        QStringList selectedFiles = fileDialog.selectedFiles();
+        if (selectedFiles.length() == 1)
+        {
+            QString saveFileFormat;
+            QString selectedFile = selectedFiles.at(0);
+            if (selectedFile.right(4) == ".jpg")
+            {
+                saveFileFormat = "JPEG";
+            }
+            else if (selectedFile.right(4) == ".jpeg")
+            {
+                saveFileFormat = "JPEG";
+            }
+            else if (selectedFile.right(4) == ".png")
+            {
+                saveFileFormat = "PNG";
+            }
+            else if (selectedFile.right(7) == ".suffix")
+            {
+                if (fileDialog.selectedNameFilter() == "JPEG picture (*.jpg)")
+                {
+                    selectedFile.replace(".suffix", ".jpg");
+                }
+                else if (fileDialog.selectedNameFilter() == "Portable Network Graphics (*.png)")
+                {
+                    selectedFile.replace(".suffix", ".png");
+                }
+                else
+                {
+                    selectedFile.replace(".suffix", ".jpg");
+                }
+            }
+
+            bool isSaved = ui->labPicture->pixmap()->save(selectedFile, saveFileFormat.toStdString().c_str(), 100);
+
+            if (!isSaved)
+            {
+                QMessageBox::warning(this, tr("Snapmatic Picture Exporter"), tr("Failed to save the picture"));
+                goto fileDialogPreSave;
+            }
+        }
+        else
+        {
+            QMessageBox::warning(this, tr("Snapmatic Picture Exporter"), tr("No valid file is selected"));
+            goto fileDialogPreSave;
+        }
+    }
 }
