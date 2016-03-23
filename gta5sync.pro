@@ -25,7 +25,7 @@ TARGET = gta5sync
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
+SOURCES += main.cpp \
     SnapmaticPicture.cpp \
     PictureDialog.cpp \
     ProfileDatabase.cpp \
@@ -58,10 +58,10 @@ FORMS    += \
 TRANSLATIONS += \
     gta5sync_de.ts
 
-RESOURCES +=
+RESOURCES += \
+    app.qrc
 
 OTHER_FILES += \
-    gta5sync_de.qm \
     app.rc
 
 win32: RC_FILE += app.rc

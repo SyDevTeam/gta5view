@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/tr">
+        <file>gta5sync_de.qm</file>
+        <file>qt_de.qm</file>
+        <file>qtbase_de.qm</file>
+    </qresource>
+</RCC>
