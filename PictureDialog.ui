@@ -84,16 +84,16 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="cmdClose">
+      <widget class="QPushButton" name="cmdExport">
        <property name="text">
-        <string>Close</string>
+        <string>Export</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="cmdExport">
+      <widget class="QPushButton" name="cmdClose">
        <property name="text">
-        <string>Export</string>
+        <string>Close</string>
        </property>
       </widget>
      </item>
