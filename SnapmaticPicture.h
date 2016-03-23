@@ -29,11 +29,10 @@ class SnapmaticPicture : public QObject
 {
     Q_OBJECT
 public:
-    explicit SnapmaticPicture(QObject *parent = 0, QString fileName = "");
+    explicit SnapmaticPicture(QString fileName = "", QObject *parent = 0);
     bool readingPictureFromFile(QString fileName);
     bool readingPicture();
     void setPixmap(QPixmap pixmap);
-    void resetValues();
     bool isPicOk();
     QPixmap getPixmap();
     QString getLastStep();

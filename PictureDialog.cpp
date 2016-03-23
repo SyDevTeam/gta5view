@@ -57,7 +57,8 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
     // Showing error if reading error
     if (!readOk)
     {
-        QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep())); return;
+        QMessageBox::warning(this, tr("Snapmatic Picture Viewer"), tr("Failed at %1").arg(picture->getLastStep()));
+        return;
     }
 
     if (picture->isPicOk())

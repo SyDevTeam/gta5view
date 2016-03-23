@@ -23,10 +23,9 @@
 #include <QJsonArray>
 #include <QPixmap>
 #include <QString>
-#include <QDebug>
 #include <QFile>
 
-SnapmaticPicture::SnapmaticPicture(QObject *parent, QString fileName) : QObject(parent)
+SnapmaticPicture::SnapmaticPicture(QString fileName, QObject *parent) : QObject(parent), picFileName(fileName)
 {
     // PARSE INT INIT - DO NOT CHANGE THIS VALUES
     snapmaticHeaderLength = 278;
@@ -38,7 +37,6 @@ SnapmaticPicture::SnapmaticPicture(QObject *parent, QString fileName) : QObject(
 
     // INIT PIC
     cachePicture = QPixmap(0,0);
-    picFileName = "";
     pictureStr = "";
     lastStep = "";
     picOk = 0;
@@ -51,12 +49,6 @@ SnapmaticPicture::SnapmaticPicture(QObject *parent, QString fileName) : QObject(
     jsonLocZ = 0;
     jsonCrewID = 0;
     jsonPlyrsList = QStringList();
-
-    // SET PIC FILENAME
-    if (fileName != "")
-    {
-        picFileName = fileName;
-    }
 }
 
 bool SnapmaticPicture::readingPicture()

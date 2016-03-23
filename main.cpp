@@ -19,8 +19,10 @@
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
+#include "SavegameDialog.h"
 #include "PictureDialog.h"
 #include "CrewDatabase.h"
+#include "SavegameData.h"
 #include <QApplication>
 #include <QStringList>
 #include <QObject>
@@ -47,6 +49,12 @@ int main(int argc, char *argv[])
             arg1 = reworkedArg;
             selectedAction = "showpic";
         }
+        else if (currentArg.left(9) == "-showsgd=" && selectedAction == "")
+        {
+            reworkedArg = currentArg.remove(0,9);
+            arg1 = reworkedArg;
+            selectedAction = "showsgd";
+        }
         else if (selectedAction == "")
         {
             QFile argumentFile(currentArg);
@@ -58,15 +66,14 @@ int main(int argc, char *argv[])
         }
     }
 
-    CrewDatabase *crewDB = new CrewDatabase();
-    ProfileDatabase *profileDB = new ProfileDatabase();
-    DatabaseThread *threadDB = new DatabaseThread(crewDB);
-    QObject::connect(threadDB, SIGNAL(playerNameFound(int,QString)), profileDB, SLOT(setPlayerName(int,QString)));
-
     if (selectedAction == "showpic")
     {
+        CrewDatabase *crewDB = new CrewDatabase();
+        ProfileDatabase *profileDB = new ProfileDatabase();
+        DatabaseThread *threadDB = new DatabaseThread(crewDB);
         PictureDialog *picDialog = new PictureDialog(profileDB);
         SnapmaticPicture picture;
+
         bool readOk = picture.readingPictureFromFile(arg1);
         picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
         picDialog->setSnapmaticPicture(&picture, readOk);
@@ -75,9 +82,26 @@ int main(int argc, char *argv[])
         if (crewID != 0) { crewDB->addCrew(crewID); }
         if (!readOk) { return 1; }
 
+        QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
         QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(on_playerNameUpdated()));
         threadDB->start();
+
         picDialog->show();
+
+        return a.exec();
+    }
+    else if (selectedAction == "showsgd")
+    {
+        SavegameDialog *savegameDialog = new SavegameDialog();
+        SavegameData savegame;
+
+        bool readOk = savegame.readingSavegameFromFile(arg1);
+        savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+        savegameDialog->setSavegameData(&savegame, readOk);
+
+        if (!readOk) { return 1; }
+
+        savegameDialog->show();
 
         return a.exec();
     }
