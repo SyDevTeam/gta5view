@@ -39,7 +39,7 @@ int main(int argc, char *argv[])
     a.setApplicationName("gta5sync");
     a.setApplicationVersion("1.0.0");
 
-    QSettings settings("Syping Gaming Team", "gtasync");
+    QSettings settings("Syping Gaming Team", "gta5sync");
     settings.beginGroup("Interface");
     QString language = settings.value("Language","System").toString();
     settings.endGroup();
