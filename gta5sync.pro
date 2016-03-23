@@ -30,14 +30,16 @@ SOURCES += main.cpp\
     PictureDialog.cpp \
     ProfileDatabase.cpp \
     DatabaseThread.cpp \
-    CrewDatabase.cpp
+    CrewDatabase.cpp \
+    SavegameData.cpp
 
 HEADERS  += \
     SnapmaticPicture.h \
     PictureDialog.h \
     ProfileDatabase.h \
     DatabaseThread.h \
-    CrewDatabase.h
+    CrewDatabase.h \
+    SavegameData.h
 
 FORMS    += \
     PictureDialog.ui

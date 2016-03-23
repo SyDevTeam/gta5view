@@ -30,7 +30,7 @@ SnapmaticPicture::SnapmaticPicture(QObject *parent, QString fileName) : QObject(
 {
     // PARSE INT INIT - DO NOT CHANGE THIS VALUES
     snapmaticHeaderLength = 278;
-    snapmaticUsefulLength = 256;
+    snapmaticUsefulLength = 260;
     jpegHeaderLineDifStr = 2;
     jpegPreHeaderLength = 14;
     jpegPicStreamLength = 524288;
