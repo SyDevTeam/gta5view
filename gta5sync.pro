@@ -55,9 +55,14 @@ FORMS    += \
     UserInterface.ui \
     ProfileInterface.ui
 
+TRANSLATIONS += \
+    gta5sync_de.ts
+
 RESOURCES +=
 
-OTHER_FILES += app.rc
+OTHER_FILES += \
+    gta5sync_de.qm
+    app.rc
 
 win32: RC_FILE += app.rc
 
