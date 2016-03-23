@@ -87,8 +87,14 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
         {
             foreach (const QString &player, plyrsList)
             {
-                plyrsStr.append(", ");
-                plyrsStr.append(profileDB->getPlayerName(player.toInt()));
+                QString playerName = profileDB->getPlayerName(player.toInt());
+                plyrsStr.append(", <a href=\"http://socialclub.rockstargames.com/member/");
+                plyrsStr.append(playerName);
+                plyrsStr.append("/");
+                plyrsStr.append(player);
+                plyrsStr.append("\">");
+                plyrsStr.append(playerName);
+                plyrsStr.append("</a>");
             }
             plyrsStr.remove(0,2);
         }
@@ -116,8 +122,21 @@ void PictureDialog::on_playerNameUpdated()
         QString plyrsStr;
         foreach (const QString &player, plyrsList)
         {
-            plyrsStr.append(", ");
-            plyrsStr.append(profileDB->getPlayerName(player.toInt()));
+            QString playerName = profileDB->getPlayerName(player.toInt());
+            plyrsStr.append(", <a href=\"http://socialclub.rockstargames.com/member/");
+            if (playerName != player)
+            {
+                plyrsStr.append(playerName);
+            }
+            else
+            {
+                plyrsStr.append("id");
+            }
+            plyrsStr.append("/");
+            plyrsStr.append(player);
+            plyrsStr.append("\">");
+            plyrsStr.append(playerName);
+            plyrsStr.append("</a>");
         }
         plyrsStr.remove(0,2);
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
@@ -180,6 +199,7 @@ fileDialogPreSave:
         {
             QString saveFileFormat;
             QString selectedFile = selectedFiles.at(0);
+
             if (selectedFile.right(4) == ".jpg")
             {
                 saveFileFormat = "JPEG";

@@ -21,6 +21,7 @@
 #include "DatabaseThread.h"
 #include "SavegameDialog.h"
 #include "PictureDialog.h"
+#include "UserInterface.h"
 #include "CrewDatabase.h"
 #include "SavegameData.h"
 #include <QApplication>
@@ -125,5 +126,8 @@ int main(int argc, char *argv[])
         return a.exec();
     }
 
-    return 0;
+    UserInterface *uiWindow = new UserInterface();
+    uiWindow->show();
+
+    return a.exec();
 }
