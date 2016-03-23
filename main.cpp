@@ -76,6 +76,11 @@ int main(int argc, char *argv[])
                     arg1 = currentArg;
                     selectedAction = "showsgd";
                 }
+                else if (argumentFileType == "MISR")
+                {
+                    arg1 = currentArg;
+                    selectedAction = "showsgd";
+                }
             }
         }
     }
