@@ -61,7 +61,7 @@ TRANSLATIONS += \
 RESOURCES +=
 
 OTHER_FILES += \
-    gta5sync_de.qm
+    gta5sync_de.qm \
     app.rc
 
 win32: RC_FILE += app.rc
