@@ -25,8 +25,10 @@
 #include "SavegameData.h"
 #include <QApplication>
 #include <QStringList>
+#include <QFileInfo>
 #include <QObject>
 #include <QString>
+#include <QDebug>
 #include <QFile>
 
 int main(int argc, char *argv[])
@@ -58,10 +60,22 @@ int main(int argc, char *argv[])
         else if (selectedAction == "")
         {
             QFile argumentFile(currentArg);
+            QFileInfo argumentFileInfo(argumentFile);
             if (argumentFile.exists())
             {
-                arg1 = currentArg;
-                selectedAction = "showpic";
+                QString argumentFileName = argumentFileInfo.fileName();
+                QString argumentFileType = argumentFileName.left(4);
+
+                if (argumentFileType == "PGTA")
+                {
+                    arg1 = currentArg;
+                    selectedAction = "showpic";
+                }
+                else if (argumentFileType == "SGTA")
+                {
+                    arg1 = currentArg;
+                    selectedAction = "showsgd";
+                }
             }
         }
     }
