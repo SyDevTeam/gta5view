@@ -39,12 +39,11 @@ int main(int argc, char *argv[])
     a.setApplicationName("gta5sync");
     a.setApplicationVersion("1.0.0");
 
+    // Loading translation settings
     QSettings settings("Syping Gaming Team", "gta5sync");
     settings.beginGroup("Interface");
     QString language = settings.value("Language","System").toString();
     settings.endGroup();
-
-    // Translate pre values
     bool trsf = false;
     bool svlp = false;
 
@@ -62,7 +61,7 @@ int main(int argc, char *argv[])
                 {
                     if (langList.at(0) != "en")
                     {
-                        if (svlp) {trsf = true;}
+                        if (svlp) { trsf = true; }
                     }
                 }
             }
@@ -70,7 +69,7 @@ int main(int argc, char *argv[])
             {
                 if (langList.at(0) != "en")
                 {
-                    if (svlp) {trsf = true;}
+                    if (svlp) { trsf = true; }
                 }
             }
         }

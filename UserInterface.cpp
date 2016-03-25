@@ -19,12 +19,64 @@
 #include "UserInterface.h"
 #include "ui_UserInterface.h"
 #include "ProfileInterface.h"
+#include <QMessageBox>
+#include <QSettings>
+#include <QFileInfo>
+#include <QFile>
+#include <QDir>
+#include <QMap>
+
+#ifdef QT5_MODE
+#include <QStandardPaths>
+#else
+#include <QDesktopServices>
+#endif
 
 UserInterface::UserInterface(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
+
+    // init settings
+    QSettings SyncSettings("Syping Gaming Team", "gta5sync");
+    SyncSettings.beginGroup("dir");
+    bool forceDir = SyncSettings.value("force", false).toBool();
+
+    // init folder
+#ifdef QT5_MODE
+    QString GTAV_defaultFolder = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "\\Rockstar Games\\GTA V";
+#else
+    QString GTAV_defaultFolder = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation) + "\\Rockstar Games\\GTA V";
+#endif
+    QDir GTAV_Dir;
+    if (forceDir)
+    {
+        GTAV_Folder = SyncSettings.value("dir", GTAV_defaultFolder).toString();
+    }
+    else
+    {
+        GTAV_Folder = GTAV_defaultFolder;
+    }
+    GTAV_Dir.setPath(GTAV_Folder);
+    if (GTAV_Dir.exists())
+    {
+        QDir::setCurrent(GTAV_Folder);
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("GTA V Sync"), tr("GTA V Folder not found!"));
+    }
+
+    // profiles init
+    QDir GTAV_ProfilesDir;
+    GTAV_ProfilesFolder = GTAV_Folder + "\\Profiles";
+    GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
+
+    QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::NoFilter, QDir::NoSort);
+    GTAV_Profiles.removeAll("..");
+    GTAV_Profiles.removeAll(".");
+
     ProfileInterface *profile1 = new ProfileInterface();
     ui->swProfile->addWidget(profile1);
     ui->swProfile->setCurrentWidget(profile1);

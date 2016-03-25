@@ -16,32 +16,17 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef USERINTERFACE_H
-#define USERINTERFACE_H
+#include "SnapmaticWidget.h"
+#include "ui_SnapmaticWidget.h"
 
-#include <QMainWindow>
-#include <QString>
-#include <QMap>
-
-namespace Ui {
-class UserInterface;
+SnapmaticWidget::SnapmaticWidget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::SnapmaticWidget)
+{
+    ui->setupUi(this);
 }
 
-class UserInterface : public QMainWindow
+SnapmaticWidget::~SnapmaticWidget()
 {
-    Q_OBJECT
-public:
-    explicit UserInterface(QWidget *parent = 0);
-    ~UserInterface();
-
-private slots:
-    void on_actionExit_triggered();
-
-private:
-    Ui::UserInterface *ui;
-    QString GTAV_Folder;
-    QString GTAV_ProfilesFolder;
-    QMap<QString, QString> GTAV_ProfileMap;
-};
-
-#endif // USERINTERFACE_H
+    delete ui;
+}

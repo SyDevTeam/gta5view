@@ -35,7 +35,9 @@ SOURCES += main.cpp \
     SavegameDialog.cpp \
     SyncFramework.cpp \
     UserInterface.cpp \
-    ProfileInterface.cpp
+    ProfileInterface.cpp \
+    SnapmaticWidget.cpp \
+    SavegameWidget.cpp
 
 HEADERS  += \
     SnapmaticPicture.h \
@@ -47,13 +49,17 @@ HEADERS  += \
     SavegameDialog.h \
     SyncFramework.h \
     UserInterface.h \
-    ProfileInterface.h
+    ProfileInterface.h \
+    SnapmaticWidget.h \
+    SavegameWidget.h
 
 FORMS    += \
     PictureDialog.ui \
     SavegameDialog.ui \
     UserInterface.ui \
-    ProfileInterface.ui
+    ProfileInterface.ui \
+    SnapmaticWidget.ui \
+    SavegameWidget.ui
 
 TRANSLATIONS += \
     gta5sync_de.ts

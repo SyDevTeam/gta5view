@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Grand Theft Auto V Sync</string>
+   <string>GTA V Sync</string>
   </property>
   <widget class="QWidget" name="cwUI">
    <layout class="QVBoxLayout" name="vlUI">

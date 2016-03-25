@@ -16,32 +16,25 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef USERINTERFACE_H
-#define USERINTERFACE_H
+#ifndef SAVEGAMEWIDGET_H
+#define SAVEGAMEWIDGET_H
 
-#include <QMainWindow>
-#include <QString>
-#include <QMap>
+#include <QWidget>
 
 namespace Ui {
-class UserInterface;
+class SavegameWidget;
 }
 
-class UserInterface : public QMainWindow
+class SavegameWidget : public QWidget
 {
     Q_OBJECT
-public:
-    explicit UserInterface(QWidget *parent = 0);
-    ~UserInterface();
 
-private slots:
-    void on_actionExit_triggered();
+public:
+    explicit SavegameWidget(QWidget *parent = 0);
+    ~SavegameWidget();
 
 private:
-    Ui::UserInterface *ui;
-    QString GTAV_Folder;
-    QString GTAV_ProfilesFolder;
-    QMap<QString, QString> GTAV_ProfileMap;
+    Ui::SavegameWidget *ui;
 };
 
-#endif // USERINTERFACE_H
+#endif // SAVEGAMEWIDGET_H

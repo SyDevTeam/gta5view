@@ -18,6 +18,9 @@
 
 #include "ProfileInterface.h"
 #include "ui_ProfileInterface.h"
+#include "SnapmaticWidget.h"
+#include "SavegameWidget.h"
+#include <QDir>
 
 ProfileInterface::ProfileInterface(QWidget *parent) :
     QWidget(parent),
@@ -30,4 +33,10 @@ ProfileInterface::ProfileInterface(QWidget *parent) :
 ProfileInterface::~ProfileInterface()
 {
     delete ui;
+}
+
+void ProfileInterface::setProfileFolder(QString folder)
+{
+    profileFolder = folder;
+
 }
