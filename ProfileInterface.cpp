@@ -20,6 +20,10 @@
 #include "ui_ProfileInterface.h"
 #include "SnapmaticWidget.h"
 #include "SavegameWidget.h"
+#include <QFileInfo>
+#include <QRegExp>
+#include <QDebug>
+#include <QFile>
 #include <QDir>
 
 ProfileInterface::ProfileInterface(QWidget *parent) :
@@ -27,6 +31,7 @@ ProfileInterface::ProfileInterface(QWidget *parent) :
     ui(new Ui::ProfileInterface)
 {
     ui->setupUi(this);
+    contentStr = ui->labProfileContent->text();
     profileFolder = "";
 }
 
@@ -35,8 +40,33 @@ ProfileInterface::~ProfileInterface()
     delete ui;
 }
 
-void ProfileInterface::setProfileFolder(QString folder)
+void ProfileInterface::setProfileFolder(QString folder, QString profile)
 {
     profileFolder = folder;
+    profileName = profile;
+}
 
+void ProfileInterface::setupProfileInterface()
+{
+    QDir profileDir;
+    profileDir.setPath(profileFolder);
+    ui->labProfileContent->setText(contentStr.arg(profileName));
+
+    profileDir.setNameFilters(QStringList("PGTA*"));
+    QStringList SnapmaticPics = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
+    foreach(const QString &SnapmaticPic, SnapmaticPics)
+    {
+        QString picturePath = profileFolder + "/" + SnapmaticPic;
+        SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
+        if (picture->readingPicture())
+        {
+            SnapmaticWidget *picWidget = new SnapmaticWidget(ui->saSnapmaticContent);
+            picWidget->setSnapmaticPicture(picture, picturePath);
+            ui->saSnapmaticContent->layout()->addWidget(picWidget);
+        }
+    }
+
+    profileDir.setNameFilters(QStringList("SGTA*"));
+    QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
+    qDebug() << SavegameFiles;
 }

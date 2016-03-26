@@ -32,11 +32,13 @@ class SnapmaticWidget : public QWidget
 
 public:
     explicit SnapmaticWidget(QWidget *parent = 0);
-    void setSnapmaticPicture(SnapmaticPicture *picutre, QString picturePath);
+    void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
     ~SnapmaticWidget();
 
 private:
     Ui::SnapmaticWidget *ui;
+    SnapmaticPicture *smpic;
+    QString picPath;
 };
 
 #endif // SNAPMATICWIDGET_H

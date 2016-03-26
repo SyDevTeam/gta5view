@@ -22,6 +22,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QFileInfo>
+#include <QDebug>
 #include <QFile>
 #include <QDir>
 #include <QMap>
@@ -45,9 +46,9 @@ UserInterface::UserInterface(QWidget *parent) :
 
     // init folder
 #ifdef QT5_MODE
-    QString GTAV_defaultFolder = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "\\Rockstar Games\\GTA V";
+    QString GTAV_defaultFolder = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/Rockstar Games/GTA V";
 #else
-    QString GTAV_defaultFolder = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation) + "\\Rockstar Games\\GTA V";
+    QString GTAV_defaultFolder = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation) + "/Rockstar Games/GTA V";
 #endif
     QDir GTAV_Dir;
     if (forceDir)
@@ -70,16 +71,20 @@ UserInterface::UserInterface(QWidget *parent) :
 
     // profiles init
     QDir GTAV_ProfilesDir;
-    GTAV_ProfilesFolder = GTAV_Folder + "\\Profiles";
+    GTAV_ProfilesFolder = GTAV_Folder + "/Profiles";
     GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
 
-    QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::NoFilter, QDir::NoSort);
-    GTAV_Profiles.removeAll("..");
-    GTAV_Profiles.removeAll(".");
+    QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
 
-    ProfileInterface *profile1 = new ProfileInterface();
-    ui->swProfile->addWidget(profile1);
-    ui->swProfile->setCurrentWidget(profile1);
+    if (GTAV_Profiles.length() >= 1)
+    {
+        QString profileName = GTAV_Profiles.at(0);
+        ProfileInterface *profile1 = new ProfileInterface();
+        ui->swProfile->addWidget(profile1);
+        ui->swProfile->setCurrentWidget(profile1);
+        profile1->setProfileFolder(GTAV_ProfilesFolder + "/" + profileName, profileName);
+        profile1->setupProfileInterface();
+    }
 }
 
 UserInterface::~UserInterface()

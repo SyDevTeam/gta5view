@@ -18,15 +18,29 @@
 
 #include "SnapmaticWidget.h"
 #include "ui_SnapmaticWidget.h"
+#include "SnapmaticPicture.h"
+#include <QPixmap>
 
 SnapmaticWidget::SnapmaticWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SnapmaticWidget)
 {
     ui->setupUi(this);
+    picPath = "";
+    smpic = 0;
 }
 
 SnapmaticWidget::~SnapmaticWidget()
 {
     delete ui;
+}
+
+void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath)
+{
+    QPixmap SnapmaticPixmap = picture->getPixmap();
+    SnapmaticPixmap.scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->labPicStr->setText(picture->getPictureStr());
+    ui->labPicture->setPixmap(SnapmaticPixmap);
+    smpic = picture;
+    picPath = picturePath;
 }

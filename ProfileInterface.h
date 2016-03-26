@@ -30,12 +30,15 @@ class ProfileInterface : public QWidget
     Q_OBJECT
 public:
     explicit ProfileInterface(QWidget *parent = 0);
-    void setProfileFolder(QString folder);
+    void setProfileFolder(QString folder, QString profile);
+    void setupProfileInterface();
     ~ProfileInterface();
 
 private:
     Ui::ProfileInterface *ui;
     QString profileFolder;
+    QString profileName;
+    QString contentStr;
 };
 
 #endif // PROFILEINTERFACE_H
