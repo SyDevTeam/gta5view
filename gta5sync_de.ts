@@ -82,17 +82,16 @@
         <translation>Profil Interface</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.ui" line="44"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;GTA V Snapmatic Picture:&lt;/span&gt; PHOTO - 01/01/01 - 22:04:11</source>
-        <translation type="unfinished"></translation>
+        <location filename="ProfileInterface.ui" line="32"/>
+        <source>Content of Profile %1</source>
+        <translation>Inhalt vom Profil %1</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.ui" line="64"/>
         <source>View</source>
-        <translation>Ansehen</translation>
+        <translation type="obsolete">Ansehen</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.ui" line="71"/>
+        <location filename="ProfileInterface.ui" line="113"/>
         <source>Close Profile</source>
         <translation>Profil schließen</translation>
     </message>
@@ -122,51 +121,107 @@
     </message>
 </context>
 <context>
-    <name>UserInterface</name>
+    <name>SavegameWidget</name>
     <message>
-        <location filename="UserInterface.ui" line="14"/>
-        <source>Grand Theft Auto V Sync</source>
-        <translation>Grand Theft Auto V Sync</translation>
+        <location filename="SavegameWidget.ui" line="14"/>
+        <source>Savegame Widget</source>
+        <translation>Spielstand Widget</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="51"/>
+        <location filename="SavegameWidget.ui" line="20"/>
+        <source>The Third Way (100%) - 00/00/00 00:00:00</source>
+        <translation>The Third Way (100%) - 00/00/00 00:00:00</translation>
+    </message>
+    <message>
+        <location filename="SavegameWidget.ui" line="43"/>
+        <source>Copy</source>
+        <translation>Kopieren</translation>
+    </message>
+    <message>
+        <location filename="SavegameWidget.ui" line="50"/>
+        <source>Delete</source>
+        <translation>Löschen</translation>
+    </message>
+</context>
+<context>
+    <name>SnapmaticWidget</name>
+    <message>
+        <location filename="SnapmaticWidget.ui" line="14"/>
+        <source>Snapmatic Widget</source>
+        <translation>Snapmatic Widget</translation>
+    </message>
+    <message>
+        <location filename="SnapmaticWidget.ui" line="45"/>
+        <source>PHOTO - 00/00/00 00:00:00</source>
+        <translation>FOTO - 00/00/00 00:00:00</translation>
+    </message>
+    <message>
+        <location filename="SnapmaticWidget.ui" line="68"/>
+        <source>View</source>
+        <translation>Ansehen</translation>
+    </message>
+    <message>
+        <location filename="SnapmaticWidget.ui" line="75"/>
+        <source>Delete</source>
+        <translation>Löschen</translation>
+    </message>
+</context>
+<context>
+    <name>UserInterface</name>
+    <message>
+        <source>Grand Theft Auto V Sync</source>
+        <translation type="obsolete">Grand Theft Auto V Sync</translation>
+    </message>
+    <message>
+        <location filename="UserInterface.ui" line="20"/>
+        <location filename="UserInterface.cpp" line="69"/>
+        <source>GTA V Sync</source>
+        <translation>GTA V Sync</translation>
+    </message>
+    <message>
+        <location filename="UserInterface.ui" line="57"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="58"/>
+        <location filename="UserInterface.ui" line="64"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="67"/>
+        <location filename="UserInterface.ui" line="73"/>
         <source>About gta5sync</source>
         <translation>Über gta5sync</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="70"/>
+        <location filename="UserInterface.ui" line="76"/>
         <source>Ctrl+A</source>
         <translation>Strg+A</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="75"/>
+        <location filename="UserInterface.ui" line="81"/>
         <source>Exit</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="78"/>
+        <location filename="UserInterface.ui" line="84"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="83"/>
+        <location filename="UserInterface.ui" line="89"/>
         <source>Select profile</source>
         <translation>Profil auswählen</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="86"/>
+        <location filename="UserInterface.ui" line="92"/>
         <source>Ctrl+P</source>
         <translation>Strg+P</translation>
+    </message>
+    <message>
+        <location filename="UserInterface.cpp" line="69"/>
+        <source>GTA V Folder not found!</source>
+        <translation>GTA V Ordner nicht gefunden!</translation>
     </message>
 </context>
 </TS>
