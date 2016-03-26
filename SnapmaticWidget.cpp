@@ -19,10 +19,11 @@
 #include "SnapmaticWidget.h"
 #include "ui_SnapmaticWidget.h"
 #include "SnapmaticPicture.h"
+#include "PictureDialog.h"
 #include <QPixmap>
 
-SnapmaticWidget::SnapmaticWidget(QWidget *parent) :
-    QWidget(parent),
+SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, QWidget *parent) :
+    QWidget(parent), profileDB(profileDB),
     ui(new Ui::SnapmaticWidget)
 {
     ui->setupUi(this);
@@ -43,4 +44,15 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString pic
     ui->labPicture->setPixmap(SnapmaticPixmap);
     smpic = picture;
     picPath = picturePath;
+}
+
+void SnapmaticWidget::on_cmdView_clicked()
+{
+    PictureDialog *picDialog = new PictureDialog(profileDB, this);
+    picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    picDialog->setSnapmaticPicture(smpic, true);
+    picDialog->setModal(true);
+    picDialog->show();
+    picDialog->exec();
+    picDialog->deleteLater();
 }

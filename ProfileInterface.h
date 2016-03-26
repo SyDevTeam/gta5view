@@ -19,6 +19,8 @@
 #ifndef PROFILEINTERFACE_H
 #define PROFILEINTERFACE_H
 
+#include "ProfileDatabase.h"
+#include "CrewDatabase.h"
 #include <QWidget>
 
 namespace Ui {
@@ -29,12 +31,17 @@ class ProfileInterface : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ProfileInterface(QWidget *parent = 0);
+    explicit ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
     void setProfileFolder(QString folder, QString profile);
     void setupProfileInterface();
     ~ProfileInterface();
 
+private slots:
+    void on_cmdCloseProfile_clicked();
+
 private:
+    ProfileDatabase *profileDB;
+    CrewDatabase *crewDB;
     Ui::ProfileInterface *ui;
     QString profileFolder;
     QString profileName;

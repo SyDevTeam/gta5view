@@ -19,8 +19,9 @@
 #ifndef SNAPMATICWIDGET_H
 #define SNAPMATICWIDGET_H
 
-#include <QWidget>
 #include "SnapmaticPicture.h"
+#include "ProfileDatabase.h"
+#include <QWidget>
 
 namespace Ui {
 class SnapmaticWidget;
@@ -31,11 +32,15 @@ class SnapmaticWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit SnapmaticWidget(QWidget *parent = 0);
+    explicit SnapmaticWidget(ProfileDatabase *profileDB, QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
     ~SnapmaticWidget();
 
+private slots:
+    void on_cmdView_clicked();
+
 private:
+    ProfileDatabase *profileDB;
     Ui::SnapmaticWidget *ui;
     SnapmaticPicture *smpic;
     QString picPath;

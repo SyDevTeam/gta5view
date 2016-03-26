@@ -268,7 +268,14 @@ int main(int argc, char *argv[])
         return a.exec();
     }
 
-    UserInterface *uiWindow = new UserInterface();
+    CrewDatabase *crewDB = new CrewDatabase();
+    ProfileDatabase *profileDB = new ProfileDatabase();
+    DatabaseThread *threadDB = new DatabaseThread(crewDB);
+
+    QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
+    threadDB->start();
+
+    UserInterface *uiWindow = new UserInterface(profileDB, crewDB);
     uiWindow->show();
 
     return a.exec();

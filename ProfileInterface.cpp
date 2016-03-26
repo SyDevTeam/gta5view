@@ -20,17 +20,19 @@
 #include "ui_ProfileInterface.h"
 #include "SnapmaticWidget.h"
 #include "SavegameWidget.h"
+#include <QSpacerItem>
 #include <QFileInfo>
 #include <QRegExp>
 #include <QDebug>
 #include <QFile>
 #include <QDir>
 
-ProfileInterface::ProfileInterface(QWidget *parent) :
-    QWidget(parent),
+ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent) :
+    QWidget(parent), profileDB(profileDB), crewDB(crewDB),
     ui(new Ui::ProfileInterface)
 {
     ui->setupUi(this);
+    ui->labProfileContent->setVisible(false);
     contentStr = ui->labProfileContent->text();
     profileFolder = "";
 }
@@ -60,11 +62,14 @@ void ProfileInterface::setupProfileInterface()
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
         if (picture->readingPicture())
         {
-            SnapmaticWidget *picWidget = new SnapmaticWidget(ui->saSnapmaticContent);
+            SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB);
             picWidget->setSnapmaticPicture(picture, picturePath);
-            ui->saSnapmaticContent->layout()->addWidget(picWidget);
+            ui->vlSnapmatic->addWidget(picWidget);
+            crewDB->addCrew(picture->getCrewNumber());
         }
     }
+    QSpacerItem *snapmaticSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->vlSnapmatic->addSpacerItem(snapmaticSpacer);
 
     profileDir.setNameFilters(QStringList("SGTA*"));
     QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
@@ -74,9 +79,16 @@ void ProfileInterface::setupProfileInterface()
         SavegameData *savegame = new SavegameData(sgdPath);
         if (savegame->readingSavegame())
         {
-            SavegameWidget *sgdWidget = new SavegameWidget(ui->saSavegameContent);
+            SavegameWidget *sgdWidget = new SavegameWidget();
             sgdWidget->setSavegameData(savegame, sgdPath);
-            ui->saSavegameContent->layout()->addWidget(sgdWidget);
+            ui->vlSavegame->addWidget(sgdWidget);
         }
     }
+    QSpacerItem *savegameSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->vlSavegame->addSpacerItem(savegameSpacer);
+}
+
+void ProfileInterface::on_cmdCloseProfile_clicked()
+{
+    this->close();
 }

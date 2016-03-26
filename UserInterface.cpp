@@ -33,8 +33,8 @@
 #include <QDesktopServices>
 #endif
 
-UserInterface::UserInterface(QWidget *parent) :
-    QMainWindow(parent),
+UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent) :
+    QMainWindow(parent), profileDB(profileDB), crewDB(crewDB),
     ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
@@ -79,7 +79,7 @@ UserInterface::UserInterface(QWidget *parent) :
     if (GTAV_Profiles.length() >= 1)
     {
         QString profileName = GTAV_Profiles.at(0);
-        ProfileInterface *profile1 = new ProfileInterface();
+        ProfileInterface *profile1 = new ProfileInterface(profileDB, crewDB);
         ui->swProfile->addWidget(profile1);
         ui->swProfile->setCurrentWidget(profile1);
         profile1->setProfileFolder(GTAV_ProfilesFolder + "/" + profileName, profileName);

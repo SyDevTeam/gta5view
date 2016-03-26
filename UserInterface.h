@@ -19,6 +19,8 @@
 #ifndef USERINTERFACE_H
 #define USERINTERFACE_H
 
+#include "ProfileDatabase.h"
+#include "CrewDatabase.h"
 #include <QMainWindow>
 #include <QString>
 #include <QMap>
@@ -31,13 +33,15 @@ class UserInterface : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit UserInterface(QWidget *parent = 0);
+    explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
     ~UserInterface();
 
 private slots:
     void on_actionExit_triggered();
 
 private:
+    ProfileDatabase *profileDB;
+    CrewDatabase *crewDB;
     Ui::UserInterface *ui;
     QString GTAV_Folder;
     QString GTAV_ProfilesFolder;
