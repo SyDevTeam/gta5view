@@ -68,5 +68,15 @@ void ProfileInterface::setupProfileInterface()
 
     profileDir.setNameFilters(QStringList("SGTA*"));
     QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
-    qDebug() << SavegameFiles;
+    foreach(const QString &SavegameFile, SavegameFiles)
+    {
+        QString sgdPath = profileFolder + "/" + SavegameFile;
+        SavegameData *savegame = new SavegameData(sgdPath);
+        if (savegame->readingSavegame())
+        {
+            SavegameWidget *sgdWidget = new SavegameWidget(ui->saSavegameContent);
+            sgdWidget->setSavegameData(savegame, sgdPath);
+            ui->saSavegameContent->layout()->addWidget(sgdWidget);
+        }
+    }
 }

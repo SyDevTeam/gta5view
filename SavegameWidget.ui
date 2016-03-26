@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Savegame Widget</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="hlSavegameContent">
    <item>
     <widget class="QLabel" name="labSavegameStr">
      <property name="text">

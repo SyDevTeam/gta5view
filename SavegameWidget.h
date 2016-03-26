@@ -20,6 +20,7 @@
 #define SAVEGAMEWIDGET_H
 
 #include <QWidget>
+#include "SavegameData.h"
 
 namespace Ui {
 class SavegameWidget;
@@ -31,10 +32,13 @@ class SavegameWidget : public QWidget
 
 public:
     explicit SavegameWidget(QWidget *parent = 0);
+    void setSavegameData(SavegameData *savegame, QString savegamePath);
     ~SavegameWidget();
 
 private:
     Ui::SavegameWidget *ui;
+    SavegameData *sgdata;
+    QString sgdPath;
 };
 
 #endif // SAVEGAMEWIDGET_H

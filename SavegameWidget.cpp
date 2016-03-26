@@ -18,15 +18,25 @@
 
 #include "SavegameWidget.h"
 #include "ui_SavegameWidget.h"
+#include "SavegameData.h"
 
 SavegameWidget::SavegameWidget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::SavegameWidget)
 {
     ui->setupUi(this);
+    sgdPath = "";
+    sgdata = 0;
 }
 
 SavegameWidget::~SavegameWidget()
 {
     delete ui;
+}
+
+void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePath)
+{
+    ui->labSavegameStr->setText(savegame->getSavegameStr());
+    sgdPath = savegamePath;
+    sgdata = savegame;
 }
