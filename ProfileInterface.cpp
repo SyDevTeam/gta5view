@@ -40,6 +40,14 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 
 ProfileInterface::~ProfileInterface()
 {
+    foreach(SavegameData *savegame, savegames)
+    {
+        delete savegame;
+    }
+    foreach(SnapmaticPicture *picture, pictures)
+    {
+        delete picture;
+    }
     delete ui;
 }
 
@@ -64,6 +72,7 @@ void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegam
     SavegameWidget *sgdWidget = new SavegameWidget();
     sgdWidget->setSavegameData(savegame, savegamePath);
     ui->vlSavegame->addWidget(sgdWidget);
+    savegames.append(savegame);
 }
 
 void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString picturePath)
@@ -71,6 +80,7 @@ void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString pictu
     SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
     ui->vlSnapmatic->addWidget(picWidget);
+    pictures.append(picture);
 }
 
 void ProfileInterface::on_loadingProgress(int value, int maximum)
@@ -90,5 +100,5 @@ void ProfileInterface::on_profileLoaded()
 
 void ProfileInterface::on_cmdCloseProfile_clicked()
 {
-    this->close();
+    emit profileClosed();
 }

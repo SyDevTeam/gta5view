@@ -19,6 +19,7 @@
 #ifndef USERINTERFACE_H
 #define USERINTERFACE_H
 
+#include "ProfileInterface.h"
 #include "ProfileDatabase.h"
 #include "CrewDatabase.h"
 #include <QMainWindow>
@@ -38,14 +39,17 @@ public:
 
 private slots:
     void on_actionExit_triggered();
+    void closeProfile();
 
 private:
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
     Ui::UserInterface *ui;
+    ProfileInterface *profileUI;
+    bool profileOpen;
     QString GTAV_Folder;
     QString GTAV_ProfilesFolder;
-    QMap<QString, QString> GTAV_ProfileMap;
+    void openProfile(QString profileName);
 };
 
 #endif // USERINTERFACE_H

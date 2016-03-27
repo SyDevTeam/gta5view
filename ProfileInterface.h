@@ -24,6 +24,7 @@
 #include "SavegameData.h"
 #include "CrewDatabase.h"
 #include <QWidget>
+#include <QList>
 
 namespace Ui {
 class ProfileInterface;
@@ -52,6 +53,11 @@ private:
     QString profileFolder;
     QString profileName;
     QString loadingStr;
+    QList<SavegameData*> savegames;
+    QList<SnapmaticPicture*> pictures;
+
+signals:
+    void profileClosed();
 };
 
 #endif // PROFILEINTERFACE_H

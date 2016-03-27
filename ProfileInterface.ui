@@ -172,6 +172,9 @@
        <property name="text">
         <string>Close Profile</string>
        </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
     </layout>

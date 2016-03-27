@@ -60,12 +60,18 @@
      <property name="text">
       <string>View</string>
      </property>
+     <property name="autoDefault">
+      <bool>true</bool>
+     </property>
     </widget>
    </item>
    <item>
     <widget class="QPushButton" name="cmdDelete">
      <property name="text">
       <string>Delete</string>
+     </property>
+     <property name="autoDefault">
+      <bool>true</bool>
      </property>
     </widget>
    </item>

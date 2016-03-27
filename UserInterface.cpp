@@ -38,6 +38,8 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
+    profileOpen = 0;
+    profileUI = 0;
 
     // init settings
     QSettings SyncSettings("Syping", "gta5sync");
@@ -66,24 +68,49 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     }
     else
     {
-        QMessageBox::warning(this, tr("GTA V Sync"), tr("GTA V Folder not found!"));
+        QMessageBox::warning(this, tr("gta5sync"), tr("GTA V Folder not found!"));
     }
+    SyncSettings.endGroup();
 
     // profiles init
+    SyncSettings.beginGroup("Profile");
+    QString defaultProfile = SyncSettings.value("Default", "").toString();
     QDir GTAV_ProfilesDir;
     GTAV_ProfilesFolder = GTAV_Folder + "/Profiles";
     GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
 
     QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
 
-    if (GTAV_Profiles.length() >= 1)
+    if (GTAV_Profiles.length() == 1)
     {
-        QString profileName = GTAV_Profiles.at(0);
-        ProfileInterface *profile1 = new ProfileInterface(profileDB, crewDB);
-        ui->swProfile->addWidget(profile1);
-        ui->swProfile->setCurrentWidget(profile1);
-        profile1->setProfileFolder(GTAV_ProfilesFolder + "/" + profileName, profileName);
-        profile1->setupProfileInterface();
+        openProfile(GTAV_Profiles.at(0));
+    }
+    else if(GTAV_Profiles.contains(defaultProfile))
+    {
+        openProfile(defaultProfile);
+    }
+    SyncSettings.endGroup();
+}
+
+void UserInterface::openProfile(QString profileName)
+{
+    profileOpen = true;
+    profileUI = new ProfileInterface(profileDB, crewDB);
+    ui->swProfile->addWidget(profileUI);
+    ui->swProfile->setCurrentWidget(profileUI);
+    profileUI->setProfileFolder(GTAV_ProfilesFolder + "/" + profileName, profileName);
+    profileUI->setupProfileInterface();
+    QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));
+}
+
+void UserInterface::closeProfile()
+{
+    if (profileOpen)
+    {
+        profileOpen = false;
+        ui->swProfile->removeWidget(profileUI);
+        profileUI->deleteLater();
+        delete profileUI;
     }
 }
 
