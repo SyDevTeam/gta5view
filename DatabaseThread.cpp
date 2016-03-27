@@ -44,17 +44,17 @@ dbtBegin:
     // Quick time scan
     if (crewList.length() <= 3)
     {
-        scanCrewMembersList(crewList, 3, 0);
+        scanCrewMembersList(crewList, 3, 1000);
         emit playerNameUpdated();
     }
     else if (crewList.length() <= 5)
     {
-        scanCrewMembersList(crewList, 2, 0);
+        scanCrewMembersList(crewList, 2, 1000);
         emit playerNameUpdated();
     }
 
     QEventLoop waitingLoop;
-    QTimer::singleShot(5000, &waitingLoop, SLOT(quit()));
+    QTimer::singleShot(10000, &waitingLoop, SLOT(quit()));
     waitingLoop.exec();
 
     // Long time scan
