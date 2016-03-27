@@ -33,7 +33,7 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui(new Ui::ProfileInterface)
 {
     ui->setupUi(this);
-    ui->labProfileContent->setVisible(false);
+    ui->saProfile->setVisible(false);
     contentStr = ui->labProfileContent->text();
     profileFolder = "";
 }
@@ -51,11 +51,11 @@ void ProfileInterface::setProfileFolder(QString folder, QString profile)
 
 void ProfileInterface::setupProfileInterface()
 {
-    ui->labProfileContent->setText(contentStr.arg(profileName));
-
     ProfileLoader *profileLoader = new ProfileLoader(profileFolder, crewDB);
     QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(on_savegameLoaded(SavegameData*, QString)));
     QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*, QString)), this, SLOT(on_pictureLoaded(SnapmaticPicture*, QString)));
+    QObject::connect(profileLoader, SIGNAL(loadingProgress(int,int)), this, SLOT(on_loadingProgress(int,int)));
+    QObject::connect(profileLoader, SIGNAL(finished()), this, SLOT(on_profileLoaded()));
     profileLoader->start();
 }
 
@@ -71,6 +71,23 @@ void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString pictu
     SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
     ui->vlSnapmatic->addWidget(picWidget);
+}
+
+void ProfileInterface::on_loadingProgress(int value, int maximum)
+{
+    ui->pbPictureLoading->setMaximum(maximum);
+    ui->pbPictureLoading->setValue(value);
+    ui->labProfileContent->setText(contentStr.arg(QString::number(value), QString::number(maximum)));
+}
+
+void ProfileInterface::on_profileLoaded()
+{
+    QSpacerItem *saSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->saProfileContent->layout()->addItem(saSpacerItem);
+    ui->saProfile->setVisible(true);
+    ui->pbPictureLoading->setVisible(false);
+    ui->labProfileContent->setVisible(false);
+    ui->frmLoading->setVisible(false);
 }
 
 void ProfileInterface::on_cmdCloseProfile_clicked()

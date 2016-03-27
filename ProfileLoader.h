@@ -41,6 +41,7 @@ private:
 signals:
     void pictureLoaded(SnapmaticPicture *picture, QString picturePath);
     void savegameLoaded(SavegameData *savegame, QString savegamePath);
+    void loadingProgress(int value, int maximum);
 };
 
 #endif // PROFILELOADER_H

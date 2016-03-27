@@ -32,15 +32,25 @@ ProfileLoader::ProfileLoader(QString profileFolder, CrewDatabase *crewDB, QObjec
 
 void ProfileLoader::run()
 {
+    int loadedV = 0;
     QDir profileDir;
     profileDir.setPath(profileFolder);
+
     profileDir.setNameFilters(QStringList("SGTA*"));
     QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
     QStringList BackupFiles = SavegameFiles.filter(".bak", Qt::CaseInsensitive);
+    profileDir.setNameFilters(QStringList("PGTA*"));
+    QStringList SnapmaticPics = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
+
+    SavegameFiles.removeDuplicates();
+    SnapmaticPics.removeDuplicates();
     foreach(const QString &BackupFile, BackupFiles)
     {
         SavegameFiles.removeAll(BackupFile);
     }
+
+    int maximumV = SavegameFiles.length() + SnapmaticPics.length();
+
     foreach(const QString &SavegameFile, SavegameFiles)
     {
         QString sgdPath = profileFolder + "/" + SavegameFile;
@@ -49,10 +59,9 @@ void ProfileLoader::run()
         {
             emit savegameLoaded(savegame, sgdPath);
         }
+        loadedV++;
+        emit loadingProgress(loadedV, maximumV);
     }
-
-    profileDir.setNameFilters(QStringList("PGTA*"));
-    QStringList SnapmaticPics = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
     foreach(const QString &SnapmaticPic, SnapmaticPics)
     {
         QString picturePath = profileFolder + "/" + SnapmaticPic;
@@ -62,5 +71,7 @@ void ProfileLoader::run()
             emit pictureLoaded(picture, picturePath);
             crewDB->addCrew(picture->getCrewNumber());
         }
+        loadedV++;
+        emit loadingProgress(loadedV, maximumV);
     }
 }

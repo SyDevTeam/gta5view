@@ -42,6 +42,8 @@ private slots:
     void on_cmdCloseProfile_clicked();
     void on_pictureLoaded(SnapmaticPicture *picture, QString picturePath);
     void on_savegameLoaded(SavegameData *savegame, QString savegamePath);
+    void on_loadingProgress(int value, int maximum);
+    void on_profileLoaded();
 
 private:
     ProfileDatabase *profileDB;
