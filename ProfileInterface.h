@@ -51,7 +51,7 @@ private:
     Ui::ProfileInterface *ui;
     QString profileFolder;
     QString profileName;
-    QString contentStr;
+    QString loadingStr;
 };
 
 #endif // PROFILEINTERFACE_H

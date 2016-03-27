@@ -32,12 +32,12 @@ ProfileLoader::ProfileLoader(QString profileFolder, CrewDatabase *crewDB, QObjec
 
 void ProfileLoader::run()
 {
-    int loadedV = 0;
+    int curFile = 1;
     QDir profileDir;
+    QList<int> crewList;
     profileDir.setPath(profileFolder);
 
-    QList<int> crewList;
-
+    // Seek pictures and savegames
     profileDir.setNameFilters(QStringList("SGTA*"));
     QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
     QStringList BackupFiles = SavegameFiles.filter(".bak", Qt::CaseInsensitive);
@@ -53,6 +53,8 @@ void ProfileLoader::run()
 
     int maximumV = SavegameFiles.length() + SnapmaticPics.length();
 
+    // Loading pictures and savegames
+    emit loadingProgress(curFile, maximumV);
     foreach(const QString &SavegameFile, SavegameFiles)
     {
         QString sgdPath = profileFolder + "/" + SavegameFile;
@@ -61,8 +63,8 @@ void ProfileLoader::run()
         {
             emit savegameLoaded(savegame, sgdPath);
         }
-        loadedV++;
-        emit loadingProgress(loadedV, maximumV);
+        curFile++;
+        emit loadingProgress(curFile, maximumV);
     }
     foreach(const QString &SnapmaticPic, SnapmaticPics)
     {
@@ -77,8 +79,8 @@ void ProfileLoader::run()
                 crewList.append(crewNumber);
             }
         }
-        loadedV++;
-        emit loadingProgress(loadedV, maximumV);
+        curFile++;
+        emit loadingProgress(curFile, maximumV);
     }
 
     // adding found crews

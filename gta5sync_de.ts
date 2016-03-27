@@ -82,7 +82,12 @@
         <translation>Profil Interface</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.ui" line="32"/>
+        <location filename="ProfileInterface.ui" line="63"/>
+        <source>Loading file %1 of %2 files</source>
+        <oldsource>Loading %1 files of %2 files</oldsource>
+        <translation>Lade Datei %1 von %2 Dateien</translation>
+    </message>
+    <message>
         <source>Content of Profile %1</source>
         <translation>Inhalt vom Profil %1</translation>
     </message>
@@ -91,7 +96,7 @@
         <translation type="obsolete">Ansehen</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.ui" line="113"/>
+        <location filename="ProfileInterface.ui" line="173"/>
         <source>Close Profile</source>
         <translation>Profil schließen</translation>
     </message>
@@ -128,17 +133,17 @@
         <translation>Spielstand Widget</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.ui" line="20"/>
+        <location filename="SavegameWidget.ui" line="36"/>
         <source>The Third Way (100%) - 00/00/00 00:00:00</source>
         <translation>The Third Way (100%) - 00/00/00 00:00:00</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.ui" line="43"/>
+        <location filename="SavegameWidget.ui" line="46"/>
         <source>Copy</source>
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.ui" line="50"/>
+        <location filename="SavegameWidget.ui" line="53"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -151,17 +156,17 @@
         <translation>Snapmatic Widget</translation>
     </message>
     <message>
-        <location filename="SnapmaticWidget.ui" line="45"/>
+        <location filename="SnapmaticWidget.ui" line="51"/>
         <source>PHOTO - 00/00/00 00:00:00</source>
         <translation>FOTO - 00/00/00 00:00:00</translation>
     </message>
     <message>
-        <location filename="SnapmaticWidget.ui" line="68"/>
+        <location filename="SnapmaticWidget.ui" line="61"/>
         <source>View</source>
         <translation>Ansehen</translation>
     </message>
     <message>
-        <location filename="SnapmaticWidget.ui" line="75"/>
+        <location filename="SnapmaticWidget.ui" line="68"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -173,10 +178,14 @@
         <translation type="obsolete">Grand Theft Auto V Sync</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="20"/>
         <location filename="UserInterface.cpp" line="69"/>
         <source>GTA V Sync</source>
         <translation>GTA V Sync</translation>
+    </message>
+    <message>
+        <location filename="UserInterface.ui" line="20"/>
+        <source>gta5sync - %1</source>
+        <translation>gta5sync - %1</translation>
     </message>
     <message>
         <location filename="UserInterface.ui" line="57"/>

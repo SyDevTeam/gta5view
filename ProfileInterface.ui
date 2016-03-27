@@ -58,9 +58,9 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="labProfileContent">
+       <widget class="QLabel" name="labProfileLoading">
         <property name="text">
-         <string>Loading %1 files of %2 files</string>
+         <string>Loading file %1 of %2 files</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>

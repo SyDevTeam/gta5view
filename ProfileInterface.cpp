@@ -34,7 +34,7 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 {
     ui->setupUi(this);
     ui->saProfile->setVisible(false);
-    contentStr = ui->labProfileContent->text();
+    loadingStr = ui->labProfileLoading->text();
     profileFolder = "";
 }
 
@@ -77,7 +77,7 @@ void ProfileInterface::on_loadingProgress(int value, int maximum)
 {
     ui->pbPictureLoading->setMaximum(maximum);
     ui->pbPictureLoading->setValue(value);
-    ui->labProfileContent->setText(contentStr.arg(QString::number(value), QString::number(maximum)));
+    ui->labProfileLoading->setText(loadingStr.arg(QString::number(value), QString::number(maximum)));
 }
 
 void ProfileInterface::on_profileLoaded()
