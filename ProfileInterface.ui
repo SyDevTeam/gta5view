@@ -60,7 +60,7 @@
       <item>
        <widget class="QLabel" name="labProfileContent">
         <property name="text">
-         <string>Loading %1 files of %2</string>
+         <string>Loading %1 files of %2 files</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
