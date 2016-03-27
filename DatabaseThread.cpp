@@ -38,8 +38,7 @@ DatabaseThread::DatabaseThread(CrewDatabase *crewDB, QObject *parent) : QThread(
 void DatabaseThread::run()
 {
     QEventLoop threadLoop;
-dbtBegin:
-    QStringList crewList = crewDB->getCrews();
+    QStringList crewList;
 
     // Quick time scan
     if (crewList.length() <= 3)
@@ -56,6 +55,9 @@ dbtBegin:
     QEventLoop waitingLoop;
     QTimer::singleShot(10000, &waitingLoop, SLOT(quit()));
     waitingLoop.exec();
+
+dbtBegin:
+    crewList = crewDB->getCrews();
 
     // Long time scan
     scanCrewMembersList(crewList, crewMaxPages, 10000);
