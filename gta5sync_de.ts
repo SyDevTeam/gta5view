@@ -89,7 +89,7 @@
     </message>
     <message>
         <source>Content of Profile %1</source>
-        <translation>Inhalt vom Profil %1</translation>
+        <translation type="obsolete">Inhalt vom Profil %1</translation>
     </message>
     <message>
         <source>View</source>
@@ -99,6 +99,11 @@
         <location filename="ProfileInterface.ui" line="173"/>
         <source>Close Profile</source>
         <translation>Profil schließen</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="80"/>
+        <source>Loading...</source>
+        <translation>Lade...</translation>
     </message>
 </context>
 <context>
@@ -143,7 +148,7 @@
         <translation>Kopieren</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.ui" line="53"/>
+        <location filename="SavegameWidget.ui" line="56"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -166,7 +171,7 @@
         <translation>Ansehen</translation>
     </message>
     <message>
-        <location filename="SnapmaticWidget.ui" line="68"/>
+        <location filename="SnapmaticWidget.ui" line="71"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -178,9 +183,8 @@
         <translation type="obsolete">Grand Theft Auto V Sync</translation>
     </message>
     <message>
-        <location filename="UserInterface.cpp" line="69"/>
         <source>GTA V Sync</source>
-        <translation>GTA V Sync</translation>
+        <translation type="obsolete">GTA V Sync</translation>
     </message>
     <message>
         <location filename="UserInterface.ui" line="20"/>
@@ -188,49 +192,60 @@
         <translation>gta5sync - %1</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="57"/>
+        <location filename="UserInterface.ui" line="86"/>
         <source>File</source>
         <translation>Datei</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="64"/>
+        <location filename="UserInterface.ui" line="93"/>
         <source>Help</source>
         <translation>Hilfe</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="73"/>
+        <location filename="UserInterface.ui" line="102"/>
         <source>About gta5sync</source>
         <translation>Über gta5sync</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="76"/>
+        <location filename="UserInterface.ui" line="105"/>
         <source>Ctrl+A</source>
         <translation>Strg+A</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="81"/>
-        <source>Exit</source>
+        <location filename="UserInterface.ui" line="110"/>
+        <location filename="UserInterface.cpp" line="121"/>
+        <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="84"/>
+        <source>Exit</source>
+        <translation type="obsolete">Schließen</translation>
+    </message>
+    <message>
+        <location filename="UserInterface.ui" line="113"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="89"/>
+        <location filename="UserInterface.ui" line="59"/>
+        <location filename="UserInterface.ui" line="118"/>
         <source>Select profile</source>
         <translation>Profil auswählen</translation>
     </message>
     <message>
-        <location filename="UserInterface.ui" line="92"/>
+        <location filename="UserInterface.ui" line="121"/>
         <source>Ctrl+P</source>
         <translation>Strg+P</translation>
     </message>
     <message>
-        <location filename="UserInterface.cpp" line="69"/>
+        <location filename="UserInterface.cpp" line="74"/>
         <source>GTA V Folder not found!</source>
         <translation>GTA V Ordner nicht gefunden!</translation>
+    </message>
+    <message>
+        <location filename="UserInterface.cpp" line="74"/>
+        <source>gta5sync</source>
+        <translation>gta5sync</translation>
     </message>
 </context>
 </TS>

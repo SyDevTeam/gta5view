@@ -110,6 +110,9 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
         ui->labJSON->setText(jsonDrawString.arg("0.0", "0.0", "0.0", tr("No player"), tr("No crew")));
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
     }
+
+    this->setMinimumSize(this->geometry().size());
+    this->setMaximumSize(this->geometry().size());
 }
 
 void PictureDialog::on_playerNameUpdated()

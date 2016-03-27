@@ -19,6 +19,9 @@
 #include "UserInterface.h"
 #include "ui_UserInterface.h"
 #include "ProfileInterface.h"
+#include <QHBoxLayout>
+#include <QSpacerItem>
+#include <QPushButton>
 #include <QMessageBox>
 #include <QSettings>
 #include <QFileInfo>
@@ -33,8 +36,8 @@
 #include <QDesktopServices>
 #endif
 
-UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent) :
-    QMainWindow(parent), profileDB(profileDB), crewDB(crewDB),
+UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
+    QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
     ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
@@ -80,6 +83,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
 
     QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
+    setupProfileUi(GTAV_Profiles);
 
     if (GTAV_Profiles.length() == 1)
     {
@@ -92,10 +96,46 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     SyncSettings.endGroup();
 }
 
+void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
+{
+    foreach(const QString &GTAV_Profile, GTAV_Profiles)
+    {
+        QPushButton *profileBtn = new QPushButton(GTAV_Profile, ui->swSelection);
+        profileBtn->setObjectName(GTAV_Profile);
+        profileBtn->setMinimumSize(0, 40);
+        profileBtn->setAutoDefault(true);
+        ui->swSelection->layout()->addWidget(profileBtn);
+
+        QObject::connect(profileBtn, SIGNAL(clicked(bool)), this, SLOT(on_profileButton_clicked()));
+    }
+    QSpacerItem *buttomSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    ui->swSelection->layout()->addItem(buttomSpacerItem);
+
+    QHBoxLayout *footerLayout = new QHBoxLayout();
+    footerLayout->setObjectName("footerLayout");
+    ui->swSelection->layout()->addItem(footerLayout);
+
+    QSpacerItem *closeButtonSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    footerLayout->addSpacerItem(closeButtonSpacer);
+
+    QPushButton *cmdClose = new QPushButton(tr("Close"), ui->swSelection);
+    cmdClose->setObjectName("cmdClose");
+    cmdClose->setAutoDefault(true);
+    footerLayout->addWidget(cmdClose);
+
+    QObject::connect(cmdClose, SIGNAL(clicked(bool)), this, SLOT(close()));
+}
+
+void UserInterface::on_profileButton_clicked()
+{
+    QPushButton *profileBtn = (QPushButton*)sender();
+    openProfile(profileBtn->objectName());
+}
+
 void UserInterface::openProfile(QString profileName)
 {
     profileOpen = true;
-    profileUI = new ProfileInterface(profileDB, crewDB);
+    profileUI = new ProfileInterface(profileDB, crewDB, threadDB);
     ui->swProfile->addWidget(profileUI);
     ui->swProfile->setCurrentWidget(profileUI);
     profileUI->setProfileFolder(GTAV_ProfilesFolder + "/" + profileName, profileName);
@@ -122,4 +162,15 @@ UserInterface::~UserInterface()
 void UserInterface::on_actionExit_triggered()
 {
     this->close();
+}
+
+void UserInterface::on_actionSelect_profile_triggered()
+{
+    closeProfile();
+    openSelectProfile();
+}
+
+void UserInterface::openSelectProfile()
+{
+    // not needed right now
 }

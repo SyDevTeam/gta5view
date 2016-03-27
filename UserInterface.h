@@ -21,6 +21,7 @@
 
 #include "ProfileInterface.h"
 #include "ProfileDatabase.h"
+#include "DatabaseThread.h"
 #include "CrewDatabase.h"
 #include <QMainWindow>
 #include <QString>
@@ -34,22 +35,27 @@ class UserInterface : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
+    explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
     ~UserInterface();
 
 private slots:
-    void on_actionExit_triggered();
     void closeProfile();
+    void on_actionExit_triggered();
+    void on_actionSelect_profile_triggered();
+    void on_profileButton_clicked();
 
 private:
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
+    DatabaseThread *threadDB;
     Ui::UserInterface *ui;
     ProfileInterface *profileUI;
     bool profileOpen;
     QString GTAV_Folder;
     QString GTAV_ProfilesFolder;
+    void setupProfileUi(QStringList GTAV_Profiles);
     void openProfile(QString profileName);
+    void openSelectProfile();
 };
 
 #endif // USERINTERFACE_H

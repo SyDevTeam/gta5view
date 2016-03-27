@@ -19,11 +19,12 @@
 #include "SnapmaticWidget.h"
 #include "ui_SnapmaticWidget.h"
 #include "SnapmaticPicture.h"
+#include "DatabaseThread.h"
 #include "PictureDialog.h"
 #include <QPixmap>
 
-SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, QWidget *parent) :
-    QWidget(parent), profileDB(profileDB),
+SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent) :
+    QWidget(parent), profileDB(profileDB), threadDB(threadDB),
     ui(new Ui::SnapmaticWidget)
 {
     ui->setupUi(this);
@@ -52,7 +53,13 @@ void SnapmaticWidget::on_cmdView_clicked()
     picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
     picDialog->setSnapmaticPicture(smpic, true);
     picDialog->setModal(true);
+
+    // be ready for playerName updated
+    QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(on_playerNameUpdated()));
+
+    // show picture dialog
     picDialog->show();
     picDialog->exec();
     picDialog->deleteLater();
+    delete picDialog;
 }

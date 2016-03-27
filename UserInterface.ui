@@ -38,7 +38,36 @@
       <property name="lineWidth">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="profileSelection"/>
+      <widget class="QWidget" name="swSelection">
+       <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+         <spacer name="vsUpper">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item>
+         <widget class="QLabel" name="labSelectProfile">
+          <property name="text">
+           <string>Select profile</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+          <property name="wordWrap">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
@@ -78,7 +107,7 @@
   </action>
   <action name="actionExit">
    <property name="text">
-    <string>Exit</string>
+    <string>Close</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>

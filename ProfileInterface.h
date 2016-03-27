@@ -21,6 +21,8 @@
 
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
+#include "DatabaseThread.h"
+#include "ProfileLoader.h"
 #include "SavegameData.h"
 #include "CrewDatabase.h"
 #include <QWidget>
@@ -34,7 +36,7 @@ class ProfileInterface : public QWidget
 {
     Q_OBJECT
 public:
-    explicit ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
+    explicit ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
     void setProfileFolder(QString folder, QString profile);
     void setupProfileInterface();
     ~ProfileInterface();
@@ -49,12 +51,16 @@ private slots:
 private:
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
+    DatabaseThread *threadDB;
     Ui::ProfileInterface *ui;
+
+    ProfileLoader *profileLoader;
+    QList<SavegameData*> savegames;
+    QList<SnapmaticPicture*> pictures;
+    QList<QWidget*> widgets;
     QString profileFolder;
     QString profileName;
     QString loadingStr;
-    QList<SavegameData*> savegames;
-    QList<SnapmaticPicture*> pictures;
 
 signals:
     void profileClosed();

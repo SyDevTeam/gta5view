@@ -21,6 +21,7 @@
 
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
+#include "DatabaseThread.h"
 #include <QWidget>
 
 namespace Ui {
@@ -32,7 +33,7 @@ class SnapmaticWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit SnapmaticWidget(ProfileDatabase *profileDB, QWidget *parent = 0);
+    explicit SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
     ~SnapmaticWidget();
 
@@ -41,6 +42,7 @@ private slots:
 
 private:
     ProfileDatabase *profileDB;
+    DatabaseThread *threadDB;
     Ui::SnapmaticWidget *ui;
     SnapmaticPicture *smpic;
     QString picPath;

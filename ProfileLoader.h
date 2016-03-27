@@ -37,6 +37,7 @@ protected:
 private:
     QString profileFolder;
     CrewDatabase *crewDB;
+    ProfileLoader *profileLoader;
 
 signals:
     void pictureLoaded(SnapmaticPicture *picture, QString picturePath);

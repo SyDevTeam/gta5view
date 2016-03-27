@@ -19,35 +19,53 @@
 #include "ProfileInterface.h"
 #include "ui_ProfileInterface.h"
 #include "SnapmaticWidget.h"
+#include "DatabaseThread.h"
 #include "SavegameWidget.h"
 #include "ProfileLoader.h"
 #include <QSpacerItem>
 #include <QFileInfo>
+#include <QPalette>
 #include <QRegExp>
 #include <QDebug>
+#include <QColor>
 #include <QFile>
 #include <QDir>
 
-ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent) :
-    QWidget(parent), profileDB(profileDB), crewDB(crewDB),
+ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
+    QWidget(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
     ui(new Ui::ProfileInterface)
 {
     ui->setupUi(this);
     ui->saProfile->setVisible(false);
+    ui->cmdCloseProfile->setEnabled(false);
     loadingStr = ui->labProfileLoading->text();
     profileFolder = "";
+    profileLoader = 0;
+
+    QPalette palette;
+    QColor baseColor = palette.base().color();
+    ui->saProfile->setStyleSheet("QWidget#saProfileContent{background-color: rgb(" + QString::number(baseColor.red()) + "," + QString::number(baseColor.green()) + "," + QString::number(baseColor.blue()) + ")}");
 }
 
 ProfileInterface::~ProfileInterface()
 {
     foreach(SavegameData *savegame, savegames)
     {
+        savegame->deleteLater();
         delete savegame;
     }
     foreach(SnapmaticPicture *picture, pictures)
     {
+        picture->deleteLater();
         delete picture;
     }
+    foreach(QWidget *widget, widgets)
+    {
+        widget->deleteLater();
+        delete widget;
+    }
+    profileLoader->deleteLater();
+    delete profileLoader;
     delete ui;
 }
 
@@ -59,7 +77,8 @@ void ProfileInterface::setProfileFolder(QString folder, QString profile)
 
 void ProfileInterface::setupProfileInterface()
 {
-    ProfileLoader *profileLoader = new ProfileLoader(profileFolder, crewDB);
+    ui->labProfileLoading->setText(tr("Loading..."));
+    profileLoader = new ProfileLoader(profileFolder, crewDB);
     QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(on_savegameLoaded(SavegameData*, QString)));
     QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*, QString)), this, SLOT(on_pictureLoaded(SnapmaticPicture*, QString)));
     QObject::connect(profileLoader, SIGNAL(loadingProgress(int,int)), this, SLOT(on_loadingProgress(int,int)));
@@ -72,14 +91,16 @@ void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegam
     SavegameWidget *sgdWidget = new SavegameWidget();
     sgdWidget->setSavegameData(savegame, savegamePath);
     ui->vlSavegame->addWidget(sgdWidget);
+    widgets.append(sgdWidget);
     savegames.append(savegame);
 }
 
 void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString picturePath)
 {
-    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB);
+    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, threadDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
     ui->vlSnapmatic->addWidget(picWidget);
+    widgets.append(picWidget);
     pictures.append(picture);
 }
 
@@ -96,6 +117,7 @@ void ProfileInterface::on_profileLoaded()
     ui->saProfileContent->layout()->addItem(saSpacerItem);
     ui->saProfile->setVisible(true);
     ui->frmLoading->setVisible(false);
+    ui->cmdCloseProfile->setEnabled(true);
 }
 
 void ProfileInterface::on_cmdCloseProfile_clicked()

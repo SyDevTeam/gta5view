@@ -275,7 +275,7 @@ int main(int argc, char *argv[])
     QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
     threadDB->start();
 
-    UserInterface *uiWindow = new UserInterface(profileDB, crewDB);
+    UserInterface *uiWindow = new UserInterface(profileDB, crewDB, threadDB);
     uiWindow->show();
 
     return a.exec();
