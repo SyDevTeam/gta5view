@@ -85,8 +85,6 @@ void ProfileInterface::on_profileLoaded()
     QSpacerItem *saSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->saProfileContent->layout()->addItem(saSpacerItem);
     ui->saProfile->setVisible(true);
-    ui->pbPictureLoading->setVisible(false);
-    ui->labProfileContent->setVisible(false);
     ui->frmLoading->setVisible(false);
 }
 
