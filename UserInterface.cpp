@@ -19,6 +19,7 @@
 #include "UserInterface.h"
 #include "ui_UserInterface.h"
 #include "ProfileInterface.h"
+#include "AboutDialog.h"
 #include <QHBoxLayout>
 #include <QSpacerItem>
 #include <QPushButton>
@@ -41,6 +42,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
+    this->setWindowIcon(QIcon(":/img/5sync.png"));
     profileOpen = 0;
     profileUI = 0;
 
@@ -173,4 +175,14 @@ void UserInterface::on_actionSelect_profile_triggered()
 void UserInterface::openSelectProfile()
 {
     // not needed right now
+}
+
+void UserInterface::on_actionAbout_gta5sync_triggered()
+{
+    AboutDialog *aboutDialog = new AboutDialog(this);
+    aboutDialog->setWindowFlags(aboutDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    aboutDialog->show();
+    aboutDialog->exec();
+    aboutDialog->deleteLater();
+    delete aboutDialog;
 }

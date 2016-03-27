@@ -1,4 +1,4 @@
-//IDI_ICON1               ICON    DISCARDABLE     "gta5sync.ico"
+IDI_ICON1               ICON    DISCARDABLE     "5sync.ico"
 
 #include <windows.h>
 

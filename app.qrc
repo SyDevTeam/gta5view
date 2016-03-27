@@ -6,5 +6,7 @@
     </qresource>
     <qresource prefix="/img">
         <file>savegame.png</file>
+        <file>5sync.ico</file>
+        <file>5sync.png</file>
     </qresource>
 </RCC>

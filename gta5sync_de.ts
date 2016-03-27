@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="de_DE">
 <context>
+    <name>AboutDialog</name>
+    <message>
+        <location filename="AboutDialog.ui" line="14"/>
+        <source>About gta5sync</source>
+        <translation>Über gta5sync</translation>
+    </message>
+    <message utf8="true">
+        <location filename="AboutDialog.ui" line="59"/>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright © &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="AboutDialog.ui" line="101"/>
+        <source>Close</source>
+        <translation>Schließen</translation>
+    </message>
+</context>
+<context>
     <name>PictureDialog</name>
     <message>
         <location filename="PictureDialog.ui" line="14"/>
@@ -48,28 +66,28 @@
         <translation>Keine Crew</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="155"/>
+        <location filename="PictureDialog.cpp" line="158"/>
         <source>JPEG picture (*.jpg);;Portable Network Graphics (*.png)</source>
         <translation>JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="156"/>
+        <location filename="PictureDialog.cpp" line="159"/>
         <source>Export picture</source>
         <translation>Bild exportieren</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="232"/>
-        <location filename="PictureDialog.cpp" line="238"/>
+        <location filename="PictureDialog.cpp" line="235"/>
+        <location filename="PictureDialog.cpp" line="241"/>
         <source>Snapmatic Picture Exporter</source>
         <translation>Snapmatic Bild Exporter</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="232"/>
+        <location filename="PictureDialog.cpp" line="235"/>
         <source>Failed to save the picture</source>
         <translation>Fehlgeschlagen beim Speichern des Bildes</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="238"/>
+        <location filename="PictureDialog.cpp" line="241"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
@@ -213,7 +231,7 @@
     </message>
     <message>
         <location filename="UserInterface.ui" line="110"/>
-        <location filename="UserInterface.cpp" line="121"/>
+        <location filename="UserInterface.cpp" line="122"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -238,12 +256,12 @@
         <translation>Strg+P</translation>
     </message>
     <message>
-        <location filename="UserInterface.cpp" line="74"/>
+        <location filename="UserInterface.cpp" line="75"/>
         <source>GTA V Folder not found!</source>
         <translation>GTA V Ordner nicht gefunden!</translation>
     </message>
     <message>
-        <location filename="UserInterface.cpp" line="74"/>
+        <location filename="UserInterface.cpp" line="75"/>
         <source>gta5sync</source>
         <translation>gta5sync</translation>
     </message>

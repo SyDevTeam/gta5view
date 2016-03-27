@@ -43,6 +43,7 @@ private slots:
     void on_actionExit_triggered();
     void on_actionSelect_profile_triggered();
     void on_profileButton_clicked();
+    void on_actionAbout_gta5sync_triggered();
 
 private:
     ProfileDatabase *profileDB;
