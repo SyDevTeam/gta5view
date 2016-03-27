@@ -36,6 +36,8 @@ void ProfileLoader::run()
     QDir profileDir;
     profileDir.setPath(profileFolder);
 
+    QList<int> crewList;
+
     profileDir.setNameFilters(QStringList("SGTA*"));
     QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
     QStringList BackupFiles = SavegameFiles.filter(".bak", Qt::CaseInsensitive);
@@ -69,9 +71,19 @@ void ProfileLoader::run()
         if (picture->readingPicture())
         {
             emit pictureLoaded(picture, picturePath);
-            crewDB->addCrew(picture->getCrewNumber());
+            int crewNumber = picture->getCrewNumber();
+            if (!crewList.contains(crewNumber))
+            {
+                crewList.append(crewNumber);
+            }
         }
         loadedV++;
         emit loadingProgress(loadedV, maximumV);
+    }
+
+    // adding found crews
+    foreach(int crewID, crewList)
+    {
+        crewDB->addCrew(crewID);
     }
 }
