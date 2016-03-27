@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
     a.setApplicationVersion("1.0.0");
 
     // Loading translation settings
-    QSettings settings("Syping Gaming Team", "gta5sync");
+    QSettings settings("Syping", "gta5sync");
     settings.beginGroup("Interface");
     QString language = settings.value("Language","System").toString();
     settings.endGroup();

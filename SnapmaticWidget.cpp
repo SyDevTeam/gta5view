@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ SnapmaticWidget::~SnapmaticWidget()
 
 void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath)
 {
-    QPixmap SnapmaticPixmap = picture->getPixmap();
+    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getPicture(), Qt::AutoColor);
     SnapmaticPixmap.scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     ui->labPicStr->setText(picture->getPictureStr());
     ui->labPicture->setPixmap(SnapmaticPixmap);

@@ -4,4 +4,7 @@
         <file>qt_de.qm</file>
         <file>qtbase_de.qm</file>
     </qresource>
+    <qresource prefix="/img">
+        <file>savegame.png</file>
+    </qresource>
 </RCC>

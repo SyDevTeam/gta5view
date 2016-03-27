@@ -15,7 +15,23 @@
   </property>
   <layout class="QHBoxLayout" name="hlSavegameContent">
    <item>
+    <widget class="QLabel" name="labSavegamePic">
+     <property name="text">
+      <string/>
+     </property>
+     <property name="pixmap">
+      <pixmap resource="app.qrc">:/img/savegame.png</pixmap>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QLabel" name="labSavegameStr">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>The Third Way (100%) - 00/00/00 00:00:00</string>
      </property>
@@ -23,19 +39,6 @@
       <bool>true</bool>
      </property>
     </widget>
-   </item>
-   <item>
-    <spacer name="hsSavegameWidget">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-    </spacer>
    </item>
    <item>
     <widget class="QPushButton" name="cmdCopy">
@@ -53,6 +56,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="app.qrc"/>
+ </resources>
  <connections/>
 </ui>

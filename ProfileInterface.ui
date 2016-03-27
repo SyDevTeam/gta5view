@@ -64,12 +64,15 @@
         <number>0</number>
        </property>
        <item>
-        <layout class="QHBoxLayout" name="hlContent">
-         <item>
-          <layout class="QVBoxLayout" name="vlSnapmatic"/>
-         </item>
+        <layout class="QVBoxLayout" name="vlContent">
+         <property name="spacing">
+          <number>0</number>
+         </property>
          <item>
           <layout class="QVBoxLayout" name="vlSavegame"/>
+         </item>
+         <item>
+          <layout class="QVBoxLayout" name="vlSnapmatic"/>
          </item>
         </layout>
        </item>

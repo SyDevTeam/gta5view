@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -68,7 +68,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
 
     if (picture->isPicOk())
     {
-        ui->labPicture->setPixmap(picture->getPixmap());
+        ui->labPicture->setPixmap(QPixmap::fromImage(picture->getPicture(), Qt::AutoColor));
         ui->cmdExport->setEnabled(true);
     }
     if (picture->isJsonOk())

@@ -16,34 +16,31 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef SAVEGAMEDATA_H
-#define SAVEGAMEDATA_H
+#ifndef PROFILELOADER_H
+#define PROFILELOADER_H
 
-#include <QObject>
+#include "SnapmaticPicture.h"
+#include "SavegameData.h"
+#include "CrewDatabase.h"
+#include <QThread>
+#include <QDir>
 
-class SavegameData : public QObject
+class ProfileLoader : public QThread
 {
     Q_OBJECT
 public:
-    explicit SavegameData(QString fileName = "", QObject *parent = 0);
-    bool readingSavegameFromFile(QString fileName);
-    bool readingSavegame();
-    bool isSavegameOk();
-    QString getLastStep();
-    QString getSavegameStr();
+    explicit ProfileLoader(QString profileFolder, CrewDatabase *crewDB, QObject *parent = 0);
+
+protected:
+    void run();
 
 private:
-    QString getSavegameDataString(QByteArray savegameHeader);
-    QString convertDrawStringForLog(QString inputStr);
-    QString convertLogStringForDraw(QString inputStr);
-    QString savegameFileName;
-    QString savegameStr;
-    QString lastStep;
-    bool savegameOk;
+    QString profileFolder;
+    CrewDatabase *crewDB;
 
-    // PARSE INT
-    QString verificationValue;
-    int savegameHeaderLength;
+signals:
+    void pictureLoaded(SnapmaticPicture *picture, QString picturePath);
+    void savegameLoaded(SavegameData *savegame, QString savegamePath);
 };
 
-#endif // SAVEGAMEDATA_H
+#endif // PROFILELOADER_H

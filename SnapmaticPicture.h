@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 
 #include <QStringList>
 #include <QObject>
-#include <QPixmap>
 #include <QString>
+#include <QImage>
 #include <QFile>
 
 class SnapmaticPicture : public QObject
@@ -32,9 +32,9 @@ public:
     explicit SnapmaticPicture(QString fileName = "", QObject *parent = 0);
     bool readingPictureFromFile(QString fileName);
     bool readingPicture();
-    void setPixmap(QPixmap pixmap);
+    void setPicture(QImage picture);
     bool isPicOk();
-    QPixmap getPixmap();
+    QImage getPicture();
     QString getLastStep();
     QString getPictureStr();
 
@@ -52,7 +52,7 @@ private:
     QString getSnapmaticJSONString(QByteArray jsonBytes);
     QString convertDrawStringForLog(QString inputStr);
     QString convertLogStringForDraw(QString inputStr);
-    QPixmap cachePicture;
+    QImage cachePicture;
     QString picFileName;
     QString pictureStr;
     QString lastStep;

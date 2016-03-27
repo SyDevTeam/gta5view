@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 #include "ui_ProfileInterface.h"
 #include "SnapmaticWidget.h"
 #include "SavegameWidget.h"
+#include "ProfileLoader.h"
 #include <QSpacerItem>
 #include <QFileInfo>
 #include <QRegExp>
@@ -50,42 +51,26 @@ void ProfileInterface::setProfileFolder(QString folder, QString profile)
 
 void ProfileInterface::setupProfileInterface()
 {
-    QDir profileDir;
-    profileDir.setPath(profileFolder);
     ui->labProfileContent->setText(contentStr.arg(profileName));
 
-    profileDir.setNameFilters(QStringList("PGTA*"));
-    QStringList SnapmaticPics = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
-    foreach(const QString &SnapmaticPic, SnapmaticPics)
-    {
-        QString picturePath = profileFolder + "/" + SnapmaticPic;
-        SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
-        if (picture->readingPicture())
-        {
-            SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB);
-            picWidget->setSnapmaticPicture(picture, picturePath);
-            ui->vlSnapmatic->addWidget(picWidget);
-            crewDB->addCrew(picture->getCrewNumber());
-        }
-    }
-    QSpacerItem *snapmaticSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    ui->vlSnapmatic->addSpacerItem(snapmaticSpacer);
+    ProfileLoader *profileLoader = new ProfileLoader(profileFolder, crewDB);
+    QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(on_savegameLoaded(SavegameData*, QString)));
+    QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*, QString)), this, SLOT(on_pictureLoaded(SnapmaticPicture*, QString)));
+    profileLoader->start();
+}
 
-    profileDir.setNameFilters(QStringList("SGTA*"));
-    QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
-    foreach(const QString &SavegameFile, SavegameFiles)
-    {
-        QString sgdPath = profileFolder + "/" + SavegameFile;
-        SavegameData *savegame = new SavegameData(sgdPath);
-        if (savegame->readingSavegame())
-        {
-            SavegameWidget *sgdWidget = new SavegameWidget();
-            sgdWidget->setSavegameData(savegame, sgdPath);
-            ui->vlSavegame->addWidget(sgdWidget);
-        }
-    }
-    QSpacerItem *savegameSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    ui->vlSavegame->addSpacerItem(savegameSpacer);
+void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegamePath)
+{
+    SavegameWidget *sgdWidget = new SavegameWidget();
+    sgdWidget->setSavegameData(savegame, savegamePath);
+    ui->vlSavegame->addWidget(sgdWidget);
+}
+
+void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString picturePath)
+{
+    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB);
+    picWidget->setSnapmaticPicture(picture, picturePath);
+    ui->vlSnapmatic->addWidget(picWidget);
 }
 
 void ProfileInterface::on_cmdCloseProfile_clicked()

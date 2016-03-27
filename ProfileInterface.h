@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -19,7 +19,9 @@
 #ifndef PROFILEINTERFACE_H
 #define PROFILEINTERFACE_H
 
+#include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
+#include "SavegameData.h"
 #include "CrewDatabase.h"
 #include <QWidget>
 
@@ -38,6 +40,8 @@ public:
 
 private slots:
     void on_cmdCloseProfile_clicked();
+    void on_pictureLoaded(SnapmaticPicture *picture, QString picturePath);
+    void on_savegameLoaded(SavegameData *savegame, QString savegamePath);
 
 private:
     ProfileDatabase *profileDB;

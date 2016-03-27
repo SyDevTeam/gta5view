@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QJsonArray>
-#include <QPixmap>
 #include <QString>
+#include <QImage>
 #include <QFile>
 
 SnapmaticPicture::SnapmaticPicture(QString fileName, QObject *parent) : QObject(parent), picFileName(fileName)
@@ -36,7 +36,7 @@ SnapmaticPicture::SnapmaticPicture(QString fileName, QObject *parent) : QObject(
     jsonStreamLength = 3076;
 
     // INIT PIC
-    cachePicture = QPixmap(0,0);
+    cachePicture = QImage(0, 0, QImage::Format_RGB32);
     pictureStr = "";
     lastStep = "";
     picOk = 0;
@@ -95,7 +95,7 @@ bool SnapmaticPicture::readingPicture()
         return false;
     }
     QByteArray jpegRawContent = picFile->read(jpegPicStreamLength);
-    picOk = cachePicture.loadFromData(jpegRawContent);
+    picOk = cachePicture.loadFromData(jpegRawContent, "JPEG");
 
     // Read JSON Stream
     if (!picFile->isReadable())
@@ -145,9 +145,9 @@ bool SnapmaticPicture::readingPictureFromFile(QString fileName)
     }
 }
 
-void SnapmaticPicture::setPixmap(QPixmap pixmap)
+void SnapmaticPicture::setPicture(QImage picture)
 {
-    cachePicture = pixmap;
+    cachePicture = picture;
 }
 
 QString SnapmaticPicture::getPictureStr()
@@ -160,7 +160,7 @@ QString SnapmaticPicture::getLastStep()
     return lastStep;
 }
 
-QPixmap SnapmaticPicture::getPixmap()
+QImage SnapmaticPicture::getPicture()
 {
     return cachePicture;
 }

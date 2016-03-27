@@ -1,6 +1,6 @@
 #/*****************************************************************************
 #* gta5sync GRAND THEFT AUTO V SYNC
-#* Copyright (C) 2015-2016 Syping Gaming Team
+#* Copyright (C) 2015-2016 Syping
 #*
 #* This program is free software: you can redistribute it and/or modify
 #* it under the terms of the GNU General Public License as published by
@@ -37,7 +37,8 @@ SOURCES += main.cpp \
     UserInterface.cpp \
     ProfileInterface.cpp \
     SnapmaticWidget.cpp \
-    SavegameWidget.cpp
+    SavegameWidget.cpp \
+    ProfileLoader.cpp
 
 HEADERS  += \
     SnapmaticPicture.h \
@@ -51,7 +52,8 @@ HEADERS  += \
     UserInterface.h \
     ProfileInterface.h \
     SnapmaticWidget.h \
-    SavegameWidget.h
+    SavegameWidget.h \
+    ProfileLoader.h
 
 FORMS    += \
     PictureDialog.ui \

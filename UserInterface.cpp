@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -40,7 +40,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     ui->setupUi(this);
 
     // init settings
-    QSettings SyncSettings("Syping Gaming Team", "gta5sync");
+    QSettings SyncSettings("Syping", "gta5sync");
     SyncSettings.beginGroup("dir");
     bool forceDir = SyncSettings.value("force", false).toBool();
 

@@ -41,6 +41,12 @@
    </item>
    <item>
     <widget class="QLabel" name="labPicStr">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="text">
       <string>PHOTO - 00/00/00 00:00:00</string>
      </property>
@@ -48,19 +54,6 @@
       <bool>true</bool>
      </property>
     </widget>
-   </item>
-   <item>
-    <spacer name="hsView">
-     <property name="orientation">
-      <enum>Qt::Horizontal</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-    </spacer>
    </item>
    <item>
     <widget class="QPushButton" name="cmdView">

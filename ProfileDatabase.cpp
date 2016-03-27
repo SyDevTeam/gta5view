@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping Gaming Team
+* Copyright (C) 2016 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -38,7 +38,7 @@ ProfileDatabase::ProfileDatabase(QObject *parent) : QObject(parent)
     QString dirPath = dir.absolutePath();
     QString defaultConfPath = dirPath + "/players.ini";
 
-    QSettings confPathSettings("Syping Gaming Team","gta5sync");
+    QSettings confPathSettings("Syping","gta5sync");
     confPathSettings.beginGroup("Database");
     QString confPathFile = confPathSettings.value("Location", defaultConfPath).toString();
     confPathSettings.endGroup();
