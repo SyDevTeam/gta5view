@@ -99,7 +99,7 @@ int main(int argc, char *argv[])
         }
     }
     a.installTranslator(&appTranslator);
-#ifdef QT5_MODE
+#if QT_VERSION >= 0x050000
     QTranslator qtTranslator1;
     if (language == "System" || language.trimmed() == "")
     {
