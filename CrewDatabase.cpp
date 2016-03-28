@@ -16,24 +16,15 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include "StandardPaths.h"
 #include "CrewDatabase.h"
 #include <QFile>
 #include <QDir>
 
-#ifdef QT5_MODE
-#include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
-
 CrewDatabase::CrewDatabase(QObject *parent) : QObject(parent)
 {
     QDir dir;
-#ifdef QT5_MODE
-    dir.setPath(QStandardPaths::writableLocation(QStandardPaths::DataLocation));
-#else
-    dir.setPath(QDesktopServices::storageLocation(QDesktopServices::DataLocation));
-#endif
+    dir.setPath(StandardPaths::writableLocation(StandardPaths::DataLocation));
     dir.mkdir("../gta5sync");
     QString dirPath = dir.absolutePath();
     QString defaultConfPath = dirPath + "/crews.ini";

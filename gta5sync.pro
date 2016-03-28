@@ -19,7 +19,6 @@
 QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-isEqual(QT_MAJOR_VERSION, 5): DEFINES += QT5_MODE
 
 TARGET = gta5sync
 TEMPLATE = app
@@ -33,13 +32,13 @@ SOURCES += main.cpp \
     CrewDatabase.cpp \
     SavegameData.cpp \
     SavegameDialog.cpp \
-    SyncFramework.cpp \
     UserInterface.cpp \
     ProfileInterface.cpp \
     SnapmaticWidget.cpp \
     SavegameWidget.cpp \
     ProfileLoader.cpp \
-    AboutDialog.cpp
+    AboutDialog.cpp \
+    StandardPaths.cpp
 
 HEADERS  += \
     SnapmaticPicture.h \
@@ -49,13 +48,13 @@ HEADERS  += \
     CrewDatabase.h \
     SavegameData.h \
     SavegameDialog.h \
-    SyncFramework.h \
     UserInterface.h \
     ProfileInterface.h \
     SnapmaticWidget.h \
     SavegameWidget.h \
     ProfileLoader.h \
-    AboutDialog.h
+    AboutDialog.h \
+    StandardPaths.h
 
 FORMS    += \
     PictureDialog.ui \

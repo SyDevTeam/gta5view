@@ -19,6 +19,7 @@
 #include "UserInterface.h"
 #include "ui_UserInterface.h"
 #include "ProfileInterface.h"
+#include "StandardPaths.h"
 #include "AboutDialog.h"
 #include <QHBoxLayout>
 #include <QSpacerItem>
@@ -30,12 +31,6 @@
 #include <QFile>
 #include <QDir>
 #include <QMap>
-
-#ifdef QT5_MODE
-#include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
 
 UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
     QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
@@ -52,11 +47,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     bool forceDir = SyncSettings.value("force", false).toBool();
 
     // init folder
-#ifdef QT5_MODE
-    QString GTAV_defaultFolder = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation) + "/Rockstar Games/GTA V";
-#else
-    QString GTAV_defaultFolder = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation) + "/Rockstar Games/GTA V";
-#endif
+    QString GTAV_defaultFolder = StandardPaths::writableLocation(StandardPaths::DocumentsLocation) + "/Rockstar Games/GTA V";
     QDir GTAV_Dir;
     if (forceDir)
     {

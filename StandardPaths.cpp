@@ -16,40 +16,16 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-// DONT USE THE SYNC FRAMEWORK NOW
+#include "StandardPaths.h"
+
+StandardPaths::StandardPaths()
+{
+
+}
 
 #ifndef QT5_MODE
-
-#ifndef SYNCFRAMEWORK_H
-#define SYNCFRAMEWORK_H
-
-#include <QObject>
-#include <QString>
-
-class SyncFramework : public QObject
+QString StandardPaths::writableLocation(QDesktopServices::StandardLocation standardLocation)
 {
-    Q_OBJECT
-public:
-    explicit SyncFramework(QObject *parent = 0);
-    void setPort(int port);
-    void setHost(QString hostname);
-    void setUsername(QString username);
-    void setPassword(QString password);
-    void setSyncFolder(QString folder);
-    void testServer();
-
-private:
-    int serverPort;
-    QString serverHostname;
-    QString serverUsername;
-    QString serverPassword;
-    QString serverSyncFolder;
-
-private slots:
-    void fileDownloaded(bool isDone);
-    void fileUploaded(bool isDone);
-
-};
-
+    return QDesktopServices::storageLocation(standardLocation);
+}
 #endif
-#endif // SYNCFRAMEWORK_H

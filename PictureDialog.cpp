@@ -19,6 +19,7 @@
 #include "PictureDialog.h"
 #include "ProfileDatabase.h"
 #include "ui_PictureDialog.h"
+#include "StandardPaths.h"
 
 #include <QJsonDocument>
 #include <QFileDialog>
@@ -30,12 +31,6 @@
 #include <QList>
 #include <QUrl>
 #include <QDir>
-
-#if QT5_MODE
-#include <QStandardPaths>
-#else
-#include <QDesktopServices>
-#endif
 
 PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     QDialog(parent), profileDB(profileDB),
@@ -164,13 +159,8 @@ void PictureDialog::on_cmdExport_clicked()
     QDir dir;
 
     // Get Documents + Desktop Location
-#ifdef QT5_MODE
-    QString documentsLocation = QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
-    QString desktopLocation = QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
-#else
-    QString documentsLocation = QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
-    QString desktopLocation = QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
-#endif
+    QString documentsLocation = StandardPaths::writableLocation(StandardPaths::DocumentsLocation);
+    QString desktopLocation = StandardPaths::writableLocation(StandardPaths::DesktopLocation);
 
     // Add Desktop Location to Sidebar
     dir.setPath(desktopLocation);
