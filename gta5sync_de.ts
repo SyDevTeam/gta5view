@@ -14,7 +14,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="AboutDialog.ui" line="101"/>
+        <location filename="AboutDialog.ui" line="104"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -42,52 +42,52 @@
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="65"/>
-        <location filename="PictureDialog.cpp" line="111"/>
+        <location filename="PictureDialog.cpp" line="61"/>
+        <location filename="PictureDialog.cpp" line="107"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Snapmatic Bildansicht</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="65"/>
-        <location filename="PictureDialog.cpp" line="111"/>
+        <location filename="PictureDialog.cpp" line="61"/>
+        <location filename="PictureDialog.cpp" line="107"/>
         <source>Failed at %1</source>
         <translation>Fehlgeschlagen bei %1</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="100"/>
-        <location filename="PictureDialog.cpp" line="110"/>
+        <location filename="PictureDialog.cpp" line="96"/>
+        <location filename="PictureDialog.cpp" line="106"/>
         <source>No player</source>
         <translation>Keine Spieler</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="103"/>
-        <location filename="PictureDialog.cpp" line="110"/>
+        <location filename="PictureDialog.cpp" line="99"/>
+        <location filename="PictureDialog.cpp" line="106"/>
         <source>No crew</source>
         <translation>Keine Crew</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="158"/>
+        <location filename="PictureDialog.cpp" line="154"/>
         <source>JPEG picture (*.jpg);;Portable Network Graphics (*.png)</source>
         <translation>JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="159"/>
+        <location filename="PictureDialog.cpp" line="155"/>
+        <location filename="PictureDialog.cpp" line="226"/>
+        <location filename="PictureDialog.cpp" line="232"/>
         <source>Export picture</source>
         <translation>Bild exportieren</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="235"/>
-        <location filename="PictureDialog.cpp" line="241"/>
         <source>Snapmatic Picture Exporter</source>
-        <translation>Snapmatic Bild Exporter</translation>
+        <translation type="obsolete">Snapmatic Bild Exporter</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="235"/>
+        <location filename="PictureDialog.cpp" line="226"/>
         <source>Failed to save the picture</source>
         <translation>Fehlgeschlagen beim Speichern des Bildes</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="241"/>
+        <location filename="PictureDialog.cpp" line="232"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
@@ -100,7 +100,7 @@
         <translation>Profil Interface</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.ui" line="63"/>
+        <location filename="ProfileInterface.ui" line="52"/>
         <source>Loading file %1 of %2 files</source>
         <oldsource>Loading %1 files of %2 files</oldsource>
         <translation>Lade Datei %1 von %2 Dateien</translation>
@@ -114,12 +114,12 @@
         <translation type="obsolete">Ansehen</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.ui" line="173"/>
+        <location filename="ProfileInterface.ui" line="179"/>
         <source>Close Profile</source>
         <translation>Profil schließen</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.cpp" line="80"/>
+        <location filename="ProfileInterface.cpp" line="81"/>
         <source>Loading...</source>
         <translation>Lade...</translation>
     </message>
@@ -170,6 +170,22 @@
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
+    <message>
+        <location filename="SavegameWidget.cpp" line="50"/>
+        <location filename="SavegameWidget.cpp" line="63"/>
+        <source>Delete savegame</source>
+        <translation>Savegame löschen</translation>
+    </message>
+    <message>
+        <location filename="SavegameWidget.cpp" line="50"/>
+        <source>Are you sure to delete %1 from your Savegames?</source>
+        <translation>Bist du sicher %1 von deinen Spielständen zu löschen?</translation>
+    </message>
+    <message>
+        <location filename="SavegameWidget.cpp" line="63"/>
+        <source>Failed at deleting %1 from your Savegames</source>
+        <translation>Fehlgeschlagen beim Löschen %1 von deinen Spielständen</translation>
+    </message>
 </context>
 <context>
     <name>SnapmaticWidget</name>
@@ -192,6 +208,26 @@
         <location filename="SnapmaticWidget.ui" line="71"/>
         <source>Delete</source>
         <translation>Löschen</translation>
+    </message>
+    <message>
+        <location filename="SnapmaticWidget.cpp" line="75"/>
+        <location filename="SnapmaticWidget.cpp" line="88"/>
+        <source>Delete picture</source>
+        <translation>Bild löschen</translation>
+    </message>
+    <message>
+        <location filename="SnapmaticWidget.cpp" line="75"/>
+        <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
+        <translation>Bist du sicher %1 von deinen Snapmatic Bilder zu löschen?</translation>
+    </message>
+    <message>
+        <source>You&apos;re sure to delete %1 from your Snapmatic pictures?</source>
+        <translation type="obsolete">Bist du sicher %1 von deinen Snapmatic Bilder zu löschen?</translation>
+    </message>
+    <message>
+        <location filename="SnapmaticWidget.cpp" line="88"/>
+        <source>Failed at deleting %1 from your Snapmatic pictures</source>
+        <translation>Fehlgeschlagen beim Löschen %1 von deinen Snapmatic Bildern</translation>
     </message>
 </context>
 <context>
@@ -231,7 +267,7 @@
     </message>
     <message>
         <location filename="UserInterface.ui" line="110"/>
-        <location filename="UserInterface.cpp" line="122"/>
+        <location filename="UserInterface.cpp" line="117"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -247,6 +283,8 @@
     <message>
         <location filename="UserInterface.ui" line="59"/>
         <location filename="UserInterface.ui" line="118"/>
+        <location filename="UserInterface.cpp" line="45"/>
+        <location filename="UserInterface.cpp" line="152"/>
         <source>Select profile</source>
         <translation>Profil auswählen</translation>
     </message>
@@ -256,12 +294,12 @@
         <translation>Strg+P</translation>
     </message>
     <message>
-        <location filename="UserInterface.cpp" line="75"/>
+        <location filename="UserInterface.cpp" line="70"/>
         <source>GTA V Folder not found!</source>
         <translation>GTA V Ordner nicht gefunden!</translation>
     </message>
     <message>
-        <location filename="UserInterface.cpp" line="75"/>
+        <location filename="UserInterface.cpp" line="70"/>
         <source>gta5sync</source>
         <translation>gta5sync</translation>
     </message>

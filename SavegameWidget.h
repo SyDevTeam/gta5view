@@ -35,10 +35,17 @@ public:
     void setSavegameData(SavegameData *savegame, QString savegamePath);
     ~SavegameWidget();
 
+private slots:
+    void on_cmdDelete_clicked();
+
 private:
     Ui::SavegameWidget *ui;
     SavegameData *sgdata;
     QString sgdPath;
+    QString sgdStr;
+
+signals:
+    void savegameDeleted();
 };
 
 #endif // SAVEGAMEWIDGET_H

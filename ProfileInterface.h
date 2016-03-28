@@ -47,6 +47,7 @@ private slots:
     void on_pictureLoaded(SnapmaticPicture *picture, QString picturePath);
     void on_savegameLoaded(SavegameData *savegame, QString savegamePath);
     void on_loadingProgress(int value, int maximum);
+    void on_savegameDeleted();
     void on_pictureDeleted();
     void on_profileLoaded();
 

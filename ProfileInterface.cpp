@@ -94,6 +94,7 @@ void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegam
     ui->vlSavegame->addWidget(sgdWidget);
     widgets.append(sgdWidget);
     savegames.append(savegame);
+    QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(on_savegameDeleted()));
 }
 
 void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString picturePath)
@@ -119,6 +120,14 @@ void ProfileInterface::on_profileLoaded()
     ui->saProfileContent->layout()->addItem(saSpacerItem);
     ui->swProfile->setCurrentWidget(ui->pageProfile);
     ui->cmdCloseProfile->setEnabled(true);
+}
+
+void ProfileInterface::on_savegameDeleted()
+{
+    SavegameWidget *sgdWidget = (SavegameWidget*)sender();
+    widgets.removeAll(sgdWidget);
+    sgdWidget->deleteLater();
+    delete sgdWidget;
 }
 
 void ProfileInterface::on_pictureDeleted()

@@ -72,7 +72,7 @@ void SnapmaticWidget::on_cmdView_clicked()
 
 void SnapmaticWidget::on_cmdDelete_clicked()
 {
-    int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("You're sure to delete %1 from your Snapmatic pictures?").arg(picStr), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
+    int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("Are you sure to delete %1 from your Snapmatic pictures?").arg("\""+picStr+"\""), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
     if (uchoice == QMessageBox::Yes)
     {
         if (!QFile::exists(picPath))
@@ -85,7 +85,7 @@ void SnapmaticWidget::on_cmdDelete_clicked()
         }
         else
         {
-            QMessageBox::warning(this, tr("Delete picture"), tr("Failed at deleting %1 from your Snapmatic pictures").arg(picStr));
+            QMessageBox::warning(this, tr("Delete picture"), tr("Failed at deleting %1 from your Snapmatic pictures").arg("\""+picStr+"\""));
         }
     }
 }

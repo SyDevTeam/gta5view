@@ -19,6 +19,8 @@
 #include "SavegameWidget.h"
 #include "ui_SavegameWidget.h"
 #include "SavegameData.h"
+#include <QMessageBox>
+#include <QFile>
 
 SavegameWidget::SavegameWidget(QWidget *parent) :
     QWidget(parent),
@@ -26,6 +28,7 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     sgdPath = "";
+    sgdStr = "";
     sgdata = 0;
 }
 
@@ -37,6 +40,27 @@ SavegameWidget::~SavegameWidget()
 void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePath)
 {
     ui->labSavegameStr->setText(savegame->getSavegameStr());
+    sgdStr = savegame->getSavegameStr();
     sgdPath = savegamePath;
     sgdata = savegame;
+}
+
+void SavegameWidget::on_cmdDelete_clicked()
+{
+    int uchoice = QMessageBox::question(this, tr("Delete savegame"), tr("Are you sure to delete %1 from your Savegames?").arg("\""+sgdStr+"\""), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
+    if (uchoice == QMessageBox::Yes)
+    {
+        if (!QFile::exists(sgdPath))
+        {
+            emit savegameDeleted();
+        }
+        else if(QFile::remove(sgdPath))
+        {
+            emit savegameDeleted();
+        }
+        else
+        {
+            QMessageBox::warning(this, tr("Delete savegame"), tr("Failed at deleting %1 from your Savegames").arg("\""+sgdStr+"\""));
+        }
+    }
 }
