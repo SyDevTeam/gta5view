@@ -18,9 +18,13 @@
 
 #include "SavegameWidget.h"
 #include "ui_SavegameWidget.h"
+#include "StandardPaths.h"
 #include "SavegameData.h"
+#include <QFileDialog>
 #include <QMessageBox>
+#include <QFileInfo>
 #include <QFile>
+#include <QUrl>
 
 SavegameWidget::SavegameWidget(QWidget *parent) :
     QWidget(parent),
@@ -61,6 +65,74 @@ void SavegameWidget::on_cmdDelete_clicked()
         else
         {
             QMessageBox::warning(this, tr("Delete savegame"), tr("Failed at deleting %1 from your savegames").arg("\""+sgdStr+"\""));
+        }
+    }
+}
+
+void SavegameWidget::on_cmdCopy_clicked()
+{
+    QFileInfo fileInfo(sgdPath);
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileDialog.setViewMode(QFileDialog::Detail);
+    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
+    fileDialog.setDefaultSuffix("");
+    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowTitle(tr("Copy savegame"));
+
+    QStringList filters;
+    filters << tr("Savegame files (SGTA*)");
+    filters << tr("All files (**)");
+    fileDialog.setNameFilters(filters);
+
+    QList<QUrl> sidebarUrls = fileDialog.sidebarUrls();
+    QDir dir;
+
+    // Get Documents + Desktop Location
+    QString documentsLocation = StandardPaths::documentsLocation();
+    QString desktopLocation = StandardPaths::desktopLocation();
+
+    // Add Desktop Location to Sidebar
+    dir.setPath(desktopLocation);
+    if (dir.exists())
+    {
+        sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
+    }
+
+    // Add Documents + GTA V Location to Sidebar
+    dir.setPath(documentsLocation);
+    if (dir.exists())
+    {
+        sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
+        if (dir.cd("Rockstar Games/GTA V"))
+        {
+            sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
+        }
+    }
+
+    fileDialog.setSidebarUrls(sidebarUrls);
+
+fileDialogPreSave:
+    if (fileDialog.exec())
+    {
+        QStringList selectedFiles = fileDialog.selectedFiles();
+        if (selectedFiles.length() == 1)
+        {
+            QString selectedFile = selectedFiles.at(0);
+
+            bool isCopied = QFile::copy(sgdPath, selectedFile);
+
+            if (!isCopied)
+            {
+                QMessageBox::warning(this, tr("Copy savegame"), tr("Failed to copy the savegame"));
+                goto fileDialogPreSave;
+            }
+        }
+        else
+        {
+            QMessageBox::warning(this, tr("Copy savegame"), tr("No valid file is selected"));
+            goto fileDialogPreSave;
         }
     }
 }

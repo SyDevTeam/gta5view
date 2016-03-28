@@ -37,6 +37,7 @@ public:
 
 private slots:
     void on_cmdDelete_clicked();
+    void on_cmdCopy_clicked();
 
 private:
     Ui::SavegameWidget *ui;

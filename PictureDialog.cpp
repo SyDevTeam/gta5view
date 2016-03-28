@@ -150,10 +150,15 @@ void PictureDialog::on_cmdExport_clicked()
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
     fileDialog.setDefaultSuffix("suffix");
-    fileDialog.setNameFilter(tr("JPEG picture (*.jpg);;Portable Network Graphics (*.png)"));
     fileDialog.setWindowTitle(tr("Export picture"));
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+
+    QStringList filters;
+    filters << tr("JPEG picture (*.jpg)");
+    filters << tr("Portable Network Graphics (*.png)");
+    fileDialog.setNameFilters(filters);
 
     QList<QUrl> sidebarUrls = fileDialog.sidebarUrls();
     QDir dir;
