@@ -146,11 +146,15 @@ void PictureDialog::on_cmdClose_clicked()
 
 void PictureDialog::on_cmdExport_clicked()
 {
+    QSettings settings("Syping", "gta5sync");
+    settings.beginGroup("FileDialogs");
+
     QFileDialog fileDialog(this);
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
+    fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("suffix");
     fileDialog.setWindowTitle(tr("Export picture"));
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
@@ -186,6 +190,7 @@ void PictureDialog::on_cmdExport_clicked()
     }
 
     fileDialog.setSidebarUrls(sidebarUrls);
+    fileDialog.restoreState(settings.value("ExportPicture","").toByteArray());
 
 fileDialogPreSave:
     if (fileDialog.exec())
@@ -224,11 +229,27 @@ fileDialogPreSave:
                 }
             }
 
+            if (QFile::exists(selectedFile))
+            {
+                if (QMessageBox::Yes == QMessageBox::warning(this, tr("Export picture"), tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+                {
+                    if (!QFile::remove(selectedFile))
+                    {
+                        QMessageBox::warning(this, tr("Export picture"), tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
+                        goto fileDialogPreSave;
+                    }
+                }
+                else
+                {
+                    goto fileDialogPreSave;
+                }
+            }
+
             bool isSaved = ui->labPicture->pixmap()->save(selectedFile, saveFileFormat.toStdString().c_str(), 100);
 
             if (!isSaved)
             {
-                QMessageBox::warning(this, tr("Export picture"), tr("Failed to save the picture"));
+                QMessageBox::warning(this, tr("Export picture"), tr("Failed to save current picture"));
                 goto fileDialogPreSave;
             }
         }
@@ -238,4 +259,7 @@ fileDialogPreSave:
             goto fileDialogPreSave;
         }
     }
+
+    settings.setValue("ExportPicture", fileDialog.saveState());
+    settings.endGroup();
 }

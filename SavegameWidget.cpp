@@ -22,6 +22,7 @@
 #include "SavegameData.h"
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QSettings>
 #include <QFileInfo>
 #include <QFile>
 #include <QUrl>
@@ -71,12 +72,16 @@ void SavegameWidget::on_cmdDelete_clicked()
 
 void SavegameWidget::on_cmdCopy_clicked()
 {
+    QSettings settings("Syping", "gta5sync");
+    settings.beginGroup("FileDialogs");
+
     QFileInfo fileInfo(sgdPath);
     QFileDialog fileDialog(this);
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
+    fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
     fileDialog.setWindowTitle(tr("Copy savegame"));
@@ -112,6 +117,7 @@ void SavegameWidget::on_cmdCopy_clicked()
     }
 
     fileDialog.setSidebarUrls(sidebarUrls);
+    fileDialog.restoreState(settings.value("CopySavegame","").toByteArray());
 
 fileDialogPreSave:
     if (fileDialog.exec())
@@ -121,11 +127,26 @@ fileDialogPreSave:
         {
             QString selectedFile = selectedFiles.at(0);
 
-            bool isCopied = QFile::copy(sgdPath, selectedFile);
+            if (QFile::exists(selectedFile))
+            {
+                if (QMessageBox::Yes == QMessageBox::warning(this, tr("Copy savegame"), tr("Overwrite %1 with current savegame?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+                {
+                    if (!QFile::remove(selectedFile))
+                    {
+                        QMessageBox::warning(this, tr("Copy savegame"), tr("Failed to overwrite %1 with current savegame").arg("\""+selectedFile+"\""));
+                        goto fileDialogPreSave;
+                    }
+                }
+                else
+                {
+                    goto fileDialogPreSave;
+                }
+            }
 
+            bool isCopied = QFile::copy(sgdPath, selectedFile);
             if (!isCopied)
             {
-                QMessageBox::warning(this, tr("Copy savegame"), tr("Failed to copy the savegame"));
+                QMessageBox::warning(this, tr("Copy savegame"), tr("Failed to copy current savegame"));
                 goto fileDialogPreSave;
             }
         }
@@ -135,4 +156,7 @@ fileDialogPreSave:
             goto fileDialogPreSave;
         }
     }
+
+    settings.setValue("CopySavegame", fileDialog.saveState());
+    settings.endGroup();
 }

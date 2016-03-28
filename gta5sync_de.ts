@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -66,23 +66,40 @@
         <translation>Keine Crew</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="159"/>
+        <location filename="PictureDialog.cpp" line="163"/>
         <source>JPEG picture (*.jpg)</source>
         <translation>JPEG Bild (*.jpg)</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="160"/>
+        <location filename="PictureDialog.cpp" line="164"/>
         <source>Portable Network Graphics (*.png)</source>
         <translation>Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <source>JPEG picture (*.jpg);;Portable Network Graphics (*.png)</source>
-        <translation>JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
+        <location filename="PictureDialog.cpp" line="234"/>
+        <source>Overwrite %1 with current Snapmatic picture?</source>
+        <translation>Überschreibe %1 mit aktuellen Snapmatic Bild?</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="155"/>
-        <location filename="PictureDialog.cpp" line="231"/>
-        <location filename="PictureDialog.cpp" line="237"/>
+        <location filename="PictureDialog.cpp" line="238"/>
+        <source>Failed to overwrite %1 with current Snapmatic picture</source>
+        <translation>Fehlgeschlagen beim Überschreiben von %1 mit aktuellen Snapmatic Bild</translation>
+    </message>
+    <message>
+        <location filename="PictureDialog.cpp" line="252"/>
+        <source>Failed to save current picture</source>
+        <translation>Fehlgeschlagen beim Speichern vom aktuellen Bild</translation>
+    </message>
+    <message>
+        <source>JPEG picture (*.jpg);;Portable Network Graphics (*.png)</source>
+        <translation type="vanished">JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
+    </message>
+    <message>
+        <location filename="PictureDialog.cpp" line="159"/>
+        <location filename="PictureDialog.cpp" line="234"/>
+        <location filename="PictureDialog.cpp" line="238"/>
+        <location filename="PictureDialog.cpp" line="252"/>
+        <location filename="PictureDialog.cpp" line="258"/>
         <source>Export picture</source>
         <translation>Bild exportieren</translation>
     </message>
@@ -91,12 +108,11 @@
         <translation type="obsolete">Snapmatic Bild Exporter</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="231"/>
         <source>Failed to save the picture</source>
-        <translation>Beim Speichern des Bildes ist ein Fehler aufgetreten</translation>
+        <translation type="vanished">Beim Speichern des Bildes ist ein Fehler aufgetreten</translation>
     </message>
     <message>
-        <location filename="PictureDialog.cpp" line="237"/>
+        <location filename="PictureDialog.cpp" line="258"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
@@ -180,45 +196,61 @@
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.cpp" line="54"/>
-        <location filename="SavegameWidget.cpp" line="67"/>
+        <location filename="SavegameWidget.cpp" line="55"/>
+        <location filename="SavegameWidget.cpp" line="68"/>
         <source>Delete savegame</source>
         <translation>Savegame löschen</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.cpp" line="54"/>
+        <location filename="SavegameWidget.cpp" line="55"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Bist du sicher %1 von deinen Spielständen zu löschen?</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.cpp" line="67"/>
+        <location filename="SavegameWidget.cpp" line="68"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Fehlgeschlagen beim Löschen %1 von deinen Spielständen</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.cpp" line="82"/>
-        <location filename="SavegameWidget.cpp" line="128"/>
-        <location filename="SavegameWidget.cpp" line="134"/>
+        <location filename="SavegameWidget.cpp" line="87"/>
+        <location filename="SavegameWidget.cpp" line="132"/>
+        <location filename="SavegameWidget.cpp" line="136"/>
+        <location filename="SavegameWidget.cpp" line="149"/>
+        <location filename="SavegameWidget.cpp" line="155"/>
         <source>Copy savegame</source>
         <translation>Spielstand kopieren</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.cpp" line="85"/>
+        <location filename="SavegameWidget.cpp" line="90"/>
         <source>Savegame files (SGTA*)</source>
         <translation>Spielstanddateien (SGTA*)</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.cpp" line="86"/>
+        <location filename="SavegameWidget.cpp" line="91"/>
         <source>All files (**)</source>
         <translation>Alle Dateien (**)</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.cpp" line="128"/>
-        <source>Failed to copy the savegame</source>
-        <translation>Beim Kopieren vom Spielstand ist ein Fehler aufgetreten</translation>
+        <location filename="SavegameWidget.cpp" line="132"/>
+        <source>Overwrite %1 with current savegame?</source>
+        <translation>Überschreibe %1 mit aktuellen Spielstand?</translation>
     </message>
     <message>
-        <location filename="SavegameWidget.cpp" line="134"/>
+        <location filename="SavegameWidget.cpp" line="136"/>
+        <source>Failed to overwrite %1 with current savegame</source>
+        <translation>Fehlgeschlagen beim Überschreiben von %1 mit aktuellen Spielstand </translation>
+    </message>
+    <message>
+        <location filename="SavegameWidget.cpp" line="149"/>
+        <source>Failed to copy current savegame</source>
+        <translation>Fehlgeschlagen beim Kopieren vom Spielstand</translation>
+    </message>
+    <message>
+        <source>Failed to copy the savegame</source>
+        <translation type="vanished">Beim Kopieren vom Spielstand ist ein Fehler aufgetreten</translation>
+    </message>
+    <message>
+        <location filename="SavegameWidget.cpp" line="155"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
