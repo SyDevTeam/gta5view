@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -8,7 +8,7 @@
         <source>About gta5sync</source>
         <translation>Über gta5sync</translation>
     </message>
-    <message>
+    <message utf8="true">
         <location filename="AboutDialog.ui" line="59"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright © &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
@@ -92,7 +92,7 @@
     </message>
     <message>
         <source>JPEG picture (*.jpg);;Portable Network Graphics (*.png)</source>
-        <translation type="vanished">JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
+        <translation type="obsolete">JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
     </message>
     <message>
         <location filename="PictureDialog.cpp" line="159"/>
@@ -109,7 +109,7 @@
     </message>
     <message>
         <source>Failed to save the picture</source>
-        <translation type="vanished">Beim Speichern des Bildes ist ein Fehler aufgetreten</translation>
+        <translation type="obsolete">Beim Speichern des Bildes ist ein Fehler aufgetreten</translation>
     </message>
     <message>
         <location filename="PictureDialog.cpp" line="258"/>
@@ -131,6 +131,20 @@
         <translation>Lade Datei %1 von %2 Dateien</translation>
     </message>
     <message>
+        <location filename="ProfileInterface.ui" line="179"/>
+        <location filename="ProfileInterface.cpp" line="163"/>
+        <location filename="ProfileInterface.cpp" line="221"/>
+        <location filename="ProfileInterface.cpp" line="234"/>
+        <location filename="ProfileInterface.cpp" line="241"/>
+        <location filename="ProfileInterface.cpp" line="247"/>
+        <location filename="ProfileInterface.cpp" line="262"/>
+        <location filename="ProfileInterface.cpp" line="272"/>
+        <location filename="ProfileInterface.cpp" line="308"/>
+        <location filename="ProfileInterface.cpp" line="314"/>
+        <source>Import copy</source>
+        <translation>Kopie importieren</translation>
+    </message>
+    <message>
         <source>Content of Profile %1</source>
         <translation type="obsolete">Inhalt vom Profil %1</translation>
     </message>
@@ -139,14 +153,70 @@
         <translation type="obsolete">Ansehen</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.ui" line="179"/>
+        <location filename="ProfileInterface.ui" line="189"/>
         <source>Close Profile</source>
         <translation>Profil schließen</translation>
     </message>
     <message>
-        <location filename="ProfileInterface.cpp" line="81"/>
+        <location filename="ProfileInterface.cpp" line="87"/>
         <source>Loading...</source>
         <translation>Lade...</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="167"/>
+        <source>All profile files (SGTA* PGTA*)</source>
+        <translation>Alle Profildateien (SGTA* PGTA*)</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="168"/>
+        <source>Savegames files (SGTA*)</source>
+        <translation>Spielstanddateien (SGTA*)</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="169"/>
+        <source>Snapmatic pictures (PGTA*)</source>
+        <translation>Snapmatic Bilder (PGTA*)</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="170"/>
+        <source>All files (**)</source>
+        <translation>Alle Dateien (**)</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="221"/>
+        <source>Failed to read Snapmatic picture</source>
+        <translation>Fehler beim Lesen vom Snapmatic Bild</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="234"/>
+        <source>Failed to read Savegame file</source>
+        <translation>Fehler beim Lesen von Spielstanddatei</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="241"/>
+        <location filename="ProfileInterface.cpp" line="247"/>
+        <source>No valid file is selected</source>
+        <translation>Keine gültige Datei wurde ausgewählt</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="262"/>
+        <source>Failed to import copy of Snapmatic picture because the file not begin with PGTA</source>
+        <translation>Fehlgeschlagenen beim Import vom Snapmatic Bild weil die Datei nicht mit PGTA begint </translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="272"/>
+        <source>Failed to import copy of Snapmatic picture because the copy failed</source>
+        <translation>Fehlgeschlagenen beim Import vom Snapmatic Bild weil kopieren fehlgeschlagen ist</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="308"/>
+        <source>Failed to import copy of Savegame file because the copy failed</source>
+        <translation>Fehlgeschlagenen beim Import vom Spielstand weil kopieren fehlgeschlagen ist</translation>
+    </message>
+    <message>
+        <location filename="ProfileInterface.cpp" line="314"/>
+        <source>Failed to import copy of Savegame file because no free Savegame slot left</source>
+        <translation>Fehlgeschlagenen beim Import vom Spielstand weil kein Spielstandslot mehr übrig ist</translation>
     </message>
 </context>
 <context>
@@ -247,7 +317,7 @@
     </message>
     <message>
         <source>Failed to copy the savegame</source>
-        <translation type="vanished">Beim Kopieren vom Spielstand ist ein Fehler aufgetreten</translation>
+        <translation type="obsolete">Beim Kopieren vom Spielstand ist ein Fehler aufgetreten</translation>
     </message>
     <message>
         <location filename="SavegameWidget.cpp" line="155"/>

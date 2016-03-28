@@ -105,8 +105,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>398</width>
-            <height>251</height>
+            <width>98</width>
+            <height>28</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="vlProfile">
@@ -172,6 +172,16 @@
         </size>
        </property>
       </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cmdImport">
+       <property name="text">
+        <string>Import copy</string>
+       </property>
+       <property name="autoDefault">
+        <bool>true</bool>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QPushButton" name="cmdCloseProfile">
