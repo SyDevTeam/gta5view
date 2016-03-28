@@ -25,45 +25,45 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp \
-    SnapmaticPicture.cpp \
+    AboutDialog.cpp \
+    CrewDatabase.cpp \
+    DatabaseThread.cpp \
     PictureDialog.cpp \
     ProfileDatabase.cpp \
-    DatabaseThread.cpp \
-    CrewDatabase.cpp \
+    ProfileInterface.cpp \
+    ProfileLoader.cpp \
     SavegameData.cpp \
     SavegameDialog.cpp \
-    UserInterface.cpp \
-    ProfileInterface.cpp \
-    SnapmaticWidget.cpp \
     SavegameWidget.cpp \
-    ProfileLoader.cpp \
-    AboutDialog.cpp \
-    StandardPaths.cpp
+    SnapmaticPicture.cpp \
+    SnapmaticWidget.cpp \
+    StandardPaths.cpp \
+    UserInterface.cpp
 
 HEADERS  += \
-    SnapmaticPicture.h \
+    AboutDialog.h \
+    CrewDatabase.h \
+    DatabaseThread.h \
     PictureDialog.h \
     ProfileDatabase.h \
-    DatabaseThread.h \
-    CrewDatabase.h \
+    ProfileInterface.h \
+    ProfileLoader.h \
     SavegameData.h \
     SavegameDialog.h \
-    UserInterface.h \
-    ProfileInterface.h \
-    SnapmaticWidget.h \
     SavegameWidget.h \
-    ProfileLoader.h \
-    AboutDialog.h \
-    StandardPaths.h
+    SnapmaticPicture.h \
+    SnapmaticWidget.h \
+    StandardPaths.h \
+    UserInterface.h
 
 FORMS    += \
+    AboutDialog.ui \
     PictureDialog.ui \
-    SavegameDialog.ui \
-    UserInterface.ui \
     ProfileInterface.ui \
-    SnapmaticWidget.ui \
+    SavegameDialog.ui \
     SavegameWidget.ui \
-    AboutDialog.ui
+    SnapmaticWidget.ui \
+    UserInterface.ui
 
 TRANSLATIONS += \
     gta5sync_de.ts
@@ -97,9 +97,3 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
     qjson4/QJsonValueRef.cpp \
     qjson4/QJsonParser.cpp
 
-# QT4/QT5 STANDARDPATHS CLASS
-
-isEqual(QT_MAJOR_VERSION, 4): HEADERS +=
-isEqual(QT_MAJOR_VERSION, 4): SOURCES +=
-greaterThan(QT_MAJOR_VERSION, 4): HEADERS +=
-greaterThan(QT_MAJOR_VERSION, 4): SOURCES +=
