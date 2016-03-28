@@ -36,7 +36,6 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui(new Ui::ProfileInterface)
 {
     ui->setupUi(this);
-    ui->saProfile->setVisible(false);
     ui->cmdCloseProfile->setEnabled(false);
     loadingStr = ui->labProfileLoading->text();
     profileFolder = "";
@@ -115,8 +114,7 @@ void ProfileInterface::on_profileLoaded()
 {
     QSpacerItem *saSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->saProfileContent->layout()->addItem(saSpacerItem);
-    ui->saProfile->setVisible(true);
-    ui->frmLoading->setVisible(false);
+    ui->swProfile->setCurrentWidget(ui->pageProfile);
     ui->cmdCloseProfile->setEnabled(true);
 }
 
