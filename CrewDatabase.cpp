@@ -24,7 +24,7 @@
 CrewDatabase::CrewDatabase(QObject *parent) : QObject(parent)
 {
     QDir dir;
-    dir.setPath(StandardPaths::writableLocation(StandardPaths::DataLocation));
+    dir.setPath(StandardPaths::dataLocation());
     dir.mkdir("../gta5sync");
     QString dirPath = dir.absolutePath();
     QString defaultConfPath = dirPath + "/crews.ini";

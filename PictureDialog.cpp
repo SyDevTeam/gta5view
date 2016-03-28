@@ -159,8 +159,8 @@ void PictureDialog::on_cmdExport_clicked()
     QDir dir;
 
     // Get Documents + Desktop Location
-    QString documentsLocation = StandardPaths::writableLocation(StandardPaths::DocumentsLocation);
-    QString desktopLocation = StandardPaths::writableLocation(StandardPaths::DesktopLocation);
+    QString documentsLocation = StandardPaths::documentsLocation();
+    QString desktopLocation = StandardPaths::desktopLocation();
 
     // Add Desktop Location to Sidebar
     dir.setPath(desktopLocation);

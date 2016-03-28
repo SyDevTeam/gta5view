@@ -17,8 +17,39 @@
 *****************************************************************************/
 
 #include "StandardPaths.h"
+#if QT_VERSION >= 0x050000
+#include <QStandardPaths>
+#else
+#include <QDesktopServices>
+#endif
 
-QString StandardPaths::writableLocation(StandardLocation type)
+StandardPaths::StandardPaths()
 {
-    return QDesktopServices::storageLocation(type);
+}
+
+QString StandardPaths::dataLocation()
+{
+#if QT_VERSION >= 0x050000
+    return QStandardPaths::writableLocation(QStandardPaths::DataLocation);
+#else
+    return QDesktopServices::storageLocation(QDesktopServices::DataLocation);
+#endif
+}
+
+QString StandardPaths::desktopLocation()
+{
+#if QT_VERSION >= 0x050000
+    return QStandardPaths::writableLocation(QStandardPaths::DesktopLocation);
+#else
+    return QDesktopServices::storageLocation(QDesktopServices::DesktopLocation);
+#endif
+}
+
+QString StandardPaths::documentsLocation()
+{
+#if QT_VERSION >= 0x050000
+    return QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation);
+#else
+    return QDesktopServices::storageLocation(QDesktopServices::DocumentsLocation);
+#endif
 }

@@ -47,7 +47,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     bool forceDir = SyncSettings.value("force", false).toBool();
 
     // init folder
-    QString GTAV_defaultFolder = StandardPaths::writableLocation(StandardPaths::DocumentsLocation) + "/Rockstar Games/GTA V";
+    QString GTAV_defaultFolder = StandardPaths::documentsLocation() + "/Rockstar Games/GTA V";
     QDir GTAV_Dir;
     if (forceDir)
     {
