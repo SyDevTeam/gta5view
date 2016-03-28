@@ -52,6 +52,7 @@ private:
     Ui::UserInterface *ui;
     ProfileInterface *profileUI;
     bool profileOpen;
+    QString defaultWindowTitle;
     QString GTAV_Folder;
     QString GTAV_ProfilesFolder;
     void setupProfileUi(QStringList GTAV_Profiles);

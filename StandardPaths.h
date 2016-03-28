@@ -25,9 +25,16 @@ class StandardPaths
 {
 public:
     StandardPaths();
+    static QString applicationsLocation();
+    static QString cacheLocation();
     static QString dataLocation();
     static QString desktopLocation();
     static QString documentsLocation();
+    static QString fontsLocation();
+    static QString homeLocation();
+    static QString moviesLocation();
+    static QString musicLocation();
+    static QString tempLocation();
 };
 
 #endif // STANDARDPATHS_H

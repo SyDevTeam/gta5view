@@ -37,9 +37,12 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
-    this->setWindowIcon(QIcon(":/img/5sync.png"));
     profileOpen = 0;
     profileUI = 0;
+    defaultWindowTitle = this->windowTitle();
+
+    this->setWindowIcon(QIcon(":/img/5sync.png"));
+    this->setWindowTitle(defaultWindowTitle.arg(tr("Select profile")));
 
     // init settings
     QSettings SyncSettings("Syping", "gta5sync");
@@ -134,6 +137,7 @@ void UserInterface::openProfile(QString profileName)
     profileUI->setProfileFolder(GTAV_ProfilesFolder + "/" + profileName, profileName);
     profileUI->setupProfileInterface();
     QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));
+    this->setWindowTitle(defaultWindowTitle.arg(profileName));
 }
 
 void UserInterface::closeProfile()
@@ -145,6 +149,7 @@ void UserInterface::closeProfile()
         profileUI->deleteLater();
         delete profileUI;
     }
+    this->setWindowTitle(defaultWindowTitle.arg(tr("Select profile")));
 }
 
 UserInterface::~UserInterface()
