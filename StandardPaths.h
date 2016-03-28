@@ -19,24 +19,24 @@
 #ifndef STANDARDPATHS_H
 #define STANDARDPATHS_H
 
+#include <QtGlobal>
 #if QT_VERSION >= 0x050000
 #include <QStandardPaths>
-#include <QObject>
+#include <QString>
 
 class StandardPaths : public QStandardPaths
 {
 public:
-    StandardPaths();
+    static QString writableLocation(StandardLocation type);
 };
 #else
 #include <QDesktopServices>
-#include <QObject>
+#include <QString>
 
 class StandardPaths : public QDesktopServices
 {
 public:
-    StandardPaths();
-    static QString writableLocation(QDesktopServices::StandardLocation standardLocation);
+    static QString writableLocation(StandardLocation type);
 };
 #endif
 

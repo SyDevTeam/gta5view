@@ -18,14 +18,12 @@
 
 #include "StandardPaths.h"
 
-StandardPaths::StandardPaths()
+QString StandardPaths::writableLocation(StandardLocation type)
 {
+#if QT_VERSION >= 0x050000
+    return QStandardPaths::writableLocation(type);
+#else
 
-}
-
-#ifndef QT5_MODE
-QString StandardPaths::writableLocation(QDesktopServices::StandardLocation standardLocation)
-{
-    return QDesktopServices::storageLocation(standardLocation);
-}
+    return QDesktopServices::storageLocation(type);
 #endif
+}
