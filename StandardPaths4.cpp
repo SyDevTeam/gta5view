@@ -20,10 +20,5 @@
 
 QString StandardPaths::writableLocation(StandardLocation type)
 {
-#if QT_VERSION >= 0x050000
-    return QStandardPaths::writableLocation(type);
-#else
-
     return QDesktopServices::storageLocation(type);
-#endif
 }

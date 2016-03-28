@@ -15,14 +15,10 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
-#ifndef STANDARDPATHS_H
-#define STANDARDPATHS_H
 
-#include <QtGlobal>
-#if QT_VERSION >= 0x050000
-#include "StandardPaths5.h"
-#else
-#include "StandardPaths4.h"
-#endif
+#include "StandardPaths.h"
 
-#endif // STANDARDPATHS_H
+QString StandardPaths::writableLocation(StandardLocation type)
+{
+    return QStandardPaths::writableLocation(type);
+}

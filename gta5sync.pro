@@ -37,8 +37,7 @@ SOURCES += main.cpp \
     SnapmaticWidget.cpp \
     SavegameWidget.cpp \
     ProfileLoader.cpp \
-    AboutDialog.cpp \
-    StandardPaths.cpp
+    AboutDialog.cpp
 
 HEADERS  += \
     SnapmaticPicture.h \
@@ -96,3 +95,10 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
     qjson4/QJsonValue.cpp \
     qjson4/QJsonValueRef.cpp \
     qjson4/QJsonParser.cpp
+
+# QT4/QT5 STANDARDPATHS CLASS
+
+isEqual(QT_MAJOR_VERSION, 4): HEADERS += StandardPaths4.h
+isEqual(QT_MAJOR_VERSION, 4): SOURCES += StandardPaths4.cpp
+greaterThan(QT_MAJOR_VERSION, 4): HEADERS += StandardPaths5.h
+greaterThan(QT_MAJOR_VERSION, 4): SOURCES += StandardPaths5.cpp
