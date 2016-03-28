@@ -55,11 +55,13 @@ ProfileInterface::~ProfileInterface()
     }
     foreach(SnapmaticPicture *picture, pictures)
     {
+        pictures.removeAll(picture);
         picture->deleteLater();
         delete picture;
     }
     foreach(QWidget *widget, widgets)
     {
+        widgets.removeAll(widget);
         widget->deleteLater();
         delete widget;
     }
@@ -101,6 +103,7 @@ void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString pictu
     ui->vlSnapmatic->addWidget(picWidget);
     widgets.append(picWidget);
     pictures.append(picture);
+    QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(on_pictureDeleted()));
 }
 
 void ProfileInterface::on_loadingProgress(int value, int maximum)
@@ -116,6 +119,14 @@ void ProfileInterface::on_profileLoaded()
     ui->saProfileContent->layout()->addItem(saSpacerItem);
     ui->swProfile->setCurrentWidget(ui->pageProfile);
     ui->cmdCloseProfile->setEnabled(true);
+}
+
+void ProfileInterface::on_pictureDeleted()
+{
+    SnapmaticWidget *picWidget = (SnapmaticWidget*)sender();
+    widgets.removeAll(picWidget);
+    picWidget->deleteLater();
+    delete picWidget;
 }
 
 void ProfileInterface::on_cmdCloseProfile_clicked()

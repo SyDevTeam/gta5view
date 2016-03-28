@@ -223,13 +223,13 @@ fileDialogPreSave:
 
             if (!isSaved)
             {
-                QMessageBox::warning(this, tr("Snapmatic Picture Exporter"), tr("Failed to save the picture"));
+                QMessageBox::warning(this, tr("Export picture"), tr("Failed to save the picture"));
                 goto fileDialogPreSave;
             }
         }
         else
         {
-            QMessageBox::warning(this, tr("Snapmatic Picture Exporter"), tr("No valid file is selected"));
+            QMessageBox::warning(this, tr("Export picture"), tr("No valid file is selected"));
             goto fileDialogPreSave;
         }
     }

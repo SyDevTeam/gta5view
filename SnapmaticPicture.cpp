@@ -60,6 +60,8 @@ bool SnapmaticPicture::readingPicture()
     if (!picFile->open(QFile::ReadOnly))
     {
         lastStep = "1;/1,OpenFile," + convertDrawStringForLog(picFileName);
+        picFile->deleteLater();
+        delete picFile;
         return false;
     }
 
@@ -67,6 +69,9 @@ bool SnapmaticPicture::readingPicture()
     if (!picFile->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",1,NOHEADER";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
         return false;
     }
     QByteArray snapmaticHeaderLine = picFile->read(snapmaticHeaderLength);
@@ -76,6 +81,9 @@ bool SnapmaticPicture::readingPicture()
     if (!picFile->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",2,NOHEADER";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
         return false;
     }
     QByteArray jpegHeaderLine = picFile->read(jpegPreHeaderLength);
@@ -85,6 +93,9 @@ bool SnapmaticPicture::readingPicture()
     if (jpegHeaderLine.left(4) != "JPEG")
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",2,NOJPEG";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
         return false;
     }
 
@@ -92,6 +103,9 @@ bool SnapmaticPicture::readingPicture()
     if (!picFile->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,NOPIC";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
         return false;
     }
     QByteArray jpegRawContent = picFile->read(jpegPicStreamLength);
@@ -101,17 +115,26 @@ bool SnapmaticPicture::readingPicture()
     if (!picFile->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,NOJSON";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
         return picOk;
     }
     else if (picFile->read(4) != "JSON")
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,CTJSON";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
         return picOk;
     }
     QByteArray jsonRawContent = picFile->read(jsonStreamLength);
     jsonStr = getSnapmaticJSONString(jsonRawContent);
     parseJsonContent(); // JSON parsing is own function
 
+    picFile->close();
+    picFile->deleteLater();
+    delete picFile;
     return picOk;
 
 }

@@ -39,6 +39,8 @@ bool SavegameData::readingSavegame()
     if (!saveFile->open(QFile::ReadOnly))
     {
         lastStep = "1;/1,OpenFile," + convertDrawStringForLog(savegameFileName);
+        saveFile->deleteLater();
+        delete saveFile;
         return false;
     }
 
@@ -46,6 +48,9 @@ bool SavegameData::readingSavegame()
     if (!saveFile->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(savegameFileName) + ",1,NOHEADER";
+        saveFile->close();
+        saveFile->deleteLater();
+        delete saveFile;
         return false;
     }
     QByteArray savegameHeaderLine = saveFile->read(savegameHeaderLength);
@@ -58,6 +63,9 @@ bool SavegameData::readingSavegame()
         }
     }
 
+    saveFile->close();
+    saveFile->deleteLater();
+    delete saveFile;
     return savegameOk;
 }
 

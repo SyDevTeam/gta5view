@@ -20,6 +20,7 @@
 #define PROFILEINTERFACE_H
 
 #include "SnapmaticPicture.h"
+#include "SnapmaticWidget.h"
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "ProfileLoader.h"
@@ -46,6 +47,7 @@ private slots:
     void on_pictureLoaded(SnapmaticPicture *picture, QString picturePath);
     void on_savegameLoaded(SavegameData *savegame, QString savegamePath);
     void on_loadingProgress(int value, int maximum);
+    void on_pictureDeleted();
     void on_profileLoaded();
 
 private:

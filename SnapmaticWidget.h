@@ -39,6 +39,7 @@ public:
 
 private slots:
     void on_cmdView_clicked();
+    void on_cmdDelete_clicked();
 
 private:
     ProfileDatabase *profileDB;
@@ -46,6 +47,10 @@ private:
     Ui::SnapmaticWidget *ui;
     SnapmaticPicture *smpic;
     QString picPath;
+    QString picStr;
+
+signals:
+    void pictureDeleted();
 };
 
 #endif // SNAPMATICWIDGET_H

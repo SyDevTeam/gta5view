@@ -21,7 +21,10 @@
 #include "SnapmaticPicture.h"
 #include "DatabaseThread.h"
 #include "PictureDialog.h"
+#include <QMessageBox>
 #include <QPixmap>
+#include <QDebug>
+#include <QFile>
 
 SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent) :
     QWidget(parent), profileDB(profileDB), threadDB(threadDB),
@@ -29,6 +32,7 @@ SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *thr
 {
     ui->setupUi(this);
     picPath = "";
+    picStr = "";
     smpic = 0;
 }
 
@@ -39,12 +43,14 @@ SnapmaticWidget::~SnapmaticWidget()
 
 void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath)
 {
-    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getPicture(), Qt::AutoColor);
-    SnapmaticPixmap.scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    ui->labPicStr->setText(picture->getPictureStr());
-    ui->labPicture->setPixmap(SnapmaticPixmap);
     smpic = picture;
     picPath = picturePath;
+    picStr = picture->getPictureStr();
+
+    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getPicture(), Qt::AutoColor);
+    SnapmaticPixmap.scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    ui->labPicStr->setText(picStr);
+    ui->labPicture->setPixmap(SnapmaticPixmap);
 }
 
 void SnapmaticWidget::on_cmdView_clicked()
@@ -62,4 +68,25 @@ void SnapmaticWidget::on_cmdView_clicked()
     picDialog->exec();
     picDialog->deleteLater();
     delete picDialog;
+}
+
+void SnapmaticWidget::on_cmdDelete_clicked()
+{
+    int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("You're sure to delete %1 from your Snapmatic pictures?").arg(picStr), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
+    if (uchoice == QMessageBox::Yes)
+    {
+        QFile pictureFile(picPath);
+        if (!pictureFile.exists())
+        {
+            emit pictureDeleted();
+        }
+        else if(QFile::remove(picPath))
+        {
+            emit pictureDeleted();
+        }
+        else
+        {
+            QMessageBox::warning(this, tr("Delete picture"), tr("Failed at deleting %1 from your Snapmatic pictures").arg(picStr));
+        }
+    }
 }
