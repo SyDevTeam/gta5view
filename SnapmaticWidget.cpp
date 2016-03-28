@@ -75,8 +75,7 @@ void SnapmaticWidget::on_cmdDelete_clicked()
     int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("You're sure to delete %1 from your Snapmatic pictures?").arg(picStr), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
     if (uchoice == QMessageBox::Yes)
     {
-        QFile pictureFile(picPath);
-        if (!pictureFile.exists())
+        if (!QFile::exists(picPath))
         {
             emit pictureDeleted();
         }

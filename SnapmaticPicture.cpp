@@ -136,7 +136,6 @@ bool SnapmaticPicture::readingPicture()
     picFile->deleteLater();
     delete picFile;
     return picOk;
-
 }
 
 QString SnapmaticPicture::getSnapmaticPictureString(QByteArray snapmaticHeader)
