@@ -178,13 +178,21 @@
     </message>
     <message>
         <location filename="SavegameWidget.cpp" line="50"/>
-        <source>Are you sure to delete %1 from your Savegames?</source>
+        <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Bist du sicher %1 von deinen Spielständen zu löschen?</translation>
     </message>
     <message>
         <location filename="SavegameWidget.cpp" line="63"/>
-        <source>Failed at deleting %1 from your Savegames</source>
+        <source>Failed at deleting %1 from your savegames</source>
         <translation>Fehlgeschlagen beim Löschen %1 von deinen Spielständen</translation>
+    </message>
+    <message>
+        <source>Are you sure to delete %1 from your Savegames?</source>
+        <translation type="obsolete">Bist du sicher %1 von deinen Spielständen zu löschen?</translation>
+    </message>
+    <message>
+        <source>Failed at deleting %1 from your Savegames</source>
+        <translation type="obsolete">Fehlgeschlagen beim Löschen %1 von deinen Spielständen</translation>
     </message>
 </context>
 <context>
