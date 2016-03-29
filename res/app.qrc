@@ -7,5 +7,13 @@
     <qresource prefix="/img">
         <file>savegame.png</file>
         <file>5sync-48.png</file>
+        <file>5sync-16.png</file>
+        <file>5sync-24.png</file>
+        <file>5sync-32.png</file>
+        <file>5sync-40.png</file>
+        <file>5sync-64.png</file>
+        <file>5sync-96.png</file>
+        <file>5sync-128.png</file>
+        <file>5sync-256.png</file>
     </qresource>
 </RCC>

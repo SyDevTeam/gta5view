@@ -27,6 +27,7 @@ SOURCES += main.cpp \
     AboutDialog.cpp \
     CrewDatabase.cpp \
     DatabaseThread.cpp \
+    IconLoader.cpp \
     PictureDialog.cpp \
     ProfileDatabase.cpp \
     ProfileInterface.cpp \
@@ -44,6 +45,7 @@ HEADERS  += \
     AboutDialog.h \
     CrewDatabase.h \
     DatabaseThread.h \
+    IconLoader.h \
     PictureDialog.h \
     ProfileDatabase.h \
     ProfileInterface.h \

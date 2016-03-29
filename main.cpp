@@ -24,6 +24,7 @@
 #include "UserInterface.h"
 #include "CrewDatabase.h"
 #include "SavegameData.h"
+#include "IconLoader.h"
 #include <QApplication>
 #include <QStringList>
 #include <QTranslator>
@@ -243,7 +244,7 @@ int main(int argc, char *argv[])
 
         bool readOk = picture.readingPictureFromFile(arg1);
         picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-        picDialog->setWindowIcon(QIcon(":/img/5sync-48.png"));
+        picDialog->setWindowIcon(IconLoader::loadingAppIcon());
         picDialog->setSnapmaticPicture(&picture, readOk);
 
         int crewID = picture.getCrewNumber();
@@ -265,7 +266,7 @@ int main(int argc, char *argv[])
 
         bool readOk = savegame.readingSavegameFromFile(arg1);
         savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-        savegameDialog->setWindowIcon(QIcon(":/img/5sync-48.png"));
+        savegameDialog->setWindowIcon(IconLoader::loadingAppIcon());
         savegameDialog->setSavegameData(&savegame, readOk);
 
         if (!readOk) { return 1; }
@@ -283,7 +284,7 @@ int main(int argc, char *argv[])
     threadDB->start();
 
     UserInterface *uiWindow = new UserInterface(profileDB, crewDB, threadDB);
-    uiWindow->setWindowIcon(QIcon(":/img/5sync-48.png"));
+    uiWindow->setWindowIcon(IconLoader::loadingAppIcon());
     uiWindow->show();
 
     return a.exec();
