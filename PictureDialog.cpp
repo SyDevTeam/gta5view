@@ -200,7 +200,7 @@ fileDialogPreSave:
                 }
                 QString cmpPicTitl = picTitl;
                 cmpPicTitl.replace(" ", "");
-                newPictureFileName = yearStr + "-" + monthStr + "-" + dayStr + "_" + timeStr + "_" + cmpPicTitl +  ".jpg";
+                newPictureFileName = yearStr + monthStr + dayStr + timeStr + "_" + cmpPicTitl +  ".jpg";
             }
         }
         fileDialog.selectFile(newPictureFileName);
