@@ -73,11 +73,11 @@ TRANSLATIONS += \
 RESOURCES += \
     res/app.qrc
 
-OTHER_FILES += app.rc \
+OTHER_FILES += res/app.rc \
     res/gta5sync.desktop \
     res/gta5sync_de.ts
 
-win32: RC_FILE += app.rc
+win32: RC_FILE += res/app.rc
 
 # QT4 ONLY STUFF
 
