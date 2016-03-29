@@ -37,6 +37,8 @@ public:
     QImage getPicture();
     QString getLastStep();
     QString getPictureStr();
+    QString getPictureTitl();
+    QString getPictureDesc();
 
     // JSON
     bool isJsonOk();
@@ -50,12 +52,15 @@ public:
 private:
     QString getSnapmaticPictureString(QByteArray snapmaticHeader);
     QString getSnapmaticJSONString(QByteArray jsonBytes);
+    QString getSnapmaticTIDEString(QByteArray tideBytes);
     QString convertDrawStringForLog(QString inputStr);
     QString convertLogStringForDraw(QString inputStr);
     QImage cachePicture;
     QString picFileName;
     QString pictureStr;
     QString lastStep;
+    QString titlStr;
+    QString descStr;
     bool picOk;
 
     // PARSE INT
@@ -65,6 +70,7 @@ private:
     int jpegPreHeaderLength;
     int jpegPicStreamLength;
     int jsonStreamLength;
+    int tideStreamLength;
 
     // JSON
     void parseJsonContent();

@@ -34,6 +34,7 @@ SnapmaticPicture::SnapmaticPicture(QString fileName, QObject *parent) : QObject(
     jpegPreHeaderLength = 14;
     jpegPicStreamLength = 524288;
     jsonStreamLength = 3076;
+    tideStreamLength = 260;
 
     // INIT PIC
     cachePicture = QImage(0, 0, QImage::Format_RGB32);
@@ -102,7 +103,7 @@ bool SnapmaticPicture::readingPicture()
     // Read JPEG Stream
     if (!picFile->isReadable())
     {
-        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",3,NOPIC";
+        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",2,NOPIC";
         picFile->close();
         picFile->deleteLater();
         delete picFile;
@@ -132,6 +133,44 @@ bool SnapmaticPicture::readingPicture()
     jsonStr = getSnapmaticJSONString(jsonRawContent);
     parseJsonContent(); // JSON parsing is own function
 
+    if (!picFile->isReadable())
+    {
+        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",4,NOTITL";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
+        return picOk;
+    }
+    else if (picFile->read(4) != "TITL")
+    {
+        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",4,CTTITL";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
+        return picOk;
+    }
+    QByteArray titlRawContent = picFile->read(tideStreamLength);
+    titlStr = getSnapmaticTIDEString(titlRawContent);
+
+    if (!picFile->isReadable())
+    {
+        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",5,NODESC";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
+        return picOk;
+    }
+    else if (picFile->read(4) != "DESC")
+    {
+        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(picFileName) + ",5,CTDESC";
+        picFile->close();
+        picFile->deleteLater();
+        delete picFile;
+        return picOk;
+    }
+    QByteArray descRawContent = picFile->read(tideStreamLength);
+    descStr = getSnapmaticTIDEString(descRawContent);
+
     picFile->close();
     picFile->deleteLater();
     delete picFile;
@@ -154,6 +193,14 @@ QString SnapmaticPicture::getSnapmaticJSONString(QByteArray jsonBytes)
     return QString::fromLatin1(jsonUsefulBytes);
 }
 
+QString SnapmaticPicture::getSnapmaticTIDEString(QByteArray tideBytes)
+{
+    QByteArray tideUsefulBytes = tideBytes;
+    tideUsefulBytes.remove(0,4);
+    QList<QByteArray> tideUsefulBytesList = tideUsefulBytes.split(0x00);
+    return QString::fromLatin1(tideUsefulBytesList.at(0));
+}
+
 bool SnapmaticPicture::readingPictureFromFile(QString fileName)
 {
     if (fileName != "")
@@ -170,6 +217,16 @@ bool SnapmaticPicture::readingPictureFromFile(QString fileName)
 void SnapmaticPicture::setPicture(QImage picture)
 {
     cachePicture = picture;
+}
+
+QString SnapmaticPicture::getPictureDesc()
+{
+    return descStr;
+}
+
+QString SnapmaticPicture::getPictureTitl()
+{
+    return titlStr;
 }
 
 QString SnapmaticPicture::getPictureStr()
