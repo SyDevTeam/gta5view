@@ -176,6 +176,7 @@ void UserInterface::openSelectProfile()
 void UserInterface::on_actionAbout_gta5sync_triggered()
 {
     AboutDialog *aboutDialog = new AboutDialog(this);
+    aboutDialog->setWindowIcon(this->windowIcon());
     aboutDialog->setWindowFlags(aboutDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
     aboutDialog->show();
     aboutDialog->exec();
