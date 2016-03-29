@@ -23,7 +23,6 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = gta5sync
 TEMPLATE = app
 
-
 SOURCES += main.cpp \
     AboutDialog.cpp \
     CrewDatabase.cpp \
@@ -82,7 +81,6 @@ win32: RC_FILE += res/app.rc
 # QT4 ONLY STUFF
 
 isEqual(QT_MAJOR_VERSION, 4): INCLUDEPATH += ./qjson4
-
 isEqual(QT_MAJOR_VERSION, 4): HEADERS += qjson4/QJsonArray.h \
     qjson4/QJsonDocument.h \
     qjson4/QJsonObject.h \
@@ -106,3 +104,7 @@ unix: !macx: appfiles.path = $$(INSTALL_PATH)/share/applications
 unix: !macx: appfiles.files = $$PWD/res/gta5sync.desktop
 unix: !macx: target.path = $$(INSTALL_PATH)/bin
 unix: !macx: INSTALLS += target appfiles
+
+# STATIC BUILD STUFF
+static: QTPLUGIN += qjpeg
+static: isEqual(QT_MAJOR_VERSION, 4): QTPLUGIN += qjpcodecs
