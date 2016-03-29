@@ -66,13 +66,14 @@ FORMS    += \
     UserInterface.ui
 
 TRANSLATIONS += \
-    gta5sync_de.ts
+    res/gta5sync_de.ts
 
 RESOURCES += \
     res/app.qrc
 
-OTHER_FILES += \
-    app.rc
+OTHER_FILES += app.rc \
+    res/gta5sync.desktop \
+    res/gta5sync_de.ts
 
 win32: RC_FILE += app.rc
 
@@ -100,6 +101,6 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
 # UNIX SYSTEM STUFF
 
 unix: !macx: appfiles.path = $$(INSTALL_PATH)/share/applications
-unix: !macx: appfiles.files = $$PWD/res/5sync.desktop
+unix: !macx: appfiles.files = $$PWD/res/gta5sync.desktop
 unix: !macx: target.path = $$(INSTALL_PATH)/bin
 unix: !macx: INSTALLS += target appfiles

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=gta5sync
+Comment=gta5sync
+Categories=Qt;Application;Utility;
+Exec=gta5sync
+Icon=gta5sync
+Terminal=false
+StartupNotify=false

@@ -41,6 +41,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     jsonDrawString = ui->labJSON->text();
     ui->cmdExport->setEnabled(0);
     plyrsList = QStringList();
+    picTitl = "";
     crewID = "";
     locX = "";
     locY = "";
@@ -75,6 +76,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
         locZ = QString::number(picture->getLocationZ());
         crewID = QString::number(picture->getCrewNumber());
         plyrsList = picture->getPlayers();
+        picTitl = picture->getPictureTitl();
 
         QString plyrsStr;
         if (plyrsList.length() >= 1)
@@ -100,7 +102,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
         if (crewID == "") { crewID = tr("No crew"); }
 
         this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
-        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
+        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl));
     }
     else
     {
@@ -136,7 +138,7 @@ void PictureDialog::on_playerNameUpdated()
             plyrsStr.append("</a>");
         }
         plyrsStr.remove(0,2);
-        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID));
+        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl));
     }
 }
 
