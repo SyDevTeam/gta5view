@@ -7,6 +7,6 @@
     <qresource prefix="/img">
         <file>savegame.png</file>
         <file>5sync.ico</file>
-        <file>5sync.png</file>
+        <file>5sync-48.png</file>
     </qresource>
 </RCC>

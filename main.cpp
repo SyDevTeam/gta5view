@@ -32,12 +32,17 @@
 #include <QString>
 #include <QDebug>
 #include <QFile>
+#include <QDir>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setApplicationName("gta5sync");
     a.setApplicationVersion("1.0.0");
+
+    QDir pluginsDir = QFileInfo(a.applicationFilePath()).absoluteDir();
+    pluginsDir.cd("plugins");
+    a.addLibraryPath(pluginsDir.path());
 
     // Loading translation settings
     QSettings settings("Syping", "gta5sync");
@@ -238,6 +243,7 @@ int main(int argc, char *argv[])
 
         bool readOk = picture.readingPictureFromFile(arg1);
         picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+        picDialog->setWindowIcon(QIcon(":/img/5sync-48.png"));
         picDialog->setSnapmaticPicture(&picture, readOk);
 
         int crewID = picture.getCrewNumber();
@@ -259,6 +265,7 @@ int main(int argc, char *argv[])
 
         bool readOk = savegame.readingSavegameFromFile(arg1);
         savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+        savegameDialog->setWindowIcon(QIcon(":/img/5sync-48.png"));
         savegameDialog->setSavegameData(&savegame, readOk);
 
         if (!readOk) { return 1; }
@@ -276,6 +283,7 @@ int main(int argc, char *argv[])
     threadDB->start();
 
     UserInterface *uiWindow = new UserInterface(profileDB, crewDB, threadDB);
+    uiWindow->setWindowIcon(QIcon(":/img/5sync-48.png"));
     uiWindow->show();
 
     return a.exec();

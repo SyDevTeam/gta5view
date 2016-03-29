@@ -37,7 +37,6 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui(new Ui::PictureDialog)
 {
     ui->setupUi(this);
-    this->setWindowIcon(QIcon(":/img/5sync.png"));
     windowTitleStr = this->windowTitle();
     jsonDrawString = ui->labJSON->text();
     ui->cmdExport->setEnabled(0);

@@ -69,7 +69,7 @@ TRANSLATIONS += \
     gta5sync_de.ts
 
 RESOURCES += \
-    app.qrc
+    res/app.qrc
 
 OTHER_FILES += \
     app.rc
@@ -97,3 +97,9 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
     qjson4/QJsonValueRef.cpp \
     qjson4/QJsonParser.cpp
 
+# UNIX SYSTEM STUFF
+
+unix: !macx: appfiles.path = $$(INSTALL_PATH)/share/applications
+unix: !macx: appfiles.files = $$PWD/res/5sync.desktop
+unix: !macx: target.path = $$(INSTALL_PATH)/bin
+unix: !macx: INSTALLS += target appfiles
