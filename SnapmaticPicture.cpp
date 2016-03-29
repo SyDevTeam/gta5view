@@ -197,7 +197,7 @@ QString SnapmaticPicture::getSnapmaticTIDEString(QByteArray tideBytes)
 {
     QByteArray tideUsefulBytes = tideBytes;
     tideUsefulBytes.remove(0, 4);
-    QList<QByteArray> tideUsefulBytesList = tideUsefulBytes.split(0x00);
+    QList<QByteArray> tideUsefulBytesList = tideUsefulBytes.split(char(0x00));
     return QString::fromLatin1(tideUsefulBytesList.at(0));
 }
 
