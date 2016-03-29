@@ -180,23 +180,23 @@ bool SnapmaticPicture::readingPicture()
 QString SnapmaticPicture::getSnapmaticPictureString(QByteArray snapmaticHeader)
 {
     QByteArray snapmaticUsefulBytes = snapmaticHeader.left(snapmaticUsefulLength);
-    snapmaticUsefulBytes.replace(QByteArray::fromHex("00"),"");
-    snapmaticUsefulBytes.replace(QByteArray::fromHex("01"),"");
+    snapmaticUsefulBytes.replace((char)0x00, "");
+    snapmaticUsefulBytes.replace((char)0x01, "");
     return QString::fromLatin1(snapmaticUsefulBytes);
 }
 
 QString SnapmaticPicture::getSnapmaticJSONString(QByteArray jsonBytes)
 {
     QByteArray jsonUsefulBytes = jsonBytes;
-    jsonUsefulBytes.replace(QByteArray::fromHex("00"),"");
-    jsonUsefulBytes.replace(QByteArray::fromHex("0C"),"");
+    jsonUsefulBytes.replace((char)0x00, "");
+    jsonUsefulBytes.replace((char)0x0c, "");
     return QString::fromLatin1(jsonUsefulBytes);
 }
 
 QString SnapmaticPicture::getSnapmaticTIDEString(QByteArray tideBytes)
 {
     QByteArray tideUsefulBytes = tideBytes;
-    tideUsefulBytes.remove(0,4);
+    tideUsefulBytes.remove(0, 4);
     QList<QByteArray> tideUsefulBytesList = tideUsefulBytes.split(0x00);
     return QString::fromLatin1(tideUsefulBytesList.at(0));
 }
