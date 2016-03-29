@@ -18,6 +18,7 @@
 
 #include "ProfileInterface.h"
 #include "ui_ProfileInterface.h"
+#include "SidebarGenerator.h"
 #include "SnapmaticWidget.h"
 #include "DatabaseThread.h"
 #include "SavegameWidget.h"
@@ -171,30 +172,7 @@ fileDialogPreOpen:
     filters << tr("All files (**)");
     fileDialog.setNameFilters(filters);
 
-    QList<QUrl> sidebarUrls = fileDialog.sidebarUrls();
-    QDir dir;
-
-    // Get Documents + Desktop Location
-    QString documentsLocation = StandardPaths::documentsLocation();
-    QString desktopLocation = StandardPaths::desktopLocation();
-
-    // Add Desktop Location to Sidebar
-    dir.setPath(desktopLocation);
-    if (dir.exists())
-    {
-        sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
-    }
-
-    // Add Documents + GTA V Location to Sidebar
-    dir.setPath(documentsLocation);
-    if (dir.exists())
-    {
-        sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
-        if (dir.cd("Rockstar Games/GTA V"))
-        {
-            sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
-        }
-    }
+    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
 
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.restoreState(settings.value("ImportCopy","").toByteArray());

@@ -82,6 +82,15 @@ QString StandardPaths::moviesLocation()
 #endif
 }
 
+QString StandardPaths::picturesLocation()
+{
+#if QT_VERSION >= 0x050000
+    return QStandardPaths::writableLocation(QStandardPaths::PicturesLocation);
+#else
+    return QDesktopServices::storageLocation(QDesktopServices::PicturesLocation);
+#endif
+}
+
 QString StandardPaths::fontsLocation()
 {
 #if QT_VERSION >= 0x050000

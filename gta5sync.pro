@@ -35,6 +35,7 @@ SOURCES += main.cpp \
     SavegameData.cpp \
     SavegameDialog.cpp \
     SavegameWidget.cpp \
+    SidebarGenerator.cpp \
     SnapmaticPicture.cpp \
     SnapmaticWidget.cpp \
     StandardPaths.cpp \
@@ -51,6 +52,7 @@ HEADERS  += \
     SavegameData.h \
     SavegameDialog.h \
     SavegameWidget.h \
+    SidebarGenerator.h \
     SnapmaticPicture.h \
     SnapmaticWidget.h \
     StandardPaths.h \

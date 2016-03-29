@@ -16,26 +16,17 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef STANDARDPATHS_H
-#define STANDARDPATHS_H
+#ifndef SIDEBARGENERATOR_H
+#define SIDEBARGENERATOR_H
 
-#include <QString>
+#include <QList>
+#include <QUrl>
 
-class StandardPaths
+class SidebarGenerator
 {
 public:
-    StandardPaths();
-    static QString applicationsLocation();
-    static QString cacheLocation();
-    static QString dataLocation();
-    static QString desktopLocation();
-    static QString documentsLocation();
-    static QString fontsLocation();
-    static QString homeLocation();
-    static QString moviesLocation();
-    static QString picturesLocation();
-    static QString musicLocation();
-    static QString tempLocation();
+    SidebarGenerator();
+    static QList<QUrl> generateSidebarUrls(QList<QUrl> sidebarUrls);
 };
 
-#endif // STANDARDPATHS_H
+#endif // SIDEBARGENERATOR_H
