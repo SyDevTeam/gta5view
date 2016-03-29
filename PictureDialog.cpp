@@ -199,8 +199,8 @@ fileDialogPreSave:
                     monthStr = dateStrList.at(0);
                 }
                 QString cmpPicTitl = picTitl;
-                cmpPicTitl.replace(" ", "");
-                newPictureFileName = yearStr + monthStr + dayStr + timeStr + "_" + cmpPicTitl +  ".jpg";
+                cmpPicTitl.replace(" ", "_");
+                newPictureFileName = yearStr + monthStr + dayStr + timeStr + "-" + cmpPicTitl +  ".jpg";
             }
         }
         fileDialog.selectFile(newPictureFileName);
