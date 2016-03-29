@@ -149,6 +149,7 @@ void PictureDialog::on_cmdExport_clicked()
     QSettings settings("Syping", "gta5sync");
     settings.beginGroup("FileDialogs");
 
+fileDialogPreSave:
     QFileDialog fileDialog(this);
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
@@ -192,7 +193,6 @@ void PictureDialog::on_cmdExport_clicked()
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.restoreState(settings.value("ExportPicture","").toByteArray());
 
-fileDialogPreSave:
     if (fileDialog.exec())
     {
         QStringList selectedFiles = fileDialog.selectedFiles();

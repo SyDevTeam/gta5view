@@ -155,6 +155,7 @@ void ProfileInterface::on_cmdImport_clicked()
     QSettings settings("Syping", "gta5sync");
     settings.beginGroup("FileDialogs");
 
+fileDialogPreOpen:
     QFileDialog fileDialog(this);
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
@@ -198,7 +199,6 @@ void ProfileInterface::on_cmdImport_clicked()
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.restoreState(settings.value("ImportCopy","").toByteArray());
 
-fileDialogPreOpen:
     if (fileDialog.exec())
     {
         QStringList selectedFiles = fileDialog.selectedFiles();
@@ -219,6 +219,8 @@ fileDialogPreOpen:
                     else
                     {
                         QMessageBox::warning(this, tr("Import copy"), tr("Failed to read Snapmatic picture"));
+                        picture->deleteLater();
+                        delete picture;
                         goto fileDialogPreOpen;
                     }
                 }
@@ -232,6 +234,34 @@ fileDialogPreOpen:
                     else
                     {
                         QMessageBox::warning(this, tr("Import copy"), tr("Failed to read Savegame file"));
+                        savegame->deleteLater();
+                        delete savegame;
+                        goto fileDialogPreOpen;
+                    }
+                }
+                else
+                {
+                    SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
+                    SavegameData *savegame = new SavegameData(selectedFile);
+                    if (picture->readingPicture())
+                    {
+                        importSnapmaticPicture(picture, selectedFile);
+                        savegame->deleteLater();
+                        delete savegame;
+                    }
+                    else if (savegame->readingSavegame())
+                    {
+                        importSavegameData(savegame, selectedFile);
+                        picture->deleteLater();
+                        delete picture;
+                    }
+                    else
+                    {
+                        savegame->deleteLater();
+                        picture->deleteLater();
+                        delete savegame;
+                        delete picture;
+                        QMessageBox::warning(this, tr("Import copy"), tr("Can't import %1 because of not valid file format").arg("\""+selectedFileName+"\""));
                         goto fileDialogPreOpen;
                     }
                 }
@@ -287,7 +317,7 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         {
             sgdNumber.insert(0, "0");
         }
-        sgdFileName = "SGTA00" + sgdNumber;
+        sgdFileName = "SGTA500" + sgdNumber;
 
         if (!QFile::exists(profileFolder + "/" + sgdFileName))
         {

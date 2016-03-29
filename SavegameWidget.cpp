@@ -75,7 +75,8 @@ void SavegameWidget::on_cmdCopy_clicked()
     QSettings settings("Syping", "gta5sync");
     settings.beginGroup("FileDialogs");
 
-    QFileInfo fileInfo(sgdPath);
+fileDialogPreSave:
+    QFileInfo sgdFileInfo(sgdPath);
     QFileDialog fileDialog(this);
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
@@ -118,8 +119,8 @@ void SavegameWidget::on_cmdCopy_clicked()
 
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.restoreState(settings.value("CopySavegame","").toByteArray());
+    fileDialog.selectFile(sgdFileInfo.fileName());
 
-fileDialogPreSave:
     if (fileDialog.exec())
     {
         QStringList selectedFiles = fileDialog.selectedFiles();
