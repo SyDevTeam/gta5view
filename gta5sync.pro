@@ -106,5 +106,4 @@ unix: !macx: target.path = $$(INSTALL_PATH)/bin
 unix: !macx: INSTALLS += target appfiles
 
 # STATIC BUILD STUFF
-static: QTPLUGIN += qjpeg
 static: isEqual(QT_MAJOR_VERSION, 4): QTPLUGIN += qjpcodecs
