@@ -46,6 +46,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     locX = "";
     locY = "";
     locZ = "";
+    smpic = 0;
 }
 
 PictureDialog::~PictureDialog()
@@ -56,6 +57,7 @@ PictureDialog::~PictureDialog()
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
 {
     // Showing error if reading error
+    smpic = picture;
     if (!readOk)
     {
         QMessageBox::warning(this, tr("Snapmatic Picture Viewer"), tr("Failed at %1").arg(picture->getLastStep()));
@@ -192,6 +194,36 @@ fileDialogPreSave:
 
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.restoreState(settings.value("ExportPicture","").toByteArray());
+
+    if (smpic != 0)
+    {
+        QString newPictureFileName;
+        QString pictureStr = smpic->getPictureStr();
+        QStringList pictureStrList = pictureStr.split(" - ");
+        if (pictureStrList.length() <= 2)
+        {
+            QString dtStr = pictureStrList.at(1);
+            QStringList dtStrList = dtStr.split(" ");
+            if (dtStrList.length() <= 2)
+            {
+                QString dayStr;
+                QString yearStr;
+                QString monthStr;
+                QString dateStr = dtStrList.at(0);
+                QString timeStr = dtStrList.at(1);
+                timeStr.replace(":","");
+                QStringList dateStrList = dateStr.split("/");
+                if (dateStrList.length() <= 3)
+                {
+                    dayStr = dateStrList.at(1);
+                    yearStr = dateStrList.at(2);
+                    monthStr = dateStrList.at(0);
+                }
+                newPictureFileName = yearStr + "-" + monthStr + "-" + dayStr + "_" + timeStr + ".jpg";
+            }
+        }
+        fileDialog.selectFile(newPictureFileName);
+    }
 
     if (fileDialog.exec())
     {

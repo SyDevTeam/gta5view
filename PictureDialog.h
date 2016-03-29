@@ -45,6 +45,7 @@ private slots:
 private:
     ProfileDatabase *profileDB;
     Ui::PictureDialog *ui;
+    SnapmaticPicture *smpic;
     QString jsonDrawString;
     QString windowTitleStr;
     QStringList plyrsList;
