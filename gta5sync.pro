@@ -107,7 +107,7 @@ unix: !macx: appfiles.files = $$PWD/res/gta5sync.desktop
 unix: !macx: pixmaps.path = $$(INSTALL_PATH)/share/pixmaps
 unix: !macx: pixmaps.files = $$PWD/res/gta5sync.xpm
 unix: !macx: target.path = $$(INSTALL_PATH)/bin
-unix: !macx: INSTALLS += target appfiles pixmaps
+unix: !macx: INSTALLS += target pixmaps appfiles
 
 # STATIC BUILD STUFF
 static: isEqual(QT_MAJOR_VERSION, 4): QTPLUGIN += qjpcodecs
