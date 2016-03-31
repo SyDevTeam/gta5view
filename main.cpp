@@ -245,7 +245,7 @@ int main(int argc, char *argv[])
         bool readOk = picture.readingPictureFromFile(arg1);
         picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
         picDialog->setWindowIcon(IconLoader::loadingAppIcon());
-        picDialog->setSnapmaticPicture(&picture, readOk);
+        picDialog->setSnapmaticPicture(&picture, arg1, readOk);
 
         int crewID = picture.getCrewNumber();
         if (crewID != 0) { crewDB->addCrew(crewID); }

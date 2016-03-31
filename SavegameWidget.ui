@@ -20,7 +20,7 @@
       <string/>
      </property>
      <property name="pixmap">
-      <pixmap resource="app.qrc">:/img/savegame.png</pixmap>
+      <pixmap resource="res/app.qrc">:/img/savegame.png</pixmap>
      </property>
     </widget>
    </item>
@@ -63,7 +63,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="app.qrc"/>
+  <include location="res/app.qrc"/>
  </resources>
  <connections/>
 </ui>

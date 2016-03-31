@@ -43,6 +43,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->cmdExport->setEnabled(0);
     plyrsList = QStringList();
     picTitl = "";
+    picPath = "";
     crewID = "";
     locX = "";
     locY = "";
@@ -55,9 +56,10 @@ PictureDialog::~PictureDialog()
     delete ui;
 }
 
-void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath, bool readOk)
 {
     // Showing error if reading error
+    picPath = picturePath;
     smpic = picture;
     if (!readOk)
     {
@@ -262,7 +264,7 @@ fileDialogPreSave:
 
             if (!isSaved)
             {
-                QMessageBox::warning(this, tr("Export picture"), tr("Failed to save current picture"));
+                QMessageBox::warning(this, tr("Export picture"), tr("Failed to export current Snapmatic picture"));
                 goto fileDialogPreSave;
             }
         }
@@ -274,5 +276,74 @@ fileDialogPreSave:
     }
 
     settings.setValue("ExportPicture", fileDialog.saveState());
+    settings.endGroup();
+}
+
+void PictureDialog::on_cmdCopy_clicked()
+{
+    QSettings settings("Syping", "gta5sync");
+    settings.beginGroup("FileDialogs");
+
+fileDialogPreSave:
+    QFileInfo sgdFileInfo(picPath);
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileDialog.setViewMode(QFileDialog::Detail);
+    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
+    fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
+    fileDialog.setDefaultSuffix("");
+    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowTitle(tr("Copy picture"));
+
+    QStringList filters;
+    filters << tr("Snapmatic pictures (PGTA*)");
+    filters << tr("All files (**)");
+    fileDialog.setNameFilters(filters);
+
+    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
+
+    fileDialog.setSidebarUrls(sidebarUrls);
+    fileDialog.restoreState(settings.value("CopyPicture","").toByteArray());
+    fileDialog.selectFile(sgdFileInfo.fileName());
+
+    if (fileDialog.exec())
+    {
+        QStringList selectedFiles = fileDialog.selectedFiles();
+        if (selectedFiles.length() == 1)
+        {
+            QString selectedFile = selectedFiles.at(0);
+
+            if (QFile::exists(selectedFile))
+            {
+                if (QMessageBox::Yes == QMessageBox::warning(this, tr("Copy picture"), tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+                {
+                    if (!QFile::remove(selectedFile))
+                    {
+                        QMessageBox::warning(this, tr("Copy picture"), tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
+                        goto fileDialogPreSave;
+                    }
+                }
+                else
+                {
+                    goto fileDialogPreSave;
+                }
+            }
+
+            bool isCopied = QFile::copy(picPath, selectedFile);
+            if (!isCopied)
+            {
+                QMessageBox::warning(this, tr("Copy picture"), tr("Failed to copy current Snapmatic picture"));
+                goto fileDialogPreSave;
+            }
+        }
+        else
+        {
+            QMessageBox::warning(this, tr("Copy picture"), tr("No valid file is selected"));
+            goto fileDialogPreSave;
+        }
+    }
+
+    settings.setValue("CopyPicture", fileDialog.saveState());
     settings.endGroup();
 }

@@ -57,7 +57,7 @@ void SnapmaticWidget::on_cmdView_clicked()
 {
     PictureDialog *picDialog = new PictureDialog(profileDB, this);
     picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-    picDialog->setSnapmaticPicture(smpic, true);
+    picDialog->setSnapmaticPicture(smpic, picPath, true);
     picDialog->setModal(true);
 
     // be ready for playerName updated

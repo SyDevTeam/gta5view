@@ -32,7 +32,7 @@ class PictureDialog : public QDialog
     Q_OBJECT
 public:
     explicit PictureDialog(ProfileDatabase *profileDB, QWidget *parent = 0);
-    void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
+    void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk);
     ~PictureDialog();
 
 public slots:
@@ -41,6 +41,7 @@ public slots:
 private slots:
     void on_cmdClose_clicked();
     void on_cmdExport_clicked();
+    void on_cmdCopy_clicked();
 
 private:
     ProfileDatabase *profileDB;
@@ -50,6 +51,7 @@ private:
     QString windowTitleStr;
     QStringList plyrsList;
     QString picTitl;
+    QString picPath;
     QString crewID;
     QString locX;
     QString locY;
