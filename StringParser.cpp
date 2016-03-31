@@ -30,5 +30,5 @@ StringParser::StringParser()
 QString StringParser::parseTitleString(QByteArray commitBytes, int maxLength)
 {
     Q_UNUSED(maxLength)
-    return QTextCodec::codecForName("UTF-16LE")->toUnicode(commitBytes);
+    return QTextCodec::codecForName("UTF-16LE")->toUnicode(commitBytes).trimmed();
 }
