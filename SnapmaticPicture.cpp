@@ -17,6 +17,7 @@
 *****************************************************************************/
 
 #include "SnapmaticPicture.h"
+#include "StringParser.h"
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QVariantMap>
@@ -179,10 +180,11 @@ bool SnapmaticPicture::readingPicture()
 
 QString SnapmaticPicture::getSnapmaticPictureString(QByteArray snapmaticHeader)
 {
-    QByteArray snapmaticUsefulBytes = snapmaticHeader.left(snapmaticUsefulLength);
-    snapmaticUsefulBytes.replace((char)0x00, "");
-    snapmaticUsefulBytes.replace((char)0x01, "");
-    return QString::fromLatin1(snapmaticUsefulBytes);
+    QByteArray snapmaticBytes = snapmaticHeader.left(snapmaticUsefulLength);
+    QList<QByteArray> snapmaticBytesList = snapmaticBytes.split(char(0x01));
+    snapmaticBytes = snapmaticBytesList.at(1);
+    snapmaticBytesList.clear();
+    return StringParser::parseTitleString(snapmaticBytes, snapmaticBytes.length());
 }
 
 QString SnapmaticPicture::getSnapmaticJSONString(QByteArray jsonBytes)

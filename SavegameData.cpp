@@ -16,6 +16,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include "StringParser.h"
 #include "SavegameData.h"
 #include <QTextCodec>
 #include <QDebug>
@@ -72,43 +73,11 @@ bool SavegameData::readingSavegame()
 
 QString SavegameData::getSavegameDataString(QByteArray savegameHeader)
 {
-    QString savegameTitle;
     QByteArray savegameBytes = savegameHeader.left(savegameHeaderLength);
     QList<QByteArray> savegameBytesList = savegameBytes.split(char(0x01));
     savegameBytes = savegameBytesList.at(1);
-
-    int savegameLength = savegameBytes.length();
-    int parsedBytes = 0;
-
-    while (parsedBytes <= savegameLength)
-    {
-        QList<QByteArray> parseByteList;
-        parseByteList.append(savegameBytes.mid(parsedBytes-1, 1));
-        parseByteList.append(savegameBytes.mid(parsedBytes-2, 1));
-        if (parseByteList.at(0).toHex() == "00")
-        {
-            // Latin character
-            savegameTitle.append(QString::fromLatin1(parseByteList.at(1)));
-        }
-        else if (parseByteList.at(0).toHex() == "30")
-        {
-            // Japanese character
-            QByteArray japaneseHex;
-            japaneseHex.append(QByteArray::fromHex("A5"));
-            japaneseHex.append(parseByteList.at(1));
-            savegameTitle.append(QTextCodec::codecForName("EUC-JP")->toUnicode(japaneseHex));
-        }
-        else
-        {
-            // Unsupported
-        }
-        parsedBytes = parsedBytes + 2;
-        parseByteList.clear();
-    }
-
     savegameBytesList.clear();
-    savegameBytes.clear();
-    return savegameTitle;
+    return StringParser::parseTitleString(savegameBytes, savegameBytes.length());
 }
 
 bool SavegameData::readingSavegameFromFile(QString fileName)

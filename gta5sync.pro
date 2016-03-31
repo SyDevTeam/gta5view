@@ -39,6 +39,7 @@ SOURCES += main.cpp \
     SnapmaticPicture.cpp \
     SnapmaticWidget.cpp \
     StandardPaths.cpp \
+    StringParser.cpp \
     UserInterface.cpp
 
 HEADERS  += \
@@ -57,6 +58,7 @@ HEADERS  += \
     SnapmaticPicture.h \
     SnapmaticWidget.h \
     StandardPaths.h \
+    StringParser.h \
     UserInterface.h
 
 FORMS    += \
