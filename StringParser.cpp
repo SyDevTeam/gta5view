@@ -29,37 +29,6 @@ StringParser::StringParser()
 
 QString StringParser::parseTitleString(QByteArray commitBytes, int maxLength)
 {
-    QString finalString;
-    int parsedBytes = 0;
-
-    while (parsedBytes <= maxLength)
-    {
-        QList<QByteArray> parseByteList;
-        parseByteList.append(commitBytes.mid(parsedBytes-1, 1));
-        parseByteList.append(commitBytes.mid(parsedBytes-2, 1));
-        if (parseByteList.at(0).toHex() == "00")
-        {
-            // Latin character
-            finalString.append(QString::fromLatin1(parseByteList.at(1)));
-        }
-//      else if (parseByteList.at(0).toHex() == "30")
-//      {
-//          // Japanese character
-//          QByteArray japaneseHex;
-//          japaneseHex.append(QByteArray::fromHex("A5"));
-//          japaneseHex.append(parseByteList.at(1));
-//          finalString.append(QTextCodec::codecForName("EUC-JP")->toUnicode(japaneseHex));
-//      }
-        else
-        {
-            QByteArray unsupportedHex;
-            unsupportedHex.append(parseByteList.at(0));
-            unsupportedHex.append(parseByteList.at(1));
-            finalString.append(QTextCodec::codecForName("UTF-16BE")->toUnicode(unsupportedHex));
-        }
-        parsedBytes = parsedBytes + 2;
-        parseByteList.clear();
-    }
-
-    return finalString;
+    Q_UNUSED(maxLength)
+    return QTextCodec::codecForName("UTF-16LE")->toUnicode(commitBytes);
 }
