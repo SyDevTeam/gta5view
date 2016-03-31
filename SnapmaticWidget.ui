@@ -66,6 +66,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="cmdCopy">
+     <property name="text">
+      <string>Copy</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="cmdDelete">
      <property name="text">
       <string>Delete</string>
