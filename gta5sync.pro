@@ -80,6 +80,13 @@ OTHER_FILES += res/app.rc \
     res/gta5sync.desktop \
     res/gta5sync_de.ts
 
+DISTFILES += \
+    lang/gta5sync_ru.qm \
+    lang/qtbase_ru.qm \
+    lang/README.txt \
+    lang/gta5sync_ru.ts \
+    lang/qt_ru.ts
+
 win32: RC_FILE += res/app.rc
 
 # QT4 ONLY STUFF
