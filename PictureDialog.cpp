@@ -61,6 +61,7 @@ PictureDialog::~PictureDialog()
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath, bool readOk)
 {
     // Showing error if reading error
+    QImage snapmaticPicture;
     picPath = picturePath;
     smpic = picture;
     if (!readOk)
@@ -71,7 +72,8 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
 
     if (picture->isPicOk())
     {
-        ui->labPicture->setPixmap(QPixmap::fromImage(picture->getPicture(), Qt::AutoColor));
+        snapmaticPicture = picture->getPicture();
+        ui->labPicture->setPixmap(QPixmap::fromImage(snapmaticPicture, Qt::AutoColor));
         ui->cmdExport->setEnabled(true);
     }
     if (picture->isJsonOk())
@@ -115,8 +117,13 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
     }
 
-    this->setMinimumSize(this->geometry().size());
-    this->setMaximumSize(this->geometry().size());
+    int jsn_h = ui->jsonFrame->height();
+    int spc_h = layout()->spacing();
+    int pix_h = snapmaticPicture.height();
+    int frm_h = jsn_h+spc_h+pix_h;
+
+    this->setMinimumSize(960, frm_h);
+    this->setMaximumSize(960, frm_h);
 }
 
 void PictureDialog::on_playerNameUpdated()
