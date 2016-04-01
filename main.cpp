@@ -156,44 +156,6 @@ int main(int argc, char *argv[])
         }
     }
     a.installTranslator(&EqtTranslator1);
-    QTranslator EqtTranslator2;
-    if (language == "System" || language.trimmed() == "")
-    {
-        QString languageName = QLocale::system().name();
-        QStringList langList = languageName.split("_");
-        if (langList.length() >= 1)
-        {
-            if (QFile::exists(langpath + "/qtmultimedia_" + langList.at(0) + ".qm"))
-            {
-                EqtTranslator2.load(langpath + "/qtmultimedia_" + langList.at(0) + ".qm");
-            }
-        }
-    }
-    else
-    {
-        QString languageName = language;
-        QStringList langList = languageName.split("_");
-        if (langList.length() >= 1)
-        {
-            if (QFile::exists(langpath + "/qtmultimedia_" + langList.at(0) + ".qm"))
-            {
-                EqtTranslator2.load(langpath + "/qtmultimedia_" + langList.at(0) + ".qm");
-            }
-        }
-    }
-    if (trsf)
-    {
-        QString languageName = QLocale::system().name();
-        QStringList langList = languageName.split("_");
-        if (langList.length() >= 1)
-        {
-            if (QFile::exists(langpath + "/qtmultimedia_" + langList.at(0) + ".qm"))
-            {
-                EqtTranslator2.load(langpath + "/qtmultimedia_" + langList.at(0) + ".qm");
-            }
-        }
-    }
-    a.installTranslator(&EqtTranslator2);
 #else
     QTranslator EqtTranslator;
     if (language == "System" || language.trimmed() == "")
