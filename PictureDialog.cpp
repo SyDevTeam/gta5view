@@ -361,11 +361,19 @@ void PictureDialog::on_labPicture_mouseDoubleClicked()
 {
     QDialog *pictureWidget = new QDialog(this);
     QRect rec = QApplication::desktop()->screenGeometry();
+    QHBoxLayout *widgetLayout = new QHBoxLayout(pictureWidget);
+    widgetLayout->setSpacing(0);
+    widgetLayout->setContentsMargins(0, 0, 0, 0);
 
     UiModLabel *pictureLabel = new UiModLabel(pictureWidget);
     pictureLabel->setPixmap(ui->labPicture->pixmap()->scaled(rec.width(), rec.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    pictureLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    pictureLabel->setAlignment(Qt::AlignCenter);
+    widgetLayout->addWidget(pictureLabel);
+
     QObject::connect(pictureLabel, SIGNAL(mouseDoubleClicked()), pictureWidget, SLOT(close()));
 
+    pictureWidget->setLayout(widgetLayout);
     pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
     pictureWidget->setWindowTitle(tr("Show picture"));
     pictureWidget->setStyleSheet("background-color: black;");
@@ -373,6 +381,8 @@ void PictureDialog::on_labPicture_mouseDoubleClicked()
     pictureWidget->setModal(true);
     pictureWidget->exec();
 
+    widgetLayout->deleteLater();
+    delete widgetLayout;
     pictureLabel->deleteLater();
     delete pictureLabel;
     pictureWidget->deleteLater();
