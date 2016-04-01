@@ -130,6 +130,11 @@ void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int
 
                 currentPage++;
             }
+
+            netReply->deleteLater();
+            delete netReply;
+            netManager->deleteLater();
+            delete netManager;
         }
     }
 }
