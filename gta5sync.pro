@@ -71,16 +71,15 @@ FORMS    += \
     UserInterface.ui
 
 TRANSLATIONS += \
-    res/gta5sync_de.ts
+    res/gta5sync_de.ts \
+    res/lang/gta5sync_ru.ts
 
 RESOURCES += \
     res/app.qrc
 
-OTHER_FILES += res/app.rc \
+DISTFILES += res/app.rc \
     res/gta5sync.desktop \
-    res/gta5sync_de.ts
-
-DISTFILES += \
+    res/gta5sync_de.ts \
     lang/gta5sync_ru.qm \
     lang/qtbase_ru.qm \
     lang/README.txt \
