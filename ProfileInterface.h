@@ -29,6 +29,7 @@
 #include <QSpacerItem>
 #include <QWidget>
 #include <QList>
+#include <QMap>
 
 namespace Ui {
 class ProfileInterface;
@@ -62,7 +63,7 @@ private:
     ProfileLoader *profileLoader;
     QList<SavegameData*> savegames;
     QList<SnapmaticPicture*> pictures;
-    QList<QWidget*> widgets;
+    QMap<QWidget*,QString> widgets;
     QSpacerItem *saSpacerItem;
     QString profileFolder;
     QString profileName;

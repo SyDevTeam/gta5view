@@ -40,7 +40,8 @@ SOURCES += main.cpp \
     SnapmaticWidget.cpp \
     StandardPaths.cpp \
     StringParser.cpp \
-    UserInterface.cpp
+    UserInterface.cpp \
+    uimod/UiModLabel.cpp
 
 HEADERS  += \
     AboutDialog.h \
@@ -59,7 +60,8 @@ HEADERS  += \
     SnapmaticWidget.h \
     StandardPaths.h \
     StringParser.h \
-    UserInterface.h
+    UserInterface.h \
+    uimod/UiModLabel.h
 
 FORMS    += \
     AboutDialog.ui \

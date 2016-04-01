@@ -27,7 +27,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="labPicture">
+    <widget class="UiModLabel" name="labPicture">
      <property name="text">
       <string/>
      </property>
@@ -110,6 +110,19 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>UiModLabel</class>
+   <extends>QLabel</extends>
+   <header>uimod/UiModLabel.h</header>
+   <slots>
+    <signal>mouseMoved()</signal>
+    <signal>mouseReleased()</signal>
+    <signal>mousePressed()</signal>
+    <signal>mouseDoubleClicked()</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

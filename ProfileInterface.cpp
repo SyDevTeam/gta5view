@@ -66,9 +66,9 @@ ProfileInterface::~ProfileInterface()
         picture->deleteLater();
         delete picture;
     }
-    foreach(QWidget *widget, widgets)
+    foreach(QWidget *widget, widgets.keys())
     {
-        widgets.removeAll(widget);
+        widgets.remove(widget);
         widget->deleteLater();
         delete widget;
     }
@@ -99,7 +99,7 @@ void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegam
     SavegameWidget *sgdWidget = new SavegameWidget();
     sgdWidget->setSavegameData(savegame, savegamePath);
     ui->vlSavegame->addWidget(sgdWidget);
-    widgets.append(sgdWidget);
+    widgets[sgdWidget] = "SavegameWidget";
     savegames.append(savegame);
     QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(on_savegameDeleted()));
 }
@@ -109,7 +109,7 @@ void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString pictu
     SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, threadDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
     ui->vlSnapmatic->addWidget(picWidget);
-    widgets.append(picWidget);
+    widgets[picWidget] = "SnapmaticWidget";
     pictures.append(picture);
     QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(on_pictureDeleted()));
 }
@@ -133,7 +133,7 @@ void ProfileInterface::on_profileLoaded()
 void ProfileInterface::on_savegameDeleted()
 {
     SavegameWidget *sgdWidget = (SavegameWidget*)sender();
-    widgets.removeAll(sgdWidget);
+    widgets.remove(sgdWidget);
     sgdWidget->deleteLater();
     delete sgdWidget;
 }
@@ -141,7 +141,7 @@ void ProfileInterface::on_savegameDeleted()
 void ProfileInterface::on_pictureDeleted()
 {
     SnapmaticWidget *picWidget = (SnapmaticWidget*)sender();
-    widgets.removeAll(picWidget);
+    widgets.remove(picWidget);
     picWidget->deleteLater();
     delete picWidget;
 }
