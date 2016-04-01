@@ -84,7 +84,7 @@ DISTFILES += res/app.rc \
     lang/qtbase_ru.qm \
     lang/README.txt \
     lang/gta5sync_ru.ts \
-    lang/qt_ru.ts
+    lang/qt_ru.qm
 
 win32: RC_FILE += res/app.rc
 
