@@ -71,8 +71,7 @@ FORMS    += \
     UserInterface.ui
 
 TRANSLATIONS += \
-    res/gta5sync_de.ts \
-    res/gta5sync_ru.ts
+    res/gta5sync_de.ts
 
 RESOURCES += \
     res/app.qrc
