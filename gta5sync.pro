@@ -88,6 +88,8 @@ DISTFILES += res/app.rc \
     lang/gta5sync_ru.ts \
     lang/qt_ru.qm
 
+INCLUDEPATH += ./uimod
+
 win32: RC_FILE += res/app.rc
 
 # QT4 ONLY STUFF

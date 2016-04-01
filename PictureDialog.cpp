@@ -21,7 +21,9 @@
 #include "ui_PictureDialog.h"
 #include "SidebarGenerator.h"
 #include "StandardPaths.h"
+#include "UiModLabel.h"
 
+#include <QDesktopWidget>
 #include <QJsonDocument>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -346,4 +348,26 @@ fileDialogPreSave:
 
     settings.setValue("CopyPicture", fileDialog.saveState());
     settings.endGroup();
+}
+
+void PictureDialog::on_labPicture_mouseDoubleClicked()
+{
+    QDialog *pictureWidget = new QDialog(this);
+    QRect rec = QApplication::desktop()->screenGeometry();
+
+    UiModLabel *pictureLabel = new UiModLabel(pictureWidget);
+    pictureLabel->setPixmap(ui->labPicture->pixmap()->scaled(rec.width(), rec.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
+    QObject::connect(pictureLabel, SIGNAL(mouseDoubleClicked()), pictureWidget, SLOT(close()));
+
+    pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
+    pictureWidget->setWindowTitle(tr("Show picture"));
+    pictureWidget->setStyleSheet("background-color: black;");
+    pictureWidget->showFullScreen();
+    pictureWidget->setModal(true);
+    pictureWidget->exec();
+
+    pictureLabel->deleteLater();
+    delete pictureLabel;
+    pictureWidget->deleteLater();
+    delete pictureWidget;
 }
