@@ -375,7 +375,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked()
 
     pictureWidget->setLayout(widgetLayout);
     pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
-    pictureWidget->setWindowTitle(tr("Show picture"));
+    pictureWidget->setWindowTitle(this->windowTitle());
     pictureWidget->setStyleSheet("background-color: black;");
     pictureWidget->showFullScreen();
     pictureWidget->setModal(true);
