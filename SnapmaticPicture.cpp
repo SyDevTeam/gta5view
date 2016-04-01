@@ -192,15 +192,15 @@ QString SnapmaticPicture::getSnapmaticJSONString(QByteArray jsonBytes)
     QByteArray jsonUsefulBytes = jsonBytes;
     jsonUsefulBytes.replace((char)0x00, "");
     jsonUsefulBytes.replace((char)0x0c, "");
-    return QString::fromUtf8(jsonUsefulBytes);
+    return QString::fromUtf8(jsonUsefulBytes).trimmed();
 }
 
 QString SnapmaticPicture::getSnapmaticTIDEString(QByteArray tideBytes)
 {
     QByteArray tideUsefulBytes = tideBytes;
-    tideUsefulBytes.remove(0, 4);
+    tideUsefulBytes.remove(0,4);
     QList<QByteArray> tideUsefulBytesList = tideUsefulBytes.split(char(0x00));
-    return QString::fromUtf8(tideUsefulBytesList.at(0));
+    return QString::fromUtf8(tideUsefulBytesList.at(0)).trimmed();
 }
 
 bool SnapmaticPicture::readingPictureFromFile(QString fileName)
