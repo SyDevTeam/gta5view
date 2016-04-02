@@ -28,13 +28,18 @@
 #include <QSettings>
 #include <QFileInfo>
 #include <QFile>
+#include <QMenu>
 #include <QUrl>
 
 SavegameWidget::SavegameWidget(QWidget *parent) :
-    QWidget(parent),
+    ProfileWidget(parent),
     ui(new Ui::SavegameWidget)
 {
     ui->setupUi(this);
+    ui->cmdCopy->setVisible(false);
+    ui->cmdView->setVisible(false);
+    ui->cmdDelete->setVisible(false);
+    ui->cbSelected->setVisible(false);
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
@@ -78,19 +83,60 @@ void SavegameWidget::on_cmdDelete_clicked()
     }
 }
 
+void SavegameWidget::on_cmdView_clicked()
+{
+    SavegameDialog *savegameDialog = new SavegameDialog(this);
+    savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    savegameDialog->setSavegameData(sgdata, sgdPath, true);
+    savegameDialog->setModal(true);
+    savegameDialog->show();
+    savegameDialog->exec();
+    savegameDialog->deleteLater();
+    delete savegameDialog;
+}
+
 void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     QWidget::mouseDoubleClickEvent(ev);
 
     if (ev->button() == Qt::LeftButton)
     {
-        SavegameDialog *savegameDialog = new SavegameDialog(this);
-        savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-        savegameDialog->setSavegameData(sgdata, sgdPath, true);
-        savegameDialog->setModal(true);
-        savegameDialog->show();
-        savegameDialog->exec();
-        savegameDialog->deleteLater();
-        delete savegameDialog;
+        on_cmdView_clicked();
     }
+}
+
+void SavegameWidget::on_savegameSelected()
+{
+    ui->cbSelected->setChecked(true);
+}
+
+void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
+{
+    QMenu contextMenu(this);
+    if (!ui->cbSelected->isChecked())
+    {
+        contextMenu.addAction(tr("Select"), this, SLOT(on_savegameSelected()));
+        contextMenu.addSeparator();
+    }
+    contextMenu.addAction(tr("View savegame"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addAction(tr("Copy savegame"), this, SLOT(on_cmdCopy_clicked()));
+    contextMenu.addAction(tr("Delete savegame"), this, SLOT(on_cmdDelete_clicked()));
+    contextMenu.exec(ev->globalPos());
+}
+
+void SavegameWidget::on_cbSelected_stateChanged(int arg1)
+{
+    if (arg1 == Qt::Checked)
+    {
+        emit widgetSelected();
+    }
+    else if (arg1 == Qt::Unchecked)
+    {
+        emit widgetDeselected();
+    }
+}
+
+void SavegameWidget::setSelectionMode(bool selectionMode)
+{
+    ui->cbSelected->setVisible(selectionMode);
 }

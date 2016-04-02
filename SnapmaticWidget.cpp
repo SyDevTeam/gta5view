@@ -24,13 +24,18 @@
 #include <QMessageBox>
 #include <QPixmap>
 #include <QDebug>
+#include <QMenu>
 #include <QFile>
 
 SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent) :
-    QWidget(parent), profileDB(profileDB), threadDB(threadDB),
+    ProfileWidget(parent), profileDB(profileDB), threadDB(threadDB),
     ui(new Ui::SnapmaticWidget)
 {
     ui->setupUi(this);
+    ui->cmdView->setVisible(false);
+    ui->cmdCopy->setVisible(false);
+    ui->cmdDelete->setVisible(false);
+    ui->cbSelected->setVisible(false);
     picPath = "";
     picStr = "";
     smpic = 0;
@@ -70,6 +75,11 @@ void SnapmaticWidget::on_cmdView_clicked()
     delete picDialog;
 }
 
+void SnapmaticWidget::on_cmdCopy_clicked()
+{
+
+}
+
 void SnapmaticWidget::on_cmdDelete_clicked()
 {
     int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("Are you sure to delete %1 from your Snapmatic pictures?").arg("\""+picStr+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
@@ -98,4 +108,40 @@ void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
     {
         on_cmdView_clicked();
     }
+}
+
+void SnapmaticWidget::on_pictureSelected()
+{
+    ui->cbSelected->setChecked(true);
+}
+
+void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
+{
+    QMenu contextMenu(this);
+    if (!ui->cbSelected->isChecked())
+    {
+        contextMenu.addAction(tr("Select"), this, SLOT(on_pictureSelected()));
+        contextMenu.addSeparator();
+    }
+    contextMenu.addAction(tr("View picture"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addAction(tr("Copy picture"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addAction(tr("Delete picture"), this, SLOT(on_cmdDelete_clicked()));
+    contextMenu.exec(ev->globalPos());
+}
+
+void SnapmaticWidget::on_cbSelected_stateChanged(int arg1)
+{
+    if (arg1 == Qt::Checked)
+    {
+        emit widgetSelected();
+    }
+    else if (arg1 == Qt::Unchecked)
+    {
+        emit widgetDeselected();
+    }
+}
+
+void SnapmaticWidget::setSelectionMode(bool selectionMode)
+{
+    ui->cbSelected->setVisible(selectionMode);
 }

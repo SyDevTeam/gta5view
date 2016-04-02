@@ -22,6 +22,8 @@
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
+#include "ProfileWidget.h"
+#include <QContextMenuEvent>
 #include <QMouseEvent>
 #include <QWidget>
 
@@ -29,32 +31,40 @@ namespace Ui {
 class SnapmaticWidget;
 }
 
-class SnapmaticWidget : public QWidget
+class SnapmaticWidget : public ProfileWidget
 {
     Q_OBJECT
 
 public:
-    explicit SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent = 0);
+    SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
+    void setSelectionMode(bool selectionMode);
     ~SnapmaticWidget();
 
 private slots:
     void on_cmdView_clicked();
+    void on_cmdCopy_clicked();
     void on_cmdDelete_clicked();
+    void on_pictureSelected();
+    void on_cbSelected_stateChanged(int arg1);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);
+    void contextMenuEvent(QContextMenuEvent *ev);
 
 private:
     ProfileDatabase *profileDB;
     DatabaseThread *threadDB;
     Ui::SnapmaticWidget *ui;
     SnapmaticPicture *smpic;
+    QAction *actSelectPic;
     QString picPath;
     QString picStr;
 
 signals:
     void pictureDeleted();
+    void widgetSelected();
+    void widgetDeselected();
 };
 
 #endif // SNAPMATICWIDGET_H

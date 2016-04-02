@@ -44,6 +44,7 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui->cmdImport->setEnabled(false);
     ui->cmdCloseProfile->setEnabled(false);
     loadingStr = ui->labProfileLoading->text();
+    selectedWidgts = 0;
     profileFolder = "";
     profileLoader = 0;
     saSpacerItem = 0;
@@ -66,7 +67,7 @@ ProfileInterface::~ProfileInterface()
         picture->deleteLater();
         delete picture;
     }
-    foreach(QWidget *widget, widgets.keys())
+    foreach(ProfileWidget *widget, widgets.keys())
     {
         widgets.remove(widget);
         widget->deleteLater();
@@ -102,6 +103,8 @@ void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegam
     widgets[sgdWidget] = "SavegameWidget";
     savegames.append(savegame);
     QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(on_savegameDeleted()));
+    QObject::connect(sgdWidget, SIGNAL(widgetSelected()), this, SLOT(on_profileWidgetSelected()));
+    QObject::connect(sgdWidget, SIGNAL(widgetDeselected()), this, SLOT(on_profileWidgetDeselected()));
 }
 
 void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString picturePath)
@@ -112,6 +115,8 @@ void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString pictu
     widgets[picWidget] = "SnapmaticWidget";
     pictures.append(picture);
     QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(on_pictureDeleted()));
+    QObject::connect(picWidget, SIGNAL(widgetSelected()), this, SLOT(on_profileWidgetSelected()));
+    QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(on_profileWidgetDeselected()));
 }
 
 void ProfileInterface::on_loadingProgress(int value, int maximum)
@@ -322,4 +327,28 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         QMessageBox::warning(this, tr("Import copy"), tr("Failed to import copy of Savegame file because no free Savegame slot left"));
         return false;
     }
+}
+
+void ProfileInterface::on_profileWidgetSelected()
+{
+    if (selectedWidgts == 0)
+    {
+        foreach(ProfileWidget *widget, widgets.keys())
+        {
+            widget->setSelectionMode(true);
+        }
+    }
+    selectedWidgts++;
+}
+
+void ProfileInterface::on_profileWidgetDeselected()
+{
+    if (selectedWidgts == 1)
+    {
+        foreach(ProfileWidget *widget, widgets.keys())
+        {
+            widget->setSelectionMode(false);
+        }
+    }
+    selectedWidgts--;
 }

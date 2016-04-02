@@ -24,6 +24,7 @@
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "ProfileLoader.h"
+#include "ProfileWidget.h"
 #include "SavegameData.h"
 #include "CrewDatabase.h"
 #include <QSpacerItem>
@@ -53,6 +54,8 @@ private slots:
     void on_pictureDeleted();
     void on_profileLoaded();
     void on_cmdImport_clicked();
+    void on_profileWidgetSelected();
+    void on_profileWidgetDeselected();
 
 private:
     ProfileDatabase *profileDB;
@@ -63,11 +66,12 @@ private:
     ProfileLoader *profileLoader;
     QList<SavegameData*> savegames;
     QList<SnapmaticPicture*> pictures;
-    QMap<QWidget*,QString> widgets;
+    QMap<ProfileWidget*,QString> widgets;
     QSpacerItem *saSpacerItem;
     QString profileFolder;
     QString profileName;
     QString loadingStr;
+    int selectedWidgts;
 
     bool importSnapmaticPicture(SnapmaticPicture *picture, QString picPath);
     bool importSavegameData(SavegameData *savegame, QString sgdPath);

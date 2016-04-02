@@ -19,29 +19,36 @@
 #ifndef SAVEGAMEWIDGET_H
 #define SAVEGAMEWIDGET_H
 
+#include "ProfileWidget.h"
+#include "SavegameData.h"
+#include <QContextMenuEvent>
 #include <QMouseEvent>
 #include <QWidget>
-#include "SavegameData.h"
 
 namespace Ui {
 class SavegameWidget;
 }
 
-class SavegameWidget : public QWidget
+class SavegameWidget : public ProfileWidget
 {
     Q_OBJECT
 
 public:
-    explicit SavegameWidget(QWidget *parent = 0);
+    SavegameWidget(QWidget *parent = 0);
     void setSavegameData(SavegameData *savegame, QString savegamePath);
+    void setSelectionMode(bool selectionMode);
     ~SavegameWidget();
 
 private slots:
-    void on_cmdDelete_clicked();
+    void on_cmdView_clicked();
     void on_cmdCopy_clicked();
+    void on_cmdDelete_clicked();
+    void on_savegameSelected();
+    void on_cbSelected_stateChanged(int arg1);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);
+    void contextMenuEvent(QContextMenuEvent *ev);
 
 private:
     Ui::SavegameWidget *ui;
@@ -51,6 +58,8 @@ private:
 
 signals:
     void savegameDeleted();
+    void widgetSelected();
+    void widgetDeselected();
 };
 
 #endif // SAVEGAMEWIDGET_H

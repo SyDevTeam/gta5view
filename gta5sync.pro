@@ -32,6 +32,7 @@ SOURCES += main.cpp \
     ProfileDatabase.cpp \
     ProfileInterface.cpp \
     ProfileLoader.cpp \
+    ProfileWidget.cpp \
     SavegameCopy.cpp \
     SavegameData.cpp \
     SavegameDialog.cpp \
@@ -53,6 +54,7 @@ HEADERS  += \
     ProfileDatabase.h \
     ProfileInterface.h \
     ProfileLoader.h \
+    ProfileWidget.h \
     SavegameCopy.h \
     SavegameData.h \
     SavegameDialog.h \
