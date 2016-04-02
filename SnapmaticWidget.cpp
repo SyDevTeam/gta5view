@@ -93,5 +93,9 @@ void SnapmaticWidget::on_cmdDelete_clicked()
 void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     QWidget::mouseDoubleClickEvent(ev);
-    on_cmdView_clicked();
+
+    if (ev->button() == Qt::LeftButton)
+    {
+        on_cmdView_clicked();
+    }
 }

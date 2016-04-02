@@ -82,12 +82,15 @@ void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     QWidget::mouseDoubleClickEvent(ev);
 
-    SavegameDialog *savegameDialog = new SavegameDialog(this);
-    savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-    savegameDialog->setSavegameData(sgdata, sgdPath, true);
-    savegameDialog->setModal(true);
-    savegameDialog->show();
-    savegameDialog->exec();
-    savegameDialog->deleteLater();
-    delete savegameDialog;
+    if (ev->button() == Qt::LeftButton)
+    {
+        SavegameDialog *savegameDialog = new SavegameDialog(this);
+        savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+        savegameDialog->setSavegameData(sgdata, sgdPath, true);
+        savegameDialog->setModal(true);
+        savegameDialog->show();
+        savegameDialog->exec();
+        savegameDialog->deleteLater();
+        delete savegameDialog;
+    }
 }

@@ -19,6 +19,7 @@
 #ifndef SAVEGAMEWIDGET_H
 #define SAVEGAMEWIDGET_H
 
+#include <QMouseEvent>
 #include <QWidget>
 #include "SavegameData.h"
 
