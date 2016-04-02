@@ -27,11 +27,13 @@
 #include <QSpacerItem>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QScrollBar>
 #include <QFileInfo>
 #include <QPalette>
 #include <QRegExp>
 #include <QDebug>
 #include <QColor>
+#include <QTimer>
 #include <QFile>
 #include <QUrl>
 #include <QDir>
@@ -345,10 +347,12 @@ void ProfileInterface::on_profileWidgetDeselected()
 {
     if (selectedWidgts == 1)
     {
+        int scrollBarValue = ui->saProfile->verticalScrollBar()->value();
         foreach(ProfileWidget *widget, widgets.keys())
         {
             widget->setSelectionMode(false);
         }
+        ui->saProfile->verticalScrollBar()->setValue(scrollBarValue);
     }
     selectedWidgts--;
 }
