@@ -53,6 +53,13 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="cmdCopy">
+       <property name="text">
+        <string>Copy</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="cmdClose">
        <property name="text">
         <string>Close</string>

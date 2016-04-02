@@ -32,6 +32,7 @@ SOURCES += main.cpp \
     ProfileDatabase.cpp \
     ProfileInterface.cpp \
     ProfileLoader.cpp \
+    SavegameCopy.cpp \
     SavegameData.cpp \
     SavegameDialog.cpp \
     SavegameWidget.cpp \
@@ -52,6 +53,7 @@ HEADERS  += \
     ProfileDatabase.h \
     ProfileInterface.h \
     ProfileLoader.h \
+    SavegameCopy.h \
     SavegameData.h \
     SavegameDialog.h \
     SavegameWidget.h \
@@ -74,7 +76,7 @@ FORMS    += \
 
 TRANSLATIONS += \
     res/gta5sync_de.ts \
-    res/lang/gta5sync_ru.ts
+    lang/gta5sync_ru.ts
 
 RESOURCES += \
     res/app.qrc

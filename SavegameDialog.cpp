@@ -1,6 +1,6 @@
 #include "SavegameDialog.h"
 #include "ui_SavegameDialog.h"
-
+#include "SavegameCopy.h"
 #include <QMessageBox>
 
 SavegameDialog::SavegameDialog(QWidget *parent) :
@@ -16,7 +16,7 @@ SavegameDialog::~SavegameDialog()
     delete ui;
 }
 
-void SavegameDialog::setSavegameData(SavegameData *savegame, bool readOk)
+void SavegameDialog::setSavegameData(SavegameData *savegame, QString savegamePath, bool readOk)
 {
     // Showing error if reading error
     if (!readOk)
@@ -24,11 +24,16 @@ void SavegameDialog::setSavegameData(SavegameData *savegame, bool readOk)
         QMessageBox::warning(this,tr("Savegame Viewer"),tr("Failed at %1").arg(savegame->getLastStep()));
         return;
     }
-
+    sgdPath = savegamePath;
     ui->labSavegameText->setText(savegameLabStr.arg(savegame->getSavegameStr()));
 }
 
 void SavegameDialog::on_cmdClose_clicked()
 {
     this->close();
+}
+
+void SavegameDialog::on_cmdCopy_clicked()
+{
+    SavegameCopy::CopySavegame(this, sgdPath);
 }

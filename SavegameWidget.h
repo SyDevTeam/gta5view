@@ -39,6 +39,9 @@ private slots:
     void on_cmdDelete_clicked();
     void on_cmdCopy_clicked();
 
+protected:
+    void mouseDoubleClickEvent(QMouseEvent *ev);
+
 private:
     Ui::SavegameWidget *ui;
     SavegameData *sgdata;

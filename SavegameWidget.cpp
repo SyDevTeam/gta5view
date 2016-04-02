@@ -19,8 +19,10 @@
 #include "SavegameWidget.h"
 #include "ui_SavegameWidget.h"
 #include "SidebarGenerator.h"
+#include "SavegameDialog.h"
 #include "StandardPaths.h"
 #include "SavegameData.h"
+#include "SavegameCopy.h"
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
@@ -51,6 +53,11 @@ void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePat
     sgdata = savegame;
 }
 
+void SavegameWidget::on_cmdCopy_clicked()
+{
+    SavegameCopy::CopySavegame(this, sgdPath);
+}
+
 void SavegameWidget::on_cmdDelete_clicked()
 {
     int uchoice = QMessageBox::question(this, tr("Delete savegame"), tr("Are you sure to delete %1 from your savegames?").arg("\""+sgdStr+"\""), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
@@ -71,71 +78,16 @@ void SavegameWidget::on_cmdDelete_clicked()
     }
 }
 
-void SavegameWidget::on_cmdCopy_clicked()
+void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
-    QSettings settings("Syping", "gta5sync");
-    settings.beginGroup("FileDialogs");
+    QWidget::mouseDoubleClickEvent(ev);
 
-fileDialogPreSave:
-    QFileInfo sgdFileInfo(sgdPath);
-    QFileDialog fileDialog(this);
-    fileDialog.setFileMode(QFileDialog::AnyFile);
-    fileDialog.setViewMode(QFileDialog::Detail);
-    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
-    fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
-    fileDialog.setDefaultSuffix("");
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-    fileDialog.setWindowTitle(tr("Copy savegame"));
-
-    QStringList filters;
-    filters << tr("Savegame files (SGTA*)");
-    filters << tr("All files (**)");
-    fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
-    fileDialog.restoreState(settings.value("CopySavegame","").toByteArray());
-    fileDialog.selectFile(sgdFileInfo.fileName());
-
-    if (fileDialog.exec())
-    {
-        QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
-            QString selectedFile = selectedFiles.at(0);
-
-            if (QFile::exists(selectedFile))
-            {
-                if (QMessageBox::Yes == QMessageBox::warning(this, tr("Copy savegame"), tr("Overwrite %1 with current savegame?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-                {
-                    if (!QFile::remove(selectedFile))
-                    {
-                        QMessageBox::warning(this, tr("Copy savegame"), tr("Failed to overwrite %1 with current savegame").arg("\""+selectedFile+"\""));
-                        goto fileDialogPreSave;
-                    }
-                }
-                else
-                {
-                    goto fileDialogPreSave;
-                }
-            }
-
-            bool isCopied = QFile::copy(sgdPath, selectedFile);
-            if (!isCopied)
-            {
-                QMessageBox::warning(this, tr("Copy savegame"), tr("Failed to copy current savegame"));
-                goto fileDialogPreSave;
-            }
-        }
-        else
-        {
-            QMessageBox::warning(this, tr("Copy savegame"), tr("No valid file is selected"));
-            goto fileDialogPreSave;
-        }
-    }
-
-    settings.setValue("CopySavegame", fileDialog.saveState());
-    settings.endGroup();
+    SavegameDialog *savegameDialog = new SavegameDialog(this);
+    savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    savegameDialog->setSavegameData(sgdata, sgdPath, true);
+    savegameDialog->setModal(true);
+    savegameDialog->show();
+    savegameDialog->exec();
+    savegameDialog->deleteLater();
+    delete savegameDialog;
 }

@@ -16,24 +16,16 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#include "AboutDialog.h"
-#include "ui_AboutDialog.h"
+#ifndef SAVEGAMECOPY_H
+#define SAVEGAMECOPY_H
 
-AboutDialog::AboutDialog(QWidget *parent) :
-    QDialog(parent),
-    ui(new Ui::AboutDialog)
-{
-    ui->setupUi(this);
-    aboutStr = ui->labAbout->text();
-    ui->labAbout->setText(aboutStr.arg(qApp->applicationVersion(), QT_VERSION_STR, qVersion()));
-}
+#include <QWidget>
 
-AboutDialog::~AboutDialog()
+class SavegameCopy
 {
-    delete ui;
-}
+public:
+    SavegameCopy();
+    static void CopySavegame(QWidget *parent, QString sgdPath);
+};
 
-void AboutDialog::on_cmdClose_clicked()
-{
-    this->close();
-}
+#endif // SAVEGAMECOPY_H

@@ -9,14 +9,18 @@
         <translation>О программе gta5sync</translation>
     </message>
     <message utf8="true">
-        <location filename="../AboutDialog.ui" line="59"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright © &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;Проект для просмотра и синхронизации фотографий Snapmatic и сохранений от Grand Theft Auto 5&lt;br/&gt;&lt;br/&gt;Версия проекта: %1&lt;br/&gt;Скомпилировано с Qt %2&lt;br/&gt;Работает на Qt %3&lt;br/&gt;&lt;br/&gt;Copyright © &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync лицензирован по &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+        <translation type="obsolete">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;Проект для просмотра и синхронизации фотографий Snapmatic и сохранений от Grand Theft Auto 5&lt;br/&gt;&lt;br/&gt;Версия проекта: %1&lt;br/&gt;Скомпилировано с Qt %2&lt;br/&gt;Работает на Qt %3&lt;br/&gt;&lt;br/&gt;Copyright © &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync лицензирован по &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="104"/>
         <source>Close</source>
         <translation>Закрыть</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.ui" line="59"/>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -27,7 +31,7 @@
         <translation>%1 - Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="72"/>
+        <location filename="../PictureDialog.ui" line="78"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br&gt;
@@ -38,109 +42,109 @@
 &lt;span style=&quot; font-weight:600;&quot;&gt;ID группы: &lt;/span&gt;%5</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="85"/>
-        <location filename="../PictureDialog.cpp" line="166"/>
-        <location filename="../PictureDialog.cpp" line="249"/>
-        <location filename="../PictureDialog.cpp" line="253"/>
-        <location filename="../PictureDialog.cpp" line="267"/>
-        <location filename="../PictureDialog.cpp" line="273"/>
+        <location filename="../PictureDialog.ui" line="91"/>
+        <location filename="../PictureDialog.cpp" line="175"/>
+        <location filename="../PictureDialog.cpp" line="258"/>
+        <location filename="../PictureDialog.cpp" line="262"/>
+        <location filename="../PictureDialog.cpp" line="276"/>
+        <location filename="../PictureDialog.cpp" line="282"/>
         <source>Export picture</source>
         <translation>Экспорт картинки</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="88"/>
+        <location filename="../PictureDialog.ui" line="94"/>
         <source>Export</source>
         <translation>Экспорт</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="95"/>
+        <location filename="../PictureDialog.ui" line="101"/>
         <source>Copy</source>
         <translation>Копировать</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="102"/>
-        <location filename="../PictureDialog.ui" line="105"/>
+        <location filename="../PictureDialog.ui" line="108"/>
+        <location filename="../PictureDialog.ui" line="111"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="66"/>
-        <location filename="../PictureDialog.cpp" line="113"/>
+        <location filename="../PictureDialog.cpp" line="69"/>
+        <location filename="../PictureDialog.cpp" line="117"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="66"/>
-        <location filename="../PictureDialog.cpp" line="113"/>
+        <location filename="../PictureDialog.cpp" line="69"/>
+        <location filename="../PictureDialog.cpp" line="117"/>
         <source>Failed at %1</source>
         <translation>Ошибка при %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="102"/>
-        <location filename="../PictureDialog.cpp" line="112"/>
+        <location filename="../PictureDialog.cpp" line="106"/>
+        <location filename="../PictureDialog.cpp" line="116"/>
         <source>No player</source>
         <translation>Игроков нет</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="105"/>
-        <location filename="../PictureDialog.cpp" line="112"/>
+        <location filename="../PictureDialog.cpp" line="109"/>
+        <location filename="../PictureDialog.cpp" line="116"/>
         <source>No crew</source>
         <translation>Без группы</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="170"/>
+        <location filename="../PictureDialog.cpp" line="179"/>
         <source>JPEG picture (*.jpg)</source>
         <translation>Картинка JPEG (*.jpg)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="171"/>
+        <location filename="../PictureDialog.cpp" line="180"/>
         <source>Portable Network Graphics (*.png)</source>
         <translation>Картинка Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="249"/>
-        <location filename="../PictureDialog.cpp" line="319"/>
+        <location filename="../PictureDialog.cpp" line="258"/>
+        <location filename="../PictureDialog.cpp" line="328"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
         <translation>Перезаписать %1 текущей картинкой Snapmatic?</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="253"/>
-        <location filename="../PictureDialog.cpp" line="323"/>
+        <location filename="../PictureDialog.cpp" line="262"/>
+        <location filename="../PictureDialog.cpp" line="332"/>
         <source>Failed to overwrite %1 with current Snapmatic picture</source>
         <translation>Не удалось перезаписать %1 картинкой Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="267"/>
+        <location filename="../PictureDialog.cpp" line="276"/>
         <source>Failed to export current Snapmatic picture</source>
         <translation>Не удалось экспортировать текущую картинку Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="273"/>
-        <location filename="../PictureDialog.cpp" line="342"/>
+        <location filename="../PictureDialog.cpp" line="282"/>
+        <location filename="../PictureDialog.cpp" line="351"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="297"/>
-        <location filename="../PictureDialog.cpp" line="319"/>
-        <location filename="../PictureDialog.cpp" line="323"/>
-        <location filename="../PictureDialog.cpp" line="336"/>
-        <location filename="../PictureDialog.cpp" line="342"/>
+        <location filename="../PictureDialog.cpp" line="306"/>
+        <location filename="../PictureDialog.cpp" line="328"/>
+        <location filename="../PictureDialog.cpp" line="332"/>
+        <location filename="../PictureDialog.cpp" line="345"/>
+        <location filename="../PictureDialog.cpp" line="351"/>
         <source>Copy picture</source>
         <translation>Скопировать картинку</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="300"/>
+        <location filename="../PictureDialog.cpp" line="309"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Картинки Snapmatic (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="301"/>
+        <location filename="../PictureDialog.cpp" line="310"/>
         <source>All files (**)</source>
         <translation>Все файлы (**)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="336"/>
+        <location filename="../PictureDialog.cpp" line="345"/>
         <source>Failed to copy current Snapmatic picture</source>
         <translation>Не удалось скопировать текущую картинку Snapmatic</translation>
     </message>
@@ -259,6 +263,11 @@
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="58"/>
+        <source>Copy</source>
+        <translation type="unfinished">Копировать</translation>
+    </message>
+    <message>
+        <location filename="../SavegameDialog.ui" line="65"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
@@ -291,57 +300,56 @@
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="56"/>
-        <location filename="../SavegameWidget.cpp" line="69"/>
+        <location filename="../SavegameWidget.cpp" line="57"/>
+        <location filename="../SavegameWidget.cpp" line="70"/>
         <source>Delete savegame</source>
         <translation>Удалить сохранение</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="56"/>
+        <location filename="../SavegameWidget.cpp" line="57"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Вы уверены, что хотите удалить сохранение %1?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="69"/>
+        <location filename="../SavegameWidget.cpp" line="70"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Не удалось удалить сохранение %1</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="89"/>
-        <location filename="../SavegameWidget.cpp" line="111"/>
-        <location filename="../SavegameWidget.cpp" line="115"/>
-        <location filename="../SavegameWidget.cpp" line="128"/>
-        <location filename="../SavegameWidget.cpp" line="134"/>
+        <location filename="../SavegameCopy.cpp" line="68"/>
+        <location filename="../SavegameCopy.cpp" line="72"/>
+        <location filename="../SavegameCopy.cpp" line="85"/>
+        <location filename="../SavegameCopy.cpp" line="91"/>
         <source>Copy savegame</source>
         <translation>Копировать сохранение</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="92"/>
+        <location filename="../SavegameCopy.cpp" line="49"/>
         <source>Savegame files (SGTA*)</source>
         <translation>Файлы сохранений (SGTA*)</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="93"/>
+        <location filename="../SavegameCopy.cpp" line="50"/>
         <source>All files (**)</source>
         <translation>Все файлы (**)</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="111"/>
+        <location filename="../SavegameCopy.cpp" line="68"/>
         <source>Overwrite %1 with current savegame?</source>
         <translation>Перезаписать %1 текущим сохранением?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="115"/>
+        <location filename="../SavegameCopy.cpp" line="72"/>
         <source>Failed to overwrite %1 with current savegame</source>
         <translation>Не удалось перезаписать %1 текущим сохранением</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="128"/>
+        <location filename="../SavegameCopy.cpp" line="85"/>
         <source>Failed to copy current savegame</source>
         <translation>Не удалось скопировать текущее сохранение</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="134"/>
+        <location filename="../SavegameCopy.cpp" line="91"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
     </message>
