@@ -22,6 +22,7 @@
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
+#include <QMouseEvent>
 #include <QWidget>
 
 namespace Ui {
@@ -40,6 +41,9 @@ public:
 private slots:
     void on_cmdView_clicked();
     void on_cmdDelete_clicked();
+
+protected:
+    void mouseDoubleClickEvent(QMouseEvent *ev);
 
 private:
     ProfileDatabase *profileDB;
