@@ -27,6 +27,7 @@ SOURCES += main.cpp \
     AboutDialog.cpp \
     CrewDatabase.cpp \
     DatabaseThread.cpp \
+    ExportThread.cpp \
     IconLoader.cpp \
     PictureCopy.cpp \
     PictureDialog.cpp \
@@ -51,6 +52,7 @@ HEADERS  += \
     AboutDialog.h \
     CrewDatabase.h \
     DatabaseThread.h \
+    ExportThread.h \
     IconLoader.h \
     PictureCopy.h \
     PictureDialog.h \

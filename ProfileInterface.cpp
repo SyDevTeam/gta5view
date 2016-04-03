@@ -25,10 +25,15 @@
 #include "PictureExport.h"
 #include "StandardPaths.h"
 #include "ProfileLoader.h"
+#include "ExportThread.h"
+#include <QProgressDialog>
+#include <QProgressBar>
 #include <QInputDialog>
+#include <QPushButton>
 #include <QSpacerItem>
 #include <QMessageBox>
 #include <QFileDialog>
+#include <QEventLoop>
 #include <QScrollBar>
 #include <QFileInfo>
 #include <QPalette>
@@ -80,6 +85,7 @@ ProfileInterface::~ProfileInterface()
     }
     profileLoader->deleteLater();
     delete profileLoader;
+
     delete ui;
 }
 
@@ -389,88 +395,110 @@ void ProfileInterface::deselectAllWidgets()
 
 void ProfileInterface::exportSelected()
 {
-    bool modeSet = false;
+    int exportCount = 0;
+    bool haveToExportPics = false;
     bool pictureCopyEnabled = false;
     bool pictureExportEnabled = false;
 
-    QStringList failedSavegames;
-    QStringList failedCopyPictures;
-    QStringList failedExportPictures;
     QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected"), profileFolder);
     if (exportDirectory != "")
     {
-        foreach(ProfileWidget *widget, widgets.keys())
+        foreach (ProfileWidget *widget, widgets.keys())
         {
-            if (widgets[widget] == "SnapmaticWidget")
+            if (widget->isSelected())
             {
-                SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
-                SnapmaticPicture *picture = picWidget->getPicture();
-                if (!modeSet)
+                if (widgets[widget] == "SnapmaticWidget")
                 {
-                    QInputDialog inputDialog;
-                    QStringList inputDialogItems;
-                    inputDialogItems << tr("Export and Copy pictures");
-                    inputDialogItems << tr("Export pictures");
-                    inputDialogItems << tr("Copy pictures");
-
-                    bool itemSelected = false;
-                    QString selectedItem = inputDialog.getItem(this, tr("Export selected"), tr("How should we deal with the Snapmatic pictures?"), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-                    if (itemSelected)
-                    {
-                        if (selectedItem == tr("Export and Copy pictures"))
-                        {
-                            pictureExportEnabled = true;
-                            pictureCopyEnabled = true;
-                        }
-                        else if (selectedItem == tr("Export pictures"))
-                        {
-                            pictureExportEnabled = true;
-                        }
-                        else if (selectedItem == tr("Copy pictures"))
-                        {
-                            pictureCopyEnabled = true;
-                        }
-                    }
-                    else
-                    {
-                        pictureExportEnabled = true;
-                        pictureCopyEnabled = true;
-                    }
-                    modeSet = true;
+                    haveToExportPics = true;
                 }
+                exportCount++;
+            }
+        }
 
-                if (pictureExportEnabled)
+        if (haveToExportPics)
+        {
+            QInputDialog inputDialog;
+            QStringList inputDialogItems;
+            inputDialogItems << tr("Export and Copy pictures");
+            inputDialogItems << tr("Export pictures");
+            inputDialogItems << tr("Copy pictures");
+
+            bool itemSelected = false;
+            QString selectedItem = inputDialog.getItem(this, tr("Export selected"), tr("How should we deal with the Snapmatic pictures?"), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+            if (itemSelected)
+            {
+                if (selectedItem == tr("Export and Copy pictures"))
                 {
-                    QString exportFileName = PictureExport::getPictureFileName(picture);
-                    if (!picture->getPicture().save(exportDirectory + "/" + exportFileName, "JPEG", 100))
-                    {
-                        failedExportPictures.append(exportFileName);
-                    }
+                    pictureExportEnabled = true;
+                    pictureCopyEnabled = true;
                 }
-                if (pictureCopyEnabled)
+                else if (selectedItem == tr("Export pictures"))
                 {
-                    QString originalFileName = picture->getPictureFileName();
-                    QFileInfo originalFileInfo(originalFileName);
-                    QString exportFileName = originalFileInfo.fileName();
-                    if (QFile::copy(originalFileName, exportDirectory + "/" + exportFileName))
-                    {
-                        failedCopyPictures.append(exportFileName);
-                    }
+                    pictureExportEnabled = true;
+                }
+                else if (selectedItem == tr("Copy pictures"))
+                {
+                    pictureCopyEnabled = true;
                 }
             }
-            else if (widgets[widget] == "SavegameWidget")
+            else
             {
-                SavegameWidget *sgdWidget = (SavegameWidget*)widget;
-                SavegameData *savegame = sgdWidget->getSavegame();
-
-                QString originalFileName = savegame->getSavegameFileName();
-                QFileInfo originalFileInfo(originalFileName);
-                QString exportFileName = originalFileInfo.fileName();
-                if (QFile::copy(originalFileName, exportDirectory + "/" + exportFileName))
-                {
-                    failedSavegames.append(exportFileName);
-                }
+                pictureExportEnabled = true;
+                pictureCopyEnabled = true;
             }
+        }
+
+        QProgressDialog pbDialog(this);
+        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowTitle(tr("Export selected..."));
+        pbDialog.setLabelText(tr("Current export job: %1").arg(tr("Initializing...")));
+        pbDialog.setRange(0, exportCount);
+
+        QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
+        pbBtn.at(0)->setDisabled(true);
+
+        QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
+        pbBar.at(0)->setTextVisible(false);
+
+        ExportThread *exportThread = new ExportThread(widgets, exportDirectory, pictureCopyEnabled, pictureExportEnabled);
+        QObject::connect(exportThread, SIGNAL(exportStringUpdate(QString)), &pbDialog, SLOT(setLabelText(QString)));
+        QObject::connect(exportThread, SIGNAL(exportProgressUpdate(int)), &pbDialog, SLOT(setValue(int)));
+        QObject::connect(exportThread, SIGNAL(exportFinished()), &pbDialog, SLOT(close()));
+        exportThread->start();
+
+        pbDialog.exec();
+        QStringList getFailedSavegames = exportThread->getFailedSavegames();
+        QStringList getFailedCopyPictures = exportThread->getFailedCopyPictures();
+        QStringList getFailedExportPictures = exportThread->getFailedExportPictures();
+
+        QString errorStr;
+        QStringList errorList;
+        errorList << getFailedExportPictures;
+        errorList << getFailedCopyPictures;
+        errorList << getFailedSavegames;
+
+        foreach (const QString &curErrorStr, errorList)
+        {
+            errorStr.append(", " + curErrorStr);
+        }
+        if (errorStr != "")
+        {
+            errorStr.remove(0, 2);
+            QMessageBox::warning(this, tr("Export selected"), tr("Export failed with...\n\n%1").arg(errorStr));
+        }
+
+        if (exportThread->isFinished())
+        {
+            exportThread->deleteLater();
+            delete exportThread;
+        }
+        else
+        {
+            QEventLoop threadFinishLoop;
+            QObject::connect(exportThread, SIGNAL(finished()), &threadFinishLoop, SLOT(quit()));
+            threadFinishLoop.exec();
+            exportThread->deleteLater();
+            delete exportThread;
         }
     }
 }

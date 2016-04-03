@@ -25,8 +25,10 @@
 #include "DatabaseThread.h"
 #include "ProfileLoader.h"
 #include "ProfileWidget.h"
+#include "ExportThread.h"
 #include "SavegameData.h"
 #include "CrewDatabase.h"
+#include <QProgressDialog>
 #include <QSpacerItem>
 #include <QWidget>
 #include <QList>
