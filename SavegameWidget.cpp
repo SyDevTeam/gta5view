@@ -27,6 +27,10 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QFileInfo>
+#include <QPalette>
+#include <QColor>
+#include <QBrush>
+#include <QTimer>
 #include <QFile>
 #include <QMenu>
 #include <QUrl>
@@ -40,6 +44,13 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     ui->cmdView->setVisible(false);
     ui->cmdDelete->setVisible(false);
     ui->cbSelected->setVisible(false);
+
+    QPalette palette;
+    QColor highlightBackColor = palette.highlight().color();
+    QColor highlightTextColor = palette.highlightedText().color();
+    setStyleSheet(QString("QFrame:hover#SavegameFrame{background-color: rgb(%1, %2, %3); color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+
+    clkIssued = 0;
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
@@ -95,15 +106,6 @@ void SavegameWidget::on_cmdView_clicked()
     delete savegameDialog;
 }
 
-void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
-{
-    QWidget::mouseDoubleClickEvent(ev);
-
-    if (ev->button() == Qt::LeftButton)
-    {
-        on_cmdView_clicked();
-    }
-}
 
 void SavegameWidget::setChecked(bool isChecked)
 {
@@ -113,6 +115,44 @@ void SavegameWidget::setChecked(bool isChecked)
 void SavegameWidget::on_savegameSelected()
 {
     setChecked(true);
+}
+
+void SavegameWidget::mousePressEvent(QMouseEvent *ev)
+{
+    ProfileWidget::mouseReleaseEvent(ev);
+    clkIssued = true;
+}
+
+void SavegameWidget::mouseReleaseEvent(QMouseEvent *ev)
+{
+    ProfileWidget::mouseReleaseEvent(ev);
+    if (ui->cbSelected->isVisible())
+    {
+        if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
+        {
+            clkIssued = false;
+            QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
+        }
+    }
+}
+
+void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
+{
+    QWidget::mouseDoubleClickEvent(ev);
+
+    if (ev->button() == Qt::LeftButton)
+    {
+        clkIssued = true;
+        on_cmdView_clicked();
+    }
+}
+
+void SavegameWidget::changeCheckedState()
+{
+    if (!clkIssued)
+    {
+        ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
+    }
 }
 
 void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)

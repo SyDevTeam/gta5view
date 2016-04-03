@@ -48,9 +48,12 @@ private slots:
     void on_cmdDelete_clicked();
     void on_savegameSelected();
     void on_cbSelected_stateChanged(int arg1);
+    void changeCheckedState();
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);
+    void mouseReleaseEvent(QMouseEvent *ev);
+    void mousePressEvent(QMouseEvent *ev);
     void contextMenuEvent(QContextMenuEvent *ev);
 
 private:
@@ -58,6 +61,7 @@ private:
     SavegameData *sgdata;
     QString sgdPath;
     QString sgdStr;
+    bool clkIssued;
 
 signals:
     void savegameDeleted();

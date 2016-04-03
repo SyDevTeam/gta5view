@@ -51,9 +51,12 @@ private slots:
     void on_cmdDelete_clicked();
     void on_pictureSelected();
     void on_cbSelected_stateChanged(int arg1);
+    void changeCheckedState();
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);
+    void mouseReleaseEvent(QMouseEvent *ev);
+    void mousePressEvent(QMouseEvent *ev);
     void contextMenuEvent(QContextMenuEvent *ev);
 
 private:
@@ -64,6 +67,7 @@ private:
     QAction *actSelectPic;
     QString picPath;
     QString picStr;
+    bool clkIssued;
 
 signals:
     void pictureDeleted();

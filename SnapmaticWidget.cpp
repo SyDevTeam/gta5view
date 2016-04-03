@@ -25,6 +25,7 @@
 #include "PictureCopy.h"
 #include <QMessageBox>
 #include <QPixmap>
+#include <QTimer>
 #include <QDebug>
 #include <QMenu>
 #include <QFile>
@@ -39,6 +40,13 @@ SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *thr
     ui->cmdExport->setVisible(false);
     ui->cmdDelete->setVisible(false);
     ui->cbSelected->setVisible(false);
+
+    QPalette palette;
+    QColor highlightBackColor = palette.highlight().color();
+    QColor highlightTextColor = palette.highlightedText().color();
+    setStyleSheet(QString("QFrame:hover#SnapmaticFrame{background-color: rgb(%1, %2, %3); color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+
+    clkIssued = 0;
     picPath = "";
     picStr = "";
     smpic = 0;
@@ -108,13 +116,40 @@ void SnapmaticWidget::on_cmdDelete_clicked()
     }
 }
 
+void SnapmaticWidget::mousePressEvent(QMouseEvent *ev)
+{
+    ProfileWidget::mousePressEvent(ev);
+}
+
+void SnapmaticWidget::mouseReleaseEvent(QMouseEvent *ev)
+{
+    ProfileWidget::mouseReleaseEvent(ev);
+    if (ui->cbSelected->isVisible())
+    {
+        if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
+        {
+            clkIssued = false;
+            QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
+        }
+    }
+}
+
 void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     QWidget::mouseDoubleClickEvent(ev);
 
     if (ev->button() == Qt::LeftButton)
     {
+        clkIssued = true;
         on_cmdView_clicked();
+    }
+}
+
+void SnapmaticWidget::changeCheckedState()
+{
+    if (!clkIssued)
+    {
+        ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
     }
 }
 
