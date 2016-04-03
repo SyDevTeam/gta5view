@@ -53,7 +53,7 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 
     QPalette palette;
     QColor baseColor = palette.base().color();
-    ui->saProfile->setStyleSheet("QWidget#saProfileContent{background-color: rgb(" + QString::number(baseColor.red()) + "," + QString::number(baseColor.green()) + "," + QString::number(baseColor.blue()) + ")}");
+    ui->saProfile->setStyleSheet(QString("QWidget#saProfileContent{background-color: rgb(%1, %2, %3)}").arg(QString::number(baseColor.red()),QString::number(baseColor.green()),QString::number(baseColor.blue())));
 }
 
 ProfileInterface::~ProfileInterface()
