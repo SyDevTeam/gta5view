@@ -77,7 +77,7 @@ void SnapmaticWidget::on_cmdView_clicked()
     picDialog->setModal(true);
 
     // be ready for playerName updated
-    QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(on_playerNameUpdated()));
+    QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(playerNameUpdated()));
 
     // show picture dialog
     picDialog->show();
@@ -165,7 +165,7 @@ void SnapmaticWidget::setChecked(bool isChecked)
     ui->cbSelected->setChecked(isChecked);
 }
 
-void SnapmaticWidget::on_pictureSelected()
+void SnapmaticWidget::pictureSelected()
 {
     setChecked(true);
 }
@@ -175,7 +175,7 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
     QMenu contextMenu(this);
     if (!ui->cbSelected->isChecked())
     {
-        contextMenu.addAction(tr("Select"), this, SLOT(on_pictureSelected()));
+        contextMenu.addAction(tr("Select"), this, SLOT(pictureSelected()));
         contextMenu.addSeparator();
     }
     contextMenu.addAction(tr("View picture"), this, SLOT(on_cmdView_clicked()));

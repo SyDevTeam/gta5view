@@ -46,9 +46,9 @@ private slots:
     void on_cmdView_clicked();
     void on_cmdCopy_clicked();
     void on_cmdDelete_clicked();
-    void on_savegameSelected();
     void on_cbSelected_stateChanged(int arg1);
     void changeCheckedState();
+    void savegameSelected();
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);

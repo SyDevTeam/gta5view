@@ -112,7 +112,7 @@ void SavegameWidget::setChecked(bool isChecked)
     ui->cbSelected->setChecked(isChecked);
 }
 
-void SavegameWidget::on_savegameSelected()
+void SavegameWidget::savegameSelected()
 {
     setChecked(true);
 }
@@ -167,7 +167,7 @@ void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
     QMenu contextMenu(this);
     if (!ui->cbSelected->isChecked())
     {
-        contextMenu.addAction(tr("Select"), this, SLOT(on_savegameSelected()));
+        contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected()));
         contextMenu.addSeparator();
     }
     contextMenu.addAction(tr("View savegame"), this, SLOT(on_cmdView_clicked()));

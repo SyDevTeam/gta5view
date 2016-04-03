@@ -49,9 +49,9 @@ private slots:
     void on_cmdCopy_clicked();
     void on_cmdExport_clicked();
     void on_cmdDelete_clicked();
-    void on_pictureSelected();
     void on_cbSelected_stateChanged(int arg1);
     void changeCheckedState();
+    void pictureSelected();
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);

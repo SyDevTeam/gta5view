@@ -396,7 +396,7 @@ int main(int argc, char *argv[])
         if (!readOk) { return 1; }
 
         QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
-        QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(on_playerNameUpdated()));
+        QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(playerNameUpdated()));
         threadDB->start();
 
         picDialog->show();

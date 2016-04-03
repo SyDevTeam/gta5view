@@ -36,7 +36,7 @@ public:
     ~PictureDialog();
 
 public slots:
-    void on_playerNameUpdated();
+    void playerNameUpdated();
 
 private slots:
     void on_cmdClose_clicked();

@@ -91,14 +91,14 @@ void ProfileInterface::setupProfileInterface()
 {
     ui->labProfileLoading->setText(tr("Loading..."));
     profileLoader = new ProfileLoader(profileFolder, crewDB);
-    QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(on_savegameLoaded(SavegameData*, QString)));
-    QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*, QString)), this, SLOT(on_pictureLoaded(SnapmaticPicture*, QString)));
-    QObject::connect(profileLoader, SIGNAL(loadingProgress(int,int)), this, SLOT(on_loadingProgress(int,int)));
-    QObject::connect(profileLoader, SIGNAL(finished()), this, SLOT(on_profileLoaded()));
+    QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(savegameLoaded(SavegameData*, QString)));
+    QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*, QString)), this, SLOT(pictureLoaded(SnapmaticPicture*, QString)));
+    QObject::connect(profileLoader, SIGNAL(loadingProgress(int,int)), this, SLOT(loadingProgress(int,int)));
+    QObject::connect(profileLoader, SIGNAL(finished()), this, SLOT(profileLoaded()));
     profileLoader->start();
 }
 
-void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegamePath)
+void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePath)
 {
     SavegameWidget *sgdWidget = new SavegameWidget();
     sgdWidget->setSavegameData(savegame, savegamePath);
@@ -106,12 +106,12 @@ void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegam
     widgets[sgdWidget] = "SavegameWidget";
     savegames.append(savegame);
     if (selectedWidgts != 0) { sgdWidget->setSelectionMode(true); }
-    QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(on_savegameDeleted()));
-    QObject::connect(sgdWidget, SIGNAL(widgetSelected()), this, SLOT(on_profileWidgetSelected()));
-    QObject::connect(sgdWidget, SIGNAL(widgetDeselected()), this, SLOT(on_profileWidgetDeselected()));
+    QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(savegameDeleted()));
+    QObject::connect(sgdWidget, SIGNAL(widgetSelected()), this, SLOT(profileWidgetSelected()));
+    QObject::connect(sgdWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
 }
 
-void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString picturePath)
+void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, QString picturePath)
 {
     SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, threadDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
@@ -119,19 +119,19 @@ void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString pictu
     widgets[picWidget] = "SnapmaticWidget";
     pictures.append(picture);
     if (selectedWidgts != 0) { picWidget->setSelectionMode(true); }
-    QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(on_pictureDeleted()));
-    QObject::connect(picWidget, SIGNAL(widgetSelected()), this, SLOT(on_profileWidgetSelected()));
-    QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(on_profileWidgetDeselected()));
+    QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(pictureDeleted()));
+    QObject::connect(picWidget, SIGNAL(widgetSelected()), this, SLOT(profileWidgetSelected()));
+    QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
 }
 
-void ProfileInterface::on_loadingProgress(int value, int maximum)
+void ProfileInterface::loadingProgress(int value, int maximum)
 {
     ui->pbPictureLoading->setMaximum(maximum);
     ui->pbPictureLoading->setValue(value);
     ui->labProfileLoading->setText(loadingStr.arg(QString::number(value), QString::number(maximum)));
 }
 
-void ProfileInterface::on_profileLoaded()
+void ProfileInterface::profileLoaded()
 {
     saSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->saProfileContent->layout()->addItem(saSpacerItem);
@@ -140,7 +140,7 @@ void ProfileInterface::on_profileLoaded()
     ui->cmdImport->setEnabled(true);
 }
 
-void ProfileInterface::on_savegameDeleted()
+void ProfileInterface::savegameDeleted()
 {
     SavegameWidget *sgdWidget = (SavegameWidget*)sender();
     SavegameData *savegame = sgdWidget->getSavegame();
@@ -150,7 +150,7 @@ void ProfileInterface::on_savegameDeleted()
     delete savegame;
 }
 
-void ProfileInterface::on_pictureDeleted()
+void ProfileInterface::pictureDeleted()
 {
     SnapmaticWidget *picWidget = (SnapmaticWidget*)sender();
     SnapmaticPicture *picture = picWidget->getPicture();
@@ -286,7 +286,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
     }
     else if (QFile::copy(picPath, profileFolder + "/" + picFileName))
     {
-        on_pictureLoaded(picture, profileFolder + "/" + picFileName);
+        pictureLoaded(picture, profileFolder + "/" + picFileName);
         return true;
     }
     else
@@ -322,7 +322,7 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
     {
         if (QFile::copy(sgdPath, profileFolder + "/" + sgdFileName))
         {
-            on_savegameLoaded(savegame, profileFolder + "/" + sgdFileName);
+            savegameLoaded(savegame, profileFolder + "/" + sgdFileName);
             return true;
         }
         else
@@ -338,7 +338,7 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
     }
 }
 
-void ProfileInterface::on_profileWidgetSelected()
+void ProfileInterface::profileWidgetSelected()
 {
     if (selectedWidgts == 0)
     {
@@ -350,7 +350,7 @@ void ProfileInterface::on_profileWidgetSelected()
     selectedWidgts++;
 }
 
-void ProfileInterface::on_profileWidgetDeselected()
+void ProfileInterface::profileWidgetDeselected()
 {
     if (selectedWidgts == 1)
     {

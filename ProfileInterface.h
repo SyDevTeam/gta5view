@@ -47,15 +47,15 @@ public:
 
 private slots:
     void on_cmdCloseProfile_clicked();
-    void on_pictureLoaded(SnapmaticPicture *picture, QString picturePath);
-    void on_savegameLoaded(SavegameData *savegame, QString savegamePath);
-    void on_loadingProgress(int value, int maximum);
-    void on_savegameDeleted();
-    void on_pictureDeleted();
-    void on_profileLoaded();
     void on_cmdImport_clicked();
-    void on_profileWidgetSelected();
-    void on_profileWidgetDeselected();
+    void pictureLoaded(SnapmaticPicture *picture, QString picturePath);
+    void savegameLoaded(SavegameData *savegame, QString savegamePath);
+    void loadingProgress(int value, int maximum);
+    void savegameDeleted();
+    void pictureDeleted();
+    void profileLoaded();
+    void profileWidgetSelected();
+    void profileWidgetDeselected();
 
 private:
     ProfileDatabase *profileDB;

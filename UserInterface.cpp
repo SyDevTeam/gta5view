@@ -102,7 +102,7 @@ void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
         profileBtn->setAutoDefault(true);
         ui->swSelection->layout()->addWidget(profileBtn);
 
-        QObject::connect(profileBtn, SIGNAL(clicked(bool)), this, SLOT(on_profileButton_clicked()));
+        QObject::connect(profileBtn, SIGNAL(clicked(bool)), this, SLOT(profileButton_clicked()));
     }
     QSpacerItem *buttomSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->swSelection->layout()->addItem(buttomSpacerItem);
@@ -122,7 +122,7 @@ void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
     QObject::connect(cmdClose, SIGNAL(clicked(bool)), this, SLOT(close()));
 }
 
-void UserInterface::on_profileButton_clicked()
+void UserInterface::profileButton_clicked()
 {
     QPushButton *profileBtn = (QPushButton*)sender();
     openProfile(profileBtn->objectName());

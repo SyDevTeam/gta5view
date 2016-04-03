@@ -128,7 +128,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
     this->setMaximumSize(960, frm_h);
 }
 
-void PictureDialog::on_playerNameUpdated()
+void PictureDialog::playerNameUpdated()
 {
     if (plyrsList.count() >= 1)
     {
