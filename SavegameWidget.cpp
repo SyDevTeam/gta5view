@@ -72,7 +72,7 @@ void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePat
 
 void SavegameWidget::on_cmdCopy_clicked()
 {
-    SavegameCopy::CopySavegame(this, sgdPath);
+    SavegameCopy::copySavegame(this, sgdPath);
 }
 
 void SavegameWidget::on_cmdDelete_clicked()

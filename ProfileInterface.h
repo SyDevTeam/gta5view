@@ -48,6 +48,8 @@ public:
 public slots:
     void selectAllWidgets();
     void deselectAllWidgets();
+    void exportSelected();
+    void deleteSelected();
 
 private slots:
     void on_cmdCloseProfile_clicked();

@@ -27,7 +27,8 @@ class PictureExport
 {
 public:
     PictureExport();
-    static void ExportPicture(QWidget *parent, SnapmaticPicture *picture);
+    static void exportPicture(QWidget *parent, SnapmaticPicture *picture);
+    static QString getPictureFileName(SnapmaticPicture *picture);
 };
 
 #endif // PICTUREEXPORT_H

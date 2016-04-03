@@ -221,6 +221,11 @@ void SnapmaticPicture::setPicture(QImage picture)
     cachePicture = picture;
 }
 
+QString SnapmaticPicture::getPictureFileName()
+{
+    return picFileName;
+}
+
 QString SnapmaticPicture::getPictureDesc()
 {
     return descStr;

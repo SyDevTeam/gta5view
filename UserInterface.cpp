@@ -227,3 +227,13 @@ void UserInterface::on_actionDeselect_all_triggered()
 {
     profileUI->deselectAllWidgets();
 }
+
+void UserInterface::on_actionExport_selected_triggered()
+{
+    profileUI->exportSelected();
+}
+
+void UserInterface::on_actionDelete_selected_triggered()
+{
+    profileUI->deleteSelected();
+}

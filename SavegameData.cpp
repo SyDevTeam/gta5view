@@ -108,6 +108,11 @@ bool SavegameData::isSavegameOk()
     return savegameOk;
 }
 
+QString SavegameData::getSavegameFileName()
+{
+    return savegameFileName;
+}
+
 QString SavegameData::getSavegameStr()
 {
     return savegameStr;

@@ -39,6 +39,7 @@ public:
     QString getPictureStr();
     QString getPictureTitl();
     QString getPictureDesc();
+    QString getPictureFileName();
 
     // JSON
     bool isJsonOk();

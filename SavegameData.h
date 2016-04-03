@@ -31,6 +31,7 @@ public:
     bool isSavegameOk();
     QString getLastStep();
     QString getSavegameStr();
+    QString getSavegameFileName();
 
 private:
     QString getSavegameDataString(QByteArray savegameHeader);

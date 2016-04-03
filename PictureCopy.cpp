@@ -28,7 +28,7 @@ PictureCopy::PictureCopy()
 
 }
 
-void PictureCopy::CopyPicture(QWidget *parent, QString picPath)
+void PictureCopy::copyPicture(QWidget *parent, QString picPath)
 {
     QSettings settings("Syping", "gta5sync");
     settings.beginGroup("FileDialogs");

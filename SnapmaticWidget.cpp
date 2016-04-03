@@ -88,12 +88,12 @@ void SnapmaticWidget::on_cmdView_clicked()
 
 void SnapmaticWidget::on_cmdCopy_clicked()
 {
-    PictureCopy::CopyPicture(this, picPath);
+    PictureCopy::copyPicture(this, picPath);
 }
 
 void SnapmaticWidget::on_cmdExport_clicked()
 {
-    PictureExport::ExportPicture(this, smpic);
+    PictureExport::exportPicture(this, smpic);
 }
 
 void SnapmaticWidget::on_cmdDelete_clicked()

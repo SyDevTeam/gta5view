@@ -22,8 +22,10 @@
 #include "SnapmaticWidget.h"
 #include "DatabaseThread.h"
 #include "SavegameWidget.h"
+#include "PictureExport.h"
 #include "StandardPaths.h"
 #include "ProfileLoader.h"
+#include <QInputDialog>
 #include <QSpacerItem>
 #include <QMessageBox>
 #include <QFileDialog>
@@ -383,4 +385,97 @@ void ProfileInterface::deselectAllWidgets()
     {
         widget->setSelected(false);
     }
+}
+
+void ProfileInterface::exportSelected()
+{
+    bool modeSet = false;
+    bool pictureCopyEnabled = false;
+    bool pictureExportEnabled = false;
+
+    QStringList failedSavegames;
+    QStringList failedCopyPictures;
+    QStringList failedExportPictures;
+    QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected"), profileFolder);
+    if (exportDirectory != "")
+    {
+        foreach(ProfileWidget *widget, widgets.keys())
+        {
+            if (widgets[widget] == "SnapmaticWidget")
+            {
+                SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
+                SnapmaticPicture *picture = picWidget->getPicture();
+                if (!modeSet)
+                {
+                    QInputDialog inputDialog;
+                    QStringList inputDialogItems;
+                    inputDialogItems << tr("Export and Copy pictures");
+                    inputDialogItems << tr("Export pictures");
+                    inputDialogItems << tr("Copy pictures");
+
+                    bool itemSelected = false;
+                    QString selectedItem = inputDialog.getItem(this, tr("Export selected"), tr("How should we deal with the Snapmatic pictures?"), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+                    if (itemSelected)
+                    {
+                        if (selectedItem == tr("Export and Copy pictures"))
+                        {
+                            pictureExportEnabled = true;
+                            pictureCopyEnabled = true;
+                        }
+                        else if (selectedItem == tr("Export pictures"))
+                        {
+                            pictureExportEnabled = true;
+                        }
+                        else if (selectedItem == tr("Copy pictures"))
+                        {
+                            pictureCopyEnabled = true;
+                        }
+                    }
+                    else
+                    {
+                        pictureExportEnabled = true;
+                        pictureCopyEnabled = true;
+                    }
+                    modeSet = true;
+                }
+
+                if (pictureExportEnabled)
+                {
+                    QString exportFileName = PictureExport::getPictureFileName(picture);
+                    if (!picture->getPicture().save(exportDirectory + "/" + exportFileName, "JPEG", 100))
+                    {
+                        failedExportPictures.append(exportFileName);
+                    }
+                }
+                if (pictureCopyEnabled)
+                {
+                    QString originalFileName = picture->getPictureFileName();
+                    QFileInfo originalFileInfo(originalFileName);
+                    QString exportFileName = originalFileInfo.fileName();
+                    if (QFile::copy(originalFileName, exportDirectory + "/" + exportFileName))
+                    {
+                        failedCopyPictures.append(exportFileName);
+                    }
+                }
+            }
+            else if (widgets[widget] == "SavegameWidget")
+            {
+                SavegameWidget *sgdWidget = (SavegameWidget*)widget;
+                SavegameData *savegame = sgdWidget->getSavegame();
+
+                QString originalFileName = savegame->getSavegameFileName();
+                QFileInfo originalFileInfo(originalFileName);
+                QString exportFileName = originalFileInfo.fileName();
+                if (QFile::copy(originalFileName, exportDirectory + "/" + exportFileName))
+                {
+                    failedSavegames.append(exportFileName);
+                }
+            }
+        }
+    }
+}
+
+void ProfileInterface::deleteSelected()
+{
+
 }

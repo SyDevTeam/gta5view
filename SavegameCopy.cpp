@@ -28,7 +28,7 @@ SavegameCopy::SavegameCopy()
 
 }
 
-void SavegameCopy::CopySavegame(QWidget *parent, QString sgdPath)
+void SavegameCopy::copySavegame(QWidget *parent, QString sgdPath)
 {
     QSettings settings("Syping", "gta5sync");
     settings.beginGroup("FileDialogs");

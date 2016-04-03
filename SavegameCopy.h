@@ -26,7 +26,7 @@ class SavegameCopy
 {
 public:
     SavegameCopy();
-    static void CopySavegame(QWidget *parent, QString sgdPath);
+    static void copySavegame(QWidget *parent, QString sgdPath);
 };
 
 #endif // SAVEGAMECOPY_H

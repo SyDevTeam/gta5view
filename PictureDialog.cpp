@@ -163,12 +163,12 @@ void PictureDialog::on_cmdClose_clicked()
 
 void PictureDialog::on_cmdExport_clicked()
 {
-    PictureExport::ExportPicture(this, smpic);
+    PictureExport::exportPicture(this, smpic);
 }
 
 void PictureDialog::on_cmdCopy_clicked()
 {
-    PictureCopy::CopyPicture(this, picPath);
+    PictureCopy::copyPicture(this, picPath);
 }
 
 void PictureDialog::on_labPicture_mouseDoubleClicked()

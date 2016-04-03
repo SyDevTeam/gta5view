@@ -26,7 +26,7 @@ class PictureCopy
 {
 public:
     PictureCopy();
-    static void CopyPicture(QWidget *parent, QString picPath);
+    static void copyPicture(QWidget *parent, QString picPath);
 };
 
 #endif // PICTURECOPY_H

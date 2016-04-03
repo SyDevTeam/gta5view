@@ -35,5 +35,5 @@ void SavegameDialog::on_cmdClose_clicked()
 
 void SavegameDialog::on_cmdCopy_clicked()
 {
-    SavegameCopy::CopySavegame(this, sgdPath);
+    SavegameCopy::copySavegame(this, sgdPath);
 }
