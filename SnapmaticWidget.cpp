@@ -182,14 +182,14 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
         contextMenu.addSeparator();
         if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Select"), this, SLOT(pictureSelected())); }
         if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Deselect"), this, SLOT(pictureSelected())); }
-        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString(tr("Ctrl+S")));
-        contextMenu.addAction(tr("Deselect all"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString(tr("Shift+S")));
+        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
+        contextMenu.addAction(tr("Deselect all"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Shift+S"));
     }
     else
     {
         contextMenu.addSeparator();
         contextMenu.addAction(tr("Select"), this, SLOT(pictureSelected()));
-        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString(tr("Ctrl+S")));
+        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
     }
     contextMenu.exec(ev->globalPos());
     setStyleSheet(styleSheet()); // fix multi highlight bug
