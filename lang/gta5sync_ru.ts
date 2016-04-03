@@ -163,16 +163,16 @@
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="179"/>
-        <location filename="../ProfileInterface.cpp" line="192"/>
-        <location filename="../ProfileInterface.cpp" line="226"/>
-        <location filename="../ProfileInterface.cpp" line="241"/>
-        <location filename="../ProfileInterface.cpp" line="269"/>
-        <location filename="../ProfileInterface.cpp" line="276"/>
-        <location filename="../ProfileInterface.cpp" line="282"/>
-        <location filename="../ProfileInterface.cpp" line="297"/>
+        <location filename="../ProfileInterface.cpp" line="202"/>
+        <location filename="../ProfileInterface.cpp" line="236"/>
+        <location filename="../ProfileInterface.cpp" line="251"/>
+        <location filename="../ProfileInterface.cpp" line="279"/>
+        <location filename="../ProfileInterface.cpp" line="286"/>
+        <location filename="../ProfileInterface.cpp" line="292"/>
         <location filename="../ProfileInterface.cpp" line="307"/>
-        <location filename="../ProfileInterface.cpp" line="343"/>
-        <location filename="../ProfileInterface.cpp" line="349"/>
+        <location filename="../ProfileInterface.cpp" line="317"/>
+        <location filename="../ProfileInterface.cpp" line="353"/>
+        <location filename="../ProfileInterface.cpp" line="359"/>
         <source>Import copy</source>
         <translation>Импортировать копию</translation>
     </message>
@@ -187,118 +187,134 @@
         <translation>Загрузка...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="196"/>
+        <location filename="../ProfileInterface.cpp" line="206"/>
         <source>All profile files (SGTA* PGTA*)</source>
         <translation>Все файлы профиля (SGTA* PGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="197"/>
+        <location filename="../ProfileInterface.cpp" line="207"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Файлы сохранения (SGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="198"/>
+        <location filename="../ProfileInterface.cpp" line="208"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Картинка Snapmatic (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="199"/>
+        <location filename="../ProfileInterface.cpp" line="209"/>
         <source>All files (**)</source>
         <translation>Все файлы (**)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="226"/>
+        <location filename="../ProfileInterface.cpp" line="236"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Не удалось загрузить картинку Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="241"/>
+        <location filename="../ProfileInterface.cpp" line="251"/>
         <source>Failed to read Savegame file</source>
         <translation>Не удалось загрузить файл сохранения</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="269"/>
+        <location filename="../ProfileInterface.cpp" line="279"/>
         <source>Can&apos;t import %1 because of not valid file format</source>
         <translation>Не получилось импортировать %1 из-за неправильного формата файла</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="276"/>
-        <location filename="../ProfileInterface.cpp" line="282"/>
+        <location filename="../ProfileInterface.cpp" line="286"/>
+        <location filename="../ProfileInterface.cpp" line="292"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="297"/>
+        <location filename="../ProfileInterface.cpp" line="307"/>
         <source>Failed to import copy of Snapmatic picture because the file not begin with PGTA</source>
         <translation>Не удалось имортировать копию картинки Snapmatic, т.к. файл не начинается с PGTA</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="307"/>
+        <location filename="../ProfileInterface.cpp" line="317"/>
         <source>Failed to import copy of Snapmatic picture because the copy failed</source>
         <translation>Не получилось имортировать копию картинки Snapmatic, потому что не удалось его скопировать</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="343"/>
+        <location filename="../ProfileInterface.cpp" line="353"/>
         <source>Failed to import copy of Savegame file because the copy failed</source>
         <translation>Не получилось имортировать копию сохранения, потому что не удалось его скопировать</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="349"/>
+        <location filename="../ProfileInterface.cpp" line="359"/>
         <source>Failed to import copy of Savegame file because no free Savegame slot left</source>
         <translation>Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="403"/>
-        <location filename="../ProfileInterface.cpp" line="427"/>
-        <location filename="../ProfileInterface.cpp" line="487"/>
+        <location filename="../ProfileInterface.cpp" line="413"/>
+        <location filename="../ProfileInterface.cpp" line="437"/>
+        <location filename="../ProfileInterface.cpp" line="497"/>
         <source>Export selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="422"/>
-        <location filename="../ProfileInterface.cpp" line="430"/>
+        <location filename="../ProfileInterface.cpp" line="432"/>
+        <location filename="../ProfileInterface.cpp" line="440"/>
         <source>Export and Copy pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="423"/>
-        <location filename="../ProfileInterface.cpp" line="435"/>
+        <location filename="../ProfileInterface.cpp" line="433"/>
+        <location filename="../ProfileInterface.cpp" line="445"/>
         <source>Export pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="424"/>
-        <location filename="../ProfileInterface.cpp" line="439"/>
+        <location filename="../ProfileInterface.cpp" line="434"/>
+        <location filename="../ProfileInterface.cpp" line="449"/>
         <source>Copy pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="427"/>
+        <location filename="../ProfileInterface.cpp" line="437"/>
         <source>How should we deal with the Snapmatic pictures?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="453"/>
+        <location filename="../ProfileInterface.cpp" line="463"/>
         <source>Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="454"/>
+        <location filename="../ProfileInterface.cpp" line="464"/>
         <source>Initializing...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="487"/>
+        <location filename="../ProfileInterface.cpp" line="497"/>
         <source>Export failed with...
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ProfileInterface.cpp" line="518"/>
+        <location filename="../ProfileInterface.cpp" line="548"/>
+        <source>Delete selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="518"/>
+        <source>You really want delete the selected content?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="548"/>
+        <source>Failed at delete all selected content</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../ExportThread.cpp" line="50"/>
         <location filename="../ExportThread.cpp" line="65"/>
         <location filename="../ExportThread.cpp" line="84"/>
-        <location filename="../ProfileInterface.cpp" line="454"/>
+        <location filename="../ProfileInterface.cpp" line="464"/>
         <source>Current export job: %1</source>
         <translation type="unfinished"></translation>
     </message>

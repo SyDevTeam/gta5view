@@ -155,7 +155,12 @@ void ProfileInterface::profileLoaded_p()
 
 void ProfileInterface::savegameDeleted()
 {
-    SavegameWidget *sgdWidget = (SavegameWidget*)sender();
+    savegameDeleted_f((SavegameWidget*)sender());
+}
+
+void ProfileInterface::savegameDeleted_f(QWidget *sgdWidget_)
+{
+    SavegameWidget *sgdWidget = (SavegameWidget*)sgdWidget_;
     SavegameData *savegame = sgdWidget->getSavegame();
     if (sgdWidget->isSelected()) { sgdWidget->setSelected(false); }
     sgdWidget->close();
@@ -165,7 +170,12 @@ void ProfileInterface::savegameDeleted()
 
 void ProfileInterface::pictureDeleted()
 {
-    SnapmaticWidget *picWidget = (SnapmaticWidget*)sender();
+    pictureDeleted_f((SnapmaticWidget*)sender());
+}
+
+void ProfileInterface::pictureDeleted_f(QWidget *picWidget_)
+{
+    SnapmaticWidget *picWidget = (SnapmaticWidget*)picWidget_;
     SnapmaticPicture *picture = picWidget->getPicture();
     if (picWidget->isSelected()) { picWidget->setSelected(false); }
     picWidget->close();
@@ -505,5 +515,37 @@ void ProfileInterface::exportSelected()
 
 void ProfileInterface::deleteSelected()
 {
-
+    if (QMessageBox::Yes == QMessageBox::warning(this, tr("Delete selected"), tr("You really want delete the selected content?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+    {
+        foreach (ProfileWidget *widget, widgets.keys())
+        {
+            if (widget->isSelected())
+            {
+                if (widgets[widget] == "SnapmaticWidget")
+                {
+                    SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
+                    SnapmaticPicture *picture = picWidget->getPicture();
+                    QString fileName = picture->getPictureFileName();
+                    if (!QFile::exists(fileName) || QFile::remove(fileName))
+                    {
+                        pictureDeleted_f(picWidget);
+                    }
+                }
+                else if (widgets[widget] == "SavegameWidget")
+                {
+                    SavegameWidget *sgdWidget = (SavegameWidget*)widget;
+                    SavegameData *savegame = sgdWidget->getSavegame();
+                    QString fileName = savegame->getSavegameFileName();
+                    if (!QFile::exists(fileName) || QFile::remove(fileName))
+                    {
+                        savegameDeleted_f(sgdWidget);
+                    }
+                }
+            }
+        }
+        if (selectedWidgts != 0)
+        {
+            QMessageBox::warning(this, tr("Delete selected"), tr("Failed at delete all selected content"));
+        }
+    }
 }

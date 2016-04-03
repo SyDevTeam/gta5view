@@ -23,6 +23,7 @@
 #include "SnapmaticWidget.h"
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
+#include "SavegameWidget.h"
 #include "ProfileLoader.h"
 #include "ProfileWidget.h"
 #include "ExportThread.h"
@@ -83,6 +84,8 @@ private:
 
     bool importSnapmaticPicture(SnapmaticPicture *picture, QString picPath);
     bool importSavegameData(SavegameData *savegame, QString sgdPath);
+    void savegameDeleted_f(QWidget *sgdWidget);
+    void pictureDeleted_f(QWidget *picWidget);
 
 signals:
     void profileLoaded();
