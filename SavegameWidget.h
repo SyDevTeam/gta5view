@@ -38,6 +38,8 @@ public:
     void setSavegameData(SavegameData *savegame, QString savegamePath);
     void setSelectionMode(bool selectionMode);
     void setChecked(bool isChecked);
+    SavegameData* getSavegame();
+    bool isSelected();
     ~SavegameWidget();
 
 private slots:

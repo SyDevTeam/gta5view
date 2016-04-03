@@ -24,6 +24,16 @@ ProfileWidget::ProfileWidget(QWidget *parent) : QWidget(parent)
 
 }
 
+ProfileWidget::~ProfileWidget()
+{
+}
+
+bool ProfileWidget::isSelected()
+{
+    qDebug() << "ProfileWidget got used without overwrite";
+    return false;
+}
+
 void ProfileWidget::setSelectionMode(bool selectionMode)
 {
     qDebug() << "ProfileWidget got used without overwrite, result:" << selectionMode;

@@ -58,8 +58,15 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 
 ProfileInterface::~ProfileInterface()
 {
+    foreach(ProfileWidget *widget, widgets.keys())
+    {
+        widgets.remove(widget);
+        widget->deleteLater();
+        delete widget;
+    }
     foreach(SavegameData *savegame, savegames)
     {
+        savegames.removeAll(savegame);
         savegame->deleteLater();
         delete savegame;
     }
@@ -68,12 +75,6 @@ ProfileInterface::~ProfileInterface()
         pictures.removeAll(picture);
         picture->deleteLater();
         delete picture;
-    }
-    foreach(ProfileWidget *widget, widgets.keys())
-    {
-        widgets.remove(widget);
-        widget->deleteLater();
-        delete widget;
     }
     profileLoader->deleteLater();
     delete profileLoader;
@@ -104,6 +105,7 @@ void ProfileInterface::on_savegameLoaded(SavegameData *savegame, QString savegam
     ui->vlSavegame->addWidget(sgdWidget);
     widgets[sgdWidget] = "SavegameWidget";
     savegames.append(savegame);
+    if (selectedWidgts != 0) { sgdWidget->setSelectionMode(true); }
     QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(on_savegameDeleted()));
     QObject::connect(sgdWidget, SIGNAL(widgetSelected()), this, SLOT(on_profileWidgetSelected()));
     QObject::connect(sgdWidget, SIGNAL(widgetDeselected()), this, SLOT(on_profileWidgetDeselected()));
@@ -116,6 +118,7 @@ void ProfileInterface::on_pictureLoaded(SnapmaticPicture *picture, QString pictu
     ui->vlSnapmatic->addWidget(picWidget);
     widgets[picWidget] = "SnapmaticWidget";
     pictures.append(picture);
+    if (selectedWidgts != 0) { picWidget->setSelectionMode(true); }
     QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(on_pictureDeleted()));
     QObject::connect(picWidget, SIGNAL(widgetSelected()), this, SLOT(on_profileWidgetSelected()));
     QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(on_profileWidgetDeselected()));
@@ -140,17 +143,21 @@ void ProfileInterface::on_profileLoaded()
 void ProfileInterface::on_savegameDeleted()
 {
     SavegameWidget *sgdWidget = (SavegameWidget*)sender();
-    widgets.remove(sgdWidget);
-    sgdWidget->deleteLater();
-    delete sgdWidget;
+    SavegameData *savegame = sgdWidget->getSavegame();
+    if (sgdWidget->isSelected()) { sgdWidget->setChecked(false); }
+    sgdWidget->close();
+    savegames.removeAll(savegame);
+    delete savegame;
 }
 
 void ProfileInterface::on_pictureDeleted()
 {
     SnapmaticWidget *picWidget = (SnapmaticWidget*)sender();
-    widgets.remove(picWidget);
-    picWidget->deleteLater();
-    delete picWidget;
+    SnapmaticPicture *picture = picWidget->getPicture();
+    if (picWidget->isSelected()) { picWidget->setChecked(false); }
+    picWidget->close();
+    pictures.removeAll(picture);
+    delete picture;
 }
 
 void ProfileInterface::on_cmdCloseProfile_clicked()

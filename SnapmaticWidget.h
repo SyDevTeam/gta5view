@@ -40,6 +40,8 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
     void setSelectionMode(bool selectionMode);
     void setChecked(bool isChecked);
+    bool isSelected();
+    SnapmaticPicture *getPicture();
     ~SnapmaticWidget();
 
 private slots:

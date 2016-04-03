@@ -141,7 +141,17 @@ void SavegameWidget::on_cbSelected_stateChanged(int arg1)
     }
 }
 
+bool SavegameWidget::isSelected()
+{
+    return ui->cbSelected->isChecked();
+}
+
 void SavegameWidget::setSelectionMode(bool selectionMode)
 {
     ui->cbSelected->setVisible(selectionMode);
+}
+
+SavegameData* SavegameWidget::getSavegame()
+{
+    return sgdata;
 }

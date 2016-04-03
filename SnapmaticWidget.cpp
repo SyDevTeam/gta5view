@@ -155,7 +155,17 @@ void SnapmaticWidget::on_cbSelected_stateChanged(int arg1)
     }
 }
 
+bool SnapmaticWidget::isSelected()
+{
+    return ui->cbSelected->isChecked();
+}
+
 void SnapmaticWidget::setSelectionMode(bool selectionMode)
 {
     ui->cbSelected->setVisible(selectionMode);
+}
+
+SnapmaticPicture* SnapmaticWidget::getPicture()
+{
+    return smpic;
 }

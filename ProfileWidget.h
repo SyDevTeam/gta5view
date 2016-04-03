@@ -27,6 +27,8 @@ class ProfileWidget : public QWidget
 public:
     explicit ProfileWidget(QWidget *parent = 0);
     virtual void setSelectionMode(bool selectionMode);
+    virtual bool isSelected();
+    ~ProfileWidget();
 
 signals:
 
