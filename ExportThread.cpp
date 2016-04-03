@@ -25,7 +25,7 @@
 #include <QFile>
 
 ExportThread::ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, QObject *parent) : QThread(parent),
-    exportDirectory(exportDirectory), profileMap(profileMap), pictureCopyEnabled(pictureCopyEnabled), pictureExportEnabled(pictureExportEnabled)
+    profileMap(profileMap), exportDirectory(exportDirectory), pictureCopyEnabled(pictureCopyEnabled), pictureExportEnabled(pictureExportEnabled)
 {
 
 }

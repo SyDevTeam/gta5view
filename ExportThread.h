@@ -39,12 +39,12 @@ protected:
 
 private:
     QMap <ProfileWidget*, QString> profileMap;
-    QStringList failedSavegames;
-    QStringList failedCopyPictures;
-    QStringList failedExportPictures;
     QString exportDirectory;
     bool pictureCopyEnabled;
     bool pictureExportEnabled;
+    QStringList failedSavegames;
+    QStringList failedCopyPictures;
+    QStringList failedExportPictures;
 
 signals:
     void exportStringUpdate(QString currentFileName);
