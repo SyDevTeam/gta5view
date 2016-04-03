@@ -173,6 +173,7 @@ void UserInterface::closeProfile()
     if (profileOpen)
     {
         profileOpen = false;
+        ui->menuProfile->setEnabled(false);
         ui->swProfile->removeWidget(profileUI);
         profileUI->deleteLater();
         delete profileUI;

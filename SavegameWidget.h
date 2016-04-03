@@ -19,6 +19,7 @@
 #ifndef SAVEGAMEWIDGET_H
 #define SAVEGAMEWIDGET_H
 
+#include "ProfileInterface.h"
 #include "ProfileWidget.h"
 #include "SavegameData.h"
 #include <QContextMenuEvent>
@@ -49,6 +50,8 @@ private slots:
     void on_cbSelected_stateChanged(int arg1);
     void changeCheckedState();
     void savegameSelected();
+    void selectAllWidgets();
+    void deselectAllWidgets();
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);
@@ -67,6 +70,8 @@ signals:
     void savegameDeleted();
     void widgetSelected();
     void widgetDeselected();
+    void allWidgetsSelected();
+    void allWidgetsDeselected();
 };
 
 #endif // SAVEGAMEWIDGET_H

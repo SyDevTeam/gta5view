@@ -20,6 +20,7 @@
 #define SNAPMATICWIDGET_H
 
 #include "SnapmaticPicture.h"
+#include "ProfileInterface.h"
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "ProfileWidget.h"
@@ -52,6 +53,8 @@ private slots:
     void on_cbSelected_stateChanged(int arg1);
     void changeCheckedState();
     void pictureSelected();
+    void selectAllWidgets();
+    void deselectAllWidgets();
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);
@@ -73,6 +76,8 @@ signals:
     void pictureDeleted();
     void widgetSelected();
     void widgetDeselected();
+    void allWidgetsSelected();
+    void allWidgetsDeselected();
 };
 
 #endif // SNAPMATICWIDGET_H

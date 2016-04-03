@@ -19,6 +19,7 @@
 #include "SavegameWidget.h"
 #include "ui_SavegameWidget.h"
 #include "SidebarGenerator.h"
+#include "ProfileInterface.h"
 #include "SavegameDialog.h"
 #include "StandardPaths.h"
 #include "SavegameData.h"
@@ -159,20 +160,30 @@ void SavegameWidget::setSelected(bool isSelected)
 
 void SavegameWidget::savegameSelected()
 {
-    setSelected(true);
+    setSelected(!ui->cbSelected->isChecked());
 }
 
 void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
     if (!ui->cbSelected->isVisible())
+    contextMenu.addAction(tr("View"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addAction(tr("Copy"), this, SLOT(on_cmdCopy_clicked()));
+    contextMenu.addAction(tr("Delete"), this, SLOT(on_cmdDelete_clicked()));
+    if (ui->cbSelected->isVisible())
     {
-        contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected()));
         contextMenu.addSeparator();
+        if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected())); }
+        if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Deselect"), this, SLOT(savegameSelected())); }
+        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString(tr("Ctrl+S")));
+        contextMenu.addAction(tr("Deselect all"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString(tr("Shift+S")));
     }
-    contextMenu.addAction(tr("View savegame"), this, SLOT(on_cmdView_clicked()));
-    contextMenu.addAction(tr("Copy savegame"), this, SLOT(on_cmdCopy_clicked()));
-    contextMenu.addAction(tr("Delete savegame"), this, SLOT(on_cmdDelete_clicked()));
+    else
+    {
+        contextMenu.addSeparator();
+        contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected()));
+        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString(tr("Ctrl+S")));
+    }
     contextMenu.exec(ev->globalPos());
     setStyleSheet(styleSheet()); // fix multi highlight bug
 }
@@ -197,6 +208,16 @@ bool SavegameWidget::isSelected()
 void SavegameWidget::setSelectionMode(bool selectionMode)
 {
     ui->cbSelected->setVisible(selectionMode);
+}
+
+void SavegameWidget::selectAllWidgets()
+{
+    emit allWidgetsSelected();
+}
+
+void SavegameWidget::deselectAllWidgets()
+{
+    emit allWidgetsDeselected();
 }
 
 SavegameData* SavegameWidget::getSavegame()

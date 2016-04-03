@@ -168,21 +168,29 @@ void SnapmaticWidget::setSelected(bool isSelected)
 
 void SnapmaticWidget::pictureSelected()
 {
-    setSelected(true);
+    setSelected(!ui->cbSelected->isChecked());
 }
 
 void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
-    if (!ui->cbSelected->isVisible())
+    contextMenu.addAction(tr("View"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addAction(tr("Copy"), this, SLOT(on_cmdCopy_clicked()));
+    contextMenu.addAction(tr("Delete"), this, SLOT(on_cmdDelete_clicked()));
+    if (ui->cbSelected->isVisible())
     {
-        contextMenu.addAction(tr("Select"), this, SLOT(pictureSelected()));
         contextMenu.addSeparator();
+        if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Select"), this, SLOT(pictureSelected())); }
+        if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Deselect"), this, SLOT(pictureSelected())); }
+        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString(tr("Ctrl+S")));
+        contextMenu.addAction(tr("Deselect all"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString(tr("Shift+S")));
     }
-    contextMenu.addAction(tr("View picture"), this, SLOT(on_cmdView_clicked()));
-    contextMenu.addAction(tr("Copy picture"), this, SLOT(on_cmdCopy_clicked()));
-    contextMenu.addAction(tr("Export picture"), this, SLOT(on_cmdExport_clicked()));
-    contextMenu.addAction(tr("Delete picture"), this, SLOT(on_cmdDelete_clicked()));
+    else
+    {
+        contextMenu.addSeparator();
+        contextMenu.addAction(tr("Select"), this, SLOT(pictureSelected()));
+        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString(tr("Ctrl+S")));
+    }
     contextMenu.exec(ev->globalPos());
     setStyleSheet(styleSheet()); // fix multi highlight bug
 }
@@ -207,6 +215,16 @@ bool SnapmaticWidget::isSelected()
 void SnapmaticWidget::setSelectionMode(bool selectionMode)
 {
     ui->cbSelected->setVisible(selectionMode);
+}
+
+void SnapmaticWidget::selectAllWidgets()
+{
+    emit allWidgetsSelected();
+}
+
+void SnapmaticWidget::deselectAllWidgets()
+{
+    emit allWidgetsDeselected();
 }
 
 SnapmaticPicture* SnapmaticWidget::getPicture()
