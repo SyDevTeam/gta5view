@@ -167,6 +167,7 @@ void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
     contextMenu.addAction(tr("Copy savegame"), this, SLOT(on_cmdCopy_clicked()));
     contextMenu.addAction(tr("Delete savegame"), this, SLOT(on_cmdDelete_clicked()));
     contextMenu.exec(ev->globalPos());
+    setStyleSheet(styleSheet()); // fix multi highlight bug
 }
 
 void SavegameWidget::on_cbSelected_stateChanged(int arg1)

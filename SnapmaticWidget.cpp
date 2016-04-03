@@ -176,6 +176,7 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
     contextMenu.addAction(tr("Export picture"), this, SLOT(on_cmdExport_clicked()));
     contextMenu.addAction(tr("Delete picture"), this, SLOT(on_cmdDelete_clicked()));
     contextMenu.exec(ev->globalPos());
+    setStyleSheet(styleSheet()); // fix multi highlight bug
 }
 
 void SnapmaticWidget::on_cbSelected_stateChanged(int arg1)
