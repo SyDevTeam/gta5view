@@ -30,11 +30,16 @@ ProfileWidget::~ProfileWidget()
 
 bool ProfileWidget::isSelected()
 {
-    qDebug() << "ProfileWidget got used without overwrite";
+    qDebug() << "ProfileWidget::isSelected got used without overwrite";
     return false;
+}
+
+void ProfileWidget::setSelected(bool isSelected)
+{
+    qDebug() << "ProfileWidget::setSelected got used without overwrite, result" << isSelected;
 }
 
 void ProfileWidget::setSelectionMode(bool selectionMode)
 {
-    qDebug() << "ProfileWidget got used without overwrite, result:" << selectionMode;
+    qDebug() << "ProfileWidget::setSelectionMode got used without overwrite, result:" << selectionMode;
 }

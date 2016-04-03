@@ -40,10 +40,14 @@ public:
 
 private slots:
     void closeProfile();
+    void profileLoaded();
     void profileButton_clicked();
+    void reloadProfiles_clicked();
     void on_actionExit_triggered();
     void on_actionSelect_profile_triggered();
     void on_actionAbout_gta5sync_triggered();
+    void on_actionSelect_all_triggered();
+    void on_actionDeselect_all_triggered();
 
 private:
     ProfileDatabase *profileDB;

@@ -45,15 +45,19 @@ public:
     void setupProfileInterface();
     ~ProfileInterface();
 
+public slots:
+    void selectAllWidgets();
+    void deselectAllWidgets();
+
 private slots:
     void on_cmdCloseProfile_clicked();
     void on_cmdImport_clicked();
     void pictureLoaded(SnapmaticPicture *picture, QString picturePath);
     void savegameLoaded(SavegameData *savegame, QString savegamePath);
     void loadingProgress(int value, int maximum);
-    void savegameDeleted();
     void pictureDeleted();
-    void profileLoaded();
+    void savegameDeleted();
+    void profileLoaded_p();
     void profileWidgetSelected();
     void profileWidgetDeselected();
 
@@ -77,6 +81,7 @@ private:
     bool importSavegameData(SavegameData *savegame, QString sgdPath);
 
 signals:
+    void profileLoaded();
     void profileClosed();
 };
 

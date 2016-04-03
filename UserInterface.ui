@@ -94,7 +94,26 @@
     </property>
     <addaction name="actionAbout_gta5sync"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>Edit</string>
+    </property>
+    <widget class="QMenu" name="menuProfile">
+     <property name="title">
+      <string>Profile</string>
+     </property>
+     <addaction name="actionSelect_all"/>
+     <addaction name="actionDeselect_all"/>
+     <addaction name="separator"/>
+     <addaction name="actionExport_selected"/>
+     <addaction name="actionDelete_selected"/>
+    </widget>
+    <addaction name="menuProfile"/>
+    <addaction name="separator"/>
+    <addaction name="actionOptions"/>
+   </widget>
    <addaction name="menuFile"/>
+   <addaction name="menuEdit"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionAbout_gta5sync">
@@ -119,6 +138,46 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionOptions">
+   <property name="text">
+    <string>Options</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSelect_all">
+   <property name="text">
+    <string>Select all</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionDeselect_all">
+   <property name="text">
+    <string>Deselect all</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+S</string>
+   </property>
+  </action>
+  <action name="actionExport_selected">
+   <property name="text">
+    <string>Export selected</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionDelete_selected">
+   <property name="text">
+    <string>Delete selected</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
    </property>
   </action>
  </widget>

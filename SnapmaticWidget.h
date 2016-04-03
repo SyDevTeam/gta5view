@@ -39,7 +39,7 @@ public:
     SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
     void setSelectionMode(bool selectionMode);
-    void setChecked(bool isChecked);
+    void setSelected(bool isSelected);
     bool isSelected();
     SnapmaticPicture *getPicture();
     ~SnapmaticWidget();

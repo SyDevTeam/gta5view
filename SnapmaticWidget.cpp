@@ -129,7 +129,8 @@ void SnapmaticWidget::mouseReleaseEvent(QMouseEvent *ev)
         if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
         {
             clkIssued = false;
-            QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
+            //QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
+            ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
         }
     }
     else
@@ -145,11 +146,11 @@ void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     QWidget::mouseDoubleClickEvent(ev);
 
-    if (ev->button() == Qt::LeftButton)
-    {
-        clkIssued = true;
-        on_cmdView_clicked();
-    }
+//  if (ev->button() == Qt::LeftButton)
+//  {
+//      clkIssued = true;
+//      on_cmdView_clicked();
+//  }
 }
 
 void SnapmaticWidget::changeCheckedState()
@@ -160,20 +161,20 @@ void SnapmaticWidget::changeCheckedState()
     }
 }
 
-void SnapmaticWidget::setChecked(bool isChecked)
+void SnapmaticWidget::setSelected(bool isSelected)
 {
-    ui->cbSelected->setChecked(isChecked);
+    ui->cbSelected->setChecked(isSelected);
 }
 
 void SnapmaticWidget::pictureSelected()
 {
-    setChecked(true);
+    setSelected(true);
 }
 
 void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
-    if (!ui->cbSelected->isChecked())
+    if (!ui->cbSelected->isVisible())
     {
         contextMenu.addAction(tr("Select"), this, SLOT(pictureSelected()));
         contextMenu.addSeparator();

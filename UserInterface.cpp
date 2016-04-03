@@ -27,6 +27,7 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QFileInfo>
+#include <QProcess>
 #include <QDebug>
 #include <QFile>
 #include <QDir>
@@ -39,6 +40,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->setupUi(this);
     profileOpen = 0;
     profileUI = 0;
+    ui->menuProfile->setEnabled(false);
     defaultWindowTitle = this->windowTitle();
 
     this->setWindowIcon(QIcon(":/img/5sync.png"));
@@ -67,7 +69,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     }
     else
     {
-        QMessageBox::warning(this, tr("gta5sync"), tr("GTA V Folder not found!"));
+        QMessageBox::warning(this, tr("gta5sync"), tr("Grand Theft Auto V Folder not found!"));
     }
     SyncSettings.endGroup();
 
@@ -94,7 +96,16 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 
 void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
 {
-    foreach(const QString &GTAV_Profile, GTAV_Profiles)
+    if (GTAV_Profiles.length() == 0)
+    {
+        QPushButton *reloadBtn = new QPushButton(tr("Reload"), ui->swSelection);
+        reloadBtn->setObjectName("Reload");
+        reloadBtn->setAutoDefault(true);
+        ui->swSelection->layout()->addWidget(reloadBtn);
+
+        QObject::connect(reloadBtn, SIGNAL(clicked(bool)), this, SLOT(reloadProfiles_clicked()));
+    }
+    else foreach(const QString &GTAV_Profile, GTAV_Profiles)
     {
         QPushButton *profileBtn = new QPushButton(GTAV_Profile, ui->swSelection);
         profileBtn->setObjectName(GTAV_Profile);
@@ -122,6 +133,22 @@ void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
     QObject::connect(cmdClose, SIGNAL(clicked(bool)), this, SLOT(close()));
 }
 
+void UserInterface::reloadProfiles_clicked()
+{
+    QStringList gta5sync_a = qApp->arguments();
+    if (gta5sync_a.length() >= 1)
+    {
+        QProcess gta5sync_p;
+        QString gta5sync_exe = gta5sync_a.at(0);
+        gta5sync_a.removeAt(0);
+        gta5sync_p.startDetached(gta5sync_exe, gta5sync_a);
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Reload profiles"), tr("Not able to reload profiles"));
+    }
+}
+
 void UserInterface::profileButton_clicked()
 {
     QPushButton *profileBtn = (QPushButton*)sender();
@@ -137,6 +164,7 @@ void UserInterface::openProfile(QString profileName)
     profileUI->setProfileFolder(GTAV_ProfilesFolder + "/" + profileName, profileName);
     profileUI->setupProfileInterface();
     QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));
+    QObject::connect(profileUI, SIGNAL(profileLoaded()), this, SLOT(profileLoaded()));
     this->setWindowTitle(defaultWindowTitle.arg(profileName));
 }
 
@@ -182,4 +210,19 @@ void UserInterface::on_actionAbout_gta5sync_triggered()
     aboutDialog->exec();
     aboutDialog->deleteLater();
     delete aboutDialog;
+}
+
+void UserInterface::profileLoaded()
+{
+    ui->menuProfile->setEnabled(true);
+}
+
+void UserInterface::on_actionSelect_all_triggered()
+{
+    profileUI->selectAllWidgets();
+}
+
+void UserInterface::on_actionDeselect_all_triggered()
+{
+    profileUI->deselectAllWidgets();
 }

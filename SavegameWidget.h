@@ -37,7 +37,7 @@ public:
     SavegameWidget(QWidget *parent = 0);
     void setSavegameData(SavegameData *savegame, QString savegamePath);
     void setSelectionMode(bool selectionMode);
-    void setChecked(bool isChecked);
+    void setSelected(bool isSelected);
     SavegameData* getSavegame();
     bool isSelected();
     ~SavegameWidget();

@@ -106,17 +106,6 @@ void SavegameWidget::on_cmdView_clicked()
     delete savegameDialog;
 }
 
-
-void SavegameWidget::setChecked(bool isChecked)
-{
-    ui->cbSelected->setChecked(isChecked);
-}
-
-void SavegameWidget::savegameSelected()
-{
-    setChecked(true);
-}
-
 void SavegameWidget::mousePressEvent(QMouseEvent *ev)
 {
     ProfileWidget::mouseReleaseEvent(ev);
@@ -131,7 +120,8 @@ void SavegameWidget::mouseReleaseEvent(QMouseEvent *ev)
         if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
         {
             clkIssued = false;
-            QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
+            //QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
+            ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
         }
     }
     else
@@ -147,11 +137,11 @@ void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     QWidget::mouseDoubleClickEvent(ev);
 
-    if (ev->button() == Qt::LeftButton)
-    {
-        clkIssued = true;
-        on_cmdView_clicked();
-    }
+//  if (ev->button() == Qt::LeftButton)
+//  {
+//      clkIssued = true;
+//      on_cmdView_clicked();
+//  }
 }
 
 void SavegameWidget::changeCheckedState()
@@ -162,10 +152,20 @@ void SavegameWidget::changeCheckedState()
     }
 }
 
+void SavegameWidget::setSelected(bool isSelected)
+{
+    ui->cbSelected->setChecked(isSelected);
+}
+
+void SavegameWidget::savegameSelected()
+{
+    setSelected(true);
+}
+
 void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
-    if (!ui->cbSelected->isChecked())
+    if (!ui->cbSelected->isVisible())
     {
         contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected()));
         contextMenu.addSeparator();

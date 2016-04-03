@@ -94,7 +94,7 @@ void ProfileInterface::setupProfileInterface()
     QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(savegameLoaded(SavegameData*, QString)));
     QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*, QString)), this, SLOT(pictureLoaded(SnapmaticPicture*, QString)));
     QObject::connect(profileLoader, SIGNAL(loadingProgress(int,int)), this, SLOT(loadingProgress(int,int)));
-    QObject::connect(profileLoader, SIGNAL(finished()), this, SLOT(profileLoaded()));
+    QObject::connect(profileLoader, SIGNAL(finished()), this, SLOT(profileLoaded_p()));
     profileLoader->start();
 }
 
@@ -131,20 +131,21 @@ void ProfileInterface::loadingProgress(int value, int maximum)
     ui->labProfileLoading->setText(loadingStr.arg(QString::number(value), QString::number(maximum)));
 }
 
-void ProfileInterface::profileLoaded()
+void ProfileInterface::profileLoaded_p()
 {
     saSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->saProfileContent->layout()->addItem(saSpacerItem);
     ui->swProfile->setCurrentWidget(ui->pageProfile);
     ui->cmdCloseProfile->setEnabled(true);
     ui->cmdImport->setEnabled(true);
+    emit profileLoaded();
 }
 
 void ProfileInterface::savegameDeleted()
 {
     SavegameWidget *sgdWidget = (SavegameWidget*)sender();
     SavegameData *savegame = sgdWidget->getSavegame();
-    if (sgdWidget->isSelected()) { sgdWidget->setChecked(false); }
+    if (sgdWidget->isSelected()) { sgdWidget->setSelected(false); }
     sgdWidget->close();
     savegames.removeAll(savegame);
     delete savegame;
@@ -154,7 +155,7 @@ void ProfileInterface::pictureDeleted()
 {
     SnapmaticWidget *picWidget = (SnapmaticWidget*)sender();
     SnapmaticPicture *picture = picWidget->getPicture();
-    if (picWidget->isSelected()) { picWidget->setChecked(false); }
+    if (picWidget->isSelected()) { picWidget->setSelected(false); }
     picWidget->close();
     pictures.removeAll(picture);
     delete picture;
@@ -362,4 +363,20 @@ void ProfileInterface::profileWidgetDeselected()
         ui->saProfile->verticalScrollBar()->setValue(scrollBarValue);
     }
     selectedWidgts--;
+}
+
+void ProfileInterface::selectAllWidgets()
+{
+    foreach(ProfileWidget *widget, widgets.keys())
+    {
+        widget->setSelected(true);
+    }
+}
+
+void ProfileInterface::deselectAllWidgets()
+{
+    foreach(ProfileWidget *widget, widgets.keys())
+    {
+        widget->setSelected(false);
+    }
 }
