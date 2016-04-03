@@ -134,6 +134,13 @@ void SavegameWidget::mouseReleaseEvent(QMouseEvent *ev)
             QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
         }
     }
+    else
+    {
+        if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
+        {
+            on_cmdView_clicked();
+        }
+    }
 }
 
 void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
