@@ -16,17 +16,17 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef SAVEGAMECOPY_H
-#define SAVEGAMECOPY_H
+#ifndef PICTURECOPY_H
+#define PICTURECOPY_H
 
 #include <QWidget>
 #include <QString>
 
-class SavegameCopy
+class PictureCopy
 {
 public:
-    SavegameCopy();
-    static void CopySavegame(QWidget *parent, QString sgdPath);
+    PictureCopy();
+    static void CopyPicture(QWidget *parent, QString picPath);
 };
 
-#endif // SAVEGAMECOPY_H
+#endif // PICTURECOPY_H

@@ -39,11 +39,13 @@ public:
     SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
     void setSelectionMode(bool selectionMode);
+    void setChecked(bool isChecked);
     ~SnapmaticWidget();
 
 private slots:
     void on_cmdView_clicked();
     void on_cmdCopy_clicked();
+    void on_cmdExport_clicked();
     void on_cmdDelete_clicked();
     void on_pictureSelected();
     void on_cbSelected_stateChanged(int arg1);

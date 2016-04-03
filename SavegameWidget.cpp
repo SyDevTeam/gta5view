@@ -105,9 +105,14 @@ void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
     }
 }
 
+void SavegameWidget::setChecked(bool isChecked)
+{
+    ui->cbSelected->setChecked(isChecked);
+}
+
 void SavegameWidget::on_savegameSelected()
 {
-    ui->cbSelected->setChecked(true);
+    setChecked(true);
 }
 
 void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)

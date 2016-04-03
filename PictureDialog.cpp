@@ -21,6 +21,8 @@
 #include "ui_PictureDialog.h"
 #include "SidebarGenerator.h"
 #include "StandardPaths.h"
+#include "PictureExport.h"
+#include "PictureCopy.h"
 #include "UiModLabel.h"
 
 #include <QDesktopWidget>
@@ -161,200 +163,12 @@ void PictureDialog::on_cmdClose_clicked()
 
 void PictureDialog::on_cmdExport_clicked()
 {
-    QSettings settings("Syping", "gta5sync");
-    settings.beginGroup("FileDialogs");
-
-fileDialogPreSave:
-    QFileDialog fileDialog(this);
-    fileDialog.setFileMode(QFileDialog::AnyFile);
-    fileDialog.setViewMode(QFileDialog::Detail);
-    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
-    fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
-    fileDialog.setDefaultSuffix("suffix");
-    fileDialog.setWindowTitle(tr("Export picture"));
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-
-    QStringList filters;
-    filters << tr("JPEG picture (*.jpg)");
-    filters << tr("Portable Network Graphics (*.png)");
-    fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
-    fileDialog.restoreState(settings.value("ExportPicture","").toByteArray());
-
-    if (smpic != 0)
-    {
-        QString newPictureFileName;
-        QString pictureStr = smpic->getPictureStr();
-        QStringList pictureStrList = pictureStr.split(" - ");
-        if (pictureStrList.length() <= 2)
-        {
-            QString dtStr = pictureStrList.at(1);
-            QStringList dtStrList = dtStr.split(" ");
-            if (dtStrList.length() <= 2)
-            {
-                QString dayStr;
-                QString yearStr;
-                QString monthStr;
-                QString dateStr = dtStrList.at(0);
-                QString timeStr = dtStrList.at(1);
-                timeStr.replace(":","");
-                QStringList dateStrList = dateStr.split("/");
-                if (dateStrList.length() <= 3)
-                {
-                    dayStr = dateStrList.at(1);
-                    yearStr = dateStrList.at(2);
-                    monthStr = dateStrList.at(0);
-                }
-                QString cmpPicTitl = picTitl;
-                cmpPicTitl.replace(" ", "_");
-                newPictureFileName = yearStr + monthStr + dayStr + timeStr + "_" + cmpPicTitl +  ".jpg";
-            }
-        }
-        fileDialog.selectFile(newPictureFileName);
-    }
-
-    if (fileDialog.exec())
-    {
-        QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
-            QString saveFileFormat;
-            QString selectedFile = selectedFiles.at(0);
-
-            if (selectedFile.right(4) == ".jpg")
-            {
-                saveFileFormat = "JPEG";
-            }
-            else if (selectedFile.right(4) == ".jpeg")
-            {
-                saveFileFormat = "JPEG";
-            }
-            else if (selectedFile.right(4) == ".png")
-            {
-                saveFileFormat = "PNG";
-            }
-            else if (selectedFile.right(7) == ".suffix")
-            {
-                if (fileDialog.selectedNameFilter() == "JPEG picture (*.jpg)")
-                {
-                    selectedFile.replace(".suffix", ".jpg");
-                }
-                else if (fileDialog.selectedNameFilter() == "Portable Network Graphics (*.png)")
-                {
-                    selectedFile.replace(".suffix", ".png");
-                }
-                else
-                {
-                    selectedFile.replace(".suffix", ".jpg");
-                }
-            }
-
-            if (QFile::exists(selectedFile))
-            {
-                if (QMessageBox::Yes == QMessageBox::warning(this, tr("Export picture"), tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-                {
-                    if (!QFile::remove(selectedFile))
-                    {
-                        QMessageBox::warning(this, tr("Export picture"), tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
-                        goto fileDialogPreSave;
-                    }
-                }
-                else
-                {
-                    goto fileDialogPreSave;
-                }
-            }
-
-            bool isSaved = ui->labPicture->pixmap()->save(selectedFile, saveFileFormat.toStdString().c_str(), 100);
-
-            if (!isSaved)
-            {
-                QMessageBox::warning(this, tr("Export picture"), tr("Failed to export current Snapmatic picture"));
-                goto fileDialogPreSave;
-            }
-        }
-        else
-        {
-            QMessageBox::warning(this, tr("Export picture"), tr("No valid file is selected"));
-            goto fileDialogPreSave;
-        }
-    }
-
-    settings.setValue("ExportPicture", fileDialog.saveState());
-    settings.endGroup();
+    PictureExport::ExportPicture(this, smpic);
 }
 
 void PictureDialog::on_cmdCopy_clicked()
 {
-    QSettings settings("Syping", "gta5sync");
-    settings.beginGroup("FileDialogs");
-
-fileDialogPreSave:
-    QFileInfo sgdFileInfo(picPath);
-    QFileDialog fileDialog(this);
-    fileDialog.setFileMode(QFileDialog::AnyFile);
-    fileDialog.setViewMode(QFileDialog::Detail);
-    fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
-    fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
-    fileDialog.setDefaultSuffix("");
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-    fileDialog.setWindowTitle(tr("Copy picture"));
-
-    QStringList filters;
-    filters << tr("Snapmatic pictures (PGTA*)");
-    filters << tr("All files (**)");
-    fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
-    fileDialog.restoreState(settings.value("CopyPicture","").toByteArray());
-    fileDialog.selectFile(sgdFileInfo.fileName());
-
-    if (fileDialog.exec())
-    {
-        QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
-            QString selectedFile = selectedFiles.at(0);
-
-            if (QFile::exists(selectedFile))
-            {
-                if (QMessageBox::Yes == QMessageBox::warning(this, tr("Copy picture"), tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-                {
-                    if (!QFile::remove(selectedFile))
-                    {
-                        QMessageBox::warning(this, tr("Copy picture"), tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
-                        goto fileDialogPreSave;
-                    }
-                }
-                else
-                {
-                    goto fileDialogPreSave;
-                }
-            }
-
-            bool isCopied = QFile::copy(picPath, selectedFile);
-            if (!isCopied)
-            {
-                QMessageBox::warning(this, tr("Copy picture"), tr("Failed to copy current Snapmatic picture"));
-                goto fileDialogPreSave;
-            }
-        }
-        else
-        {
-            QMessageBox::warning(this, tr("Copy picture"), tr("No valid file is selected"));
-            goto fileDialogPreSave;
-        }
-    }
-
-    settings.setValue("CopyPicture", fileDialog.saveState());
-    settings.endGroup();
+    PictureCopy::CopyPicture(this, picPath);
 }
 
 void PictureDialog::on_labPicture_mouseDoubleClicked()

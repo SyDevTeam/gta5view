@@ -21,6 +21,8 @@
 #include "SnapmaticPicture.h"
 #include "DatabaseThread.h"
 #include "PictureDialog.h"
+#include "PictureExport.h"
+#include "PictureCopy.h"
 #include <QMessageBox>
 #include <QPixmap>
 #include <QDebug>
@@ -34,6 +36,7 @@ SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *thr
     ui->setupUi(this);
     ui->cmdView->setVisible(false);
     ui->cmdCopy->setVisible(false);
+    ui->cmdExport->setVisible(false);
     ui->cmdDelete->setVisible(false);
     ui->cbSelected->setVisible(false);
     picPath = "";
@@ -77,7 +80,12 @@ void SnapmaticWidget::on_cmdView_clicked()
 
 void SnapmaticWidget::on_cmdCopy_clicked()
 {
+    PictureCopy::CopyPicture(this, picPath);
+}
 
+void SnapmaticWidget::on_cmdExport_clicked()
+{
+    PictureExport::ExportPicture(this, smpic);
 }
 
 void SnapmaticWidget::on_cmdDelete_clicked()
@@ -110,9 +118,14 @@ void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
     }
 }
 
+void SnapmaticWidget::setChecked(bool isChecked)
+{
+    ui->cbSelected->setChecked(isChecked);
+}
+
 void SnapmaticWidget::on_pictureSelected()
 {
-    ui->cbSelected->setChecked(true);
+    setChecked(true);
 }
 
 void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
@@ -124,7 +137,8 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
         contextMenu.addSeparator();
     }
     contextMenu.addAction(tr("View picture"), this, SLOT(on_cmdView_clicked()));
-    contextMenu.addAction(tr("Copy picture"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addAction(tr("Copy picture"), this, SLOT(on_cmdCopy_clicked()));
+    contextMenu.addAction(tr("Export picture"), this, SLOT(on_cmdExport_clicked()));
     contextMenu.addAction(tr("Delete picture"), this, SLOT(on_cmdDelete_clicked()));
     contextMenu.exec(ev->globalPos());
 }

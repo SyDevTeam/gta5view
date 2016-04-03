@@ -80,6 +80,13 @@
     </widget>
    </item>
    <item>
+    <widget class="QPushButton" name="cmdExport">
+     <property name="text">
+      <string>Export</string>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="cmdDelete">
      <property name="text">
       <string>Delete</string>

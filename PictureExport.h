@@ -16,17 +16,18 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef SAVEGAMECOPY_H
-#define SAVEGAMECOPY_H
+#ifndef PICTUREEXPORT_H
+#define PICTUREEXPORT_H
 
+#include "SnapmaticPicture.h"
 #include <QWidget>
 #include <QString>
 
-class SavegameCopy
+class PictureExport
 {
 public:
-    SavegameCopy();
-    static void CopySavegame(QWidget *parent, QString sgdPath);
+    PictureExport();
+    static void ExportPicture(QWidget *parent, SnapmaticPicture *picture);
 };
 
-#endif // SAVEGAMECOPY_H
+#endif // PICTUREEXPORT_H

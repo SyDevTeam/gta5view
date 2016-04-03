@@ -43,11 +43,11 @@
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="91"/>
-        <location filename="../PictureDialog.cpp" line="175"/>
-        <location filename="../PictureDialog.cpp" line="258"/>
-        <location filename="../PictureDialog.cpp" line="262"/>
-        <location filename="../PictureDialog.cpp" line="276"/>
-        <location filename="../PictureDialog.cpp" line="282"/>
+        <location filename="../PictureExport.cpp" line="44"/>
+        <location filename="../PictureExport.cpp" line="127"/>
+        <location filename="../PictureExport.cpp" line="131"/>
+        <location filename="../PictureExport.cpp" line="145"/>
+        <location filename="../PictureExport.cpp" line="151"/>
         <source>Export picture</source>
         <translation>Экспорт картинки</translation>
     </message>
@@ -68,83 +68,83 @@
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="69"/>
-        <location filename="../PictureDialog.cpp" line="117"/>
+        <location filename="../PictureDialog.cpp" line="71"/>
+        <location filename="../PictureDialog.cpp" line="119"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="69"/>
-        <location filename="../PictureDialog.cpp" line="117"/>
+        <location filename="../PictureDialog.cpp" line="71"/>
+        <location filename="../PictureDialog.cpp" line="119"/>
         <source>Failed at %1</source>
         <translation>Ошибка при %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="106"/>
-        <location filename="../PictureDialog.cpp" line="116"/>
+        <location filename="../PictureDialog.cpp" line="108"/>
+        <location filename="../PictureDialog.cpp" line="118"/>
         <source>No player</source>
         <translation>Игроков нет</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="109"/>
-        <location filename="../PictureDialog.cpp" line="116"/>
+        <location filename="../PictureDialog.cpp" line="111"/>
+        <location filename="../PictureDialog.cpp" line="118"/>
         <source>No crew</source>
         <translation>Без группы</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="179"/>
+        <location filename="../PictureExport.cpp" line="48"/>
         <source>JPEG picture (*.jpg)</source>
         <translation>Картинка JPEG (*.jpg)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="180"/>
+        <location filename="../PictureExport.cpp" line="49"/>
         <source>Portable Network Graphics (*.png)</source>
         <translation>Картинка Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="258"/>
-        <location filename="../PictureDialog.cpp" line="328"/>
+        <location filename="../PictureCopy.cpp" line="68"/>
+        <location filename="../PictureExport.cpp" line="127"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
         <translation>Перезаписать %1 текущей картинкой Snapmatic?</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="262"/>
-        <location filename="../PictureDialog.cpp" line="332"/>
+        <location filename="../PictureCopy.cpp" line="72"/>
+        <location filename="../PictureExport.cpp" line="131"/>
         <source>Failed to overwrite %1 with current Snapmatic picture</source>
         <translation>Не удалось перезаписать %1 картинкой Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="276"/>
+        <location filename="../PictureExport.cpp" line="145"/>
         <source>Failed to export current Snapmatic picture</source>
         <translation>Не удалось экспортировать текущую картинку Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="282"/>
-        <location filename="../PictureDialog.cpp" line="351"/>
+        <location filename="../PictureCopy.cpp" line="91"/>
+        <location filename="../PictureExport.cpp" line="151"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="306"/>
-        <location filename="../PictureDialog.cpp" line="328"/>
-        <location filename="../PictureDialog.cpp" line="332"/>
-        <location filename="../PictureDialog.cpp" line="345"/>
-        <location filename="../PictureDialog.cpp" line="351"/>
+        <location filename="../PictureCopy.cpp" line="46"/>
+        <location filename="../PictureCopy.cpp" line="68"/>
+        <location filename="../PictureCopy.cpp" line="72"/>
+        <location filename="../PictureCopy.cpp" line="85"/>
+        <location filename="../PictureCopy.cpp" line="91"/>
         <source>Copy picture</source>
         <translation>Скопировать картинку</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="309"/>
+        <location filename="../PictureCopy.cpp" line="49"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Картинки Snapmatic (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="310"/>
+        <location filename="../PictureCopy.cpp" line="50"/>
         <source>All files (**)</source>
         <translation>Все файлы (**)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="345"/>
+        <location filename="../PictureCopy.cpp" line="85"/>
         <source>Failed to copy current Snapmatic picture</source>
         <translation>Не удалось скопировать текущую картинку Snapmatic</translation>
     </message>
@@ -163,16 +163,16 @@
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="179"/>
-        <location filename="../ProfileInterface.cpp" line="165"/>
-        <location filename="../ProfileInterface.cpp" line="199"/>
-        <location filename="../ProfileInterface.cpp" line="214"/>
-        <location filename="../ProfileInterface.cpp" line="242"/>
+        <location filename="../ProfileInterface.cpp" line="172"/>
+        <location filename="../ProfileInterface.cpp" line="206"/>
+        <location filename="../ProfileInterface.cpp" line="221"/>
         <location filename="../ProfileInterface.cpp" line="249"/>
-        <location filename="../ProfileInterface.cpp" line="255"/>
-        <location filename="../ProfileInterface.cpp" line="270"/>
-        <location filename="../ProfileInterface.cpp" line="280"/>
-        <location filename="../ProfileInterface.cpp" line="316"/>
-        <location filename="../ProfileInterface.cpp" line="322"/>
+        <location filename="../ProfileInterface.cpp" line="256"/>
+        <location filename="../ProfileInterface.cpp" line="262"/>
+        <location filename="../ProfileInterface.cpp" line="277"/>
+        <location filename="../ProfileInterface.cpp" line="287"/>
+        <location filename="../ProfileInterface.cpp" line="323"/>
+        <location filename="../ProfileInterface.cpp" line="329"/>
         <source>Import copy</source>
         <translation>Импортировать копию</translation>
     </message>
@@ -182,68 +182,68 @@
         <translation>Закрыть профиль</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="88"/>
+        <location filename="../ProfileInterface.cpp" line="91"/>
         <source>Loading...</source>
         <translation>Загрузка...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="169"/>
+        <location filename="../ProfileInterface.cpp" line="176"/>
         <source>All profile files (SGTA* PGTA*)</source>
         <translation>Все файлы профиля (SGTA* PGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="170"/>
+        <location filename="../ProfileInterface.cpp" line="177"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Файлы сохранения (SGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="171"/>
+        <location filename="../ProfileInterface.cpp" line="178"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Картинка Snapmatic (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="172"/>
+        <location filename="../ProfileInterface.cpp" line="179"/>
         <source>All files (**)</source>
         <translation>Все файлы (**)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="199"/>
+        <location filename="../ProfileInterface.cpp" line="206"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Не удалось загрузить картинку Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="214"/>
+        <location filename="../ProfileInterface.cpp" line="221"/>
         <source>Failed to read Savegame file</source>
         <translation>Не удалось загрузить файл сохранения</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="242"/>
+        <location filename="../ProfileInterface.cpp" line="249"/>
         <source>Can&apos;t import %1 because of not valid file format</source>
         <translation>Не получилось импортировать %1 из-за неправильного формата файла</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="249"/>
-        <location filename="../ProfileInterface.cpp" line="255"/>
+        <location filename="../ProfileInterface.cpp" line="256"/>
+        <location filename="../ProfileInterface.cpp" line="262"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="270"/>
+        <location filename="../ProfileInterface.cpp" line="277"/>
         <source>Failed to import copy of Snapmatic picture because the file not begin with PGTA</source>
         <translation>Не удалось имортировать копию картинки Snapmatic, т.к. файл не начинается с PGTA</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="280"/>
+        <location filename="../ProfileInterface.cpp" line="287"/>
         <source>Failed to import copy of Snapmatic picture because the copy failed</source>
         <translation>Не получилось имортировать копию картинки Snapmatic, потому что не удалось его скопировать</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="316"/>
+        <location filename="../ProfileInterface.cpp" line="323"/>
         <source>Failed to import copy of Savegame file because the copy failed</source>
         <translation>Не получилось имортировать копию сохранения, потому что не удалось его скопировать</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="322"/>
+        <location filename="../ProfileInterface.cpp" line="329"/>
         <source>Failed to import copy of Savegame file because no free Savegame slot left</source>
         <translation>Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
     </message>
@@ -285,41 +285,58 @@
         <translation>Виджет сохранений</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="36"/>
+        <location filename="../SavegameWidget.ui" line="43"/>
         <source>The Third Way (100%) - 00/00/00 00:00:00</source>
         <translation>Третий путь (100%) - 00/00/00 00:00:00</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="46"/>
+        <location filename="../SavegameWidget.ui" line="53"/>
+        <source>View</source>
+        <translation type="unfinished">Просмотр</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.ui" line="60"/>
         <source>Copy</source>
         <translation>Копировать</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="56"/>
+        <location filename="../SavegameWidget.ui" line="70"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="57"/>
-        <location filename="../SavegameWidget.cpp" line="70"/>
+        <location filename="../SavegameWidget.cpp" line="68"/>
+        <location filename="../SavegameWidget.cpp" line="81"/>
+        <location filename="../SavegameWidget.cpp" line="128"/>
         <source>Delete savegame</source>
         <translation>Удалить сохранение</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="57"/>
+        <location filename="../SavegameWidget.cpp" line="68"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Вы уверены, что хотите удалить сохранение %1?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="70"/>
+        <location filename="../SavegameWidget.cpp" line="81"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Не удалось удалить сохранение %1</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="123"/>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="126"/>
+        <source>View savegame</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="68"/>
         <location filename="../SavegameCopy.cpp" line="72"/>
         <location filename="../SavegameCopy.cpp" line="85"/>
         <location filename="../SavegameCopy.cpp" line="91"/>
+        <location filename="../SavegameWidget.cpp" line="127"/>
         <source>Copy savegame</source>
         <translation>Копировать сохранение</translation>
     </message>
@@ -362,35 +379,66 @@
         <translation>Виджет Snapmatic</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.ui" line="51"/>
+        <location filename="../SnapmaticWidget.ui" line="58"/>
         <source>PHOTO - 00/00/00 00:00:00</source>
         <translation>ФОТО - 00/00/00 00:00:00</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.ui" line="61"/>
+        <location filename="../SnapmaticWidget.ui" line="68"/>
         <source>View</source>
         <translation>Просмотр</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.ui" line="71"/>
+        <location filename="../SnapmaticWidget.ui" line="78"/>
+        <source>Copy</source>
+        <translation type="unfinished">Копировать</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.ui" line="85"/>
+        <source>Export</source>
+        <translation type="unfinished">Экспорт</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.ui" line="92"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="75"/>
-        <location filename="../SnapmaticWidget.cpp" line="88"/>
+        <location filename="../SnapmaticWidget.cpp" line="92"/>
+        <location filename="../SnapmaticWidget.cpp" line="105"/>
+        <location filename="../SnapmaticWidget.cpp" line="141"/>
         <source>Delete picture</source>
         <translation>Удалить картинку</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="75"/>
+        <location filename="../SnapmaticWidget.cpp" line="92"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation>Уверены, что хотите удалить %1 из коллекции картинок Snapmatic?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="88"/>
+        <location filename="../SnapmaticWidget.cpp" line="105"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation>Не удалось удалить %1 из колелкции картинок Snapmatic </translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="135"/>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="138"/>
+        <source>View picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="139"/>
+        <source>Copy picture</source>
+        <translation type="unfinished">Скопировать картинку</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="140"/>
+        <source>Export picture</source>
+        <translation type="unfinished">Экспорт картинки</translation>
     </message>
 </context>
 <context>
