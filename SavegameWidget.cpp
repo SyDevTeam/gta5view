@@ -175,14 +175,14 @@ void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
         contextMenu.addSeparator();
         if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected())); }
         if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Deselect"), this, SLOT(savegameSelected())); }
-        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString(tr("Ctrl+S")));
-        contextMenu.addAction(tr("Deselect all"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString(tr("Shift+S")));
+        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
+        contextMenu.addAction(tr("Deselect all"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Shift+S"));
     }
     else
     {
         contextMenu.addSeparator();
         contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected()));
-        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString(tr("Ctrl+S")));
+        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
     }
     contextMenu.exec(ev->globalPos());
     setStyleSheet(styleSheet()); // fix multi highlight bug
