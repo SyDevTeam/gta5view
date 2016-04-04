@@ -176,6 +176,7 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
     QMenu contextMenu(this);
     contextMenu.addAction(tr("View"), this, SLOT(on_cmdView_clicked()));
     contextMenu.addAction(tr("Copy"), this, SLOT(on_cmdCopy_clicked()));
+    contextMenu.addAction(tr("Export"), this, SLOT(on_cmdExport_clicked()));
     contextMenu.addAction(tr("Delete"), this, SLOT(on_cmdDelete_clicked()));
     if (ui->cbSelected->isVisible())
     {
