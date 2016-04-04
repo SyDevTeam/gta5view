@@ -29,6 +29,7 @@ SOURCES += main.cpp \
     DatabaseThread.cpp \
     ExportThread.cpp \
     IconLoader.cpp \
+    OptionsDialog.cpp \
     PictureCopy.cpp \
     PictureDialog.cpp \
     PictureExport.cpp \
@@ -54,6 +55,7 @@ HEADERS  += \
     DatabaseThread.h \
     ExportThread.h \
     IconLoader.h \
+    OptionsDialog.h \
     PictureCopy.h \
     PictureDialog.h \
     PictureExport.h \
@@ -75,6 +77,7 @@ HEADERS  += \
 
 FORMS    += \
     AboutDialog.ui \
+    OptionsDialog.ui \
     PictureDialog.ui \
     ProfileInterface.ui \
     SavegameDialog.ui \
