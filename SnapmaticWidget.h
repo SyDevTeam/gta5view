@@ -69,6 +69,7 @@ private:
     SnapmaticPicture *smpic;
     QAction *actSelectPic;
     QString picPath;
+    QString picTitl;
     QString picStr;
     bool clkIssued;
 
