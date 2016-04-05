@@ -28,6 +28,14 @@
     </message>
 </context>
 <context>
+    <name>OptionsDialog</name>
+    <message>
+        <location filename="../OptionsDialog.ui" line="14"/>
+        <source>Options</source>
+        <translation>Optionen</translation>
+    </message>
+</context>
+<context>
     <name>PictureDialog</name>
     <message>
         <location filename="../PictureDialog.ui" line="14"/>
@@ -291,75 +299,82 @@
         <translation>Fehlgeschlagenen beim Import vom Spielstand weil kein Spielstandslot mehr übrig ist</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="413"/>
-        <location filename="../ProfileInterface.cpp" line="437"/>
-        <location filename="../ProfileInterface.cpp" line="497"/>
+        <location filename="../ProfileInterface.cpp" line="414"/>
+        <location filename="../ProfileInterface.cpp" line="441"/>
+        <location filename="../ProfileInterface.cpp" line="513"/>
         <source>Export selected</source>
         <translation>Auswahl exportieren</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="432"/>
-        <location filename="../ProfileInterface.cpp" line="440"/>
+        <location filename="../ProfileInterface.cpp" line="436"/>
+        <location filename="../ProfileInterface.cpp" line="444"/>
         <source>Export and Copy pictures</source>
         <translation>Bilder exportieren und kopieren</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="433"/>
-        <location filename="../ProfileInterface.cpp" line="445"/>
+        <location filename="../ProfileInterface.cpp" line="437"/>
+        <location filename="../ProfileInterface.cpp" line="449"/>
         <source>Export pictures</source>
         <translation>Bilder exportieren</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="434"/>
-        <location filename="../ProfileInterface.cpp" line="449"/>
+        <location filename="../ProfileInterface.cpp" line="438"/>
+        <location filename="../ProfileInterface.cpp" line="453"/>
         <source>Copy pictures</source>
         <translation>Bilder kopieren</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="437"/>
+        <location filename="../ProfileInterface.cpp" line="441"/>
         <source>How should we deal with the Snapmatic pictures?</source>
         <translation>Wie sollen wir mit den Snapmatic Bilder umgehen?</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="463"/>
+        <location filename="../ProfileInterface.cpp" line="479"/>
         <source>Export selected...</source>
         <translation>Auswahl exportieren...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="464"/>
-        <source>Initializing...</source>
-        <translation>Initialisierung...</translation>
+        <location filename="../ProfileInterface.cpp" line="480"/>
+        <source>Initializing export...</source>
+        <translation>Initialisiere Export...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="497"/>
+        <source>Initializing...</source>
+        <translation type="obsolete">Initialisierung...</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="513"/>
         <source>Export failed with...
 
 %1</source>
         <translation>Exportieren fehlgeschlagen bei...\n%1</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="518"/>
-        <location filename="../ProfileInterface.cpp" line="548"/>
+        <location filename="../ProfileInterface.cpp" line="534"/>
+        <location filename="../ProfileInterface.cpp" line="564"/>
         <source>Delete selected</source>
         <translation>Auswahl löschen</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="518"/>
+        <location filename="../ProfileInterface.cpp" line="534"/>
         <source>You really want delete the selected content?</source>
         <translation>Möchtest du wirklich den ausgewählten Inhalt löschen?</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="548"/>
+        <location filename="../ProfileInterface.cpp" line="564"/>
         <source>Failed at delete all selected content</source>
         <translation>Fehlgeschlagen beim Löschen von alle ausgewählte Inhalte</translation>
     </message>
     <message>
+        <source>Current export job: %1</source>
+        <translation type="obsolete">Aktueller Exportiervorgang: %1</translation>
+    </message>
+    <message>
         <location filename="../ExportThread.cpp" line="50"/>
         <location filename="../ExportThread.cpp" line="65"/>
-        <location filename="../ExportThread.cpp" line="84"/>
-        <location filename="../ProfileInterface.cpp" line="464"/>
-        <source>Current export job: %1</source>
-        <translation>Aktueller Exportiervorgang: %1</translation>
+        <location filename="../ExportThread.cpp" line="86"/>
+        <source>Export file %1 of %2 files</source>
+        <translation>Exportiere Datei %1 von %2 Dateien</translation>
     </message>
 </context>
 <context>
@@ -456,7 +471,7 @@
     </message>
     <message>
         <source>Ctrl+S</source>
-        <translation>Strg+S</translation>
+        <translation type="obsolete">Strg+S</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="179"/>
@@ -465,7 +480,7 @@
     </message>
     <message>
         <source>Shift+S</source>
-        <translation>Umschalt+S</translation>
+        <translation type="obsolete">Umschalt+S</translation>
     </message>
     <message>
         <source>View savegame</source>
@@ -548,12 +563,13 @@
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="109"/>
+        <location filename="../SnapmaticWidget.cpp" line="179"/>
         <source>Export</source>
         <translation>Exportieren</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="116"/>
-        <location filename="../SnapmaticWidget.cpp" line="179"/>
+        <location filename="../SnapmaticWidget.cpp" line="180"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
@@ -569,19 +585,19 @@
         <translation>Bist du sicher %1 von deinen Snapmatic Bilder zu löschen?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="183"/>
-        <location filename="../SnapmaticWidget.cpp" line="191"/>
+        <location filename="../SnapmaticWidget.cpp" line="184"/>
+        <location filename="../SnapmaticWidget.cpp" line="192"/>
         <source>Select</source>
         <translation>Auswählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="184"/>
+        <location filename="../SnapmaticWidget.cpp" line="185"/>
         <source>Deselect</source>
         <translation>Abwählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="185"/>
-        <location filename="../SnapmaticWidget.cpp" line="192"/>
+        <location filename="../SnapmaticWidget.cpp" line="186"/>
+        <location filename="../SnapmaticWidget.cpp" line="193"/>
         <source>Select all</source>
         <translation>Alles auswählen</translation>
     </message>
@@ -590,7 +606,7 @@
         <translation type="obsolete">Strg+S</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="186"/>
+        <location filename="../SnapmaticWidget.cpp" line="187"/>
         <source>Deselect all</source>
         <translation>Alles abwählen</translation>
     </message>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.0" language="ru_RU">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -20,6 +20,14 @@
     <message>
         <location filename="../AboutDialog.ui" line="59"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>OptionsDialog</name>
+    <message>
+        <location filename="../OptionsDialog.ui" line="14"/>
+        <source>Options</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -248,74 +256,73 @@
         <translation>Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="413"/>
-        <location filename="../ProfileInterface.cpp" line="437"/>
-        <location filename="../ProfileInterface.cpp" line="497"/>
+        <location filename="../ProfileInterface.cpp" line="414"/>
+        <location filename="../ProfileInterface.cpp" line="441"/>
+        <location filename="../ProfileInterface.cpp" line="513"/>
         <source>Export selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="432"/>
-        <location filename="../ProfileInterface.cpp" line="440"/>
+        <location filename="../ProfileInterface.cpp" line="436"/>
+        <location filename="../ProfileInterface.cpp" line="444"/>
         <source>Export and Copy pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="433"/>
-        <location filename="../ProfileInterface.cpp" line="445"/>
+        <location filename="../ProfileInterface.cpp" line="437"/>
+        <location filename="../ProfileInterface.cpp" line="449"/>
         <source>Export pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="434"/>
-        <location filename="../ProfileInterface.cpp" line="449"/>
+        <location filename="../ProfileInterface.cpp" line="438"/>
+        <location filename="../ProfileInterface.cpp" line="453"/>
         <source>Copy pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="437"/>
+        <location filename="../ProfileInterface.cpp" line="441"/>
         <source>How should we deal with the Snapmatic pictures?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="463"/>
+        <location filename="../ProfileInterface.cpp" line="479"/>
         <source>Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="464"/>
-        <source>Initializing...</source>
+        <location filename="../ProfileInterface.cpp" line="480"/>
+        <source>Initializing export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="497"/>
+        <location filename="../ProfileInterface.cpp" line="513"/>
         <source>Export failed with...
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="518"/>
-        <location filename="../ProfileInterface.cpp" line="548"/>
+        <location filename="../ProfileInterface.cpp" line="534"/>
+        <location filename="../ProfileInterface.cpp" line="564"/>
         <source>Delete selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="518"/>
+        <location filename="../ProfileInterface.cpp" line="534"/>
         <source>You really want delete the selected content?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="548"/>
+        <location filename="../ProfileInterface.cpp" line="564"/>
         <source>Failed at delete all selected content</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ExportThread.cpp" line="50"/>
         <location filename="../ExportThread.cpp" line="65"/>
-        <location filename="../ExportThread.cpp" line="84"/>
-        <location filename="../ProfileInterface.cpp" line="464"/>
-        <source>Current export job: %1</source>
+        <location filename="../ExportThread.cpp" line="86"/>
+        <source>Export file %1 of %2 files</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -481,12 +488,13 @@
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="109"/>
+        <location filename="../SnapmaticWidget.cpp" line="179"/>
         <source>Export</source>
         <translation type="unfinished">Экспорт</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="116"/>
-        <location filename="../SnapmaticWidget.cpp" line="179"/>
+        <location filename="../SnapmaticWidget.cpp" line="180"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -507,24 +515,24 @@
         <translation>Не удалось удалить %1 из колелкции картинок Snapmatic </translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="183"/>
-        <location filename="../SnapmaticWidget.cpp" line="191"/>
+        <location filename="../SnapmaticWidget.cpp" line="184"/>
+        <location filename="../SnapmaticWidget.cpp" line="192"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="184"/>
+        <location filename="../SnapmaticWidget.cpp" line="185"/>
         <source>Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="185"/>
-        <location filename="../SnapmaticWidget.cpp" line="192"/>
+        <location filename="../SnapmaticWidget.cpp" line="186"/>
+        <location filename="../SnapmaticWidget.cpp" line="193"/>
         <source>Select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="186"/>
+        <location filename="../SnapmaticWidget.cpp" line="187"/>
         <source>Deselect all</source>
         <translation type="unfinished"></translation>
     </message>
