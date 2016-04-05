@@ -406,7 +406,8 @@ void ProfileInterface::deselectAllWidgets()
 void ProfileInterface::exportSelected()
 {
     int exportCount = 0;
-    bool haveToExportPics = false;
+    int exportPictures = 0;
+    int exportSavegames = 0;
     bool pictureCopyEnabled = false;
     bool pictureExportEnabled = false;
 
@@ -419,13 +420,16 @@ void ProfileInterface::exportSelected()
             {
                 if (widgets[widget] == "SnapmaticWidget")
                 {
-                    haveToExportPics = true;
+                    exportPictures++;
                 }
-                exportCount++;
+                else if (widgets[widget] == "SavegameWidgets")
+                {
+                    exportSavegames++;
+                }
             }
         }
 
-        if (haveToExportPics)
+        if (exportPictures != 0)
         {
             QInputDialog inputDialog;
             QStringList inputDialogItems;
@@ -458,10 +462,22 @@ void ProfileInterface::exportSelected()
             }
         }
 
+        // Counting the exports together
+        exportCount = exportCount + exportSavegames;
+        if (pictureExportEnabled && pictureCopyEnabled)
+        {
+            int exportPictures2 = exportPictures * 2;
+            exportCount = exportCount + exportPictures2;
+        }
+        else
+        {
+            exportCount = exportCount + exportPictures;
+        }
+
         QProgressDialog pbDialog(this);
         pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
         pbDialog.setWindowTitle(tr("Export selected..."));
-        pbDialog.setLabelText(tr("Current export job: %1").arg(tr("Initializing...")));
+        pbDialog.setLabelText(tr("Initializing export..."));
         pbDialog.setRange(0, exportCount);
 
         QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
@@ -470,7 +486,7 @@ void ProfileInterface::exportSelected()
         QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
         pbBar.at(0)->setTextVisible(false);
 
-        ExportThread *exportThread = new ExportThread(widgets, exportDirectory, pictureCopyEnabled, pictureExportEnabled);
+        ExportThread *exportThread = new ExportThread(widgets, exportDirectory, pictureCopyEnabled, pictureExportEnabled, exportCount);
         QObject::connect(exportThread, SIGNAL(exportStringUpdate(QString)), &pbDialog, SLOT(setLabelText(QString)));
         QObject::connect(exportThread, SIGNAL(exportProgressUpdate(int)), &pbDialog, SLOT(setValue(int)));
         QObject::connect(exportThread, SIGNAL(exportFinished()), &pbDialog, SLOT(close()));

@@ -29,7 +29,7 @@ class ExportThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, QObject *parent = 0);
+    explicit ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, int exportCount, QObject *parent = 0);
     QStringList getFailedSavegames();
     QStringList getFailedCopyPictures();
     QStringList getFailedExportPictures();
@@ -42,6 +42,7 @@ private:
     QString exportDirectory;
     bool pictureCopyEnabled;
     bool pictureExportEnabled;
+    int exportCount;
     QStringList failedSavegames;
     QStringList failedCopyPictures;
     QStringList failedExportPictures;

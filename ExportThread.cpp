@@ -24,8 +24,8 @@
 #include <QFileInfo>
 #include <QFile>
 
-ExportThread::ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, QObject *parent) : QThread(parent),
-    profileMap(profileMap), exportDirectory(exportDirectory), pictureCopyEnabled(pictureCopyEnabled), pictureExportEnabled(pictureExportEnabled)
+ExportThread::ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, int exportCount, QObject *parent) : QThread(parent),
+    profileMap(profileMap), exportDirectory(exportDirectory), pictureCopyEnabled(pictureCopyEnabled), pictureExportEnabled(pictureExportEnabled), exportCount(exportCount)
 {
 
 }
@@ -47,7 +47,7 @@ void ExportThread::run()
                     QString exportFileName = PictureExport::getPictureFileName(picture);
 
                     intExportProgress++;
-                    emit exportStringUpdate(ProfileInterface::tr("Current export job: %1").arg(exportFileName));
+                    emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
                     emit exportProgressUpdate(intExportProgress);
 
                     if (!picture->getPicture().save(exportDirectory + "/" + exportFileName, "JPEG", 100))
@@ -62,10 +62,12 @@ void ExportThread::run()
                     QString exportFileName = originalFileInfo.fileName();
 
                     intExportProgress++;
-                    emit exportStringUpdate(ProfileInterface::tr("Current export job: %1").arg(exportFileName));
+                    emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
                     emit exportProgressUpdate(intExportProgress);
 
-                    if (!QFile::copy(originalFileName, exportDirectory + "/" + exportFileName))
+                    QString exportFilePath = exportDirectory + "/" + exportFileName;
+                    if (QFile::exists(exportFilePath)) {QFile::remove(exportFilePath);}
+                    if (!QFile::copy(originalFileName, exportFilePath))
                     {
                         failedCopyPictures.append(exportFileName);
                     }
@@ -81,10 +83,12 @@ void ExportThread::run()
                 QString exportFileName = originalFileInfo.fileName();
 
                 intExportProgress++;
-                emit exportStringUpdate(ProfileInterface::tr("Current export job: %1").arg(exportFileName));
+                emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
                 emit exportProgressUpdate(intExportProgress);
 
-                if (!QFile::copy(originalFileName, exportDirectory + "/" + exportFileName))
+                QString exportFilePath = exportDirectory + "/" + exportFileName;
+                if (QFile::exists(exportFilePath)) {QFile::remove(exportFilePath);}
+                if (!QFile::copy(originalFileName, exportFilePath))
                 {
                     failedSavegames.append(exportFileName);
                 }
