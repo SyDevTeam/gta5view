@@ -43,3 +43,9 @@ void ProfileWidget::setSelectionMode(bool selectionMode)
 {
     qDebug() << "ProfileWidget::setSelectionMode got used without overwrite, result:" << selectionMode;
 }
+
+QString ProfileWidget::getWidgetType()
+{
+    qDebug() << "ProfileWidget::getWidgetType got used without overwrite";
+    return "ProfileWidget";
+}

@@ -29,6 +29,7 @@ public:
     virtual void setSelectionMode(bool selectionMode);
     virtual void setSelected(bool isSelected);
     virtual bool isSelected();
+    virtual QString getWidgetType();
     ~ProfileWidget();
 
 signals:

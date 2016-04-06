@@ -233,3 +233,8 @@ SnapmaticPicture* SnapmaticWidget::getPicture()
 {
     return smpic;
 }
+
+QString SnapmaticWidget::getWidgetType()
+{
+    return "SnapmaticWidget";
+}

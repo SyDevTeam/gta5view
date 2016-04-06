@@ -110,8 +110,7 @@ void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePa
 {
     SavegameWidget *sgdWidget = new SavegameWidget();
     sgdWidget->setSavegameData(savegame, savegamePath);
-    ui->vlSavegame->addWidget(sgdWidget);
-    widgets[sgdWidget] = "SavegameWidget";
+    widgets[sgdWidget] = "SGD" + QFileInfo(savegamePath).fileName();
     savegames.append(savegame);
     if (selectedWidgts != 0) { sgdWidget->setSelectionMode(true); }
     QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(savegameDeleted()));
@@ -125,8 +124,7 @@ void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, QString pictureP
 {
     SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, threadDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
-    ui->vlSnapmatic->addWidget(picWidget);
-    widgets[picWidget] = "SnapmaticWidget";
+    widgets[picWidget] = "PIC" + picture->getPictureSortStr();
     pictures.append(picture);
     if (selectedWidgts != 0) { picWidget->setSelectionMode(true); }
     QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(pictureDeleted()));
@@ -145,6 +143,20 @@ void ProfileInterface::loadingProgress(int value, int maximum)
 
 void ProfileInterface::profileLoaded_p()
 {
+    QStringList widgetsKeyList = widgets.values();
+    qSort(widgetsKeyList.begin(), widgetsKeyList.end());
+    foreach(QString widgetKey, widgetsKeyList)
+    {
+        ProfileWidget *widget = widgets.key(widgetKey);
+        if (widget->getWidgetType() == "SnapmaticWidget")
+        {
+            ui->vlSnapmatic->insertWidget(0, widget);
+        }
+        else if (widget->getWidgetType() == "SavegameWidget")
+        {
+            ui->vlSavegame->addWidget(widget);
+        }
+    }
     saSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->saProfileContent->layout()->addItem(saSpacerItem);
     ui->swProfile->setCurrentWidget(ui->pageProfile);
@@ -418,11 +430,11 @@ void ProfileInterface::exportSelected()
         {
             if (widget->isSelected())
             {
-                if (widgets[widget] == "SnapmaticWidget")
+                if (widget->getWidgetType() == "SnapmaticWidget")
                 {
                     exportPictures++;
                 }
-                else if (widgets[widget] == "SavegameWidgets")
+                else if (widget->getWidgetType() == "SavegameWidgets")
                 {
                     exportSavegames++;
                 }
@@ -537,7 +549,7 @@ void ProfileInterface::deleteSelected()
         {
             if (widget->isSelected())
             {
-                if (widgets[widget] == "SnapmaticWidget")
+                if (widget->getWidgetType() == "SnapmaticWidget")
                 {
                     SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
                     SnapmaticPicture *picture = picWidget->getPicture();
@@ -547,7 +559,7 @@ void ProfileInterface::deleteSelected()
                         pictureDeleted_f(picWidget);
                     }
                 }
-                else if (widgets[widget] == "SavegameWidget")
+                else if (widget->getWidgetType() == "SavegameWidget")
                 {
                     SavegameWidget *sgdWidget = (SavegameWidget*)widget;
                     SavegameData *savegame = sgdWidget->getSavegame();

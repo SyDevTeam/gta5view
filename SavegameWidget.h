@@ -40,6 +40,7 @@ public:
     void setSelectionMode(bool selectionMode);
     void setSelected(bool isSelected);
     SavegameData* getSavegame();
+    QString getWidgetType();
     bool isSelected();
     ~SavegameWidget();
 

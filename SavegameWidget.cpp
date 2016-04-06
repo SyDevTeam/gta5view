@@ -224,3 +224,8 @@ SavegameData* SavegameWidget::getSavegame()
 {
     return sgdata;
 }
+
+QString SavegameWidget::getWidgetType()
+{
+    return "SavegameWidget";
+}
