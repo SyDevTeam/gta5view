@@ -57,6 +57,7 @@ void ProfileLoader::run()
     emit loadingProgress(curFile, maximumV);
     foreach(const QString &SavegameFile, SavegameFiles)
     {
+        emit loadingProgress(curFile, maximumV);
         QString sgdPath = profileFolder + "/" + SavegameFile;
         SavegameData *savegame = new SavegameData(sgdPath);
         if (savegame->readingSavegame())
@@ -64,10 +65,10 @@ void ProfileLoader::run()
             emit savegameLoaded(savegame, sgdPath);
         }
         curFile++;
-        emit loadingProgress(curFile, maximumV);
     }
     foreach(const QString &SnapmaticPic, SnapmaticPics)
     {
+        emit loadingProgress(curFile, maximumV);
         QString picturePath = profileFolder + "/" + SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
         if (picture->readingPicture())
@@ -80,7 +81,6 @@ void ProfileLoader::run()
             }
         }
         curFile++;
-        emit loadingProgress(curFile, maximumV);
     }
 
     // adding found crews

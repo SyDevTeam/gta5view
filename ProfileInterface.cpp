@@ -208,6 +208,8 @@ void ProfileInterface::sortingProfileInterface()
 
     ui->vlSavegame->setEnabled(true);
     ui->vlSnapmatic->setEnabled(true);
+
+    qApp->processEvents();
 }
 
 void ProfileInterface::profileLoaded_p()
