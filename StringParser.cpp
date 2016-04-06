@@ -16,21 +16,33 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include "StringParser.h"
 #include <QTextCodec>
 #include <QByteArray>
 #include <QString>
 #include <QList>
-#include "StringParser.h"
 
 StringParser::StringParser()
 {
 
 }
 
-QString StringParser::parseTitleString(QByteArray commitBytes, int maxLength)
+QString StringParser::parseTitleString(const QByteArray &commitBytes, int maxLength)
 {
     Q_UNUSED(maxLength)
     QString retStr = QTextCodec::codecForName("UTF-16LE")->toUnicode(commitBytes).trimmed();
     retStr.remove(QChar((char)0x00));
     return retStr;
+}
+
+QString StringParser::convertDrawStringForLog(const QString &inputStr)
+{
+    QString outputStr = inputStr;
+    return outputStr.replace("&","&u;").replace(",","&c;");
+}
+
+QString StringParser::convertLogStringForDraw(const QString &inputStr)
+{
+    QString outputStr = inputStr;
+    return outputStr.replace("&c;",",").replace("&u;","&");
 }

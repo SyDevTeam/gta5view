@@ -26,7 +26,9 @@ class StringParser
 {
 public:
     StringParser();
-    static QString parseTitleString(QByteArray commitBytes, int maxLength);
+    static QString parseTitleString(const QByteArray &commitBytes, int maxLength);
+    static QString convertDrawStringForLog(const QString &inputStr);
+    static QString convertLogStringForDraw(const QString &inputStr);
 };
 
 #endif // STRINGPARSER_H

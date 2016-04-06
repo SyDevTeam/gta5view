@@ -43,7 +43,6 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->menuProfile->setEnabled(false);
     defaultWindowTitle = this->windowTitle();
 
-    this->setWindowIcon(QIcon(":/img/5sync.png"));
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select profile")));
 
     // init settings

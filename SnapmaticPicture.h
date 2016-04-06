@@ -29,17 +29,19 @@ class SnapmaticPicture : public QObject
 {
     Q_OBJECT
 public:
-    explicit SnapmaticPicture(QString fileName = "", QObject *parent = 0);
-    bool readingPictureFromFile(QString fileName);
+    explicit SnapmaticPicture(const QString &fileName = "", QObject *parent = 0);
+    bool readingPictureFromFile(const QString &fileName);
     bool readingPicture();
-    void setPicture(QImage picture);
+    void setPicture(const QImage &picture);
     bool isPicOk();
     QImage getPicture();
     QString getLastStep();
     QString getPictureStr();
     QString getPictureTitl();
     QString getPictureDesc();
+    QString getPictureSortStr();
     QString getPictureFileName();
+    QString getExportPictureFileName();
 
     // JSON
     bool isJsonOk();
@@ -51,15 +53,16 @@ public:
     QStringList getPlayers();
 
 private:
-    QString getSnapmaticPictureString(QByteArray snapmaticHeader);
-    QString getSnapmaticJSONString(QByteArray jsonBytes);
-    QString getSnapmaticTIDEString(QByteArray tideBytes);
-    QString convertDrawStringForLog(QString inputStr);
-    QString convertLogStringForDraw(QString inputStr);
+    QString getSnapmaticPictureString(const QByteArray &snapmaticHeader);
+    QString getSnapmaticJSONString(const QByteArray &jsonBytes);
+    QString getSnapmaticTIDEString(const QByteArray &tideBytes);
+    void parseSnapmaticExportAndSortString();
     QImage cachePicture;
+    QString picExportFileName;
     QString picFileName;
     QString pictureStr;
     QString lastStep;
+    QString sortStr;
     QString titlStr;
     QString descStr;
     bool picOk;

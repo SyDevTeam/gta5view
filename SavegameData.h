@@ -25,8 +25,8 @@ class SavegameData : public QObject
 {
     Q_OBJECT
 public:
-    explicit SavegameData(QString fileName = "", QObject *parent = 0);
-    bool readingSavegameFromFile(QString fileName);
+    explicit SavegameData(const QString &fileName = "", QObject *parent = 0);
+    bool readingSavegameFromFile(const QString &fileName);
     bool readingSavegame();
     bool isSavegameOk();
     QString getLastStep();
@@ -34,9 +34,7 @@ public:
     QString getSavegameFileName();
 
 private:
-    QString getSavegameDataString(QByteArray savegameHeader);
-    QString convertDrawStringForLog(QString inputStr);
-    QString convertLogStringForDraw(QString inputStr);
+    QString getSavegameDataString(const QByteArray &savegameHeader);
     QString savegameFileName;
     QString savegameStr;
     QString lastStep;

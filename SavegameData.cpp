@@ -22,7 +22,7 @@
 #include <QDebug>
 #include <QFile>
 
-SavegameData::SavegameData(QString fileName, QObject *parent) : QObject(parent), savegameFileName(fileName)
+SavegameData::SavegameData(const QString &fileName, QObject *parent) : QObject(parent), savegameFileName(fileName)
 {
     // PARSE INT INIT - DO NOT CHANGE THIS VALUES
     savegameHeaderLength = 260;
@@ -41,7 +41,7 @@ bool SavegameData::readingSavegame()
     QFile *saveFile = new QFile(savegameFileName);
     if (!saveFile->open(QFile::ReadOnly))
     {
-        lastStep = "1;/1,OpenFile," + convertDrawStringForLog(savegameFileName);
+        lastStep = "1;/1,OpenFile," + StringParser::convertDrawStringForLog(savegameFileName);
         saveFile->deleteLater();
         delete saveFile;
         return false;
@@ -50,7 +50,7 @@ bool SavegameData::readingSavegame()
     // Reading Savegame Header
     if (!saveFile->isReadable())
     {
-        lastStep = "2;/3,ReadingFile," + convertDrawStringForLog(savegameFileName) + ",1,NOHEADER";
+        lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(savegameFileName) + ",1,NOHEADER";
         saveFile->close();
         saveFile->deleteLater();
         delete saveFile;
@@ -71,7 +71,7 @@ bool SavegameData::readingSavegame()
     return savegameOk;
 }
 
-QString SavegameData::getSavegameDataString(QByteArray savegameHeader)
+QString SavegameData::getSavegameDataString(const QByteArray &savegameHeader)
 {
     QByteArray savegameBytes = savegameHeader.left(savegameHeaderLength);
     QList<QByteArray> savegameBytesList = savegameBytes.split(char(0x01));
@@ -80,7 +80,7 @@ QString SavegameData::getSavegameDataString(QByteArray savegameHeader)
     return StringParser::parseTitleString(savegameBytes, savegameBytes.length());
 }
 
-bool SavegameData::readingSavegameFromFile(QString fileName)
+bool SavegameData::readingSavegameFromFile(const QString &fileName)
 {
     if (fileName != "")
     {
@@ -91,16 +91,6 @@ bool SavegameData::readingSavegameFromFile(QString fileName)
     {
         return false;
     }
-}
-
-QString SavegameData::convertDrawStringForLog(QString inputStr)
-{
-    return inputStr.replace("&","&u;").replace(",","&c;");
-}
-
-QString SavegameData::convertLogStringForDraw(QString inputStr)
-{
-    return inputStr.replace("&c;",",").replace("&u;","&");
 }
 
 bool SavegameData::isSavegameOk()
