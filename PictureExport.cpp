@@ -133,32 +133,5 @@ fileDialogPreSave:
 
 QString PictureExport::getPictureFileName(SnapmaticPicture *picture)
 {
-    QString newPictureFileName;
-    QString pictureStr = picture->getPictureStr();
-    QStringList pictureStrList = pictureStr.split(" - ");
-    if (pictureStrList.length() <= 2)
-    {
-        QString dtStr = pictureStrList.at(1);
-        QStringList dtStrList = dtStr.split(" ");
-        if (dtStrList.length() <= 2)
-        {
-            QString dayStr;
-            QString yearStr;
-            QString monthStr;
-            QString dateStr = dtStrList.at(0);
-            QString timeStr = dtStrList.at(1);
-            timeStr.replace(":","");
-            QStringList dateStrList = dateStr.split("/");
-            if (dateStrList.length() <= 3)
-            {
-                dayStr = dateStrList.at(1);
-                yearStr = dateStrList.at(2);
-                monthStr = dateStrList.at(0);
-            }
-            QString cmpPicTitl = picture->getPictureTitl();
-            cmpPicTitl.replace(" ", "_");
-            newPictureFileName = yearStr + monthStr + dayStr + timeStr + "_" + cmpPicTitl +  ".jpg";
-        }
-    }
-    return newPictureFileName;
+    return picture->getExportPictureFileName();
 }
