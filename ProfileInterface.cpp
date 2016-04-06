@@ -108,6 +108,11 @@ void ProfileInterface::setupProfileInterface()
 
 void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePath)
 {
+    savegameLoaded_f(savegame, savegamePath, false);
+}
+
+void ProfileInterface::savegameLoaded_f(SavegameData *savegame, QString savegamePath, bool inserted)
+{
     SavegameWidget *sgdWidget = new SavegameWidget();
     sgdWidget->setSavegameData(savegame, savegamePath);
     widgets[sgdWidget] = "SGD" + QFileInfo(savegamePath).fileName();
@@ -118,9 +123,15 @@ void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePa
     QObject::connect(sgdWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
     QObject::connect(sgdWidget, SIGNAL(allWidgetsSelected()), this, SLOT(selectAllWidgets()));
     QObject::connect(sgdWidget, SIGNAL(allWidgetsDeselected()), this, SLOT(deselectAllWidgets()));
+    if (inserted) { insertSavegameIPI(sgdWidget); }
 }
 
 void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, QString picturePath)
+{
+    pictureLoaded_f(picture, picturePath, false);
+}
+
+void ProfileInterface::pictureLoaded_f(SnapmaticPicture *picture, QString picturePath, bool inserted)
 {
     SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, threadDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
@@ -132,6 +143,7 @@ void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, QString pictureP
     QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
     QObject::connect(picWidget, SIGNAL(allWidgetsSelected()), this, SLOT(selectAllWidgets()));
     QObject::connect(picWidget, SIGNAL(allWidgetsDeselected()), this, SLOT(deselectAllWidgets()));
+    if (inserted) { insertSnapmaticIPI(picWidget); }
 }
 
 void ProfileInterface::loadingProgress(int value, int maximum)
@@ -141,10 +153,42 @@ void ProfileInterface::loadingProgress(int value, int maximum)
     ui->labProfileLoading->setText(loadingStr.arg(QString::number(value), QString::number(maximum)));
 }
 
-void ProfileInterface::profileLoaded_p()
+void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 {
+    ProfileWidget *proWidget = (ProfileWidget*)widget;
+    if (widgets.contains(proWidget))
+    {
+        QString widgetKey = widgets[proWidget];
+        QStringList widgetsKeyList = widgets.values();
+        QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
+        qSort(pictureKeyList.rbegin(), pictureKeyList.rend());
+        int picIndex = pictureKeyList.indexOf(QRegExp(widgetKey));
+        ui->vlSnapmatic->insertWidget(picIndex, proWidget);
+    }
+}
+
+void ProfileInterface::insertSavegameIPI(QWidget *widget)
+{
+    ProfileWidget *proWidget = (ProfileWidget*)widget;
+    if (widgets.contains(proWidget))
+    {
+        QString widgetKey = widgets[proWidget];
+        QStringList widgetsKeyList = widgets.values();
+        QStringList savegameKeyList = widgetsKeyList.filter("SGD", Qt::CaseSensitive);
+        qSort(savegameKeyList.begin(), savegameKeyList.end());
+        int sgdIndex = savegameKeyList.indexOf(QRegExp(widgetKey));
+        ui->vlSavegame->insertWidget(sgdIndex, proWidget);
+    }
+}
+
+void ProfileInterface::sortingProfileInterface()
+{
+    ui->vlSavegame->setEnabled(false);
+    ui->vlSnapmatic->setEnabled(false);
+
     QStringList widgetsKeyList = widgets.values();
     qSort(widgetsKeyList.begin(), widgetsKeyList.end());
+
     foreach(QString widgetKey, widgetsKeyList)
     {
         ProfileWidget *widget = widgets.key(widgetKey);
@@ -157,6 +201,14 @@ void ProfileInterface::profileLoaded_p()
             ui->vlSavegame->addWidget(widget);
         }
     }
+
+    ui->vlSavegame->setEnabled(true);
+    ui->vlSnapmatic->setEnabled(true);
+}
+
+void ProfileInterface::profileLoaded_p()
+{
+    sortingProfileInterface();
     saSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
     ui->saProfileContent->layout()->addItem(saSpacerItem);
     ui->swProfile->setCurrentWidget(ui->pageProfile);
@@ -321,7 +373,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
     }
     else if (QFile::copy(picPath, profileFolder + "/" + picFileName))
     {
-        pictureLoaded(picture, profileFolder + "/" + picFileName);
+        pictureLoaded_f(picture, profileFolder + "/" + picFileName, true);
         return true;
     }
     else
@@ -357,7 +409,7 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
     {
         if (QFile::copy(sgdPath, profileFolder + "/" + sgdFileName))
         {
-            savegameLoaded(savegame, profileFolder + "/" + sgdFileName);
+            savegameLoaded_f(savegame, profileFolder + "/" + sgdFileName, true);
             return true;
         }
         else

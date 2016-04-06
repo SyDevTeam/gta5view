@@ -84,8 +84,13 @@ private:
 
     bool importSnapmaticPicture(SnapmaticPicture *picture, QString picPath);
     bool importSavegameData(SavegameData *savegame, QString sgdPath);
+    void pictureLoaded_f(SnapmaticPicture *picture, QString picturePath, bool inserted);
+    void savegameLoaded_f(SavegameData *savegame, QString savegamePath, bool inserted);
     void savegameDeleted_f(QWidget *sgdWidget);
     void pictureDeleted_f(QWidget *picWidget);
+    void insertSnapmaticIPI(QWidget *widget);
+    void insertSavegameIPI(QWidget *widget);
+    void sortingProfileInterface();
 
 signals:
     void profileLoaded();
