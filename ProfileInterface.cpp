@@ -161,7 +161,11 @@ void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
         QString widgetKey = widgets[proWidget];
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
+#if QT_VERSION >= 0x050000
         qSort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#else
+        qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
+#endif
         int picIndex = pictureKeyList.indexOf(QRegExp(widgetKey));
         ui->vlSnapmatic->insertWidget(picIndex, proWidget);
     }
