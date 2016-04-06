@@ -161,7 +161,7 @@ void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
         QString widgetKey = widgets[proWidget];
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050600
         qSort(pictureKeyList.rbegin(), pictureKeyList.rend());
 #else
         qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
