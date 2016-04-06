@@ -41,7 +41,7 @@ private:
     bool savegameOk;
 
     // PARSE INT
-    QString verificationValue;
+    QByteArray verificationValue;
     int savegameHeaderLength;
 };
 

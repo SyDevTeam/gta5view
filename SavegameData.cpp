@@ -26,7 +26,7 @@ SavegameData::SavegameData(const QString &fileName, QObject *parent) : QObject(p
 {
     // PARSE INT INIT - DO NOT CHANGE THIS VALUES
     savegameHeaderLength = 260;
-    verificationValue = QString::fromLatin1("00000001");
+    verificationValue = QByteArray::fromHex("00000001");
 
     // INIT SAVEGAME
     savegameStr = "";
@@ -57,7 +57,7 @@ bool SavegameData::readingSavegame()
         return false;
     }
     QByteArray savegameHeaderLine = saveFile->read(savegameHeaderLength);
-    if (QString::fromLatin1(savegameHeaderLine.left(4).toHex()) == verificationValue)
+    if (savegameHeaderLine.left(4) == verificationValue)
     {
         savegameStr = getSavegameDataString(savegameHeaderLine);
         if (savegameStr.length() >= 1)
