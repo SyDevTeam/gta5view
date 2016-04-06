@@ -166,7 +166,6 @@ void SavegameWidget::savegameSelected()
 void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
-    if (!ui->cbSelected->isVisible())
     contextMenu.addAction(tr("View"), this, SLOT(on_cmdView_clicked()));
     contextMenu.addAction(tr("Copy"), this, SLOT(on_cmdCopy_clicked()));
     contextMenu.addAction(tr("Delete"), this, SLOT(on_cmdDelete_clicked()));
