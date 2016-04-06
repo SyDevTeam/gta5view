@@ -168,6 +168,9 @@ void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 #endif
         int picIndex = pictureKeyList.indexOf(QRegExp(widgetKey));
         ui->vlSnapmatic->insertWidget(picIndex, proWidget);
+
+        qApp->processEvents();
+        ui->saProfile->ensureWidgetVisible(proWidget, 0, 0);
     }
 }
 
@@ -182,6 +185,9 @@ void ProfileInterface::insertSavegameIPI(QWidget *widget)
         qSort(savegameKeyList.begin(), savegameKeyList.end());
         int sgdIndex = savegameKeyList.indexOf(QRegExp(widgetKey));
         ui->vlSavegame->insertWidget(sgdIndex, proWidget);
+
+        qApp->processEvents();
+        ui->saProfile->ensureWidgetVisible(proWidget, 0, 0);
     }
 }
 
