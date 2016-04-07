@@ -59,7 +59,6 @@ int main(int argc, char *argv[])
     // Start external translate loading
     QString langpath = a.applicationFilePath();
     langpath = appDir.absolutePath();
-    qDebug() << "Translation path" << langpath;
     bool trsf = false;
     bool svlp = false;
     QTranslator EappTranslator;
