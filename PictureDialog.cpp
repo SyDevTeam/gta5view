@@ -93,7 +93,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
             foreach (const QString &player, plyrsList)
             {
                 QString playerName = profileDB->getPlayerName(player.toInt());
-                plyrsStr.append(", <a href=\"http://socialclub.rockstargames.com/member/");
+                plyrsStr.append(", <a href=\"https://socialclub.rockstargames.com/member/");
                 plyrsStr.append(playerName);
                 plyrsStr.append("/");
                 plyrsStr.append(player);
@@ -136,7 +136,7 @@ void PictureDialog::playerNameUpdated()
         foreach (const QString &player, plyrsList)
         {
             QString playerName = profileDB->getPlayerName(player.toInt());
-            plyrsStr.append(", <a href=\"http://socialclub.rockstargames.com/member/");
+            plyrsStr.append(", <a href=\"https://socialclub.rockstargames.com/member/");
             if (playerName != player)
             {
                 plyrsStr.append(playerName);
