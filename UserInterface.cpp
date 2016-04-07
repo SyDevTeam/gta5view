@@ -141,6 +141,7 @@ void UserInterface::reloadProfiles_clicked()
         QString gta5sync_exe = gta5sync_a.at(0);
         gta5sync_a.removeAt(0);
         gta5sync_p.startDetached(gta5sync_exe, gta5sync_a);
+        qApp->exit(0);
     }
     else
     {
