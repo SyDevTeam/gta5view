@@ -81,7 +81,7 @@ void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int
         {
             QNetworkAccessManager *netManager = new QNetworkAccessManager();
 
-            QString memberListUrl = "http://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=" + crewID + "&pageNumber=" + QString::number(currentPage);
+            QString memberListUrl = "https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=" + crewID + "&pageNumber=" + QString::number(currentPage);
 
             QNetworkRequest netRequest(memberListUrl);
             netRequest.setRawHeader("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 gta5sync/1.0");
