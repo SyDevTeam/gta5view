@@ -72,69 +72,72 @@ void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int
 {
     foreach (const QString &crewID, crewList)
     {
-
-        int currentPage = 0;
-        int foundPlayers = 0;
-        int totalPlayers = 1000;
-
-        while(foundPlayers < totalPlayers && currentPage < maxPages)
+        if (crewID != "0")
         {
-            QNetworkAccessManager *netManager = new QNetworkAccessManager();
+            int currentPage = 0;
+            int foundPlayers = 0;
+            int totalPlayers = 1000;
 
-            QString memberListUrl = "https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=" + crewID + "&pageNumber=" + QString::number(currentPage);
-
-            QNetworkRequest netRequest(memberListUrl);
-            netRequest.setRawHeader("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 gta5sync/1.0");
-            netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
-            netRequest.setRawHeader("Connection", "keep-alive");
-
-            QNetworkReply *netReply = netManager->get(netRequest);
-
-            QEventLoop downloadLoop;
-            QObject::connect(netReply, SIGNAL(finished()), &downloadLoop, SLOT(quit()));
-            QTimer::singleShot(30000, &downloadLoop, SLOT(quit()));
-            downloadLoop.exec();
-
-            if (netReply->isFinished())
+            while(foundPlayers < totalPlayers && currentPage < maxPages)
             {
-                QByteArray crewJson = netReply->readAll();
-                QJsonDocument crewDocument = QJsonDocument::fromJson(crewJson);
-                QJsonObject crewObject = crewDocument.object();
-                QVariantMap crewMap = crewObject.toVariantMap();
+                QNetworkAccessManager *netManager = new QNetworkAccessManager();
 
-                if (crewMap.contains("Total")) { totalPlayers = crewMap["Total"].toInt(); }
+                QString memberListUrl = "https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=" + crewID + "&pageNumber=" + QString::number(currentPage);
 
-                if (crewMap.contains("Members"))
+                QNetworkRequest netRequest(memberListUrl);
+                netRequest.setRawHeader("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 gta5sync/1.0");
+                netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+                netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
+                netRequest.setRawHeader("Connection", "keep-alive");
+
+                QNetworkReply *netReply = netManager->get(netRequest);
+
+                QEventLoop downloadLoop;
+                QObject::connect(netReply, SIGNAL(finished()), &downloadLoop, SLOT(quit()));
+                QTimer::singleShot(30000, &downloadLoop, SLOT(quit()));
+                downloadLoop.exec();
+
+                if (netReply->isFinished())
                 {
-                    QList<QVariant> memberList = crewMap["Members"].toList();
-                    foreach (const QVariant &memberVariant, memberList)
+                    QByteArray crewJson = netReply->readAll();
+                    qDebug() << crewJson;
+                    QJsonDocument crewDocument = QJsonDocument::fromJson(crewJson);
+                    QJsonObject crewObject = crewDocument.object();
+                    QVariantMap crewMap = crewObject.toVariantMap();
+
+                    if (crewMap.contains("Total")) { totalPlayers = crewMap["Total"].toInt(); }
+
+                    if (crewMap.contains("Members"))
                     {
-                        QMap<QString, QVariant> memberMap = memberVariant.toMap();
-                        foundPlayers++;
-                        if (memberMap.contains("RockstarId") && memberMap.contains("Name"))
+                        QList<QVariant> memberList = crewMap["Members"].toList();
+                        foreach (const QVariant &memberVariant, memberList)
                         {
-                            int RockstarId = memberMap["RockstarId"].toInt();
-                            QString memberName = memberMap["Name"].toString();
-                            if (memberName != "" && RockstarId != 0)
+                            QMap<QString, QVariant> memberMap = memberVariant.toMap();
+                            foundPlayers++;
+                            if (memberMap.contains("RockstarId") && memberMap.contains("Name"))
                             {
-                                emit playerNameFound(RockstarId, memberName);
+                                int RockstarId = memberMap["RockstarId"].toInt();
+                                QString memberName = memberMap["Name"].toString();
+                                if (memberName != "" && RockstarId != 0)
+                                {
+                                    emit playerNameFound(RockstarId, memberName);
+                                }
                             }
                         }
                     }
+
+                    QEventLoop waitingLoop;
+                    QTimer::singleShot(requestDelay, &waitingLoop, SLOT(quit()));
+                    waitingLoop.exec();
+
+                    currentPage++;
                 }
 
-                QEventLoop waitingLoop;
-                QTimer::singleShot(requestDelay, &waitingLoop, SLOT(quit()));
-                waitingLoop.exec();
-
-                currentPage++;
+                netReply->deleteLater();
+                delete netReply;
+                netManager->deleteLater();
+                delete netManager;
             }
-
-            netReply->deleteLater();
-            delete netReply;
-            netManager->deleteLater();
-            delete netManager;
         }
     }
 }
