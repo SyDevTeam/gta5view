@@ -42,7 +42,7 @@ fileDialogPreSave:
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("suffix");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-    fileDialog.setWindowTitle(PictureDialog::tr("Export picture..."));
+    fileDialog.setWindowTitle(PictureDialog::tr("Export as JPG picture..."));
     fileDialog.setLabelText(QFileDialog::Accept, PictureDialog::tr("&Export"));
 
     QStringList filters;
@@ -99,11 +99,11 @@ fileDialogPreSave:
 
             if (QFile::exists(selectedFile))
             {
-                if (QMessageBox::Yes == QMessageBox::warning(parent, PictureDialog::tr("Export picture"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+                if (QMessageBox::Yes == QMessageBox::warning(parent, PictureDialog::tr("Export as JPG picture"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
                 {
                     if (!QFile::remove(selectedFile))
                     {
-                        QMessageBox::warning(parent, PictureDialog::tr("Export picture"), PictureDialog::tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
+                        QMessageBox::warning(parent, PictureDialog::tr("Export as JPG picture"), PictureDialog::tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
                         goto fileDialogPreSave;
                     }
                 }
@@ -117,13 +117,13 @@ fileDialogPreSave:
 
             if (!isSaved)
             {
-                QMessageBox::warning(parent, PictureDialog::tr("Export picture"), PictureDialog::tr("Failed to export current Snapmatic picture"));
+                QMessageBox::warning(parent, PictureDialog::tr("Export as JPG picture"), PictureDialog::tr("Failed to export current Snapmatic picture"));
                 goto fileDialogPreSave;
             }
         }
         else
         {
-            QMessageBox::warning(parent, PictureDialog::tr("Export picture"), PictureDialog::tr("No valid file is selected"));
+            QMessageBox::warning(parent, PictureDialog::tr("Export as JPG picture"), PictureDialog::tr("No valid file is selected"));
             goto fileDialogPreSave;
         }
     }
