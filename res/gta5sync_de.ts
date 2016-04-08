@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -23,7 +23,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="59"/>
@@ -85,11 +85,11 @@
     </message>
     <message>
         <source>Export</source>
-        <translation type="vanished">Exportieren</translation>
+        <translation>Exportieren</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="127"/>
@@ -132,7 +132,7 @@
     </message>
     <message>
         <source>Export picture...</source>
-        <translation type="vanished">Exportiere Bild...</translation>
+        <translation>Exportiere Bild...</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="45"/>
@@ -155,7 +155,7 @@
         <location filename="../PictureExport.cpp" line="120"/>
         <location filename="../PictureExport.cpp" line="126"/>
         <source>Export as JPG picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportiere als JPG Bild</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="69"/>
@@ -169,7 +169,7 @@
         <location filename="../PictureCopy.cpp" line="86"/>
         <location filename="../PictureCopy.cpp" line="92"/>
         <source>Export as GTA Snapmatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportiere als GTA Snapmatic</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="73"/>
@@ -184,7 +184,7 @@
     </message>
     <message>
         <source>Copy picture</source>
-        <translation type="vanished">Bild kopieren</translation>
+        <translation>Bild kopieren</translation>
     </message>
     <message>
         <source>Export picture for Import...</source>
@@ -254,26 +254,26 @@
     <message>
         <location filename="../ProfileInterface.ui" line="182"/>
         <source>Import exported file</source>
-        <translation type="unfinished"></translation>
+        <translation>Importiere exportiere Datei</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="185"/>
         <source>&amp;Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importieren...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="195"/>
         <source>Close profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil schließen</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="198"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Schließen</translation>
+        <translation>&amp;Schließen</translation>
     </message>
     <message>
         <source>Import copy</source>
-        <translation type="vanished">Kopie importieren</translation>
+        <translation>Kopie importieren</translation>
     </message>
     <message>
         <source>Content of Profile %1</source>
@@ -285,7 +285,7 @@
     </message>
     <message>
         <source>Close Profile</source>
-        <translation type="vanished">Profil schließen</translation>
+        <translation>Profil schließen</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="100"/>
@@ -295,7 +295,7 @@
     <message>
         <location filename="../ProfileInterface.cpp" line="279"/>
         <source>Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Importieren...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="280"/>
@@ -309,7 +309,7 @@
         <location filename="../ProfileInterface.cpp" line="430"/>
         <location filename="../ProfileInterface.cpp" line="436"/>
         <source>Import</source>
-        <translation type="unfinished"></translation>
+        <translation>Importieren</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="283"/>
@@ -376,19 +376,19 @@
         <location filename="../ProfileInterface.cpp" line="515"/>
         <location filename="../ProfileInterface.cpp" line="523"/>
         <source>JPG pictures and GTA Snapmatic</source>
-        <translation type="unfinished"></translation>
+        <translation>JPG Bilder und GTA Snapmatic</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="516"/>
         <location filename="../ProfileInterface.cpp" line="528"/>
         <source>JPG pictures only</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur JPG Bilder</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="517"/>
         <location filename="../ProfileInterface.cpp" line="532"/>
         <source>GTA Snapmatic only</source>
-        <translation type="unfinished"></translation>
+        <translation>Nur GTA Snapmatic</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="520"/>
@@ -411,7 +411,7 @@ Export as:</source>
         <location filename="../ProfileInterface.cpp" line="655"/>
         <location filename="../ProfileInterface.cpp" line="661"/>
         <source>Remove selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahl löschen</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="625"/>
@@ -425,19 +425,19 @@ Export as:</source>
     </message>
     <message>
         <source>Failed to import copy of Snapmatic picture because the file not begin with PGTA</source>
-        <translation type="vanished">Fehlgeschlagenen beim Import vom Snapmatic Bild weil die Datei nicht mit PGTA begint </translation>
+        <translation>Fehlgeschlagenen beim Import vom Snapmatic Bild weil die Datei nicht mit PGTA begint </translation>
     </message>
     <message>
         <source>Failed to import copy of Snapmatic picture because the copy failed</source>
-        <translation type="vanished">Fehlgeschlagenen beim Import vom Snapmatic Bild weil kopieren fehlgeschlagen ist</translation>
+        <translation>Fehlgeschlagenen beim Import vom Snapmatic Bild weil kopieren fehlgeschlagen ist</translation>
     </message>
     <message>
         <source>Failed to import copy of Savegame file because the copy failed</source>
-        <translation type="vanished">Fehlgeschlagenen beim Import vom Spielstand weil kopieren fehlgeschlagen ist</translation>
+        <translation>Fehlgeschlagenen beim Import vom Spielstand weil kopieren fehlgeschlagen ist</translation>
     </message>
     <message>
         <source>Failed to import copy of Savegame file because no free Savegame slot left</source>
-        <translation type="vanished">Fehlgeschlagenen beim Import vom Spielstand weil kein Spielstandslot mehr übrig ist</translation>
+        <translation>Fehlgeschlagenen beim Import vom Spielstand weil kein Spielstandslot mehr übrig ist</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="493"/>
@@ -449,19 +449,19 @@ Export as:</source>
     </message>
     <message>
         <source>Export and Copy pictures</source>
-        <translation type="vanished">Bilder exportieren und kopieren</translation>
+        <translation>Bilder exportieren und kopieren</translation>
     </message>
     <message>
         <source>Export pictures</source>
-        <translation type="vanished">Bilder exportieren</translation>
+        <translation>Bilder exportieren</translation>
     </message>
     <message>
         <source>Copy pictures</source>
-        <translation type="vanished">Bilder kopieren</translation>
+        <translation>Bilder kopieren</translation>
     </message>
     <message>
         <source>How should we deal with the Snapmatic pictures?</source>
-        <translation type="vanished">Wie sollen wir mit den Snapmatic Bilder umgehen?</translation>
+        <translation>Wie sollen wir mit den Snapmatic Bilder umgehen?</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="563"/>
@@ -486,15 +486,15 @@ Export as:</source>
     </message>
     <message>
         <source>Delete selected</source>
-        <translation type="vanished">Auswahl löschen</translation>
+        <translation>Auswahl löschen</translation>
     </message>
     <message>
         <source>You really want delete the selected content?</source>
-        <translation type="vanished">Möchtest du wirklich den ausgewählten Inhalt löschen?</translation>
+        <translation>Möchtest du wirklich den ausgewählten Inhalt löschen?</translation>
     </message>
     <message>
         <source>Failed at delete all selected content</source>
-        <translation type="vanished">Fehlgeschlagen beim Löschen von alle ausgewählte Inhalte</translation>
+        <translation>Fehlgeschlagen beim Löschen von alle ausgewählte Inhalte</translation>
     </message>
     <message>
         <source>Current export job: %1</source>
@@ -584,46 +584,46 @@ Export as:</source>
     <message>
         <location filename="../SavegameWidget.cpp" line="169"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;nsehen</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="171"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfe&amp;rnen</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="175"/>
         <location filename="../SavegameWidget.cpp" line="183"/>
         <source>&amp;Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Au&amp;swählen</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="176"/>
         <source>&amp;Deselect</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;bwählen</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="177"/>
         <location filename="../SavegameWidget.cpp" line="184"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="178"/>
         <source>&amp;Deselect All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles a&amp;bwählen</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation type="vanished">Auswählen</translation>
+        <translation>Auswählen</translation>
     </message>
     <message>
         <source>Deselect</source>
-        <translation type="vanished">Abwählen</translation>
+        <translation>Abwählen</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="vanished">Alles auswählen</translation>
+        <translation>Alles auswählen</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
@@ -631,7 +631,7 @@ Export as:</source>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation type="vanished">Alles abwählen</translation>
+        <translation>Alles abwählen</translation>
     </message>
     <message>
         <source>Shift+S</source>
@@ -640,7 +640,7 @@ Export as:</source>
     <message>
         <location filename="../SavegameWidget.ui" line="77"/>
         <source>View savegame</source>
-        <translation type="unfinished">Spielstand ansehen</translation>
+        <translation>Spielstand ansehen</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="87"/>
@@ -651,7 +651,7 @@ Export as:</source>
         <location filename="../SavegameCopy.cpp" line="47"/>
         <location filename="../SavegameWidget.cpp" line="170"/>
         <source>&amp;Export</source>
-        <translation type="unfinished">&amp;Exportieren</translation>
+        <translation>&amp;Exportieren</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="50"/>
@@ -669,7 +669,7 @@ Export as:</source>
         <location filename="../SavegameCopy.cpp" line="86"/>
         <location filename="../SavegameCopy.cpp" line="92"/>
         <source>Export Savegame</source>
-        <translation type="unfinished"></translation>
+        <translation>Spielnstand exportieren</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="69"/>
@@ -688,15 +688,15 @@ Export as:</source>
     </message>
     <message>
         <source>Overwrite %1 with current savegame?</source>
-        <translation type="vanished">Überschreibe %1 mit aktuellen Spielstand?</translation>
+        <translation>Überschreibe %1 mit aktuellen Spielstand?</translation>
     </message>
     <message>
         <source>Failed to overwrite %1 with current savegame</source>
-        <translation type="vanished">Fehlgeschlagen beim Überschreiben von %1 mit aktuellen Spielstand </translation>
+        <translation>Fehlgeschlagen beim Überschreiben von %1 mit aktuellen Spielstand </translation>
     </message>
     <message>
         <source>Failed to copy current savegame</source>
-        <translation type="vanished">Fehlgeschlagen beim Kopieren vom Spielstand</translation>
+        <translation>Fehlgeschlagen beim Kopieren vom Spielstand</translation>
     </message>
     <message>
         <source>Failed to copy the savegame</source>
@@ -763,61 +763,61 @@ Export as:</source>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="178"/>
         <source>&amp;Export</source>
-        <translation type="unfinished">&amp;Exportieren</translation>
+        <translation>&amp;Exportieren</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="179"/>
         <source>Export as &amp;JPG picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportiere als &amp;JPG Bild</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="180"/>
         <source>Export as &amp;GTA Snapmatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportiere als &amp;GTA Snapmatic</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="181"/>
         <source>&amp;View</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;nsehen</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="183"/>
         <source>&amp;Remove</source>
-        <translation type="unfinished"></translation>
+        <translation>Entfe&amp;rnen</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="187"/>
         <location filename="../SnapmaticWidget.cpp" line="195"/>
         <source>&amp;Select</source>
-        <translation type="unfinished"></translation>
+        <translation>Au&amp;swählen</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="188"/>
         <source>&amp;Deselect</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;bwählen</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="189"/>
         <location filename="../SnapmaticWidget.cpp" line="196"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles &amp;auswählen</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="190"/>
         <source>&amp;Deselect All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles a&amp;bwählen</translation>
     </message>
     <message>
         <source>Select</source>
-        <translation type="vanished">Auswählen</translation>
+        <translation>Auswählen</translation>
     </message>
     <message>
         <source>Deselect</source>
-        <translation type="vanished">Abwählen</translation>
+        <translation>Abwählen</translation>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="vanished">Alles auswählen</translation>
+        <translation>Alles auswählen</translation>
     </message>
     <message>
         <source>Ctrl+S</source>
@@ -825,7 +825,7 @@ Export as:</source>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation type="vanished">Alles abwählen</translation>
+        <translation>Alles abwählen</translation>
     </message>
     <message>
         <source>Shift+S</source>
@@ -834,17 +834,17 @@ Export as:</source>
     <message>
         <location filename="../SnapmaticWidget.ui" line="92"/>
         <source>View picture</source>
-        <translation type="unfinished">Bild ansehen</translation>
+        <translation>Bild ansehen</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="105"/>
         <source>Copy picture</source>
-        <translation type="unfinished">Bild kopieren</translation>
+        <translation>Bild kopieren</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="115"/>
         <source>Export picture</source>
-        <translation type="unfinished">Bild exportieren</translation>
+        <translation>Bild exportieren</translation>
     </message>
     <message>
         <source>You&apos;re sure to delete %1 from your Snapmatic pictures?</source>
@@ -873,23 +873,23 @@ Export as:</source>
     </message>
     <message>
         <source>File</source>
-        <translation type="vanished">Datei</translation>
+        <translation>Datei</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="vanished">Hilfe</translation>
+        <translation>Hilfe</translation>
     </message>
     <message>
         <source>Edit</source>
-        <translation type="vanished">Bearbeiten</translation>
+        <translation>Bearbeiten</translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation type="vanished">Profil</translation>
+        <translation>Profil</translation>
     </message>
     <message>
         <source>About gta5sync</source>
-        <translation type="vanished">Über gta5sync</translation>
+        <translation>Über gta5sync</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="124"/>
@@ -898,11 +898,11 @@ Export as:</source>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <source>Options</source>
-        <translation type="vanished">Optionen</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="148"/>
@@ -911,7 +911,7 @@ Export as:</source>
     </message>
     <message>
         <source>Select all</source>
-        <translation type="vanished">Alles auswählen</translation>
+        <translation>Alles auswählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="156"/>
@@ -920,15 +920,15 @@ Export as:</source>
     </message>
     <message>
         <source>Deselect all</source>
-        <translation type="vanished">Alles abwählen</translation>
+        <translation>Alles abwählen</translation>
     </message>
     <message>
         <source>Shift+S</source>
-        <translation type="vanished">Umschalt+S</translation>
+        <translation>Umschalt+S</translation>
     </message>
     <message>
         <source>Export selected</source>
-        <translation type="vanished">Auswahl exportieren</translation>
+        <translation>Auswahl exportieren</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="172"/>
@@ -937,7 +937,7 @@ Export as:</source>
     </message>
     <message>
         <source>Delete selected</source>
-        <translation type="vanished">Auswahl löschen</translation>
+        <translation>Auswahl löschen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="164"/>
@@ -961,38 +961,38 @@ Export as:</source>
     <message>
         <location filename="../UserInterface.ui" line="86"/>
         <source>&amp;File</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Datei</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="93"/>
         <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Hilfe</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="99"/>
         <source>&amp;Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Bearb&amp;eiten</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="103"/>
         <source>&amp;Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Profil</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="121"/>
         <source>&amp;About gta5sync</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Über gta5sync</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="129"/>
         <location filename="../UserInterface.cpp" line="127"/>
         <source>&amp;Close</source>
-        <translation type="unfinished">&amp;Schließen</translation>
+        <translation>&amp;Schließen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="137"/>
         <source>Select &amp;Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Profil auswählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="140"/>
@@ -1002,32 +1002,32 @@ Export as:</source>
     <message>
         <location filename="../UserInterface.ui" line="145"/>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Optionen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="153"/>
         <source>Select &amp;All</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="161"/>
         <source>&amp;Deselect All</source>
-        <translation type="unfinished"></translation>
+        <translation>Alles a&amp;bwählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="169"/>
         <source>&amp;Export selected...</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahl &amp;exportieren...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="177"/>
         <source>&amp;Remove selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Auswahl entfe&amp;rnen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="180"/>
         <source>Ctrl+R</source>
-        <translation type="unfinished"></translation>
+        <translation>Strg+R</translation>
     </message>
     <message>
         <source>GTA V Folder not found!</source>
@@ -1037,7 +1037,7 @@ Export as:</source>
         <location filename="../UserInterface.cpp" line="46"/>
         <location filename="../UserInterface.cpp" line="181"/>
         <source>Select Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil auswählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="71"/>
@@ -1052,11 +1052,11 @@ Export as:</source>
     <message>
         <location filename="../UserInterface.cpp" line="100"/>
         <source>&amp;Reload</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Neuladen</translation>
     </message>
     <message>
         <source>Reload</source>
-        <translation type="vanished">Neuladen</translation>
+        <translation>Neuladen</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="148"/>
