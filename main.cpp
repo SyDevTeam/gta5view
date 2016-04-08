@@ -58,9 +58,10 @@ int main(int argc, char *argv[])
     char faceName[32];
     char DefChar = ' ';
     WideCharToMultiByte(CP_ACP, 0, uiFont.lfFaceName, -1, faceName, 32, &DefChar, NULL);
-    std::string uiFontStr(faceName);
+    QString uiFontStr(QString::fromStdString(std::string(faceName)));
 
-    QFont appFont(QString::fromStdString(uiFontStr), 9);
+    // Set Application Font
+    QFont appFont(uiFontStr, 9);
     a.setFont(appFont);
 #endif
 
