@@ -28,18 +28,41 @@
 #include <QApplication>
 #include <QStringList>
 #include <QTranslator>
+#include <QMessageBox>
 #include <QFileInfo>
+#include <QRawFont>
 #include <QObject>
 #include <QString>
 #include <QDebug>
+#include <QFont>
 #include <QFile>
 #include <QDir>
+
+#ifdef GTA5SYNC_WIN
+#include "windows.h"
+#include <iostream>
+#endif
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setApplicationName("gta5sync");
     a.setApplicationVersion("1.0.0");
+
+#ifdef GTA5SYNC_WIN
+    // Get Windows Font
+    NONCLIENTMETRICS ncm;
+    ncm.cbSize = sizeof(ncm);
+    SystemParametersInfo(SPI_GETNONCLIENTMETRICS, ncm.cbSize, &ncm, 0);
+    LOGFONTW uiFont = ncm.lfMessageFont;
+    char faceName[32];
+    char DefChar = ' ';
+    WideCharToMultiByte(CP_ACP, 0, uiFont.lfFaceName, -1, faceName, 32, &DefChar, NULL);
+    std::string uiFontStr(faceName);
+
+    QFont appFont(QString::fromStdString(uiFontStr), 9);
+    a.setFont(appFont);
+#endif
 
     QDir appDir = QFileInfo(a.applicationFilePath()).absoluteDir();
     if (appDir.cd("plugins"))

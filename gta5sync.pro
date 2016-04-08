@@ -103,7 +103,11 @@ DISTFILES += res/app.rc \
 
 INCLUDEPATH += ./uimod
 
+# WINDOWS ONLY
+
+win32: DEFINES += GTA5SYNC_WIN
 win32: RC_FILE += res/app.rc
+win32: LIBS += -luser32
 
 # QT4 ONLY STUFF
 
