@@ -254,7 +254,7 @@
     <message>
         <location filename="../ProfileInterface.ui" line="182"/>
         <source>Import exported file</source>
-        <translation>Importiere exportiere Datei</translation>
+        <translation>Importiere exportietre Datei</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="185"/>
@@ -404,7 +404,7 @@ Export as:</source>
         <location filename="../ProfileInterface.cpp" line="617"/>
         <location filename="../ProfileInterface.cpp" line="661"/>
         <source>No Snapmatic pictures or Savegames files are selected</source>
-        <translation type="unfinished"></translation>
+        <translation>Keine Snapmatic Bilder oder Spielstände ausgewählt</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="625"/>
