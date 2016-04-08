@@ -254,7 +254,7 @@
     <message>
         <location filename="../ProfileInterface.ui" line="182"/>
         <source>Import exported file</source>
-        <translation>Importiere exportietre Datei</translation>
+        <translation>Importiere exportierte Datei</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="185"/>
