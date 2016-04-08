@@ -166,22 +166,22 @@ void SavegameWidget::savegameSelected()
 void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
-    contextMenu.addAction(tr("View"), this, SLOT(on_cmdView_clicked()));
-    contextMenu.addAction(tr("Copy"), this, SLOT(on_cmdCopy_clicked()));
-    contextMenu.addAction(tr("Delete"), this, SLOT(on_cmdDelete_clicked()));
+    contextMenu.addAction(tr("&View"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addAction(tr("&Export"), this, SLOT(on_cmdCopy_clicked()));
+    contextMenu.addAction(tr("&Remove"), this, SLOT(on_cmdDelete_clicked()));
     if (ui->cbSelected->isVisible())
     {
         contextMenu.addSeparator();
-        if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected())); }
-        if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("Deselect"), this, SLOT(savegameSelected())); }
-        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
-        contextMenu.addAction(tr("Deselect all"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Shift+S"));
+        if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Select"), this, SLOT(savegameSelected())); }
+        if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Deselect"), this, SLOT(savegameSelected())); }
+        contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
+        contextMenu.addAction(tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
     }
     else
     {
         contextMenu.addSeparator();
-        contextMenu.addAction(tr("Select"), this, SLOT(savegameSelected()));
-        contextMenu.addAction(tr("Select all"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
+        contextMenu.addAction(tr("&Select"), this, SLOT(savegameSelected()));
+        contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
     }
     contextMenu.exec(ev->globalPos());
     setStyleSheet(styleSheet()); // fix multi highlight bug

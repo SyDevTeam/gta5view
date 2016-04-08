@@ -43,7 +43,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->menuProfile->setEnabled(false);
     defaultWindowTitle = this->windowTitle();
 
-    this->setWindowTitle(defaultWindowTitle.arg(tr("Select profile")));
+    this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
 
     // init settings
     QSettings SyncSettings("Syping", "gta5sync");
@@ -97,7 +97,7 @@ void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
 {
     if (GTAV_Profiles.length() == 0)
     {
-        QPushButton *reloadBtn = new QPushButton(tr("Reload"), ui->swSelection);
+        QPushButton *reloadBtn = new QPushButton(tr("&Reload"), ui->swSelection);
         reloadBtn->setObjectName("Reload");
         reloadBtn->setAutoDefault(true);
         ui->swSelection->layout()->addWidget(reloadBtn);
@@ -124,7 +124,7 @@ void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
     QSpacerItem *closeButtonSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
     footerLayout->addSpacerItem(closeButtonSpacer);
 
-    QPushButton *cmdClose = new QPushButton(tr("Close"), ui->swSelection);
+    QPushButton *cmdClose = new QPushButton(tr("&Close"), ui->swSelection);
     cmdClose->setObjectName("cmdClose");
     cmdClose->setAutoDefault(true);
     footerLayout->addWidget(cmdClose);
@@ -178,7 +178,7 @@ void UserInterface::closeProfile()
         profileUI->deleteLater();
         delete profileUI;
     }
-    this->setWindowTitle(defaultWindowTitle.arg(tr("Select profile")));
+    this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
 }
 
 UserInterface::~UserInterface()

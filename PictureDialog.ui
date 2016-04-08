@@ -91,14 +91,7 @@
          <string>Export picture</string>
         </property>
         <property name="text">
-         <string>Export</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="cmdCopy">
-        <property name="text">
-         <string>Copy</string>
+         <string>&amp;Export</string>
         </property>
        </widget>
       </item>
@@ -108,7 +101,7 @@
          <string>Close</string>
         </property>
         <property name="text">
-         <string>Close</string>
+         <string>&amp;Close</string>
         </property>
        </widget>
       </item>

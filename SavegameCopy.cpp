@@ -43,7 +43,8 @@ fileDialogPreSave:
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-    fileDialog.setWindowTitle(SavegameWidget::tr(("Copy savegame")));
+    fileDialog.setWindowTitle(SavegameWidget::tr(("Export Savegame...")));
+    fileDialog.setLabelText(QFileDialog::Accept, SavegameWidget::tr("&Export"));
 
     QStringList filters;
     filters << SavegameWidget::tr("Savegame files (SGTA*)");
@@ -65,11 +66,11 @@ fileDialogPreSave:
 
             if (QFile::exists(selectedFile))
             {
-                if (QMessageBox::Yes == QMessageBox::warning(parent, SavegameWidget::tr("Copy savegame"), SavegameWidget::tr("Overwrite %1 with current savegame?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+                if (QMessageBox::Yes == QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Overwrite %1 with current Savegame?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
                 {
                     if (!QFile::remove(selectedFile))
                     {
-                        QMessageBox::warning(parent, SavegameWidget::tr("Copy savegame"), SavegameWidget::tr("Failed to overwrite %1 with current savegame").arg("\""+selectedFile+"\""));
+                        QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Failed to overwrite %1 with current Savegame").arg("\""+selectedFile+"\""));
                         goto fileDialogPreSave;
                     }
                 }
@@ -82,13 +83,13 @@ fileDialogPreSave:
             bool isCopied = QFile::copy(sgdPath, selectedFile);
             if (!isCopied)
             {
-                QMessageBox::warning(parent, SavegameWidget::tr("Copy savegame"), SavegameWidget::tr("Failed to copy current savegame"));
+                QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Failed to copy current Savegame"));
                 goto fileDialogPreSave;
             }
         }
         else
         {
-            QMessageBox::warning(parent, SavegameWidget::tr("Copy savegame"), SavegameWidget::tr("No valid file is selected"));
+            QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("No valid file is selected"));
             goto fileDialogPreSave;
         }
     }

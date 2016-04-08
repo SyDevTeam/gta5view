@@ -83,24 +83,24 @@
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>File</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="actionSelect_profile"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
-     <string>Help</string>
+     <string>&amp;Help</string>
     </property>
     <addaction name="actionAbout_gta5sync"/>
    </widget>
    <widget class="QMenu" name="menuEdit">
     <property name="title">
-     <string>Edit</string>
+     <string>&amp;Edit</string>
     </property>
     <widget class="QMenu" name="menuProfile">
      <property name="title">
-      <string>Profile</string>
+      <string>&amp;Profile</string>
      </property>
      <addaction name="actionSelect_all"/>
      <addaction name="actionDeselect_all"/>
@@ -118,7 +118,7 @@
   </widget>
   <action name="actionAbout_gta5sync">
    <property name="text">
-    <string>About gta5sync</string>
+    <string>&amp;About gta5sync</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+A</string>
@@ -126,7 +126,7 @@
   </action>
   <action name="actionExit">
    <property name="text">
-    <string>Close</string>
+    <string>&amp;Close</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -134,7 +134,7 @@
   </action>
   <action name="actionSelect_profile">
    <property name="text">
-    <string>Select profile</string>
+    <string>Select &amp;Profile</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
@@ -142,7 +142,7 @@
   </action>
   <action name="actionOptions">
    <property name="text">
-    <string>Options</string>
+    <string>&amp;Options</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
@@ -150,7 +150,7 @@
   </action>
   <action name="actionSelect_all">
    <property name="text">
-    <string>Select all</string>
+    <string>Select &amp;All</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
@@ -158,15 +158,15 @@
   </action>
   <action name="actionDeselect_all">
    <property name="text">
-    <string>Deselect all</string>
+    <string>&amp;Deselect All</string>
    </property>
    <property name="shortcut">
-    <string>Shift+S</string>
+    <string>Ctrl+D</string>
    </property>
   </action>
   <action name="actionExport_selected">
    <property name="text">
-    <string>Export selected</string>
+    <string>&amp;Export selected</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
@@ -174,10 +174,10 @@
   </action>
   <action name="actionDelete_selected">
    <property name="text">
-    <string>Delete selected</string>
+    <string>&amp;Remove selected</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+D</string>
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>

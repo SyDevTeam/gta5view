@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>385</width>
+    <width>459</width>
     <height>45</height>
    </rect>
   </property>
@@ -88,6 +88,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdView">
+        <property name="toolTip">
+         <string>View picture</string>
+        </property>
         <property name="text">
          <string>View</string>
         </property>
@@ -98,6 +101,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdCopy">
+        <property name="toolTip">
+         <string>Copy picture</string>
+        </property>
         <property name="text">
          <string>Copy</string>
         </property>
@@ -105,6 +111,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdExport">
+        <property name="toolTip">
+         <string>Export picture</string>
+        </property>
         <property name="text">
          <string>Export</string>
         </property>
@@ -112,6 +121,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdDelete">
+        <property name="toolTip">
+         <string>Delete picture</string>
+        </property>
         <property name="text">
          <string>Delete</string>
         </property>

@@ -53,10 +53,17 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     locY = "";
     locZ = "";
     smpic = 0;
+
+    // Export menu
+    exportMenu = new QMenu(this);
+    exportMenu->addAction(tr("Export as &picture...", "Export as picture"), this, SLOT(exportSnapmaticPicture()));
+    exportMenu->addAction(tr("Export for &import...", "Export for import"), this, SLOT(copySnapmaticPicture()));
+    ui->cmdExport->setMenu(exportMenu);
 }
 
 PictureDialog::~PictureDialog()
 {
+    delete exportMenu;
     delete ui;
 }
 
@@ -161,12 +168,12 @@ void PictureDialog::on_cmdClose_clicked()
     this->close();
 }
 
-void PictureDialog::on_cmdExport_clicked()
+void PictureDialog::exportSnapmaticPicture()
 {
     PictureExport::exportPicture(this, smpic);
 }
 
-void PictureDialog::on_cmdCopy_clicked()
+void PictureDialog::copySnapmaticPicture()
 {
     PictureCopy::copyPicture(this, picPath);
 }

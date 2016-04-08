@@ -275,8 +275,9 @@ fileDialogPreOpen:
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
-    fileDialog.setWindowTitle(tr("Import copy"));
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowTitle(tr("Import..."));
+    fileDialog.setLabelText(QFileDialog::Accept, tr("Import"));
 
     QStringList filters;
     filters << tr("All profile files (SGTA* PGTA*)");

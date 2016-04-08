@@ -22,6 +22,7 @@
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
 #include <QDialog>
+#include <QMenu>
 
 namespace Ui {
 class PictureDialog;
@@ -39,9 +40,9 @@ public slots:
     void playerNameUpdated();
 
 private slots:
+    void copySnapmaticPicture();
+    void exportSnapmaticPicture();
     void on_cmdClose_clicked();
-    void on_cmdExport_clicked();
-    void on_cmdCopy_clicked();
     void on_labPicture_mouseDoubleClicked();
 
 private:
@@ -57,6 +58,7 @@ private:
     QString locX;
     QString locY;
     QString locZ;
+    QMenu *exportMenu;
 };
 
 #endif // PICTUREDIALOG_H

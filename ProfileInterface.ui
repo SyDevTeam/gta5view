@@ -105,8 +105,8 @@
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>28</height>
+            <width>398</width>
+            <height>251</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="vlProfile">
@@ -175,8 +175,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="cmdImport">
+       <property name="toolTip">
+        <string>Import exported file</string>
+       </property>
        <property name="text">
-        <string>Import copy</string>
+        <string>&amp;Import...</string>
        </property>
        <property name="autoDefault">
         <bool>true</bool>
@@ -185,8 +188,11 @@
      </item>
      <item>
       <widget class="QPushButton" name="cmdCloseProfile">
+       <property name="toolTip">
+        <string>Close profile</string>
+       </property>
        <property name="text">
-        <string>Close Profile</string>
+        <string>&amp;Close</string>
        </property>
        <property name="autoDefault">
         <bool>true</bool>

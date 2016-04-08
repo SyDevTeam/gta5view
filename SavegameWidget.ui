@@ -73,6 +73,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdView">
+        <property name="toolTip">
+         <string>View savegame</string>
+        </property>
         <property name="text">
          <string>View</string>
         </property>
@@ -80,6 +83,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdCopy">
+        <property name="toolTip">
+         <string>Copy savegame</string>
+        </property>
         <property name="text">
          <string>Copy</string>
         </property>
@@ -90,6 +96,9 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdDelete">
+        <property name="toolTip">
+         <string>Delete savegame</string>
+        </property>
         <property name="text">
          <string>Delete</string>
         </property>
