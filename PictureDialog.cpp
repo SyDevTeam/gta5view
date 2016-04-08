@@ -56,8 +56,8 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
 
     // Export menu
     exportMenu = new QMenu(this);
-    exportMenu->addAction(tr("Export as &picture...", "Export as picture"), this, SLOT(exportSnapmaticPicture()));
-    exportMenu->addAction(tr("Export for &import...", "Export for import"), this, SLOT(copySnapmaticPicture()));
+    exportMenu->addAction(tr("Export as &JPG picture..."), this, SLOT(exportSnapmaticPicture()));
+    exportMenu->addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(copySnapmaticPicture()));
     ui->cmdExport->setMenu(exportMenu);
 }
 

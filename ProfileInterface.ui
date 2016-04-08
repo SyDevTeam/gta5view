@@ -14,6 +14,9 @@
    <string>Profile Interface</string>
   </property>
   <layout class="QVBoxLayout" name="vlProfileInterface">
+   <property name="spacing">
+    <number>0</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -106,7 +109,7 @@
             <x>0</x>
             <y>0</y>
             <width>398</width>
-            <height>251</height>
+            <height>257</height>
            </rect>
           </property>
           <layout class="QVBoxLayout" name="vlProfile">

@@ -310,7 +310,7 @@ fileDialogPreOpen:
                     }
                     else
                     {
-                        QMessageBox::warning(this, tr("Import copy"), tr("Failed to read Snapmatic picture"));
+                        QMessageBox::warning(this, tr("Import"), tr("Failed to read Snapmatic picture"));
                         picture->deleteLater();
                         delete picture;
                         goto fileDialogPreOpen;
@@ -325,7 +325,7 @@ fileDialogPreOpen:
                     }
                     else
                     {
-                        QMessageBox::warning(this, tr("Import copy"), tr("Failed to read Savegame file"));
+                        QMessageBox::warning(this, tr("Import"), tr("Failed to read Savegame file"));
                         savegame->deleteLater();
                         delete savegame;
                         goto fileDialogPreOpen;
@@ -353,20 +353,20 @@ fileDialogPreOpen:
                         picture->deleteLater();
                         delete savegame;
                         delete picture;
-                        QMessageBox::warning(this, tr("Import copy"), tr("Can't import %1 because of not valid file format").arg("\""+selectedFileName+"\""));
+                        QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because of not valid file format").arg("\""+selectedFileName+"\""));
                         goto fileDialogPreOpen;
                     }
                 }
             }
             else
             {
-                QMessageBox::warning(this, tr("Import copy"), tr("No valid file is selected"));
+                QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
                 goto fileDialogPreOpen;
             }
         }
         else
         {
-            QMessageBox::warning(this, tr("Import copy"), tr("No valid file is selected"));
+            QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
             goto fileDialogPreOpen;
         }
     }
@@ -381,7 +381,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
     QString picFileName = picFileInfo.fileName();
     if (picFileName.left(4) != "PGTA")
     {
-        QMessageBox::warning(this, tr("Import copy"), tr("Failed to import copy of Snapmatic picture because the file not begin with PGTA"));
+        QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, file not begin with PGTA"));
         return false;
     }
     else if (QFile::copy(picPath, profileFolder + "/" + picFileName))
@@ -391,7 +391,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
     }
     else
     {
-        QMessageBox::warning(this, tr("Import copy"), tr("Failed to import copy of Snapmatic picture because the copy failed"));
+        QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, can't copy the file into profile"));
         return false;
     }
 }
@@ -427,13 +427,13 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         }
         else
         {
-            QMessageBox::warning(this, tr("Import copy"), tr("Failed to import copy of Savegame file because the copy failed"));
+            QMessageBox::warning(this, tr("Import"), tr("Failed to import the Savegame, can't copy the file into profile"));
             return false;
         }
     }
     else
     {
-        QMessageBox::warning(this, tr("Import copy"), tr("Failed to import copy of Savegame file because no free Savegame slot left"));
+        QMessageBox::warning(this, tr("Import"), tr("Failed to import the Savegame, no Savegame slot is left"));
         return false;
     }
 }
@@ -482,163 +482,182 @@ void ProfileInterface::deselectAllWidgets()
 
 void ProfileInterface::exportSelected()
 {
-    int exportCount = 0;
-    int exportPictures = 0;
-    int exportSavegames = 0;
-    bool pictureCopyEnabled = false;
-    bool pictureExportEnabled = false;
-
-    QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected"), profileFolder);
-    if (exportDirectory != "")
+    if (selectedWidgts != 0)
     {
-        foreach (ProfileWidget *widget, widgets.keys())
+        int exportCount = 0;
+        int exportPictures = 0;
+        int exportSavegames = 0;
+        bool pictureCopyEnabled = false;
+        bool pictureExportEnabled = false;
+
+        QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected"), profileFolder);
+        if (exportDirectory != "")
         {
-            if (widget->isSelected())
+            foreach (ProfileWidget *widget, widgets.keys())
             {
-                if (widget->getWidgetType() == "SnapmaticWidget")
+                if (widget->isSelected())
                 {
-                    exportPictures++;
-                }
-                else if (widget->getWidgetType() == "SavegameWidgets")
-                {
-                    exportSavegames++;
+                    if (widget->getWidgetType() == "SnapmaticWidget")
+                    {
+                        exportPictures++;
+                    }
+                    else if (widget->getWidgetType() == "SavegameWidget")
+                    {
+                        exportSavegames++;
+                    }
                 }
             }
-        }
 
-        if (exportPictures != 0)
-        {
-            QInputDialog inputDialog;
-            QStringList inputDialogItems;
-            inputDialogItems << tr("Export and Copy pictures");
-            inputDialogItems << tr("Export pictures");
-            inputDialogItems << tr("Copy pictures");
-
-            bool itemSelected = false;
-            QString selectedItem = inputDialog.getItem(this, tr("Export selected"), tr("How should we deal with the Snapmatic pictures?"), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-            if (itemSelected)
+            if (exportPictures != 0)
             {
-                if (selectedItem == tr("Export and Copy pictures"))
+                QInputDialog inputDialog;
+                QStringList inputDialogItems;
+                inputDialogItems << tr("JPG pictures and GTA Snapmatic");
+                inputDialogItems << tr("JPG pictures only");
+                inputDialogItems << tr("GTA Snapmatic only");
+
+                bool itemSelected = false;
+                QString selectedItem = inputDialog.getItem(this, tr("Export selected"), tr("Export Snapmatic pictures\n\nJPG pictures make it possible to open the picture with a Image Viewer\nGTA Snapmatic make it possible to import the picture into the game\n\nExport as:"), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+                if (itemSelected)
+                {
+                    if (selectedItem == tr("JPG pictures and GTA Snapmatic"))
+                    {
+                        pictureExportEnabled = true;
+                        pictureCopyEnabled = true;
+                    }
+                    else if (selectedItem == tr("JPG pictures only"))
+                    {
+                        pictureExportEnabled = true;
+                    }
+                    else if (selectedItem == tr("GTA Snapmatic only"))
+                    {
+                        pictureCopyEnabled = true;
+                    }
+                    else
+                    {
+                        pictureExportEnabled = true;
+                        pictureCopyEnabled = true;
+                    }
+                }
+                else
                 {
                     pictureExportEnabled = true;
                     pictureCopyEnabled = true;
                 }
-                else if (selectedItem == tr("Export pictures"))
-                {
-                    pictureExportEnabled = true;
-                }
-                else if (selectedItem == tr("Copy pictures"))
-                {
-                    pictureCopyEnabled = true;
-                }
+            }
+
+            // Counting the exports together
+            exportCount = exportCount + exportSavegames;
+            if (pictureExportEnabled && pictureCopyEnabled)
+            {
+                int exportPictures2 = exportPictures * 2;
+                exportCount = exportCount + exportPictures2;
             }
             else
             {
-                pictureExportEnabled = true;
-                pictureCopyEnabled = true;
+                exportCount = exportCount + exportPictures;
+            }
+
+            QProgressDialog pbDialog(this);
+            pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+            pbDialog.setWindowTitle(tr("Export selected..."));
+            pbDialog.setLabelText(tr("Initializing export..."));
+            pbDialog.setRange(0, exportCount);
+
+            QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
+            pbBtn.at(0)->setDisabled(true);
+
+            QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
+            pbBar.at(0)->setTextVisible(false);
+
+            ExportThread *exportThread = new ExportThread(widgets, exportDirectory, pictureCopyEnabled, pictureExportEnabled, exportCount);
+            QObject::connect(exportThread, SIGNAL(exportStringUpdate(QString)), &pbDialog, SLOT(setLabelText(QString)));
+            QObject::connect(exportThread, SIGNAL(exportProgressUpdate(int)), &pbDialog, SLOT(setValue(int)));
+            QObject::connect(exportThread, SIGNAL(exportFinished()), &pbDialog, SLOT(close()));
+            exportThread->start();
+
+            pbDialog.exec();
+            QStringList getFailedSavegames = exportThread->getFailedSavegames();
+            QStringList getFailedCopyPictures = exportThread->getFailedCopyPictures();
+            QStringList getFailedExportPictures = exportThread->getFailedExportPictures();
+
+            QString errorStr;
+            QStringList errorList;
+            errorList << getFailedExportPictures;
+            errorList << getFailedCopyPictures;
+            errorList << getFailedSavegames;
+
+            foreach (const QString &curErrorStr, errorList)
+            {
+                errorStr.append(", " + curErrorStr);
+            }
+            if (errorStr != "")
+            {
+                errorStr.remove(0, 2);
+                QMessageBox::warning(this, tr("Export selected"), tr("Export failed with...\n\n%1").arg(errorStr));
+            }
+
+            if (exportThread->isFinished())
+            {
+                exportThread->deleteLater();
+                delete exportThread;
+            }
+            else
+            {
+                QEventLoop threadFinishLoop;
+                QObject::connect(exportThread, SIGNAL(finished()), &threadFinishLoop, SLOT(quit()));
+                threadFinishLoop.exec();
+                exportThread->deleteLater();
+                delete exportThread;
             }
         }
-
-        // Counting the exports together
-        exportCount = exportCount + exportSavegames;
-        if (pictureExportEnabled && pictureCopyEnabled)
-        {
-            int exportPictures2 = exportPictures * 2;
-            exportCount = exportCount + exportPictures2;
-        }
-        else
-        {
-            exportCount = exportCount + exportPictures;
-        }
-
-        QProgressDialog pbDialog(this);
-        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
-        pbDialog.setWindowTitle(tr("Export selected..."));
-        pbDialog.setLabelText(tr("Initializing export..."));
-        pbDialog.setRange(0, exportCount);
-
-        QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
-        pbBtn.at(0)->setDisabled(true);
-
-        QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
-        pbBar.at(0)->setTextVisible(false);
-
-        ExportThread *exportThread = new ExportThread(widgets, exportDirectory, pictureCopyEnabled, pictureExportEnabled, exportCount);
-        QObject::connect(exportThread, SIGNAL(exportStringUpdate(QString)), &pbDialog, SLOT(setLabelText(QString)));
-        QObject::connect(exportThread, SIGNAL(exportProgressUpdate(int)), &pbDialog, SLOT(setValue(int)));
-        QObject::connect(exportThread, SIGNAL(exportFinished()), &pbDialog, SLOT(close()));
-        exportThread->start();
-
-        pbDialog.exec();
-        QStringList getFailedSavegames = exportThread->getFailedSavegames();
-        QStringList getFailedCopyPictures = exportThread->getFailedCopyPictures();
-        QStringList getFailedExportPictures = exportThread->getFailedExportPictures();
-
-        QString errorStr;
-        QStringList errorList;
-        errorList << getFailedExportPictures;
-        errorList << getFailedCopyPictures;
-        errorList << getFailedSavegames;
-
-        foreach (const QString &curErrorStr, errorList)
-        {
-            errorStr.append(", " + curErrorStr);
-        }
-        if (errorStr != "")
-        {
-            errorStr.remove(0, 2);
-            QMessageBox::warning(this, tr("Export selected"), tr("Export failed with...\n\n%1").arg(errorStr));
-        }
-
-        if (exportThread->isFinished())
-        {
-            exportThread->deleteLater();
-            delete exportThread;
-        }
-        else
-        {
-            QEventLoop threadFinishLoop;
-            QObject::connect(exportThread, SIGNAL(finished()), &threadFinishLoop, SLOT(quit()));
-            threadFinishLoop.exec();
-            exportThread->deleteLater();
-            delete exportThread;
-        }
+    }
+    else
+    {
+        QMessageBox::information(this, tr("Export selected"), tr("No Snapmatic pictures or Savegames files are selected"));
     }
 }
 
 void ProfileInterface::deleteSelected()
 {
-    if (QMessageBox::Yes == QMessageBox::warning(this, tr("Delete selected"), tr("You really want delete the selected content?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+    if (selectedWidgts != 0)
     {
-        foreach (ProfileWidget *widget, widgets.keys())
+        if (QMessageBox::Yes == QMessageBox::warning(this, tr("Remove selected"), tr("You really want remove the selected Snapmatic picutres and Savegame files?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
         {
-            if (widget->isSelected())
+            foreach (ProfileWidget *widget, widgets.keys())
             {
-                if (widget->getWidgetType() == "SnapmaticWidget")
+                if (widget->isSelected())
                 {
-                    SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
-                    SnapmaticPicture *picture = picWidget->getPicture();
-                    QString fileName = picture->getPictureFileName();
-                    if (!QFile::exists(fileName) || QFile::remove(fileName))
+                    if (widget->getWidgetType() == "SnapmaticWidget")
                     {
-                        pictureDeleted_f(picWidget);
+                        SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
+                        SnapmaticPicture *picture = picWidget->getPicture();
+                        QString fileName = picture->getPictureFileName();
+                        if (!QFile::exists(fileName) || QFile::remove(fileName))
+                        {
+                            pictureDeleted_f(picWidget);
+                        }
                     }
-                }
-                else if (widget->getWidgetType() == "SavegameWidget")
-                {
-                    SavegameWidget *sgdWidget = (SavegameWidget*)widget;
-                    SavegameData *savegame = sgdWidget->getSavegame();
-                    QString fileName = savegame->getSavegameFileName();
-                    if (!QFile::exists(fileName) || QFile::remove(fileName))
+                    else if (widget->getWidgetType() == "SavegameWidget")
                     {
-                        savegameDeleted_f(sgdWidget);
+                        SavegameWidget *sgdWidget = (SavegameWidget*)widget;
+                        SavegameData *savegame = sgdWidget->getSavegame();
+                        QString fileName = savegame->getSavegameFileName();
+                        if (!QFile::exists(fileName) || QFile::remove(fileName))
+                        {
+                            savegameDeleted_f(sgdWidget);
+                        }
                     }
                 }
             }
+            if (selectedWidgts != 0)
+            {
+                QMessageBox::warning(this, tr("Remove selected"), tr("Failed at remove the complete selected Snapmatic pictures and/or Savegame files"));
+            }
         }
-        if (selectedWidgts != 0)
-        {
-            QMessageBox::warning(this, tr("Delete selected"), tr("Failed at delete all selected content"));
-        }
+    }
+    else
+    {
+        QMessageBox::information(this, tr("Remove selected"), tr("No Snapmatic pictures or Savegames files are selected"));
     }
 }

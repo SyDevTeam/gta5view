@@ -37,7 +37,7 @@ void ExportThread::run()
     {
         if (widget->isSelected())
         {
-            if (profileMap[widget] == "SnapmaticWidget")
+            if (widget->getWidgetType() == "SnapmaticWidget")
             {
                 SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
                 SnapmaticPicture *picture = picWidget->getPicture();
@@ -73,7 +73,7 @@ void ExportThread::run()
                     }
                 }
             }
-            else if (profileMap[widget] == "SavegameWidget")
+            else if (widget->getWidgetType() == "SavegameWidget")
             {
                 SavegameWidget *sgdWidget = (SavegameWidget*)widget;
                 SavegameData *savegame = sgdWidget->getSavegame();
