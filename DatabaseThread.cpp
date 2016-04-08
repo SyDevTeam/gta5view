@@ -100,7 +100,6 @@ void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int
                 if (netReply->isFinished())
                 {
                     QByteArray crewJson = netReply->readAll();
-                    qDebug() << crewJson;
                     QJsonDocument crewDocument = QJsonDocument::fromJson(crewJson);
                     QJsonObject crewObject = crewDocument.object();
                     QVariantMap crewMap = crewObject.toVariantMap();
