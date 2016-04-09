@@ -46,6 +46,9 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     ui->cmdDelete->setVisible(false);
     ui->cbSelected->setVisible(false);
 
+    QString exportSavegameStr = tr("Export Savegame...");
+    Q_UNUSED(exportSavegameStr)
+
     QPalette palette;
     QColor highlightBackColor = palette.highlight().color();
     QColor highlightTextColor = palette.highlightedText().color();

@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="59"/>
@@ -72,11 +72,11 @@
     </message>
     <message>
         <source>Export</source>
-        <translation>Экспорт</translation>
+        <translation type="obsolete">Экспорт</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Копировать</translation>
+        <translation type="obsolete">Копировать</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="127"/>
@@ -173,7 +173,7 @@
     </message>
     <message>
         <source>Copy picture</source>
-        <translation>Скопировать картинку</translation>
+        <translation type="obsolete">Скопировать картинку</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="46"/>
@@ -230,11 +230,11 @@
     </message>
     <message>
         <source>Import copy</source>
-        <translation>Импортировать копию</translation>
+        <translation type="obsolete">Импортировать копию</translation>
     </message>
     <message>
         <source>Close Profile</source>
-        <translation>Закрыть профиль</translation>
+        <translation type="obsolete">Закрыть профиль</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="100"/>
@@ -374,19 +374,19 @@ Export as:</source>
     </message>
     <message>
         <source>Failed to import copy of Snapmatic picture because the file not begin with PGTA</source>
-        <translation>Не удалось имортировать копию картинки Snapmatic, т.к. файл не начинается с PGTA</translation>
+        <translation type="obsolete">Не удалось имортировать копию картинки Snapmatic, т.к. файл не начинается с PGTA</translation>
     </message>
     <message>
         <source>Failed to import copy of Snapmatic picture because the copy failed</source>
-        <translation>Не получилось имортировать копию картинки Snapmatic, потому что не удалось его скопировать</translation>
+        <translation type="obsolete">Не получилось имортировать копию картинки Snapmatic, потому что не удалось его скопировать</translation>
     </message>
     <message>
         <source>Failed to import copy of Savegame file because the copy failed</source>
-        <translation>Не получилось имортировать копию сохранения, потому что не удалось его скопировать</translation>
+        <translation type="obsolete">Не получилось имортировать копию сохранения, потому что не удалось его скопировать</translation>
     </message>
     <message>
         <source>Failed to import copy of Savegame file because no free Savegame slot left</source>
-        <translation>Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
+        <translation type="obsolete">Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="493"/>
@@ -484,50 +484,55 @@ Export as:</source>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="100"/>
-        <location filename="../SavegameWidget.cpp" line="80"/>
-        <location filename="../SavegameWidget.cpp" line="93"/>
+        <location filename="../SavegameWidget.cpp" line="83"/>
+        <location filename="../SavegameWidget.cpp" line="96"/>
         <source>Delete savegame</source>
         <translation>Удалить сохранение</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="80"/>
+        <location filename="../SavegameWidget.cpp" line="49"/>
+        <source>Export Savegame...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="83"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Вы уверены, что хотите удалить сохранение %1?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="93"/>
+        <location filename="../SavegameWidget.cpp" line="96"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Не удалось удалить сохранение %1</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="169"/>
+        <location filename="../SavegameWidget.cpp" line="172"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="171"/>
+        <location filename="../SavegameWidget.cpp" line="174"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="175"/>
-        <location filename="../SavegameWidget.cpp" line="183"/>
+        <location filename="../SavegameWidget.cpp" line="178"/>
+        <location filename="../SavegameWidget.cpp" line="186"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="176"/>
+        <location filename="../SavegameWidget.cpp" line="179"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="177"/>
-        <location filename="../SavegameWidget.cpp" line="184"/>
+        <location filename="../SavegameWidget.cpp" line="180"/>
+        <location filename="../SavegameWidget.cpp" line="187"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="178"/>
+        <location filename="../SavegameWidget.cpp" line="181"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -538,7 +543,7 @@ Export as:</source>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="47"/>
-        <location filename="../SavegameWidget.cpp" line="170"/>
+        <location filename="../SavegameWidget.cpp" line="173"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
@@ -577,15 +582,15 @@ Export as:</source>
     </message>
     <message>
         <source>Overwrite %1 with current savegame?</source>
-        <translation>Перезаписать %1 текущим сохранением?</translation>
+        <translation type="obsolete">Перезаписать %1 текущим сохранением?</translation>
     </message>
     <message>
         <source>Failed to overwrite %1 with current savegame</source>
-        <translation>Не удалось перезаписать %1 текущим сохранением</translation>
+        <translation type="obsolete">Не удалось перезаписать %1 текущим сохранением</translation>
     </message>
     <message>
         <source>Failed to copy current savegame</source>
-        <translation>Не удалось скопировать текущее сохранение</translation>
+        <translation type="obsolete">Не удалось скопировать текущее сохранение</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="92"/>
@@ -780,15 +785,15 @@ Export as:</source>
     </message>
     <message>
         <source>File</source>
-        <translation>Файл</translation>
+        <translation type="obsolete">Файл</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation>Помощь</translation>
+        <translation type="obsolete">Помощь</translation>
     </message>
     <message>
         <source>About gta5sync</source>
-        <translation>О программе gta5sync</translation>
+        <translation type="obsolete">О программе gta5sync</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="124"/>
@@ -797,7 +802,7 @@ Export as:</source>
     </message>
     <message>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="132"/>
