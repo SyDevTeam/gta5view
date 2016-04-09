@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.0" language="ru_RU">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -19,7 +19,7 @@
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="59"/>
@@ -72,11 +72,11 @@
     </message>
     <message>
         <source>Export</source>
-        <translation type="vanished">Экспорт</translation>
+        <translation>Экспорт</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Копировать</translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="127"/>
@@ -173,7 +173,7 @@
     </message>
     <message>
         <source>Copy picture</source>
-        <translation type="vanished">Скопировать картинку</translation>
+        <translation>Скопировать картинку</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="46"/>
@@ -230,11 +230,11 @@
     </message>
     <message>
         <source>Import copy</source>
-        <translation type="vanished">Импортировать копию</translation>
+        <translation>Импортировать копию</translation>
     </message>
     <message>
         <source>Close Profile</source>
-        <translation type="vanished">Закрыть профиль</translation>
+        <translation>Закрыть профиль</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="100"/>
@@ -374,19 +374,19 @@ Export as:</source>
     </message>
     <message>
         <source>Failed to import copy of Snapmatic picture because the file not begin with PGTA</source>
-        <translation type="vanished">Не удалось имортировать копию картинки Snapmatic, т.к. файл не начинается с PGTA</translation>
+        <translation>Не удалось имортировать копию картинки Snapmatic, т.к. файл не начинается с PGTA</translation>
     </message>
     <message>
         <source>Failed to import copy of Snapmatic picture because the copy failed</source>
-        <translation type="vanished">Не получилось имортировать копию картинки Snapmatic, потому что не удалось его скопировать</translation>
+        <translation>Не получилось имортировать копию картинки Snapmatic, потому что не удалось его скопировать</translation>
     </message>
     <message>
         <source>Failed to import copy of Savegame file because the copy failed</source>
-        <translation type="vanished">Не получилось имортировать копию сохранения, потому что не удалось его скопировать</translation>
+        <translation>Не получилось имортировать копию сохранения, потому что не удалось его скопировать</translation>
     </message>
     <message>
         <source>Failed to import copy of Savegame file because no free Savegame slot left</source>
-        <translation type="vanished">Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
+        <translation>Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="493"/>
@@ -437,7 +437,7 @@ Export as:</source>
     <message>
         <location filename="../SavegameDialog.ui" line="58"/>
         <source>Copy</source>
-        <translation type="unfinished">Копировать</translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="65"/>
@@ -470,7 +470,7 @@ Export as:</source>
     <message>
         <location filename="../SavegameWidget.ui" line="80"/>
         <source>View</source>
-        <translation type="unfinished">Просмотр</translation>
+        <translation>Просмотр</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="90"/>
@@ -577,15 +577,15 @@ Export as:</source>
     </message>
     <message>
         <source>Overwrite %1 with current savegame?</source>
-        <translation type="vanished">Перезаписать %1 текущим сохранением?</translation>
+        <translation>Перезаписать %1 текущим сохранением?</translation>
     </message>
     <message>
         <source>Failed to overwrite %1 with current savegame</source>
-        <translation type="vanished">Не удалось перезаписать %1 текущим сохранением</translation>
+        <translation>Не удалось перезаписать %1 текущим сохранением</translation>
     </message>
     <message>
         <source>Failed to copy current savegame</source>
-        <translation type="vanished">Не удалось скопировать текущее сохранение</translation>
+        <translation>Не удалось скопировать текущее сохранение</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="92"/>
@@ -618,12 +618,12 @@ Export as:</source>
     <message>
         <location filename="../SnapmaticWidget.ui" line="108"/>
         <source>Copy</source>
-        <translation type="unfinished">Копировать</translation>
+        <translation>Копировать</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="118"/>
         <source>Export</source>
-        <translation type="unfinished">Экспорт</translation>
+        <translation>Экспорт</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="128"/>
@@ -697,12 +697,12 @@ Export as:</source>
     <message>
         <location filename="../SnapmaticWidget.ui" line="105"/>
         <source>Copy picture</source>
-        <translation type="unfinished">Скопировать картинку</translation>
+        <translation>Скопировать картинку</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="115"/>
         <source>Export picture</source>
-        <translation type="unfinished">Экспорт картинки</translation>
+        <translation>Экспорт картинки</translation>
     </message>
 </context>
 <context>
@@ -780,15 +780,15 @@ Export as:</source>
     </message>
     <message>
         <source>File</source>
-        <translation type="vanished">Файл</translation>
+        <translation>Файл</translation>
     </message>
     <message>
         <source>Help</source>
-        <translation type="vanished">Помощь</translation>
+        <translation>Помощь</translation>
     </message>
     <message>
         <source>About gta5sync</source>
-        <translation type="vanished">О программе gta5sync</translation>
+        <translation>О программе gta5sync</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="124"/>
@@ -797,7 +797,7 @@ Export as:</source>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Закрыть</translation>
+        <translation>Закрыть</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="132"/>
