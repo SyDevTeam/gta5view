@@ -572,7 +572,7 @@ Export as:</source>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="86"/>
-        <source>Failed to copy current Savegame</source>
+        <source>Failed to export current Savegame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

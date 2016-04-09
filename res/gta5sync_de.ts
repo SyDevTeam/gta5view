@@ -355,22 +355,22 @@
     <message>
         <location filename="../ProfileInterface.cpp" line="384"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlgeschlagen beim Importieren vom Snapmatic Bild, Datei beginnt nicht mit PGTA</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="394"/>
         <source>Failed to import the Snapmatic picture, can&apos;t copy the file into profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlgeschlagen beim Importieren vom Snapmatic Bild, kann Snapmatic Bild nicht ins Profil kopieren </translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="430"/>
         <source>Failed to import the Savegame, can&apos;t copy the file into profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlgeschlagen beim Importieren vom Spielstand, kann Spielstanddatei nicht ins Profil kopieren</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="436"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlgeschlagen beim Importieren vom Spielstand, kein Spielstandslot mehr frei</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="515"/>
@@ -398,7 +398,12 @@ JPG pictures make it possible to open the picture with a Image Viewer
 GTA Snapmatic make it possible to import the picture into the game
 
 Export as:</source>
-        <translation type="unfinished"></translation>
+        <translation>Exportiere Snapmatic Bilder
+
+JPG Bilder machen es möglich sie mit ein Bildansicht Programm zu öffnen
+Das GTA Snapmatic Format macht es möglich sie wieder ins Game zu importieren
+
+Exportieren als:</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="617"/>
@@ -416,12 +421,12 @@ Export as:</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="625"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
-        <translation type="unfinished"></translation>
+        <translation>Möchtest du wirklich die ausgewählten Snapmatic Bilder und Spielstanddateien löschen?</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="655"/>
         <source>Failed at remove the complete selected Snapmatic pictures and/or Savegame files</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlgeschlagen beim kompletten entfernen der ausgewählten Snapmatic Bilder und/oder der Spielstanddateien</translation>
     </message>
     <message>
         <source>Failed to import copy of Snapmatic picture because the file not begin with PGTA</source>
@@ -674,17 +679,21 @@ Export as:</source>
     <message>
         <location filename="../SavegameCopy.cpp" line="69"/>
         <source>Overwrite %1 with current Savegame?</source>
-        <translation type="unfinished"></translation>
+        <translation>Überschreibe %1 mit aktuellen Spielstand?</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="73"/>
         <source>Failed to overwrite %1 with current Savegame</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlgeschlagen beim Überschrieben von %1 mit aktuellen Spielstand</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="86"/>
+        <source>Failed to export current Savegame</source>
+        <translation>Fehlgeschlagen beim Exportieren vom aktuellen Spielstand</translation>
+    </message>
+    <message>
         <source>Failed to copy current Savegame</source>
-        <translation type="unfinished"></translation>
+        <translation>Fehlgeschlagen beim Kopieren vom aktuellen Spielstand</translation>
     </message>
     <message>
         <source>Overwrite %1 with current savegame?</source>

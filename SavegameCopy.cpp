@@ -83,7 +83,7 @@ fileDialogPreSave:
             bool isCopied = QFile::copy(sgdPath, selectedFile);
             if (!isCopied)
             {
-                QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Failed to copy current Savegame"));
+                QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Failed to export current Savegame"));
                 goto fileDialogPreSave;
             }
         }
