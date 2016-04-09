@@ -775,14 +775,22 @@ Exportieren als:</translation>
         <translation>&amp;Exportieren</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="179"/>
         <source>Export as &amp;JPG picture</source>
         <translation>Exportiere als &amp;JPG Bild</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="180"/>
         <source>Export as &amp;GTA Snapmatic</source>
         <translation>Exportiere als &amp;GTA Snapmatic</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="179"/>
+        <source>Export as &amp;JPG picture...</source>
+        <translation>Exportiere als &amp;JPG Bild...</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="180"/>
+        <source>Export as &amp;GTA Snapmatic...</source>
+        <translation>Exportiere als &amp;GTA Snapmatic...</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="181"/>

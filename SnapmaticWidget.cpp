@@ -176,8 +176,8 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
     QMenu exportMenu(tr("&Export"), this);
-    exportMenu.addAction(tr("Export as &JPG picture"), this, SLOT(on_cmdExport_clicked()));
-    exportMenu.addAction(tr("Export as &GTA Snapmatic"), this, SLOT(on_cmdCopy_clicked()));
+    exportMenu.addAction(tr("Export as &JPG picture..."), this, SLOT(on_cmdExport_clicked()));
+    exportMenu.addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(on_cmdCopy_clicked()));
     contextMenu.addAction(tr("&View"), this, SLOT(on_cmdView_clicked()));
     contextMenu.addMenu(&exportMenu);
     contextMenu.addAction(tr("&Remove"), this, SLOT(on_cmdDelete_clicked()));

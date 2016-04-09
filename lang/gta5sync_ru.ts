@@ -654,12 +654,12 @@ Export as:</source>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="179"/>
-        <source>Export as &amp;JPG picture</source>
+        <source>Export as &amp;JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="180"/>
-        <source>Export as &amp;GTA Snapmatic</source>
+        <source>Export as &amp;GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
