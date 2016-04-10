@@ -45,9 +45,7 @@ QString AppEnv::getGameFolder(bool *ok)
 #ifdef GTA5SYNC_WIN
             _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
-            char* GTAV_FOLDER_char = QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str();
-            putenv(GTAV_FOLDER_char);
-            delete GTAV_FOLDER_char;
+            setenv("GTAV_FOLDER", dir.absolutePath().toStdString().c_str(), 1);
 #endif
             return dir.absolutePath();
         }
@@ -73,9 +71,7 @@ QString AppEnv::getGameFolder(bool *ok)
 #ifdef GTA5SYNC_WIN
         _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
-        char* GTAV_FOLDER_char = QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str();
-        putenv(GTAV_FOLDER_char);
-        delete GTAV_FOLDER_char;
+        setenv("GTAV_FOLDER", dir.absolutePath().toStdString().c_str(), 1);
 #endif
         return dir.absolutePath();
     }
@@ -88,9 +84,7 @@ QString AppEnv::getGameFolder(bool *ok)
 #ifdef GTA5SYNC_WIN
         _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
-        char* GTAV_FOLDER_char = QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str();
-        putenv(GTAV_FOLDER_char);
-        delete GTAV_FOLDER_char;
+        setenv("GTAV_FOLDER", dir.absolutePath().toStdString().c_str(), 1);
 #endif
         return dir.absolutePath();
     }
@@ -109,9 +103,7 @@ bool AppEnv::setGameFolder(QString gameFolder)
 #ifdef GTA5SYNC_WIN
         _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
-        char* GTAV_FOLDER_char = QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str();
-        putenv(GTAV_FOLDER_char);
-        delete GTAV_FOLDER_char;
+        setenv("GTAV_FOLDER", dir.absolutePath().toStdString().c_str(), 1);
 #endif
         return true;
     }
