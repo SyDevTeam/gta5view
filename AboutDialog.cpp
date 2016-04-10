@@ -32,8 +32,3 @@ AboutDialog::~AboutDialog()
 {
     delete ui;
 }
-
-void AboutDialog::on_cmdClose_clicked()
-{
-    this->close();
-}

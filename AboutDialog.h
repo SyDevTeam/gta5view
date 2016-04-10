@@ -34,7 +34,6 @@ public:
     ~AboutDialog();
 
 private slots:
-    void on_cmdClose_clicked();
 
 private:
     Ui::AboutDialog *ui;

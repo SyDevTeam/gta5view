@@ -110,5 +110,22 @@
   </layout>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>cmdClose</sender>
+   <signal>clicked()</signal>
+   <receiver>AboutDialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>327</x>
+     <y>228</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>187</x>
+     <y>124</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
