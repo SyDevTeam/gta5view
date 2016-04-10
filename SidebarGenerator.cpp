@@ -41,6 +41,7 @@ QList<QUrl> SidebarGenerator::generateSidebarUrls(QList<QUrl> sidebarUrls)
     dir.setPath(StandardPaths::documentsLocation());
     if (dir.exists())
     {
+        sidebarUrls << QUrl::fromLocalFile(dir.absolutePath());
     }
 
     bool gameFolderExists;
