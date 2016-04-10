@@ -58,7 +58,7 @@ void ProfileLoader::run()
     foreach(const QString &SavegameFile, SavegameFiles)
     {
         emit loadingProgress(curFile, maximumV);
-        QString sgdPath = profileFolder + "/" + SavegameFile;
+        QString sgdPath = profileFolder + QDir::separator() + SavegameFile;
         SavegameData *savegame = new SavegameData(sgdPath);
         if (savegame->readingSavegame())
         {
@@ -69,7 +69,7 @@ void ProfileLoader::run()
     foreach(const QString &SnapmaticPic, SnapmaticPics)
     {
         emit loadingProgress(curFile, maximumV);
-        QString picturePath = profileFolder + "/" + SnapmaticPic;
+        QString picturePath = profileFolder + QDir::separator() + SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
         if (picture->readingPicture())
         {

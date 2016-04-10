@@ -25,6 +25,7 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     AboutDialog.cpp \
+    AppEnv.cpp \
     CrewDatabase.cpp \
     DatabaseThread.cpp \
     ExportThread.cpp \
@@ -51,6 +52,7 @@ SOURCES += main.cpp \
 
 HEADERS  += \
     AboutDialog.h \
+    AppEnv.h \
     CrewDatabase.h \
     DatabaseThread.h \
     ExportThread.h \

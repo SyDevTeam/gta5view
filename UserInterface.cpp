@@ -21,6 +21,7 @@
 #include "ProfileInterface.h"
 #include "StandardPaths.h"
 #include "AboutDialog.h"
+#include "AppEnv.h"
 #include <QHBoxLayout>
 #include <QSpacerItem>
 #include <QPushButton>
@@ -45,24 +46,9 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
 
-    // init settings
-    QSettings SyncSettings("Syping", "gta5sync");
-    SyncSettings.beginGroup("dir");
-    bool forceDir = SyncSettings.value("force", false).toBool();
-
-    // init folder
-    QString GTAV_defaultFolder = StandardPaths::documentsLocation() + "/Rockstar Games/GTA V";
-    QDir GTAV_Dir;
-    if (forceDir)
-    {
-        GTAV_Folder = SyncSettings.value("dir", GTAV_defaultFolder).toString();
-    }
-    else
-    {
-        GTAV_Folder = GTAV_defaultFolder;
-    }
-    GTAV_Dir.setPath(GTAV_Folder);
-    if (GTAV_Dir.exists())
+    bool folderExists;
+    GTAV_Folder = AppEnv::getGameFolder(&folderExists);
+    if (folderExists)
     {
         QDir::setCurrent(GTAV_Folder);
     }
@@ -70,13 +56,13 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     {
         QMessageBox::warning(this, tr("gta5sync"), tr("Grand Theft Auto V Folder not found!"));
     }
-    SyncSettings.endGroup();
 
     // profiles init
+    QSettings SyncSettings("Syping", "gta5sync");
     SyncSettings.beginGroup("Profile");
     QString defaultProfile = SyncSettings.value("Default", "").toString();
     QDir GTAV_ProfilesDir;
-    GTAV_ProfilesFolder = GTAV_Folder + "/Profiles";
+    GTAV_ProfilesFolder = GTAV_Folder + QDir::separator() + "Profiles";
     GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
 
     QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
@@ -90,7 +76,6 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     {
         openProfile(defaultProfile);
     }
-    SyncSettings.endGroup();
 }
 
 void UserInterface::setupProfileUi(QStringList GTAV_Profiles)

@@ -384,9 +384,9 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
         QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, file not begin with PGTA"));
         return false;
     }
-    else if (QFile::copy(picPath, profileFolder + "/" + picFileName))
+    else if (QFile::copy(picPath, profileFolder + QDir::separator() + picFileName))
     {
-        pictureLoaded_f(picture, profileFolder + "/" + picFileName, true);
+        pictureLoaded_f(picture, profileFolder + QDir::separator() + picFileName, true);
         return true;
     }
     else
@@ -411,7 +411,7 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         }
         sgdFileName = "SGTA500" + sgdNumber;
 
-        if (!QFile::exists(profileFolder + "/" + sgdFileName))
+        if (!QFile::exists(profileFolder + QDir::separator() + sgdFileName))
         {
             foundFree = true;
         }
@@ -420,9 +420,9 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
 
     if (foundFree)
     {
-        if (QFile::copy(sgdPath, profileFolder + "/" + sgdFileName))
+        if (QFile::copy(sgdPath, profileFolder + QDir::separator() + sgdFileName))
         {
-            savegameLoaded_f(savegame, profileFolder + "/" + sgdFileName, true);
+            savegameLoaded_f(savegame, profileFolder + QDir::separator() + sgdFileName, true);
             return true;
         }
         else
