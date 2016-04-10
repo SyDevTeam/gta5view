@@ -26,6 +26,7 @@ class AppEnv
 public:
     AppEnv();
     static QString getGameFolder(bool *ok = 0);
+    static bool setGameFolder(QString gameFolder);
 };
 
 #endif // APPENV_H

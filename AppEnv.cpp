@@ -45,7 +45,9 @@ QString AppEnv::getGameFolder(bool *ok)
 #ifdef GTA5SYNC_WIN
             _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
-            putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
+            char* GTAV_FOLDER_char = QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str();
+            putenv(GTAV_FOLDER_char);
+            delete GTAV_FOLDER_char;
 #endif
             return dir.absolutePath();
         }
@@ -71,7 +73,9 @@ QString AppEnv::getGameFolder(bool *ok)
 #ifdef GTA5SYNC_WIN
         _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
-        putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
+        char* GTAV_FOLDER_char = QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str();
+        putenv(GTAV_FOLDER_char);
+        delete GTAV_FOLDER_char;
 #endif
         return dir.absolutePath();
     }
@@ -84,7 +88,9 @@ QString AppEnv::getGameFolder(bool *ok)
 #ifdef GTA5SYNC_WIN
         _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
-        putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
+        char* GTAV_FOLDER_char = QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str();
+        putenv(GTAV_FOLDER_char);
+        delete GTAV_FOLDER_char;
 #endif
         return dir.absolutePath();
     }
@@ -92,4 +98,22 @@ QString AppEnv::getGameFolder(bool *ok)
     retok = false;
     ok = &retok;
     return "";
+}
+
+bool AppEnv::setGameFolder(QString gameFolder)
+{
+    QDir dir;
+    dir.setPath(gameFolder);
+    if (dir.exists())
+    {
+#ifdef GTA5SYNC_WIN
+        _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
+#else
+        char* GTAV_FOLDER_char = QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str();
+        putenv(GTAV_FOLDER_char);
+        delete GTAV_FOLDER_char;
+#endif
+        return true;
+    }
+    return false;
 }
