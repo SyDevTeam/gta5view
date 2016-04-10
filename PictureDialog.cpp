@@ -163,11 +163,6 @@ void PictureDialog::playerNameUpdated()
     }
 }
 
-void PictureDialog::on_cmdClose_clicked()
-{
-    this->close();
-}
-
 void PictureDialog::exportSnapmaticPicture()
 {
     PictureExport::exportPicture(this, smpic);

@@ -42,7 +42,6 @@ public slots:
 private slots:
     void copySnapmaticPicture();
     void exportSnapmaticPicture();
-    void on_cmdClose_clicked();
     void on_labPicture_mouseDoubleClicked();
 
 private:
