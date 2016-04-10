@@ -18,6 +18,7 @@
 
 #include "SidebarGenerator.h"
 #include "StandardPaths.h"
+#include "AppEnv.h"
 #include <QList>
 #include <QUrl>
 #include <QDir>
@@ -40,11 +41,13 @@ QList<QUrl> SidebarGenerator::generateSidebarUrls(QList<QUrl> sidebarUrls)
     dir.setPath(StandardPaths::documentsLocation());
     if (dir.exists())
     {
-        sidebarUrls.append(QUrl::fromLocalFile(dir.absolutePath()));
-        if (dir.cd("Rockstar Games/GTA V"))
-        {
-            sidebarUrls << QUrl::fromLocalFile(dir.absolutePath());
-        }
+    }
+
+    bool gameFolderExists;
+    QString gameFolder = AppEnv::getGameFolder(&gameFolderExists);
+    if (gameFolderExists)
+    {
+        QUrl::fromLocalFile(gameFolder);
     }
 
     dir.setPath(StandardPaths::desktopLocation());
