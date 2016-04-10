@@ -80,8 +80,14 @@
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</string>
         </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
         <property name="openExternalLinks">
          <bool>true</bool>
+        </property>
+        <property name="textInteractionFlags">
+         <set>Qt::TextBrowserInteraction</set>
         </property>
        </widget>
       </item>
