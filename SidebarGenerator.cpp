@@ -47,7 +47,7 @@ QList<QUrl> SidebarGenerator::generateSidebarUrls(QList<QUrl> sidebarUrls)
     QString gameFolder = AppEnv::getGameFolder(&gameFolderExists);
     if (gameFolderExists)
     {
-        QUrl::fromLocalFile(gameFolder);
+        sidebarUrls << QUrl::fromLocalFile(gameFolder);
     }
 
     dir.setPath(StandardPaths::desktopLocation());
