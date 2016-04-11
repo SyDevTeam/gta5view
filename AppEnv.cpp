@@ -36,7 +36,6 @@ QString AppEnv::getGameFolder(bool *ok)
     QDir dir;
     bool retok;
     QString GTAV_FOLDER(getenv("GTAV_FOLDER"));
-    qDebug() << GTAV_FOLDER;
     if (GTAV_FOLDER != "")
     {
         dir.setPath(GTAV_FOLDER);
