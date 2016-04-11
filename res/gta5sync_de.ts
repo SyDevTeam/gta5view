@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -47,14 +47,14 @@
         <translation>%1 - Snapmatic Bildansicht</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="120"/>
+        <location filename="../PictureDialog.ui" line="126"/>
         <location filename="../PictureCopy.cpp" line="47"/>
         <location filename="../PictureExport.cpp" line="46"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="130"/>
+        <location filename="../PictureDialog.ui" line="136"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
@@ -92,7 +92,7 @@
         <translation type="obsolete">Kopieren</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="127"/>
+        <location filename="../PictureDialog.ui" line="133"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -219,7 +219,7 @@
         <translation type="obsolete">JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="117"/>
+        <location filename="../PictureDialog.ui" line="123"/>
         <source>Export picture</source>
         <translation>Bild exportieren</translation>
     </message>
@@ -914,7 +914,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="124"/>
+        <location filename="../UserInterface.ui" line="167"/>
         <source>Ctrl+A</source>
         <translation>Strg+A</translation>
     </message>
@@ -927,7 +927,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Optionen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="148"/>
+        <location filename="../UserInterface.ui" line="191"/>
         <source>Ctrl+O</source>
         <translation>Strg+O</translation>
     </message>
@@ -936,7 +936,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="156"/>
+        <location filename="../UserInterface.ui" line="199"/>
         <source>Ctrl+S</source>
         <translation>Strg+S</translation>
     </message>
@@ -953,7 +953,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Auswahl exportieren</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="172"/>
+        <location filename="../UserInterface.ui" line="215"/>
         <source>Ctrl+E</source>
         <translation>Strg+E</translation>
     </message>
@@ -962,7 +962,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Auswahl löschen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="164"/>
+        <location filename="../UserInterface.ui" line="207"/>
         <source>Ctrl+D</source>
         <translation>Strg+D</translation>
     </message>
@@ -971,7 +971,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Schließen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="132"/>
+        <location filename="../UserInterface.ui" line="175"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
@@ -981,73 +981,73 @@ Exportieren als:</translation>
         <translation>Profil auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="86"/>
+        <location filename="../UserInterface.ui" line="129"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="93"/>
+        <location filename="../UserInterface.ui" line="136"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="99"/>
+        <location filename="../UserInterface.ui" line="142"/>
         <source>&amp;Edit</source>
         <translation>Bearb&amp;eiten</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="103"/>
+        <location filename="../UserInterface.ui" line="146"/>
         <source>&amp;Profile</source>
         <translation>&amp;Profil</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="121"/>
+        <location filename="../UserInterface.ui" line="164"/>
         <source>&amp;About gta5sync</source>
         <translation>&amp;Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="129"/>
-        <location filename="../UserInterface.cpp" line="127"/>
+        <location filename="../UserInterface.ui" line="103"/>
+        <location filename="../UserInterface.ui" line="172"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="137"/>
+        <location filename="../UserInterface.ui" line="180"/>
         <source>Select &amp;Profile</source>
         <translation>&amp;Profil auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="140"/>
+        <location filename="../UserInterface.ui" line="183"/>
         <source>Ctrl+P</source>
         <translation>Strg+P</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="145"/>
+        <location filename="../UserInterface.ui" line="188"/>
         <source>&amp;Options</source>
         <translation>&amp;Optionen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="153"/>
+        <location filename="../UserInterface.ui" line="196"/>
         <source>Select &amp;All</source>
         <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="161"/>
+        <location filename="../UserInterface.ui" line="204"/>
         <source>&amp;Deselect All</source>
         <translation>Alles a&amp;bwählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="169"/>
+        <location filename="../UserInterface.ui" line="212"/>
         <source>&amp;Export selected...</source>
         <translation>Auswahl &amp;exportieren...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="177"/>
+        <location filename="../UserInterface.ui" line="220"/>
         <source>&amp;Remove selected</source>
         <translation>Auswahl entfe&amp;rnen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="180"/>
+        <location filename="../UserInterface.ui" line="223"/>
         <source>Ctrl+R</source>
         <translation>Strg+R</translation>
     </message>
@@ -1056,23 +1056,33 @@ Exportieren als:</translation>
         <translation type="obsolete">GTA V Ordner nicht gefunden!</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="46"/>
-        <location filename="../UserInterface.cpp" line="181"/>
+        <location filename="../UserInterface.cpp" line="49"/>
+        <location filename="../UserInterface.cpp" line="199"/>
         <source>Select Profile</source>
         <translation>Profil auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="71"/>
+        <location filename="../UserInterface.cpp" line="62"/>
+        <location filename="../UserInterface.cpp" line="150"/>
+        <source>Select GTA V Folder...</source>
+        <translation>Wähle GTA V Ordner...</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="114"/>
+        <source>Change GTA V &amp;Folder</source>
+        <translation>GTA V &amp;Ordner ändern</translation>
+    </message>
+    <message>
         <source>gta5sync</source>
-        <translation>gta5sync</translation>
+        <translation type="vanished">gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="71"/>
         <source>Grand Theft Auto V Folder not found!</source>
-        <translation>Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
+        <translation type="vanished">Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="100"/>
+        <location filename="../UserInterface.cpp" line="107"/>
+        <location filename="../UserInterface.cpp" line="137"/>
         <source>&amp;Reload</source>
         <translation>&amp;Neuladen</translation>
     </message>
@@ -1081,14 +1091,12 @@ Exportieren als:</translation>
         <translation type="obsolete">Neuladen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="148"/>
         <source>Reload profiles</source>
-        <translation>Profile neuladen</translation>
+        <translation type="vanished">Profile neuladen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="148"/>
         <source>Not able to reload profiles</source>
-        <translation>Nicht fähig Profile neuzuladen</translation>
+        <translation type="vanished">Nicht fähig Profile neuzuladen</translation>
     </message>
 </context>
 </TS>
