@@ -723,63 +723,63 @@ Export as:</source>
         <translation>Выбор профиля</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="129"/>
+        <location filename="../UserInterface.ui" line="136"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="136"/>
+        <location filename="../UserInterface.ui" line="143"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="142"/>
+        <location filename="../UserInterface.ui" line="149"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="146"/>
+        <location filename="../UserInterface.ui" line="153"/>
         <source>&amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="164"/>
+        <location filename="../UserInterface.ui" line="171"/>
         <source>&amp;About gta5sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="103"/>
-        <location filename="../UserInterface.ui" line="172"/>
+        <location filename="../UserInterface.ui" line="110"/>
+        <location filename="../UserInterface.ui" line="179"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="188"/>
+        <location filename="../UserInterface.ui" line="195"/>
         <source>&amp;Options</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="196"/>
+        <location filename="../UserInterface.ui" line="203"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="204"/>
+        <location filename="../UserInterface.ui" line="211"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="212"/>
+        <location filename="../UserInterface.ui" line="219"/>
         <source>&amp;Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="220"/>
+        <location filename="../UserInterface.ui" line="227"/>
         <source>&amp;Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="223"/>
+        <location filename="../UserInterface.ui" line="230"/>
         <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
@@ -796,7 +796,7 @@ Export as:</source>
         <translation type="obsolete">О программе gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="167"/>
+        <location filename="../UserInterface.ui" line="174"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
@@ -805,55 +805,55 @@ Export as:</source>
         <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="175"/>
+        <location filename="../UserInterface.ui" line="182"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="180"/>
+        <location filename="../UserInterface.ui" line="187"/>
         <source>Select &amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="183"/>
+        <location filename="../UserInterface.ui" line="190"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="191"/>
+        <location filename="../UserInterface.ui" line="198"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="199"/>
+        <location filename="../UserInterface.ui" line="206"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="215"/>
+        <location filename="../UserInterface.ui" line="222"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="207"/>
+        <location filename="../UserInterface.ui" line="214"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="49"/>
-        <location filename="../UserInterface.cpp" line="199"/>
+        <location filename="../UserInterface.cpp" line="178"/>
         <source>Select Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="62"/>
-        <location filename="../UserInterface.cpp" line="150"/>
+        <location filename="../UserInterface.cpp" line="129"/>
         <source>Select GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="114"/>
-        <source>Change GTA V &amp;Folder</source>
+        <location filename="../UserInterface.cpp" line="104"/>
+        <source>Select GTA V &amp;Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -861,8 +861,7 @@ Export as:</source>
         <translation type="vanished">gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="107"/>
-        <location filename="../UserInterface.cpp" line="137"/>
+        <location filename="../UserInterface.ui" line="103"/>
         <source>&amp;Reload</source>
         <translation type="unfinished"></translation>
     </message>

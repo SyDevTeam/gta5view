@@ -44,7 +44,7 @@ private slots:
     void profileLoaded();
     void changeFolder_clicked();
     void profileButton_clicked();
-    void reloadProfiles_clicked();
+    void on_cmdReload_clicked();
     void on_actionExit_triggered();
     void on_actionSelect_profile_triggered();
     void on_actionAbout_gta5sync_triggered();

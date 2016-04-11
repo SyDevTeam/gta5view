@@ -99,26 +99,15 @@ void UserInterface::setupDirEnv()
 
 void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
 {
-    bool profilesFound = true;
     if (GTAV_Profiles.length() == 0)
     {
-        profilesFound = false;
-
-        QPushButton *reloadBtn = new QPushButton(tr("&Reload"), ui->swSelection);
-        reloadBtn->setObjectName("cmdReload");
-        reloadBtn->setMinimumSize(0, 40);
-        reloadBtn->setAutoDefault(true);
-        ui->vlButtons->addWidget(reloadBtn);
-        profileBtns.append(reloadBtn);
-
-        QPushButton *changeDirBtn = new QPushButton(tr("Change GTA V &Folder"), ui->swSelection);
+        QPushButton *changeDirBtn = new QPushButton(tr("Select GTA V &Folder..."), ui->swSelection);
         changeDirBtn->setObjectName("cmdChangeDir");
         changeDirBtn->setMinimumSize(0, 40);
         changeDirBtn->setAutoDefault(true);
         ui->vlButtons->addWidget(changeDirBtn);
         profileBtns.append(changeDirBtn);
 
-        QObject::connect(reloadBtn, SIGNAL(clicked(bool)), this, SLOT(reloadProfiles_clicked()));
         QObject::connect(changeDirBtn, SIGNAL(clicked(bool)), this, SLOT(changeFolder_clicked()));
     }
     else foreach(const QString &GTAV_Profile, GTAV_Profiles)
@@ -132,16 +121,6 @@ void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
 
         QObject::connect(profileBtn, SIGNAL(clicked(bool)), this, SLOT(profileButton_clicked()));
     }
-    if (profilesFound)
-    {
-        QPushButton *reloadBtn = new QPushButton(tr("&Reload"), ui->swSelection);
-        reloadBtn->setObjectName("cmdReload");
-        reloadBtn->setAutoDefault(true);
-        ui->hlButtons->insertWidget(1, reloadBtn);
-        profileBtns.append(reloadBtn);
-
-        QObject::connect(reloadBtn, SIGNAL(clicked(bool)), this, SLOT(reloadProfiles_clicked()));
-    }
     profileBtns.at(0)->setFocus();
 }
 
@@ -152,11 +131,11 @@ void UserInterface::changeFolder_clicked()
     {
         QDir::setCurrent(GTAV_Folder);
         AppEnv::setGameFolder(GTAV_Folder);
-        reloadProfiles_clicked();
+        on_cmdReload_clicked();
     }
 }
 
-void UserInterface::reloadProfiles_clicked()
+void UserInterface::on_cmdReload_clicked()
 {
     foreach(QPushButton *profileBtn, profileBtns)
     {

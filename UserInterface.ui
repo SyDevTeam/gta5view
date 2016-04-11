@@ -98,6 +98,13 @@
            </spacer>
           </item>
           <item>
+           <widget class="QPushButton" name="cmdReload">
+            <property name="text">
+             <string>&amp;Reload</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="cmdClose">
             <property name="text">
              <string>&amp;Close</string>
