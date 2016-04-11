@@ -81,9 +81,10 @@ void SnapmaticWidget::on_cmdView_clicked()
     QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(playerNameUpdated()));
 
     // show picture dialog
-    picDialog->show();
+    picDialog->showNormal();
+    picDialog->setMinimumSize(picDialog->size());
+    picDialog->setMaximumSize(picDialog->size());
     picDialog->exec();
-    picDialog->deleteLater();
     delete picDialog;
 }
 
