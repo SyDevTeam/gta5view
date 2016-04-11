@@ -32,17 +32,14 @@ AppEnv::AppEnv()
 
 QString AppEnv::getGameFolder(bool *ok)
 {
-    Q_UNUSED(ok)
     QDir dir;
-    bool retok;
     QString GTAV_FOLDER(getenv("GTAV_FOLDER"));
     if (GTAV_FOLDER != "")
     {
         dir.setPath(GTAV_FOLDER);
         if (dir.exists())
         {
-            retok = true;
-            ok = &retok;
+            *ok = true;
 #ifdef GTA5SYNC_WIN
             _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
@@ -67,8 +64,7 @@ QString AppEnv::getGameFolder(bool *ok)
     dir.setPath(GTAV_returnFolder);
     if (dir.exists())
     {
-        retok = true;
-        ok = &retok;
+        *ok = true;
 #ifdef GTA5SYNC_WIN
         _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
@@ -80,8 +76,7 @@ QString AppEnv::getGameFolder(bool *ok)
     dir.setPath(GTAV_defaultFolder);
     if (dir.exists())
     {
-        retok = true;
-        ok = &retok;
+        *ok = true;
 #ifdef GTA5SYNC_WIN
         _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
 #else
@@ -90,8 +85,7 @@ QString AppEnv::getGameFolder(bool *ok)
         return dir.absolutePath();
     }
 
-    retok = false;
-    ok = &retok;
+    *ok = false;
     return "";
 }
 
