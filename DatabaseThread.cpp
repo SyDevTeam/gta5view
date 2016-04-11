@@ -43,12 +43,12 @@ void DatabaseThread::run()
     // Quick time scan
     if (crewList.length() <= 3)
     {
-        scanCrewMembersList(crewList, 3, 1000);
+        scanCrewMembersList(crewList, 3, 2500);
         emit playerNameUpdated();
     }
     else if (crewList.length() <= 5)
     {
-        scanCrewMembersList(crewList, 2, 1000);
+        scanCrewMembersList(crewList, 2, 2500);
         emit playerNameUpdated();
     }
 

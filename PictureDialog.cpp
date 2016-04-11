@@ -125,14 +125,6 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         ui->labJSON->setText(jsonDrawString.arg("0.0", "0.0", "0.0", tr("No player"), tr("No crew")));
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
     }
-
-    int jsn_h = ui->jsonFrame->height();
-    int spc_h = layout()->spacing();
-    int pix_h = snapmaticPicture.height();
-    int frm_h = jsn_h+spc_h+pix_h;
-
-    this->setMinimumSize(960, frm_h);
-    this->setMaximumSize(960, frm_h);
 }
 
 void PictureDialog::playerNameUpdated()

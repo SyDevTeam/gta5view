@@ -516,8 +516,18 @@ void ProfileInterface::exportSelected()
                 inputDialogItems << tr("JPG pictures only");
                 inputDialogItems << tr("GTA Snapmatic only");
 
+                QString ExportPreSpan;
+                QString ExportPostSpan;
+#ifdef GTA5SYNC_WIN
+                ExportPreSpan = "<span style=\"color: #003399; font-size: 12pt\">";
+                ExportPostSpan = "</span>";
+#else
+                ExportPreSpan = "<span style=\"font-weight: bold\">";
+                ExportPostSpan = "</span>";
+#endif
+
                 bool itemSelected = false;
-                QString selectedItem = inputDialog.getItem(this, tr("Export selected"), tr("Export Snapmatic pictures\n\nJPG pictures make it possible to open the picture with a Image Viewer\nGTA Snapmatic make it possible to import the picture into the game\n\nExport as:"), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+                QString selectedItem = inputDialog.getItem(this, tr("Export selected"), tr("%1Export Snapmatic pictures%2<br><br>JPG pictures make it possible to open the picture with a Image Viewer<br>GTA Snapmatic make it possible to import the picture into the game<br><br>Export as:").arg(ExportPreSpan, ExportPostSpan), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
                 if (itemSelected)
                 {
                     if (selectedItem == tr("JPG pictures and GTA Snapmatic"))
