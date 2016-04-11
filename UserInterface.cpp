@@ -136,9 +136,8 @@ void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
     {
         QPushButton *reloadBtn = new QPushButton(tr("&Reload"), ui->swSelection);
         reloadBtn->setObjectName("cmdReload");
-        reloadBtn->setMinimumSize(0, 40);
         reloadBtn->setAutoDefault(true);
-        ui->vlButtons->addWidget(reloadBtn);
+        ui->hlButtons->insertWidget(1, reloadBtn);
         profileBtns.append(reloadBtn);
 
         QObject::connect(reloadBtn, SIGNAL(clicked(bool)), this, SLOT(reloadProfiles_clicked()));

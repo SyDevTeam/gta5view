@@ -100,7 +100,7 @@
           <item>
            <widget class="QPushButton" name="cmdClose">
             <property name="text">
-             <string>Close</string>
+             <string>&amp;Close</string>
             </property>
             <property name="autoDefault">
              <bool>true</bool>
