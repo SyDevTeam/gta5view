@@ -36,11 +36,13 @@ class UserInterface : public QMainWindow
     Q_OBJECT
 public:
     explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
+    void setupDirEnv();
     ~UserInterface();
 
 private slots:
     void closeProfile();
     void profileLoaded();
+    void changeFolder_clicked();
     void profileButton_clicked();
     void reloadProfiles_clicked();
     void on_actionExit_triggered();
@@ -57,6 +59,7 @@ private:
     DatabaseThread *threadDB;
     Ui::UserInterface *ui;
     ProfileInterface *profileUI;
+    QList<QPushButton*> profileBtns;
     bool profileOpen;
     QString defaultWindowTitle;
     QString GTAV_Folder;

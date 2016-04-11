@@ -21,7 +21,9 @@
 #include "ProfileInterface.h"
 #include "StandardPaths.h"
 #include "AboutDialog.h"
+#include "IconLoader.h"
 #include "AppEnv.h"
+#include <QFileDialog>
 #include <QHBoxLayout>
 #include <QSpacerItem>
 #include <QPushButton>
@@ -45,7 +47,10 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     defaultWindowTitle = this->windowTitle();
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
+}
 
+void UserInterface::setupDirEnv()
+{
     bool folderExists;
     GTAV_Folder = AppEnv::getGameFolder(&folderExists);
     if (folderExists)
@@ -54,40 +59,67 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     }
     else
     {
-        QMessageBox::warning(this, tr("gta5sync"), tr("Grand Theft Auto V Folder not found!"));
+        GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+        if (QFileInfo(GTAV_Folder).exists())
+        {
+            folderExists = true;
+            QDir::setCurrent(GTAV_Folder);
+            AppEnv::setGameFolder(GTAV_Folder);
+        }
     }
 
     // profiles init
     QSettings SyncSettings("Syping", "gta5sync");
     SyncSettings.beginGroup("Profile");
     QString defaultProfile = SyncSettings.value("Default", "").toString();
-    QDir GTAV_ProfilesDir;
-    GTAV_ProfilesFolder = GTAV_Folder + QDir::separator() + "Profiles";
-    GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
 
-    QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
-    setupProfileUi(GTAV_Profiles);
-
-    if (GTAV_Profiles.length() == 1)
+    if (folderExists)
     {
-        openProfile(GTAV_Profiles.at(0));
+        QDir GTAV_ProfilesDir;
+        GTAV_ProfilesFolder = GTAV_Folder + QDir::separator() + "Profiles";
+        GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
+
+        QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
+        setupProfileUi(GTAV_Profiles);
+
+        if (GTAV_Profiles.length() == 1)
+        {
+            openProfile(GTAV_Profiles.at(0));
+        }
+        else if(GTAV_Profiles.contains(defaultProfile))
+        {
+            openProfile(defaultProfile);
+        }
     }
-    else if(GTAV_Profiles.contains(defaultProfile))
+    else
     {
-        openProfile(defaultProfile);
+        setupProfileUi(QStringList());
     }
 }
 
 void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
 {
+    bool profilesFound = true;
     if (GTAV_Profiles.length() == 0)
     {
+        profilesFound = false;
+
         QPushButton *reloadBtn = new QPushButton(tr("&Reload"), ui->swSelection);
-        reloadBtn->setObjectName("Reload");
+        reloadBtn->setObjectName("cmdReload");
+        reloadBtn->setMinimumSize(0, 40);
         reloadBtn->setAutoDefault(true);
-        ui->swSelection->layout()->addWidget(reloadBtn);
+        ui->vlButtons->addWidget(reloadBtn);
+        profileBtns.append(reloadBtn);
+
+        QPushButton *changeDirBtn = new QPushButton(tr("Change GTA V &Folder"), ui->swSelection);
+        changeDirBtn->setObjectName("cmdChangeDir");
+        changeDirBtn->setMinimumSize(0, 40);
+        changeDirBtn->setAutoDefault(true);
+        ui->vlButtons->addWidget(changeDirBtn);
+        profileBtns.append(changeDirBtn);
 
         QObject::connect(reloadBtn, SIGNAL(clicked(bool)), this, SLOT(reloadProfiles_clicked()));
+        QObject::connect(changeDirBtn, SIGNAL(clicked(bool)), this, SLOT(changeFolder_clicked()));
     }
     else foreach(const QString &GTAV_Profile, GTAV_Profiles)
     {
@@ -95,43 +127,45 @@ void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
         profileBtn->setObjectName(GTAV_Profile);
         profileBtn->setMinimumSize(0, 40);
         profileBtn->setAutoDefault(true);
-        ui->swSelection->layout()->addWidget(profileBtn);
+        ui->vlButtons->addWidget(profileBtn);
+        profileBtns.append(profileBtn);
 
         QObject::connect(profileBtn, SIGNAL(clicked(bool)), this, SLOT(profileButton_clicked()));
     }
-    QSpacerItem *buttomSpacerItem = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
-    ui->swSelection->layout()->addItem(buttomSpacerItem);
+    if (profilesFound)
+    {
+        QPushButton *reloadBtn = new QPushButton(tr("&Reload"), ui->swSelection);
+        reloadBtn->setObjectName("cmdReload");
+        reloadBtn->setMinimumSize(0, 40);
+        reloadBtn->setAutoDefault(true);
+        ui->vlButtons->addWidget(reloadBtn);
+        profileBtns.append(reloadBtn);
 
-    QHBoxLayout *footerLayout = new QHBoxLayout();
-    footerLayout->setObjectName("footerLayout");
-    ui->swSelection->layout()->addItem(footerLayout);
+        QObject::connect(reloadBtn, SIGNAL(clicked(bool)), this, SLOT(reloadProfiles_clicked()));
+    }
+    profileBtns.at(0)->setFocus();
+}
 
-    QSpacerItem *closeButtonSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
-    footerLayout->addSpacerItem(closeButtonSpacer);
-
-    QPushButton *cmdClose = new QPushButton(tr("&Close"), ui->swSelection);
-    cmdClose->setObjectName("cmdClose");
-    cmdClose->setAutoDefault(true);
-    footerLayout->addWidget(cmdClose);
-
-    QObject::connect(cmdClose, SIGNAL(clicked(bool)), this, SLOT(close()));
+void UserInterface::changeFolder_clicked()
+{
+    GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+    if (QFileInfo(GTAV_Folder).exists())
+    {
+        QDir::setCurrent(GTAV_Folder);
+        AppEnv::setGameFolder(GTAV_Folder);
+        reloadProfiles_clicked();
+    }
 }
 
 void UserInterface::reloadProfiles_clicked()
 {
-    QStringList gta5sync_a = qApp->arguments();
-    if (gta5sync_a.length() >= 1)
+    foreach(QPushButton *profileBtn, profileBtns)
     {
-        QProcess gta5sync_p;
-        QString gta5sync_exe = gta5sync_a.at(0);
-        gta5sync_a.removeAt(0);
-        gta5sync_p.startDetached(gta5sync_exe, gta5sync_a);
-        qApp->exit(0);
+        ui->vlButtons->removeWidget(profileBtn);
+        profileBtns.removeAll(profileBtn);
+        delete profileBtn;
     }
-    else
-    {
-        QMessageBox::warning(this, tr("Reload profiles"), tr("Not able to reload profiles"));
-    }
+    setupDirEnv();
 }
 
 void UserInterface::profileButton_clicked()
@@ -168,6 +202,10 @@ void UserInterface::closeProfile()
 
 UserInterface::~UserInterface()
 {
+    foreach (QPushButton *profileBtn, profileBtns)
+    {
+        delete profileBtn;
+    }
     delete ui;
 }
 

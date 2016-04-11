@@ -452,6 +452,7 @@ int main(int argc, char *argv[])
 
     UserInterface *uiWindow = new UserInterface(profileDB, crewDB, threadDB);
     uiWindow->setWindowIcon(IconLoader::loadingAppIcon());
+    uiWindow->setupDirEnv();
     uiWindow->show();
 
     return a.exec();
