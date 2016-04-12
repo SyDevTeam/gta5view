@@ -46,6 +46,8 @@ public:
 
 public slots:
     void playerNameUpdated();
+    void dialogNextPictureRequested();
+    void dialogPreviousPictureRequested();
 
 private slots:
     void copySnapmaticPicture();
@@ -55,6 +57,7 @@ private slots:
 signals:
     void nextPictureRequested();
     void previousPictureRequested();
+    void newPictureCommited(QImage picture);
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
@@ -63,6 +66,7 @@ private:
     ProfileDatabase *profileDB;
     Ui::PictureDialog *ui;
     SnapmaticPicture *smpic;
+    QImage snapmaticPicture;
     QString jsonDrawString;
     QString windowTitleStr;
     QStringList plyrsList;

@@ -34,6 +34,7 @@ SOURCES += main.cpp \
     PictureCopy.cpp \
     PictureDialog.cpp \
     PictureExport.cpp \
+    PictureWidget.cpp \
     ProfileDatabase.cpp \
     ProfileInterface.cpp \
     ProfileLoader.cpp \
@@ -61,6 +62,7 @@ HEADERS  += \
     PictureCopy.h \
     PictureDialog.h \
     PictureExport.h \
+    PictureWidget.h \
     ProfileDatabase.h \
     ProfileInterface.h \
     ProfileLoader.h \

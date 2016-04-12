@@ -17,6 +17,7 @@
 *****************************************************************************/
 
 #include "PictureDialog.h"
+#include "PictureWidget.h"
 #include "ProfileDatabase.h"
 #include "ui_PictureDialog.h"
 #include "SidebarGenerator.h"
@@ -91,13 +92,21 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
     return false;
 }
 
+void PictureDialog::dialogNextPictureRequested()
+{
+    emit nextPictureRequested();
+}
+
+void PictureDialog::dialogPreviousPictureRequested()
+{
+    emit previousPictureRequested();
+}
+
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath, bool readOk, bool _indexed, int _index)
 {
+    snapmaticPicture = QImage();
     indexed = _indexed;
     index = _index;
-
-    // Showing error if reading error
-    QImage snapmaticPicture;
     picPath = picturePath;
     smpic = picture;
     if (!readOk)
@@ -105,7 +114,6 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         QMessageBox::warning(this, tr("Snapmatic Picture Viewer"), tr("Failed at %1").arg(picture->getLastStep()));
         return;
     }
-
     if (picture->isPicOk())
     {
         snapmaticPicture = picture->getPicture();
@@ -152,6 +160,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         ui->labJSON->setText(jsonDrawString.arg("0.0", "0.0", "0.0", tr("No player"), tr("No crew")));
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
     }
+    emit newPictureCommited(snapmaticPicture);
 }
 
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk)
@@ -224,33 +233,21 @@ void PictureDialog::copySnapmaticPicture()
 
 void PictureDialog::on_labPicture_mouseDoubleClicked()
 {
-    QDialog *pictureWidget = new QDialog(this);
-    QRect rec = QApplication::desktop()->screenGeometry();
-    QHBoxLayout *widgetLayout = new QHBoxLayout(pictureWidget);
-    widgetLayout->setSpacing(0);
-    widgetLayout->setContentsMargins(0, 0, 0, 0);
-
-    UiModLabel *pictureLabel = new UiModLabel(pictureWidget);
-    pictureLabel->setPixmap(ui->labPicture->pixmap()->scaled(rec.width(), rec.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation));
-    pictureLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-    pictureLabel->setAlignment(Qt::AlignCenter);
-    widgetLayout->addWidget(pictureLabel);
-
-    QObject::connect(pictureLabel, SIGNAL(mouseDoubleClicked()), pictureWidget, SLOT(close()));
-
-    pictureWidget->setLayout(widgetLayout);
+    QRect desktopRect = QApplication::desktop()->screenGeometry();
+    PictureWidget *pictureWidget = new PictureWidget(this);
     pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
     pictureWidget->setWindowTitle(this->windowTitle());
     pictureWidget->setStyleSheet("background-color: black;");
+    pictureWidget->setImage(snapmaticPicture, desktopRect);
+
+    QObject::connect(this, SIGNAL(newPictureCommited(QImage)), pictureWidget, SLOT(setImage(QImage)));
+    QObject::connect(pictureWidget, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
+    QObject::connect(pictureWidget, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
+
     pictureWidget->showFullScreen();
     pictureWidget->setModal(true);
     pictureWidget->exec();
 
-    widgetLayout->deleteLater();
-    delete widgetLayout;
-    pictureLabel->deleteLater();
-    delete pictureLabel;
-    pictureWidget->deleteLater();
     delete pictureWidget;
 }
 
