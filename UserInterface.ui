@@ -152,7 +152,7 @@
    </widget>
    <widget class="QMenu" name="menuProfile">
     <property name="title">
-     <string>Profile</string>
+     <string>&amp;Profile</string>
     </property>
     <addaction name="actionSelect_all"/>
     <addaction name="actionDeselect_all"/>
