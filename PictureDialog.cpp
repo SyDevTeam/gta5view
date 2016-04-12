@@ -239,13 +239,14 @@ void PictureDialog::on_labPicture_mouseDoubleClicked()
     pictureWidget->setWindowTitle(this->windowTitle());
     pictureWidget->setStyleSheet("background-color: black;");
     pictureWidget->setImage(snapmaticPicture, desktopRect);
+    pictureWidget->setModal(true);
 
     QObject::connect(this, SIGNAL(newPictureCommited(QImage)), pictureWidget, SLOT(setImage(QImage)));
     QObject::connect(pictureWidget, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
     QObject::connect(pictureWidget, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
 
     pictureWidget->showFullScreen();
-    pictureWidget->setModal(true);
+    pictureWidget->setFocus();
     pictureWidget->exec();
 
     delete pictureWidget;
