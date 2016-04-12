@@ -501,13 +501,21 @@
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="58"/>
-        <source>Copy</source>
-        <translation>Копировать</translation>
+        <source>Cop&amp;y</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="65"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copy</source>
+        <translation type="vanished">Копировать</translation>
+    </message>
+    <message>
         <source>Close</source>
-        <translation>Закрыть</translation>
+        <translation type="vanished">Закрыть</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.cpp" line="24"/>
