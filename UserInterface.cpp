@@ -250,3 +250,8 @@ void UserInterface::on_actionOptions_triggered()
     optionsDialog->deleteLater();
     delete optionsDialog;
 }
+
+void UserInterface::on_action_Import_triggered()
+{
+    profileUI->importFiles();
+}

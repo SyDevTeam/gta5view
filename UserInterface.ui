@@ -154,11 +154,12 @@
     <property name="title">
      <string>&amp;Profile</string>
     </property>
-    <addaction name="actionSelect_all"/>
-    <addaction name="actionDeselect_all"/>
-    <addaction name="separator"/>
+    <addaction name="action_Import"/>
     <addaction name="actionExport_selected"/>
     <addaction name="actionDelete_selected"/>
+    <addaction name="separator"/>
+    <addaction name="actionSelect_all"/>
+    <addaction name="actionDeselect_all"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -227,6 +228,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="action_Import">
+   <property name="text">
+    <string>&amp;Import files...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+I</string>
    </property>
   </action>
  </widget>

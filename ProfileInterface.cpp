@@ -325,8 +325,8 @@ void ProfileInterface::pictureDeleted_f(QWidget *picWidget_)
     SnapmaticWidget *picWidget = (SnapmaticWidget*)picWidget_;
     SnapmaticPicture *picture = picWidget->getPicture();
     if (picWidget->isSelected()) { picWidget->setSelected(false); }
-    picWidget->close();
     widgets.remove(picWidget);
+    picWidget->close();
     picWidget->deleteLater();
     pictures.removeAll(picture);
     delete picture;
@@ -773,4 +773,9 @@ void ProfileInterface::deleteSelected()
     {
         QMessageBox::information(this, tr("Remove selected"), tr("No Snapmatic pictures or Savegames files are selected"));
     }
+}
+
+void ProfileInterface::importFiles()
+{
+    on_cmdImport_clicked();
 }

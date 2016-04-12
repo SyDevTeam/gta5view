@@ -53,6 +53,7 @@ public slots:
     void deselectAllWidgets();
     void exportSelected();
     void deleteSelected();
+    void importFiles();
 
 private slots:
     void on_cmdCloseProfile_clicked();
