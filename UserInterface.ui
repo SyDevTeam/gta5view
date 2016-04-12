@@ -148,22 +148,21 @@
     <property name="title">
      <string>&amp;Edit</string>
     </property>
-    <widget class="QMenu" name="menuProfile">
-     <property name="title">
-      <string>&amp;Profile</string>
-     </property>
-     <addaction name="actionSelect_all"/>
-     <addaction name="actionDeselect_all"/>
-     <addaction name="separator"/>
-     <addaction name="actionExport_selected"/>
-     <addaction name="actionDelete_selected"/>
-    </widget>
-    <addaction name="menuProfile"/>
-    <addaction name="separator"/>
     <addaction name="actionOptions"/>
+   </widget>
+   <widget class="QMenu" name="menuProfile">
+    <property name="title">
+     <string>Profile</string>
+    </property>
+    <addaction name="actionSelect_all"/>
+    <addaction name="actionDeselect_all"/>
+    <addaction name="separator"/>
+    <addaction name="actionExport_selected"/>
+    <addaction name="actionDelete_selected"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuProfile"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionAbout_gta5sync">
