@@ -33,7 +33,15 @@ class PictureDialog : public QDialog
     Q_OBJECT
 public:
     explicit PictureDialog(ProfileDatabase *profileDB, QWidget *parent = 0);
+    void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk, bool indexed, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk);
+    void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath);
+    void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, int index);
+    void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
+    void setSnapmaticPicture(SnapmaticPicture *picture, int index);
+    void setSnapmaticPicture(SnapmaticPicture *picture);
+    bool isIndexed();
+    int getIndex();
     ~PictureDialog();
 
 public slots:
@@ -43,6 +51,13 @@ private slots:
     void copySnapmaticPicture();
     void exportSnapmaticPicture();
     void on_labPicture_mouseDoubleClicked();
+
+signals:
+    void nextPictureRequested();
+    void previousPictureRequested();
+
+protected:
+    bool eventFilter(QObject *obj, QEvent *ev);
 
 private:
     ProfileDatabase *profileDB;
@@ -57,6 +72,8 @@ private:
     QString locX;
     QString locY;
     QString locZ;
+    bool indexed;
+    int index;
     QMenu *exportMenu;
 };
 

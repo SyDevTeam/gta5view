@@ -65,6 +65,8 @@ private slots:
     void profileLoaded_p();
     void profileWidgetSelected();
     void profileWidgetDeselected();
+    void dialogNextPictureRequested(QWidget *dialog);
+    void dialogPreviousPictureRequested(QWidget *dialog);
 
 private:
     ProfileDatabase *profileDB;

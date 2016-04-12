@@ -89,6 +89,11 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString pic
     ui->labPicture->setPixmap(SnapmaticPixmap);
 }
 
+void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
+{
+    setSnapmaticPicture(picture, picture->getPictureFileName());
+}
+
 void SnapmaticWidget::on_cmdView_clicked()
 {
     PictureDialog *picDialog = new PictureDialog(profileDB, this);
@@ -98,6 +103,8 @@ void SnapmaticWidget::on_cmdView_clicked()
 
     // be ready for playerName updated
     QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(playerNameUpdated()));
+    QObject::connect(picDialog, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
+    QObject::connect(picDialog, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
 
     // show picture dialog
     picDialog->showNormal();
@@ -218,6 +225,16 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
     //ui->SnapmaticFrame->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
     contextMenu.exec(ev->globalPos());
     //ui->SnapmaticFrame->setStyleSheet("");
+}
+
+void SnapmaticWidget::dialogNextPictureRequested()
+{
+    emit nextPictureRequested((QWidget*)sender());
+}
+
+void SnapmaticWidget::dialogPreviousPictureRequested()
+{
+    emit previousPictureRequested((QWidget*)sender());
 }
 
 void SnapmaticWidget::on_cbSelected_stateChanged(int arg1)

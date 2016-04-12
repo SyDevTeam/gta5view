@@ -40,6 +40,7 @@ class SnapmaticWidget : public ProfileWidget
 public:
     SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
+    void setSnapmaticPicture(SnapmaticPicture *picture);
     void setSelectionMode(bool selectionMode);
     void setSelected(bool isSelected);
     SnapmaticPicture *getPicture();
@@ -57,6 +58,8 @@ private slots:
     void pictureSelected();
     void selectAllWidgets();
     void deselectAllWidgets();
+    void dialogNextPictureRequested();
+    void dialogPreviousPictureRequested();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
@@ -83,6 +86,8 @@ signals:
     void widgetDeselected();
     void allWidgetsSelected();
     void allWidgetsDeselected();
+    void nextPictureRequested(QWidget *dialog);
+    void previousPictureRequested(QWidget *dialog);
 };
 
 #endif // SNAPMATICWIDGET_H

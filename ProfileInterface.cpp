@@ -22,6 +22,7 @@
 #include "SnapmaticWidget.h"
 #include "DatabaseThread.h"
 #include "SavegameWidget.h"
+#include "PictureDialog.h"
 #include "PictureExport.h"
 #include "StandardPaths.h"
 #include "ProfileLoader.h"
@@ -143,6 +144,8 @@ void ProfileInterface::pictureLoaded_f(SnapmaticPicture *picture, QString pictur
     QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
     QObject::connect(picWidget, SIGNAL(allWidgetsSelected()), this, SLOT(selectAllWidgets()));
     QObject::connect(picWidget, SIGNAL(allWidgetsDeselected()), this, SLOT(deselectAllWidgets()));
+    QObject::connect(picWidget, SIGNAL(nextPictureRequested(QWidget*)), this, SLOT(dialogNextPictureRequested(QWidget*)));
+    QObject::connect(picWidget, SIGNAL(previousPictureRequested(QWidget*)), this, SLOT(dialogPreviousPictureRequested(QWidget*)));
     if (inserted) { insertSnapmaticIPI(picWidget); }
 }
 
@@ -188,6 +191,72 @@ void ProfileInterface::insertSavegameIPI(QWidget *widget)
 
         qApp->processEvents();
         ui->saProfile->ensureWidgetVisible(proWidget, 0, 0);
+    }
+}
+
+void ProfileInterface::dialogNextPictureRequested(QWidget *dialog)
+{
+    PictureDialog *picDialog = (PictureDialog*)dialog;
+    ProfileWidget *proWidget = (ProfileWidget*)sender();
+    if (widgets.contains(proWidget))
+    {
+        QString widgetKey = widgets[proWidget];
+        QStringList widgetsKeyList = widgets.values();
+        QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
+#if QT_VERSION >= 0x050600
+        qSort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#else
+        qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
+#endif
+        int picIndex;
+        if (picDialog->isIndexed())
+        {
+            picIndex = picDialog->getIndex();
+        }
+        else
+        {
+            picIndex = pictureKeyList.indexOf(QRegExp(widgetKey));
+        }
+        picIndex++;
+        if (pictureKeyList.length() > picIndex)
+        {
+            QString newWidgetKey = pictureKeyList.at(picIndex);
+            SnapmaticWidget *picWidget = (SnapmaticWidget*)widgets.key(newWidgetKey);
+            picDialog->setSnapmaticPicture(picWidget->getPicture(), picIndex);
+        }
+    }
+}
+
+void ProfileInterface::dialogPreviousPictureRequested(QWidget *dialog)
+{
+    PictureDialog *picDialog = (PictureDialog*)dialog;
+    ProfileWidget *proWidget = (ProfileWidget*)sender();
+    if (widgets.contains(proWidget))
+    {
+        QString widgetKey = widgets[proWidget];
+        QStringList widgetsKeyList = widgets.values();
+        QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
+#if QT_VERSION >= 0x050600
+        qSort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#else
+        qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
+#endif
+        int picIndex;
+        if (picDialog->isIndexed())
+        {
+            picIndex = picDialog->getIndex();
+        }
+        else
+        {
+            picIndex = pictureKeyList.indexOf(QRegExp(widgetKey));
+        }
+        if (picIndex > 0)
+        {
+            picIndex--;
+            QString newWidgetKey = pictureKeyList.at(picIndex );
+            SnapmaticWidget *picWidget = (SnapmaticWidget*)widgets.key(newWidgetKey);
+            picDialog->setSnapmaticPicture(picWidget->getPicture(), picIndex);
+        }
     }
 }
 

@@ -32,6 +32,7 @@
 #include <QJsonObject>
 #include <QVariantMap>
 #include <QJsonArray>
+#include <QKeyEvent>
 #include <QDebug>
 #include <QList>
 #include <QUrl>
@@ -46,6 +47,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     jsonDrawString = ui->labJSON->text();
     ui->cmdExport->setEnabled(0);
     plyrsList = QStringList();
+    indexed = 0;
     picTitl = "";
     picPath = "";
     crewID = "";
@@ -59,6 +61,8 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     exportMenu->addAction(tr("Export as &JPG picture..."), this, SLOT(exportSnapmaticPicture()));
     exportMenu->addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(copySnapmaticPicture()));
     ui->cmdExport->setMenu(exportMenu);
+
+    installEventFilter(this);
 }
 
 PictureDialog::~PictureDialog()
@@ -67,8 +71,31 @@ PictureDialog::~PictureDialog()
     delete ui;
 }
 
-void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath, bool readOk)
+bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
 {
+    if (obj == this)
+    {
+        if (ev->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = (QKeyEvent*)ev;
+            switch (keyEvent->key()){
+            case Qt::Key_Left:
+                emit previousPictureRequested();
+                break;
+            case Qt::Key_Right:
+                emit nextPictureRequested();
+                break;
+            }
+        }
+    }
+    return false;
+}
+
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath, bool readOk, bool _indexed, int _index)
+{
+    indexed = _indexed;
+    index = _index;
+
     // Showing error if reading error
     QImage snapmaticPicture;
     picPath = picturePath;
@@ -125,6 +152,36 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         ui->labJSON->setText(jsonDrawString.arg("0.0", "0.0", "0.0", tr("No player"), tr("No crew")));
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
     }
+}
+
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk)
+{
+    setSnapmaticPicture(picture, picPath, readOk, false, 0);
+}
+
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picPath)
+{
+    setSnapmaticPicture(picture, picPath, true);
+}
+
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, int index)
+{
+    setSnapmaticPicture(picture, picture->getPictureFileName(), readOk, true, index);
+}
+
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
+{
+    setSnapmaticPicture(picture, picture->getPictureFileName(), readOk);
+}
+
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, int index)
+{
+    setSnapmaticPicture(picture, true, index);
+}
+
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture)
+{
+    setSnapmaticPicture(picture, true);
 }
 
 void PictureDialog::playerNameUpdated()
@@ -195,4 +252,14 @@ void PictureDialog::on_labPicture_mouseDoubleClicked()
     delete pictureLabel;
     pictureWidget->deleteLater();
     delete pictureWidget;
+}
+
+bool PictureDialog::isIndexed()
+{
+    return indexed;
+}
+
+int PictureDialog::getIndex()
+{
+    return index;
 }
