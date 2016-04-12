@@ -20,6 +20,7 @@
 #include "ui_UserInterface.h"
 #include "ProfileInterface.h"
 #include "StandardPaths.h"
+#include "OptionsDialog.h"
 #include "AboutDialog.h"
 #include "IconLoader.h"
 #include "AppEnv.h"
@@ -237,4 +238,15 @@ void UserInterface::on_actionExport_selected_triggered()
 void UserInterface::on_actionDelete_selected_triggered()
 {
     profileUI->deleteSelected();
+}
+
+void UserInterface::on_actionOptions_triggered()
+{
+    OptionsDialog *optionsDialog = new OptionsDialog(this);
+    optionsDialog->setWindowFlags(optionsDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    optionsDialog->setModal(true);
+    optionsDialog->show();
+    optionsDialog->exec();
+    optionsDialog->deleteLater();
+    delete optionsDialog;
 }

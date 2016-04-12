@@ -52,6 +52,7 @@ private slots:
     void on_actionDeselect_all_triggered();
     void on_actionExport_selected_triggered();
     void on_actionDelete_selected_triggered();
+    void on_actionOptions_triggered();
 
 private:
     ProfileDatabase *profileDB;
