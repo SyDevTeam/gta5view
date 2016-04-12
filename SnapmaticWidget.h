@@ -27,6 +27,7 @@
 #include <QContextMenuEvent>
 #include <QMouseEvent>
 #include <QWidget>
+#include <QColor>
 
 namespace Ui {
 class SnapmaticWidget;
@@ -58,6 +59,7 @@ private slots:
     void deselectAllWidgets();
 
 protected:
+    bool eventFilter(QObject *obj, QEvent *ev);
     void mouseDoubleClickEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
@@ -68,7 +70,8 @@ private:
     DatabaseThread *threadDB;
     Ui::SnapmaticWidget *ui;
     SnapmaticPicture *smpic;
-    QAction *actSelectPic;
+    QColor highlightBackColor;
+    QColor highlightTextColor;
     QString picPath;
     QString picTitl;
     QString picStr;

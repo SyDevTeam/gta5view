@@ -50,19 +50,38 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     Q_UNUSED(exportSavegameStr)
 
     QPalette palette;
-    QColor highlightBackColor = palette.highlight().color();
-    QColor highlightTextColor = palette.highlightedText().color();
-    setStyleSheet(QString("QFrame:hover#SavegameFrame{background-color: rgb(%1, %2, %3); color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+    highlightBackColor = palette.highlight().color();
+    highlightTextColor = palette.highlightedText().color();
 
     clkIssued = 0;
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
+
+    installEventFilter(this);
 }
 
 SavegameWidget::~SavegameWidget()
 {
     delete ui;
+}
+
+bool SavegameWidget::eventFilter(QObject *obj, QEvent *ev)
+{
+    if (obj == this)
+    {
+        if (ev->type() == QEvent::Enter)
+        {
+            setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+            return true;
+        }
+        else if(ev->type() == QEvent::Leave)
+        {
+            setStyleSheet("");
+            return true;
+        }
+    }
+    return false;
 }
 
 void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePath)
@@ -186,8 +205,9 @@ void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
         contextMenu.addAction(tr("&Select"), this, SLOT(savegameSelected()));
         contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
     }
+    //ui->SavegameFrame->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
     contextMenu.exec(ev->globalPos());
-    setStyleSheet(styleSheet()); // fix multi highlight bug
+    //ui->SavegameFrame->setStyleSheet("");
 }
 
 void SavegameWidget::on_cbSelected_stateChanged(int arg1)

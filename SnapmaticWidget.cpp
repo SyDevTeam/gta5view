@@ -42,19 +42,38 @@ SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *thr
     ui->cbSelected->setVisible(false);
 
     QPalette palette;
-    QColor highlightBackColor = palette.highlight().color();
-    QColor highlightTextColor = palette.highlightedText().color();
-    setStyleSheet(QString("QFrame:hover#SnapmaticFrame{background-color: rgb(%1, %2, %3); color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+    highlightBackColor = palette.highlight().color();
+    highlightTextColor = palette.highlightedText().color();
 
     clkIssued = 0;
     picPath = "";
     picStr = "";
     smpic = 0;
+
+    installEventFilter(this);
 }
 
 SnapmaticWidget::~SnapmaticWidget()
 {
     delete ui;
+}
+
+bool SnapmaticWidget::eventFilter(QObject *obj, QEvent *ev)
+{
+    if (obj == this)
+    {
+        if (ev->type() == QEvent::Enter)
+        {
+            setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+            return true;
+        }
+        else if(ev->type() == QEvent::Leave)
+        {
+            setStyleSheet("");
+            return true;
+        }
+    }
+    return false;
 }
 
 void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath)
@@ -148,11 +167,11 @@ void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     QWidget::mouseDoubleClickEvent(ev);
 
-//  if (ev->button() == Qt::LeftButton)
-//  {
-//      clkIssued = true;
-//      on_cmdView_clicked();
-//  }
+    //  if (ev->button() == Qt::LeftButton)
+    //  {
+    //      clkIssued = true;
+    //      on_cmdView_clicked();
+    //  }
 }
 
 void SnapmaticWidget::changeCheckedState()
@@ -196,8 +215,9 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
         contextMenu.addAction(tr("&Select"), this, SLOT(pictureSelected()));
         contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+S"));
     }
+    //ui->SnapmaticFrame->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
     contextMenu.exec(ev->globalPos());
-    setStyleSheet(styleSheet()); // fix multi highlight bug
+    //ui->SnapmaticFrame->setStyleSheet("");
 }
 
 void SnapmaticWidget::on_cbSelected_stateChanged(int arg1)

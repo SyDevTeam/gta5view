@@ -164,13 +164,6 @@
        </property>
       </widget>
      </item>
-     <item>
-      <widget class="QPushButton" name="cmdApply">
-       <property name="text">
-        <string extracomment="OK, Cancel, Apply">&amp;Apply</string>
-       </property>
-      </widget>
-     </item>
     </layout>
    </item>
   </layout>

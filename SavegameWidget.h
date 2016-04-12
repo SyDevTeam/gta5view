@@ -25,6 +25,7 @@
 #include <QContextMenuEvent>
 #include <QMouseEvent>
 #include <QWidget>
+#include <QColor>
 
 namespace Ui {
 class SavegameWidget;
@@ -55,6 +56,7 @@ private slots:
     void deselectAllWidgets();
 
 protected:
+    bool eventFilter(QObject *obj, QEvent *ev);
     void mouseDoubleClickEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
@@ -63,6 +65,8 @@ protected:
 private:
     Ui::SavegameWidget *ui;
     SavegameData *sgdata;
+    QColor highlightBackColor;
+    QColor highlightTextColor;
     QString sgdPath;
     QString sgdStr;
     bool clkIssued;
