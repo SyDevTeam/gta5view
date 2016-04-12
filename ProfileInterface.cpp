@@ -308,7 +308,9 @@ void ProfileInterface::savegameDeleted_f(QWidget *sgdWidget_)
     SavegameWidget *sgdWidget = (SavegameWidget*)sgdWidget_;
     SavegameData *savegame = sgdWidget->getSavegame();
     if (sgdWidget->isSelected()) { sgdWidget->setSelected(false); }
+    widgets.remove(sgdWidget);
     sgdWidget->close();
+    sgdWidget->deleteLater();
     savegames.removeAll(savegame);
     delete savegame;
 }
@@ -324,6 +326,8 @@ void ProfileInterface::pictureDeleted_f(QWidget *picWidget_)
     SnapmaticPicture *picture = picWidget->getPicture();
     if (picWidget->isSelected()) { picWidget->setSelected(false); }
     picWidget->close();
+    widgets.remove(picWidget);
+    picWidget->deleteLater();
     pictures.removeAll(picture);
     delete picture;
 }
