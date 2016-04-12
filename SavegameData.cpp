@@ -112,3 +112,8 @@ QString SavegameData::getLastStep()
 {
     return lastStep;
 }
+
+void SavegameData::setSavegameFileName(QString savegameFileName_)
+{
+    savegameFileName = savegameFileName_;
+}

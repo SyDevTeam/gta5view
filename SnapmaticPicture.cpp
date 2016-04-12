@@ -303,6 +303,11 @@ bool SnapmaticPicture::isPicOk()
     return picOk;
 }
 
+void SnapmaticPicture::setPicFileName(QString picFileName_)
+{
+    picFileName = picFileName_;
+}
+
 // JSON part
 
 void SnapmaticPicture::parseJsonContent()

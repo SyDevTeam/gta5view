@@ -32,7 +32,6 @@ public:
     explicit SnapmaticPicture(const QString &fileName = "", QObject *parent = 0);
     bool readingPictureFromFile(const QString &fileName);
     bool readingPicture();
-    void setPicture(const QImage &picture);
     bool isPicOk();
     QImage getPicture();
     QString getLastStep();
@@ -42,6 +41,8 @@ public:
     QString getPictureSortStr();
     QString getPictureFileName();
     QString getExportPictureFileName();
+    void setPicture(const QImage &picture);
+    void setPicFileName(QString picFileName_);
 
     // JSON
     bool isJsonOk();

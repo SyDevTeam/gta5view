@@ -410,7 +410,9 @@ bool ProfileInterface::importFile(QString selectedFile, bool warn)
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
             if (picture->readingPicture())
             {
-                return importSnapmaticPicture(picture, selectedFile, warn);
+                bool success = importSnapmaticPicture(picture, selectedFile, warn);;
+                if (!success) delete picture;
+                return success;
             }
             else
             {
@@ -425,7 +427,9 @@ bool ProfileInterface::importFile(QString selectedFile, bool warn)
             SavegameData *savegame = new SavegameData(selectedFile);
             if (savegame->readingSavegame())
             {
-                return importSavegameData(savegame, selectedFile, warn);
+                bool success = importSavegameData(savegame, selectedFile, warn);
+                if (!success) delete savegame;
+                return success;
             }
             else
             {
@@ -441,15 +445,17 @@ bool ProfileInterface::importFile(QString selectedFile, bool warn)
             SavegameData *savegame = new SavegameData(selectedFile);
             if (picture->readingPicture())
             {
-                savegame->deleteLater();
+                bool success = importSnapmaticPicture(picture, selectedFile, warn);;
                 delete savegame;
-                return importSnapmaticPicture(picture, selectedFile, warn);
+                if (!success) delete picture;
+                return success;
             }
             else if (savegame->readingSavegame())
             {
-                picture->deleteLater();
+                bool success = importSavegameData(savegame, selectedFile, warn);
                 delete picture;
-                return importSavegameData(savegame, selectedFile, warn);
+                if (!success) delete savegame;
+                return success;
             }
             else
             {
@@ -477,6 +483,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
     }
     else if (QFile::copy(picPath, profileFolder + QDir::separator() + picFileName))
     {
+        picture->setPicFileName(profileFolder + QDir::separator() + picFileName);
         pictureLoaded_f(picture, profileFolder + QDir::separator() + picFileName, true);
         return true;
     }
@@ -513,6 +520,7 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
     {
         if (QFile::copy(sgdPath, profileFolder + QDir::separator() + sgdFileName))
         {
+            savegame->setSavegameFileName(profileFolder + QDir::separator() + sgdFileName);
             savegameLoaded_f(savegame, profileFolder + QDir::separator() + sgdFileName, true);
             return true;
         }

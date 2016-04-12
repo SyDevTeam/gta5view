@@ -32,6 +32,7 @@ public:
     QString getLastStep();
     QString getSavegameStr();
     QString getSavegameFileName();
+    void setSavegameFileName(QString savegameFileName);
 
 private:
     QString getSavegameDataString(const QByteArray &savegameHeader);
