@@ -151,9 +151,23 @@
       </spacer>
      </item>
      <item>
+      <widget class="QPushButton" name="cmdOK">
+       <property name="text">
+        <string extracomment="OK, Cancel, Apply">&amp;OK</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QPushButton" name="cmdClose">
        <property name="text">
-        <string>&amp;Close</string>
+        <string extracomment="OK, Cancel, Apply">&amp;Cancel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="cmdApply">
+       <property name="text">
+        <string extracomment="OK, Cancel, Apply">&amp;Apply</string>
        </property>
       </widget>
      </item>
