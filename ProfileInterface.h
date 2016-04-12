@@ -84,8 +84,9 @@ private:
     QString loadingStr;
     int selectedWidgts;
 
-    bool importSnapmaticPicture(SnapmaticPicture *picture, QString picPath);
-    bool importSavegameData(SavegameData *savegame, QString sgdPath);
+    bool importFile(QString selectedFile, bool warn);
+    bool importSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool warn = true);
+    bool importSavegameData(SavegameData *savegame, QString sgdPath, bool warn = true);
     void pictureLoaded_f(SnapmaticPicture *picture, QString picturePath, bool inserted);
     void savegameLoaded_f(SavegameData *savegame, QString savegamePath, bool inserted);
     void savegameDeleted_f(QWidget *sgdWidget);

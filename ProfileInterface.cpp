@@ -340,7 +340,7 @@ void ProfileInterface::on_cmdImport_clicked()
 
 fileDialogPreOpen:
     QFileDialog fileDialog(this);
-    fileDialog.setFileMode(QFileDialog::AnyFile);
+    fileDialog.setFileMode(QFileDialog::ExistingFiles);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
@@ -366,71 +366,27 @@ fileDialogPreOpen:
         if (selectedFiles.length() == 1)
         {
             QString selectedFile = selectedFiles.at(0);
-            QFileInfo selectedFileInfo(selectedFile);
-            QString selectedFileName = selectedFileInfo.fileName();
-            if (QFile::exists(selectedFile))
+            if (!importFile(selectedFile, true)) goto fileDialogPreOpen;
+        }
+        else if (selectedFiles.length() > 1)
+        {
+            QString errorStr;
+            QStringList failedFiles;
+            foreach(const QString &selectedFile, selectedFiles)
             {
-                if (selectedFileName.left(4) == "PGTA")
+                if (!importFile(selectedFile, false))
                 {
-                    SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
-                    if (picture->readingPicture())
-                    {
-                        importSnapmaticPicture(picture, selectedFile);
-                    }
-                    else
-                    {
-                        QMessageBox::warning(this, tr("Import"), tr("Failed to read Snapmatic picture"));
-                        picture->deleteLater();
-                        delete picture;
-                        goto fileDialogPreOpen;
-                    }
-                }
-                else if (selectedFileName.left(4) == "SGTA")
-                {
-                    SavegameData *savegame = new SavegameData(selectedFile);
-                    if (savegame->readingSavegame())
-                    {
-                        importSavegameData(savegame, selectedFile);
-                    }
-                    else
-                    {
-                        QMessageBox::warning(this, tr("Import"), tr("Failed to read Savegame file"));
-                        savegame->deleteLater();
-                        delete savegame;
-                        goto fileDialogPreOpen;
-                    }
-                }
-                else
-                {
-                    SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
-                    SavegameData *savegame = new SavegameData(selectedFile);
-                    if (picture->readingPicture())
-                    {
-                        importSnapmaticPicture(picture, selectedFile);
-                        savegame->deleteLater();
-                        delete savegame;
-                    }
-                    else if (savegame->readingSavegame())
-                    {
-                        importSavegameData(savegame, selectedFile);
-                        picture->deleteLater();
-                        delete picture;
-                    }
-                    else
-                    {
-                        savegame->deleteLater();
-                        picture->deleteLater();
-                        delete savegame;
-                        delete picture;
-                        QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because of not valid file format").arg("\""+selectedFileName+"\""));
-                        goto fileDialogPreOpen;
-                    }
+                    failedFiles << QFileInfo(selectedFile).fileName();
                 }
             }
-            else
+            foreach (const QString &curErrorStr, failedFiles)
             {
-                QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
-                goto fileDialogPreOpen;
+                errorStr.append(", " + curErrorStr);
+            }
+            if (errorStr != "")
+            {
+                errorStr.remove(0, 2);
+                QMessageBox::warning(this, tr("Import"), tr("Import failed with...\n\n%1").arg(errorStr));
             }
         }
         else
@@ -444,13 +400,79 @@ fileDialogPreOpen:
     settings.endGroup();
 }
 
-bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString picPath)
+bool ProfileInterface::importFile(QString selectedFile, bool warn)
+{
+    QString selectedFileName = QFileInfo(selectedFile).fileName();
+    if (QFile::exists(selectedFile))
+    {
+        if (selectedFileName.left(4) == "PGTA")
+        {
+            SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
+            if (picture->readingPicture())
+            {
+                return importSnapmaticPicture(picture, selectedFile, warn);
+            }
+            else
+            {
+                if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to read Snapmatic picture"));
+                picture->deleteLater();
+                delete picture;
+                return false;
+            }
+        }
+        else if (selectedFileName.left(4) == "SGTA")
+        {
+            SavegameData *savegame = new SavegameData(selectedFile);
+            if (savegame->readingSavegame())
+            {
+                return importSavegameData(savegame, selectedFile, warn);
+            }
+            else
+            {
+                if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to read Savegame file"));
+                savegame->deleteLater();
+                delete savegame;
+                return false;
+            }
+        }
+        else
+        {
+            SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
+            SavegameData *savegame = new SavegameData(selectedFile);
+            if (picture->readingPicture())
+            {
+                savegame->deleteLater();
+                delete savegame;
+                return importSnapmaticPicture(picture, selectedFile, warn);
+            }
+            else if (savegame->readingSavegame())
+            {
+                picture->deleteLater();
+                delete picture;
+                return importSavegameData(savegame, selectedFile, warn);
+            }
+            else
+            {
+                savegame->deleteLater();
+                picture->deleteLater();
+                delete savegame;
+                delete picture;
+                if (warn) QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because of not valid file format").arg("\""+selectedFileName+"\""));
+                return false;
+            }
+        }
+    }
+    if (warn) QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
+    return false;
+}
+
+bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool warn)
 {
     QFileInfo picFileInfo(picPath);
     QString picFileName = picFileInfo.fileName();
     if (picFileName.left(4) != "PGTA")
     {
-        QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, file not begin with PGTA"));
+        if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, file not begin with PGTA"));
         return false;
     }
     else if (QFile::copy(picPath, profileFolder + QDir::separator() + picFileName))
@@ -460,12 +482,12 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
     }
     else
     {
-        QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, can't copy the file into profile"));
+        if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, can't copy the file into profile"));
         return false;
     }
 }
 
-bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPath)
+bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPath, bool warn)
 {
     QString sgdFileName;
     bool foundFree = 0;
@@ -496,13 +518,13 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         }
         else
         {
-            QMessageBox::warning(this, tr("Import"), tr("Failed to import the Savegame, can't copy the file into profile"));
+            if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Savegame, can't copy the file into profile"));
             return false;
         }
     }
     else
     {
-        QMessageBox::warning(this, tr("Import"), tr("Failed to import the Savegame, no Savegame slot is left"));
+        if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Savegame, no Savegame slot is left"));
         return false;
     }
 }
