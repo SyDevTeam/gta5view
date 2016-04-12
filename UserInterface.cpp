@@ -217,7 +217,7 @@ void UserInterface::on_actionAbout_gta5sync_triggered()
 
 void UserInterface::profileLoaded()
 {
-    ui->menuProfile->setEnabled(false);
+    ui->menuProfile->setEnabled(true);
 }
 
 void UserInterface::on_actionSelect_all_triggered()
