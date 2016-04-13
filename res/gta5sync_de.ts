@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -35,16 +35,16 @@
     <name>OptionsDialog</name>
     <message>
         <source>Options</source>
-        <translation type="vanished">Optionen</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>gta5sync - Options</source>
-        <translation type="vanished">gta5sync - Optionen</translation>
+        <translation>gta5sync - Optionen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="14"/>
         <source>gta5sync - Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>gta5sync - Einstellungen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="27"/>
@@ -54,53 +54,53 @@
     <message>
         <location filename="../OptionsDialog.ui" line="33"/>
         <source>Content Open/Select Mode</source>
-        <translation type="unfinished"></translation>
+        <translation>Inhalte Öffnen/Auswählen Modus</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="39"/>
         <source>Open with Singleclick</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein Klick zum öffnen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="49"/>
         <source>Open with Doubleclick</source>
-        <translation type="unfinished"></translation>
+        <translation>Doppelklick zum öffnen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="56"/>
         <source>Select with Singleclick</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein Klick zum auswählen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="80"/>
         <source>Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Spieler</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="111"/>
         <source>ID</source>
-        <translation type="unfinished"></translation>
+        <translation>ID</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="116"/>
         <source>Name</source>
-        <translation type="unfinished"></translation>
+        <translation>Name</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="125"/>
         <location filename="../OptionsDialog.ui" line="131"/>
         <source>Language</source>
-        <translation type="unfinished"></translation>
+        <translation>Sprache</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="157"/>
         <source>Sync</source>
-        <translation type="unfinished"></translation>
+        <translation>Sync</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="163"/>
         <source>Sync is not implemented at current time</source>
-        <translation type="unfinished"></translation>
+        <translation>Sync wurde bisher nicht implentiert</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="195"/>
@@ -118,24 +118,24 @@
         <location filename="../OptionsDialog.cpp" line="78"/>
         <source>%1 (%2 if available) [sys]</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 wenn verfügbar) [sys]</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="78"/>
         <source>System</source>
         <comment>System like PC System</comment>
-        <translation type="unfinished"></translation>
+        <translation>System</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="134"/>
         <source>%1</source>
         <comment>%1</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="134"/>
         <source>The language change will take effect after you restart %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Die Änderung der Sprache nimmt Effekt sobald du %1 neugestartet hast.</translation>
     </message>
 </context>
 <context>
@@ -511,7 +511,7 @@ JPG pictures make it possible to open the picture with a Image Viewer
 GTA Snapmatic make it possible to import the picture into the game
 
 Export as:</source>
-        <translation type="vanished">Exportiere Snapmatic Bilder
+        <translation>Exportiere Snapmatic Bilder
 
 JPG Bilder machen es möglich sie mit ein Bildansicht Programm zu öffnen
 Das GTA Snapmatic Format macht es möglich sie wieder ins Game zu importieren
@@ -651,11 +651,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.cpp" line="24"/>
@@ -1145,12 +1145,12 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="vanished">&amp;Optionen</translation>
+        <translation>&amp;Optionen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="195"/>
         <source>&amp;Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Ein&amp;stellungen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="203"/>
@@ -1210,15 +1210,15 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Change GTA V &amp;Folder</source>
-        <translation type="vanished">GTA V &amp;Ordner ändern</translation>
+        <translation>GTA V &amp;Ordner ändern</translation>
     </message>
     <message>
         <source>gta5sync</source>
-        <translation type="vanished">gta5sync</translation>
+        <translation>gta5sync</translation>
     </message>
     <message>
         <source>Grand Theft Auto V Folder not found!</source>
-        <translation type="vanished">Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
+        <translation>Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="103"/>
@@ -1231,11 +1231,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Reload profiles</source>
-        <translation type="vanished">Profile neuladen</translation>
+        <translation>Profile neuladen</translation>
     </message>
     <message>
         <source>Not able to reload profiles</source>
-        <translation type="vanished">Nicht fähig Profile neuzuladen</translation>
+        <translation>Nicht fähig Profile neuzuladen</translation>
     </message>
 </context>
 </TS>
