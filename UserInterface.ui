@@ -135,7 +135,9 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="actionOpen_File"/>
     <addaction name="actionSelect_profile"/>
+    <addaction name="separator"/>
     <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
@@ -171,12 +173,18 @@
     <string>&amp;About gta5sync</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+A</string>
+    <string>Ctrl+P</string>
    </property>
   </action>
   <action name="actionExit">
+   <property name="icon">
+    <iconset theme="application-exit"/>
+   </property>
    <property name="text">
-    <string>&amp;Close</string>
+    <string>&amp;Exit</string>
+   </property>
+   <property name="toolTip">
+    <string>Exit</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -184,10 +192,10 @@
   </action>
   <action name="actionSelect_profile">
    <property name="text">
-    <string>Select &amp;Profile</string>
+    <string>Close &amp;Profile</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+P</string>
+    <string>Ctrl+End</string>
    </property>
   </action>
   <action name="actionOptions">
@@ -195,7 +203,7 @@
     <string>&amp;Settings</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="actionSelect_all">
@@ -203,7 +211,7 @@
     <string>Select &amp;All</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string>Ctrl+A</string>
    </property>
   </action>
   <action name="actionDeselect_all">
@@ -227,7 +235,7 @@
     <string>&amp;Remove selected</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+R</string>
+    <string>Ctrl+Del</string>
    </property>
   </action>
   <action name="action_Import">
@@ -236,6 +244,17 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+I</string>
+   </property>
+  </action>
+  <action name="actionOpen_File">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
+   <property name="text">
+    <string>&amp;Open File...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
    </property>
   </action>
  </widget>

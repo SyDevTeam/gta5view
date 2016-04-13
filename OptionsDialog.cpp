@@ -33,6 +33,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui(new Ui::OptionsDialog)
 {
     ui->setupUi(this);
+    ui->tabWidget->setCurrentIndex(0);
     setupTreeWidget();
     setupLanguageBox();
 }

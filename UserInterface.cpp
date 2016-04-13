@@ -46,6 +46,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     profileOpen = 0;
     profileUI = 0;
     ui->menuProfile->setEnabled(false);
+    ui->actionSelect_profile->setEnabled(false);
     defaultWindowTitle = tr("gta5sync - %1");
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
@@ -173,6 +174,7 @@ void UserInterface::closeProfile()
     {
         profileOpen = false;
         ui->menuProfile->setEnabled(false);
+        ui->actionSelect_profile->setEnabled(false);
         ui->swProfile->removeWidget(profileUI);
         profileUI->deleteLater();
         delete profileUI;
@@ -219,6 +221,7 @@ void UserInterface::on_actionAbout_gta5sync_triggered()
 void UserInterface::profileLoaded()
 {
     ui->menuProfile->setEnabled(true);
+    ui->actionSelect_profile->setEnabled(true);
 }
 
 void UserInterface::on_actionSelect_all_triggered()
