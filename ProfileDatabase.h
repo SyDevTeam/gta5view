@@ -29,6 +29,7 @@ class ProfileDatabase : public QObject
 public:
     explicit ProfileDatabase(QObject *parent = 0);
     QString getPlayerName(int playerID);
+    QStringList getPlayers();
     ~ProfileDatabase();
 
 private:

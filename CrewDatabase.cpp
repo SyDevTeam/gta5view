@@ -41,6 +41,7 @@ CrewDatabase::CrewDatabase(QObject *parent) : QObject(parent)
 CrewDatabase::~CrewDatabase()
 {
     crewDB->endGroup();
+    delete crewDB;
 }
 
 QStringList CrewDatabase::getCrews()

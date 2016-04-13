@@ -41,6 +41,12 @@ ProfileDatabase::ProfileDatabase(QObject *parent) : QObject(parent)
 ProfileDatabase::~ProfileDatabase()
 {
     profileDB->endGroup();
+    delete profileDB;
+}
+
+QStringList ProfileDatabase::getPlayers()
+{
+    return profileDB->childKeys();
 }
 
 QString ProfileDatabase::getPlayerName(int playerID)
