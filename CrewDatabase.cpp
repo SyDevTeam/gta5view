@@ -27,7 +27,7 @@ CrewDatabase::CrewDatabase(QObject *parent) : QObject(parent)
     dir.setPath(StandardPaths::dataLocation());
     dir.mkdir("../gta5sync");
     QString dirPath = dir.absolutePath();
-    QString defaultConfPath = dirPath + "/crews.ini";
+    QString defaultConfPath = dirPath + QDir::separator() + "crews.ini";
 
     QSettings confPathSettings("Syping","gta5sync");
     confPathSettings.beginGroup("Database");

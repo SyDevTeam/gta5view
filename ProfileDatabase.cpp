@@ -27,7 +27,7 @@ ProfileDatabase::ProfileDatabase(QObject *parent) : QObject(parent)
     dir.setPath(StandardPaths::dataLocation());
     dir.mkdir("../gta5sync");
     QString dirPath = dir.absolutePath();
-    QString defaultConfPath = dirPath + "/players.ini";
+    QString defaultConfPath = dirPath + QDir::separator() + "players.ini";
 
     QSettings confPathSettings("Syping","gta5sync");
     confPathSettings.beginGroup("Database");
