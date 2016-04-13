@@ -18,6 +18,7 @@
 
 #include "StandardPaths.h"
 #include "CrewDatabase.h"
+#include "config.h"
 #include <QFile>
 #include <QDir>
 
@@ -29,7 +30,7 @@ CrewDatabase::CrewDatabase(QObject *parent) : QObject(parent)
     QString dirPath = dir.absolutePath();
     QString defaultConfPath = dirPath + QDir::separator() + "crews.ini";
 
-    QSettings confPathSettings("Syping","gta5sync");
+    QSettings confPathSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     confPathSettings.beginGroup("Database");
     QString confPathFile = confPathSettings.value("Crews", defaultConfPath).toString();
     confPathSettings.endGroup();

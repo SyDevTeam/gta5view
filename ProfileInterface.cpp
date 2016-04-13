@@ -27,6 +27,7 @@
 #include "StandardPaths.h"
 #include "ProfileLoader.h"
 #include "ExportThread.h"
+#include "config.h"
 #include <QProgressDialog>
 #include <QProgressBar>
 #include <QInputDialog>
@@ -339,7 +340,7 @@ void ProfileInterface::on_cmdCloseProfile_clicked()
 
 void ProfileInterface::on_cmdImport_clicked()
 {
-    QSettings settings("Syping", "gta5sync");
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("FileDialogs");
 
 fileDialogPreOpen:

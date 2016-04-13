@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>gta5sync - Options</string>
+   <string>gta5sync - Settings</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -75,9 +75,54 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabPlayers">
+      <attribute name="title">
+       <string>Players</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vlPlayers">
+       <property name="leftMargin">
+        <number>0</number>
+       </property>
+       <property name="topMargin">
+        <number>0</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>0</number>
+       </property>
+       <item>
+        <widget class="QTreeWidget" name="twPlayers">
+         <property name="editTriggers">
+          <set>QAbstractItemView::NoEditTriggers</set>
+         </property>
+         <property name="verticalScrollMode">
+          <enum>QAbstractItemView::ScrollPerPixel</enum>
+         </property>
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <column>
+          <property name="text">
+           <string>ID</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Name</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tabLocalization">
       <attribute name="title">
-       <string>Localization</string>
+       <string>Language</string>
       </attribute>
       <layout class="QVBoxLayout" name="vlLocalization">
        <item>
@@ -87,13 +132,7 @@
          </property>
          <layout class="QVBoxLayout" name="vlLanguage">
           <item>
-           <widget class="QComboBox" name="cbLanguage">
-            <item>
-             <property name="text">
-              <string>System</string>
-             </property>
-            </item>
-           </widget>
+           <widget class="QComboBox" name="cbLanguage"/>
           </item>
          </layout>
         </widget>

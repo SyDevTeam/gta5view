@@ -16,20 +16,35 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef STRINGPARSER_H
-#define STRINGPARSER_H
+#ifndef CONFIG_H
+#define CONFIG_H
 
-#include <QByteArray>
-#include <QString>
+#ifndef GTA5SYNC_APPVENDOR
+#define GTA5SYNC_APPVENDOR "Syping"
+#endif
 
-class StringParser
-{
-public:
-    StringParser();
-    static QString parseTitleString(const QByteArray &commitBytes, int maxLength);
-    static QString convertDrawStringForLog(const QString &inputStr);
-    static QString convertLogStringForDraw(const QString &inputStr);
-    static QString convertBuildedString(const QString &buildedStr);
-};
+#ifndef GTA5SYNC_APPSTR
+#define GTA5SYNC_APPSTR "gta5sync"
+#endif
 
-#endif // STRINGPARSER_H
+#ifndef GTA5SYNC_APPVER
+#define GTA5SYNC_APPVER "1.0.0"
+#endif
+
+#ifndef GTA5SYNC_BUILDTYPE
+#define GTA5SYNC_BUILDTYPE "Custom"
+#endif
+
+#ifndef GTA5SYNC_SHARE
+#define GTA5SYNC_SHARE "$RUNDIR"
+#endif
+
+#ifndef GTA5SYNC_LANG
+#define GTA5SYNC_LANG "$SHAREDIR$SEPARATORlang"
+#endif
+
+#ifndef GTA5SYNC_PLUG
+#define GTA5SYNC_PLUG "$RUNDIR$SEPARATORplugins"
+#endif
+
+#endif // CONFIG_H

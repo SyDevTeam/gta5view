@@ -54,6 +54,7 @@ SOURCES += main.cpp \
 HEADERS  += \
     AboutDialog.h \
     AppEnv.h \
+    config.h \
     CrewDatabase.h \
     DatabaseThread.h \
     ExportThread.h \

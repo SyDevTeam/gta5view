@@ -20,13 +20,22 @@
 #define APPENV_H
 
 #include <QString>
+#include <QUrl>
 
 class AppEnv
 {
 public:
     AppEnv();
+
+    // Folder Stuff
     static QString getGameFolder(bool *ok = 0);
     static bool setGameFolder(QString gameFolder);
+    static QString getLangFolder();
+    static QString getPluginsFolder();
+
+    // Web Stuff
+    static QByteArray getUserAgent();
+    static QUrl getPlayerFetchingUrl(QString crewID, QString pageNumber);
 };
 
 #endif // APPENV_H

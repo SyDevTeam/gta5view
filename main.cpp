@@ -25,6 +25,8 @@
 #include "CrewDatabase.h"
 #include "SavegameData.h"
 #include "IconLoader.h"
+#include "AppEnv.h"
+#include "config.h"
 #include <QApplication>
 #include <QStringList>
 #include <QTranslator>
@@ -46,8 +48,8 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    a.setApplicationName("gta5sync");
-    a.setApplicationVersion("1.0.0");
+    a.setApplicationName(GTA5SYNC_APPSTR);
+    a.setApplicationVersion(GTA5SYNC_APPVER);
 
 #ifdef GTA5SYNC_WIN
     // Get Windows Font
@@ -65,24 +67,20 @@ int main(int argc, char *argv[])
     a.setFont(appFont);
 #endif
 
-    QDir appDir = QFileInfo(a.applicationFilePath()).absoluteDir();
-    if (appDir.cd("plugins"))
+    QString pluginsDir = AppEnv::getPluginsFolder();
+    if (QFileInfo(pluginsDir).exists())
     {
-        a.addLibraryPath(appDir.path());
-        appDir.cdUp();
+        a.addLibraryPath(pluginsDir);
     }
-    appDir.mkdir("lang");
-    appDir.cd("lang");
 
     // Loading translation settings
-    QSettings settings("Syping", "gta5sync");
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Interface");
     QString language = settings.value("Language","System").toString();
     settings.endGroup();
 
     // Start external translate loading
-    QString langpath = a.applicationFilePath();
-    langpath = appDir.absolutePath();
+    QString langpath = AppEnv::getLangFolder();
     bool trsf = false;
     bool svlp = false;
     QTranslator EappTranslator;

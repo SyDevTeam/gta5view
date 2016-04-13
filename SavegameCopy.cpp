@@ -19,6 +19,7 @@
 #include "SidebarGenerator.h"
 #include "SavegameWidget.h"
 #include "SavegameCopy.h"
+#include "config.h"
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSettings>
@@ -30,7 +31,7 @@ SavegameCopy::SavegameCopy()
 
 void SavegameCopy::copySavegame(QWidget *parent, QString sgdPath)
 {
-    QSettings settings("Syping", "gta5sync");
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("FileDialogs");
 
 fileDialogPreSave:

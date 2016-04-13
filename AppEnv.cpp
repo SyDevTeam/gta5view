@@ -17,7 +17,9 @@
 *****************************************************************************/
 
 #define _CRT_SECURE_NO_WARNINGS
+#include "config.h"
 #include "AppEnv.h"
+#include "StringParser.h"
 #include "StandardPaths.h"
 #include <QDir>
 #include <QDebug>
@@ -29,6 +31,8 @@ AppEnv::AppEnv()
 {
 
 }
+
+// Folder Stuff
 
 QString AppEnv::getGameFolder(bool *ok)
 {
@@ -103,4 +107,26 @@ bool AppEnv::setGameFolder(QString gameFolder)
         return true;
     }
     return false;
+}
+
+QString AppEnv::getLangFolder()
+{
+    return StringParser::convertBuildedString(QString::fromUtf8(GTA5SYNC_LANG));
+}
+
+QString AppEnv::getPluginsFolder()
+{
+    return StringParser::convertBuildedString(QString::fromUtf8(GTA5SYNC_PLUG));
+}
+
+// Web Stuff
+
+QByteArray AppEnv::getUserAgent()
+{
+    return QString("Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 gta5sync/1.0").toUtf8();
+}
+
+QUrl AppEnv::getPlayerFetchingUrl(QString crewID, QString pageNumber)
+{
+    return QUrl(QString("https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=%1&pageNumber=%2").arg(crewID, pageNumber));
 }

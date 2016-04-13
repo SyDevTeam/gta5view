@@ -18,6 +18,7 @@
 
 #include "ProfileDatabase.h"
 #include "StandardPaths.h"
+#include "config.h"
 #include <QFile>
 #include <QDir>
 
@@ -29,7 +30,7 @@ ProfileDatabase::ProfileDatabase(QObject *parent) : QObject(parent)
     QString dirPath = dir.absolutePath();
     QString defaultConfPath = dirPath + QDir::separator() + "players.ini";
 
-    QSettings confPathSettings("Syping","gta5sync");
+    QSettings confPathSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     confPathSettings.beginGroup("Database");
     QString confPathFile = confPathSettings.value("Players", defaultConfPath).toString();
     confPathSettings.endGroup();

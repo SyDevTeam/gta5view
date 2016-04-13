@@ -18,6 +18,7 @@
 
 #include "DatabaseThread.h"
 #include "CrewDatabase.h"
+#include "AppEnv.h"
 #include <QNetworkAccessManager>
 #include <QNetworkRequest>
 #include <QNetworkReply>
@@ -85,20 +86,19 @@ void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int
             {
                 QNetworkAccessManager *netManager = new QNetworkAccessManager();
 
-                QString memberListUrl = "https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=" + crewID + "&pageNumber=" + QString::number(currentPage);
-
-                QNetworkRequest netRequest(memberListUrl);
-                netRequest.setRawHeader("User-Agent", "Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 gta5sync/1.0");
+                QNetworkRequest netRequest(AppEnv::getPlayerFetchingUrl(crewID, QString::number(currentPage)));
+                netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
                 netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
                 netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
                 netRequest.setRawHeader("Connection", "keep-alive");
 
                 QNetworkReply *netReply = netManager->get(netRequest);
 
-                QEventLoop downloadLoop;
-                QObject::connect(netReply, SIGNAL(finished()), &downloadLoop, SLOT(quit()));
-                QTimer::singleShot(30000, &downloadLoop, SLOT(quit()));
-                downloadLoop.exec();
+                QEventLoop *downloadLoop = new QEventLoop();
+                QObject::connect(netReply, SIGNAL(finished()), downloadLoop, SLOT(quit()));
+                QTimer::singleShot(30000, downloadLoop, SLOT(quit()));
+                downloadLoop->exec();
+                delete downloadLoop;
 
                 if (netReply->isFinished())
                 {
@@ -128,9 +128,10 @@ void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int
                         }
                     }
 
-                    QEventLoop waitingLoop;
-                    QTimer::singleShot(requestDelay, &waitingLoop, SLOT(quit()));
-                    waitingLoop.exec();
+                    QEventLoop *waitingLoop = new QEventLoop();
+                    QTimer::singleShot(requestDelay, waitingLoop, SLOT(quit()));
+                    waitingLoop->exec();
+                    delete waitingLoop;
 
                     currentPage++;
                 }

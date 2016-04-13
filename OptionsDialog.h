@@ -1,4 +1,4 @@
-/*****************************************************************************
+/******************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
 * Copyright (C) 2016 Syping
 *
@@ -19,7 +19,10 @@
 #ifndef OPTIONSDIALOG_H
 #define OPTIONSDIALOG_H
 
+#include <QList>
 #include <QDialog>
+#include <QTreeWidgetItem>
+#include "ProfileDatabase.h"
 
 namespace Ui {
 class OptionsDialog;
@@ -30,11 +33,20 @@ class OptionsDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit OptionsDialog(QWidget *parent = 0);
+    explicit OptionsDialog(ProfileDatabase *profileDB, QWidget *parent = 0);
     ~OptionsDialog();
 
+private slots:
+    void on_cmdOK_clicked();
+
 private:
+    ProfileDatabase *profileDB;
     Ui::OptionsDialog *ui;
+    QList<QTreeWidgetItem*> playerItems;
+    QString currentLanguage;
+    void setupTreeWidget();
+    void setupLanguageBox();
+    void applySettings();
 };
 
 #endif // OPTIONSDIALOG_H

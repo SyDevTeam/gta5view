@@ -24,6 +24,7 @@
 #include "AboutDialog.h"
 #include "IconLoader.h"
 #include "AppEnv.h"
+#include "config.h"
 #include <QFileDialog>
 #include <QHBoxLayout>
 #include <QSpacerItem>
@@ -45,7 +46,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     profileOpen = 0;
     profileUI = 0;
     ui->menuProfile->setEnabled(false);
-    defaultWindowTitle = this->windowTitle();
+    defaultWindowTitle = tr("gta5sync - %1");
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
 }
@@ -70,7 +71,7 @@ void UserInterface::setupDirEnv()
     }
 
     // profiles init
-    QSettings SyncSettings("Syping", "gta5sync");
+    QSettings SyncSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     SyncSettings.beginGroup("Profile");
     QString defaultProfile = SyncSettings.value("Default", "").toString();
 
@@ -242,7 +243,7 @@ void UserInterface::on_actionDelete_selected_triggered()
 
 void UserInterface::on_actionOptions_triggered()
 {
-    OptionsDialog *optionsDialog = new OptionsDialog(this);
+    OptionsDialog *optionsDialog = new OptionsDialog(profileDB, this);
     optionsDialog->setWindowFlags(optionsDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
     optionsDialog->setModal(true);
     optionsDialog->show();

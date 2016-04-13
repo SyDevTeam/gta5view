@@ -17,10 +17,14 @@
 *****************************************************************************/
 
 #include "StringParser.h"
+#include "config.h"
+#include <QApplication>
 #include <QTextCodec>
 #include <QByteArray>
+#include <QFileInfo>
 #include <QString>
 #include <QList>
+#include <QDir>
 
 StringParser::StringParser()
 {
@@ -45,4 +49,13 @@ QString StringParser::convertLogStringForDraw(const QString &inputStr)
 {
     QString outputStr = inputStr;
     return outputStr.replace("&c;",",").replace("&u;","&");
+}
+
+QString StringParser::convertBuildedString(const QString &buildedStr)
+{
+    QString outputStr = buildedStr;
+    outputStr.replace("$SEPARATOR", QDir::separator());
+    outputStr.replace("$SHAREDIR", QString::fromUtf8(GTA5SYNC_SHARE));
+    outputStr.replace("$RUNDIR", QFileInfo(qApp->applicationFilePath()).absoluteDir().absolutePath());
+    return outputStr;
 }

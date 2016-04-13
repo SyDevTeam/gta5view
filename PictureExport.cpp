@@ -19,6 +19,7 @@
 #include "PictureExport.h"
 #include "PictureDialog.h"
 #include "SidebarGenerator.h"
+#include "config.h"
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSettings>
@@ -30,7 +31,7 @@ PictureExport::PictureExport()
 
 void PictureExport::exportPicture(QWidget *parent, SnapmaticPicture *picture)
 {
-    QSettings settings("Syping", "gta5sync");
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("FileDialogs");
 
 fileDialogPreSave:
