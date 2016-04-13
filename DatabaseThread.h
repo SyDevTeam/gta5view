@@ -32,6 +32,7 @@ public:
 private:
     CrewDatabase *crewDB;
     void scanCrewMembersList(QStringList crewList, int maxPages, int requestDelay);
+    bool threadRunning;
     int crewMaxPages;
     int plyrPerReq;
 

@@ -33,6 +33,7 @@
 DatabaseThread::DatabaseThread(CrewDatabase *crewDB, QObject *parent) : QThread(parent), crewDB(crewDB)
 {
     crewMaxPages = 83;
+    threadRunning = true;
 }
 
 void DatabaseThread::run()
@@ -52,20 +53,22 @@ void DatabaseThread::run()
         emit playerNameUpdated();
     }
 
-    QEventLoop waitingLoop;
-    QTimer::singleShot(10000, &waitingLoop, SLOT(quit()));
-    waitingLoop.exec();
+    QEventLoop *waitingLoop = new QEventLoop();
+    QTimer::singleShot(10000, waitingLoop, SLOT(quit()));
+    waitingLoop->exec();
+    delete waitingLoop;
 
-dbtBegin:
-    crewList = crewDB->getCrews();
+    while (threadRunning)
+    {
+        crewList = crewDB->getCrews();
 
-    // Long time scan
-    scanCrewMembersList(crewList, crewMaxPages, 10000);
-    emit playerNameUpdated();
+        // Long time scan
+        scanCrewMembersList(crewList, crewMaxPages, 10000);
+        emit playerNameUpdated();
 
-    QTimer::singleShot(300000, &threadLoop, SLOT(quit()));
-    threadLoop.exec();
-    goto dbtBegin;
+        QTimer::singleShot(300000, &threadLoop, SLOT(quit()));
+        threadLoop.exec();
+    }
 }
 
 void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int requestDelay)
