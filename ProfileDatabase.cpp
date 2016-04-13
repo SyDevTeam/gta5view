@@ -31,7 +31,7 @@ ProfileDatabase::ProfileDatabase(QObject *parent) : QObject(parent)
 
     QSettings confPathSettings("Syping","gta5sync");
     confPathSettings.beginGroup("Database");
-    QString confPathFile = confPathSettings.value("Location", defaultConfPath).toString();
+    QString confPathFile = confPathSettings.value("Players", defaultConfPath).toString();
     confPathSettings.endGroup();
 
     profileDB = new QSettings(confPathFile, QSettings::IniFormat);
