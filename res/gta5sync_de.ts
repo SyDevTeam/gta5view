@@ -100,7 +100,7 @@
     <message>
         <location filename="../OptionsDialog.ui" line="163"/>
         <source>Sync is not implemented at current time</source>
-        <translation>Sync wurde bisher nicht implentiert</translation>
+        <translation>Sync wurde bisher nicht implementiert</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="195"/>
