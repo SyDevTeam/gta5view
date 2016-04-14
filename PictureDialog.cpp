@@ -67,6 +67,8 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->cmdExport->setMenu(exportMenu);
 
     installEventFilter(this);
+    installEventFilter(ui->labPicture);
+    ui->labPicture->setFocusPolicy(Qt::StrongFocus);
 }
 
 PictureDialog::~PictureDialog()
@@ -78,7 +80,7 @@ PictureDialog::~PictureDialog()
 bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
 {
     bool returnValue = false;
-    if (obj == this)
+    if (obj == this || obj == ui->labPicture)
     {
         if (ev->type() == QEvent::KeyPress)
         {

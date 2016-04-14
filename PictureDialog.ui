@@ -120,7 +120,7 @@
           <item>
            <widget class="QPushButton" name="cmdExport">
             <property name="focusPolicy">
-             <enum>Qt::ClickFocus</enum>
+             <enum>Qt::NoFocus</enum>
             </property>
             <property name="toolTip">
              <string>Export picture</string>
@@ -136,7 +136,7 @@
           <item>
            <widget class="QPushButton" name="cmdClose">
             <property name="focusPolicy">
-             <enum>Qt::ClickFocus</enum>
+             <enum>Qt::NoFocus</enum>
             </property>
             <property name="toolTip">
              <string>Close</string>
