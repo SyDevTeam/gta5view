@@ -45,6 +45,7 @@ class ProfileInterface : public QWidget
 public:
     explicit ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
     void setProfileFolder(QString folder, QString profile);
+    void settingsApplied(int contentMode, QString language);
     void setupProfileInterface();
     ~ProfileInterface();
 
@@ -84,6 +85,7 @@ private:
     QString profileName;
     QString loadingStr;
     int selectedWidgts;
+    int contentMode;
 
     bool importFile(QString selectedFile, bool warn);
     bool importSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool warn = true);

@@ -54,7 +54,6 @@ private slots:
     void on_cmdExport_clicked();
     void on_cmdDelete_clicked();
     void on_cbSelected_stateChanged(int arg1);
-    void changeCheckedState();
     void pictureSelected();
     void selectAllWidgets();
     void deselectAllWidgets();
@@ -78,7 +77,6 @@ private:
     QString picPath;
     QString picTitl;
     QString picStr;
-    bool clkIssued;
 
 signals:
     void pictureDeleted();

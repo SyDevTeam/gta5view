@@ -34,12 +34,18 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tabWidget->setCurrentIndex(0);
+    contentMode = 0;
+    settings = new QSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+
     setupTreeWidget();
     setupLanguageBox();
+    setupRadioButtons();
+    setupDefaultProfile();
 }
 
 OptionsDialog::~OptionsDialog()
 {
+    delete settings;
     foreach(QTreeWidgetItem *playerItem, playerItems)
     {
         delete playerItem;
@@ -71,10 +77,9 @@ void OptionsDialog::setupTreeWidget()
 
 void OptionsDialog::setupLanguageBox()
 {
-    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-    settings.beginGroup("Interface");
-    currentLanguage = settings.value("Language","System").toString();
-    settings.endGroup();
+    settings->beginGroup("Interface");
+    currentLanguage = settings->value("Language","System").toString();
+    settings->endGroup();
 
     QString cbSysStr = tr("%1 (%2 if available) [sys]", "System like PC System = %1, System Language like Deutsch = %2").arg(tr("System",
     "System like PC System"), QLocale::system().nativeLanguageName());
@@ -117,6 +122,30 @@ void OptionsDialog::setupLanguageBox()
     }
 }
 
+void OptionsDialog::setupRadioButtons()
+{
+    bool contentModeOk;
+    settings->beginGroup("Profile");
+    contentMode = settings->value("ContentMode", 0).toInt(&contentModeOk);
+    settings->endGroup();
+
+    if (contentModeOk)
+    {
+        if (contentMode == 0)
+        {
+            ui->rbOpenWithSC->setChecked(true);
+        }
+        else if (contentMode == 1)
+        {
+            ui->rbOpenWithDC->setChecked(true);
+        }
+        else if (contentMode == 2)
+        {
+            ui->rbSelectWithSC->setChecked(true);
+        }
+    }
+}
+
 void OptionsDialog::on_cmdOK_clicked()
 {
     applySettings();
@@ -125,13 +154,54 @@ void OptionsDialog::on_cmdOK_clicked()
 
 void OptionsDialog::applySettings()
 {
-    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-    settings.beginGroup("Interface");
-    settings.setValue("Language", ui->cbLanguage->currentData());
-    settings.endGroup();
+    settings->beginGroup("Interface");
+    settings->setValue("Language", ui->cbLanguage->currentData());
+    settings->endGroup();
+
+    settings->beginGroup("Profile");
+    int newContentMode = 0;
+    if (ui->rbOpenWithSC->isChecked())
+    {
+        newContentMode = 0;
+    }
+    else if (ui->rbOpenWithDC->isChecked())
+    {
+        newContentMode = 1;
+    }
+    else if (ui->rbSelectWithSC->isChecked())
+    {
+        newContentMode = 2;
+    }
+    settings->setValue("ContentMode", newContentMode);
+    settings->setValue("Default", ui->cbProfiles->currentData());
+    settings->endGroup();
+
+    emit settingsApplied(newContentMode, ui->cbLanguage->currentData().toString());
 
     if (ui->cbLanguage->currentData().toString() != currentLanguage)
     {
         QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The language change will take effect after you restart %1.").arg(GTA5SYNC_APPSTR));
+    }
+}
+
+void OptionsDialog::setupDefaultProfile()
+{
+    settings->beginGroup("Profile");
+    defaultProfile = settings->value("Default", "").toString();
+    settings->endGroup();
+
+    QString cbNoneStr = tr("No Profile", "No Profile, as default");
+    ui->cbProfiles->addItem(cbNoneStr, "");
+}
+
+void OptionsDialog::commitProfiles(QStringList profiles)
+{
+    foreach(const QString &profile, profiles)
+    {
+        ui->cbProfiles->addItem(tr("Profile: %1").arg(profile), profile);
+        if (defaultProfile == profile)
+        {
+            ui->cbProfiles->setCurrentText(tr("Profile: %1").arg(profile));
+        }
     }
 }

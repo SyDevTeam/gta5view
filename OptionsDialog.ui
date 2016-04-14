@@ -61,6 +61,18 @@
         </widget>
        </item>
        <item>
+        <widget class="QGroupBox" name="gbDefaultProfile">
+         <property name="title">
+          <string>Default Profile</string>
+         </property>
+         <layout class="QVBoxLayout" name="vlDefaultProfile">
+          <item>
+           <widget class="QComboBox" name="cbProfiles"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
         <spacer name="vsProfile">
          <property name="orientation">
           <enum>Qt::Vertical</enum>

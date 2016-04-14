@@ -57,6 +57,7 @@ private slots:
     void on_actionOptions_triggered();
     void on_action_Import_triggered();
     void on_actionOpen_File_triggered();
+    void settingsApplied(int contentMode, QString language);
 
 private:
     ProfileDatabase *profileDB;
@@ -66,10 +67,13 @@ private:
     ProfileInterface *profileUI;
     QList<QPushButton*> profileBtns;
     bool profileOpen;
+    int contentMode;
+    QString language;
     QString defaultWindowTitle;
     QString GTAV_Folder;
     QString GTAV_ProfilesFolder;
-    void setupProfileUi(QStringList GTAV_Profiles);
+    QStringList GTAV_Profiles;
+    void setupProfileUi();
     void openProfile(QString profileName);
     void openSelectProfile();
 

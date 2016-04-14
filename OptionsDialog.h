@@ -21,6 +21,7 @@
 
 #include <QList>
 #include <QDialog>
+#include <QSettings>
 #include <QTreeWidgetItem>
 #include "ProfileDatabase.h"
 
@@ -34,18 +35,27 @@ class OptionsDialog : public QDialog
 
 public:
     explicit OptionsDialog(ProfileDatabase *profileDB, QWidget *parent = 0);
+    void commitProfiles(QStringList profiles);
     ~OptionsDialog();
 
 private slots:
     void on_cmdOK_clicked();
+
+signals:
+    void settingsApplied(int contentMode, QString language);
 
 private:
     ProfileDatabase *profileDB;
     Ui::OptionsDialog *ui;
     QList<QTreeWidgetItem*> playerItems;
     QString currentLanguage;
+    QString defaultProfile;
+    QSettings *settings;
+    int contentMode;
     void setupTreeWidget();
     void setupLanguageBox();
+    void setupRadioButtons();
+    void setupDefaultProfile();
     void applySettings();
 };
 

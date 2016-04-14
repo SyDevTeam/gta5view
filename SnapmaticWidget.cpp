@@ -45,7 +45,6 @@ SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *thr
     highlightBackColor = palette.highlight().color();
     highlightTextColor = palette.highlightedText().color();
 
-    clkIssued = 0;
     picPath = "";
     picStr = "";
     smpic = 0;
@@ -156,14 +155,12 @@ void SnapmaticWidget::mouseReleaseEvent(QMouseEvent *ev)
     {
         if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
         {
-            clkIssued = false;
-            //QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
             ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
         }
     }
     else
     {
-        if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
+        if (getContentMode() == 0 && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
         {
             on_cmdView_clicked();
         }
@@ -172,20 +169,11 @@ void SnapmaticWidget::mouseReleaseEvent(QMouseEvent *ev)
 
 void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
-    QWidget::mouseDoubleClickEvent(ev);
+    ProfileWidget::mouseDoubleClickEvent(ev);
 
-    //  if (ev->button() == Qt::LeftButton)
-    //  {
-    //      clkIssued = true;
-    //      on_cmdView_clicked();
-    //  }
-}
-
-void SnapmaticWidget::changeCheckedState()
-{
-    if (!clkIssued)
+    if (!ui->cbSelected->isVisible() && getContentMode() == 1 && ev->button() == Qt::LeftButton)
     {
-        ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
+        on_cmdView_clicked();
     }
 }
 
@@ -223,9 +211,7 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
         contextMenu.addAction(tr("&Select"), this, SLOT(pictureSelected()));
         contextMenu.addAction(QIcon::fromTheme("edit-select-all"), tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
     }
-    //ui->SnapmaticFrame->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
     contextMenu.exec(ev->globalPos());
-    //ui->SnapmaticFrame->setStyleSheet("");
 }
 
 void SnapmaticWidget::dialogNextPictureRequested()

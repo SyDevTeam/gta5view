@@ -48,6 +48,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui(new Ui::UserInterface)
 {
     ui->setupUi(this);
+    contentMode = 0;
     profileOpen = 0;
     profileUI = 0;
     ui->menuProfile->setEnabled(false);
@@ -78,9 +79,16 @@ void UserInterface::setupDirEnv()
     }
 
     // profiles init
-    QSettings SyncSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-    SyncSettings.beginGroup("Profile");
-    QString defaultProfile = SyncSettings.value("Default", "").toString();
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Profile");
+    QString defaultProfile = settings.value("Default", "").toString();
+
+    bool contentModeOk;
+    contentMode = settings.value("ContentMode", 0).toInt(&contentModeOk);
+    if (contentMode != 0 || contentMode != 1 || contentMode != 2)
+    {
+        contentMode = 0;
+    }
 
     if (folderExists)
     {
@@ -88,8 +96,8 @@ void UserInterface::setupDirEnv()
         GTAV_ProfilesFolder = GTAV_Folder + QDir::separator() + "Profiles";
         GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
 
-        QStringList GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
-        setupProfileUi(GTAV_Profiles);
+        GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
+        setupProfileUi();
 
         if (GTAV_Profiles.length() == 1)
         {
@@ -102,11 +110,13 @@ void UserInterface::setupDirEnv()
     }
     else
     {
-        setupProfileUi(QStringList());
+        GTAV_Profiles = QStringList();
+        setupProfileUi();
     }
+    settings.endGroup();
 }
 
-void UserInterface::setupProfileUi(QStringList GTAV_Profiles)
+void UserInterface::setupProfileUi()
 {
     if (GTAV_Profiles.length() == 0)
     {
@@ -167,7 +177,8 @@ void UserInterface::openProfile(QString profileName)
     profileUI = new ProfileInterface(profileDB, crewDB, threadDB);
     ui->swProfile->addWidget(profileUI);
     ui->swProfile->setCurrentWidget(profileUI);
-    profileUI->setProfileFolder(GTAV_ProfilesFolder + "/" + profileName, profileName);
+    profileUI->setProfileFolder(GTAV_ProfilesFolder + QDir::separator() + profileName, profileName);
+    profileUI->settingsApplied(contentMode, language);
     profileUI->setupProfileInterface();
     QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));
     QObject::connect(profileUI, SIGNAL(profileLoaded()), this, SLOT(profileLoaded()));
@@ -232,38 +243,55 @@ void UserInterface::profileLoaded()
 
 void UserInterface::on_actionSelect_all_triggered()
 {
-    profileUI->selectAllWidgets();
+    if (profileOpen)
+    {
+        profileUI->selectAllWidgets();
+    }
 }
 
 void UserInterface::on_actionDeselect_all_triggered()
 {
-    profileUI->deselectAllWidgets();
+    if (profileOpen)
+    {
+        profileUI->deselectAllWidgets();
+    }
 }
 
 void UserInterface::on_actionExport_selected_triggered()
 {
-    profileUI->exportSelected();
+    if (profileOpen)
+    {
+        profileUI->exportSelected();
+    }
 }
 
 void UserInterface::on_actionDelete_selected_triggered()
 {
-    profileUI->deleteSelected();
+    if (profileOpen)
+    {
+        profileUI->deleteSelected();
+    }
 }
 
 void UserInterface::on_actionOptions_triggered()
 {
     OptionsDialog *optionsDialog = new OptionsDialog(profileDB, this);
     optionsDialog->setWindowFlags(optionsDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    optionsDialog->commitProfiles(GTAV_Profiles);
+    QObject::connect(optionsDialog, SIGNAL(settingsApplied(int,QString)), this, SLOT(settingsApplied(int,QString)));
+
     optionsDialog->setModal(true);
     optionsDialog->show();
     optionsDialog->exec();
-    optionsDialog->deleteLater();
     delete optionsDialog;
 }
 
 void UserInterface::on_action_Import_triggered()
 {
-    profileUI->importFiles();
+    if (profileOpen)
+    {
+        profileUI->importFiles();
+    }
 }
 
 void UserInterface::on_actionOpen_File_triggered()
@@ -400,4 +428,14 @@ void UserInterface::openSavegameFile(SavegameData *savegame)
     sgdDialog->show();
     sgdDialog->exec();
     delete sgdDialog;
+}
+
+void UserInterface::settingsApplied(int _contentMode, QString _language)
+{
+    language = _language;
+    contentMode = _contentMode;
+    if (profileOpen)
+    {
+        profileUI->settingsApplied(contentMode, language);
+    }
 }

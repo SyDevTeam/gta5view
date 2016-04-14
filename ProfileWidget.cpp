@@ -21,7 +21,7 @@
 
 ProfileWidget::ProfileWidget(QWidget *parent) : QWidget(parent)
 {
-
+    contentMode = 0;
 }
 
 ProfileWidget::~ProfileWidget()
@@ -48,4 +48,14 @@ QString ProfileWidget::getWidgetType()
 {
     qDebug() << "ProfileWidget::getWidgetType got used without overwrite";
     return "ProfileWidget";
+}
+
+int ProfileWidget::getContentMode()
+{
+    return contentMode;
+}
+
+void ProfileWidget::setContentMode(int _contentMode)
+{
+    contentMode = _contentMode;
 }

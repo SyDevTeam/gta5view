@@ -53,7 +53,6 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     highlightBackColor = palette.highlight().color();
     highlightTextColor = palette.highlightedText().color();
 
-    clkIssued = 0;
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
@@ -131,8 +130,7 @@ void SavegameWidget::on_cmdView_clicked()
 
 void SavegameWidget::mousePressEvent(QMouseEvent *ev)
 {
-    ProfileWidget::mouseReleaseEvent(ev);
-    clkIssued = true;
+    ProfileWidget::mousePressEvent(ev);
 }
 
 void SavegameWidget::mouseReleaseEvent(QMouseEvent *ev)
@@ -142,14 +140,12 @@ void SavegameWidget::mouseReleaseEvent(QMouseEvent *ev)
     {
         if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
         {
-            clkIssued = false;
-            //QTimer::singleShot(QApplication::doubleClickInterval(), this, SLOT(changeCheckedState()));
             ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
         }
     }
     else
     {
-        if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
+        if (getContentMode() == 0 && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
         {
             on_cmdView_clicked();
         }
@@ -158,20 +154,11 @@ void SavegameWidget::mouseReleaseEvent(QMouseEvent *ev)
 
 void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
-    QWidget::mouseDoubleClickEvent(ev);
+    ProfileWidget::mouseDoubleClickEvent(ev);
 
-//  if (ev->button() == Qt::LeftButton)
-//  {
-//      clkIssued = true;
-//      on_cmdView_clicked();
-//  }
-}
-
-void SavegameWidget::changeCheckedState()
-{
-    if (!clkIssued)
+    if (!ui->cbSelected->isVisible() && getContentMode() == 1 && ev->button() == Qt::LeftButton)
     {
-        ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
+        on_cmdView_clicked();
     }
 }
 

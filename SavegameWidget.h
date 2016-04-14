@@ -50,7 +50,6 @@ private slots:
     void on_cmdCopy_clicked();
     void on_cmdDelete_clicked();
     void on_cbSelected_stateChanged(int arg1);
-    void changeCheckedState();
     void savegameSelected();
     void selectAllWidgets();
     void deselectAllWidgets();
@@ -69,7 +68,6 @@ private:
     QColor highlightTextColor;
     QString sgdPath;
     QString sgdStr;
-    bool clkIssued;
 
 signals:
     void savegameDeleted();

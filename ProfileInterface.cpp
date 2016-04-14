@@ -117,9 +117,10 @@ void ProfileInterface::savegameLoaded_f(SavegameData *savegame, QString savegame
 {
     SavegameWidget *sgdWidget = new SavegameWidget();
     sgdWidget->setSavegameData(savegame, savegamePath);
+    sgdWidget->setContentMode(contentMode);
     widgets[sgdWidget] = "SGD" + QFileInfo(savegamePath).fileName();
     savegames.append(savegame);
-    if (selectedWidgts != 0) { sgdWidget->setSelectionMode(true); }
+    if (selectedWidgts != 0 || contentMode == 2) { sgdWidget->setSelectionMode(true); }
     QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(savegameDeleted()));
     QObject::connect(sgdWidget, SIGNAL(widgetSelected()), this, SLOT(profileWidgetSelected()));
     QObject::connect(sgdWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
@@ -137,9 +138,10 @@ void ProfileInterface::pictureLoaded_f(SnapmaticPicture *picture, QString pictur
 {
     SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, threadDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
+    picWidget->setContentMode(contentMode);
     widgets[picWidget] = "PIC" + picture->getPictureSortStr();
     pictures.append(picture);
-    if (selectedWidgts != 0) { picWidget->setSelectionMode(true); }
+    if (selectedWidgts != 0 || contentMode == 2) { picWidget->setSelectionMode(true); }
     QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(pictureDeleted()));
     QObject::connect(picWidget, SIGNAL(widgetSelected()), this, SLOT(profileWidgetSelected()));
     QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
@@ -561,7 +563,10 @@ void ProfileInterface::profileWidgetDeselected()
         int scrollBarValue = ui->saProfile->verticalScrollBar()->value();
         foreach(ProfileWidget *widget, widgets.keys())
         {
-            widget->setSelectionMode(false);
+            if (contentMode != 2)
+            {
+                widget->setSelectionMode(false);
+            }
         }
         ui->saProfile->verticalScrollBar()->setValue(scrollBarValue);
     }
@@ -779,4 +784,30 @@ void ProfileInterface::deleteSelected()
 void ProfileInterface::importFiles()
 {
     on_cmdImport_clicked();
+}
+
+void ProfileInterface::settingsApplied(int _contentMode, QString language)
+{
+    Q_UNUSED(language)
+    contentMode = _contentMode;
+
+    if (contentMode == 2)
+    {
+        foreach(ProfileWidget *widget, widgets.keys())
+        {
+            widget->setSelectionMode(true);
+            widget->setContentMode(contentMode);
+        }
+    }
+    else
+    {
+        foreach(ProfileWidget *widget, widgets.keys())
+        {
+            if (selectedWidgts == 0)
+            {
+                widget->setSelectionMode(false);
+            }
+            widget->setContentMode(contentMode);
+        }
+    }
 }
