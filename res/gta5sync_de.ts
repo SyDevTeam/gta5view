@@ -1106,12 +1106,12 @@ Exportieren als:</translation>
     <message>
         <location filename="../UserInterface.ui" line="188"/>
         <source>Exit</source>
-        <translation>Schließen</translation>
+        <translation>Beenden</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="185"/>
         <source>&amp;Exit</source>
-        <translation>&amp;Exit</translation>
+        <translation>B&amp;eenden</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="191"/>
@@ -1252,11 +1252,11 @@ Exportieren als:</translation>
         <translation>Datei öffnen...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="323"/>
         <source>Import</source>
         <translation>Importieren</translation>
     </message>
     <message>
+        <location filename="../UserInterface.cpp" line="323"/>
         <location filename="../UserInterface.cpp" line="339"/>
         <location filename="../UserInterface.cpp" line="366"/>
         <location filename="../UserInterface.cpp" line="371"/>

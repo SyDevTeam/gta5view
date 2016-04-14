@@ -1006,10 +1006,6 @@
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="323"/>
-        <source>Import</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../UserInterface.cpp" line="339"/>
         <location filename="../UserInterface.cpp" line="366"/>
         <location filename="../UserInterface.cpp" line="371"/>
