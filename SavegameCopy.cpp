@@ -40,7 +40,7 @@ fileDialogPreSave:
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, false);
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);

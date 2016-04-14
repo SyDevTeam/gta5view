@@ -348,7 +348,7 @@ fileDialogPreOpen:
     fileDialog.setFileMode(QFileDialog::ExistingFiles);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, true);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, false);
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
     fileDialog.setWindowTitle(tr("Import..."));
     fileDialog.setLabelText(QFileDialog::Accept, tr("Import"));
