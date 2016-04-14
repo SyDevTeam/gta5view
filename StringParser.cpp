@@ -54,8 +54,8 @@ QString StringParser::convertLogStringForDraw(const QString &inputStr)
 QString StringParser::convertBuildedString(const QString &buildedStr)
 {
     QString outputStr = buildedStr;
-    outputStr.replace("$SEPARATOR", QDir::separator());
     outputStr.replace("$SHAREDIR", QString::fromUtf8(GTA5SYNC_SHARE));
     outputStr.replace("$RUNDIR", QFileInfo(qApp->applicationFilePath()).absoluteDir().absolutePath());
+    outputStr.replace("$SEPARATOR", QDir::separator());
     return outputStr;
 }
