@@ -21,7 +21,9 @@
 
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
+#include <QMouseEvent>
 #include <QDialog>
+#include <QEvent>
 #include <QMenu>
 
 namespace Ui {
@@ -61,6 +63,7 @@ signals:
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
+    void mousePressEvent(QMouseEvent *ev);
 
 private:
     ProfileDatabase *profileDB;

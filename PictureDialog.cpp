@@ -34,8 +34,11 @@
 #include <QVariantMap>
 #include <QJsonArray>
 #include <QKeyEvent>
+#include <QMimeData>
+#include <QBuffer>
 #include <QDebug>
 #include <QList>
+#include <QDrag>
 #include <QUrl>
 #include <QDir>
 
@@ -74,6 +77,7 @@ PictureDialog::~PictureDialog()
 
 bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
 {
+    bool returnValue = false;
     if (obj == this)
     {
         if (ev->type() == QEvent::KeyPress)
@@ -82,14 +86,33 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
             switch (keyEvent->key()){
             case Qt::Key_Left:
                 emit previousPictureRequested();
+                returnValue = true;
                 break;
             case Qt::Key_Right:
                 emit nextPictureRequested();
+                returnValue = true;
+                break;
+            case Qt::Key_E: case Qt::Key_S: case Qt::Key_Save:
+                ui->cmdExport->click();
+                returnValue = true;
+                break;
+            case Qt::Key_C: case Qt::Key_Q: case Qt::Key_Exit:
+                ui->cmdClose->click();
+                returnValue = true;
+                break;
+            case Qt::Key_Enter: case Qt::Key_Return:
+                on_labPicture_mouseDoubleClicked();
+                returnValue = true;
                 break;
             }
         }
     }
-    return false;
+    return returnValue;
+}
+
+void PictureDialog::mousePressEvent(QMouseEvent *ev)
+{
+    ev->accept();
 }
 
 void PictureDialog::dialogNextPictureRequested()

@@ -87,7 +87,7 @@
          <bool>true</bool>
         </property>
         <property name="textInteractionFlags">
-         <set>Qt::TextBrowserInteraction</set>
+         <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
         </property>
        </widget>
       </item>
@@ -119,21 +119,33 @@
          <layout class="QHBoxLayout" name="hlButtons">
           <item>
            <widget class="QPushButton" name="cmdExport">
+            <property name="focusPolicy">
+             <enum>Qt::ClickFocus</enum>
+            </property>
             <property name="toolTip">
              <string>Export picture</string>
             </property>
             <property name="text">
              <string>&amp;Export</string>
             </property>
+            <property name="autoDefault">
+             <bool>false</bool>
+            </property>
            </widget>
           </item>
           <item>
            <widget class="QPushButton" name="cmdClose">
+            <property name="focusPolicy">
+             <enum>Qt::ClickFocus</enum>
+            </property>
             <property name="toolTip">
              <string>Close</string>
             </property>
             <property name="text">
              <string>&amp;Close</string>
+            </property>
+            <property name="autoDefault">
+             <bool>false</bool>
             </property>
            </widget>
           </item>
