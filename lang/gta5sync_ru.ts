@@ -65,63 +65,63 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="111"/>
+        <location filename="../OptionsDialog.ui" line="120"/>
         <source>ID</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="116"/>
+        <location filename="../OptionsDialog.ui" line="125"/>
         <source>Name</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="125"/>
-        <location filename="../OptionsDialog.ui" line="131"/>
+        <location filename="../OptionsDialog.ui" line="134"/>
+        <location filename="../OptionsDialog.ui" line="140"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="157"/>
+        <location filename="../OptionsDialog.ui" line="166"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="163"/>
+        <location filename="../OptionsDialog.ui" line="172"/>
         <source>Sync is not implemented at current time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="195"/>
+        <location filename="../OptionsDialog.ui" line="204"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="202"/>
+        <location filename="../OptionsDialog.ui" line="211"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="78"/>
+        <location filename="../OptionsDialog.cpp" line="79"/>
         <source>%1 (%2 if available) [sys]</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="78"/>
+        <location filename="../OptionsDialog.cpp" line="79"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="134"/>
+        <location filename="../OptionsDialog.cpp" line="135"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="134"/>
+        <location filename="../OptionsDialog.cpp" line="135"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -145,19 +145,19 @@
 &lt;span style=&quot; font-weight:600;&quot;&gt;ID группы: &lt;/span&gt;%5</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="123"/>
+        <location filename="../PictureDialog.ui" line="126"/>
         <source>Export picture</source>
         <translation>Экспорт картинки</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="126"/>
+        <location filename="../PictureDialog.ui" line="129"/>
         <location filename="../PictureCopy.cpp" line="47"/>
         <location filename="../PictureExport.cpp" line="47"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="136"/>
+        <location filename="../PictureDialog.ui" line="145"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -170,41 +170,41 @@
         <translation type="obsolete">Копировать</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="133"/>
+        <location filename="../PictureDialog.ui" line="142"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="62"/>
+        <location filename="../PictureDialog.cpp" line="65"/>
         <source>Export as &amp;JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="63"/>
+        <location filename="../PictureDialog.cpp" line="66"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="114"/>
-        <location filename="../PictureDialog.cpp" line="161"/>
+        <location filename="../PictureDialog.cpp" line="139"/>
+        <location filename="../PictureDialog.cpp" line="186"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="114"/>
-        <location filename="../PictureDialog.cpp" line="161"/>
+        <location filename="../PictureDialog.cpp" line="139"/>
+        <location filename="../PictureDialog.cpp" line="186"/>
         <source>Failed at %1</source>
         <translation>Ошибка при %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="150"/>
-        <location filename="../PictureDialog.cpp" line="160"/>
+        <location filename="../PictureDialog.cpp" line="175"/>
+        <location filename="../PictureDialog.cpp" line="185"/>
         <source>No player</source>
         <translation>Игроков нет</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="153"/>
-        <location filename="../PictureDialog.cpp" line="160"/>
+        <location filename="../PictureDialog.cpp" line="178"/>
+        <location filename="../PictureDialog.cpp" line="185"/>
         <source>No crew</source>
         <translation>Без группы</translation>
     </message>
@@ -354,21 +354,25 @@
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="357"/>
+        <location filename="../UserInterface.cpp" line="284"/>
         <source>All profile files (SGTA* PGTA*)</source>
         <translation>Все файлы профиля (SGTA* PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="358"/>
+        <location filename="../UserInterface.cpp" line="285"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Файлы сохранения (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="359"/>
+        <location filename="../UserInterface.cpp" line="286"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Картинка Snapmatic (PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="360"/>
+        <location filename="../UserInterface.cpp" line="287"/>
         <source>All files (**)</source>
         <translation>Все файлы (**)</translation>
     </message>
@@ -381,11 +385,13 @@
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="424"/>
+        <location filename="../UserInterface.cpp" line="323"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Не удалось загрузить картинку Snapmatic</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="441"/>
+        <location filename="../UserInterface.cpp" line="339"/>
         <source>Failed to read Savegame file</source>
         <translation>Не удалось загрузить файл сохранения</translation>
     </message>
@@ -397,6 +403,7 @@
     <message>
         <location filename="../ProfileInterface.cpp" line="399"/>
         <location filename="../ProfileInterface.cpp" line="476"/>
+        <location filename="../UserInterface.cpp" line="371"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
     </message>
@@ -524,17 +531,17 @@
         <translation>Просмотрщик сохранений</translation>
     </message>
     <message>
-        <location filename="../SavegameDialog.ui" line="20"/>
+        <location filename="../SavegameDialog.ui" line="26"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
         <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Сохранение&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
     </message>
     <message>
-        <location filename="../SavegameDialog.ui" line="58"/>
-        <source>Cop&amp;y</source>
+        <location filename="../SavegameDialog.ui" line="54"/>
+        <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameDialog.ui" line="65"/>
+        <location filename="../SavegameDialog.ui" line="61"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -576,8 +583,12 @@
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="90"/>
+        <source>Export</source>
+        <translation type="unfinished">Экспорт</translation>
+    </message>
+    <message>
         <source>Copy</source>
-        <translation>Копировать</translation>
+        <translation type="vanished">Копировать</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="103"/>
@@ -760,44 +771,44 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="206"/>
+        <location filename="../SnapmaticWidget.cpp" line="207"/>
         <source>Export as &amp;JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="207"/>
+        <location filename="../SnapmaticWidget.cpp" line="208"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="208"/>
+        <location filename="../SnapmaticWidget.cpp" line="209"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="210"/>
+        <location filename="../SnapmaticWidget.cpp" line="211"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="214"/>
-        <location filename="../SnapmaticWidget.cpp" line="222"/>
+        <location filename="../SnapmaticWidget.cpp" line="215"/>
+        <location filename="../SnapmaticWidget.cpp" line="223"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="215"/>
+        <location filename="../SnapmaticWidget.cpp" line="216"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="216"/>
-        <location filename="../SnapmaticWidget.cpp" line="223"/>
+        <location filename="../SnapmaticWidget.cpp" line="217"/>
+        <location filename="../SnapmaticWidget.cpp" line="224"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="217"/>
+        <location filename="../SnapmaticWidget.cpp" line="218"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -816,7 +827,7 @@
     <name>UserInterface</name>
     <message>
         <location filename="../UserInterface.ui" line="20"/>
-        <location filename="../UserInterface.cpp" line="49"/>
+        <location filename="../UserInterface.cpp" line="56"/>
         <source>gta5sync - %1</source>
         <translation>gta5sync - %1</translation>
     </message>
@@ -831,69 +842,88 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="143"/>
+        <location filename="../UserInterface.ui" line="145"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="149"/>
+        <location filename="../UserInterface.ui" line="151"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="155"/>
+        <location filename="../UserInterface.ui" line="157"/>
         <source>&amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="171"/>
+        <location filename="../UserInterface.ui" line="173"/>
         <source>&amp;About gta5sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="195"/>
+        <location filename="../UserInterface.ui" line="185"/>
+        <source>&amp;Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="188"/>
+        <source>Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="196"/>
+        <source>Close &amp;Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="199"/>
+        <source>Ctrl+End</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="207"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="235"/>
+        <location filename="../UserInterface.ui" line="251"/>
+        <source>Ctrl+Del</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="259"/>
         <source>&amp;Import files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="238"/>
+        <location filename="../UserInterface.ui" line="262"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="110"/>
-        <location filename="../UserInterface.ui" line="179"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="203"/>
+        <location filename="../UserInterface.ui" line="218"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="211"/>
+        <location filename="../UserInterface.ui" line="229"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="219"/>
+        <location filename="../UserInterface.ui" line="240"/>
         <source>&amp;Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="227"/>
+        <location filename="../UserInterface.ui" line="248"/>
         <source>&amp;Remove selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="230"/>
-        <source>Ctrl+R</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -909,7 +939,7 @@
         <translation type="obsolete">О программе gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="174"/>
+        <location filename="../UserInterface.ui" line="221"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
@@ -918,55 +948,77 @@
         <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="182"/>
+        <location filename="../UserInterface.ui" line="191"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="187"/>
-        <source>Select &amp;Profile</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="190"/>
+        <location filename="../UserInterface.ui" line="176"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="198"/>
+        <location filename="../UserInterface.ui" line="271"/>
+        <source>&amp;Open File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="274"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="206"/>
+        <location filename="../UserInterface.ui" line="210"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="222"/>
+        <location filename="../UserInterface.ui" line="243"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="214"/>
+        <location filename="../UserInterface.ui" line="232"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="51"/>
-        <location filename="../UserInterface.cpp" line="180"/>
+        <location filename="../UserInterface.cpp" line="58"/>
+        <location filename="../UserInterface.cpp" line="188"/>
         <source>Select Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="64"/>
-        <location filename="../UserInterface.cpp" line="131"/>
+        <location filename="../UserInterface.cpp" line="71"/>
+        <location filename="../UserInterface.cpp" line="138"/>
         <source>Select GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="106"/>
+        <location filename="../UserInterface.cpp" line="113"/>
         <source>Select GTA V &amp;Folder...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="281"/>
+        <source>Open File...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="323"/>
+        <source>Import</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="339"/>
+        <location filename="../UserInterface.cpp" line="366"/>
+        <location filename="../UserInterface.cpp" line="371"/>
+        <source>Open File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="366"/>
+        <source>Can&apos;t open %1 because of not valid file format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
