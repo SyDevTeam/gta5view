@@ -87,7 +87,7 @@
          <string>Copy savegame</string>
         </property>
         <property name="text">
-         <string>Copy</string>
+         <string>Export</string>
         </property>
         <property name="autoDefault">
          <bool>true</bool>

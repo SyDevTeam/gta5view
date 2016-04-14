@@ -19,10 +19,12 @@
 #ifndef USERINTERFACE_H
 #define USERINTERFACE_H
 
+#include "SnapmaticPicture.h"
 #include "ProfileInterface.h"
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "CrewDatabase.h"
+#include "SavegameData.h"
 #include <QMainWindow>
 #include <QString>
 #include <QMap>
@@ -54,6 +56,7 @@ private slots:
     void on_actionDelete_selected_triggered();
     void on_actionOptions_triggered();
     void on_action_Import_triggered();
+    void on_actionOpen_File_triggered();
 
 private:
     ProfileDatabase *profileDB;
@@ -69,6 +72,11 @@ private:
     void setupProfileUi(QStringList GTAV_Profiles);
     void openProfile(QString profileName);
     void openSelectProfile();
+
+    // Open File
+    bool openFile(QString selectedFile, bool warn = true);
+    void openSavegameFile(SavegameData *savegame);
+    void openSnapmaticFile(SnapmaticPicture *picture);
 };
 
 #endif // USERINTERFACE_H

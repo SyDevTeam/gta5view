@@ -19,8 +19,13 @@
 #include "UserInterface.h"
 #include "ui_UserInterface.h"
 #include "ProfileInterface.h"
+#include "SnapmaticPicture.h"
+#include "SidebarGenerator.h"
+#include "SavegameDialog.h"
 #include "StandardPaths.h"
 #include "OptionsDialog.h"
+#include "PictureDialog.h"
+#include "SavegameData.h"
 #include "AboutDialog.h"
 #include "IconLoader.h"
 #include "AppEnv.h"
@@ -259,4 +264,140 @@ void UserInterface::on_actionOptions_triggered()
 void UserInterface::on_action_Import_triggered()
 {
     profileUI->importFiles();
+}
+
+void UserInterface::on_actionOpen_File_triggered()
+{
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("FileDialogs");
+
+fileDialogPreOpen:
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::ExistingFiles);
+    fileDialog.setViewMode(QFileDialog::Detail);
+    fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, false);
+    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowTitle(tr("Open File..."));
+
+    QStringList filters;
+    filters << ProfileInterface::tr("All profile files (SGTA* PGTA*)");
+    filters << ProfileInterface::tr("Savegames files (SGTA*)");
+    filters << ProfileInterface::tr("Snapmatic pictures (PGTA*)");
+    filters << ProfileInterface::tr("All files (**)");
+    fileDialog.setNameFilters(filters);
+
+    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
+
+    fileDialog.setSidebarUrls(sidebarUrls);
+    fileDialog.restoreState(settings.value("OpenFile","").toByteArray());
+
+    if (fileDialog.exec())
+    {
+        QStringList selectedFiles = fileDialog.selectedFiles();
+        if (selectedFiles.length() == 1)
+        {
+            QString selectedFile = selectedFiles.at(0);
+            if (!openFile(selectedFile, true)) goto fileDialogPreOpen;
+        }
+    }
+    settings.endGroup();
+}
+
+bool UserInterface::openFile(QString selectedFile, bool warn)
+{
+    QString selectedFileName = QFileInfo(selectedFile).fileName();
+    if (QFile::exists(selectedFile))
+    {
+        if (selectedFileName.left(4) == "PGTA")
+        {
+            SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
+            if (picture->readingPicture())
+            {
+                openSnapmaticFile(picture);
+                delete picture;
+                return true;
+            }
+            else
+            {
+                if (warn) QMessageBox::warning(this, tr("Import"), ProfileInterface::tr("Failed to read Snapmatic picture"));
+                delete picture;
+                return false;
+            }
+        }
+        else if (selectedFileName.left(4) == "SGTA")
+        {
+            SavegameData *savegame = new SavegameData(selectedFile);
+            if (savegame->readingSavegame())
+            {
+                openSavegameFile(savegame);
+                delete savegame;
+                return true;
+            }
+            else
+            {
+                if (warn) QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("Failed to read Savegame file"));
+                delete savegame;
+                return false;
+            }
+        }
+        else
+        {
+            SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
+            SavegameData *savegame = new SavegameData(selectedFile);
+            if (picture->readingPicture())
+            {
+                delete savegame;
+                openSnapmaticFile(picture);
+                delete picture;
+                return true;
+            }
+            else if (savegame->readingSavegame())
+            {
+                delete picture;
+                openSavegameFile(savegame);
+                delete savegame;
+                return true;
+            }
+            else
+            {
+                delete savegame;
+                delete picture;
+                if (warn) QMessageBox::warning(this, tr("Open File"), tr("Can't open %1 because of not valid file format").arg("\""+selectedFileName+"\""));
+                return false;
+            }
+        }
+    }
+    if (warn) QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("No valid file is selected"));
+    return false;
+}
+
+void UserInterface::openSnapmaticFile(SnapmaticPicture *picture)
+{
+    PictureDialog *picDialog = new PictureDialog(profileDB, this);
+    picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    picDialog->setSnapmaticPicture(picture, true);
+
+    int crewID = picture->getCrewNumber();
+    if (crewID != 0) { crewDB->addCrew(crewID); }
+
+    QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
+    QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(playerNameUpdated()));
+
+    picDialog->setModal(true);
+    picDialog->show();
+    picDialog->exec();
+    delete picDialog;
+}
+
+void UserInterface::openSavegameFile(SavegameData *savegame)
+{
+    SavegameDialog *sgdDialog = new SavegameDialog(this);
+    sgdDialog->setWindowFlags(sgdDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    sgdDialog->setSavegameData(savegame, savegame->getSavegameFileName(), true);
+
+    sgdDialog->setModal(true);
+    sgdDialog->show();
+    sgdDialog->exec();
+    delete sgdDialog;
 }

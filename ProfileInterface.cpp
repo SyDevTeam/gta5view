@@ -415,7 +415,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool warn)
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
             if (picture->readingPicture())
             {
-                bool success = importSnapmaticPicture(picture, selectedFile, warn);;
+                bool success = importSnapmaticPicture(picture, selectedFile, warn);
                 if (!success) delete picture;
                 return success;
             }
@@ -450,7 +450,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool warn)
             SavegameData *savegame = new SavegameData(selectedFile);
             if (picture->readingPicture())
             {
-                bool success = importSnapmaticPicture(picture, selectedFile, warn);;
+                bool success = importSnapmaticPicture(picture, selectedFile, warn);
                 delete savegame;
                 if (!success) delete picture;
                 return success;
