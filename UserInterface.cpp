@@ -320,7 +320,7 @@ bool UserInterface::openFile(QString selectedFile, bool warn)
             }
             else
             {
-                if (warn) QMessageBox::warning(this, tr("Import"), ProfileInterface::tr("Failed to read Snapmatic picture"));
+                if (warn) QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("Failed to read Snapmatic picture"));
                 delete picture;
                 return false;
             }
