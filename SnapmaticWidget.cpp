@@ -203,24 +203,25 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
     QMenu exportMenu(tr("&Export"), this);
+    exportMenu.setIcon(QIcon::fromTheme("document-save"));
     exportMenu.addAction(tr("Export as &JPG picture..."), this, SLOT(on_cmdExport_clicked()));
     exportMenu.addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(on_cmdCopy_clicked()));
-    contextMenu.addAction(tr("&View"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addAction(QIcon::fromTheme("image-x-generic"), tr("&View"), this, SLOT(on_cmdView_clicked()));
     contextMenu.addMenu(&exportMenu);
-    contextMenu.addAction(tr("&Remove"), this, SLOT(on_cmdDelete_clicked()));
+    contextMenu.addAction(QIcon::fromTheme("edit-delete"), tr("&Remove"), this, SLOT(on_cmdDelete_clicked()));
     if (ui->cbSelected->isVisible())
     {
         contextMenu.addSeparator();
         if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Select"), this, SLOT(pictureSelected())); }
         if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Deselect"), this, SLOT(pictureSelected())); }
-        contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
-        contextMenu.addAction(tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        contextMenu.addAction(QIcon::fromTheme("edit-select-all"), tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
+        contextMenu.addAction(QIcon::fromTheme("edit-clear"), tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
     }
     else
     {
         contextMenu.addSeparator();
         contextMenu.addAction(tr("&Select"), this, SLOT(pictureSelected()));
-        contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
+        contextMenu.addAction(QIcon::fromTheme("edit-select-all"), tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
     }
     //ui->SnapmaticFrame->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
     contextMenu.exec(ev->globalPos());

@@ -128,7 +128,7 @@
      <x>0</x>
      <y>0</y>
      <width>625</width>
-     <height>21</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -178,7 +178,8 @@
   </action>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="application-exit"/>
+    <iconset theme="application-exit">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Exit</string>
@@ -199,6 +200,9 @@
    </property>
   </action>
   <action name="actionOptions">
+   <property name="icon">
+    <iconset theme="preferences-system"/>
+   </property>
    <property name="text">
     <string>&amp;Settings</string>
    </property>
@@ -207,6 +211,9 @@
    </property>
   </action>
   <action name="actionSelect_all">
+   <property name="icon">
+    <iconset theme="edit-select-all"/>
+   </property>
    <property name="text">
     <string>Select &amp;All</string>
    </property>
@@ -215,6 +222,9 @@
    </property>
   </action>
   <action name="actionDeselect_all">
+   <property name="icon">
+    <iconset theme="edit-clear"/>
+   </property>
    <property name="text">
     <string>&amp;Deselect All</string>
    </property>
@@ -223,6 +233,9 @@
    </property>
   </action>
   <action name="actionExport_selected">
+   <property name="icon">
+    <iconset theme="document-save"/>
+   </property>
    <property name="text">
     <string>&amp;Export selected...</string>
    </property>
@@ -239,6 +252,9 @@
    </property>
   </action>
   <action name="action_Import">
+   <property name="icon">
+    <iconset theme="document-open"/>
+   </property>
    <property name="text">
     <string>&amp;Import files...</string>
    </property>
@@ -248,7 +264,8 @@
   </action>
   <action name="actionOpen_File">
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Open File...</string>
