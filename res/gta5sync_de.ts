@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -35,11 +35,11 @@
     <name>OptionsDialog</name>
     <message>
         <source>Options</source>
-        <translation type="vanished">Optionen</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>gta5sync - Options</source>
-        <translation type="vanished">gta5sync - Optionen</translation>
+        <translation>gta5sync - Optionen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="14"/>
@@ -74,7 +74,7 @@
     <message>
         <location filename="../OptionsDialog.ui" line="66"/>
         <source>Default Profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Standardprofil</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="92"/>
@@ -146,13 +146,13 @@
         <location filename="../OptionsDialog.cpp" line="193"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
-        <translation type="unfinished"></translation>
+        <translation>Kein Profil</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="201"/>
         <location filename="../OptionsDialog.cpp" line="204"/>
         <source>Profile: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Profil: %1</translation>
     </message>
 </context>
 <context>
@@ -535,7 +535,7 @@ JPG pictures make it possible to open the picture with a Image Viewer
 GTA Snapmatic make it possible to import the picture into the game
 
 Export as:</source>
-        <translation type="vanished">Exportiere Snapmatic Bilder
+        <translation>Exportiere Snapmatic Bilder
 
 JPG Bilder machen es möglich sie mit ein Bildansicht Programm zu öffnen
 Das GTA Snapmatic Format macht es möglich sie wieder ins Game zu importieren
@@ -670,7 +670,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Cop&amp;y</source>
-        <translation type="vanished">&amp;Kopieren</translation>
+        <translation>&amp;Kopieren</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="61"/>
@@ -679,11 +679,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.cpp" line="24"/>
@@ -715,7 +715,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="103"/>
@@ -1192,7 +1192,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Select &amp;Profile</source>
-        <translation type="vanished">&amp;Profil auswählen</translation>
+        <translation>&amp;Profil auswählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="176"/>
@@ -1201,7 +1201,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="vanished">&amp;Optionen</translation>
+        <translation>&amp;Optionen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="207"/>
@@ -1230,7 +1230,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Ctrl+R</source>
-        <translation type="vanished">Strg+R</translation>
+        <translation>Strg+R</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="259"/>
@@ -1270,7 +1270,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="vanished">Importieren</translation>
+        <translation>Importieren</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="351"/>
@@ -1287,15 +1287,15 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Change GTA V &amp;Folder</source>
-        <translation type="vanished">GTA V &amp;Ordner ändern</translation>
+        <translation>GTA V &amp;Ordner ändern</translation>
     </message>
     <message>
         <source>gta5sync</source>
-        <translation type="vanished">gta5sync</translation>
+        <translation>gta5sync</translation>
     </message>
     <message>
         <source>Grand Theft Auto V Folder not found!</source>
-        <translation type="vanished">Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
+        <translation>Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="103"/>
@@ -1308,11 +1308,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Reload profiles</source>
-        <translation type="vanished">Profile neuladen</translation>
+        <translation>Profile neuladen</translation>
     </message>
     <message>
         <source>Not able to reload profiles</source>
-        <translation type="vanished">Nicht fähig Profile neuzuladen</translation>
+        <translation>Nicht fähig Profile neuzuladen</translation>
     </message>
 </context>
 </TS>
