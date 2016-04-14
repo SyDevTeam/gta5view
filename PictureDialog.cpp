@@ -96,7 +96,7 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 ui->cmdExport->click();
                 returnValue = true;
                 break;
-            case Qt::Key_C: case Qt::Key_Q: case Qt::Key_Exit:
+            case Qt::Key_Exit:
                 ui->cmdClose->click();
                 returnValue = true;
                 break;
