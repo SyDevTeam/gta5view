@@ -16,8 +16,10 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include <QStringBuilder>
 #include "AboutDialog.h"
 #include "ui_AboutDialog.h"
+#include "config.h"
 
 AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
@@ -25,7 +27,9 @@ AboutDialog::AboutDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     aboutStr = ui->labAbout->text();
-    ui->labAbout->setText(aboutStr.arg(qApp->applicationVersion(), QT_VERSION_STR, qVersion()));
+    QString appVersion = qApp->applicationVersion();
+    QString buildType = GTA5SYNC_BUILDTYPE;
+    ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", QT_VERSION_STR, qVersion()));
 }
 
 AboutDialog::~AboutDialog()
