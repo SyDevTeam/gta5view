@@ -20,6 +20,7 @@ QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+DEPLOYMENT.display_name = gta5sync
 TARGET = gta5sync
 TEMPLATE = app
 
