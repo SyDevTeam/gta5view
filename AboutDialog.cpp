@@ -29,6 +29,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     aboutStr = ui->labAbout->text();
     QString appVersion = qApp->applicationVersion();
     QString buildType = GTA5SYNC_BUILDTYPE;
+    buildType.replace("_", "");
     ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", QT_VERSION_STR, qVersion()));
 }
 
