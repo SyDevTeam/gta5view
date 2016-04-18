@@ -82,14 +82,19 @@ void OptionsDialog::setupLanguageBox()
     settings->endGroup();
 
     QString cbSysStr = tr("%1 (%2 if available) [sys]", "System like PC System = %1, System Language like Deutsch = %2").arg(tr("System",
-    "System like PC System"), QLocale::system().nativeLanguageName());
+                                                                                                                                "System like PC System"), QLocale::system().nativeLanguageName());
     ui->cbLanguage->addItem(cbSysStr, "System");
 
     QString cbEngStr = "English (English) [en]";
     ui->cbLanguage->addItem(QIcon::fromTheme("flag-us"), cbEngStr, "en");
     if (currentLanguage == "en")
     {
+#if QT_VERSION >= 0x050000
         ui->cbLanguage->setCurrentText(cbEngStr);
+#else
+        int indexOfEnglish = ui->cbLanguage->findText(cbEngStr);
+        ui->cbLanguage->setCurrentIndex(indexOfEnglish);
+#endif
     }
 
     QDir langDir;
@@ -117,7 +122,12 @@ void OptionsDialog::setupLanguageBox()
         ui->cbLanguage->addItem(QIcon::fromTheme(langIconStr), cbLangStr, lang);
         if (currentLanguage == lang)
         {
+#if QT_VERSION >= 0x050000
             ui->cbLanguage->setCurrentText(cbLangStr);
+#else
+            int indexOfLang = ui->cbLanguage->findText(cbLangStr);
+            ui->cbLanguage->setCurrentIndex(indexOfLang);
+#endif
         }
     }
 }
@@ -155,7 +165,11 @@ void OptionsDialog::on_cmdOK_clicked()
 void OptionsDialog::applySettings()
 {
     settings->beginGroup("Interface");
+#if QT_VERSION >= 0x050000
     settings->setValue("Language", ui->cbLanguage->currentData());
+#else
+    settings->setValue("Language", ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()));
+#endif
     settings->endGroup();
 
     settings->beginGroup("Profile");
@@ -173,12 +187,25 @@ void OptionsDialog::applySettings()
         newContentMode = 2;
     }
     settings->setValue("ContentMode", newContentMode);
+#if QT_VERSION >= 0x050000
     settings->setValue("Default", ui->cbProfiles->currentData());
+#else
+    settings->setValue("Default", ui->cbProfiles->itemData(ui->cbProfiles->currentIndex()));
+#endif
     settings->endGroup();
 
+#if QT_VERSION >= 0x050000
     emit settingsApplied(newContentMode, ui->cbLanguage->currentData().toString());
+#else
+    emit settingsApplied(newContentMode, ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString());
+#endif
 
-    if (ui->cbLanguage->currentData().toString() != currentLanguage)
+#if QT_VERSION >= 0x050000
+    bool languageChanged = ui->cbLanguage->currentData().toString() != currentLanguage;
+#else
+    bool languageChanged = ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentLanguage;
+#endif
+    if (languageChanged)
     {
         QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The language change will take effect after you restart %1.").arg(GTA5SYNC_APPSTR));
     }
@@ -201,7 +228,12 @@ void OptionsDialog::commitProfiles(QStringList profiles)
         ui->cbProfiles->addItem(tr("Profile: %1").arg(profile), profile);
         if (defaultProfile == profile)
         {
+#if QT_VERSION >= 0x050000
             ui->cbProfiles->setCurrentText(tr("Profile: %1").arg(profile));
+#else
+            int indexOfProfile = ui->cbProfiles->findText(tr("Profile: %1").arg(profile));
+            ui->cbProfiles->setCurrentIndex(indexOfProfile);
+#endif
         }
     }
 }
