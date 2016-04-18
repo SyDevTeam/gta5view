@@ -98,10 +98,12 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 ui->cmdExport->click();
                 returnValue = true;
                 break;
-            case Qt::Key_Exit:
+#if QT_VERSION >= 0x050000
+            case Qt::Key_Exit
                 ui->cmdClose->click();
                 returnValue = true;
                 break;
+#endif
             case Qt::Key_Enter: case Qt::Key_Return:
                 on_labPicture_mouseDoubleClicked();
                 returnValue = true;
