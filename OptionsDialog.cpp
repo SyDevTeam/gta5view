@@ -81,9 +81,13 @@ void OptionsDialog::setupLanguageBox()
     currentLanguage = settings->value("Language","System").toString();
     settings->endGroup();
 
-    QString cbSysStr = tr("%1 (%2 if available) [sys]", "System like PC System = %1, System Language like Deutsch = %2").arg(tr("System",
-                                                                                                                                "System like PC System"), QLocale::system().nativeLanguageName());
-    ui->cbLanguage->addItem(cbSysStr, "System");
+    QStringList langList = QLocale::system().name().split("_");
+    if (langList.length() > 0)
+    {
+        QString cbSysStr = tr("%1 (%2 if available)", "System like PC System = %1, System Language like Deutsch = %2").arg(tr("System",
+        "System like PC System"), QLocale::languageToString(QLocale(langList.at(0)).language()));
+        ui->cbLanguage->addItem(cbSysStr, "System");
+    }
 
     QString cbEngStr = "English (English) [en]";
     ui->cbLanguage->addItem(QIcon::fromTheme("flag-us"), cbEngStr, "en");
