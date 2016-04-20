@@ -33,6 +33,9 @@ public:
     explicit ExportDialog(QWidget *parent = 0);
     ~ExportDialog();
 
+private slots:
+    void on_cmdSnapmaticClose_clicked();
+
 private:
     Ui::ExportDialog *ui;
 };

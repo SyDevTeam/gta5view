@@ -233,7 +233,16 @@ void SnapmaticPicture::parseSnapmaticExportAndSortString()
                 monthStr = dateStrList.at(0);
             }
             QString cmpPicTitl = titlStr;
+            cmpPicTitl.replace("\"", "''");
             cmpPicTitl.replace(" ", "_");
+            cmpPicTitl.replace(":", "-");
+            cmpPicTitl.replace("\\", "");
+            cmpPicTitl.replace("/", "");
+            cmpPicTitl.replace("<", "");
+            cmpPicTitl.replace(">", "");
+            cmpPicTitl.replace("*", "");
+            cmpPicTitl.replace("?", "");
+            cmpPicTitl.replace(".", "");
             sortStr = yearStr + monthStr + dayStr + timeStr;
             picExportFileName = sortStr + "_" + cmpPicTitl +  ".jpg";
         }
