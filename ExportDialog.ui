@@ -183,14 +183,14 @@
          <item>
           <widget class="QPushButton" name="cmdSnapmaticExport">
            <property name="text">
-            <string>Export</string>
+            <string>&amp;Export</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="cmdSnapmaticClose">
            <property name="text">
-            <string>Close</string>
+            <string>&amp;Close</string>
            </property>
           </widget>
          </item>
