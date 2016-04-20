@@ -16,13 +16,13 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#define _CRT_SECURE_NO_WARNINGS
 #include "config.h"
 #include "AppEnv.h"
 #include "StringParser.h"
 #include "StandardPaths.h"
 #include <QDir>
 #include <QDebug>
+#include <QtGlobal>
 #include <QSettings>
 #include <iostream>
 using namespace std;
@@ -37,18 +37,14 @@ AppEnv::AppEnv()
 QString AppEnv::getGameFolder(bool *ok)
 {
     QDir dir;
-    QString GTAV_FOLDER(getenv("GTAV_FOLDER"));
+    QString GTAV_FOLDER(qgetenv("GTAV_FOLDER"));
     if (GTAV_FOLDER != "")
     {
         dir.setPath(GTAV_FOLDER);
         if (dir.exists())
         {
             *ok = true;
-#ifdef GTA5SYNC_WIN
-            _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
-#else
-            setenv("GTAV_FOLDER", dir.absolutePath().toStdString().c_str(), 1);
-#endif
+            qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
             return dir.absolutePath();
         }
     }
@@ -69,11 +65,7 @@ QString AppEnv::getGameFolder(bool *ok)
     if (dir.exists())
     {
         *ok = true;
-#ifdef GTA5SYNC_WIN
-        _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
-#else
-        setenv("GTAV_FOLDER", dir.absolutePath().toStdString().c_str(), 1);
-#endif
+        qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return dir.absolutePath();
     }
 
@@ -81,11 +73,7 @@ QString AppEnv::getGameFolder(bool *ok)
     if (dir.exists())
     {
         *ok = true;
-#ifdef GTA5SYNC_WIN
-        _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
-#else
-        setenv("GTAV_FOLDER", dir.absolutePath().toStdString().c_str(), 1);
-#endif
+        qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return dir.absolutePath();
     }
 
@@ -99,11 +87,7 @@ bool AppEnv::setGameFolder(QString gameFolder)
     dir.setPath(gameFolder);
     if (dir.exists())
     {
-#ifdef GTA5SYNC_WIN
-        _putenv(QString("GTAV_FOLDER=" + dir.absolutePath()).toStdString().c_str());
-#else
-        setenv("GTAV_FOLDER", dir.absolutePath().toStdString().c_str(), 1);
-#endif
+        qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return true;
     }
     return false;
