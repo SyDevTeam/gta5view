@@ -29,6 +29,7 @@ SOURCES += main.cpp \
     AppEnv.cpp \
     CrewDatabase.cpp \
     DatabaseThread.cpp \
+    ExportDialog.cpp \
     ExportThread.cpp \
     IconLoader.cpp \
     OptionsDialog.cpp \
@@ -58,6 +59,7 @@ HEADERS  += \
     config.h \
     CrewDatabase.h \
     DatabaseThread.h \
+    ExportDialog.h \
     ExportThread.h \
     IconLoader.h \
     OptionsDialog.h \
@@ -83,6 +85,7 @@ HEADERS  += \
 
 FORMS    += \
     AboutDialog.ui \
+    ExportDialog.ui \
     OptionsDialog.ui \
     PictureDialog.ui \
     ProfileInterface.ui \
