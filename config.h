@@ -47,4 +47,8 @@
 #define GTA5SYNC_PLUG "$RUNDIR$SEPARATORplugins"
 #endif
 
+#ifdef GTA5SYNC_WINRT
+#undef GTA5SYNC_WIN
+#endif
+
 #endif // CONFIG_H
