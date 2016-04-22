@@ -421,6 +421,8 @@ int main(int argc, char *argv[])
         threadDB->start();
 
         picDialog->show();
+        picDialog->setMinimumSize(picDialog->size());
+        picDialog->setMaximumSize(picDialog->size());
 
         return a.exec();
     }
