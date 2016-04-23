@@ -332,7 +332,7 @@
     <message>
         <location filename="../PictureDialog.cpp" line="191"/>
         <source>Unknown Location</source>
-        <translation type="unfinished"></translation>
+        <translation>Unbekannter Standort</translation>
     </message>
     <message>
         <source>Export picture...</source>
