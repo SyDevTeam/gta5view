@@ -68,6 +68,9 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     exportMenu->addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(copySnapmaticPicture()));
     ui->cmdExport->setMenu(exportMenu);
 
+    // Global map
+    globalMap = GlobalString::getGlobalMap();
+
     installEventFilter(this);
     installEventFilter(ui->labPicture);
     ui->labPicture->setFocusPolicy(Qt::StrongFocus);
@@ -158,7 +161,10 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         plyrsList = picture->getPlayers();
         picTitl = picture->getPictureTitl();
         picArea = picture->getArea();
-        picAreaStr = GlobalString::getString(picArea);
+        if (globalMap.contains(picArea))
+        {
+            picAreaStr = globalMap[picArea];
+        }
 
         QString plyrsStr;
         if (plyrsList.length() >= 1)

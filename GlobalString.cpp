@@ -28,6 +28,19 @@ GlobalString::GlobalString()
 
 }
 
+QMap<QString, QString> GlobalString::getGlobalMap()
+{
+    QMap<QString, QString> globalMap;
+    QSettings globalFile(getLanguageFile(), QSettings::IniFormat);
+    globalFile.beginGroup("Global");
+    QStringList globalStrList = globalFile.childKeys();
+    foreach(const QString &globalStr, globalStrList)
+    {
+        globalMap[globalStr] = globalFile.value(globalStr, globalStr).toString();
+    }
+    globalFile.endGroup();
+    return globalMap;
+}
 
 QString GlobalString::getString(QString valueStr, bool *ok)
 {

@@ -20,6 +20,7 @@
 #define GLOBALSTRING_H
 
 #include <QString>
+#include <QMap>
 
 class GlobalString
 {
@@ -28,6 +29,7 @@ public:
     static QString getString(QString valueStr, bool *ok = 0);
     static QString getLanguageFile();
     static QString getLanguage();
+    static QMap<QString, QString> getGlobalMap();
 };
 
 #endif // GLOBALSTRING_H

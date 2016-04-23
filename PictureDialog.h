@@ -68,6 +68,7 @@ protected:
 private:
     ProfileDatabase *profileDB;
     Ui::PictureDialog *ui;
+    QMap<QString, QString> globalMap;
     SnapmaticPicture *smpic;
     QImage snapmaticPicture;
     QString jsonDrawString;
