@@ -232,19 +232,26 @@
         <translation>%1 - Snapmatic Bildansicht</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="78"/>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Standort: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Spieler: &lt;/span&gt;%4&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.ui" line="78"/>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="126"/>
+        <location filename="../PictureDialog.ui" line="129"/>
         <location filename="../PictureCopy.cpp" line="47"/>
         <location filename="../PictureExport.cpp" line="47"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="142"/>
+        <location filename="../PictureDialog.ui" line="145"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
@@ -281,7 +288,7 @@
         <translation type="obsolete">Kopieren</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="139"/>
+        <location filename="../PictureDialog.ui" line="142"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
@@ -408,7 +415,7 @@
         <translation type="obsolete">JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="123"/>
+        <location filename="../PictureDialog.ui" line="126"/>
         <source>Export picture</source>
         <translation>Bild exportieren</translation>
     </message>
