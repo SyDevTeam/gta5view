@@ -16,4 +16,9 @@
         <file>5sync-128.png</file>
         <file>5sync-256.png</file>
     </qresource>
+    <qresource prefix="/global">
+        <file>global.de.ini</file>
+        <file>global.en.ini</file>
+        <file>global.ja.ini</file>
+    </qresource>
 </RCC>
