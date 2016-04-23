@@ -19,7 +19,7 @@
 #include <QLocale>
 #include <QSettings>
 #include <QFileInfo>
-#include <QApplication>
+#include <QStringList>
 #include "GlobalString.h"
 #include "config.h"
 
