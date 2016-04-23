@@ -28,6 +28,69 @@
     </message>
 </context>
 <context>
+    <name>ExportDialog</name>
+    <message>
+        <location filename="../ExportDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="42"/>
+        <source>Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="48"/>
+        <source>&amp;JPEG/PNG format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="55"/>
+        <source>GTA &amp;Snapmatic format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="65"/>
+        <source>Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="71"/>
+        <source>Default &amp;Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="78"/>
+        <source>&amp;Desktop Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="85"/>
+        <source>&amp;Custom Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="94"/>
+        <source>Custom Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="117"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="186"/>
+        <source>&amp;Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="193"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OptionsDialog</name>
     <message>
         <location filename="../OptionsDialog.ui" line="14"/>
@@ -108,37 +171,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="84"/>
-        <source>%1 (%2 if available) [sys]</source>
-        <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.cpp" line="84"/>
+        <location filename="../OptionsDialog.cpp" line="87"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="183"/>
+        <location filename="../OptionsDialog.cpp" line="87"/>
+        <source>%1 (%2 if available)</source>
+        <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="214"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="183"/>
+        <location filename="../OptionsDialog.cpp" line="214"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="193"/>
+        <location filename="../OptionsDialog.cpp" line="224"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="201"/>
-        <location filename="../OptionsDialog.cpp" line="204"/>
+        <location filename="../OptionsDialog.cpp" line="232"/>
+        <location filename="../OptionsDialog.cpp" line="236"/>
+        <location filename="../OptionsDialog.cpp" line="238"/>
         <source>Profile: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -151,30 +215,34 @@
         <translation>%1 - Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="78"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Заголовок: &lt;/span&gt;%6&lt;br&gt;
+        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;Заголовок: &lt;/span&gt;%6&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Позиция: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Игроки: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;ID группы: &lt;/span&gt;%5</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="126"/>
+        <location filename="../PictureDialog.ui" line="78"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.ui" line="123"/>
         <source>Export picture</source>
         <translation>Экспорт картинки</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="129"/>
+        <location filename="../PictureDialog.ui" line="126"/>
         <location filename="../PictureCopy.cpp" line="47"/>
         <location filename="../PictureExport.cpp" line="47"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="145"/>
+        <location filename="../PictureDialog.ui" line="142"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -187,41 +255,41 @@
         <translation type="obsolete">Копировать</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="142"/>
+        <location filename="../PictureDialog.ui" line="139"/>
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="65"/>
+        <location filename="../PictureDialog.cpp" line="67"/>
         <source>Export as &amp;JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="66"/>
+        <location filename="../PictureDialog.cpp" line="68"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="139"/>
-        <location filename="../PictureDialog.cpp" line="186"/>
+        <location filename="../PictureDialog.cpp" line="143"/>
+        <location filename="../PictureDialog.cpp" line="192"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="139"/>
-        <location filename="../PictureDialog.cpp" line="186"/>
+        <location filename="../PictureDialog.cpp" line="143"/>
+        <location filename="../PictureDialog.cpp" line="192"/>
         <source>Failed at %1</source>
         <translation>Ошибка при %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="175"/>
-        <location filename="../PictureDialog.cpp" line="185"/>
+        <location filename="../PictureDialog.cpp" line="181"/>
+        <location filename="../PictureDialog.cpp" line="191"/>
         <source>No player</source>
         <translation>Игроков нет</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="178"/>
-        <location filename="../PictureDialog.cpp" line="185"/>
+        <location filename="../PictureDialog.cpp" line="184"/>
+        <location filename="../PictureDialog.cpp" line="191"/>
         <source>No crew</source>
         <translation>Без группы</translation>
     </message>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -32,14 +32,77 @@
     </message>
 </context>
 <context>
+    <name>ExportDialog</name>
+    <message>
+        <location filename="../ExportDialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="42"/>
+        <source>Format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="48"/>
+        <source>&amp;JPEG/PNG format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="55"/>
+        <source>GTA &amp;Snapmatic format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="65"/>
+        <source>Resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="71"/>
+        <source>Default &amp;Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="78"/>
+        <source>&amp;Desktop Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="85"/>
+        <source>&amp;Custom Size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="94"/>
+        <source>Custom Size:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="117"/>
+        <source>x</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="186"/>
+        <source>&amp;Export</source>
+        <translation type="unfinished">&amp;Exportieren</translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="193"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>OptionsDialog</name>
     <message>
         <source>Options</source>
-        <translation>Optionen</translation>
+        <translation type="vanished">Optionen</translation>
     </message>
     <message>
         <source>gta5sync - Options</source>
-        <translation>gta5sync - Optionen</translation>
+        <translation type="vanished">gta5sync - Optionen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="14"/>
@@ -120,37 +183,43 @@
         <translation>Abbre&amp;chen</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="84"/>
         <source>%1 (%2 if available) [sys]</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
-        <translation>%1 (%2 wenn verfügbar) [sys]</translation>
+        <translation type="vanished">%1 (%2 wenn verfügbar) [sys]</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="84"/>
+        <location filename="../OptionsDialog.cpp" line="87"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="183"/>
+        <location filename="../OptionsDialog.cpp" line="87"/>
+        <source>%1 (%2 if available)</source>
+        <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="214"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="183"/>
+        <location filename="../OptionsDialog.cpp" line="214"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation>Die Änderung der Sprache nimmt Effekt sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="193"/>
+        <location filename="../OptionsDialog.cpp" line="224"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Kein Profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="201"/>
-        <location filename="../OptionsDialog.cpp" line="204"/>
+        <location filename="../OptionsDialog.cpp" line="232"/>
+        <location filename="../OptionsDialog.cpp" line="236"/>
+        <location filename="../OptionsDialog.cpp" line="238"/>
         <source>Profile: %1</source>
         <translation>Profil: %1</translation>
     </message>
@@ -163,14 +232,19 @@
         <translation>%1 - Snapmatic Bildansicht</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="129"/>
+        <location filename="../PictureDialog.ui" line="78"/>
+        <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.ui" line="126"/>
         <location filename="../PictureCopy.cpp" line="47"/>
         <location filename="../PictureExport.cpp" line="47"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="145"/>
+        <location filename="../PictureDialog.ui" line="142"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
@@ -189,12 +263,11 @@
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="78"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br&gt;
+        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Standort: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Spieler: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</translation>
@@ -208,41 +281,41 @@
         <translation type="obsolete">Kopieren</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="142"/>
+        <location filename="../PictureDialog.ui" line="139"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="65"/>
+        <location filename="../PictureDialog.cpp" line="67"/>
         <source>Export as &amp;JPG picture...</source>
         <translation>Exportiere als &amp;JPG Bild...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="66"/>
+        <location filename="../PictureDialog.cpp" line="68"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation>Exportiere als &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="139"/>
-        <location filename="../PictureDialog.cpp" line="186"/>
+        <location filename="../PictureDialog.cpp" line="143"/>
+        <location filename="../PictureDialog.cpp" line="192"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Snapmatic Bildansicht</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="139"/>
-        <location filename="../PictureDialog.cpp" line="186"/>
+        <location filename="../PictureDialog.cpp" line="143"/>
+        <location filename="../PictureDialog.cpp" line="192"/>
         <source>Failed at %1</source>
         <translation>Fehlgeschlagen bei %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="175"/>
-        <location filename="../PictureDialog.cpp" line="185"/>
+        <location filename="../PictureDialog.cpp" line="181"/>
+        <location filename="../PictureDialog.cpp" line="191"/>
         <source>No player</source>
         <translation>Keine Spieler</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="178"/>
-        <location filename="../PictureDialog.cpp" line="185"/>
+        <location filename="../PictureDialog.cpp" line="184"/>
+        <location filename="../PictureDialog.cpp" line="191"/>
         <source>No crew</source>
         <translation>Keine Crew</translation>
     </message>
@@ -335,7 +408,7 @@
         <translation type="obsolete">JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="126"/>
+        <location filename="../PictureDialog.ui" line="123"/>
         <source>Export picture</source>
         <translation>Bild exportieren</translation>
     </message>
@@ -535,7 +608,7 @@ JPG pictures make it possible to open the picture with a Image Viewer
 GTA Snapmatic make it possible to import the picture into the game
 
 Export as:</source>
-        <translation>Exportiere Snapmatic Bilder
+        <translation type="vanished">Exportiere Snapmatic Bilder
 
 JPG Bilder machen es möglich sie mit ein Bildansicht Programm zu öffnen
 Das GTA Snapmatic Format macht es möglich sie wieder ins Game zu importieren
@@ -670,7 +743,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Cop&amp;y</source>
-        <translation>&amp;Kopieren</translation>
+        <translation type="vanished">&amp;Kopieren</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="61"/>
@@ -679,11 +752,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation type="vanished">Kopieren</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation>Schließen</translation>
+        <translation type="vanished">Schließen</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.cpp" line="24"/>
@@ -715,7 +788,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation>Kopieren</translation>
+        <translation type="vanished">Kopieren</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="103"/>
@@ -1192,7 +1265,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Select &amp;Profile</source>
-        <translation>&amp;Profil auswählen</translation>
+        <translation type="vanished">&amp;Profil auswählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="176"/>
@@ -1201,7 +1274,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation>&amp;Optionen</translation>
+        <translation type="vanished">&amp;Optionen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="207"/>
@@ -1230,7 +1303,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Ctrl+R</source>
-        <translation>Strg+R</translation>
+        <translation type="vanished">Strg+R</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="259"/>
@@ -1270,7 +1343,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation>Importieren</translation>
+        <translation type="vanished">Importieren</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="351"/>
@@ -1287,15 +1360,15 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Change GTA V &amp;Folder</source>
-        <translation>GTA V &amp;Ordner ändern</translation>
+        <translation type="vanished">GTA V &amp;Ordner ändern</translation>
     </message>
     <message>
         <source>gta5sync</source>
-        <translation>gta5sync</translation>
+        <translation type="vanished">gta5sync</translation>
     </message>
     <message>
         <source>Grand Theft Auto V Folder not found!</source>
-        <translation>Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
+        <translation type="vanished">Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="103"/>
@@ -1308,11 +1381,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Reload profiles</source>
-        <translation>Profile neuladen</translation>
+        <translation type="vanished">Profile neuladen</translation>
     </message>
     <message>
         <source>Not able to reload profiles</source>
-        <translation>Nicht fähig Profile neuzuladen</translation>
+        <translation type="vanished">Nicht fähig Profile neuzuladen</translation>
     </message>
 </context>
 </TS>
