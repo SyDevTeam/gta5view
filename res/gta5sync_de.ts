@@ -36,62 +36,62 @@
     <message>
         <location filename="../ExportDialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="42"/>
         <source>Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Format</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="48"/>
         <source>&amp;JPEG/PNG format</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;JPEG/PNG Format</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="55"/>
         <source>GTA &amp;Snapmatic format</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA &amp;Snapmatic Format</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="65"/>
         <source>Resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Auflösung</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="71"/>
         <source>Default &amp;Size</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Standard Größe</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="78"/>
         <source>&amp;Desktop Size</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Desktop Größe</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="85"/>
         <source>&amp;Custom Size</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Eigene Größe</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="94"/>
         <source>Custom Size:</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigene Größe:</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="117"/>
         <source>x</source>
-        <translation type="unfinished"></translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="186"/>
         <source>&amp;Export</source>
-        <translation type="unfinished">&amp;Exportieren</translation>
+        <translation>&amp;Exportieren</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="193"/>
         <source>&amp;Close</source>
-        <translation type="unfinished"></translation>
+        <translation>S&amp;chließen</translation>
     </message>
 </context>
 <context>
@@ -197,7 +197,7 @@
         <location filename="../OptionsDialog.cpp" line="87"/>
         <source>%1 (%2 if available)</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 (%2 wenn verfügbar)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="214"/>
@@ -241,7 +241,10 @@
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</source>
-        <translation type="unfinished"></translation>
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;Standort: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;Spieler: &lt;/span&gt;%4&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="129"/>
