@@ -43,7 +43,7 @@ QString AppEnv::getGameFolder(bool *ok)
         dir.setPath(GTAV_FOLDER);
         if (dir.exists())
         {
-            *ok = true;
+            if (ok != NULL) *ok = true;
             qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
             return dir.absolutePath();
         }
@@ -64,7 +64,7 @@ QString AppEnv::getGameFolder(bool *ok)
     dir.setPath(GTAV_returnFolder);
     if (dir.exists())
     {
-        *ok = true;
+        if (ok != 0) *ok = true;
         qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return dir.absolutePath();
     }
@@ -72,12 +72,12 @@ QString AppEnv::getGameFolder(bool *ok)
     dir.setPath(GTAV_defaultFolder);
     if (dir.exists())
     {
-        *ok = true;
+        if (ok != 0) *ok = true;
         qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return dir.absolutePath();
     }
 
-    *ok = false;
+    if (ok != 0) *ok = false;
     return "";
 }
 

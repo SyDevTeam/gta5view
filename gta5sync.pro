@@ -31,6 +31,7 @@ SOURCES += main.cpp \
     DatabaseThread.cpp \
     ExportDialog.cpp \
     ExportThread.cpp \
+    GlobalString.cpp \
     IconLoader.cpp \
     OptionsDialog.cpp \
     PictureCopy.cpp \
@@ -61,6 +62,7 @@ HEADERS  += \
     DatabaseThread.h \
     ExportDialog.h \
     ExportThread.h \
+    GlobalString.h \
     IconLoader.h \
     OptionsDialog.h \
     PictureCopy.h \

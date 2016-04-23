@@ -46,6 +46,7 @@ public:
 
     // JSON
     bool isJsonOk();
+    QString getArea();
     int getCrewNumber();
     QString getJsonStr();
     double getLocationX();
@@ -85,6 +86,7 @@ private:
     double jsonLocX;
     double jsonLocY;
     double jsonLocZ;
+    QString jsonArea;
     QStringList jsonPlyrsList;
 
 signals:

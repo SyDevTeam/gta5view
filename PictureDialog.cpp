@@ -23,6 +23,7 @@
 #include "SidebarGenerator.h"
 #include "StandardPaths.h"
 #include "PictureExport.h"
+#include "GlobalString.h"
 #include "PictureCopy.h"
 #include "UiModLabel.h"
 
@@ -52,6 +53,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->cmdExport->setEnabled(0);
     plyrsList = QStringList();
     indexed = 0;
+    picArea = "";
     picTitl = "";
     picPath = "";
     crewID = "";
@@ -155,6 +157,8 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         crewID = QString::number(picture->getCrewNumber());
         plyrsList = picture->getPlayers();
         picTitl = picture->getPictureTitl();
+        picArea = picture->getArea();
+        picAreaStr = GlobalString::getString(picArea);
 
         QString plyrsStr;
         if (plyrsList.length() >= 1)
@@ -180,7 +184,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         if (crewID == "") { crewID = tr("No crew"); }
 
         this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
-        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl));
+        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl, picAreaStr));
     }
     else
     {

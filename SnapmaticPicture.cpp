@@ -55,6 +55,7 @@ SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : Q
     jsonLocY = 0;
     jsonLocZ = 0;
     jsonCrewID = 0;
+    jsonArea = "";
     jsonPlyrsList = QStringList();
 }
 
@@ -333,6 +334,10 @@ void SnapmaticPicture::parseJsonContent()
         if (locMap.contains("y")) { jsonLocY = locMap["y"].toDouble(); }
         if (locMap.contains("z")) { jsonLocZ = locMap["z"].toDouble(); }
     }
+    if (jsonMap.contains("area"))
+    {
+        jsonArea = jsonMap["area"].toString();
+    }
     if (jsonMap.contains("crewid"))
     {
         jsonCrewID = jsonMap["crewid"].toInt();
@@ -348,6 +353,11 @@ void SnapmaticPicture::parseJsonContent()
 bool SnapmaticPicture::isJsonOk()
 {
     return jsonOk;
+}
+
+QString SnapmaticPicture::getArea()
+{
+    return jsonArea;
 }
 
 QString SnapmaticPicture::getJsonStr()

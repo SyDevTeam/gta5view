@@ -73,6 +73,8 @@ private:
     QString jsonDrawString;
     QString windowTitleStr;
     QStringList plyrsList;
+    QString picAreaStr;
+    QString picArea;
     QString picTitl;
     QString picPath;
     QString crewID;
