@@ -165,6 +165,10 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         {
             picAreaStr = globalMap[picArea];
         }
+        else
+        {
+            picAreaStr = picArea;
+        }
 
         QString plyrsStr;
         if (plyrsList.length() >= 1)
