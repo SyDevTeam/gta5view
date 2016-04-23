@@ -330,6 +330,11 @@
         <translation>Keine Crew</translation>
     </message>
     <message>
+        <location filename="../PictureDialog.cpp" line="191"/>
+        <source>Unknown Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <source>Export picture...</source>
         <translation type="obsolete">Exportiere Bild...</translation>
     </message>

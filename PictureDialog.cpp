@@ -188,7 +188,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
     }
     else
     {
-        ui->labJSON->setText(jsonDrawString.arg("0.0", "0.0", "0.0", tr("No player"), tr("No crew")));
+        ui->labJSON->setText(jsonDrawString.arg("0.0", "0.0", "0.0", tr("No player"), tr("No crew"), tr("Unknown Location")));
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
     }
     emit newPictureCommited(snapmaticPicture);
@@ -248,7 +248,7 @@ void PictureDialog::playerNameUpdated()
             plyrsStr.append("</a>");
         }
         plyrsStr.remove(0,2);
-        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl));
+        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl, picAreaStr));
     }
 }
 

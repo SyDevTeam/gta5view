@@ -297,6 +297,11 @@
         <translation>Без группы</translation>
     </message>
     <message>
+        <location filename="../PictureDialog.cpp" line="191"/>
+        <source>Unknown Location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="../PictureExport.cpp" line="46"/>
         <source>Export as JPG picture...</source>
         <translation type="unfinished"></translation>
