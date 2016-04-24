@@ -66,8 +66,8 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
 
     // Export menu
     exportMenu = new QMenu(this);
-    exportMenu->addAction(tr("Export as &JPG picture..."), this, SLOT(exportSnapmaticPicture()));
-    exportMenu->addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(copySnapmaticPicture()));
+    jpegExportAction = exportMenu->addAction(tr("Export as &JPG picture..."), this, SLOT(exportSnapmaticPicture()));
+    pgtaExportAction = exportMenu->addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(copySnapmaticPicture()));
     ui->cmdExport->setMenu(exportMenu);
 
     // Global map
@@ -80,6 +80,8 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
 
 PictureDialog::~PictureDialog()
 {
+    delete jpegExportAction;
+    delete pgtaExportAction;
     delete exportMenu;
     delete ui;
 }
@@ -121,10 +123,15 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
     return returnValue;
 }
 
+void PictureDialog::triggerFullscreenDoubeClick()
+{
+    on_labPicture_mouseDoubleClicked(Qt::LeftButton);
+}
+
 void PictureDialog::exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen)
 {
     rqfullscreen = fullscreen;
-    exportMenu->exec(pos);
+    exportMenu->popup(pos);
 }
 
 void PictureDialog::exportCustomContextMenuRequested(const QPoint &pos)

@@ -55,6 +55,7 @@ public slots:
 private slots:
     void copySnapmaticPicture();
     void exportSnapmaticPicture();
+    void triggerFullscreenDoubeClick();
     void on_labPicture_mouseDoubleClicked(Qt::MouseButton button);
     void on_labPicture_customContextMenuRequested(const QPoint &pos);
     void exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen);
@@ -74,6 +75,8 @@ private:
     QMap<QString, QString> globalMap;
     SnapmaticPicture *smpic;
     QWidget *fullscreenWidget;
+    QAction *jpegExportAction;
+    QAction *pgtaExportAction;
     QImage snapmaticPicture;
     QString jsonDrawString;
     QString windowTitleStr;
