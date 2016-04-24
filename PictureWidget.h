@@ -43,6 +43,9 @@ private:
     QHBoxLayout *widgetLayout;
     UiModLabel *pictureLabel;
 
+private slots:
+    void pictureDoubleClicked(Qt::MouseButton button);
+
 signals:
     void nextPictureRequested();
     void previousPictureRequested();

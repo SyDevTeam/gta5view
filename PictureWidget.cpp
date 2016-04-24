@@ -16,6 +16,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include "PictureDialog.h"
 #include "PictureWidget.h"
 #include "UiModLabel.h"
 #include <QHBoxLayout>
@@ -32,11 +33,14 @@ PictureWidget::PictureWidget(QWidget *parent) : QDialog(parent)
     widgetLayout->setContentsMargins(0, 0, 0, 0);
 
     pictureLabel = new UiModLabel(this);
+    pictureLabel->setObjectName("pictureLabel");
     pictureLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    pictureLabel->setContextMenuPolicy(Qt::CustomContextMenu);
     pictureLabel->setAlignment(Qt::AlignCenter);
     widgetLayout->addWidget(pictureLabel);
 
-    QObject::connect(pictureLabel, SIGNAL(mouseDoubleClicked()), this, SLOT(close()));
+    QObject::connect(pictureLabel, SIGNAL(mouseDoubleClicked(Qt::MouseButton)), this, SLOT(pictureDoubleClicked(Qt::MouseButton)));
+    QObject::connect(pictureLabel, SIGNAL(customContextMenuRequested(QPoint)), parent, SLOT(exportCustomContextMenuRequested(QPoint)));
 
     setLayout(widgetLayout);
 }
@@ -66,6 +70,14 @@ bool PictureWidget::eventFilter(QObject *obj, QEvent *ev)
         }
     }
     return false;
+}
+
+void PictureWidget::pictureDoubleClicked(Qt::MouseButton button)
+{
+    if (button == Qt::LeftButton)
+    {
+        close();
+    }
 }
 
 void PictureWidget::setImage(QImage image, QRect rec)

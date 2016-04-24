@@ -20,8 +20,8 @@
 #define UIMODLABEL_H
 
 #include <QWidget>
-#include <QLabel>
 #include <QString>
+#include <QLabel>
 
 class UiModLabel : public QLabel
 {
@@ -40,9 +40,9 @@ protected:
 
 signals:
     void mouseMoved();
-    void mousePressed();
-    void mouseReleased();
-    void mouseDoubleClicked();
+    void mousePressed(Qt::MouseButton button);
+    void mouseReleased(Qt::MouseButton button);
+    void mouseDoubleClicked(Qt::MouseButton button);
 };
 
 #endif // UIMODLABEL_H

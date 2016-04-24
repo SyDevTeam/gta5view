@@ -52,6 +52,8 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     jsonDrawString = ui->labJSON->text();
     ui->cmdExport->setEnabled(0);
     plyrsList = QStringList();
+    fullscreenWidget = 0;
+    rqfullscreen = 0;
     indexed = 0;
     picArea = "";
     picTitl = "";
@@ -110,7 +112,7 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 break;
 #endif
             case Qt::Key_Enter: case Qt::Key_Return:
-                on_labPicture_mouseDoubleClicked();
+                on_labPicture_mouseDoubleClicked(Qt::LeftButton);
                 returnValue = true;
                 break;
             }
@@ -119,9 +121,20 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
     return returnValue;
 }
 
+void PictureDialog::exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen)
+{
+    rqfullscreen = fullscreen;
+    exportMenu->exec(pos);
+}
+
+void PictureDialog::exportCustomContextMenuRequested(const QPoint &pos)
+{
+    exportCustomContextMenuRequestedPrivate(pos, true);
+}
+
 void PictureDialog::mousePressEvent(QMouseEvent *ev)
 {
-    ev->accept();
+    QDialog::mousePressEvent(ev);
 }
 
 void PictureDialog::dialogNextPictureRequested()
@@ -264,33 +277,56 @@ void PictureDialog::playerNameUpdated()
 
 void PictureDialog::exportSnapmaticPicture()
 {
-    PictureExport::exportPicture(this, smpic);
+    if (rqfullscreen && fullscreenWidget != 0)
+    {
+        PictureExport::exportPicture(fullscreenWidget, smpic);
+    }
+    else
+    {
+        PictureExport::exportPicture(this, smpic);
+    }
 }
 
 void PictureDialog::copySnapmaticPicture()
 {
-    PictureCopy::copyPicture(this, picPath);
+    if (rqfullscreen && fullscreenWidget != 0)
+    {
+        PictureCopy::copyPicture(fullscreenWidget, picPath);
+    }
+    else
+    {
+        PictureCopy::copyPicture(this, picPath);
+    }
 }
 
-void PictureDialog::on_labPicture_mouseDoubleClicked()
+void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 {
-    QRect desktopRect = QApplication::desktop()->screenGeometry();
-    PictureWidget *pictureWidget = new PictureWidget(this);
-    pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
-    pictureWidget->setWindowTitle(this->windowTitle());
-    pictureWidget->setStyleSheet("background-color: black;");
-    pictureWidget->setImage(snapmaticPicture, desktopRect);
-    pictureWidget->setModal(true);
+    if (button == Qt::LeftButton)
+    {
+        QRect desktopRect = QApplication::desktop()->screenGeometry();
+        PictureWidget *pictureWidget = new PictureWidget(this);
+        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
+        pictureWidget->setWindowTitle(this->windowTitle());
+        pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color: black;}");
+        pictureWidget->setImage(snapmaticPicture, desktopRect);
+        pictureWidget->setModal(true);
 
-    QObject::connect(this, SIGNAL(newPictureCommited(QImage)), pictureWidget, SLOT(setImage(QImage)));
-    QObject::connect(pictureWidget, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
-    QObject::connect(pictureWidget, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
+        fullscreenWidget = pictureWidget;
+        QObject::connect(this, SIGNAL(newPictureCommited(QImage)), pictureWidget, SLOT(setImage(QImage)));
+        QObject::connect(pictureWidget, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
+        QObject::connect(pictureWidget, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
 
-    pictureWidget->showFullScreen();
-    pictureWidget->setFocus();
-    pictureWidget->exec();
+        pictureWidget->showFullScreen();
+        pictureWidget->setFocus();
+        pictureWidget->exec();
 
-    delete pictureWidget;
+        delete pictureWidget;
+    }
+}
+
+void PictureDialog::on_labPicture_customContextMenuRequested(const QPoint &pos)
+{
+    exportCustomContextMenuRequestedPrivate(ui->labPicture->mapToGlobal(pos), false);
 }
 
 bool PictureDialog::isIndexed()

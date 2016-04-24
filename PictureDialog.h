@@ -50,11 +50,14 @@ public slots:
     void playerNameUpdated();
     void dialogNextPictureRequested();
     void dialogPreviousPictureRequested();
+    void exportCustomContextMenuRequested(const QPoint &pos);
 
 private slots:
     void copySnapmaticPicture();
     void exportSnapmaticPicture();
-    void on_labPicture_mouseDoubleClicked();
+    void on_labPicture_mouseDoubleClicked(Qt::MouseButton button);
+    void on_labPicture_customContextMenuRequested(const QPoint &pos);
+    void exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen);
 
 signals:
     void nextPictureRequested();
@@ -70,6 +73,7 @@ private:
     Ui::PictureDialog *ui;
     QMap<QString, QString> globalMap;
     SnapmaticPicture *smpic;
+    QWidget *fullscreenWidget;
     QImage snapmaticPicture;
     QString jsonDrawString;
     QString windowTitleStr;
@@ -82,6 +86,7 @@ private:
     QString locX;
     QString locY;
     QString locZ;
+    bool rqfullscreen;
     bool indexed;
     int index;
     QMenu *exportMenu;

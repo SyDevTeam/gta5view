@@ -17,6 +17,7 @@
 *****************************************************************************/
 
 #include "UiModLabel.h"
+#include <QMouseEvent>
 
 UiModLabel::UiModLabel(const QString &text, QWidget *parent) : QLabel(parent)
 {
@@ -45,17 +46,17 @@ void UiModLabel::mouseMoveEvent(QMouseEvent *ev)
 void UiModLabel::mousePressEvent(QMouseEvent *ev)
 {
     QLabel::mousePressEvent(ev);
-    emit mousePressed();
+    emit mousePressed(ev->button());
 }
 
 void UiModLabel::mouseReleaseEvent(QMouseEvent *ev)
 {
     QLabel::mouseReleaseEvent(ev);
-    emit mouseReleased();
+    emit mouseReleased(ev->button());
 }
 
 void UiModLabel::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     QLabel::mouseDoubleClickEvent(ev);
-    emit mouseDoubleClicked();
+    emit mouseDoubleClicked(ev->button());
 }
