@@ -16,13 +16,15 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include "config.h"
 #include "PictureExport.h"
 #include "PictureDialog.h"
+#include "StandardPaths.h"
 #include "SidebarGenerator.h"
-#include "config.h"
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSettings>
+#include <QDebug>
 
 PictureExport::PictureExport()
 {
@@ -33,6 +35,7 @@ void PictureExport::exportPicture(QWidget *parent, SnapmaticPicture *picture)
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("FileDialogs");
+    settings.beginGroup("ExportPicture");
 
 fileDialogPreSave:
     QFileDialog fileDialog(parent);
@@ -54,7 +57,8 @@ fileDialogPreSave:
     QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
 
     fileDialog.setSidebarUrls(sidebarUrls);
-    fileDialog.restoreState(settings.value("ExportPicture","").toByteArray());
+    fileDialog.setDirectory(settings.value("Directory", StandardPaths::picturesLocation()).toString());
+    fileDialog.restoreGeometry(settings.value(parent->objectName() + "+Geomtery", "").toByteArray());
 
     if (picture != 0)
     {
@@ -129,7 +133,9 @@ fileDialogPreSave:
         }
     }
 
-    settings.setValue("ExportPicture", fileDialog.saveState());
+    settings.setValue(parent->objectName() + "+Geometry", fileDialog.saveGeometry());
+    settings.setValue("Directory", fileDialog.directory().absolutePath());
+    settings.endGroup();
     settings.endGroup();
 }
 

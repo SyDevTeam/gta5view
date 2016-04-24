@@ -318,7 +318,8 @@ fileDialogPreOpen:
     QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
 
     fileDialog.setSidebarUrls(sidebarUrls);
-    fileDialog.restoreState(settings.value("OpenFile","").toByteArray());
+    fileDialog.setDirectory(settings.value("OpenDialogDirectory", StandardPaths::documentsLocation()).toString());
+    fileDialog.restoreGeometry(settings.value("OpenDialogGeometry","").toByteArray());
 
     if (fileDialog.exec())
     {
@@ -329,6 +330,9 @@ fileDialogPreOpen:
             if (!openFile(selectedFile, true)) goto fileDialogPreOpen;
         }
     }
+
+    settings.setValue("OpenDialogGeometry", fileDialog.saveGeometry());
+    settings.setValue("OpenDialogDirectory", fileDialog.directory().absolutePath());
     settings.endGroup();
 }
 

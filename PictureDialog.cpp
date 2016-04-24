@@ -305,6 +305,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
     {
         QRect desktopRect = QApplication::desktop()->screenGeometry();
         PictureWidget *pictureWidget = new PictureWidget(this);
+        pictureWidget->setObjectName("PictureWidget");
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
         pictureWidget->setWindowTitle(this->windowTitle());
         pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color: black;}");

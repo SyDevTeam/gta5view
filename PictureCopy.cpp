@@ -18,6 +18,7 @@
 
 #include "PictureCopy.h"
 #include "PictureDialog.h"
+#include "StandardPaths.h"
 #include "SidebarGenerator.h"
 #include <QMessageBox>
 #include <QFileDialog>
@@ -32,6 +33,7 @@ void PictureCopy::copyPicture(QWidget *parent, QString picPath)
 {
     QSettings settings("Syping", "gta5sync");
     settings.beginGroup("FileDialogs");
+    settings.beginGroup("PictureCopy");
 
 fileDialogPreSave:
     QFileInfo sgdFileInfo(picPath);
@@ -54,8 +56,9 @@ fileDialogPreSave:
     QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
 
     fileDialog.setSidebarUrls(sidebarUrls);
-    fileDialog.restoreState(settings.value("CopyPicture","").toByteArray());
+    fileDialog.setDirectory(settings.value("Directory", StandardPaths::documentsLocation()).toString());
     fileDialog.selectFile(sgdFileInfo.fileName());
+    fileDialog.restoreGeometry(settings.value(parent->objectName() + "+Geomtery", "").toByteArray());
 
     if (fileDialog.exec())
     {
@@ -94,6 +97,7 @@ fileDialogPreSave:
         }
     }
 
-    settings.setValue("CopyPicture", fileDialog.saveState());
+    settings.setValue(parent->objectName() + "+Geometry", fileDialog.saveGeometry());
+    settings.setValue("Directory", fileDialog.directory().absolutePath());
     settings.endGroup();
 }

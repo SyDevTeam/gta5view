@@ -344,6 +344,7 @@ void ProfileInterface::on_cmdImport_clicked()
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("FileDialogs");
+    settings.beginGroup("ImportCopy");
 
 fileDialogPreOpen:
     QFileDialog fileDialog(this);
@@ -365,7 +366,8 @@ fileDialogPreOpen:
     QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
 
     fileDialog.setSidebarUrls(sidebarUrls);
-    fileDialog.restoreState(settings.value("ImportCopy","").toByteArray());
+    fileDialog.setDirectory(settings.value(profileName + "+Directory", StandardPaths::documentsLocation()).toString());
+    fileDialog.restoreGeometry(settings.value(profileName + "+Geometry", "").toByteArray());
 
     if (fileDialog.exec())
     {
@@ -403,7 +405,9 @@ fileDialogPreOpen:
         }
     }
 
-    settings.setValue("ImportCopy", fileDialog.saveState());
+    settings.setValue(profileName + "+Geometry", fileDialog.saveGeometry());
+    settings.setValue(profileName + "+Directory", fileDialog.directory().absolutePath());
+    settings.endGroup();
     settings.endGroup();
 }
 
@@ -599,9 +603,13 @@ void ProfileInterface::exportSelected()
         bool pictureCopyEnabled = false;
         bool pictureExportEnabled = false;
 
-        QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected"), profileFolder);
+        QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+        settings.beginGroup("FileDialogs");
+        settings.beginGroup("ExportDirectory");
+        QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected"), settings.value(profileName, profileFolder).toString());
         if (exportDirectory != "")
         {
+            settings.setValue(profileName, exportDirectory);
             foreach (ProfileWidget *widget, widgets.keys())
             {
                 if (widget->isSelected())
@@ -730,6 +738,8 @@ void ProfileInterface::exportSelected()
                 delete exportThread;
             }
         }
+        settings.endGroup();
+        settings.endGroup();
     }
     else
     {
