@@ -21,6 +21,8 @@
 #include "PictureDialog.h"
 #include "StandardPaths.h"
 #include "SidebarGenerator.h"
+#include <QDesktopWidget>
+#include <QApplication>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSettings>
@@ -34,6 +36,41 @@ PictureExport::PictureExport()
 void PictureExport::exportPicture(QWidget *parent, SnapmaticPicture *picture)
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+
+    // Picture Settings
+    // Quality Settings
+    settings.beginGroup("Pictures");
+    int defaultQuality = 100;
+    QSize defExportSize = QSize(960, 536);
+    int customQuality = settings.value("CustomQuality", defaultQuality).toInt();
+    if (customQuality < 1 || customQuality > 100)
+    {
+        customQuality = 100;
+    }
+    bool useCustomQuality = settings.value("CustomQualityEnabled", false).toBool();
+
+    // Size Settings
+    QSize cusExportSize = settings.value("CustomSize", defExportSize).toSize();
+    if (cusExportSize.width() > 3840)
+    {
+        cusExportSize.setWidth(3840);
+    }
+    else if (cusExportSize.height() > 2160)
+    {
+        cusExportSize.setHeight(2160);
+    }
+    if (cusExportSize.width() < 1)
+    {
+        cusExportSize.setWidth(1);
+    }
+    else if (cusExportSize.height() < 1)
+    {
+        cusExportSize.setHeight(1);
+    }
+    QString sizeMode = settings.value("ExportSizeMode", "Default").toString();
+    settings.endGroup();
+    // End Picture Settings
+
     settings.beginGroup("FileDialogs");
     settings.beginGroup("ExportPicture");
 
@@ -60,11 +97,8 @@ fileDialogPreSave:
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::picturesLocation()).toString());
     fileDialog.restoreGeometry(settings.value(parent->objectName() + "+Geomtery", "").toByteArray());
 
-    if (picture != 0)
-    {
-        QString newPictureFileName = getPictureFileName(picture);
-        fileDialog.selectFile(newPictureFileName);
-    }
+    QString newPictureFileName = getPictureFileName(picture);
+    fileDialog.selectFile(newPictureFileName);
 
     if (fileDialog.exec())
     {
@@ -118,7 +152,27 @@ fileDialogPreSave:
                 }
             }
 
-            bool isSaved = picture->getPicture().save(selectedFile, saveFileFormat.toStdString().c_str(), 100);
+            // Scale Picture
+            QImage exportPicture = picture->getPicture();
+            if (sizeMode == "Desktop")
+            {
+                QRect desktopResolution = QApplication::desktop()->screenGeometry();
+                exportPicture = exportPicture.scaled(desktopResolution.width(), desktopResolution.height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            }
+            else if (sizeMode == "Custom")
+            {
+                exportPicture = exportPicture.scaled(cusExportSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            }
+
+            bool isSaved;
+            if (useCustomQuality)
+            {
+                isSaved = exportPicture.save(selectedFile, saveFileFormat.toStdString().c_str(), customQuality);
+            }
+            else
+            {
+                isSaved = exportPicture.save(selectedFile, saveFileFormat.toStdString().c_str(), 100);
+            }
 
             if (!isSaved)
             {

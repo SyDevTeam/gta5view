@@ -314,6 +314,22 @@ void OptionsDialog::setupPictureSettings()
 
     // Size Settings
     cusExportSize = settings->value("CustomSize", defExportSize).toSize();
+    if (cusExportSize.width() > 3840)
+    {
+        cusExportSize.setWidth(3840);
+    }
+    else if (cusExportSize.height() > 2160)
+    {
+        cusExportSize.setHeight(2160);
+    }
+    if (cusExportSize.width() < 1)
+    {
+        cusExportSize.setWidth(1);
+    }
+    else if (cusExportSize.height() < 1)
+    {
+        cusExportSize.setHeight(1);
+    }
     ui->sbPicExportWidth->setValue(cusExportSize.width());
     ui->sbPicExportHeight->setValue(cusExportSize.height());
 
