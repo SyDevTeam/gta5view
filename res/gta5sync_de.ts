@@ -169,7 +169,7 @@
     <message>
         <location filename="../OptionsDialog.ui" line="114"/>
         <source>Screen Resolution: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Bildschirmauflösung: %1x%2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="121"/>
