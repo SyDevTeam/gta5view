@@ -19,6 +19,7 @@
 #ifndef OPTIONSDIALOG_H
 #define OPTIONSDIALOG_H
 
+#include <QSize>
 #include <QList>
 #include <QDialog>
 #include <QSettings>
@@ -40,6 +41,9 @@ public:
 
 private slots:
     void on_cmdOK_clicked();
+    void on_rbPicCustomRes_toggled(bool checked);
+    void on_cbPicCustomQuality_toggled(bool checked);
+    void on_hsPicQuality_valueChanged(int value);
 
 signals:
     void settingsApplied(int contentMode, QString language);
@@ -50,12 +54,18 @@ private:
     QList<QTreeWidgetItem*> playerItems;
     QString currentLanguage;
     QString defaultProfile;
+    QString percentString;
     QSettings *settings;
     int contentMode;
+    int customQuality;
+    int defaultQuality;
+    QSize defExportSize;
+    QSize cusExportSize;
     void setupTreeWidget();
     void setupLanguageBox();
     void setupRadioButtons();
     void setupDefaultProfile();
+    void setupPictureSettings();
     void applySettings();
 };
 

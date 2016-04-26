@@ -29,6 +29,7 @@
 
 #include <QDesktopWidget>
 #include <QJsonDocument>
+#include <QApplication>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QJsonObject>

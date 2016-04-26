@@ -20,6 +20,8 @@
 #include "ui_OptionsDialog.h"
 #include "AppEnv.h"
 #include "config.h"
+#include <QDesktopWidget>
+#include <QApplication>
 #include <QMessageBox>
 #include <QStringList>
 #include <QLocale>
@@ -34,13 +36,27 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tabWidget->setCurrentIndex(0);
+
+    QRect desktopResolution = QApplication::desktop()->screenGeometry();
+    int desktopSizeWidth = desktopResolution.width();
+    int desktopSizeHeight = desktopResolution.height();
+    defExportSize = QSize(960, 536);
+    cusExportSize = defExportSize;
+    defaultQuality = 100;
+    customQuality = 100;
     contentMode = 0;
     settings = new QSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+
+    percentString = ui->labPicQuality->text();
+    ui->labPicQuality->setText(percentString.arg(QString::number(defaultQuality)));
+    ui->rbPicDesktopRes->setText(ui->rbPicDesktopRes->text().arg(QString::number(desktopSizeWidth), QString::number(desktopSizeHeight)));
+    ui->rbPicDefaultRes->setText(ui->rbPicDefaultRes->text().arg(QString::number(defExportSize.width()), QString::number(defExportSize.height())));
 
     setupTreeWidget();
     setupLanguageBox();
     setupRadioButtons();
     setupDefaultProfile();
+    setupPictureSettings();
 }
 
 OptionsDialog::~OptionsDialog()
@@ -85,7 +101,7 @@ void OptionsDialog::setupLanguageBox()
     if (langList.length() > 0)
     {
         QString cbSysStr = tr("%1 (%2 if available)", "System like PC System = %1, System Language like Deutsch = %2").arg(tr("System",
-        "System like PC System"), QLocale::languageToString(QLocale(langList.at(0)).language()));
+                                                                                                                              "System like PC System"), QLocale::languageToString(QLocale(langList.at(0)).language()));
         ui->cbLanguage->addItem(cbSysStr, "System");
     }
 
@@ -198,6 +214,25 @@ void OptionsDialog::applySettings()
 #endif
     settings->endGroup();
 
+    settings->beginGroup("Pictures");
+    if (ui->cbPicCustomQuality->isChecked())
+    {
+        settings->setValue("CustomQuality", ui->hsPicQuality->value());
+    }
+    settings->setValue("CustomQualityEnabled", ui->cbPicCustomQuality->isChecked());
+    QString sizeMode = "Default";
+    if (ui->rbPicDesktopRes->isChecked())
+    {
+        sizeMode = "Desktop";
+    }
+    else if (ui->rbPicCustomRes->isChecked())
+    {
+        sizeMode = "Custom";
+        settings->setValue("CustomSize", QSize(ui->sbPicExportWidth->value(), ui->sbPicExportHeight->value()));
+    }
+    settings->setValue("ExportSizeMode", sizeMode);
+    settings->endGroup();
+
 #if QT_VERSION >= 0x050000
     emit settingsApplied(newContentMode, ui->cbLanguage->currentData().toString());
 #else
@@ -240,4 +275,60 @@ void OptionsDialog::commitProfiles(QStringList profiles)
 #endif
         }
     }
+}
+
+void OptionsDialog::on_rbPicCustomRes_toggled(bool checked)
+{
+    ui->labPicCustomRes->setEnabled(checked);
+    ui->sbPicExportWidth->setEnabled(checked);
+    ui->sbPicExportHeight->setEnabled(checked);
+    ui->labPicXDescription->setEnabled(checked);
+}
+
+void OptionsDialog::on_cbPicCustomQuality_toggled(bool checked)
+{
+    ui->hsPicQuality->setEnabled(checked);
+    ui->labPicQuality->setEnabled(checked);
+    ui->labPicQualityDescription->setEnabled(checked);
+}
+
+void OptionsDialog::on_hsPicQuality_valueChanged(int value)
+{
+    customQuality = value;
+    ui->labPicQuality->setText(percentString.arg(QString::number(value)));
+}
+
+void OptionsDialog::setupPictureSettings()
+{
+    settings->beginGroup("Pictures");
+
+    // Quality Settings
+    customQuality = settings->value("CustomQuality", defaultQuality).toInt();
+    if (customQuality < 1 || customQuality > 100)
+    {
+        customQuality = 100;
+    }
+    ui->hsPicQuality->setValue(customQuality);
+    ui->cbPicCustomQuality->setChecked(settings->value("CustomQualityEnabled", false).toBool());
+
+    // Size Settings
+    cusExportSize = settings->value("CustomSize", defExportSize).toSize();
+    ui->sbPicExportWidth->setValue(cusExportSize.width());
+    ui->sbPicExportHeight->setValue(cusExportSize.height());
+
+    QString sizeMode = settings->value("ExportSizeMode", "Default").toString();
+    if (sizeMode == "Desktop")
+    {
+        ui->rbPicDesktopRes->setChecked(true);
+    }
+    else if (sizeMode == "Custom")
+    {
+        ui->rbPicCustomRes->setChecked(true);
+    }
+    else
+    {
+        ui->rbPicDefaultRes->setChecked(true);
+    }
+
+    settings->endGroup();
 }

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>350</height>
+    <width>435</width>
+    <height>375</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -74,6 +74,190 @@
        </item>
        <item>
         <spacer name="vsProfile">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tabPictures">
+      <attribute name="title">
+       <string>Pictures</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vlTabPictures">
+       <item>
+        <widget class="QGroupBox" name="gbPicResolution">
+         <property name="title">
+          <string>Export Size</string>
+         </property>
+         <layout class="QVBoxLayout" name="vlGbPicRes">
+          <item>
+           <widget class="QRadioButton" name="rbPicDefaultRes">
+            <property name="text">
+             <string>Default Size: %1x%2</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rbPicDesktopRes">
+            <property name="text">
+             <string>Desktop Size: %1x%2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="rbPicCustomRes">
+            <property name="text">
+             <string>Custom Size</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hlCustomRes">
+            <item>
+             <widget class="QLabel" name="labPicCustomRes">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Custom Size:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="sbPicExportWidth">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>3840</number>
+              </property>
+              <property name="value">
+               <number>960</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labPicXDescription">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>x</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="sbPicExportHeight">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>2160</number>
+              </property>
+              <property name="value">
+               <number>536</number>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <spacer name="hsPicCustomSize">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>0</width>
+                <height>0</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbPicQuality">
+         <property name="title">
+          <string>Export Quality</string>
+         </property>
+         <layout class="QVBoxLayout" name="vlHlPicQuality">
+          <item>
+           <widget class="QCheckBox" name="cbPicCustomQuality">
+            <property name="text">
+             <string>Enable Custom Quality</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hlPicQuality">
+            <item>
+             <widget class="QLabel" name="labPicQualityDescription">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>Quality:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="hsPicQuality">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="minimum">
+               <number>1</number>
+              </property>
+              <property name="maximum">
+               <number>100</number>
+              </property>
+              <property name="value">
+               <number>100</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="labPicQuality">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string>%1%</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="vsTabPictures">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>

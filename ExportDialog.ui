@@ -39,7 +39,7 @@
        <item>
         <widget class="QGroupBox" name="gbSnapmaticFormat">
          <property name="title">
-          <string>Format</string>
+          <string>Export Format</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
@@ -62,7 +62,7 @@
        <item>
         <widget class="QGroupBox" name="gbSnapmaticResolution">
          <property name="title">
-          <string>Resolution</string>
+          <string>Export Size</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_2">
           <item>
@@ -90,6 +90,9 @@
            <layout class="QHBoxLayout" name="hlSnapmaticResolution">
             <item>
              <widget class="QLabel" name="labSnapmaticResolutionSize">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Custom Size:</string>
               </property>
