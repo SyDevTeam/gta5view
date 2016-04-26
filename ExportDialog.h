@@ -31,6 +31,8 @@ class ExportDialog : public QDialog
 
 public:
     explicit ExportDialog(QWidget *parent = 0);
+    void setupPictureExport();
+    bool isSucceeded();
     ~ExportDialog();
 
 private slots:
@@ -38,6 +40,7 @@ private slots:
 
 private:
     Ui::ExportDialog *ui;
+    bool success;
 };
 
 #endif // EXPORTDIALOG_H

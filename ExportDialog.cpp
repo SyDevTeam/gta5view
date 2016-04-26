@@ -24,6 +24,7 @@ ExportDialog::ExportDialog(QWidget *parent) :
     ui(new Ui::ExportDialog)
 {
     ui->setupUi(this);
+    success = false;
 }
 
 ExportDialog::~ExportDialog()
@@ -31,7 +32,17 @@ ExportDialog::~ExportDialog()
     delete ui;
 }
 
+bool ExportDialog::isSucceeded()
+{
+    return success;
+}
+
 void ExportDialog::on_cmdSnapmaticClose_clicked()
 {
     this->close();
+}
+
+void ExportDialog::setupPictureExport()
+{
+    ui->swExport->setCurrentWidget(ui->pageSnapmatic);
 }
