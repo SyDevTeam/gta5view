@@ -138,21 +138,17 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="104"/>
-        <source>Default Size: %1x%2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.ui" line="114"/>
         <source>Screen Resolution: %1x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="121"/>
-        <source>Custom Size</source>
+        <location filename="../OptionsDialog.ui" line="104"/>
+        <source>Default: %1x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../OptionsDialog.ui" line="123"/>
         <location filename="../OptionsDialog.ui" line="133"/>
         <source>Custom Size:</source>
         <translation type="unfinished"></translation>
@@ -226,38 +222,38 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="103"/>
+        <location filename="../OptionsDialog.cpp" line="104"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="103"/>
+        <location filename="../OptionsDialog.cpp" line="104"/>
         <source>%1 (%2 if available)</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="249"/>
+        <location filename="../OptionsDialog.cpp" line="250"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="249"/>
+        <location filename="../OptionsDialog.cpp" line="250"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="259"/>
+        <location filename="../OptionsDialog.cpp" line="260"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="267"/>
-        <location filename="../OptionsDialog.cpp" line="271"/>
-        <location filename="../OptionsDialog.cpp" line="273"/>
+        <location filename="../OptionsDialog.cpp" line="268"/>
+        <location filename="../OptionsDialog.cpp" line="272"/>
+        <location filename="../OptionsDialog.cpp" line="274"/>
         <source>Profile: %1</source>
         <translation type="unfinished"></translation>
     </message>

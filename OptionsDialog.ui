@@ -101,7 +101,7 @@
           <item>
            <widget class="QRadioButton" name="rbPicDefaultRes">
             <property name="text">
-             <string>Default Size: %1x%2</string>
+             <string>Default: %1x%2</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -116,14 +116,14 @@
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="rbPicCustomRes">
-            <property name="text">
-             <string>Custom Size</string>
-            </property>
-           </widget>
-          </item>
-          <item>
            <layout class="QHBoxLayout" name="hlCustomRes">
+            <item>
+             <widget class="QRadioButton" name="rbPicCustomRes">
+              <property name="text">
+               <string>Custom Size:</string>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QLabel" name="labPicCustomRes">
               <property name="enabled">
