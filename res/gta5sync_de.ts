@@ -59,12 +59,12 @@
     <message>
         <location filename="../ExportDialog.ui" line="42"/>
         <source>Export Format</source>
-        <translation type="unfinished"></translation>
+        <translation>Export Format</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="65"/>
         <source>Export Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Export Größe</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="71"/>
@@ -150,57 +150,57 @@
     <message>
         <location filename="../OptionsDialog.ui" line="92"/>
         <source>Pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>Bilder</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="98"/>
         <source>Export Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Export Größe</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="104"/>
         <source>Default Size: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard Größe: %1x%2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="114"/>
         <source>Desktop Size: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Desktop Größe: %1x%2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="121"/>
         <source>Custom Size</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigene Größe</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="133"/>
         <source>Custom Size:</source>
-        <translation type="unfinished">Eigene Größe:</translation>
+        <translation>Eigene Größe:</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="159"/>
         <source>x</source>
-        <translation type="unfinished">x</translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="200"/>
         <source>Export Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Export Qualität</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="206"/>
         <source>Enable Custom Quality</source>
-        <translation type="unfinished"></translation>
+        <translation>Eigene Export Qualität benutzen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="218"/>
         <source>Quality:</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualität:</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="247"/>
         <source>%1%</source>
-        <translation type="unfinished">%1%</translation>
+        <translation>%1%</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="276"/>
