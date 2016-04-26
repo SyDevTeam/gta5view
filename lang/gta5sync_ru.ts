@@ -144,7 +144,7 @@
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="114"/>
-        <source>Desktop Size: %1x%2</source>
+        <source>Screen Resolution: %1x%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

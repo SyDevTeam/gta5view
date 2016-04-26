@@ -163,9 +163,13 @@
         <translation>Standard Größe: %1x%2</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="114"/>
         <source>Desktop Size: %1x%2</source>
-        <translation>Desktop Größe: %1x%2</translation>
+        <translation type="vanished">Desktop Größe: %1x%2</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="114"/>
+        <source>Screen Resolution: %1x%2</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="121"/>
