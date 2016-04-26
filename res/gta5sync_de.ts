@@ -177,7 +177,7 @@
     <message>
         <location filename="../OptionsDialog.ui" line="104"/>
         <source>Default: %1x%2</source>
-        <translation type="unfinished"></translation>
+        <translation>Standard: %1x%2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="123"/>
