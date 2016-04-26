@@ -21,6 +21,9 @@
 #include "ProfileWidget.h"
 #include "ExportThread.h"
 #include "SavegameData.h"
+#include "config.h"
+#include <QDesktopWidget>
+#include <QApplication>
 #include <QFileInfo>
 #include <QFile>
 
@@ -32,6 +35,42 @@ ExportThread::ExportThread(QMap<ProfileWidget*,QString> profileMap, QString expo
 
 void ExportThread::run()
 {
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+
+    // Picture Settings
+    // Quality Settings
+    settings.beginGroup("Pictures");
+    int defaultQuality = 100;
+    QSize defExportSize = QSize(960, 536);
+    int customQuality = settings.value("CustomQuality", defaultQuality).toInt();
+    if (customQuality < 1 || customQuality > 100)
+    {
+        customQuality = 100;
+    }
+    bool useCustomQuality = settings.value("CustomQualityEnabled", false).toBool();
+
+    // Size Settings
+    QSize cusExportSize = settings.value("CustomSize", defExportSize).toSize();
+    if (cusExportSize.width() > 3840)
+    {
+        cusExportSize.setWidth(3840);
+    }
+    else if (cusExportSize.height() > 2160)
+    {
+        cusExportSize.setHeight(2160);
+    }
+    if (cusExportSize.width() < 1)
+    {
+        cusExportSize.setWidth(1);
+    }
+    else if (cusExportSize.height() < 1)
+    {
+        cusExportSize.setHeight(1);
+    }
+    QString sizeMode = settings.value("ExportSizeMode", "Default").toString();
+    settings.endGroup();
+    // End Picture Settings
+
     int intExportProgress = 0;
     foreach(ProfileWidget *widget, profileMap.keys())
     {
@@ -50,7 +89,29 @@ void ExportThread::run()
                     emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
                     emit exportProgressUpdate(intExportProgress);
 
-                    if (!picture->getPicture().save(exportDirectory + "/" + exportFileName, "JPEG", 100))
+                    // Scale Picture
+                    QImage exportPicture = picture->getPicture();
+                    if (sizeMode == "Desktop")
+                    {
+                        QRect desktopResolution = QApplication::desktop()->screenGeometry();
+                        exportPicture = exportPicture.scaled(desktopResolution.width(), desktopResolution.height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+                    }
+                    else if (sizeMode == "Custom")
+                    {
+                        exportPicture = exportPicture.scaled(cusExportSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+                    }
+
+                    bool isSaved;
+                    if (useCustomQuality)
+                    {
+                        isSaved = exportPicture.save(exportDirectory + "/" + exportFileName, "JPEG", customQuality);
+                    }
+                    else
+                    {
+                        isSaved = exportPicture.save(exportDirectory + "/" + exportFileName, "JPEG", 100);
+                    }
+
+                    if (!isSaved)
                     {
                         failedExportPictures.append(exportFileName);
                     }
