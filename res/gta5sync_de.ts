@@ -213,64 +213,69 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>x</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="200"/>
+        <location filename="../OptionsDialog.ui" line="199"/>
+        <source>Ignore Aspect Ratio</source>
+        <translation>Seitenverhältnis ignorieren</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="211"/>
         <source>Export Quality</source>
         <translation>Export Qualität</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="206"/>
+        <location filename="../OptionsDialog.ui" line="217"/>
         <source>Enable Custom Quality</source>
         <translation>Eigene Export Qualität benutzen</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="218"/>
+        <location filename="../OptionsDialog.ui" line="229"/>
         <source>Quality:</source>
         <translation>Qualität:</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="247"/>
+        <location filename="../OptionsDialog.ui" line="258"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="276"/>
+        <location filename="../OptionsDialog.ui" line="287"/>
         <source>Players</source>
         <translation>Spieler</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="316"/>
+        <location filename="../OptionsDialog.ui" line="327"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="321"/>
+        <location filename="../OptionsDialog.ui" line="332"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="330"/>
-        <location filename="../OptionsDialog.ui" line="336"/>
+        <location filename="../OptionsDialog.ui" line="341"/>
+        <location filename="../OptionsDialog.ui" line="347"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="362"/>
+        <location filename="../OptionsDialog.ui" line="373"/>
         <source>Sync</source>
         <translation>Sync</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="368"/>
+        <location filename="../OptionsDialog.ui" line="379"/>
         <source>Sync is not implemented at current time</source>
         <translation>Sync wurde bisher nicht implementiert</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="400"/>
+        <location filename="../OptionsDialog.ui" line="411"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="407"/>
+        <location filename="../OptionsDialog.ui" line="418"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>Abbre&amp;chen</translation>
@@ -281,38 +286,38 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>%1 (%2 wenn verfügbar) [sys]</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="104"/>
+        <location filename="../OptionsDialog.cpp" line="105"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="104"/>
+        <location filename="../OptionsDialog.cpp" line="105"/>
         <source>%1 (%2 if available)</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
         <translation>%1 (%2 wenn verfügbar)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="250"/>
+        <location filename="../OptionsDialog.cpp" line="252"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="250"/>
+        <location filename="../OptionsDialog.cpp" line="252"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation>Die Änderung der Sprache nimmt Effekt sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="260"/>
+        <location filename="../OptionsDialog.cpp" line="262"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Kein Profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="268"/>
-        <location filename="../OptionsDialog.cpp" line="272"/>
+        <location filename="../OptionsDialog.cpp" line="270"/>
         <location filename="../OptionsDialog.cpp" line="274"/>
+        <location filename="../OptionsDialog.cpp" line="276"/>
         <source>Profile: %1</source>
         <translation>Profil: %1</translation>
     </message>
@@ -342,7 +347,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     <message>
         <location filename="../PictureDialog.ui" line="132"/>
         <location filename="../PictureCopy.cpp" line="49"/>
-        <location filename="../PictureExport.cpp" line="87"/>
+        <location filename="../PictureExport.cpp" line="88"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
@@ -432,31 +437,31 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Exportiere Bild...</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="86"/>
+        <location filename="../PictureExport.cpp" line="87"/>
         <source>Export as JPG picture...</source>
         <translation>Exportiere als JPG Bild...</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="90"/>
+        <location filename="../PictureExport.cpp" line="91"/>
         <source>JPEG picture (*.jpg)</source>
         <translation>JPEG Bild (*.jpg)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="91"/>
+        <location filename="../PictureExport.cpp" line="92"/>
         <source>Portable Network Graphics (*.png)</source>
         <translation>Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="141"/>
-        <location filename="../PictureExport.cpp" line="145"/>
-        <location filename="../PictureExport.cpp" line="179"/>
-        <location filename="../PictureExport.cpp" line="185"/>
+        <location filename="../PictureExport.cpp" line="142"/>
+        <location filename="../PictureExport.cpp" line="146"/>
+        <location filename="../PictureExport.cpp" line="180"/>
+        <location filename="../PictureExport.cpp" line="186"/>
         <source>Export as JPG picture</source>
         <translation>Exportiere als JPG Bild</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="72"/>
-        <location filename="../PictureExport.cpp" line="141"/>
+        <location filename="../PictureExport.cpp" line="142"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
         <translation>Überschreibe %1 mit aktuellen Snapmatic Bild?</translation>
     </message>
@@ -470,12 +475,12 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="76"/>
-        <location filename="../PictureExport.cpp" line="145"/>
+        <location filename="../PictureExport.cpp" line="146"/>
         <source>Failed to overwrite %1 with current Snapmatic picture</source>
         <translation>Fehlgeschlagen beim Überschreiben von %1 mit aktuellen Snapmatic Bild</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="179"/>
+        <location filename="../PictureExport.cpp" line="180"/>
         <source>Failed to export current Snapmatic picture</source>
         <translation>Fehlgeschlagen beim Exportieren vom aktuellen Snapmatic Bild</translation>
     </message>
@@ -530,7 +535,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="95"/>
-        <location filename="../PictureExport.cpp" line="185"/>
+        <location filename="../PictureExport.cpp" line="186"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
@@ -824,9 +829,9 @@ Exportieren als:</translation>
         <translation type="obsolete">Aktueller Exportiervorgang: %1</translation>
     </message>
     <message>
-        <location filename="../ExportThread.cpp" line="89"/>
-        <location filename="../ExportThread.cpp" line="126"/>
-        <location filename="../ExportThread.cpp" line="147"/>
+        <location filename="../ExportThread.cpp" line="90"/>
+        <location filename="../ExportThread.cpp" line="127"/>
+        <location filename="../ExportThread.cpp" line="148"/>
         <source>Export file %1 of %2 files</source>
         <translation>Exportiere Datei %1 von %2 Dateien</translation>
     </message>

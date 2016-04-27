@@ -191,6 +191,17 @@
             </item>
            </layout>
           </item>
+          <item>
+           <layout class="QHBoxLayout" name="hlAspectRatio">
+            <item>
+             <widget class="QCheckBox" name="cbIgnoreAspectRatio">
+              <property name="text">
+               <string>Ignore Aspect Ratio</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>

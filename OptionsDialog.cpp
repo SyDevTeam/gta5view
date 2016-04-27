@@ -41,6 +41,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     QRect desktopResolution = QApplication::desktop()->screenGeometry();
     int desktopSizeWidth = desktopResolution.width();
     int desktopSizeHeight = desktopResolution.height();
+    aspectRatio = Qt::KeepAspectRatio;
     defExportSize = QSize(960, 536);
     cusExportSize = defExportSize;
     defaultQuality = 100;
@@ -232,6 +233,7 @@ void OptionsDialog::applySettings()
         settings->setValue("CustomSize", QSize(ui->sbPicExportWidth->value(), ui->sbPicExportHeight->value()));
     }
     settings->setValue("ExportSizeMode", sizeMode);
+    settings->setValue("AspectRatio", aspectRatio);
     settings->endGroup();
 
 #if QT_VERSION >= 0x050000
@@ -347,5 +349,23 @@ void OptionsDialog::setupPictureSettings()
         ui->rbPicDefaultRes->setChecked(true);
     }
 
+    aspectRatio = (Qt::AspectRatioMode)settings->value("AspectRatio", Qt::KeepAspectRatio).toInt();
+    if (aspectRatio == Qt::IgnoreAspectRatio)
+    {
+        ui->cbIgnoreAspectRatio->setChecked(true);
+    }
+
     settings->endGroup();
+}
+
+void OptionsDialog::on_cbIgnoreAspectRatio_toggled(bool checked)
+{
+    if (checked)
+    {
+        aspectRatio = Qt::IgnoreAspectRatio;
+    }
+    else
+    {
+        aspectRatio = Qt::KeepAspectRatio;
+    }
 }

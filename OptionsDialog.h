@@ -44,6 +44,7 @@ private slots:
     void on_rbPicCustomRes_toggled(bool checked);
     void on_cbPicCustomQuality_toggled(bool checked);
     void on_hsPicQuality_valueChanged(int value);
+    void on_cbIgnoreAspectRatio_toggled(bool checked);
 
 signals:
     void settingsApplied(int contentMode, QString language);
@@ -52,6 +53,7 @@ private:
     ProfileDatabase *profileDB;
     Ui::OptionsDialog *ui;
     QList<QTreeWidgetItem*> playerItems;
+    Qt::AspectRatioMode aspectRatio;
     QString currentLanguage;
     QString defaultProfile;
     QString percentString;

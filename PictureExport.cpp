@@ -68,6 +68,7 @@ void PictureExport::exportPicture(QWidget *parent, SnapmaticPicture *picture)
         cusExportSize.setHeight(1);
     }
     QString sizeMode = settings.value("ExportSizeMode", "Default").toString();
+    Qt::AspectRatioMode aspectRatio = (Qt::AspectRatioMode)settings.value("AspectRatio", Qt::KeepAspectRatio).toInt();
     settings.endGroup();
     // End Picture Settings
 
@@ -157,11 +158,11 @@ fileDialogPreSave:
             if (sizeMode == "Desktop")
             {
                 QRect desktopResolution = QApplication::desktop()->screenGeometry();
-                exportPicture = exportPicture.scaled(desktopResolution.width(), desktopResolution.height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+                exportPicture = exportPicture.scaled(desktopResolution.width(), desktopResolution.height(), aspectRatio, Qt::SmoothTransformation);
             }
             else if (sizeMode == "Custom")
             {
-                exportPicture = exportPicture.scaled(cusExportSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+                exportPicture = exportPicture.scaled(cusExportSize, aspectRatio, Qt::SmoothTransformation);
             }
 
             bool isSaved;
