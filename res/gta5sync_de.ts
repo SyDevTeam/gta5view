@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="de_DE">
+<TS version="2.0" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -9,7 +9,30 @@
         <translation>Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="100"/>
+        <location filename="../AboutDialog.ui" line="65"/>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+&lt;br/&gt;
+A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;
+&lt;br/&gt;
+Project version: %1&lt;br/&gt;
+Project build: %4, %5&lt;br/&gt;
+Compiled with Qt %2&lt;br/&gt;
+Running with Qt %3&lt;br/&gt;
+&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+&lt;br/&gt;
+Ein Projekt zum ansehen und synchronisieren von Grand Theft Auto 5 Snapmatic Bilder und Spielständen&lt;br/&gt;
+&lt;br/&gt;
+Projektversion: %1&lt;br/&gt;
+Projektbau: %4, %5&lt;br/&gt;
+Gebaut mit Qt %2&lt;br/&gt;
+Läuft auf Qt %3&lt;br/&gt;
+&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.ui" line="109"/>
         <source>&amp;Close</source>
         <translation>S&amp;chließen</translation>
     </message>
@@ -26,7 +49,6 @@
         <translation type="obsolete">Schließen</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="65"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;Ein Projekt zum ansehen und synchronisieren von Grand Theft Auto 5 Snapmatic Bilder und Spielständen&lt;br/&gt;&lt;br/&gt;Projektversion: %1&lt;br/&gt;Gebaut mit Qt %2&lt;br/&gt;Läuft auf Qt %3&lt;br/&gt;&lt;br/&gt;Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
@@ -40,7 +62,7 @@
     </message>
     <message>
         <source>Format</source>
-        <translation type="vanished">Format</translation>
+        <translation>Format</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="48"/>
@@ -54,7 +76,7 @@
     </message>
     <message>
         <source>Resolution</source>
-        <translation type="vanished">Auflösung</translation>
+        <translation>Auflösung</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="42"/>
@@ -106,11 +128,11 @@
     <name>OptionsDialog</name>
     <message>
         <source>Options</source>
-        <translation type="vanished">Optionen</translation>
+        <translation>Optionen</translation>
     </message>
     <message>
         <source>gta5sync - Options</source>
-        <translation type="vanished">gta5sync - Optionen</translation>
+        <translation>gta5sync - Optionen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="14"/>
@@ -159,11 +181,11 @@
     </message>
     <message>
         <source>Default Size: %1x%2</source>
-        <translation type="vanished">Standard Größe: %1x%2</translation>
+        <translation>Standard Größe: %1x%2</translation>
     </message>
     <message>
         <source>Desktop Size: %1x%2</source>
-        <translation type="vanished">Desktop Größe: %1x%2</translation>
+        <translation>Desktop Größe: %1x%2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="114"/>
@@ -172,7 +194,7 @@
     </message>
     <message>
         <source>Custom Size</source>
-        <translation type="vanished">Eigene Größe</translation>
+        <translation>Eigene Größe</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="104"/>
@@ -256,7 +278,7 @@
     <message>
         <source>%1 (%2 if available) [sys]</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
-        <translation type="vanished">%1 (%2 wenn verfügbar) [sys]</translation>
+        <translation>%1 (%2 wenn verfügbar) [sys]</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="104"/>
@@ -304,7 +326,7 @@
     </message>
     <message>
         <source>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</source>
-        <translation type="vanished">&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Standort: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Spieler: &lt;/span&gt;%4&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
+        <translation>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Standort: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Spieler: &lt;/span&gt;%4&lt;br/&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="81"/>
@@ -320,7 +342,7 @@
     <message>
         <location filename="../PictureDialog.ui" line="132"/>
         <location filename="../PictureCopy.cpp" line="49"/>
-        <location filename="../PictureExport.cpp" line="50"/>
+        <location filename="../PictureExport.cpp" line="87"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
@@ -348,7 +370,7 @@
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</source>
-        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br&gt;
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Standort: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Spieler: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</translation>
@@ -410,31 +432,31 @@
         <translation type="obsolete">Exportiere Bild...</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="49"/>
+        <location filename="../PictureExport.cpp" line="86"/>
         <source>Export as JPG picture...</source>
         <translation>Exportiere als JPG Bild...</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="53"/>
+        <location filename="../PictureExport.cpp" line="90"/>
         <source>JPEG picture (*.jpg)</source>
         <translation>JPEG Bild (*.jpg)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="54"/>
+        <location filename="../PictureExport.cpp" line="91"/>
         <source>Portable Network Graphics (*.png)</source>
         <translation>Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="107"/>
-        <location filename="../PictureExport.cpp" line="111"/>
-        <location filename="../PictureExport.cpp" line="125"/>
-        <location filename="../PictureExport.cpp" line="131"/>
+        <location filename="../PictureExport.cpp" line="141"/>
+        <location filename="../PictureExport.cpp" line="145"/>
+        <location filename="../PictureExport.cpp" line="179"/>
+        <location filename="../PictureExport.cpp" line="185"/>
         <source>Export as JPG picture</source>
         <translation>Exportiere als JPG Bild</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="72"/>
-        <location filename="../PictureExport.cpp" line="107"/>
+        <location filename="../PictureExport.cpp" line="141"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
         <translation>Überschreibe %1 mit aktuellen Snapmatic Bild?</translation>
     </message>
@@ -448,12 +470,12 @@
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="76"/>
-        <location filename="../PictureExport.cpp" line="111"/>
+        <location filename="../PictureExport.cpp" line="145"/>
         <source>Failed to overwrite %1 with current Snapmatic picture</source>
         <translation>Fehlgeschlagen beim Überschreiben von %1 mit aktuellen Snapmatic Bild</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="125"/>
+        <location filename="../PictureExport.cpp" line="179"/>
         <source>Failed to export current Snapmatic picture</source>
         <translation>Fehlgeschlagen beim Exportieren vom aktuellen Snapmatic Bild</translation>
     </message>
@@ -508,7 +530,7 @@
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="95"/>
-        <location filename="../PictureExport.cpp" line="131"/>
+        <location filename="../PictureExport.cpp" line="185"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
@@ -694,7 +716,7 @@ JPG pictures make it possible to open the picture with a Image Viewer
 GTA Snapmatic make it possible to import the picture into the game
 
 Export as:</source>
-        <translation type="vanished">Exportiere Snapmatic Bilder
+        <translation>Exportiere Snapmatic Bilder
 
 JPG Bilder machen es möglich sie mit ein Bildansicht Programm zu öffnen
 Das GTA Snapmatic Format macht es möglich sie wieder ins Game zu importieren
@@ -802,9 +824,9 @@ Exportieren als:</translation>
         <translation type="obsolete">Aktueller Exportiervorgang: %1</translation>
     </message>
     <message>
-        <location filename="../ExportThread.cpp" line="50"/>
-        <location filename="../ExportThread.cpp" line="65"/>
-        <location filename="../ExportThread.cpp" line="86"/>
+        <location filename="../ExportThread.cpp" line="89"/>
+        <location filename="../ExportThread.cpp" line="126"/>
+        <location filename="../ExportThread.cpp" line="147"/>
         <source>Export file %1 of %2 files</source>
         <translation>Exportiere Datei %1 von %2 Dateien</translation>
     </message>
@@ -829,7 +851,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Cop&amp;y</source>
-        <translation type="vanished">&amp;Kopieren</translation>
+        <translation>&amp;Kopieren</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="61"/>
@@ -838,11 +860,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Schließen</translation>
+        <translation>Schließen</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.cpp" line="24"/>
@@ -874,7 +896,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Kopieren</translation>
+        <translation>Kopieren</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="103"/>
@@ -1351,7 +1373,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Select &amp;Profile</source>
-        <translation type="vanished">&amp;Profil auswählen</translation>
+        <translation>&amp;Profil auswählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="176"/>
@@ -1360,7 +1382,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>&amp;Options</source>
-        <translation type="vanished">&amp;Optionen</translation>
+        <translation>&amp;Optionen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="207"/>
@@ -1389,7 +1411,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Ctrl+R</source>
-        <translation type="vanished">Strg+R</translation>
+        <translation>Strg+R</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="259"/>
@@ -1429,7 +1451,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Import</source>
-        <translation type="vanished">Importieren</translation>
+        <translation>Importieren</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="355"/>
@@ -1446,15 +1468,15 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Change GTA V &amp;Folder</source>
-        <translation type="vanished">GTA V &amp;Ordner ändern</translation>
+        <translation>GTA V &amp;Ordner ändern</translation>
     </message>
     <message>
         <source>gta5sync</source>
-        <translation type="vanished">gta5sync</translation>
+        <translation>gta5sync</translation>
     </message>
     <message>
         <source>Grand Theft Auto V Folder not found!</source>
-        <translation type="vanished">Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
+        <translation>Grand Theft Auto V Ordner wurde nicht gefunden!</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="103"/>
@@ -1467,11 +1489,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Reload profiles</source>
-        <translation type="vanished">Profile neuladen</translation>
+        <translation>Profile neuladen</translation>
     </message>
     <message>
         <source>Not able to reload profiles</source>
-        <translation type="vanished">Nicht fähig Profile neuzuladen</translation>
+        <translation>Nicht fähig Profile neuzuladen</translation>
     </message>
 </context>
 </TS>

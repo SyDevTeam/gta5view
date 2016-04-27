@@ -9,7 +9,21 @@
         <translation>О программе gta5sync</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="100"/>
+        <location filename="../AboutDialog.ui" line="65"/>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+&lt;br/&gt;
+A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;
+&lt;br/&gt;
+Project version: %1&lt;br/&gt;
+Project build: %4, %5&lt;br/&gt;
+Compiled with Qt %2&lt;br/&gt;
+Running with Qt %3&lt;br/&gt;
+&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.ui" line="109"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -20,11 +34,6 @@
     <message>
         <source>Close</source>
         <translation type="obsolete">Закрыть</translation>
-    </message>
-    <message>
-        <location filename="../AboutDialog.ui" line="65"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -291,7 +300,7 @@
     <message>
         <location filename="../PictureDialog.ui" line="132"/>
         <location filename="../PictureCopy.cpp" line="49"/>
-        <location filename="../PictureExport.cpp" line="50"/>
+        <location filename="../PictureExport.cpp" line="87"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
@@ -353,31 +362,31 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="49"/>
+        <location filename="../PictureExport.cpp" line="86"/>
         <source>Export as JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="53"/>
+        <location filename="../PictureExport.cpp" line="90"/>
         <source>JPEG picture (*.jpg)</source>
         <translation>Картинка JPEG (*.jpg)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="54"/>
+        <location filename="../PictureExport.cpp" line="91"/>
         <source>Portable Network Graphics (*.png)</source>
         <translation>Картинка Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="107"/>
-        <location filename="../PictureExport.cpp" line="111"/>
-        <location filename="../PictureExport.cpp" line="125"/>
-        <location filename="../PictureExport.cpp" line="131"/>
+        <location filename="../PictureExport.cpp" line="141"/>
+        <location filename="../PictureExport.cpp" line="145"/>
+        <location filename="../PictureExport.cpp" line="179"/>
+        <location filename="../PictureExport.cpp" line="185"/>
         <source>Export as JPG picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="72"/>
-        <location filename="../PictureExport.cpp" line="107"/>
+        <location filename="../PictureExport.cpp" line="141"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
         <translation>Перезаписать %1 текущей картинкой Snapmatic?</translation>
     </message>
@@ -391,18 +400,18 @@
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="76"/>
-        <location filename="../PictureExport.cpp" line="111"/>
+        <location filename="../PictureExport.cpp" line="145"/>
         <source>Failed to overwrite %1 with current Snapmatic picture</source>
         <translation>Не удалось перезаписать %1 картинкой Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="125"/>
+        <location filename="../PictureExport.cpp" line="179"/>
         <source>Failed to export current Snapmatic picture</source>
         <translation>Не удалось экспортировать текущую картинку Snapmatic</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="95"/>
-        <location filename="../PictureExport.cpp" line="131"/>
+        <location filename="../PictureExport.cpp" line="185"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
     </message>
@@ -659,9 +668,9 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ExportThread.cpp" line="50"/>
-        <location filename="../ExportThread.cpp" line="65"/>
-        <location filename="../ExportThread.cpp" line="86"/>
+        <location filename="../ExportThread.cpp" line="89"/>
+        <location filename="../ExportThread.cpp" line="126"/>
+        <location filename="../ExportThread.cpp" line="147"/>
         <source>Export file %1 of %2 files</source>
         <translation type="unfinished"></translation>
     </message>
