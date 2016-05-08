@@ -56,6 +56,7 @@ SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : Q
     jsonLocZ = 0;
     jsonCrewID = 0;
     jsonArea = "";
+    jsonCreatedTimestamp = 0;
     jsonPlyrsList = QStringList();
 }
 
@@ -345,7 +346,8 @@ void SnapmaticPicture::parseJsonContent()
     if (jsonMap.contains("creat"))
     {
         QDateTime createdTimestamp;
-        createdTimestamp.setTime_t(jsonMap["creat"].toUInt());
+        jsonCreatedTimestamp = jsonMap["creat"].toUInt();
+        createdTimestamp.setTime_t(jsonCreatedTimestamp);
         jsonCreatedDateTime = createdTimestamp;
     }
     if (jsonMap.contains("plyrs"))

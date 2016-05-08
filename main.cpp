@@ -93,6 +93,7 @@ int main(int argc, char *argv[])
             if (QFile::exists(langpath + QDir::separator() + "gta5sync_" + langList.at(0) + ".qm"))
             {
                 EappTranslator.load(langpath + QDir::separator() + "/gta5sync_" + langList.at(0) + ".qm");
+                QLocale::setDefault(QLocale::system());
             }
         }
     }
@@ -113,6 +114,7 @@ int main(int argc, char *argv[])
                 }
                 else
                 {
+                    QLocale::setDefault(QLocale(langList.at(0)));
                     svlp = true;
                 }
             }
@@ -134,6 +136,7 @@ int main(int argc, char *argv[])
             if (QFile::exists(langpath + QDir::separator() + "gta5sync_" + langList.at(0) + ".qm"))
             {
                 EappTranslator.load(langpath + QDir::separator() + "gta5sync_" + langList.at(0) + ".qm");
+                QLocale::setDefault(QLocale(langList.at(0)));
             }
         }
     }
@@ -235,6 +238,10 @@ int main(int argc, char *argv[])
                         if (svlp) { trsf = true; }
                     }
                 }
+                else
+                {
+                    QLocale::setDefault(QLocale(langList.at(0)));
+                }
             }
             else
             {
@@ -254,6 +261,7 @@ int main(int argc, char *argv[])
             if (QFile::exists(":/tr/gta5sync_" + langList.at(0) + ".qm"))
             {
                 appTranslator.load(":/tr/gta5sync_" + langList.at(0) + ".qm");
+                QLocale::setDefault(QLocale(langList.at(0)));
             }
         }
     }
@@ -266,6 +274,7 @@ int main(int argc, char *argv[])
             if (QFile::exists(":/tr/gta5sync_" + langList.at(0) + ".qm"))
             {
                 appTranslator.load(":/tr/gta5sync_" + langList.at(0) + ".qm");
+                QLocale::setDefault(QLocale(langList.at(0)));
             }
         }
     }

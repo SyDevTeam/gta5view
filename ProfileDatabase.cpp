@@ -47,15 +47,21 @@ ProfileDatabase::~ProfileDatabase()
 
 QStringList ProfileDatabase::getPlayers()
 {
+    mutex.lock();
     return profileDB->childKeys();
+    mutex.unlock();
 }
 
 QString ProfileDatabase::getPlayerName(int playerID)
 {
+    mutex.lock();
     return profileDB->value(QString::number(playerID), playerID).toString();
+    mutex.unlock();
 }
 
 void ProfileDatabase::setPlayerName(int playerID, QString playerName)
 {
+    mutex.lock();
     profileDB->setValue(QString::number(playerID), playerName);
+    mutex.unlock();
 }

@@ -214,7 +214,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
 
         if (crewID == "") { crewID = tr("No crew"); }
 
-        this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
+        this->setWindowTitle(windowTitleStr.arg(picture->getCreatedDateTime().toString(Qt::DefaultLocaleLongDate)));
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl, picAreaStr));
     }
     else

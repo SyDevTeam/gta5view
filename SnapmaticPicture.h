@@ -90,6 +90,7 @@ private:
     double jsonLocZ;
     QString jsonArea;
     QStringList jsonPlyrsList;
+    uint jsonCreatedTimestamp;
     QDateTime jsonCreatedDateTime;
 
 signals:
