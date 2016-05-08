@@ -360,6 +360,9 @@ int main(int argc, char *argv[])
 #endif
     // End internal translate loading
 
+    QLocale locale;
+    qDebug() << locale.nativeLanguageName();
+
     QStringList applicationArgs = a.arguments();
     QString selectedAction;
     QString arg1;

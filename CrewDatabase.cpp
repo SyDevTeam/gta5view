@@ -47,14 +47,10 @@ CrewDatabase::~CrewDatabase()
 
 QStringList CrewDatabase::getCrews()
 {
-    mutex.lock();
     return crewDB->childKeys();
-    mutex.unlock();
 }
 
 void CrewDatabase::addCrew(int crewID)
 {
-    mutex.lock();
     crewDB->setValue(QString::number(crewID), crewID);
-    mutex.unlock();
 }
