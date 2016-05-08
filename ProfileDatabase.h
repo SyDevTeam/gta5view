@@ -33,7 +33,6 @@ public:
     ~ProfileDatabase();
 
 private:
-    QMutex mutex;
     QSettings *profileDB;
 
 public slots:
