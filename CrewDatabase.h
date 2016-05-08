@@ -19,10 +19,8 @@
 #ifndef CREWDATABASE_H
 #define CREWDATABASE_H
 
-#include <QMutexLocker>
 #include <QSettings>
 #include <QObject>
-#include <QMutex>
 #include <QMap>
 
 class CrewDatabase : public QObject
@@ -34,7 +32,6 @@ public:
     ~CrewDatabase();
 
 private:
-    QMutex mutex;
     QSettings *crewDB;
 
 public slots:
