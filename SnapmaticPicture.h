@@ -20,6 +20,7 @@
 #define SNAPMATICPICTURE_H
 
 #include <QStringList>
+#include <QDateTime>
 #include <QObject>
 #include <QString>
 #include <QImage>
@@ -41,6 +42,7 @@ public:
     QString getPictureSortStr();
     QString getPictureFileName();
     QString getExportPictureFileName();
+    QDateTime getCreatedDateTime();
     void setPicture(const QImage &picture);
     void setPicFileName(QString picFileName_);
 
@@ -88,6 +90,7 @@ private:
     double jsonLocZ;
     QString jsonArea;
     QStringList jsonPlyrsList;
+    QDateTime jsonCreatedDateTime;
 
 signals:
 

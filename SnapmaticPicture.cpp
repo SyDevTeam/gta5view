@@ -342,6 +342,12 @@ void SnapmaticPicture::parseJsonContent()
     {
         jsonCrewID = jsonMap["crewid"].toInt();
     }
+    if (jsonMap.contains("creat"))
+    {
+        QDateTime createdTimestamp;
+        createdTimestamp.setTime_t(jsonMap["creat"].toUInt());
+        jsonCreatedDateTime = createdTimestamp;
+    }
     if (jsonMap.contains("plyrs"))
     {
         jsonPlyrsList = jsonMap["plyrs"].toStringList();
@@ -388,4 +394,9 @@ double SnapmaticPicture::getLocationZ()
 QStringList SnapmaticPicture::getPlayers()
 {
     return jsonPlyrsList;
+}
+
+QDateTime SnapmaticPicture::getCreatedDateTime()
+{
+    return jsonCreatedDateTime;
 }
