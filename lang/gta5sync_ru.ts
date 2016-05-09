@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.0" language="ru_RU">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -284,7 +284,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</source>
-        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;Заголовок: &lt;/span&gt;%6&lt;br&gt;
+        <translation type="obsolete">&lt;span style=&quot; font-weight:600;&quot;&gt;Заголовок: &lt;/span&gt;%6&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Позиция: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Игроки: &lt;/span&gt;%4&lt;br&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;ID группы: &lt;/span&gt;%5</translation>
@@ -293,8 +293,8 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <location filename="../PictureDialog.ui" line="81"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</source>
+&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -328,41 +328,41 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="70"/>
+        <location filename="../PictureDialog.cpp" line="71"/>
         <source>Export as &amp;JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="71"/>
+        <location filename="../PictureDialog.cpp" line="72"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="167"/>
-        <location filename="../PictureDialog.cpp" line="223"/>
+        <location filename="../PictureDialog.cpp" line="168"/>
+        <location filename="../PictureDialog.cpp" line="225"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="167"/>
-        <location filename="../PictureDialog.cpp" line="223"/>
+        <location filename="../PictureDialog.cpp" line="168"/>
+        <location filename="../PictureDialog.cpp" line="225"/>
         <source>Failed at %1</source>
         <translation>Ошибка при %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="212"/>
-        <location filename="../PictureDialog.cpp" line="222"/>
+        <location filename="../PictureDialog.cpp" line="214"/>
+        <location filename="../PictureDialog.cpp" line="224"/>
         <source>No player</source>
         <translation>Игроков нет</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="215"/>
-        <location filename="../PictureDialog.cpp" line="222"/>
+        <location filename="../PictureDialog.cpp" line="217"/>
+        <location filename="../PictureDialog.cpp" line="224"/>
         <source>No crew</source>
         <translation>Без группы</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="222"/>
+        <location filename="../PictureDialog.cpp" line="224"/>
         <source>Unknown Location</source>
         <translation type="unfinished"></translation>
     </message>
@@ -705,11 +705,11 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Копировать</translation>
+        <translation type="obsolete">Копировать</translation>
     </message>
     <message>
         <source>Close</source>
-        <translation type="vanished">Закрыть</translation>
+        <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.cpp" line="24"/>
@@ -746,7 +746,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <source>Copy</source>
-        <translation type="vanished">Копировать</translation>
+        <translation type="obsolete">Копировать</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="103"/>
@@ -1177,7 +1177,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <source>gta5sync</source>
-        <translation type="vanished">gta5sync</translation>
+        <translation type="obsolete">gta5sync</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="103"/>
