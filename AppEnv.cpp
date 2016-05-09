@@ -110,6 +110,11 @@ QByteArray AppEnv::getUserAgent()
     return QString("Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 gta5sync/1.0").toUtf8();
 }
 
+QUrl AppEnv::getCrewFetchingUrl(QString crewID)
+{
+    return QUrl(QString("https://socialclub.rockstargames.com/reference/crewfeed/%1").arg(crewID));
+}
+
 QUrl AppEnv::getPlayerFetchingUrl(QString crewID, QString pageNumber)
 {
     return QUrl(QString("https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=%1&pageNumber=%2").arg(crewID, pageNumber));

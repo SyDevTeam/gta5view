@@ -24,6 +24,7 @@
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "ProfileWidget.h"
+#include "CrewDatabase.h"
 #include <QContextMenuEvent>
 #include <QMouseEvent>
 #include <QWidget>
@@ -38,7 +39,7 @@ class SnapmaticWidget : public ProfileWidget
     Q_OBJECT
 
 public:
-    SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent = 0);
+    SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath);
     void setSnapmaticPicture(SnapmaticPicture *picture);
     void setSelectionMode(bool selectionMode);
@@ -69,6 +70,7 @@ protected:
 
 private:
     ProfileDatabase *profileDB;
+    CrewDatabase *crewDB;
     DatabaseThread *threadDB;
     Ui::SnapmaticWidget *ui;
     SnapmaticPicture *smpic;

@@ -252,6 +252,10 @@ int main(int argc, char *argv[])
             }
         }
     }
+    else if (language == "en" || language == "English")
+    {
+        QLocale::setDefault(QLocale(QLocale::English, QLocale::AnyCountry));
+    }
     else
     {
         QString languageName = language;
@@ -360,9 +364,6 @@ int main(int argc, char *argv[])
 #endif
     // End internal translate loading
 
-    QLocale locale;
-    qDebug() << locale.nativeLanguageName();
-
     QStringList applicationArgs = a.arguments();
     QString selectedAction;
     QString arg1;
@@ -416,7 +417,7 @@ int main(int argc, char *argv[])
         CrewDatabase *crewDB = new CrewDatabase();
         ProfileDatabase *profileDB = new ProfileDatabase();
         DatabaseThread *threadDB = new DatabaseThread(crewDB);
-        PictureDialog *picDialog = new PictureDialog(profileDB);
+        PictureDialog *picDialog = new PictureDialog(profileDB, crewDB);
         SnapmaticPicture picture;
 
         bool readOk = picture.readingPictureFromFile(arg1);

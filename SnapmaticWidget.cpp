@@ -30,8 +30,8 @@
 #include <QMenu>
 #include <QFile>
 
-SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, DatabaseThread *threadDB, QWidget *parent) :
-    ProfileWidget(parent), profileDB(profileDB), threadDB(threadDB),
+SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
+    ProfileWidget(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
     ui(new Ui::SnapmaticWidget)
 {
     ui->setupUi(this);
@@ -95,7 +95,7 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
 
 void SnapmaticWidget::on_cmdView_clicked()
 {
-    PictureDialog *picDialog = new PictureDialog(profileDB, this);
+    PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, this);
     picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
     picDialog->setSnapmaticPicture(smpic, picPath, true);
     picDialog->setModal(true);

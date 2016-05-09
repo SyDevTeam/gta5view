@@ -47,10 +47,35 @@ CrewDatabase::~CrewDatabase()
 
 QStringList CrewDatabase::getCrews()
 {
-    return crewDB->childKeys();
+    QStringList compatibleCrewList = crewDB->childKeys();
+    crewDB->endGroup();
+    crewDB->beginGroup("CrewList");
+    QStringList crewIDs = crewDB->value("IDs", QStringList()).toStringList();
+    crewIDs.append(compatibleCrewList);
+    crewIDs.removeDuplicates();
+    crewDB->endGroup();
+    crewDB->beginGroup("Crews");
+    return crewIDs;
+}
+
+QString CrewDatabase::getCrewName(int crewID)
+{
+    return crewDB->value(QString::number(crewID), crewID).toString();
+}
+
+void CrewDatabase::setCrewName(int crewID, QString crewName)
+{
+    crewDB->setValue(QString::number(crewID), crewName);
 }
 
 void CrewDatabase::addCrew(int crewID)
 {
-    crewDB->setValue(QString::number(crewID), crewID);
+    QStringList crews = getCrews();
+    crews.append(QString::number(crewID));
+    crews.removeDuplicates();
+    crewDB->endGroup();
+    crewDB->beginGroup("CrewList");
+    crewDB->setValue("IDs", crews);
+    crewDB->endGroup();
+    crewDB->beginGroup("Crews");
 }

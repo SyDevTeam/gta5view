@@ -136,7 +136,7 @@ void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, QString pictureP
 
 void ProfileInterface::pictureLoaded_f(SnapmaticPicture *picture, QString picturePath, bool inserted)
 {
-    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, threadDB);
+    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, crewDB, threadDB);
     picWidget->setSnapmaticPicture(picture, picturePath);
     picWidget->setContentMode(contentMode);
     widgets[picWidget] = "PIC" + picture->getPictureSortStr();

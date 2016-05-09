@@ -35,6 +35,7 @@ public:
 
     // Web Stuff
     static QByteArray getUserAgent();
+    static QUrl getCrewFetchingUrl(QString crewID);
     static QUrl getPlayerFetchingUrl(QString crewID, QString pageNumber);
 };
 

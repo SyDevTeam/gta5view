@@ -21,6 +21,7 @@
 
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
+#include "CrewDatabase.h"
 #include <QMouseEvent>
 #include <QDialog>
 #include <QEvent>
@@ -34,7 +35,7 @@ class PictureDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit PictureDialog(ProfileDatabase *profileDB, QWidget *parent = 0);
+    explicit PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB,  QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk, bool indexed, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk);
     void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath);
@@ -71,6 +72,7 @@ protected:
 
 private:
     ProfileDatabase *profileDB;
+    CrewDatabase *crewDB;
     Ui::PictureDialog *ui;
     QMap<QString, QString> globalMap;
     SnapmaticPicture *smpic;
@@ -85,6 +87,7 @@ private:
     QString picArea;
     QString picTitl;
     QString picPath;
+    QString created;
     QString crewID;
     QString locX;
     QString locY;

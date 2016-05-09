@@ -44,8 +44,8 @@
 #include <QUrl>
 #include <QDir>
 
-PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
-    QDialog(parent), profileDB(profileDB),
+PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent) :
+    QDialog(parent), profileDB(profileDB), crewDB(crewDB),
     ui(new Ui::PictureDialog)
 {
     ui->setupUi(this);
@@ -59,6 +59,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, QWidget *parent) :
     picArea = "";
     picTitl = "";
     picPath = "";
+    created = "";
     crewID = "";
     locX = "";
     locY = "";
@@ -178,7 +179,8 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         locX = QString::number(picture->getLocationX());
         locY = QString::number(picture->getLocationY());
         locZ = QString::number(picture->getLocationZ());
-        crewID = QString::number(picture->getCrewNumber());
+        crewID = crewDB->getCrewName(picture->getCrewNumber());
+        created = picture->getCreatedDateTime().toString(Qt::DefaultLocaleShortDate);
         plyrsList = picture->getPlayers();
         picTitl = picture->getPictureTitl();
         picArea = picture->getArea();
@@ -214,8 +216,8 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
 
         if (crewID == "") { crewID = tr("No crew"); }
 
-        this->setWindowTitle(windowTitleStr.arg(picture->getCreatedDateTime().toString(Qt::DefaultLocaleLongDate)));
-        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl, picAreaStr));
+        this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
+        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl, picAreaStr, created));
     }
     else
     {
@@ -279,7 +281,7 @@ void PictureDialog::playerNameUpdated()
             plyrsStr.append("</a>");
         }
         plyrsStr.remove(0,2);
-        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl, picAreaStr));
+        ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, plyrsStr, crewID, picTitl, picAreaStr, created));
     }
 }
 

@@ -406,7 +406,7 @@ bool UserInterface::openFile(QString selectedFile, bool warn)
 
 void UserInterface::openSnapmaticFile(SnapmaticPicture *picture)
 {
-    PictureDialog *picDialog = new PictureDialog(profileDB, this);
+    PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, this);
     picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
     picDialog->setSnapmaticPicture(picture, true);
     picDialog->setModal(true);
