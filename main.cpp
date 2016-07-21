@@ -53,6 +53,7 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(GTA5SYNC_APPVER);
 
 #ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050000
     // Get Windows Font
     NONCLIENTMETRICS ncm;
     ncm.cbSize = sizeof(ncm);
@@ -67,6 +68,7 @@ int main(int argc, char *argv[])
     // Set Application Font
     QFont appFont(uiFontStr, 9);
     a.setFont(appFont);
+#endif
 #endif
 
     QString pluginsDir = AppEnv::getPluginsFolder();
