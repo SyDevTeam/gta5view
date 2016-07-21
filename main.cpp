@@ -52,8 +52,6 @@ int main(int argc, char *argv[])
     a.setApplicationName(GTA5SYNC_APPSTR);
     a.setApplicationVersion(GTA5SYNC_APPVER);
 
-    setlocale(LC_ALL, "");
-
 #ifdef GTA5SYNC_WIN
     // Get Windows Font
     NONCLIENTMETRICS ncm;
