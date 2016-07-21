@@ -27,6 +27,7 @@
 #include "IconLoader.h"
 #include "AppEnv.h"
 #include "config.h"
+#include <QDesktopWidget>
 #include <QApplication>
 #include <QStringList>
 #include <QTranslator>
@@ -51,16 +52,19 @@ int main(int argc, char *argv[])
     a.setApplicationName(GTA5SYNC_APPSTR);
     a.setApplicationVersion(GTA5SYNC_APPVER);
 
+    setlocale(LC_ALL, "");
+
 #ifdef GTA5SYNC_WIN
     // Get Windows Font
     NONCLIENTMETRICS ncm;
     ncm.cbSize = sizeof(ncm);
     SystemParametersInfo(SPI_GETNONCLIENTMETRICS, ncm.cbSize, &ncm, 0);
     LOGFONTW uiFont = ncm.lfMessageFont;
-    char faceName[32];
-    char DefChar = ' ';
-    WideCharToMultiByte(CP_ACP, 0, uiFont.lfFaceName, -1, faceName, 32, &DefChar, NULL);
-    QString uiFontStr(QString::fromStdString(std::string(faceName)));
+    QString uiFontStr(QString::fromStdWString(std::wstring(uiFont.lfFaceName)));
+
+#ifdef GTA5SYNC_DEBUG
+    QMessageBox::information(a.desktop(), QApplication::tr("Font"), QApplication::tr("Selected Font: %1").arg(uiFontStr));
+#endif
 
     // Set Application Font
     QFont appFont(uiFontStr, 9);
