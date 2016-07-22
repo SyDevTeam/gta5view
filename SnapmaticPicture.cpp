@@ -69,10 +69,13 @@ SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : Q
     jsonPlyrsList = QStringList();
 }
 
-bool SnapmaticPicture::readingPicture(bool writeEnabled)
+bool SnapmaticPicture::readingPicture(bool writeEnabled_)
 {
     // Start opening file
     // lastStep is like currentStep
+
+    // Set boolean values
+    writeEnabled = writeEnabled_;
 
     QFile *picFile = new QFile(picFileName);
     QIODevice *picStream;
@@ -268,12 +271,12 @@ void SnapmaticPicture::parseSnapmaticExportAndSortString()
     }
 }
 
-bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool writeEnabled)
+bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool writeEnabled_)
 {
     if (fileName != "")
     {
         picFileName = fileName;
-        return readingPicture(writeEnabled);
+        return readingPicture(writeEnabled_);
     }
     else
     {
@@ -281,9 +284,66 @@ bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool writ
     }
 }
 
-void SnapmaticPicture::setPicture(const QImage &picture)
+bool SnapmaticPicture::setPicture(const QImage &picture)
 {
-    cachePicture = picture;
+    if (writeEnabled)
+    {
+        QByteArray picByteArray;
+        QBuffer snapmaticStream(&rawPicContent);
+        snapmaticStream.open(QIODevice::ReadWrite);
+        if (snapmaticStream.seek(jpegStreamEditorBegin))
+        {
+            bool saveSuccess;
+            QByteArray picByteArray1;
+            QBuffer picStream1(&picByteArray1);
+            picStream1.open(QIODevice::WriteOnly);
+            saveSuccess = picture.save(&picStream1, "JPEG", 100);
+            picStream1.close();
+
+            if (picByteArray1.length() > jpegPicStreamLength)
+            {
+                QByteArray picByteArray2;
+                QBuffer picStream2(&picByteArray2);
+                picStream2.open(QIODevice::WriteOnly);
+                saveSuccess = picture.save(&picStream2, "JPEG", 90);
+                picStream2.close();
+                if (picByteArray2.length() > jpegPicStreamLength)
+                {
+                    snapmaticStream.close();
+                    return false;
+                }
+                picByteArray = picByteArray2;
+            }
+            else
+            {
+                picByteArray = picByteArray1;
+            }
+        }
+        int result = snapmaticStream.write(picByteArray);
+        if (result != 0)
+        {
+            cachePicture = picture;
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+
+bool SnapmaticPicture::exportPicture(const QString &fileName)
+{
+    QFile *picFile = new QFile(fileName);
+    if (picFile->open(QIODevice::WriteOnly))
+    {
+        picFile->write(rawPicContent);
+        picFile->close();
+        picFile->deleteLater();
+        return true;
+    }
+    else
+    {
+        return false;
+    }
 }
 
 QString SnapmaticPicture::getExportPictureFileName()

@@ -43,7 +43,8 @@ public:
     QString getPictureFileName();
     QString getExportPictureFileName();
     QDateTime getCreatedDateTime();
-    void setPicture(const QImage &picture);
+    bool setPicture(const QImage &picture);
+    bool exportPicture(const QString &fileName);
     void setPicFileName(QString picFileName_);
 
     // JSON
@@ -70,7 +71,7 @@ private:
     QString titlStr;
     QString descStr;
     bool picOk;
-    bool editMode;
+    bool writeEnabled;
 
     // PARSE INT
     int snapmaticHeaderLength;
