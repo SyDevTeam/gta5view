@@ -20,5 +20,6 @@
         <file>global.de.ini</file>
         <file>global.en.ini</file>
         <file>global.ja.ini</file>
+        <file>global.fr.ini</file>
     </qresource>
 </RCC>
