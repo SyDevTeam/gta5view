@@ -20,12 +20,12 @@ BEGIN
         BLOCK   "040904b0"
         BEGIN
             VALUE   "CompanyName",      "Syping"
-            VALUE   "FileDescription",  "Grand Theft Auto 5 Sync\0"
+            VALUE   "FileDescription",  "gta5sync\0"
             VALUE   "FileVersion",      "1.0.0.0\0"
             VALUE   "InternalName",     "gta5sync\0"
             VALUE   "LegalCopyright",   "Copyright © 2015-2016 Syping\0"
             VALUE   "OriginalFilename", "gta5sync.exe\0"
-            VALUE   "ProductName",      "Grand Theft Auto 5 Sync\0"
+            VALUE   "ProductName",      "gta5sync\0"
             VALUE   "ProductVersion",   "1.0.0.0\0"
         END
     END
