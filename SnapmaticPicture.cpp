@@ -24,6 +24,8 @@
 #include <QVariantMap>
 #include <QJsonArray>
 #include <QString>
+#include <QBuffer>
+#include <QDebug>
 #include <QImage>
 #include <QFile>
 
@@ -32,11 +34,18 @@ SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : Q
     // PARSE INT INIT - DO NOT CHANGE THIS VALUES
     snapmaticHeaderLength = 278;
     snapmaticUsefulLength = 260;
+    snapmaticFileMaxSize = 528192;
     jpegHeaderLineDifStr = 2;
     jpegPreHeaderLength = 14;
     jpegPicStreamLength = 524288;
     jsonStreamLength = 3076;
     tideStreamLength = 260;
+
+    // PARSE EDITOR INIT
+    jpegStreamEditorBegin = 292;
+    jsonStreamEditorBegin = 524588;
+    jsonStreamEditorLength = 3072;
+    rawPicContent = "";
 
     // INIT PIC
     cachePicture = QImage(0, 0, QImage::Format_RGB32);
@@ -60,12 +69,14 @@ SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : Q
     jsonPlyrsList = QStringList();
 }
 
-bool SnapmaticPicture::readingPicture()
+bool SnapmaticPicture::readingPicture(bool writeEnabled)
 {
     // Start opening file
     // lastStep is like currentStep
 
     QFile *picFile = new QFile(picFileName);
+    QIODevice *picStream;
+
     if (!picFile->open(QFile::ReadOnly))
     {
         lastStep = "1;/1,OpenFile," + StringParser::convertDrawStringForLog(picFileName);
@@ -73,117 +84,123 @@ bool SnapmaticPicture::readingPicture()
         delete picFile;
         return false;
     }
+    rawPicContent = picFile->read(snapmaticFileMaxSize);
+    picStream = new QBuffer(&rawPicContent);
+    picStream->open(QIODevice::ReadWrite);
 
     // Reading Snapmatic Header
-    if (!picFile->isReadable())
+    if (!picStream->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",1,NOHEADER";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return false;
     }
-    QByteArray snapmaticHeaderLine = picFile->read(snapmaticHeaderLength);
+    QByteArray snapmaticHeaderLine = picStream->read(snapmaticHeaderLength);
     pictureStr = getSnapmaticPictureString(snapmaticHeaderLine);
 
     // Reading JPEG Header Line
-    if (!picFile->isReadable())
+    if (!picStream->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",2,NOHEADER";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return false;
     }
-    QByteArray jpegHeaderLine = picFile->read(jpegPreHeaderLength);
+    QByteArray jpegHeaderLine = picStream->read(jpegPreHeaderLength);
 
     // Checking for JPEG
     jpegHeaderLine.remove(0, jpegHeaderLineDifStr);
     if (jpegHeaderLine.left(4) != "JPEG")
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",2,NOJPEG";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return false;
     }
 
     // Read JPEG Stream
-    if (!picFile->isReadable())
+    if (!picStream->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",2,NOPIC";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return false;
     }
-    QByteArray jpegRawContent = picFile->read(jpegPicStreamLength);
+    QByteArray jpegRawContent = picStream->read(jpegPicStreamLength);
     picOk = cachePicture.loadFromData(jpegRawContent, "JPEG");
 
     // Read JSON Stream
-    if (!picFile->isReadable())
+    if (!picStream->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",3,NOJSON";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return picOk;
     }
-    else if (picFile->read(4) != "JSON")
+    else if (picStream->read(4) != "JSON")
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",3,CTJSON";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return picOk;
     }
-    QByteArray jsonRawContent = picFile->read(jsonStreamLength);
+    QByteArray jsonRawContent = picStream->read(jsonStreamLength);
     jsonStr = getSnapmaticJSONString(jsonRawContent);
     parseJsonContent(); // JSON parsing is own function
 
-    if (!picFile->isReadable())
+    if (!picStream->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",4,NOTITL";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return picOk;
     }
-    else if (picFile->read(4) != "TITL")
+    else if (picStream->read(4) != "TITL")
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",4,CTTITL";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return picOk;
     }
-    QByteArray titlRawContent = picFile->read(tideStreamLength);
+    QByteArray titlRawContent = picStream->read(tideStreamLength);
     titlStr = getSnapmaticTIDEString(titlRawContent);
 
-    if (!picFile->isReadable())
+    if (!picStream->isReadable())
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",5,NODESC";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return picOk;
     }
-    else if (picFile->read(4) != "DESC")
+    else if (picStream->read(4) != "DESC")
     {
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",5,CTDESC";
-        picFile->close();
-        picFile->deleteLater();
+        picStream->close();
+        picStream->deleteLater();
         delete picFile;
         return picOk;
     }
-    QByteArray descRawContent = picFile->read(tideStreamLength);
+    QByteArray descRawContent = picStream->read(tideStreamLength);
     descStr = getSnapmaticTIDEString(descRawContent);
 
     parseSnapmaticExportAndSortString();
 
-    picFile->close();
+    picStream->close();
+    picStream->deleteLater();
     picFile->deleteLater();
+    delete picStream;
     delete picFile;
+    if (!writeEnabled) { rawPicContent.clear(); }
     return picOk;
 }
 
@@ -251,12 +268,12 @@ void SnapmaticPicture::parseSnapmaticExportAndSortString()
     }
 }
 
-bool SnapmaticPicture::readingPictureFromFile(const QString &fileName)
+bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool writeEnabled)
 {
     if (fileName != "")
     {
         picFileName = fileName;
-        return readingPicture();
+        return readingPicture(writeEnabled);
     }
     else
     {

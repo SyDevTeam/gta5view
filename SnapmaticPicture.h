@@ -31,8 +31,8 @@ class SnapmaticPicture : public QObject
     Q_OBJECT
 public:
     explicit SnapmaticPicture(const QString &fileName = "", QObject *parent = 0);
-    bool readingPictureFromFile(const QString &fileName);
-    bool readingPicture();
+    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = false);
+    bool readingPicture(bool writeEnabled = false);
     bool isPicOk();
     QImage getPicture();
     QString getLastStep();
@@ -70,15 +70,23 @@ private:
     QString titlStr;
     QString descStr;
     bool picOk;
+    bool editMode;
 
     // PARSE INT
     int snapmaticHeaderLength;
     int snapmaticUsefulLength;
+    int snapmaticFileMaxSize;
     int jpegHeaderLineDifStr;
     int jpegPreHeaderLength;
     int jpegPicStreamLength;
     int jsonStreamLength;
     int tideStreamLength;
+
+    // PARSE EDITOR
+    int jpegStreamEditorBegin;
+    int jsonStreamEditorBegin;
+    int jsonStreamEditorLength;
+    QByteArray rawPicContent;
 
     // JSON
     void parseJsonContent();
