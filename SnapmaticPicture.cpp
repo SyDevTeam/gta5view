@@ -318,6 +318,7 @@ bool SnapmaticPicture::setPicture(const QImage &picture)
             {
                 picByteArray = picByteArray1;
             }
+            Q_UNUSED(saveSuccess)
         }
         int result = snapmaticStream.write(picByteArray);
         if (result != 0)
