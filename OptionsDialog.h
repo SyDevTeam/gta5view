@@ -56,9 +56,11 @@ private:
     QList<QTreeWidgetItem*> playerItems;
     Qt::AspectRatioMode aspectRatio;
     QString currentLanguage;
+    QString currentCFolder;
     QString defaultProfile;
     QString percentString;
     QSettings *settings;
+    bool currentFFolder;
     int contentMode;
     int customQuality;
     int defaultQuality;

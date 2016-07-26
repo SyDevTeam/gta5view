@@ -264,26 +264,32 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="261"/>
+        <location filename="../OptionsDialog.cpp" line="263"/>
+        <location filename="../OptionsDialog.cpp" line="267"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="261"/>
+        <location filename="../OptionsDialog.cpp" line="263"/>
+        <source>The new Custom Folder will initialize after you restart %1.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="267"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="271"/>
+        <location filename="../OptionsDialog.cpp" line="277"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="279"/>
-        <location filename="../OptionsDialog.cpp" line="283"/>
         <location filename="../OptionsDialog.cpp" line="285"/>
+        <location filename="../OptionsDialog.cpp" line="289"/>
+        <location filename="../OptionsDialog.cpp" line="291"/>
         <source>Profile: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1090,6 +1096,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../UserInterface.ui" line="285"/>
+        <location filename="../UserInterface.cpp" line="123"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1187,15 +1194,10 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../UserInterface.ui" line="288"/>
-        <location filename="../OptionsDialog.cpp" line="398"/>
+        <location filename="../OptionsDialog.cpp" line="406"/>
         <location filename="../UserInterface.cpp" line="72"/>
         <location filename="../UserInterface.cpp" line="446"/>
         <source>Select GTA V Folder...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.cpp" line="123"/>
-        <source>Select GTA V &amp;Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

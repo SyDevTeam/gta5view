@@ -240,9 +240,10 @@ void OptionsDialog::applySettings()
     settings->setValue("AspectRatio", aspectRatio);
     settings->endGroup();
 
+    bool forceCustomFolder = ui->cbForceCustomFolder->isChecked();
     settings->beginGroup("dir");
     settings->setValue("dir", ui->txtFolder->text());
-    settings->setValue("force", ui->cbForceCustomFolder->isChecked());
+    settings->setValue("force", forceCustomFolder);
     settings->endGroup();
 
 #if QT_VERSION >= 0x050000
@@ -256,6 +257,11 @@ void OptionsDialog::applySettings()
 #else
     bool languageChanged = ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentLanguage;
 #endif
+
+    if (forceCustomFolder && ui->txtFolder->text() != currentCFolder || forceCustomFolder != currentFFolder && forceCustomFolder)
+    {
+        QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The new Custom Folder will initialize after you restart %1.").arg(GTA5SYNC_APPSTR));
+    }
     if (languageChanged)
     {
         QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The language change will take effect after you restart %1.").arg(GTA5SYNC_APPSTR));
@@ -384,13 +390,14 @@ void OptionsDialog::setupCustomGTAFolder()
     bool ok;
     QString defaultGameFolder = AppEnv::getGameFolder(&ok);
     settings->beginGroup("dir");
-    QString customGameFolder = settings->value("dir", "").toString();
-    if (customGameFolder == "" && ok)
+    currentCFolder = settings->value("dir", "").toString();
+    currentFFolder = settings->value("force", false).toBool();
+    if (currentCFolder == "" && ok)
     {
-        customGameFolder = defaultGameFolder;
+        currentCFolder = defaultGameFolder;
     }
-    ui->txtFolder->setText(customGameFolder);
-    ui->cbForceCustomFolder->setChecked(settings->value("force", false).toBool());
+    ui->txtFolder->setText(currentCFolder);
+    ui->cbForceCustomFolder->setChecked(currentFFolder);
     settings->endGroup();
 }
 
