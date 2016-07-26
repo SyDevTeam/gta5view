@@ -57,6 +57,7 @@ private slots:
     void on_actionOptions_triggered();
     void on_action_Import_triggered();
     void on_actionOpen_File_triggered();
+    void on_actionSelect_GTA_Folder_triggered();
     void settingsApplied(int contentMode, QString language);
 
 private:

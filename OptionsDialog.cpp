@@ -18,10 +18,13 @@
 
 #include "OptionsDialog.h"
 #include "ui_OptionsDialog.h"
+#include "StandardPaths.h"
+#include "UserInterface.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QDesktopWidget>
 #include <QApplication>
+#include <QFileDialog>
 #include <QMessageBox>
 #include <QStringList>
 #include <QLocale>
@@ -59,6 +62,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     setupRadioButtons();
     setupDefaultProfile();
     setupPictureSettings();
+    setupCustomGTAFolder();
 }
 
 OptionsDialog::~OptionsDialog()
@@ -236,6 +240,11 @@ void OptionsDialog::applySettings()
     settings->setValue("AspectRatio", aspectRatio);
     settings->endGroup();
 
+    settings->beginGroup("dir");
+    settings->setValue("dir", ui->txtFolder->text());
+    settings->setValue("force", ui->cbForceCustomFolder->isChecked());
+    settings->endGroup();
+
 #if QT_VERSION >= 0x050000
     emit settingsApplied(newContentMode, ui->cbLanguage->currentData().toString());
 #else
@@ -367,5 +376,29 @@ void OptionsDialog::on_cbIgnoreAspectRatio_toggled(bool checked)
     else
     {
         aspectRatio = Qt::KeepAspectRatio;
+    }
+}
+
+void OptionsDialog::setupCustomGTAFolder()
+{
+    bool ok;
+    QString defaultGameFolder = AppEnv::getGameFolder(&ok);
+    settings->beginGroup("dir");
+    QString customGameFolder = settings->value("dir", "").toString();
+    if (customGameFolder == "" && ok)
+    {
+        customGameFolder = defaultGameFolder;
+    }
+    ui->txtFolder->setText(customGameFolder);
+    ui->cbForceCustomFolder->setChecked(settings->value("force", false).toBool());
+    settings->endGroup();
+}
+
+void OptionsDialog::on_cmdExploreFolder_clicked()
+{
+    QString GTAV_Folder = QFileDialog::getExistingDirectory(this, UserInterface::tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+    if (QFileInfo(GTAV_Folder).exists())
+    {
+        ui->txtFolder->setText(GTAV_Folder);
     }
 }

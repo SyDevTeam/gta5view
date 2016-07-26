@@ -45,6 +45,7 @@ private slots:
     void on_cbPicCustomQuality_toggled(bool checked);
     void on_hsPicQuality_valueChanged(int value);
     void on_cbIgnoreAspectRatio_toggled(bool checked);
+    void on_cmdExploreFolder_clicked();
 
 signals:
     void settingsApplied(int contentMode, QString language);
@@ -68,6 +69,7 @@ private:
     void setupRadioButtons();
     void setupDefaultProfile();
     void setupPictureSettings();
+    void setupCustomGTAFolder();
     void applySettings();
 };
 

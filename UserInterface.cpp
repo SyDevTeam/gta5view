@@ -120,7 +120,7 @@ void UserInterface::setupProfileUi()
 {
     if (GTAV_Profiles.length() == 0)
     {
-        QPushButton *changeDirBtn = new QPushButton(tr("Select GTA V &Folder..."), ui->swSelection);
+        QPushButton *changeDirBtn = new QPushButton(tr("Select &GTA V Folder..."), ui->swSelection);
         changeDirBtn->setObjectName("cmdChangeDir");
         changeDirBtn->setMinimumSize(0, 40);
         changeDirBtn->setAutoDefault(true);
@@ -145,13 +145,7 @@ void UserInterface::setupProfileUi()
 
 void UserInterface::changeFolder_clicked()
 {
-    GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-    if (QFileInfo(GTAV_Folder).exists())
-    {
-        QDir::setCurrent(GTAV_Folder);
-        AppEnv::setGameFolder(GTAV_Folder);
-        on_cmdReload_clicked();
-    }
+    on_actionSelect_GTA_Folder_triggered();
 }
 
 void UserInterface::on_cmdReload_clicked()
@@ -444,5 +438,17 @@ void UserInterface::settingsApplied(int _contentMode, QString _language)
     if (profileOpen)
     {
         profileUI->settingsApplied(contentMode, language);
+    }
+}
+
+void UserInterface::on_actionSelect_GTA_Folder_triggered()
+{
+    QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+    if (QFileInfo(GTAV_Folder_Temp).exists())
+    {
+        GTAV_Folder = GTAV_Folder_Temp;
+        QDir::setCurrent(GTAV_Folder);
+        AppEnv::setGameFolder(GTAV_Folder);
+        on_cmdReload_clicked();
     }
 }

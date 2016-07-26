@@ -24,7 +24,7 @@
      </property>
      <widget class="QWidget" name="tabProfile">
       <attribute name="title">
-       <string>Profile</string>
+       <string>Profiles</string>
       </attribute>
       <layout class="QVBoxLayout" name="vlProfile">
        <item>
@@ -68,6 +68,36 @@
          <layout class="QVBoxLayout" name="vlDefaultProfile">
           <item>
            <widget class="QComboBox" name="cbProfiles"/>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbDefaultFolder">
+         <property name="title">
+          <string>Custom GTA V Folder</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QCheckBox" name="cbForceCustomFolder">
+            <property name="text">
+             <string>Force using Custom Folder</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hlDefaultFolder">
+            <item>
+             <widget class="QLineEdit" name="txtFolder"/>
+            </item>
+            <item>
+             <widget class="QToolButton" name="cmdExploreFolder">
+              <property name="text">
+               <string>...</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
           </item>
          </layout>
         </widget>

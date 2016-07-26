@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
@@ -9,7 +9,31 @@
         <translation>Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="65"/>
+        <location filename="../AboutDialog.ui" line="29"/>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+&lt;br/&gt;
+A project for viewing and sync Grand Theft Auto V Snapmatic&lt;br/&gt;
+Pictures and Savegames&lt;br/&gt;
+&lt;br/&gt;
+Project version: %1&lt;br/&gt;
+Project build: %4, %5&lt;br/&gt;
+Compiled with Qt %2&lt;br/&gt;
+Running with Qt %3&lt;br/&gt;
+&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+&lt;br/&gt;
+Ein Projekt zum ansehen und synchronisieren von&lt;br/&gt;
+Grand Theft Auto V Snapmatic Bilder und Spielständen&lt;br/&gt;
+&lt;br/&gt;
+Projektversion: %1&lt;br/&gt;
+Projektbau: %4, %5&lt;br/&gt;
+Gebaut mit Qt %2&lt;br/&gt;
+Läuft auf Qt %3&lt;br/&gt;
+&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+    </message>
+    <message>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;
@@ -20,7 +44,7 @@ Compiled with Qt %2&lt;br/&gt;
 Running with Qt %3&lt;br/&gt;
 &lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 Ein Projekt zum ansehen und synchronisieren von Grand Theft Auto 5 Snapmatic Bilder und Spielständen&lt;br/&gt;
 &lt;br/&gt;
@@ -32,7 +56,7 @@ Läuft auf Qt %3&lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="109"/>
+        <location filename="../AboutDialog.ui" line="70"/>
         <source>&amp;Close</source>
         <translation>S&amp;chließen</translation>
     </message>
@@ -140,9 +164,8 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>gta5sync - Einstellungen</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="27"/>
         <source>Profile</source>
-        <translation>Profil</translation>
+        <translation type="vanished">Profil</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="33"/>
@@ -170,12 +193,12 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Standardprofil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="92"/>
+        <location filename="../OptionsDialog.ui" line="122"/>
         <source>Pictures</source>
         <translation>Bilder</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="98"/>
+        <location filename="../OptionsDialog.ui" line="128"/>
         <source>Export Size</source>
         <translation>Export Größe</translation>
     </message>
@@ -188,7 +211,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Desktop Größe: %1x%2</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="114"/>
+        <location filename="../OptionsDialog.ui" line="144"/>
         <source>Screen Resolution: %1x%2</source>
         <translation>Bildschirmauflösung: %1x%2</translation>
     </message>
@@ -197,85 +220,105 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Eigene Größe</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="104"/>
+        <location filename="../OptionsDialog.ui" line="27"/>
+        <source>Profiles</source>
+        <translation>Profile</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="78"/>
+        <source>Custom GTA V Folder</source>
+        <translation>Eigener GTA V Ordner</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="84"/>
+        <source>Force using Custom Folder</source>
+        <translation>Nutzung vom eigenen Ordner erzwingen</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="96"/>
+        <source>...</source>
+        <translation>...</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="134"/>
         <source>Default: %1x%2</source>
         <translation>Standard: %1x%2</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="123"/>
-        <location filename="../OptionsDialog.ui" line="133"/>
+        <location filename="../OptionsDialog.ui" line="153"/>
+        <location filename="../OptionsDialog.ui" line="163"/>
         <source>Custom Size:</source>
         <translation>Eigene Größe:</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="159"/>
+        <location filename="../OptionsDialog.ui" line="189"/>
         <source>x</source>
         <translation>x</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="199"/>
+        <location filename="../OptionsDialog.ui" line="229"/>
         <source>Ignore Aspect Ratio</source>
         <translation>Seitenverhältnis ignorieren</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="211"/>
+        <location filename="../OptionsDialog.ui" line="241"/>
         <source>Export Quality</source>
         <translation>Export Qualität</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="217"/>
+        <location filename="../OptionsDialog.ui" line="247"/>
         <source>Enable Custom Quality</source>
         <translation>Eigene Export Qualität benutzen</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="229"/>
+        <location filename="../OptionsDialog.ui" line="259"/>
         <source>Quality:</source>
         <translation>Qualität:</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="258"/>
+        <location filename="../OptionsDialog.ui" line="288"/>
         <source>%1%</source>
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="287"/>
+        <location filename="../OptionsDialog.ui" line="317"/>
         <source>Players</source>
         <translation>Spieler</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="327"/>
+        <location filename="../OptionsDialog.ui" line="357"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="332"/>
+        <location filename="../OptionsDialog.ui" line="362"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="341"/>
-        <location filename="../OptionsDialog.ui" line="347"/>
+        <location filename="../OptionsDialog.ui" line="371"/>
+        <location filename="../OptionsDialog.ui" line="377"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="373"/>
+        <location filename="../OptionsDialog.ui" line="403"/>
         <source>Sync</source>
         <translation>Sync</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="379"/>
+        <location filename="../OptionsDialog.ui" line="409"/>
         <source>Sync is not implemented at current time</source>
         <translation>Sync wurde bisher nicht implementiert</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="411"/>
+        <location filename="../OptionsDialog.ui" line="441"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="418"/>
+        <location filename="../OptionsDialog.ui" line="448"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>Abbre&amp;chen</translation>
@@ -286,38 +329,38 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">%1 (%2 wenn verfügbar) [sys]</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="105"/>
+        <location filename="../OptionsDialog.cpp" line="109"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="105"/>
+        <location filename="../OptionsDialog.cpp" line="109"/>
         <source>%1 (%2 if available)</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
         <translation>%1 (%2 wenn verfügbar)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="252"/>
+        <location filename="../OptionsDialog.cpp" line="261"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="252"/>
+        <location filename="../OptionsDialog.cpp" line="261"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation>Die Änderung der Sprache nimmt Effekt sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="262"/>
+        <location filename="../OptionsDialog.cpp" line="271"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Kein Profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="270"/>
-        <location filename="../OptionsDialog.cpp" line="274"/>
-        <location filename="../OptionsDialog.cpp" line="276"/>
+        <location filename="../OptionsDialog.cpp" line="279"/>
+        <location filename="../OptionsDialog.cpp" line="283"/>
+        <location filename="../OptionsDialog.cpp" line="285"/>
         <source>Profile: %1</source>
         <translation>Profil: %1</translation>
     </message>
@@ -636,25 +679,25 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="360"/>
-        <location filename="../UserInterface.cpp" line="312"/>
+        <location filename="../UserInterface.cpp" line="306"/>
         <source>All profile files (SGTA* PGTA*)</source>
         <translation>Alle Profildateien (SGTA* PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="361"/>
-        <location filename="../UserInterface.cpp" line="313"/>
+        <location filename="../UserInterface.cpp" line="307"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Spielstanddateien (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="362"/>
-        <location filename="../UserInterface.cpp" line="314"/>
+        <location filename="../UserInterface.cpp" line="308"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Snapmatic Bilder (PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="363"/>
-        <location filename="../UserInterface.cpp" line="315"/>
+        <location filename="../UserInterface.cpp" line="309"/>
         <source>All files (**)</source>
         <translation>Alle Dateien (**)</translation>
     </message>
@@ -669,13 +712,13 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="430"/>
-        <location filename="../UserInterface.cpp" line="355"/>
+        <location filename="../UserInterface.cpp" line="349"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Fehler beim Lesen vom Snapmatic Bild</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="447"/>
-        <location filename="../UserInterface.cpp" line="371"/>
+        <location filename="../UserInterface.cpp" line="365"/>
         <source>Failed to read Savegame file</source>
         <translation>Fehler beim Lesen von Spielstanddatei</translation>
     </message>
@@ -692,7 +735,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     <message>
         <location filename="../ProfileInterface.cpp" line="403"/>
         <location filename="../ProfileInterface.cpp" line="482"/>
-        <location filename="../UserInterface.cpp" line="403"/>
+        <location filename="../UserInterface.cpp" line="397"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
@@ -854,6 +897,19 @@ Exportieren als:</translation>
         <location filename="../ExportThread.cpp" line="148"/>
         <source>Export file %1 of %2 files</source>
         <translation>Exportiere Datei %1 von %2 Dateien</translation>
+    </message>
+</context>
+<context>
+    <name>QApplication</name>
+    <message>
+        <location filename="../main.cpp" line="65"/>
+        <source>Font</source>
+        <translation>Schrift</translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="65"/>
+        <source>Selected Font: %1</source>
+        <translation>Ausgewähle Schrift: %1</translation>
     </message>
 </context>
 <context>
@@ -1274,7 +1330,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="221"/>
+        <location filename="../UserInterface.ui" line="224"/>
         <source>Ctrl+A</source>
         <translation>Strg+A</translation>
     </message>
@@ -1287,7 +1343,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Optionen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="274"/>
+        <location filename="../UserInterface.ui" line="280"/>
         <source>Ctrl+O</source>
         <translation>Strg+O</translation>
     </message>
@@ -1296,7 +1352,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="210"/>
+        <location filename="../UserInterface.ui" line="212"/>
         <source>Ctrl+S</source>
         <translation>Strg+S</translation>
     </message>
@@ -1313,7 +1369,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Auswahl exportieren</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="243"/>
+        <location filename="../UserInterface.ui" line="248"/>
         <source>Ctrl+E</source>
         <translation>Strg+E</translation>
     </message>
@@ -1322,22 +1378,22 @@ Exportieren als:</translation>
         <translation type="obsolete">Auswahl löschen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="232"/>
+        <location filename="../UserInterface.ui" line="236"/>
         <source>Ctrl+D</source>
         <translation>Strg+D</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="188"/>
+        <location filename="../UserInterface.ui" line="189"/>
         <source>Exit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="185"/>
+        <location filename="../UserInterface.ui" line="186"/>
         <source>&amp;Exit</source>
         <translation>B&amp;eenden</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="191"/>
+        <location filename="../UserInterface.ui" line="192"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
@@ -1352,44 +1408,54 @@ Exportieren als:</translation>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="145"/>
+        <location filename="../UserInterface.ui" line="146"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="151"/>
+        <location filename="../UserInterface.ui" line="152"/>
         <source>&amp;Edit</source>
         <translation>Bearb&amp;eiten</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="157"/>
+        <location filename="../UserInterface.ui" line="158"/>
         <source>&amp;Profile</source>
         <translation>&amp;Profil</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="173"/>
+        <location filename="../UserInterface.ui" line="174"/>
         <source>&amp;About gta5sync</source>
         <translation>&amp;Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="196"/>
+        <location filename="../UserInterface.ui" line="197"/>
         <source>Close &amp;Profile</source>
         <translation>&amp;Profil schließen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="199"/>
+        <location filename="../UserInterface.ui" line="200"/>
         <source>Ctrl+End</source>
         <translation>Strg+Ende</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="251"/>
+        <location filename="../UserInterface.ui" line="256"/>
         <source>Ctrl+Del</source>
         <translation>Strg+Entf</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="271"/>
+        <location filename="../UserInterface.ui" line="277"/>
         <source>&amp;Open File...</source>
         <translation>Datei &amp;öffnen...</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="285"/>
+        <source>Select &amp;GTA V Folder...</source>
+        <translation>Wähle &amp;GTA V Ordner...</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="291"/>
+        <source>Ctrl+G</source>
+        <translation>Strg+G</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="110"/>
@@ -1401,7 +1467,7 @@ Exportieren als:</translation>
         <translation type="obsolete">&amp;Profil auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="176"/>
+        <location filename="../UserInterface.ui" line="177"/>
         <source>Ctrl+P</source>
         <translation>Strg+P</translation>
     </message>
@@ -1410,27 +1476,27 @@ Exportieren als:</translation>
         <translation type="obsolete">&amp;Optionen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="207"/>
+        <location filename="../UserInterface.ui" line="209"/>
         <source>&amp;Settings</source>
         <translation>Ein&amp;stellungen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="218"/>
+        <location filename="../UserInterface.ui" line="221"/>
         <source>Select &amp;All</source>
         <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="229"/>
+        <location filename="../UserInterface.ui" line="233"/>
         <source>&amp;Deselect All</source>
         <translation>Alles a&amp;bwählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="240"/>
+        <location filename="../UserInterface.ui" line="245"/>
         <source>&amp;Export selected...</source>
         <translation>Auswahl &amp;exportieren...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="248"/>
+        <location filename="../UserInterface.ui" line="253"/>
         <source>&amp;Remove selected</source>
         <translation>Auswahl entfe&amp;rnen</translation>
     </message>
@@ -1439,12 +1505,12 @@ Exportieren als:</translation>
         <translation type="obsolete">Strg+R</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="259"/>
+        <location filename="../UserInterface.ui" line="265"/>
         <source>&amp;Import files...</source>
         <translation>Dateien &amp;importieren...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="262"/>
+        <location filename="../UserInterface.ui" line="268"/>
         <source>Ctrl+I</source>
         <translation>Strg+I</translation>
     </message>
@@ -1454,13 +1520,15 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="59"/>
-        <location filename="../UserInterface.cpp" line="199"/>
+        <location filename="../UserInterface.cpp" line="193"/>
         <source>Select Profile</source>
         <translation>Profil auswählen</translation>
     </message>
     <message>
+        <location filename="../UserInterface.ui" line="288"/>
+        <location filename="../OptionsDialog.cpp" line="398"/>
         <location filename="../UserInterface.cpp" line="72"/>
-        <location filename="../UserInterface.cpp" line="148"/>
+        <location filename="../UserInterface.cpp" line="446"/>
         <source>Select GTA V Folder...</source>
         <translation>Wähle GTA V Ordner...</translation>
     </message>
@@ -1470,7 +1538,7 @@ Exportieren als:</translation>
         <translation>Wähle GTA V &amp;Ordner...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="309"/>
+        <location filename="../UserInterface.cpp" line="303"/>
         <source>Open File...</source>
         <translation>Datei öffnen...</translation>
     </message>
@@ -1479,15 +1547,15 @@ Exportieren als:</translation>
         <translation type="obsolete">Importieren</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="355"/>
-        <location filename="../UserInterface.cpp" line="371"/>
-        <location filename="../UserInterface.cpp" line="398"/>
-        <location filename="../UserInterface.cpp" line="403"/>
+        <location filename="../UserInterface.cpp" line="349"/>
+        <location filename="../UserInterface.cpp" line="365"/>
+        <location filename="../UserInterface.cpp" line="392"/>
+        <location filename="../UserInterface.cpp" line="397"/>
         <source>Open File</source>
         <translation>Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="398"/>
+        <location filename="../UserInterface.cpp" line="392"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>Kann nicht %1 öffnen weil Dateiformat nicht gültig ist</translation>
     </message>

@@ -128,13 +128,14 @@
      <x>0</x>
      <y>0</y>
      <width>625</width>
-     <height>25</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="actionSelect_GTA_Folder"/>
     <addaction name="actionOpen_File"/>
     <addaction name="actionSelect_profile"/>
     <addaction name="separator"/>
@@ -201,7 +202,8 @@
   </action>
   <action name="actionOptions">
    <property name="icon">
-    <iconset theme="preferences-system"/>
+    <iconset theme="preferences-system">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Settings</string>
@@ -212,7 +214,8 @@
   </action>
   <action name="actionSelect_all">
    <property name="icon">
-    <iconset theme="edit-select-all"/>
+    <iconset theme="edit-select-all">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Select &amp;All</string>
@@ -223,7 +226,8 @@
   </action>
   <action name="actionDeselect_all">
    <property name="icon">
-    <iconset theme="edit-clear"/>
+    <iconset theme="edit-clear">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Deselect All</string>
@@ -234,7 +238,8 @@
   </action>
   <action name="actionExport_selected">
    <property name="icon">
-    <iconset theme="document-save"/>
+    <iconset theme="document-save">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Export selected...</string>
@@ -253,7 +258,8 @@
   </action>
   <action name="action_Import">
    <property name="icon">
-    <iconset theme="document-open"/>
+    <iconset theme="document-open">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>&amp;Import files...</string>
@@ -272,6 +278,17 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+O</string>
+   </property>
+  </action>
+  <action name="actionSelect_GTA_Folder">
+   <property name="text">
+    <string>Select &amp;GTA V Folder...</string>
+   </property>
+   <property name="toolTip">
+    <string>Select GTA V Folder...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+G</string>
    </property>
   </action>
  </widget>
