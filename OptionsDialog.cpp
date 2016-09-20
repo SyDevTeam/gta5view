@@ -258,7 +258,7 @@ void OptionsDialog::applySettings()
     bool languageChanged = ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentLanguage;
 #endif
 
-    if (forceCustomFolder && ui->txtFolder->text() != currentCFolder || forceCustomFolder != currentFFolder && forceCustomFolder)
+    if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder))
     {
         QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The new Custom Folder will initialize after you restart %1.").arg(GTA5SYNC_APPSTR));
     }
