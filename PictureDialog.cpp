@@ -287,7 +287,7 @@ void PictureDialog::playerNameUpdated()
 
 void PictureDialog::exportSnapmaticPicture()
 {
-    if (rqfullscreen && fullscreenWidget != 0)
+    if (rqfullscreen && fullscreenWidget)
     {
         PictureExport::exportPicture(fullscreenWidget, smpic);
     }
@@ -299,7 +299,7 @@ void PictureDialog::exportSnapmaticPicture()
 
 void PictureDialog::copySnapmaticPicture()
 {
-    if (rqfullscreen && fullscreenWidget != 0)
+    if (rqfullscreen && fullscreenWidget)
     {
         PictureCopy::copyPicture(fullscreenWidget, picPath);
     }
@@ -331,6 +331,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         pictureWidget->setFocus();
         pictureWidget->exec();
 
+        fullscreenWidget = 0;
         delete pictureWidget;
     }
 }
