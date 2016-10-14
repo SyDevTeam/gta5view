@@ -110,7 +110,14 @@ DISTFILES += res/app.rc \
     lang/qtbase_ru.qm \
     lang/README.txt \
     lang/gta5sync_ru.ts \
-    lang/qt_ru.qm
+    lang/qt_ru.qm \
+    android/AndroidManifest.xml \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/gradlew \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew.bat
 
 INCLUDEPATH += ./uimod
 
@@ -148,3 +155,5 @@ unix: !macx: pixmaps.path = $$(INSTALL_PATH)/share/pixmaps
 unix: !macx: pixmaps.files = $$PWD/res/gta5sync.xpm
 unix: !macx: target.path = $$(INSTALL_PATH)/bin
 unix: !macx: INSTALLS += target pixmaps appfiles
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

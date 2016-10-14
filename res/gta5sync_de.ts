@@ -971,17 +971,24 @@ Exportieren als:</translation>
         <translation>Spielstand Widget</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="67"/>
         <source>The Third Way (100%) - 00/00/00 00:00:00</source>
-        <translation>The Third Way (100%) - 00/00/00 00:00:00</translation>
+        <translation type="vanished">The Third Way (100%) - 00/00/00 00:00:00</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="80"/>
+        <location filename="../SavegameWidget.ui" line="67"/>
+        <location filename="../SavegameWidget.cpp" line="57"/>
+        <source>Savegame %1
+%2</source>
+        <translation>Spielstand %1
+%2</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.ui" line="81"/>
         <source>View</source>
         <translation>Ansehen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="90"/>
+        <location filename="../SavegameWidget.ui" line="91"/>
         <source>Export</source>
         <translation>Exportieren</translation>
     </message>
@@ -990,61 +997,61 @@ Exportieren als:</translation>
         <translation type="obsolete">Kopieren</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="103"/>
+        <location filename="../SavegameWidget.ui" line="104"/>
         <source>Delete</source>
         <translation>Löschen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="100"/>
-        <location filename="../SavegameWidget.cpp" line="101"/>
-        <location filename="../SavegameWidget.cpp" line="114"/>
+        <location filename="../SavegameWidget.ui" line="101"/>
+        <location filename="../SavegameWidget.cpp" line="113"/>
+        <location filename="../SavegameWidget.cpp" line="126"/>
         <source>Delete savegame</source>
         <translation>Savegame löschen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="49"/>
+        <location filename="../SavegameWidget.cpp" line="50"/>
         <source>Export Savegame...</source>
         <translation>Spielstand exportieren...</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="101"/>
+        <location filename="../SavegameWidget.cpp" line="113"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Bist du sicher %1 von deinen Spielständen zu löschen?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="114"/>
+        <location filename="../SavegameWidget.cpp" line="126"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Fehlgeschlagen beim Löschen %1 von deinen Spielständen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="178"/>
+        <location filename="../SavegameWidget.cpp" line="190"/>
         <source>&amp;View</source>
         <translation>A&amp;nsehen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="180"/>
+        <location filename="../SavegameWidget.cpp" line="192"/>
         <source>&amp;Remove</source>
         <translation>Entfe&amp;rnen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="184"/>
-        <location filename="../SavegameWidget.cpp" line="192"/>
+        <location filename="../SavegameWidget.cpp" line="196"/>
+        <location filename="../SavegameWidget.cpp" line="204"/>
         <source>&amp;Select</source>
         <translation>Au&amp;swählen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="185"/>
+        <location filename="../SavegameWidget.cpp" line="197"/>
         <source>&amp;Deselect</source>
         <translation>A&amp;bwählen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="186"/>
-        <location filename="../SavegameWidget.cpp" line="193"/>
+        <location filename="../SavegameWidget.cpp" line="198"/>
+        <location filename="../SavegameWidget.cpp" line="205"/>
         <source>Select &amp;All</source>
         <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="187"/>
+        <location filename="../SavegameWidget.cpp" line="199"/>
         <source>&amp;Deselect All</source>
         <translation>Alles a&amp;bwählen</translation>
     </message>
@@ -1073,18 +1080,18 @@ Exportieren als:</translation>
         <translation type="obsolete">Umschalt+S</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="77"/>
+        <location filename="../SavegameWidget.ui" line="78"/>
         <source>View savegame</source>
         <translation>Spielstand ansehen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="87"/>
+        <location filename="../SavegameWidget.ui" line="88"/>
         <source>Copy savegame</source>
         <translation>Spielstand kopieren</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="48"/>
-        <location filename="../SavegameWidget.cpp" line="179"/>
+        <location filename="../SavegameWidget.cpp" line="191"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
@@ -1213,44 +1220,44 @@ Exportieren als:</translation>
         <translation type="obsolete">Exportiere als &amp;GTA Snapmatic</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="195"/>
+        <location filename="../SnapmaticWidget.cpp" line="194"/>
         <source>Export as &amp;JPG picture...</source>
         <translation>Exportiere als &amp;JPG Bild...</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="196"/>
+        <location filename="../SnapmaticWidget.cpp" line="195"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation>Exportiere als &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="197"/>
+        <location filename="../SnapmaticWidget.cpp" line="196"/>
         <source>&amp;View</source>
         <translation>A&amp;nsehen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="199"/>
+        <location filename="../SnapmaticWidget.cpp" line="198"/>
         <source>&amp;Remove</source>
         <translation>Entfe&amp;rnen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="203"/>
-        <location filename="../SnapmaticWidget.cpp" line="211"/>
+        <location filename="../SnapmaticWidget.cpp" line="202"/>
+        <location filename="../SnapmaticWidget.cpp" line="210"/>
         <source>&amp;Select</source>
         <translation>Au&amp;swählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="204"/>
+        <location filename="../SnapmaticWidget.cpp" line="203"/>
         <source>&amp;Deselect</source>
         <translation>A&amp;bwählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="205"/>
-        <location filename="../SnapmaticWidget.cpp" line="212"/>
+        <location filename="../SnapmaticWidget.cpp" line="204"/>
+        <location filename="../SnapmaticWidget.cpp" line="211"/>
         <source>Select &amp;All</source>
         <translation>Alles &amp;auswählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="206"/>
+        <location filename="../SnapmaticWidget.cpp" line="205"/>
         <source>&amp;Deselect All</source>
         <translation>Alles a&amp;bwählen</translation>
     </message>

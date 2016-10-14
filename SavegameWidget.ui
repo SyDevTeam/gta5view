@@ -64,7 +64,8 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>The Third Way (100%) - 00/00/00 00:00:00</string>
+         <string>Savegame %1
+%2</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

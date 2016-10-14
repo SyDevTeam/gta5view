@@ -760,22 +760,28 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Виджет сохранений</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="67"/>
         <source>The Third Way (100%) - 00/00/00 00:00:00</source>
-        <translation>Третий путь (100%) - 00/00/00 00:00:00</translation>
+        <translation type="vanished">Третий путь (100%) - 00/00/00 00:00:00</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="77"/>
+        <location filename="../SavegameWidget.ui" line="67"/>
+        <location filename="../SavegameWidget.cpp" line="57"/>
+        <source>Savegame %1
+%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.ui" line="78"/>
         <source>View savegame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="80"/>
+        <location filename="../SavegameWidget.ui" line="81"/>
         <source>View</source>
         <translation>Просмотр</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="90"/>
+        <location filename="../SavegameWidget.ui" line="91"/>
         <source>Export</source>
         <translation type="unfinished">Экспорт</translation>
     </message>
@@ -784,72 +790,72 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Копировать</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="103"/>
+        <location filename="../SavegameWidget.ui" line="104"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="100"/>
-        <location filename="../SavegameWidget.cpp" line="101"/>
-        <location filename="../SavegameWidget.cpp" line="114"/>
+        <location filename="../SavegameWidget.ui" line="101"/>
+        <location filename="../SavegameWidget.cpp" line="113"/>
+        <location filename="../SavegameWidget.cpp" line="126"/>
         <source>Delete savegame</source>
         <translation>Удалить сохранение</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="49"/>
+        <location filename="../SavegameWidget.cpp" line="50"/>
         <source>Export Savegame...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="101"/>
+        <location filename="../SavegameWidget.cpp" line="113"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Вы уверены, что хотите удалить сохранение %1?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="114"/>
+        <location filename="../SavegameWidget.cpp" line="126"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Не удалось удалить сохранение %1</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="178"/>
+        <location filename="../SavegameWidget.cpp" line="190"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="180"/>
+        <location filename="../SavegameWidget.cpp" line="192"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="184"/>
-        <location filename="../SavegameWidget.cpp" line="192"/>
+        <location filename="../SavegameWidget.cpp" line="196"/>
+        <location filename="../SavegameWidget.cpp" line="204"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="185"/>
+        <location filename="../SavegameWidget.cpp" line="197"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="186"/>
-        <location filename="../SavegameWidget.cpp" line="193"/>
+        <location filename="../SavegameWidget.cpp" line="198"/>
+        <location filename="../SavegameWidget.cpp" line="205"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="187"/>
+        <location filename="../SavegameWidget.cpp" line="199"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="87"/>
+        <location filename="../SavegameWidget.ui" line="88"/>
         <source>Copy savegame</source>
         <translation>Копировать сохранение</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="48"/>
-        <location filename="../SavegameWidget.cpp" line="179"/>
+        <location filename="../SavegameWidget.cpp" line="191"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
@@ -964,44 +970,44 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="195"/>
+        <location filename="../SnapmaticWidget.cpp" line="194"/>
         <source>Export as &amp;JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="196"/>
+        <location filename="../SnapmaticWidget.cpp" line="195"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="197"/>
+        <location filename="../SnapmaticWidget.cpp" line="196"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="199"/>
+        <location filename="../SnapmaticWidget.cpp" line="198"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="203"/>
-        <location filename="../SnapmaticWidget.cpp" line="211"/>
+        <location filename="../SnapmaticWidget.cpp" line="202"/>
+        <location filename="../SnapmaticWidget.cpp" line="210"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="204"/>
+        <location filename="../SnapmaticWidget.cpp" line="203"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="205"/>
-        <location filename="../SnapmaticWidget.cpp" line="212"/>
+        <location filename="../SnapmaticWidget.cpp" line="204"/>
+        <location filename="../SnapmaticWidget.cpp" line="211"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="206"/>
+        <location filename="../SnapmaticWidget.cpp" line="205"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>

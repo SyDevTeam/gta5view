@@ -66,6 +66,7 @@ private:
     SavegameData *sgdata;
     QColor highlightBackColor;
     QColor highlightTextColor;
+    QString labelStr;
     QString sgdPath;
     QString sgdStr;
 

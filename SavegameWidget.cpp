@@ -32,6 +32,7 @@
 #include <QColor>
 #include <QBrush>
 #include <QTimer>
+#include <QDebug>
 #include <QFile>
 #include <QMenu>
 #include <QUrl>
@@ -53,6 +54,7 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     highlightBackColor = palette.highlight().color();
     highlightTextColor = palette.highlightedText().color();
 
+    labelStr = tr("Savegame %1\n%2");
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
@@ -85,7 +87,17 @@ bool SavegameWidget::eventFilter(QObject *obj, QEvent *ev)
 
 void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePath)
 {
-    ui->labSavegameStr->setText(savegame->getSavegameStr());
+    bool validNumber;
+    QString fileName = QFileInfo(savegame->getSavegameFileName()).fileName();
+    int savegameNumber = QString(fileName).remove(0,5).toInt(&validNumber) + 1;
+    if (!validNumber)
+    {
+        ui->labSavegameStr->setText(savegame->getSavegameStr());
+    }
+    else
+    {
+        ui->labSavegameStr->setText(labelStr.arg(QString::number(savegameNumber), savegame->getSavegameStr()));
+    }
     sgdStr = savegame->getSavegameStr();
     sgdPath = savegamePath;
     sgdata = savegame;
