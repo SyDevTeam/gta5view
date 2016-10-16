@@ -64,8 +64,7 @@
          </sizepolicy>
         </property>
         <property name="text">
-         <string>Savegame %1
-%2</string>
+         <string>SAVE - %1&lt;br&gt;%2</string>
         </property>
         <property name="wordWrap">
          <bool>true</bool>

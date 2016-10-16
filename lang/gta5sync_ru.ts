@@ -765,23 +765,21 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="67"/>
-        <location filename="../SavegameWidget.cpp" line="57"/>
-        <source>Savegame %1
-%2</source>
+        <source>SAVE - %1&lt;br&gt;%2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="78"/>
+        <location filename="../SavegameWidget.ui" line="77"/>
         <source>View savegame</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="81"/>
+        <location filename="../SavegameWidget.ui" line="80"/>
         <source>View</source>
         <translation>Просмотр</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="91"/>
+        <location filename="../SavegameWidget.ui" line="90"/>
         <source>Export</source>
         <translation type="unfinished">Экспорт</translation>
     </message>
@@ -790,14 +788,14 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Копировать</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="104"/>
+        <location filename="../SavegameWidget.ui" line="103"/>
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="101"/>
-        <location filename="../SavegameWidget.cpp" line="113"/>
-        <location filename="../SavegameWidget.cpp" line="126"/>
+        <location filename="../SavegameWidget.ui" line="100"/>
+        <location filename="../SavegameWidget.cpp" line="130"/>
+        <location filename="../SavegameWidget.cpp" line="143"/>
         <source>Delete savegame</source>
         <translation>Удалить сохранение</translation>
     </message>
@@ -807,55 +805,76 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="113"/>
+        <location filename="../SavegameWidget.cpp" line="57"/>
+        <source>SAVE %3 - %1&lt;br&gt;%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="92"/>
+        <location filename="../SavegameWidget.cpp" line="93"/>
+        <source>WRONG FORMAT</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="107"/>
+        <source>AUTO</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="116"/>
+        <source>UNKNOWN</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="130"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Вы уверены, что хотите удалить сохранение %1?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="126"/>
+        <location filename="../SavegameWidget.cpp" line="143"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Не удалось удалить сохранение %1</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="190"/>
+        <location filename="../SavegameWidget.cpp" line="207"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="192"/>
+        <location filename="../SavegameWidget.cpp" line="209"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="196"/>
-        <location filename="../SavegameWidget.cpp" line="204"/>
+        <location filename="../SavegameWidget.cpp" line="213"/>
+        <location filename="../SavegameWidget.cpp" line="221"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="197"/>
+        <location filename="../SavegameWidget.cpp" line="214"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="198"/>
-        <location filename="../SavegameWidget.cpp" line="205"/>
+        <location filename="../SavegameWidget.cpp" line="215"/>
+        <location filename="../SavegameWidget.cpp" line="222"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="199"/>
+        <location filename="../SavegameWidget.cpp" line="216"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="88"/>
+        <location filename="../SavegameWidget.ui" line="87"/>
         <source>Copy savegame</source>
         <translation>Копировать сохранение</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="48"/>
-        <location filename="../SavegameWidget.cpp" line="191"/>
+        <location filename="../SavegameWidget.cpp" line="208"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>

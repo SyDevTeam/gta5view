@@ -54,7 +54,7 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     highlightBackColor = palette.highlight().color();
     highlightTextColor = palette.highlightedText().color();
 
-    labelStr = tr("Savegame %1\n%2");
+    labelStr = tr("SAVE %3 - %1<br>%2");
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
@@ -87,18 +87,35 @@ bool SavegameWidget::eventFilter(QObject *obj, QEvent *ev)
 
 void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePath)
 {
+    // BETA CODE
     bool validNumber;
+    QString savegameName = tr("WRONG FORMAT");
+    QString savegameDate = tr("WRONG FORMAT");
+    QString savegameString = savegame->getSavegameStr();
     QString fileName = QFileInfo(savegame->getSavegameFileName()).fileName();
-    int savegameNumber = QString(fileName).remove(0,5).toInt(&validNumber) + 1;
-    if (!validNumber)
+    QStringList savegameNDL = QString(savegameString).split(" - ");
+    if (savegameNDL.length() >= 2)
     {
-        ui->labSavegameStr->setText(savegame->getSavegameStr());
+        savegameDate = savegameNDL.at(savegameNDL.length() - 1);
+        savegameName = QString(savegameString).remove(savegameString.length() - savegameDate.length() - 3, savegameDate.length() + 3);
+    }
+    int savegameNumber = QString(fileName).remove(0,5).toInt(&validNumber) + 1;
+    if (validNumber)
+    {
+        if (savegameNumber == 16)
+        {
+            ui->labSavegameStr->setText(labelStr.arg(savegameDate, savegameName, tr("AUTO")));
+        }
+        else
+        {
+            ui->labSavegameStr->setText(labelStr.arg(savegameDate, savegameName, QString::number(savegameNumber)));
+        }
     }
     else
     {
-        ui->labSavegameStr->setText(labelStr.arg(QString::number(savegameNumber), savegame->getSavegameStr()));
+        ui->labSavegameStr->setText(labelStr.arg(savegameDate, savegameName, tr("UNKNOWN")));
     }
-    sgdStr = savegame->getSavegameStr();
+    sgdStr = savegameString;
     sgdPath = savegamePath;
     sgdata = savegame;
 }
