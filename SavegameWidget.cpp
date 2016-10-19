@@ -54,7 +54,8 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     highlightBackColor = palette.highlight().color();
     highlightTextColor = palette.highlightedText().color();
 
-    labelStr = tr("SAVE %3 - %1<br>%2");
+    labelAutosaveStr = tr("AUTOSAVE - %1<br>%2");
+    labelSaveStr = tr("SAVE %3 - %1<br>%2");
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
@@ -104,16 +105,16 @@ void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePat
     {
         if (savegameNumber == 16)
         {
-            ui->labSavegameStr->setText(labelStr.arg(savegameDate, savegameName, tr("AUTO")));
+            ui->labSavegameStr->setText(labelAutosaveStr.arg(savegameDate, savegameName));
         }
         else
         {
-            ui->labSavegameStr->setText(labelStr.arg(savegameDate, savegameName, QString::number(savegameNumber)));
+            ui->labSavegameStr->setText(labelSaveStr.arg(savegameDate, savegameName, QString::number(savegameNumber)));
         }
     }
     else
     {
-        ui->labSavegameStr->setText(labelStr.arg(savegameDate, savegameName, tr("UNKNOWN")));
+        ui->labSavegameStr->setText(labelSaveStr.arg(savegameDate, savegameName, tr("UNKNOWN")));
     }
     sgdStr = savegameString;
     sgdPath = savegamePath;
