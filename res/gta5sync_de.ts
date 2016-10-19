@@ -981,9 +981,8 @@ Exportieren als:</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.ui" line="67"/>
         <source>SAVE - %1&lt;br&gt;%2</source>
-        <translation>SPIELSTAND - %1&lt;br&gt;%2</translation>
+        <translation type="vanished">SPIELSTAND - %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="80"/>
@@ -1006,8 +1005,8 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="100"/>
-        <location filename="../SavegameWidget.cpp" line="130"/>
-        <location filename="../SavegameWidget.cpp" line="143"/>
+        <location filename="../SavegameWidget.cpp" line="131"/>
+        <location filename="../SavegameWidget.cpp" line="144"/>
         <source>Delete savegame</source>
         <translation>Savegame löschen</translation>
     </message>
@@ -1017,65 +1016,78 @@ Exportieren als:</translation>
         <translation>Spielstand exportieren...</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="57"/>
+        <location filename="../SavegameWidget.ui" line="67"/>
         <source>SAVE %3 - %1&lt;br&gt;%2</source>
         <translation>SPIELSTAND %3 - %1&lt;br&gt;%2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="92"/>
         <location filename="../SavegameWidget.cpp" line="93"/>
+        <location filename="../SavegameWidget.cpp" line="94"/>
         <source>WRONG FORMAT</source>
         <translation>FALSCHES FORMAT</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="107"/>
         <source>AUTO</source>
-        <translation>AUTO</translation>
+        <translation type="vanished">AUTO</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="116"/>
+        <location filename="../SavegameWidget.cpp" line="57"/>
+        <source>AUTOSAVE - %1
+%2</source>
+        <translation>AUTOSAVE - %1
+%2</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="58"/>
+        <source>SAVE %3 - %1
+%2</source>
+        <translation>SPIELSTAND %3 - %1
+%2</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="117"/>
         <source>UNKNOWN</source>
         <translation>UNKNOWN</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="130"/>
+        <location filename="../SavegameWidget.cpp" line="131"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Bist du sicher %1 von deinen Spielständen zu löschen?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="143"/>
+        <location filename="../SavegameWidget.cpp" line="144"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Fehlgeschlagen beim Löschen %1 von deinen Spielständen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="207"/>
+        <location filename="../SavegameWidget.cpp" line="208"/>
         <source>&amp;View</source>
         <translation>A&amp;nsehen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="209"/>
+        <location filename="../SavegameWidget.cpp" line="210"/>
         <source>&amp;Remove</source>
         <translation>Entfe&amp;rnen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="213"/>
-        <location filename="../SavegameWidget.cpp" line="221"/>
+        <location filename="../SavegameWidget.cpp" line="214"/>
+        <location filename="../SavegameWidget.cpp" line="222"/>
         <source>&amp;Select</source>
         <translation>Au&amp;swählen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="214"/>
+        <location filename="../SavegameWidget.cpp" line="215"/>
         <source>&amp;Deselect</source>
         <translation>A&amp;bwählen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="215"/>
-        <location filename="../SavegameWidget.cpp" line="222"/>
+        <location filename="../SavegameWidget.cpp" line="216"/>
+        <location filename="../SavegameWidget.cpp" line="223"/>
         <source>Select &amp;All</source>
         <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="216"/>
+        <location filename="../SavegameWidget.cpp" line="217"/>
         <source>&amp;Deselect All</source>
         <translation>Alles a&amp;bwählen</translation>
     </message>
@@ -1115,7 +1127,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="48"/>
-        <location filename="../SavegameWidget.cpp" line="208"/>
+        <location filename="../SavegameWidget.cpp" line="209"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>

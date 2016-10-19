@@ -54,8 +54,8 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     highlightBackColor = palette.highlight().color();
     highlightTextColor = palette.highlightedText().color();
 
-    labelAutosaveStr = tr("AUTOSAVE - %1<br>%2");
-    labelSaveStr = tr("SAVE %3 - %1<br>%2");
+    labelAutosaveStr = tr("AUTOSAVE - %1\n%2");
+    labelSaveStr = tr("SAVE %3 - %1\n%2");
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
