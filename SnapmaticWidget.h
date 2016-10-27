@@ -44,9 +44,12 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture);
     void setSelectionMode(bool selectionMode);
     void setSelected(bool isSelected);
+    bool makePictureVisible();
+    bool makePictureHidden();
     SnapmaticPicture *getPicture();
     QString getWidgetType();
     bool isSelected();
+    bool isHidden();
     ~SnapmaticWidget();
 
 private slots:
@@ -55,9 +58,12 @@ private slots:
     void on_cmdExport_clicked();
     void on_cmdDelete_clicked();
     void on_cbSelected_stateChanged(int arg1);
+    void adjustTextColor();
     void pictureSelected();
     void selectAllWidgets();
     void deselectAllWidgets();
+    void makePictureHiddenSlot();
+    void makePictureVisibleSlot();
     void dialogNextPictureRequested();
     void dialogPreviousPictureRequested();
 
@@ -76,6 +82,7 @@ private:
     SnapmaticPicture *smpic;
     QColor highlightBackColor;
     QColor highlightTextColor;
+    QColor highlightHiddenColor;
     QString picPath;
     QString picTitl;
     QString picStr;

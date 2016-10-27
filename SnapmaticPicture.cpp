@@ -79,6 +79,10 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
 
     QFile *picFile = new QFile(picFileName);
     QIODevice *picStream;
+    if (picFileName.right(7) == ".hidden") // for the hidden file system
+    {
+        picFileName.remove(picFileName.length() - 7, 7);
+    }
 
     if (!picFile->open(QFile::ReadOnly))
     {

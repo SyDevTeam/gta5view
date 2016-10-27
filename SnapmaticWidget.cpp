@@ -44,6 +44,8 @@ SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewD
     QPalette palette;
     highlightBackColor = palette.highlight().color();
     highlightTextColor = palette.highlightedText().color();
+    palette.setCurrentColorGroup(QPalette::Disabled);
+    highlightHiddenColor = palette.text().color();
 
     picPath = "";
     picStr = "";
@@ -79,6 +81,7 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString pic
 {
     smpic = picture;
     picPath = picturePath;
+    qDebug() << picPath;
     picStr = picture->getPictureStr();
     picTitl = picture->getPictureTitl();
 
@@ -86,6 +89,8 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString pic
     SnapmaticPixmap.scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
     ui->labPicStr->setText(picStr + "\n" + picTitl + "");
     ui->labPicture->setPixmap(SnapmaticPixmap);
+
+    adjustTextColor();
 }
 
 void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
@@ -190,10 +195,20 @@ void SnapmaticWidget::pictureSelected()
 void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
     QMenu contextMenu(this);
+    QMenu editMenu(tr("Edi&t"), this);
+    if (isHidden())
+    {
+        editMenu.addAction(tr("Enable &In-game"), this, SLOT(makePictureVisibleSlot()));
+    }
+    else
+    {
+        editMenu.addAction(tr("Disable &In-game"), this, SLOT(makePictureHiddenSlot()));
+    }
     QMenu exportMenu(tr("&Export"), this);
     exportMenu.addAction(tr("Export as &JPG picture..."), this, SLOT(on_cmdExport_clicked()));
     exportMenu.addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(on_cmdCopy_clicked()));
     contextMenu.addAction(tr("&View"), this, SLOT(on_cmdView_clicked()));
+    contextMenu.addMenu(&editMenu);
     contextMenu.addMenu(&exportMenu);
     contextMenu.addAction(tr("&Remove"), this, SLOT(on_cmdDelete_clicked()));
     if (ui->cbSelected->isVisible())
@@ -235,9 +250,76 @@ void SnapmaticWidget::on_cbSelected_stateChanged(int arg1)
     }
 }
 
+void SnapmaticWidget::adjustTextColor()
+{
+    if (isHidden())
+    {
+        ui->labPicStr->setStyleSheet(QString("QLabel{color: rgb(%1, %2, %3);}").arg(QString::number(highlightHiddenColor.red()), QString::number(highlightHiddenColor.green()), QString::number(highlightHiddenColor.blue())));
+    }
+    else
+    {
+        ui->labPicStr->setStyleSheet("");
+    }
+}
+
+bool SnapmaticWidget::makePictureVisible()
+{
+    if (isHidden())
+    {
+        QString newPicPath = QString(picPath).remove(picPath.length() - 7, 7);
+        if (QFile::rename(picPath, newPicPath))
+        {
+            picPath = newPicPath;
+            return true;
+        }
+        return false;
+    }
+    return true;
+}
+
+bool SnapmaticWidget::makePictureHidden()
+{
+    if (!isHidden())
+    {
+        QString newPicPath = QString(picPath + ".hidden");
+        if (QFile::rename(picPath, newPicPath))
+        {
+            picPath = newPicPath;
+            return true;
+        }
+        return false;
+    }
+    return true;
+}
+
+void SnapmaticWidget::makePictureHiddenSlot()
+{
+    if (makePictureHidden())
+    {
+        adjustTextColor();
+    }
+}
+
+void SnapmaticWidget::makePictureVisibleSlot()
+{
+    if (makePictureVisible())
+    {
+        adjustTextColor();
+    }
+}
+
 bool SnapmaticWidget::isSelected()
 {
     return ui->cbSelected->isChecked();
+}
+
+bool SnapmaticWidget::isHidden()
+{
+    if (picPath.right(7) == ".hidden")
+    {
+        return true;
+    }
+    return false;
 }
 
 void SnapmaticWidget::setSelectionMode(bool selectionMode)

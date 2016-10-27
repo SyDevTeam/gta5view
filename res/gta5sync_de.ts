@@ -1232,18 +1232,33 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="125"/>
-        <location filename="../SnapmaticWidget.cpp" line="128"/>
-        <location filename="../SnapmaticWidget.cpp" line="141"/>
+        <location filename="../SnapmaticWidget.cpp" line="133"/>
+        <location filename="../SnapmaticWidget.cpp" line="146"/>
         <source>Delete picture</source>
         <translation>Bild löschen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="128"/>
+        <location filename="../SnapmaticWidget.cpp" line="133"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation>Bist du sicher %1 von deinen Snapmatic Bilder zu löschen?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="193"/>
+        <location filename="../SnapmaticWidget.cpp" line="198"/>
+        <source>Edi&amp;t</source>
+        <translation>Bearbei&amp;ten</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="201"/>
+        <source>Enable &amp;In-game</source>
+        <translation>&amp;Im Spiel aktivieren</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="205"/>
+        <source>Disable &amp;In-game</source>
+        <translation>&amp;Im Spiel deaktivieren</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="207"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
@@ -1256,44 +1271,44 @@ Exportieren als:</translation>
         <translation type="obsolete">Exportiere als &amp;GTA Snapmatic</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="194"/>
+        <location filename="../SnapmaticWidget.cpp" line="208"/>
         <source>Export as &amp;JPG picture...</source>
         <translation>Exportiere als &amp;JPG Bild...</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="195"/>
+        <location filename="../SnapmaticWidget.cpp" line="209"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation>Exportiere als &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="196"/>
+        <location filename="../SnapmaticWidget.cpp" line="210"/>
         <source>&amp;View</source>
         <translation>A&amp;nsehen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="198"/>
+        <location filename="../SnapmaticWidget.cpp" line="213"/>
         <source>&amp;Remove</source>
         <translation>Entfe&amp;rnen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="202"/>
-        <location filename="../SnapmaticWidget.cpp" line="210"/>
+        <location filename="../SnapmaticWidget.cpp" line="217"/>
+        <location filename="../SnapmaticWidget.cpp" line="225"/>
         <source>&amp;Select</source>
         <translation>Au&amp;swählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="203"/>
+        <location filename="../SnapmaticWidget.cpp" line="218"/>
         <source>&amp;Deselect</source>
         <translation>A&amp;bwählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="204"/>
-        <location filename="../SnapmaticWidget.cpp" line="211"/>
+        <location filename="../SnapmaticWidget.cpp" line="219"/>
+        <location filename="../SnapmaticWidget.cpp" line="226"/>
         <source>Select &amp;All</source>
         <translation>Alles &amp;auswählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="205"/>
+        <location filename="../SnapmaticWidget.cpp" line="220"/>
         <source>&amp;Deselect All</source>
         <translation>Alles a&amp;bwählen</translation>
     </message>
@@ -1341,7 +1356,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Bist du sicher %1 von deinen Snapmatic Bilder zu löschen?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="141"/>
+        <location filename="../SnapmaticWidget.cpp" line="146"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation>Fehlgeschlagen beim Löschen %1 von deinen Snapmatic Bildern</translation>
     </message>

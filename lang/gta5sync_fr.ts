@@ -893,8 +893,8 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="125"/>
-        <location filename="../SnapmaticWidget.cpp" line="128"/>
-        <location filename="../SnapmaticWidget.cpp" line="141"/>
+        <location filename="../SnapmaticWidget.cpp" line="133"/>
+        <location filename="../SnapmaticWidget.cpp" line="146"/>
         <source>Delete picture</source>
         <translation type="unfinished"></translation>
     </message>
@@ -904,59 +904,74 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="128"/>
+        <location filename="../SnapmaticWidget.cpp" line="133"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="141"/>
+        <location filename="../SnapmaticWidget.cpp" line="146"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="193"/>
-        <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="194"/>
-        <source>Export as &amp;JPG picture...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="195"/>
-        <source>Export as &amp;GTA Snapmatic...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="196"/>
-        <source>&amp;View</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../SnapmaticWidget.cpp" line="198"/>
-        <source>&amp;Remove</source>
+        <source>Edi&amp;t</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="202"/>
-        <location filename="../SnapmaticWidget.cpp" line="210"/>
-        <source>&amp;Select</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="203"/>
-        <source>&amp;Deselect</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="204"/>
-        <location filename="../SnapmaticWidget.cpp" line="211"/>
-        <source>Select &amp;All</source>
+        <location filename="../SnapmaticWidget.cpp" line="201"/>
+        <source>Enable &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="205"/>
+        <source>Disable &amp;In-game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="207"/>
+        <source>&amp;Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="208"/>
+        <source>Export as &amp;JPG picture...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="209"/>
+        <source>Export as &amp;GTA Snapmatic...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="210"/>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="213"/>
+        <source>&amp;Remove</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="217"/>
+        <location filename="../SnapmaticWidget.cpp" line="225"/>
+        <source>&amp;Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="218"/>
+        <source>&amp;Deselect</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="219"/>
+        <location filename="../SnapmaticWidget.cpp" line="226"/>
+        <source>Select &amp;All</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="220"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
