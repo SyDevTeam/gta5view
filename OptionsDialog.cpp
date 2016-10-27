@@ -63,6 +63,8 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     setupDefaultProfile();
     setupPictureSettings();
     setupCustomGTAFolder();
+
+    this->setWindowTitle(windowTitle().arg(GTA5SYNC_APPSTR));
 }
 
 OptionsDialog::~OptionsDialog()

@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>gta5sync - Settings</string>
+   <string>%1 - Settings</string>
   </property>
   <property name="modal">
    <bool>true</bool>

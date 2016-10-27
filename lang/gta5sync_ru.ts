@@ -103,11 +103,6 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
 <context>
     <name>OptionsDialog</name>
     <message>
-        <location filename="../OptionsDialog.ui" line="14"/>
-        <source>gta5sync - Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.ui" line="33"/>
         <source>Content Open/Select Mode</source>
         <translation type="unfinished"></translation>
@@ -150,6 +145,11 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     <message>
         <location filename="../OptionsDialog.ui" line="134"/>
         <source>Default: %1x%2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="14"/>
+        <source>%1 - Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -252,44 +252,44 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="109"/>
+        <location filename="../OptionsDialog.cpp" line="111"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="109"/>
+        <location filename="../OptionsDialog.cpp" line="111"/>
         <source>%1 (%2 if available)</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="263"/>
-        <location filename="../OptionsDialog.cpp" line="267"/>
+        <location filename="../OptionsDialog.cpp" line="265"/>
+        <location filename="../OptionsDialog.cpp" line="269"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="263"/>
+        <location filename="../OptionsDialog.cpp" line="265"/>
         <source>The new Custom Folder will initialize after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="267"/>
+        <location filename="../OptionsDialog.cpp" line="269"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="277"/>
+        <location filename="../OptionsDialog.cpp" line="279"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="285"/>
-        <location filename="../OptionsDialog.cpp" line="289"/>
+        <location filename="../OptionsDialog.cpp" line="287"/>
         <location filename="../OptionsDialog.cpp" line="291"/>
+        <location filename="../OptionsDialog.cpp" line="293"/>
         <source>Profile: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -480,22 +480,27 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Загружается файл %1 из %2</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.ui" line="182"/>
+        <location filename="../ProfileInterface.ui" line="169"/>
+        <source>%1 %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.ui" line="189"/>
         <source>Import exported file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.ui" line="185"/>
+        <location filename="../ProfileInterface.ui" line="192"/>
         <source>&amp;Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.ui" line="195"/>
+        <location filename="../ProfileInterface.ui" line="202"/>
         <source>Close profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.ui" line="198"/>
+        <location filename="../ProfileInterface.ui" line="205"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -508,149 +513,154 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Закрыть профиль</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="102"/>
+        <location filename="../ProfileInterface.cpp" line="104"/>
         <source>Loading...</source>
         <translation>Загрузка...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="356"/>
+        <location filename="../ProfileInterface.cpp" line="358"/>
         <source>Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="357"/>
-        <location filename="../ProfileInterface.cpp" line="398"/>
-        <location filename="../ProfileInterface.cpp" line="403"/>
-        <location filename="../ProfileInterface.cpp" line="430"/>
-        <location filename="../ProfileInterface.cpp" line="447"/>
-        <location filename="../ProfileInterface.cpp" line="477"/>
-        <location filename="../ProfileInterface.cpp" line="482"/>
-        <location filename="../ProfileInterface.cpp" line="497"/>
-        <location filename="../ProfileInterface.cpp" line="502"/>
-        <location filename="../ProfileInterface.cpp" line="513"/>
-        <location filename="../ProfileInterface.cpp" line="550"/>
-        <location filename="../ProfileInterface.cpp" line="556"/>
+        <location filename="../ProfileInterface.cpp" line="359"/>
+        <location filename="../ProfileInterface.cpp" line="400"/>
+        <location filename="../ProfileInterface.cpp" line="405"/>
+        <location filename="../ProfileInterface.cpp" line="432"/>
+        <location filename="../ProfileInterface.cpp" line="449"/>
+        <location filename="../ProfileInterface.cpp" line="479"/>
+        <location filename="../ProfileInterface.cpp" line="484"/>
+        <location filename="../ProfileInterface.cpp" line="499"/>
+        <location filename="../ProfileInterface.cpp" line="504"/>
+        <location filename="../ProfileInterface.cpp" line="515"/>
+        <location filename="../ProfileInterface.cpp" line="552"/>
+        <location filename="../ProfileInterface.cpp" line="558"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="360"/>
-        <location filename="../UserInterface.cpp" line="306"/>
+        <location filename="../ProfileInterface.cpp" line="362"/>
+        <location filename="../UserInterface.cpp" line="307"/>
         <source>All profile files (SGTA* PGTA*)</source>
         <translation>Все файлы профиля (SGTA* PGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="361"/>
-        <location filename="../UserInterface.cpp" line="307"/>
+        <location filename="../ProfileInterface.cpp" line="363"/>
+        <location filename="../UserInterface.cpp" line="308"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Файлы сохранения (SGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="362"/>
-        <location filename="../UserInterface.cpp" line="308"/>
+        <location filename="../ProfileInterface.cpp" line="364"/>
+        <location filename="../UserInterface.cpp" line="309"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Картинка Snapmatic (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="363"/>
-        <location filename="../UserInterface.cpp" line="309"/>
+        <location filename="../ProfileInterface.cpp" line="365"/>
+        <location filename="../UserInterface.cpp" line="310"/>
         <source>All files (**)</source>
         <translation>Все файлы (**)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="398"/>
+        <location filename="../ProfileInterface.cpp" line="400"/>
         <source>Import failed with...
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="430"/>
-        <location filename="../UserInterface.cpp" line="349"/>
+        <location filename="../ProfileInterface.cpp" line="432"/>
+        <location filename="../UserInterface.cpp" line="350"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Не удалось загрузить картинку Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="447"/>
-        <location filename="../UserInterface.cpp" line="365"/>
+        <location filename="../ProfileInterface.cpp" line="449"/>
+        <location filename="../UserInterface.cpp" line="366"/>
         <source>Failed to read Savegame file</source>
         <translation>Не удалось загрузить файл сохранения</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="477"/>
+        <location filename="../ProfileInterface.cpp" line="479"/>
         <source>Can&apos;t import %1 because of not valid file format</source>
         <translation>Не получилось импортировать %1 из-за неправильного формата файла</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="403"/>
-        <location filename="../ProfileInterface.cpp" line="482"/>
-        <location filename="../UserInterface.cpp" line="397"/>
+        <location filename="../ProfileInterface.cpp" line="405"/>
+        <location filename="../ProfileInterface.cpp" line="484"/>
+        <location filename="../UserInterface.cpp" line="398"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="497"/>
+        <location filename="../ProfileInterface.cpp" line="58"/>
+        <source>Enabled pictures: %1 of %2</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="499"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="502"/>
+        <location filename="../ProfileInterface.cpp" line="504"/>
         <source>Failed to import the Snapmatic picture, the picture is already in the game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="513"/>
+        <location filename="../ProfileInterface.cpp" line="515"/>
         <source>Failed to import the Snapmatic picture, can&apos;t copy the file into profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="550"/>
+        <location filename="../ProfileInterface.cpp" line="552"/>
         <source>Failed to import the Savegame, can&apos;t copy the file into profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="556"/>
+        <location filename="../ProfileInterface.cpp" line="558"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="642"/>
-        <location filename="../ProfileInterface.cpp" line="660"/>
+        <location filename="../ProfileInterface.cpp" line="644"/>
+        <location filename="../ProfileInterface.cpp" line="662"/>
         <source>JPG pictures and GTA Snapmatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="643"/>
-        <location filename="../ProfileInterface.cpp" line="665"/>
+        <location filename="../ProfileInterface.cpp" line="645"/>
+        <location filename="../ProfileInterface.cpp" line="667"/>
         <source>JPG pictures only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="644"/>
-        <location filename="../ProfileInterface.cpp" line="669"/>
+        <location filename="../ProfileInterface.cpp" line="646"/>
+        <location filename="../ProfileInterface.cpp" line="671"/>
         <source>GTA Snapmatic only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="756"/>
-        <location filename="../ProfileInterface.cpp" line="799"/>
+        <location filename="../ProfileInterface.cpp" line="758"/>
+        <location filename="../ProfileInterface.cpp" line="801"/>
         <source>No Snapmatic pictures or Savegames files are selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="764"/>
-        <location filename="../ProfileInterface.cpp" line="793"/>
-        <location filename="../ProfileInterface.cpp" line="799"/>
+        <location filename="../ProfileInterface.cpp" line="766"/>
+        <location filename="../ProfileInterface.cpp" line="795"/>
+        <location filename="../ProfileInterface.cpp" line="801"/>
         <source>Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="764"/>
+        <location filename="../ProfileInterface.cpp" line="766"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="793"/>
+        <location filename="../ProfileInterface.cpp" line="795"/>
         <source>Failed at remove the complete selected Snapmatic pictures and/or Savegame files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -671,30 +681,30 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="619"/>
-        <location filename="../ProfileInterface.cpp" line="657"/>
-        <location filename="../ProfileInterface.cpp" line="734"/>
-        <location filename="../ProfileInterface.cpp" line="756"/>
+        <location filename="../ProfileInterface.cpp" line="621"/>
+        <location filename="../ProfileInterface.cpp" line="659"/>
+        <location filename="../ProfileInterface.cpp" line="736"/>
+        <location filename="../ProfileInterface.cpp" line="758"/>
         <source>Export selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="657"/>
+        <location filename="../ProfileInterface.cpp" line="659"/>
         <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="700"/>
+        <location filename="../ProfileInterface.cpp" line="702"/>
         <source>Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="701"/>
+        <location filename="../ProfileInterface.cpp" line="703"/>
         <source>Initializing export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="734"/>
+        <location filename="../ProfileInterface.cpp" line="736"/>
         <source>Export failed with...
 
 %1</source>
@@ -1068,113 +1078,117 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     <name>UserInterface</name>
     <message>
         <location filename="../UserInterface.ui" line="20"/>
-        <location filename="../UserInterface.cpp" line="57"/>
         <source>gta5sync - %1</source>
         <translation>gta5sync - %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="59"/>
+        <location filename="../UserInterface.ui" line="74"/>
         <source>Select profile</source>
         <translation>Выбор профиля</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="136"/>
-        <source>&amp;File</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="146"/>
-        <source>&amp;Help</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="152"/>
-        <source>&amp;Edit</source>
+        <location filename="../UserInterface.ui" line="105"/>
+        <source>%1 %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="158"/>
-        <source>&amp;Profile</source>
+        <source>&amp;File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="168"/>
+        <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="174"/>
+        <source>&amp;Edit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="180"/>
+        <source>&amp;Profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="196"/>
         <source>&amp;About gta5sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="186"/>
+        <location filename="../UserInterface.ui" line="208"/>
         <source>&amp;Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="189"/>
+        <location filename="../UserInterface.ui" line="211"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="197"/>
+        <location filename="../UserInterface.ui" line="219"/>
         <source>Close &amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="200"/>
+        <location filename="../UserInterface.ui" line="222"/>
         <source>Ctrl+End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="209"/>
+        <location filename="../UserInterface.ui" line="231"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="256"/>
+        <location filename="../UserInterface.ui" line="278"/>
         <source>Ctrl+Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="265"/>
+        <location filename="../UserInterface.ui" line="287"/>
         <source>&amp;Import files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="268"/>
+        <location filename="../UserInterface.ui" line="290"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="285"/>
-        <location filename="../UserInterface.cpp" line="123"/>
+        <location filename="../UserInterface.ui" line="307"/>
+        <location filename="../UserInterface.cpp" line="124"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="291"/>
+        <location filename="../UserInterface.ui" line="313"/>
         <source>Ctrl+G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="110"/>
+        <location filename="../UserInterface.ui" line="132"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="221"/>
+        <location filename="../UserInterface.ui" line="243"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="233"/>
+        <location filename="../UserInterface.ui" line="255"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="245"/>
+        <location filename="../UserInterface.ui" line="267"/>
         <source>&amp;Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="253"/>
+        <location filename="../UserInterface.ui" line="275"/>
         <source>&amp;Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1191,7 +1205,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">О программе gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="224"/>
+        <location filename="../UserInterface.ui" line="246"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
@@ -1200,69 +1214,74 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="192"/>
+        <location filename="../UserInterface.ui" line="214"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="177"/>
+        <location filename="../UserInterface.ui" line="199"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="277"/>
+        <location filename="../UserInterface.ui" line="299"/>
         <source>&amp;Open File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="280"/>
+        <location filename="../UserInterface.ui" line="302"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="212"/>
+        <location filename="../UserInterface.ui" line="234"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="248"/>
+        <location filename="../UserInterface.ui" line="270"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="236"/>
+        <location filename="../UserInterface.ui" line="258"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="59"/>
-        <location filename="../UserInterface.cpp" line="193"/>
+        <location filename="../UserInterface.cpp" line="194"/>
         <source>Select Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="288"/>
-        <location filename="../OptionsDialog.cpp" line="406"/>
-        <location filename="../UserInterface.cpp" line="72"/>
-        <location filename="../UserInterface.cpp" line="446"/>
+        <location filename="../UserInterface.ui" line="310"/>
+        <location filename="../OptionsDialog.cpp" line="408"/>
+        <location filename="../UserInterface.cpp" line="73"/>
+        <location filename="../UserInterface.cpp" line="447"/>
         <source>Select GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="303"/>
+        <location filename="../UserInterface.cpp" line="57"/>
+        <source>%2 - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="304"/>
         <source>Open File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="349"/>
-        <location filename="../UserInterface.cpp" line="365"/>
-        <location filename="../UserInterface.cpp" line="392"/>
-        <location filename="../UserInterface.cpp" line="397"/>
+        <location filename="../UserInterface.cpp" line="350"/>
+        <location filename="../UserInterface.cpp" line="366"/>
+        <location filename="../UserInterface.cpp" line="393"/>
+        <location filename="../UserInterface.cpp" line="398"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="392"/>
+        <location filename="../UserInterface.cpp" line="393"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1271,7 +1290,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="103"/>
+        <location filename="../UserInterface.ui" line="125"/>
         <source>&amp;Reload</source>
         <translation type="unfinished"></translation>
     </message>
