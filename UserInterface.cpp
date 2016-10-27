@@ -54,7 +54,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->menuProfile->setEnabled(false);
     ui->actionSelect_profile->setEnabled(false);
     ui->actionAbout_gta5sync->setIcon(IconLoader::loadingAppIcon());
-    defaultWindowTitle = tr("gta5sync - %1");
+    defaultWindowTitle = tr("%2 - %1").arg("%1", GTA5SYNC_APPSTR);
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     ui->labVersion->setText(ui->labVersion->text().arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
