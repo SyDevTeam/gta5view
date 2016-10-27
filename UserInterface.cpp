@@ -173,7 +173,6 @@ void UserInterface::openProfile(QString profileName)
     ui->swProfile->addWidget(profileUI);
     ui->swProfile->setCurrentWidget(profileUI);
     profileUI->setProfileFolder(GTAV_ProfilesFolder + QDir::separator() + profileName, profileName);
-    qDebug() << contentMode;
     profileUI->settingsApplied(contentMode, language);
     profileUI->setupProfileInterface();
     QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));
