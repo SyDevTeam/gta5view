@@ -326,7 +326,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="132"/>
-        <location filename="../PictureCopy.cpp" line="49"/>
+        <location filename="../PictureCopy.cpp" line="55"/>
         <location filename="../PictureExport.cpp" line="88"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
@@ -412,21 +412,21 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureCopy.cpp" line="72"/>
+        <location filename="../PictureCopy.cpp" line="78"/>
         <location filename="../PictureExport.cpp" line="142"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
         <translation>Перезаписать %1 текущей картинкой Snapmatic?</translation>
     </message>
     <message>
-        <location filename="../PictureCopy.cpp" line="72"/>
-        <location filename="../PictureCopy.cpp" line="76"/>
-        <location filename="../PictureCopy.cpp" line="89"/>
+        <location filename="../PictureCopy.cpp" line="78"/>
+        <location filename="../PictureCopy.cpp" line="82"/>
         <location filename="../PictureCopy.cpp" line="95"/>
+        <location filename="../PictureCopy.cpp" line="101"/>
         <source>Export as GTA Snapmatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureCopy.cpp" line="76"/>
+        <location filename="../PictureCopy.cpp" line="82"/>
         <location filename="../PictureExport.cpp" line="146"/>
         <source>Failed to overwrite %1 with current Snapmatic picture</source>
         <translation>Не удалось перезаписать %1 картинкой Snapmatic</translation>
@@ -437,7 +437,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Не удалось экспортировать текущую картинку Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureCopy.cpp" line="95"/>
+        <location filename="../PictureCopy.cpp" line="101"/>
         <location filename="../PictureExport.cpp" line="186"/>
         <source>No valid file is selected</source>
         <translation>Выбранный файл неверен</translation>
@@ -447,22 +447,22 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Скопировать картинку</translation>
     </message>
     <message>
-        <location filename="../PictureCopy.cpp" line="48"/>
+        <location filename="../PictureCopy.cpp" line="54"/>
         <source>Export as GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureCopy.cpp" line="52"/>
+        <location filename="../PictureCopy.cpp" line="58"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Картинки Snapmatic (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../PictureCopy.cpp" line="53"/>
+        <location filename="../PictureCopy.cpp" line="59"/>
         <source>All files (**)</source>
         <translation>Все файлы (**)</translation>
     </message>
     <message>
-        <location filename="../PictureCopy.cpp" line="89"/>
+        <location filename="../PictureCopy.cpp" line="95"/>
         <source>Failed to copy current Snapmatic picture</source>
         <translation>Не удалось скопировать текущую картинку Snapmatic</translation>
     </message>
@@ -525,10 +525,11 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <location filename="../ProfileInterface.cpp" line="447"/>
         <location filename="../ProfileInterface.cpp" line="477"/>
         <location filename="../ProfileInterface.cpp" line="482"/>
-        <location filename="../ProfileInterface.cpp" line="492"/>
-        <location filename="../ProfileInterface.cpp" line="503"/>
-        <location filename="../ProfileInterface.cpp" line="540"/>
-        <location filename="../ProfileInterface.cpp" line="546"/>
+        <location filename="../ProfileInterface.cpp" line="497"/>
+        <location filename="../ProfileInterface.cpp" line="502"/>
+        <location filename="../ProfileInterface.cpp" line="513"/>
+        <location filename="../ProfileInterface.cpp" line="550"/>
+        <location filename="../ProfileInterface.cpp" line="556"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
@@ -588,63 +589,68 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Выбранный файл неверен</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="492"/>
+        <location filename="../ProfileInterface.cpp" line="497"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="503"/>
+        <location filename="../ProfileInterface.cpp" line="502"/>
+        <source>Failed to import the Snapmatic picture, the picture is already in the game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="513"/>
         <source>Failed to import the Snapmatic picture, can&apos;t copy the file into profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="540"/>
+        <location filename="../ProfileInterface.cpp" line="550"/>
         <source>Failed to import the Savegame, can&apos;t copy the file into profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="546"/>
+        <location filename="../ProfileInterface.cpp" line="556"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="632"/>
-        <location filename="../ProfileInterface.cpp" line="650"/>
+        <location filename="../ProfileInterface.cpp" line="642"/>
+        <location filename="../ProfileInterface.cpp" line="660"/>
         <source>JPG pictures and GTA Snapmatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="633"/>
-        <location filename="../ProfileInterface.cpp" line="655"/>
+        <location filename="../ProfileInterface.cpp" line="643"/>
+        <location filename="../ProfileInterface.cpp" line="665"/>
         <source>JPG pictures only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="634"/>
-        <location filename="../ProfileInterface.cpp" line="659"/>
+        <location filename="../ProfileInterface.cpp" line="644"/>
+        <location filename="../ProfileInterface.cpp" line="669"/>
         <source>GTA Snapmatic only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="746"/>
-        <location filename="../ProfileInterface.cpp" line="790"/>
+        <location filename="../ProfileInterface.cpp" line="756"/>
+        <location filename="../ProfileInterface.cpp" line="799"/>
         <source>No Snapmatic pictures or Savegames files are selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="754"/>
-        <location filename="../ProfileInterface.cpp" line="784"/>
-        <location filename="../ProfileInterface.cpp" line="790"/>
+        <location filename="../ProfileInterface.cpp" line="764"/>
+        <location filename="../ProfileInterface.cpp" line="793"/>
+        <location filename="../ProfileInterface.cpp" line="799"/>
         <source>Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="754"/>
+        <location filename="../ProfileInterface.cpp" line="764"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="784"/>
+        <location filename="../ProfileInterface.cpp" line="793"/>
         <source>Failed at remove the complete selected Snapmatic pictures and/or Savegame files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -665,30 +671,30 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="609"/>
-        <location filename="../ProfileInterface.cpp" line="647"/>
-        <location filename="../ProfileInterface.cpp" line="724"/>
-        <location filename="../ProfileInterface.cpp" line="746"/>
+        <location filename="../ProfileInterface.cpp" line="619"/>
+        <location filename="../ProfileInterface.cpp" line="657"/>
+        <location filename="../ProfileInterface.cpp" line="734"/>
+        <location filename="../ProfileInterface.cpp" line="756"/>
         <source>Export selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="647"/>
+        <location filename="../ProfileInterface.cpp" line="657"/>
         <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="690"/>
+        <location filename="../ProfileInterface.cpp" line="700"/>
         <source>Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="691"/>
+        <location filename="../ProfileInterface.cpp" line="701"/>
         <source>Initializing export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="724"/>
+        <location filename="../ProfileInterface.cpp" line="734"/>
         <source>Export failed with...
 
 %1</source>
@@ -696,8 +702,8 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../ExportThread.cpp" line="90"/>
-        <location filename="../ExportThread.cpp" line="127"/>
-        <location filename="../ExportThread.cpp" line="148"/>
+        <location filename="../ExportThread.cpp" line="132"/>
+        <location filename="../ExportThread.cpp" line="153"/>
         <source>Export file %1 of %2 files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -970,80 +976,80 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="125"/>
-        <location filename="../SnapmaticWidget.cpp" line="133"/>
-        <location filename="../SnapmaticWidget.cpp" line="146"/>
+        <location filename="../SnapmaticWidget.cpp" line="132"/>
+        <location filename="../SnapmaticWidget.cpp" line="145"/>
         <source>Delete picture</source>
         <translation>Удалить картинку</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="133"/>
+        <location filename="../SnapmaticWidget.cpp" line="132"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation>Уверены, что хотите удалить %1 из коллекции картинок Snapmatic?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="146"/>
+        <location filename="../SnapmaticWidget.cpp" line="145"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation>Не удалось удалить %1 из колелкции картинок Snapmatic </translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="198"/>
+        <location filename="../SnapmaticWidget.cpp" line="197"/>
         <source>Edi&amp;t</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="201"/>
+        <location filename="../SnapmaticWidget.cpp" line="200"/>
         <source>Enable &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="205"/>
+        <location filename="../SnapmaticWidget.cpp" line="204"/>
         <source>Disable &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="207"/>
+        <location filename="../SnapmaticWidget.cpp" line="206"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="208"/>
+        <location filename="../SnapmaticWidget.cpp" line="207"/>
         <source>Export as &amp;JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="209"/>
+        <location filename="../SnapmaticWidget.cpp" line="208"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="210"/>
+        <location filename="../SnapmaticWidget.cpp" line="209"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="213"/>
+        <location filename="../SnapmaticWidget.cpp" line="212"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="217"/>
-        <location filename="../SnapmaticWidget.cpp" line="225"/>
+        <location filename="../SnapmaticWidget.cpp" line="216"/>
+        <location filename="../SnapmaticWidget.cpp" line="224"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="218"/>
+        <location filename="../SnapmaticWidget.cpp" line="217"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="219"/>
-        <location filename="../SnapmaticWidget.cpp" line="226"/>
+        <location filename="../SnapmaticWidget.cpp" line="218"/>
+        <location filename="../SnapmaticWidget.cpp" line="225"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="220"/>
+        <location filename="../SnapmaticWidget.cpp" line="219"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
