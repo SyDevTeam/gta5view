@@ -301,12 +301,10 @@ void PictureDialog::copySnapmaticPicture()
 {
     if (rqfullscreen && fullscreenWidget)
     {
-        QMessageBox::information(fullscreenWidget, picPath, picPath);
         PictureCopy::copyPicture(fullscreenWidget, picPath);
     }
     else
     {
-        QMessageBox::information(this, picPath, picPath);
         PictureCopy::copyPicture(this, picPath);
     }
 }
