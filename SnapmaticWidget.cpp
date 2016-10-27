@@ -47,6 +47,7 @@ SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewD
     palette.setCurrentColorGroup(QPalette::Disabled);
     highlightHiddenColor = palette.text().color();
 
+    snwgt = parent;
     picPath = "";
     picStr = "";
     smpic = 0;
@@ -216,7 +217,11 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
         if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Select"), this, SLOT(pictureSelected())); }
         if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Deselect"), this, SLOT(pictureSelected())); }
         contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
-        contextMenu.addAction(tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        ProfileInterface *profileInterface = (ProfileInterface*)snwgt;
+        if (profileInterface->selectedWidgets() != 0)
+        {
+            contextMenu.addAction(tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        }
     }
     else
     {

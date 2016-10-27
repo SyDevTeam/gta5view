@@ -87,6 +87,7 @@ private:
     QString picPath;
     QString picTitl;
     QString picStr;
+    QWidget *snwgt;
 
 signals:
     void pictureDeleted();

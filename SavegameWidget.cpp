@@ -56,6 +56,7 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
 
     labelAutosaveStr = tr("AUTOSAVE - %1\n%2");
     labelSaveStr = tr("SAVE %3 - %1\n%2");
+    snwgt = parent;
     sgdPath = "";
     sgdStr = "";
     sgdata = 0;
@@ -214,7 +215,11 @@ void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
         if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Select"), this, SLOT(savegameSelected())); }
         if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Deselect"), this, SLOT(savegameSelected())); }
         contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
-        contextMenu.addAction(tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        ProfileInterface *profileInterface = (ProfileInterface*)snwgt;
+        if (profileInterface->selectedWidgets() != 0)
+        {
+            contextMenu.addAction(tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        }
     }
     else
     {

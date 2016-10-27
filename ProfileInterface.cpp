@@ -117,7 +117,7 @@ void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePa
 
 void ProfileInterface::savegameLoaded_f(SavegameData *savegame, QString savegamePath, bool inserted)
 {
-    SavegameWidget *sgdWidget = new SavegameWidget();
+    SavegameWidget *sgdWidget = new SavegameWidget(this);
     sgdWidget->setSavegameData(savegame, savegamePath);
     sgdWidget->setContentMode(contentMode);
     widgets[sgdWidget] = "SGD" + QFileInfo(savegamePath).fileName();
@@ -138,7 +138,7 @@ void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, QString pictureP
 
 void ProfileInterface::pictureLoaded_f(SnapmaticPicture *picture, QString picturePath, bool inserted)
 {
-    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, crewDB, threadDB);
+    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, crewDB, threadDB, this);
     picWidget->setSnapmaticPicture(picture, picturePath);
     picWidget->setContentMode(contentMode);
     widgets[picWidget] = "PIC" + picture->getPictureSortStr();
@@ -831,4 +831,9 @@ void ProfileInterface::settingsApplied(int _contentMode, QString language)
             widget->setContentMode(contentMode);
         }
     }
+}
+
+int ProfileInterface::selectedWidgets()
+{
+    return selectedWidgts;
 }

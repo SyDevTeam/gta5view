@@ -47,6 +47,7 @@ public:
     void setProfileFolder(QString folder, QString profile);
     void settingsApplied(int contentMode, QString language);
     void setupProfileInterface();
+    int selectedWidgets();
     ~ProfileInterface();
 
 public slots:

@@ -70,6 +70,7 @@ private:
     QString labelSaveStr;
     QString sgdPath;
     QString sgdStr;
+    QWidget *snwgt;
 
 signals:
     void savegameDeleted();
