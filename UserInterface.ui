@@ -184,7 +184,7 @@
     </property>
     <widget class="QMenu" name="menuSelection_visibility">
      <property name="title">
-      <string>Selection visibility</string>
+      <string>&amp;Selection visibility</string>
      </property>
      <addaction name="action_Enable_In_game"/>
      <addaction name="action_Disable_In_game"/>
@@ -335,7 +335,7 @@
   </action>
   <action name="action_Disable_In_game">
    <property name="text">
-    <string>Hid&amp;e In-game</string>
+    <string>Hi&amp;de In-game</string>
    </property>
    <property name="shortcut">
     <string>Shift+D</string>

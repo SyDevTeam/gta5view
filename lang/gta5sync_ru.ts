@@ -1112,11 +1112,6 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="187"/>
-        <source>Selection visibility</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="208"/>
         <source>&amp;About gta5sync</source>
         <translation type="unfinished"></translation>
@@ -1178,13 +1173,13 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="338"/>
-        <source>Hid&amp;e In-game</source>
+        <location filename="../UserInterface.ui" line="333"/>
+        <source>Shift+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="333"/>
-        <source>Shift+E</source>
+        <location filename="../UserInterface.ui" line="338"/>
+        <source>Hi&amp;de In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1195,6 +1190,11 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     <message>
         <location filename="../UserInterface.ui" line="135"/>
         <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="187"/>
+        <source>&amp;Selection visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
