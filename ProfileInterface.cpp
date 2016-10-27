@@ -502,10 +502,10 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
         if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, the picture is already in the game"));
         return false;
     }
-    else if (QFile::copy(picPath, profileFolder + QDir::separator() + picFileName))
+    else if (QFile::copy(picPath, profileFolder + QDir::separator() + adjustedFileName))
     {
-        picture->setPicFileName(profileFolder + QDir::separator() + picFileName);
-        pictureLoaded_f(picture, profileFolder + QDir::separator() + picFileName, true);
+        picture->setPicFileName(profileFolder + QDir::separator() + adjustedFileName);
+        pictureLoaded_f(picture, profileFolder + QDir::separator() + adjustedFileName, true);
         return true;
     }
     else
