@@ -35,8 +35,14 @@ void PictureCopy::copyPicture(QWidget *parent, QString picPath)
     settings.beginGroup("FileDialogs");
     settings.beginGroup("PictureCopy");
 
+    QString adjustedPicPath = picPath;
+    if (adjustedPicPath.right(7) == ".hidden") // for the hidden file system
+    {
+        adjustedPicPath.remove(adjustedPicPath.length() - 7, 7);
+    }
+
 fileDialogPreSave:
-    QFileInfo sgdFileInfo(picPath);
+    QFileInfo sgdFileInfo(adjustedPicPath);
     QFileDialog fileDialog(parent);
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);

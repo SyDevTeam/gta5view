@@ -81,7 +81,6 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString pic
 {
     smpic = picture;
     picPath = picturePath;
-    qDebug() << picPath;
     picStr = picture->getPictureStr();
     picTitl = picture->getPictureTitl();
 
