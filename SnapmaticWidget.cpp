@@ -341,6 +341,11 @@ SnapmaticPicture* SnapmaticWidget::getPicture()
     return smpic;
 }
 
+QString SnapmaticWidget::getPicturePath()
+{
+    return picPath;
+}
+
 QString SnapmaticWidget::getWidgetType()
 {
     return "SnapmaticWidget";

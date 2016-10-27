@@ -47,6 +47,7 @@ public:
     bool makePictureVisible();
     bool makePictureHidden();
     SnapmaticPicture *getPicture();
+    QString getPicturePath();
     QString getWidgetType();
     bool isSelected();
     bool isHidden();

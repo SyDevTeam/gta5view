@@ -119,9 +119,14 @@ void ExportThread::run()
                 }
                 if (pictureCopyEnabled)
                 {
-                    QString originalFileName = picture->getPictureFileName();
-                    QFileInfo originalFileInfo(originalFileName);
-                    QString exportFileName = originalFileInfo.fileName();
+                    QString originalFileName = picWidget->getPicturePath();
+                    QString adjustedFileName = originalFileName;
+                    if (adjustedFileName.right(7) == ".hidden") // for the hidden file system
+                    {
+                        adjustedFileName.remove(adjustedFileName.length() - 7, 7);
+                    }
+                    QFileInfo adjustedFileInfo(adjustedFileName);
+                    QString exportFileName = adjustedFileInfo.fileName();
 
                     intExportProgress++;
                     emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
