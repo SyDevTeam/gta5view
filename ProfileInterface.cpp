@@ -55,6 +55,7 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui->cmdImport->setEnabled(false);
     ui->cmdCloseProfile->setEnabled(false);
     loadingStr = ui->labProfileLoading->text();
+    enabledPicStr = tr("Enabled pictures: %1 of %2");
     selectedWidgts = 0;
     profileFolder = "";
     profileLoader = 0;
@@ -62,6 +63,7 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 
     QPalette palette;
     QColor baseColor = palette.base().color();
+    ui->labVersion->setText(ui->labVersion->text().arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
     ui->saProfile->setStyleSheet(QString("QWidget#saProfileContent{background-color: rgb(%1, %2, %3)}").arg(QString::number(baseColor.red()),QString::number(baseColor.green()),QString::number(baseColor.blue())));
 }
 

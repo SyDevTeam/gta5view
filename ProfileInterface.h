@@ -81,6 +81,7 @@ private:
     QList<SnapmaticPicture*> pictures;
     QMap<ProfileWidget*,QString> widgets;
     QSpacerItem *saSpacerItem;
+    QString enabledPicStr;
     QString profileFolder;
     QString profileName;
     QString loadingStr;

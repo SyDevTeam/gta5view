@@ -57,6 +57,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     defaultWindowTitle = tr("gta5sync - %1");
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
+    ui->labVersion->setText(ui->labVersion->text().arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
 }
 
 void UserInterface::setupDirEnv()

@@ -85,6 +85,13 @@
         <item>
          <layout class="QHBoxLayout" name="hlButtons">
           <item>
+           <widget class="QLabel" name="labVersion">
+            <property name="text">
+             <string>%1 %2</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="hsButtons">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -128,7 +135,7 @@
      <x>0</x>
      <y>0</y>
      <width>625</width>
-     <height>19</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
