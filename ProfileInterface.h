@@ -47,6 +47,8 @@ public:
     void setProfileFolder(QString folder, QString profile);
     void settingsApplied(int contentMode, QString language);
     void setupProfileInterface();
+    void disableSelected();
+    void enableSelected();
     int selectedWidgets();
     ~ProfileInterface();
 

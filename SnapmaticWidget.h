@@ -44,6 +44,8 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture);
     void setSelectionMode(bool selectionMode);
     void setSelected(bool isSelected);
+    bool makePictureVisible();
+    bool makePictureHidden();
     SnapmaticPicture *getPicture();
     QString getPicturePath();
     QString getWidgetType();
@@ -61,10 +63,10 @@ private slots:
     void pictureSelected();
     void selectAllWidgets();
     void deselectAllWidgets();
-    void makePictureHiddenSlot();
-    void makePictureVisibleSlot();
     void dialogNextPictureRequested();
     void dialogPreviousPictureRequested();
+    void makePictureVisibleSlot();
+    void makePictureHiddenSlot();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
@@ -72,8 +74,6 @@ protected:
     void mouseReleaseEvent(QMouseEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
     void contextMenuEvent(QContextMenuEvent *ev);
-    void makePictureVisible();
-    void makePictureHidden();
 
 private:
     ProfileDatabase *profileDB;

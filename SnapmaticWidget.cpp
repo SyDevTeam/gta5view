@@ -266,36 +266,38 @@ void SnapmaticWidget::adjustTextColor()
     }
 }
 
-void SnapmaticWidget::makePictureHidden()
-{
-    QString newPicPath = QString(picPath + ".hidden");
-    picPath = newPicPath;
-}
-
-void SnapmaticWidget::makePictureVisible()
-{
-    QString newPicPath = QString(picPath).remove(picPath.length() - 7, 7);
-    picPath = newPicPath;
-}
-
-void SnapmaticWidget::makePictureHiddenSlot()
+bool SnapmaticWidget::makePictureHidden()
 {
     SnapmaticPicture *picture = (SnapmaticPicture*)smpic;
     if (picture->setPictureHidden())
     {
-        makePictureHidden();
+        picPath = picture->getPictureFileName();
         adjustTextColor();
+        return true;
     }
+    return false;
 }
 
-void SnapmaticWidget::makePictureVisibleSlot()
+bool SnapmaticWidget::makePictureVisible()
 {
     SnapmaticPicture *picture = (SnapmaticPicture*)smpic;
     if (picture->setPictureVisible())
     {
-        makePictureVisible();
+        picPath = picture->getPictureFileName();
         adjustTextColor();
+        return true;
     }
+    return false;
+}
+
+void SnapmaticWidget::makePictureHiddenSlot()
+{
+    makePictureHidden();
+}
+
+void SnapmaticWidget::makePictureVisibleSlot()
+{
+    makePictureVisible();
 }
 
 bool SnapmaticWidget::isSelected()

@@ -453,3 +453,19 @@ void UserInterface::on_actionSelect_GTA_Folder_triggered()
         on_cmdReload_clicked();
     }
 }
+
+void UserInterface::on_action_Enable_In_game_triggered()
+{
+    if (profileOpen)
+    {
+        profileUI->enableSelected();
+    }
+}
+
+void UserInterface::on_action_Disable_In_game_triggered()
+{
+    if (profileOpen)
+    {
+        profileUI->disableSelected();
+    }
+}

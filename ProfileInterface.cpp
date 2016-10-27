@@ -833,6 +833,44 @@ void ProfileInterface::settingsApplied(int _contentMode, QString language)
     }
 }
 
+void ProfileInterface::enableSelected()
+{
+    int fails = 0;
+    foreach (ProfileWidget *widget, widgets.keys())
+    {
+        if (widget->isSelected())
+        {
+            if (widget->getWidgetType() == "SnapmaticWidget")
+            {
+                SnapmaticWidget *snapmaticWidget = (SnapmaticWidget*)widget;
+                if (!snapmaticWidget->makePictureVisible())
+                {
+                    fails++;
+                }
+            }
+        }
+    }
+}
+
+void ProfileInterface::disableSelected()
+{
+    int fails = 0;
+    foreach (ProfileWidget *widget, widgets.keys())
+    {
+        if (widget->isSelected())
+        {
+            if (widget->getWidgetType() == "SnapmaticWidget")
+            {
+                SnapmaticWidget *snapmaticWidget = (SnapmaticWidget*)widget;
+                if (!snapmaticWidget->makePictureHidden())
+                {
+                    fails++;
+                }
+            }
+        }
+    }
+}
+
 int ProfileInterface::selectedWidgets()
 {
     return selectedWidgts;

@@ -1268,12 +1268,14 @@ Exportieren als:</translation>
         <translation>Bearbei&amp;ten</translation>
     </message>
     <message>
+        <location filename="../SnapmaticWidget.cpp" line="201"/>
         <source>Enable &amp;In-game</source>
-        <translation type="vanished">&amp;Im Spiel aktivieren</translation>
+        <translation>&amp;Im Spiel aktivieren</translation>
     </message>
     <message>
+        <location filename="../SnapmaticWidget.cpp" line="205"/>
         <source>Disable &amp;In-game</source>
-        <translation type="vanished">&amp;Im Spiel deaktivieren</translation>
+        <translation>&amp;Im Spiel deaktivieren</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="207"/>
@@ -1287,16 +1289,6 @@ Exportieren als:</translation>
     <message>
         <source>Export as &amp;GTA Snapmatic</source>
         <translation type="obsolete">Exportiere als &amp;GTA Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="201"/>
-        <source>Show &amp;In-game</source>
-        <translation>&amp;Im Spiel anzeigen</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="205"/>
-        <source>Hide &amp;In-game</source>
-        <translation>&amp;Im Spiel ausblenden</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="208"/>
@@ -1565,17 +1557,8 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="330"/>
-        <source>Show In-gam&amp;e</source>
-        <translation>Im Spiel anzeig&amp;en</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="338"/>
-        <source>Hid&amp;e In-game</source>
-        <translation>Im Spiel ausblen&amp;den</translation>
-    </message>
-    <message>
         <source>&amp;Enable In-game</source>
-        <translation type="vanished">Im Spiel aktivier&amp;en</translation>
+        <translation>Im Spiel aktivier&amp;en</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="333"/>
@@ -1583,8 +1566,9 @@ Exportieren als:</translation>
         <translation>Umschalt+E</translation>
     </message>
     <message>
+        <location filename="../UserInterface.ui" line="338"/>
         <source>&amp;Disable In-game</source>
-        <translation type="vanished">Im Spiel &amp;deaktivieren</translation>
+        <translation>Im Spiel &amp;deaktivieren</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="341"/>
