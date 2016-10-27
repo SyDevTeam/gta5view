@@ -182,9 +182,18 @@
     <property name="title">
      <string>&amp;Profile</string>
     </property>
+    <widget class="QMenu" name="menuSelection_visibility">
+     <property name="title">
+      <string>Selection visibility</string>
+     </property>
+     <addaction name="action_Enable_In_game"/>
+     <addaction name="action_Disable_In_game"/>
+    </widget>
     <addaction name="action_Import"/>
     <addaction name="actionExport_selected"/>
     <addaction name="actionDelete_selected"/>
+    <addaction name="separator"/>
+    <addaction name="menuSelection_visibility"/>
     <addaction name="separator"/>
     <addaction name="actionSelect_all"/>
     <addaction name="actionDeselect_all"/>
@@ -314,6 +323,22 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+G</string>
+   </property>
+  </action>
+  <action name="action_Enable_In_game">
+   <property name="text">
+    <string>Show In-gam&amp;e</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+E</string>
+   </property>
+  </action>
+  <action name="action_Disable_In_game">
+   <property name="text">
+    <string>Hid&amp;e In-game</string>
+   </property>
+   <property name="shortcut">
+    <string>Shift+D</string>
    </property>
   </action>
  </widget>

@@ -198,11 +198,11 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
     QMenu editMenu(tr("Edi&t"), this);
     if (isHidden())
     {
-        editMenu.addAction(tr("Enable &In-game"), this, SLOT(makePictureVisibleSlot()));
+        editMenu.addAction(tr("Show &In-game"), this, SLOT(makePictureVisibleSlot()));
     }
     else
     {
-        editMenu.addAction(tr("Disable &In-game"), this, SLOT(makePictureHiddenSlot()));
+        editMenu.addAction(tr("Hide &In-game"), this, SLOT(makePictureHiddenSlot()));
     }
     QMenu exportMenu(tr("&Export"), this);
     exportMenu.addAction(tr("Export as &JPG picture..."), this, SLOT(on_cmdExport_clicked()));

@@ -740,8 +740,8 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="100"/>
-        <location filename="../SavegameWidget.cpp" line="131"/>
-        <location filename="../SavegameWidget.cpp" line="144"/>
+        <location filename="../SavegameWidget.cpp" line="132"/>
+        <location filename="../SavegameWidget.cpp" line="145"/>
         <source>Delete savegame</source>
         <translation type="unfinished"></translation>
     </message>
@@ -752,7 +752,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="48"/>
-        <location filename="../SavegameWidget.cpp" line="209"/>
+        <location filename="../SavegameWidget.cpp" line="210"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
@@ -812,55 +812,55 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="93"/>
         <location filename="../SavegameWidget.cpp" line="94"/>
+        <location filename="../SavegameWidget.cpp" line="95"/>
         <source>WRONG FORMAT</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="117"/>
+        <location filename="../SavegameWidget.cpp" line="118"/>
         <source>UNKNOWN</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="131"/>
+        <location filename="../SavegameWidget.cpp" line="132"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="144"/>
+        <location filename="../SavegameWidget.cpp" line="145"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="208"/>
+        <location filename="../SavegameWidget.cpp" line="209"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="210"/>
+        <location filename="../SavegameWidget.cpp" line="211"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="214"/>
-        <location filename="../SavegameWidget.cpp" line="222"/>
+        <location filename="../SavegameWidget.cpp" line="215"/>
+        <location filename="../SavegameWidget.cpp" line="227"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="215"/>
+        <location filename="../SavegameWidget.cpp" line="216"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="216"/>
-        <location filename="../SavegameWidget.cpp" line="223"/>
+        <location filename="../SavegameWidget.cpp" line="217"/>
+        <location filename="../SavegameWidget.cpp" line="228"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="217"/>
+        <location filename="../SavegameWidget.cpp" line="221"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -909,8 +909,8 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="125"/>
-        <location filename="../SnapmaticWidget.cpp" line="132"/>
-        <location filename="../SnapmaticWidget.cpp" line="145"/>
+        <location filename="../SnapmaticWidget.cpp" line="133"/>
+        <location filename="../SnapmaticWidget.cpp" line="146"/>
         <source>Delete picture</source>
         <translation type="unfinished"></translation>
     </message>
@@ -920,74 +920,74 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="132"/>
+        <location filename="../SnapmaticWidget.cpp" line="133"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="145"/>
+        <location filename="../SnapmaticWidget.cpp" line="146"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="197"/>
+        <location filename="../SnapmaticWidget.cpp" line="198"/>
         <source>Edi&amp;t</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="200"/>
-        <source>Enable &amp;In-game</source>
+        <location filename="../SnapmaticWidget.cpp" line="201"/>
+        <source>Show &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="204"/>
-        <source>Disable &amp;In-game</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="206"/>
-        <source>&amp;Export</source>
+        <location filename="../SnapmaticWidget.cpp" line="205"/>
+        <source>Hide &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="207"/>
-        <source>Export as &amp;JPG picture...</source>
+        <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="208"/>
-        <source>Export as &amp;GTA Snapmatic...</source>
+        <source>Export as &amp;JPG picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="209"/>
+        <source>Export as &amp;GTA Snapmatic...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="210"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="212"/>
+        <location filename="../SnapmaticWidget.cpp" line="213"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="216"/>
-        <location filename="../SnapmaticWidget.cpp" line="224"/>
+        <location filename="../SnapmaticWidget.cpp" line="217"/>
+        <location filename="../SnapmaticWidget.cpp" line="229"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="217"/>
+        <location filename="../SnapmaticWidget.cpp" line="218"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="218"/>
-        <location filename="../SnapmaticWidget.cpp" line="225"/>
+        <location filename="../SnapmaticWidget.cpp" line="219"/>
+        <location filename="../SnapmaticWidget.cpp" line="230"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="219"/>
+        <location filename="../SnapmaticWidget.cpp" line="223"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1015,143 +1015,148 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="132"/>
+        <location filename="../UserInterface.ui" line="135"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="158"/>
+        <location filename="../UserInterface.ui" line="161"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="168"/>
+        <location filename="../UserInterface.ui" line="171"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="174"/>
+        <location filename="../UserInterface.ui" line="177"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="180"/>
+        <location filename="../UserInterface.ui" line="183"/>
         <source>&amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="196"/>
-        <source>&amp;About gta5sync</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="199"/>
-        <source>Ctrl+P</source>
+        <location filename="../UserInterface.ui" line="187"/>
+        <source>Selection visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="208"/>
-        <source>&amp;Exit</source>
+        <source>&amp;About gta5sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="211"/>
+        <source>Ctrl+P</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="220"/>
+        <source>&amp;Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="223"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="214"/>
+        <location filename="../UserInterface.ui" line="226"/>
         <source>Ctrl+Q</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="219"/>
+        <location filename="../UserInterface.ui" line="231"/>
         <source>Close &amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="222"/>
+        <location filename="../UserInterface.ui" line="234"/>
         <source>Ctrl+End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="231"/>
+        <location filename="../UserInterface.ui" line="243"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="234"/>
+        <location filename="../UserInterface.ui" line="246"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="243"/>
+        <location filename="../UserInterface.ui" line="255"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="246"/>
+        <location filename="../UserInterface.ui" line="258"/>
         <source>Ctrl+A</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="255"/>
+        <location filename="../UserInterface.ui" line="267"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="258"/>
+        <location filename="../UserInterface.ui" line="270"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="267"/>
+        <location filename="../UserInterface.ui" line="279"/>
         <source>&amp;Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="270"/>
+        <location filename="../UserInterface.ui" line="282"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="275"/>
+        <location filename="../UserInterface.ui" line="287"/>
         <source>&amp;Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="278"/>
+        <location filename="../UserInterface.ui" line="290"/>
         <source>Ctrl+Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="287"/>
+        <location filename="../UserInterface.ui" line="299"/>
         <source>&amp;Import files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="290"/>
+        <location filename="../UserInterface.ui" line="302"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="299"/>
+        <location filename="../UserInterface.ui" line="311"/>
         <source>&amp;Open File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="302"/>
+        <location filename="../UserInterface.ui" line="314"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="307"/>
+        <location filename="../UserInterface.ui" line="319"/>
         <location filename="../UserInterface.cpp" line="124"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="310"/>
+        <location filename="../UserInterface.ui" line="322"/>
         <location filename="../OptionsDialog.cpp" line="408"/>
         <location filename="../UserInterface.cpp" line="73"/>
         <location filename="../UserInterface.cpp" line="447"/>
@@ -1159,8 +1164,28 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="313"/>
+        <location filename="../UserInterface.ui" line="325"/>
         <source>Ctrl+G</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="330"/>
+        <source>Show In-gam&amp;e</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="338"/>
+        <source>Hid&amp;e In-game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="333"/>
+        <source>Shift+E</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="341"/>
+        <source>Shift+D</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
