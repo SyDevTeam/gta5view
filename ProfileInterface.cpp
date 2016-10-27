@@ -487,9 +487,19 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
 {
     QFileInfo picFileInfo(picPath);
     QString picFileName = picFileInfo.fileName();
+    QString adjustedFileName = picFileName;
+    if (adjustedFileName.right(7) == ".hidden") // for the hidden file system
+    {
+        adjustedFileName.remove(adjustedFileName.length() - 7, 7);
+    }
     if (picFileName.left(4) != "PGTA")
     {
         if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, file not begin with PGTA"));
+        return false;
+    }
+    else if (QFile::exists(profileFolder + QDir::separator() + adjustedFileName) || QFile::exists(profileFolder + QDir::separator() + adjustedFileName + ".hidden"))
+    {
+        if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, the picture is already in the game"));
         return false;
     }
     else if (QFile::copy(picPath, profileFolder + QDir::separator() + picFileName))
