@@ -770,8 +770,7 @@ void ProfileInterface::deleteSelected()
                     if (widget->getWidgetType() == "SnapmaticWidget")
                     {
                         SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
-                        SnapmaticPicture *picture = picWidget->getPicture();
-                        QString fileName = picture->getPictureFileName();
+                        QString fileName = picWidget->getPicturePath();
                         if (!QFile::exists(fileName) || QFile::remove(fileName))
                         {
                             pictureDeleted_f(picWidget);
