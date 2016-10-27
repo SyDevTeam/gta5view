@@ -57,6 +57,11 @@ public:
     double getLocationZ();
     QStringList getPlayers();
 
+    // VISIBILITY
+    bool isHidden();
+    bool setPictureHidden();
+    bool setPictureVisible();
+
 private:
     QString getSnapmaticPictureString(const QByteArray &snapmaticHeader);
     QString getSnapmaticJSONString(const QByteArray &jsonBytes);

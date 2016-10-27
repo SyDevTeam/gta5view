@@ -44,8 +44,6 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture);
     void setSelectionMode(bool selectionMode);
     void setSelected(bool isSelected);
-    bool makePictureVisible();
-    bool makePictureHidden();
     SnapmaticPicture *getPicture();
     QString getPicturePath();
     QString getWidgetType();
@@ -74,6 +72,8 @@ protected:
     void mouseReleaseEvent(QMouseEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
     void contextMenuEvent(QContextMenuEvent *ev);
+    void makePictureVisible();
+    void makePictureHidden();
 
 private:
     ProfileDatabase *profileDB;

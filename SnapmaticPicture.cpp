@@ -79,10 +79,6 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
 
     QFile *picFile = new QFile(picFileName);
     QIODevice *picStream;
-    if (picFileName.right(7) == ".hidden") // for the hidden file system
-    {
-        picFileName.remove(picFileName.length() - 7, 7);
-    }
 
     if (!picFile->open(QFile::ReadOnly))
     {
@@ -483,4 +479,45 @@ QStringList SnapmaticPicture::getPlayers()
 QDateTime SnapmaticPicture::getCreatedDateTime()
 {
     return jsonCreatedDateTime;
+}
+
+// VISIBILITY
+
+bool SnapmaticPicture::isHidden()
+{
+    if (picFileName.right(7) == ".hidden")
+    {
+        return true;
+    }
+    return false;
+}
+
+bool SnapmaticPicture::setPictureHidden()
+{
+    if (!isHidden())
+    {
+        QString newPicFileName = QString(picFileName + ".hidden");
+        if (QFile::rename(picFileName, newPicFileName))
+        {
+            picFileName = newPicFileName;
+            return true;
+        }
+        return false;
+    }
+    return true;
+}
+
+bool SnapmaticPicture::setPictureVisible()
+{
+    if (isHidden())
+    {
+        QString newPicFileName = QString(picFileName).remove(picFileName.length() - 7, 7);
+        if (QFile::rename(picFileName, newPicFileName))
+        {
+            picFileName = newPicFileName;
+            return true;
+        }
+        return false;
+    }
+    return true;
 }
