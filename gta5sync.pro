@@ -107,11 +107,14 @@ RESOURCES += \
 DISTFILES += res/app.rc \
     res/gta5sync.desktop \
     res/gta5sync_de.ts \
+    lang/gta5sync_fr.qm \
     lang/gta5sync_ru.qm \
+    lang/qtbase_fr.qm \
     lang/qtbase_ru.qm \
     lang/README.txt \
     lang/gta5sync_fr.ts \
     lang/gta5sync_ru.ts \
+    lang/qt_fr.qm \
     lang/qt_ru.qm
 
 INCLUDEPATH += ./uimod
