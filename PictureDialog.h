@@ -63,6 +63,7 @@ private slots:
     void exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen);
     void nextPictureRequestedSlot();
     void previousPictureRequestedSlot();
+    void stylize();
 
 signals:
     void nextPictureRequested();
@@ -72,6 +73,7 @@ signals:
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
+    bool event(QEvent *event);
 
 private:
     ProfileDatabase *profileDB;

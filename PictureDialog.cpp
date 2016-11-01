@@ -30,6 +30,7 @@
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050000
 #include <QtWinExtras/QtWin>
+#include <QWinEvent>
 #endif
 #endif
 
@@ -100,24 +101,47 @@ void PictureDialog::addPreviousNextButtons()
     // Windows Vista additions
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050000
+    QPalette palette;
+    QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
+    layout()->setMenuBar(uiToolbar);
+    QAction *backAction = uiToolbar->addAction("<-", this, SLOT(previousPictureRequestedSlot()));
+    QAction *nextAction = uiToolbar->addAction("->", this, SLOT(nextPictureRequestedSlot()));
+    backAction->setToolTip("");
+    nextAction->setToolTip("");
+    ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
+    stylize();
+#endif
+#endif
+}
+
+void PictureDialog::stylize()
+{
     if (QtWin::isCompositionEnabled())
     {
-        QPalette palette;
-        QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
-        layout()->setMenuBar(uiToolbar);
-        QAction *backAction = uiToolbar->addAction("<-", this, SLOT(previousPictureRequestedSlot()));
-        QAction *nextAction = uiToolbar->addAction("->", this, SLOT(nextPictureRequestedSlot()));
-        backAction->setToolTip("");
-        nextAction->setToolTip("");
-
-        QtWin::extendFrameIntoClientArea(this, 0, uiToolbar->height() - 2, 0, 0);
+        //qDebug() << this->layout()->menuBar()->height();
+        QtWin::extendFrameIntoClientArea(this, 0, this->layout()->menuBar()->height() - 2, 0, 0);
         setAttribute(Qt::WA_TranslucentBackground, true);
         setAttribute(Qt::WA_NoSystemBackground, false);
         setStyleSheet("PictureDialog { background: transparent; }");
-        ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
+    }
+    else
+    {
+        QtWin::resetExtendedFrame(this);
+        setAttribute(Qt::WA_TranslucentBackground, false);
+    }
+}
+
+bool PictureDialog::event(QEvent *event)
+{
+#ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050000
+    if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange)
+    {
+        stylize();
     }
 #endif
 #endif
+    return QDialog::event(event);
 }
 
 void PictureDialog::nextPictureRequestedSlot()
