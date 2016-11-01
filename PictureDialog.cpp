@@ -49,6 +49,7 @@
 #include <QDebug>
 #include <QList>
 #include <QDrag>
+#include <QIcon>
 #include <QUrl>
 #include <QDir>
 
@@ -104,10 +105,8 @@ void PictureDialog::addPreviousNextButtons()
     QPalette palette;
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
     layout()->setMenuBar(uiToolbar);
-    QAction *backAction = uiToolbar->addAction("<-", this, SLOT(previousPictureRequestedSlot()));
-    QAction *nextAction = uiToolbar->addAction("->", this, SLOT(nextPictureRequestedSlot()));
-    backAction->setToolTip("");
-    nextAction->setToolTip("");
+    uiToolbar->addAction(QIcon(":/img/back.png"), "", this, SLOT(previousPictureRequestedSlot()));
+    uiToolbar->addAction(QIcon(":/img/next.png"), "", this, SLOT(nextPictureRequestedSlot()));
     ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
 #endif
 #endif
