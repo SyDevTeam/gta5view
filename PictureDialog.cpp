@@ -110,7 +110,7 @@ void PictureDialog::addPreviousNextButtons()
         backAction->setToolTip("");
         nextAction->setToolTip("");
 
-        QtWin::extendFrameIntoClientArea(this, 0, uiToolbar->height(), 0, 0);
+        QtWin::extendFrameIntoClientArea(this, 0, uiToolbar->height() - 5, 0, 0);
         setAttribute(Qt::WA_TranslucentBackground, true);
         setAttribute(Qt::WA_NoSystemBackground, false);
         setStyleSheet("PictureDialog { background: transparent; }");
