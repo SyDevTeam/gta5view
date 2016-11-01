@@ -43,6 +43,7 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
     void setSnapmaticPicture(SnapmaticPicture *picture, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture);
+    void addPreviousNextButtons();
     bool isIndexed();
     int getIndex();
     ~PictureDialog();
@@ -60,6 +61,8 @@ private slots:
     void on_labPicture_mouseDoubleClicked(Qt::MouseButton button);
     void on_labPicture_customContextMenuRequested(const QPoint &pos);
     void exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen);
+    void nextPictureRequestedSlot();
+    void previousPictureRequestedSlot();
 
 signals:
     void nextPictureRequested();

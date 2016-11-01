@@ -110,6 +110,9 @@ void SnapmaticWidget::on_cmdView_clicked()
     QObject::connect(picDialog, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
     QObject::connect(picDialog, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
 
+    // add previous next buttons
+    picDialog->addPreviousNextButtons();
+
     // show picture dialog
     picDialog->show();
     picDialog->setMinimumSize(picDialog->size());
