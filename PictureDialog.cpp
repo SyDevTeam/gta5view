@@ -118,7 +118,6 @@ void PictureDialog::stylize()
 {
     if (QtWin::isCompositionEnabled())
     {
-        //qDebug() << this->layout()->menuBar()->height();
         QtWin::extendFrameIntoClientArea(this, 0, this->layout()->menuBar()->height() - 2, 0, 0);
         setAttribute(Qt::WA_TranslucentBackground, true);
         setAttribute(Qt::WA_NoSystemBackground, false);
@@ -128,6 +127,7 @@ void PictureDialog::stylize()
     {
         QtWin::resetExtendedFrame(this);
         setAttribute(Qt::WA_TranslucentBackground, false);
+        setStyleSheet(QString("PictureDialog { background: %1; }").arg(QtWin::realColorizationColor().name()));
     }
 }
 
