@@ -109,16 +109,15 @@ void PictureDialog::addPreviousNextButtons()
     backAction->setToolTip("");
     nextAction->setToolTip("");
     ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
-    stylize();
 #endif
 #endif
 }
 
-void PictureDialog::stylize()
+void PictureDialog::stylizeDialog()
 {
     if (QtWin::isCompositionEnabled())
     {
-        QtWin::extendFrameIntoClientArea(this, 0, this->layout()->menuBar()->height() - 2, 0, 0);
+        QtWin::extendFrameIntoClientArea(this, 0, this->layout()->menuBar()->height(), 0, 0);
         setAttribute(Qt::WA_TranslucentBackground, true);
         setAttribute(Qt::WA_NoSystemBackground, false);
         setStyleSheet("PictureDialog { background: transparent; }");
@@ -137,7 +136,7 @@ bool PictureDialog::event(QEvent *event)
 #if QT_VERSION >= 0x050000
     if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange)
     {
-        stylize();
+        stylizeDialog();
     }
 #endif
 #endif

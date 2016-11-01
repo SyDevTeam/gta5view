@@ -44,6 +44,7 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture);
     void addPreviousNextButtons();
+    void stylizeDialog();
     bool isIndexed();
     int getIndex();
     ~PictureDialog();
@@ -63,7 +64,6 @@ private slots:
     void exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen);
     void nextPictureRequestedSlot();
     void previousPictureRequestedSlot();
-    void stylize();
 
 signals:
     void nextPictureRequested();
