@@ -214,12 +214,12 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../OptionsDialog.ui" line="303"/>
         <source>Picture Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Visionneuse de photos</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="309"/>
         <source>Enable Navigation Bar</source>
-        <translation type="unfinished"></translation>
+        <translation>Activer la barre de navigation</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="333"/>
