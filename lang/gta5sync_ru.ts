@@ -274,32 +274,32 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="267"/>
         <location filename="../OptionsDialog.cpp" line="271"/>
+        <location filename="../OptionsDialog.cpp" line="275"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="267"/>
+        <location filename="../OptionsDialog.cpp" line="271"/>
         <source>The new Custom Folder will initialize after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="271"/>
+        <location filename="../OptionsDialog.cpp" line="275"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="281"/>
+        <location filename="../OptionsDialog.cpp" line="285"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="289"/>
         <location filename="../OptionsDialog.cpp" line="293"/>
-        <location filename="../OptionsDialog.cpp" line="295"/>
+        <location filename="../OptionsDialog.cpp" line="297"/>
+        <location filename="../OptionsDialog.cpp" line="299"/>
         <source>Profile: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -370,31 +370,31 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="237"/>
-        <location filename="../PictureDialog.cpp" line="294"/>
+        <location filename="../PictureDialog.cpp" line="241"/>
+        <location filename="../PictureDialog.cpp" line="298"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="237"/>
-        <location filename="../PictureDialog.cpp" line="294"/>
+        <location filename="../PictureDialog.cpp" line="241"/>
+        <location filename="../PictureDialog.cpp" line="298"/>
         <source>Failed at %1</source>
         <translation>Ошибка при %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="283"/>
-        <location filename="../PictureDialog.cpp" line="293"/>
+        <location filename="../PictureDialog.cpp" line="287"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>No player</source>
         <translation>Игроков нет</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="286"/>
-        <location filename="../PictureDialog.cpp" line="293"/>
+        <location filename="../PictureDialog.cpp" line="290"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>No crew</source>
         <translation>Без группы</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="293"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>Unknown Location</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1291,7 +1291,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="417"/>
+        <location filename="../OptionsDialog.cpp" line="431"/>
         <location filename="../UserInterface.cpp" line="73"/>
         <location filename="../UserInterface.cpp" line="447"/>
         <source>Select GTA V Folder...</source>

@@ -355,14 +355,14 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>%1 (%2 wenn verfügbar)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="267"/>
         <location filename="../OptionsDialog.cpp" line="271"/>
+        <location filename="../OptionsDialog.cpp" line="275"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="267"/>
+        <location filename="../OptionsDialog.cpp" line="271"/>
         <source>The new Custom Folder will initialize after you restart %1.</source>
         <translation>Der eigene Ordner wird initialisiert sobald du %1 neugestartet hast.</translation>
     </message>
@@ -371,20 +371,20 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="vanished">Der eigene Ordner initialisiert sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="271"/>
+        <location filename="../OptionsDialog.cpp" line="275"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation>Die Änderung der Sprache nimmt Effekt sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="281"/>
+        <location filename="../OptionsDialog.cpp" line="285"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Kein Profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="289"/>
         <location filename="../OptionsDialog.cpp" line="293"/>
-        <location filename="../OptionsDialog.cpp" line="295"/>
+        <location filename="../OptionsDialog.cpp" line="297"/>
+        <location filename="../OptionsDialog.cpp" line="299"/>
         <source>Profile: %1</source>
         <translation>Profil: %1</translation>
     </message>
@@ -491,31 +491,31 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Exportiere als &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="237"/>
-        <location filename="../PictureDialog.cpp" line="294"/>
+        <location filename="../PictureDialog.cpp" line="241"/>
+        <location filename="../PictureDialog.cpp" line="298"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Snapmatic Bildansicht</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="237"/>
-        <location filename="../PictureDialog.cpp" line="294"/>
+        <location filename="../PictureDialog.cpp" line="241"/>
+        <location filename="../PictureDialog.cpp" line="298"/>
         <source>Failed at %1</source>
         <translation>Fehlgeschlagen bei %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="283"/>
-        <location filename="../PictureDialog.cpp" line="293"/>
+        <location filename="../PictureDialog.cpp" line="287"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>No player</source>
         <translation>Keine Spieler</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="286"/>
-        <location filename="../PictureDialog.cpp" line="293"/>
+        <location filename="../PictureDialog.cpp" line="290"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>No crew</source>
         <translation>Keine Crew</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="293"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>Unknown Location</source>
         <translation>Unbekannter Standort</translation>
     </message>
@@ -1678,7 +1678,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="417"/>
+        <location filename="../OptionsDialog.cpp" line="431"/>
         <location filename="../UserInterface.cpp" line="73"/>
         <location filename="../UserInterface.cpp" line="447"/>
         <source>Select GTA V Folder...</source>

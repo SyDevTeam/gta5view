@@ -212,87 +212,97 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
         <translation>%1 %</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="317"/>
+        <location filename="../OptionsDialog.ui" line="303"/>
+        <source>Picture Viewer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="309"/>
+        <source>Enable Navigation Bar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="333"/>
         <source>Players</source>
         <translation>Joueurs</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="357"/>
+        <location filename="../OptionsDialog.ui" line="373"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="362"/>
+        <location filename="../OptionsDialog.ui" line="378"/>
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="371"/>
-        <location filename="../OptionsDialog.ui" line="377"/>
+        <location filename="../OptionsDialog.ui" line="387"/>
+        <location filename="../OptionsDialog.ui" line="393"/>
         <source>Language</source>
         <translation>Langue</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="403"/>
+        <location filename="../OptionsDialog.ui" line="419"/>
         <source>Sync</source>
         <translation>Synchronisation</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="409"/>
+        <location filename="../OptionsDialog.ui" line="425"/>
         <source>Sync is not implemented at current time</source>
         <translation>La synchronisation n&apos;est pas encore implémentée</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="441"/>
+        <location filename="../OptionsDialog.ui" line="457"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="448"/>
+        <location filename="../OptionsDialog.ui" line="464"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="111"/>
+        <location filename="../OptionsDialog.cpp" line="112"/>
         <source>%1 (%2 if available)</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
         <translation>%1 (%2 si disponible)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="111"/>
+        <location filename="../OptionsDialog.cpp" line="112"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation>Système</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="265"/>
-        <location filename="../OptionsDialog.cpp" line="269"/>
+        <location filename="../OptionsDialog.cpp" line="271"/>
+        <location filename="../OptionsDialog.cpp" line="275"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="265"/>
+        <location filename="../OptionsDialog.cpp" line="271"/>
         <source>The new Custom Folder will initialize after you restart %1.</source>
         <translation>Le répertoire personnalisé sera actif au prochain lancement de %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="269"/>
+        <location filename="../OptionsDialog.cpp" line="275"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation>Le changement de langue sera actif au prochain lancement de %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="279"/>
+        <location filename="../OptionsDialog.cpp" line="285"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Aucun profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="287"/>
-        <location filename="../OptionsDialog.cpp" line="291"/>
         <location filename="../OptionsDialog.cpp" line="293"/>
+        <location filename="../OptionsDialog.cpp" line="297"/>
+        <location filename="../OptionsDialog.cpp" line="299"/>
         <source>Profile: %1</source>
         <translation>Profil : %1</translation>
     </message>
@@ -305,7 +315,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
         <translation>%1 - Visionneuse de photo Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="81"/>
+        <location filename="../PictureDialog.ui" line="101"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
@@ -316,24 +326,24 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
 &lt;span style=&quot; font-weight:600;&quot;&gt;Créé le : &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="129"/>
+        <location filename="../PictureDialog.ui" line="155"/>
         <source>Export picture</source>
         <translation>Exporter la photo</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="132"/>
+        <location filename="../PictureDialog.ui" line="158"/>
         <location filename="../PictureCopy.cpp" line="55"/>
         <location filename="../PictureExport.cpp" line="88"/>
         <source>&amp;Export</source>
         <translation>&amp;Exporter</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="145"/>
+        <location filename="../PictureDialog.ui" line="171"/>
         <source>Close</source>
         <translation>Fermer la visionneuse</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="148"/>
+        <location filename="../PictureDialog.ui" line="174"/>
         <source>&amp;Close</source>
         <translation>&amp;Fermer</translation>
     </message>
@@ -384,41 +394,41 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
         <translation>Fichier invalide</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="71"/>
+        <location filename="../PictureDialog.cpp" line="81"/>
         <source>Export as &amp;JPG picture...</source>
         <translation>Exporter comme image &amp;JPG...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="72"/>
+        <location filename="../PictureDialog.cpp" line="82"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation>Exporter comme &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="168"/>
-        <location filename="../PictureDialog.cpp" line="225"/>
+        <location filename="../PictureDialog.cpp" line="241"/>
+        <location filename="../PictureDialog.cpp" line="298"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Visionneuse de photo Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="168"/>
-        <location filename="../PictureDialog.cpp" line="225"/>
+        <location filename="../PictureDialog.cpp" line="241"/>
+        <location filename="../PictureDialog.cpp" line="298"/>
         <source>Failed at %1</source>
         <translation>Echec de %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="214"/>
-        <location filename="../PictureDialog.cpp" line="224"/>
+        <location filename="../PictureDialog.cpp" line="287"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>No player</source>
         <translation>Aucun joueur</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="217"/>
-        <location filename="../PictureDialog.cpp" line="224"/>
+        <location filename="../PictureDialog.cpp" line="290"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>No crew</source>
         <translation>Aucun crew</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="224"/>
+        <location filename="../PictureDialog.cpp" line="297"/>
         <source>Unknown Location</source>
         <translation>Emplacement inconnu</translation>
     </message>
@@ -929,8 +939,8 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="125"/>
-        <location filename="../SnapmaticWidget.cpp" line="133"/>
-        <location filename="../SnapmaticWidget.cpp" line="146"/>
+        <location filename="../SnapmaticWidget.cpp" line="143"/>
+        <location filename="../SnapmaticWidget.cpp" line="156"/>
         <source>Delete picture</source>
         <translation>Supprimer la photo</translation>
     </message>
@@ -940,74 +950,74 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="133"/>
+        <location filename="../SnapmaticWidget.cpp" line="143"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation>Supprimer %1 ?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="146"/>
+        <location filename="../SnapmaticWidget.cpp" line="156"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation>Impossible de supprimer %1</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="198"/>
+        <location filename="../SnapmaticWidget.cpp" line="208"/>
         <source>Edi&amp;t</source>
         <translation>Édi&amp;ter</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="201"/>
+        <location filename="../SnapmaticWidget.cpp" line="211"/>
         <source>Show &amp;In-game</source>
         <translation>&amp;Visible en jeu</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="205"/>
+        <location filename="../SnapmaticWidget.cpp" line="215"/>
         <source>Hide &amp;In-game</source>
         <translation>&amp;Invisible en jeu</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="207"/>
+        <location filename="../SnapmaticWidget.cpp" line="217"/>
         <source>&amp;Export</source>
         <translation>&amp;Exporter</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="208"/>
+        <location filename="../SnapmaticWidget.cpp" line="218"/>
         <source>Export as &amp;JPG picture...</source>
         <translation>Exporter comme image &amp;JPG...</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="209"/>
+        <location filename="../SnapmaticWidget.cpp" line="219"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation>Exporter comme &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="210"/>
+        <location filename="../SnapmaticWidget.cpp" line="220"/>
         <source>&amp;View</source>
         <translation>&amp;Voir</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="213"/>
+        <location filename="../SnapmaticWidget.cpp" line="223"/>
         <source>&amp;Remove</source>
         <translation>S&amp;upprimer</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="217"/>
-        <location filename="../SnapmaticWidget.cpp" line="229"/>
+        <location filename="../SnapmaticWidget.cpp" line="227"/>
+        <location filename="../SnapmaticWidget.cpp" line="239"/>
         <source>&amp;Select</source>
         <translation>&amp;Sélectionner</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="218"/>
+        <location filename="../SnapmaticWidget.cpp" line="228"/>
         <source>&amp;Deselect</source>
         <translation>&amp;Déselectionner</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="219"/>
-        <location filename="../SnapmaticWidget.cpp" line="230"/>
+        <location filename="../SnapmaticWidget.cpp" line="229"/>
+        <location filename="../SnapmaticWidget.cpp" line="240"/>
         <source>Select &amp;All</source>
         <translation>Sélectionner &amp;tout</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="223"/>
+        <location filename="../SnapmaticWidget.cpp" line="233"/>
         <source>&amp;Deselect All</source>
         <translation>&amp;Déselectionner tout</translation>
     </message>
@@ -1172,7 +1182,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="408"/>
+        <location filename="../OptionsDialog.cpp" line="431"/>
         <location filename="../UserInterface.cpp" line="73"/>
         <location filename="../UserInterface.cpp" line="447"/>
         <source>Select GTA V Folder...</source>
