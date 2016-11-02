@@ -23,6 +23,7 @@
 #include "PictureDialog.h"
 #include "PictureExport.h"
 #include "PictureCopy.h"
+#include "config.h"
 #include <QMessageBox>
 #include <QPixmap>
 #include <QTimer>
@@ -100,6 +101,11 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
 
 void SnapmaticWidget::on_cmdView_clicked()
 {
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Interface");
+    bool navigationBar = settings.value("NavigationBar", false).toBool();
+    settings.endGroup();
+
     PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, this);
     picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
     picDialog->setSnapmaticPicture(smpic, picPath, true);
@@ -111,11 +117,11 @@ void SnapmaticWidget::on_cmdView_clicked()
     QObject::connect(picDialog, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
 
     // add previous next buttons
-    picDialog->addPreviousNextButtons();
+    if (navigationBar) picDialog->addPreviousNextButtons();
 
     // show picture dialog
     picDialog->show();
-    picDialog->stylizeDialog();
+    if (navigationBar) picDialog->stylizeDialog();
     picDialog->setMinimumSize(picDialog->size());
     picDialog->setMaximumSize(picDialog->size());
     picDialog->exec();
