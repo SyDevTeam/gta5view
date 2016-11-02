@@ -19,7 +19,7 @@
 QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-greaterThan(QT_MAJOR_VERSION, 4): win32: QT += winextras
+greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: QT += winextras
 
 DEPLOYMENT.display_name = gta5sync
 TARGET = gta5sync
