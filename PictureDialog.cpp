@@ -28,9 +28,9 @@
 #include "UiModLabel.h"
 
 #ifdef GTA5SYNC_WIN
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050200
 #include <QtWinExtras/QtWin>
-#include <QWinEvent>
+#include <QtWinExtras/QWinEvent>
 #endif
 #endif
 
@@ -102,7 +102,7 @@ void PictureDialog::addPreviousNextButtons()
 {
     // Windows Vista additions
 #ifdef GTA5SYNC_WIN
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050200
     QPalette palette;
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
     layout()->setMenuBar(uiToolbar);
@@ -117,7 +117,7 @@ void PictureDialog::addPreviousNextButtons()
 void PictureDialog::stylizeDialog()
 {
 #ifdef GTA5SYNC_WIN
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050200
     if (QtWin::isCompositionEnabled())
     {
         QtWin::extendFrameIntoClientArea(this, 0, this->layout()->menuBar()->height(), 0, 0);
@@ -138,7 +138,7 @@ void PictureDialog::stylizeDialog()
 bool PictureDialog::event(QEvent *event)
 {
 #ifdef GTA5SYNC_WIN
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050200
     if (navienabled)
     {
         if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange)
