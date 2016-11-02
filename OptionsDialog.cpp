@@ -199,7 +199,11 @@ void OptionsDialog::applySettings()
 #else
     settings->setValue("Language", ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()));
 #endif
+#ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050000
     settings->setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
+#endif
+#endif
     settings->endGroup();
 
     settings->beginGroup("Profile");
@@ -407,9 +411,19 @@ void OptionsDialog::setupCustomGTAFolder()
 
 void OptionsDialog::setupSnapmaticPictureViewer()
 {
+#ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050000
     settings->beginGroup("Interface");
     ui->cbSnapmaticNavigationBar->setChecked(settings->value("NavigationBar", false).toBool());
     settings->endGroup();
+#else
+    ui->cbSnapmaticNavigationBar->setVisible(false);
+    ui->gbSnapmaticPictureViewer->setVisible(false);
+#endif
+#else
+    ui->cbSnapmaticNavigationBar->setVisible(false);
+    ui->gbSnapmaticPictureViewer->setVisible(false);
+#endif
 }
 
 void OptionsDialog::on_cmdExploreFolder_clicked()
