@@ -63,6 +63,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     setupDefaultProfile();
     setupPictureSettings();
     setupCustomGTAFolder();
+    setupSnapmaticPictureViewer();
 
     this->setWindowTitle(windowTitle().arg(GTA5SYNC_APPSTR));
 }
@@ -198,6 +199,7 @@ void OptionsDialog::applySettings()
 #else
     settings->setValue("Language", ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()));
 #endif
+    settings->setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
     settings->endGroup();
 
     settings->beginGroup("Profile");
@@ -400,6 +402,13 @@ void OptionsDialog::setupCustomGTAFolder()
     }
     ui->txtFolder->setText(currentCFolder);
     ui->cbForceCustomFolder->setChecked(currentFFolder);
+    settings->endGroup();
+}
+
+void OptionsDialog::setupSnapmaticPictureViewer()
+{
+    settings->beginGroup("Interface");
+    ui->cbSnapmaticNavigationBar->setChecked(settings->value("NavigationBar", false).toBool());
     settings->endGroup();
 }
 

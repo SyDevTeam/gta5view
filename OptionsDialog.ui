@@ -77,7 +77,7 @@
          <property name="title">
           <string>Custom GTA V Folder</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="vlCustomGTAVFolder">
           <item>
            <widget class="QCheckBox" name="cbForceCustomFolder">
             <property name="text">
@@ -293,6 +293,22 @@
              </widget>
             </item>
            </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbSnapmaticPictureViewer">
+         <property name="title">
+          <string>Picture Viewer</string>
+         </property>
+         <layout class="QVBoxLayout" name="vlSnapmaticPictureViewer">
+          <item>
+           <widget class="QCheckBox" name="cbSnapmaticNavigationBar">
+            <property name="text">
+             <string>Enable Navigation Bar</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

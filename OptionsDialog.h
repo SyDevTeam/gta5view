@@ -72,6 +72,7 @@ private:
     void setupDefaultProfile();
     void setupPictureSettings();
     void setupCustomGTAFolder();
+    void setupSnapmaticPictureViewer();
     void applySettings();
 };
 
