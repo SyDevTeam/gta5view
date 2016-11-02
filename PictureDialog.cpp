@@ -116,6 +116,8 @@ void PictureDialog::addPreviousNextButtons()
 
 void PictureDialog::stylizeDialog()
 {
+#ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050000
     if (QtWin::isCompositionEnabled())
     {
         QtWin::extendFrameIntoClientArea(this, 0, this->layout()->menuBar()->height(), 0, 0);
@@ -129,6 +131,8 @@ void PictureDialog::stylizeDialog()
         setAttribute(Qt::WA_TranslucentBackground, false);
         setStyleSheet(QString("PictureDialog { background: %1; }").arg(QtWin::realColorizationColor().name()));
     }
+#endif
+#endif
 }
 
 bool PictureDialog::event(QEvent *event)
