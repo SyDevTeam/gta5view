@@ -227,6 +227,7 @@ int main(int argc, char *argv[])
     // End external translate loading
     // Start internal translate loading
     QTranslator appTranslator;
+    trsf = false;
     if (language == "System" || language.trimmed() == "")
     {
         QString languageName = QLocale::system().name();
@@ -270,6 +271,7 @@ int main(int argc, char *argv[])
             {
                 appTranslator.load(":/tr/gta5sync_" + langList.at(0) + ".qm");
                 QLocale::setDefault(QLocale(langList.at(0)));
+
             }
         }
     }

@@ -3,6 +3,9 @@
         <file>gta5sync_de.qm</file>
         <file>qt_de.qm</file>
         <file>qtbase_de.qm</file>
+        <file>gta5sync_fr.qm</file>
+        <file>qt_fr.qm</file>
+        <file>qtbase_fr.qm</file>
     </qresource>
     <qresource prefix="/img">
         <file>savegame.png</file>
