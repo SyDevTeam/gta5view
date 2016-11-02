@@ -285,44 +285,54 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>%1%</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="317"/>
+        <location filename="../OptionsDialog.ui" line="303"/>
+        <source>Picture Viewer</source>
+        <translation>Snapmatic Bildansicht</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="309"/>
+        <source>Enable Navigation Bar</source>
+        <translation>Aktiviere Navigationsleiste</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="333"/>
         <source>Players</source>
         <translation>Spieler</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="357"/>
+        <location filename="../OptionsDialog.ui" line="373"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="362"/>
+        <location filename="../OptionsDialog.ui" line="378"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="371"/>
-        <location filename="../OptionsDialog.ui" line="377"/>
+        <location filename="../OptionsDialog.ui" line="387"/>
+        <location filename="../OptionsDialog.ui" line="393"/>
         <source>Language</source>
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="403"/>
+        <location filename="../OptionsDialog.ui" line="419"/>
         <source>Sync</source>
         <translation>Sync</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="409"/>
+        <location filename="../OptionsDialog.ui" line="425"/>
         <source>Sync is not implemented at current time</source>
         <translation>Sync wurde bisher nicht implementiert</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="441"/>
+        <location filename="../OptionsDialog.ui" line="457"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="448"/>
+        <location filename="../OptionsDialog.ui" line="464"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>Abbre&amp;chen</translation>
@@ -333,26 +343,26 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">%1 (%2 wenn verfügbar) [sys]</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="111"/>
+        <location filename="../OptionsDialog.cpp" line="112"/>
         <source>System</source>
         <comment>System like PC System</comment>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="111"/>
+        <location filename="../OptionsDialog.cpp" line="112"/>
         <source>%1 (%2 if available)</source>
         <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
         <translation>%1 (%2 wenn verfügbar)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="265"/>
-        <location filename="../OptionsDialog.cpp" line="269"/>
+        <location filename="../OptionsDialog.cpp" line="267"/>
+        <location filename="../OptionsDialog.cpp" line="271"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="265"/>
+        <location filename="../OptionsDialog.cpp" line="267"/>
         <source>The new Custom Folder will initialize after you restart %1.</source>
         <translation>Der eigene Ordner wird initialisiert sobald du %1 neugestartet hast.</translation>
     </message>
@@ -361,20 +371,20 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="vanished">Der eigene Ordner initialisiert sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="269"/>
+        <location filename="../OptionsDialog.cpp" line="271"/>
         <source>The language change will take effect after you restart %1.</source>
         <translation>Die Änderung der Sprache nimmt Effekt sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="279"/>
+        <location filename="../OptionsDialog.cpp" line="281"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Kein Profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="287"/>
-        <location filename="../OptionsDialog.cpp" line="291"/>
+        <location filename="../OptionsDialog.cpp" line="289"/>
         <location filename="../OptionsDialog.cpp" line="293"/>
+        <location filename="../OptionsDialog.cpp" line="295"/>
         <source>Profile: %1</source>
         <translation>Profil: %1</translation>
     </message>
@@ -411,7 +421,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
 &lt;span style=&quot; font-weight:600;&quot;&gt;Erstellt: &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="81"/>
+        <location filename="../PictureDialog.ui" line="101"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
@@ -422,14 +432,14 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
 &lt;span style=&quot; font-weight:600;&quot;&gt;Erstellt: &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="132"/>
+        <location filename="../PictureDialog.ui" line="158"/>
         <location filename="../PictureCopy.cpp" line="55"/>
         <location filename="../PictureExport.cpp" line="88"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="148"/>
+        <location filename="../PictureDialog.ui" line="174"/>
         <source>&amp;Close</source>
         <translation>&amp;Schließen</translation>
     </message>
@@ -466,46 +476,46 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Kopieren</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="145"/>
+        <location filename="../PictureDialog.ui" line="171"/>
         <source>Close</source>
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="71"/>
+        <location filename="../PictureDialog.cpp" line="81"/>
         <source>Export as &amp;JPG picture...</source>
         <translation>Exportiere als &amp;JPG Bild...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="72"/>
+        <location filename="../PictureDialog.cpp" line="82"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation>Exportiere als &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="168"/>
-        <location filename="../PictureDialog.cpp" line="225"/>
+        <location filename="../PictureDialog.cpp" line="237"/>
+        <location filename="../PictureDialog.cpp" line="294"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Snapmatic Bildansicht</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="168"/>
-        <location filename="../PictureDialog.cpp" line="225"/>
+        <location filename="../PictureDialog.cpp" line="237"/>
+        <location filename="../PictureDialog.cpp" line="294"/>
         <source>Failed at %1</source>
         <translation>Fehlgeschlagen bei %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="214"/>
-        <location filename="../PictureDialog.cpp" line="224"/>
+        <location filename="../PictureDialog.cpp" line="283"/>
+        <location filename="../PictureDialog.cpp" line="293"/>
         <source>No player</source>
         <translation>Keine Spieler</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="217"/>
-        <location filename="../PictureDialog.cpp" line="224"/>
+        <location filename="../PictureDialog.cpp" line="286"/>
+        <location filename="../PictureDialog.cpp" line="293"/>
         <source>No crew</source>
         <translation>Keine Crew</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="224"/>
+        <location filename="../PictureDialog.cpp" line="293"/>
         <source>Unknown Location</source>
         <translation>Unbekannter Standort</translation>
     </message>
@@ -598,7 +608,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">JPEG Bild (*.jpg);;Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="129"/>
+        <location filename="../PictureDialog.ui" line="155"/>
         <source>Export picture</source>
         <translation>Bild exportieren</translation>
     </message>
@@ -1252,18 +1262,18 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="125"/>
-        <location filename="../SnapmaticWidget.cpp" line="133"/>
-        <location filename="../SnapmaticWidget.cpp" line="146"/>
+        <location filename="../SnapmaticWidget.cpp" line="143"/>
+        <location filename="../SnapmaticWidget.cpp" line="156"/>
         <source>Delete picture</source>
         <translation>Bild löschen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="133"/>
+        <location filename="../SnapmaticWidget.cpp" line="143"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation>Bist du sicher %1 von deinen Snapmatic Bilder zu löschen?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="198"/>
+        <location filename="../SnapmaticWidget.cpp" line="208"/>
         <source>Edi&amp;t</source>
         <translation>Bearbei&amp;ten</translation>
     </message>
@@ -1276,7 +1286,7 @@ Exportieren als:</translation>
         <translation type="vanished">&amp;Im Spiel deaktivieren</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="207"/>
+        <location filename="../SnapmaticWidget.cpp" line="217"/>
         <source>&amp;Export</source>
         <translation>&amp;Exportieren</translation>
     </message>
@@ -1289,54 +1299,54 @@ Exportieren als:</translation>
         <translation type="obsolete">Exportiere als &amp;GTA Snapmatic</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="201"/>
+        <location filename="../SnapmaticWidget.cpp" line="211"/>
         <source>Show &amp;In-game</source>
         <translation>&amp;Im Spiel anzeigen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="205"/>
+        <location filename="../SnapmaticWidget.cpp" line="215"/>
         <source>Hide &amp;In-game</source>
         <translation>&amp;Im Spiel ausblenden</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="208"/>
+        <location filename="../SnapmaticWidget.cpp" line="218"/>
         <source>Export as &amp;JPG picture...</source>
         <translation>Exportiere als &amp;JPG Bild...</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="209"/>
+        <location filename="../SnapmaticWidget.cpp" line="219"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation>Exportiere als &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="210"/>
+        <location filename="../SnapmaticWidget.cpp" line="220"/>
         <source>&amp;View</source>
         <translation>A&amp;nsehen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="213"/>
+        <location filename="../SnapmaticWidget.cpp" line="223"/>
         <source>&amp;Remove</source>
         <translation>Entfe&amp;rnen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="217"/>
-        <location filename="../SnapmaticWidget.cpp" line="229"/>
+        <location filename="../SnapmaticWidget.cpp" line="227"/>
+        <location filename="../SnapmaticWidget.cpp" line="239"/>
         <source>&amp;Select</source>
         <translation>Au&amp;swählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="218"/>
+        <location filename="../SnapmaticWidget.cpp" line="228"/>
         <source>&amp;Deselect</source>
         <translation>A&amp;bwählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="219"/>
-        <location filename="../SnapmaticWidget.cpp" line="230"/>
+        <location filename="../SnapmaticWidget.cpp" line="229"/>
+        <location filename="../SnapmaticWidget.cpp" line="240"/>
         <source>Select &amp;All</source>
         <translation>Alles &amp;auswählen</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="223"/>
+        <location filename="../SnapmaticWidget.cpp" line="233"/>
         <source>&amp;Deselect All</source>
         <translation>Alles a&amp;bwählen</translation>
     </message>
@@ -1384,7 +1394,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Bist du sicher %1 von deinen Snapmatic Bilder zu löschen?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="146"/>
+        <location filename="../SnapmaticWidget.cpp" line="156"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation>Fehlgeschlagen beim Löschen %1 von deinen Snapmatic Bildern</translation>
     </message>
@@ -1668,7 +1678,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="408"/>
+        <location filename="../OptionsDialog.cpp" line="417"/>
         <location filename="../UserInterface.cpp" line="73"/>
         <location filename="../UserInterface.cpp" line="447"/>
         <source>Select GTA V Folder...</source>
