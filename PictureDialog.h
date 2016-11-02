@@ -98,6 +98,7 @@ private:
     QString locY;
     QString locZ;
     bool rqfullscreen;
+    bool navienabled;
     bool indexed;
     int index;
     QMenu *exportMenu;

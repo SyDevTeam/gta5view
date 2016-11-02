@@ -64,6 +64,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     plyrsList = QStringList();
     fullscreenWidget = 0;
     rqfullscreen = 0;
+    navienabled = 0;
     indexed = 0;
     picArea = "";
     picTitl = "";
@@ -108,6 +109,7 @@ void PictureDialog::addPreviousNextButtons()
     uiToolbar->addAction(QIcon(":/img/back.png"), "", this, SLOT(previousPictureRequestedSlot()));
     uiToolbar->addAction(QIcon(":/img/next.png"), "", this, SLOT(nextPictureRequestedSlot()));
     ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
+    navienabled = true;
 #endif
 #endif
 }
@@ -133,9 +135,12 @@ bool PictureDialog::event(QEvent *event)
 {
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050000
-    if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange)
+    if (navienabled)
     {
-        stylizeDialog();
+        if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange)
+        {
+            stylizeDialog();
+        }
     }
 #endif
 #endif
