@@ -62,7 +62,7 @@
 #elif defined(_MSC_VER)
 #define GTA5SYNC_COMPILER QString("MSVC %1").arg(QString::number(_MSC_VER).left(2))
 #else
-#define GTA5SYNC_COMPILER "Unknown"
+#define GTA5SYNC_COMPILER QString("Unknown")
 #endif
 #endif
 
