@@ -30,7 +30,8 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QString appVersion = qApp->applicationVersion();
     QString buildType = GTA5SYNC_BUILDTYPE;
     buildType.replace("_", " ");
-    ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", QT_VERSION_STR, qVersion(), __DATE__, __TIME__));
+    QString buildStr = QString("%1, %2").arg(QT_VERSION_STR, GTA5SYNC_COMPILER);
+    ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", buildStr, qVersion(), __DATE__, __TIME__));
 }
 
 AboutDialog::~AboutDialog()

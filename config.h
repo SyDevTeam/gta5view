@@ -18,6 +18,7 @@
 
 #ifndef CONFIG_H
 #define CONFIG_H
+#include <QString>
 
 #ifndef GTA5SYNC_APPVENDOR
 #define GTA5SYNC_APPVENDOR "Syping"
@@ -49,6 +50,20 @@
 
 #ifdef GTA5SYNC_WINRT
 #undef GTA5SYNC_WIN
+#endif
+
+#ifndef GTA5SYNC_COMPILER
+#ifdef __clang__
+#define GTA5SYNC_COMPILER QString("Clang %1.%2.%3").arg(QString::number(__clang_major__), QString::number(__clang_minor__), QString::number(__clang_patchlevel__))
+#elif defined(__GNUC__)
+#define GTA5SYNC_COMPILER QString("GCC %1.%2.%3").arg(QString::number(__GNUC__), QString::number(__GNUC_MINOR__), QString::number(__GNUC_PATCHLEVEL__))
+#elif defined(__GNUG__)
+#define GTA5SYNC_COMPILER QString("GCC %1.%2.%3").arg(QString::number(__GNUG__), QString::number(__GNUC_MINOR__), QString::number(__GNUC_PATCHLEVEL__))
+#elif defined(_MSC_VER)
+#define GTA5SYNC_COMPILER QString("MSVC %1").arg(QString::number(_MSC_VER).left(2))
+#else
+#define GTA5SYNC_COMPILER "Unknown"
+#endif
 #endif
 
 #endif // CONFIG_H
