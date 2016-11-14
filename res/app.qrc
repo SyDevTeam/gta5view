@@ -20,6 +20,7 @@
         <file>5sync-256.png</file>
         <file>back.png</file>
         <file>next.png</file>
+        <file>960x536.png</file>
     </qresource>
     <qresource prefix="/global">
         <file>global.de.ini</file>
