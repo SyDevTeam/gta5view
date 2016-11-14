@@ -60,9 +60,9 @@
 #elif defined(__GNUG__)
 #define GTA5SYNC_COMPILER QString("GCC %1.%2.%3").arg(QString::number(__GNUG__), QString::number(__GNUC_MINOR__), QString::number(__GNUC_PATCHLEVEL__))
 #elif defined(_MSC_VER)
-#define GTA5SYNC_COMPILER QString("MSVC %1").arg(QString::number(_MSC_VER).left(2))
+#define GTA5SYNC_COMPILER QString("MSVC %1").arg(QString::number(_MSC_VER).insert(2, "."))
 #else
-#define GTA5SYNC_COMPILER QString("Unknown")
+#define GTA5SYNC_COMPILER QString("Unknown Compiler")
 #endif
 #endif
 
