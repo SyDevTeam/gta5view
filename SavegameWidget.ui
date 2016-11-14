@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>405</width>
-    <height>45</height>
+    <height>46</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -73,6 +73,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdView">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="toolTip">
          <string>View savegame</string>
         </property>
@@ -83,6 +89,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdCopy">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="toolTip">
          <string>Copy savegame</string>
         </property>
@@ -96,6 +108,12 @@
       </item>
       <item>
        <widget class="QPushButton" name="cmdDelete">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="toolTip">
          <string>Delete savegame</string>
         </property>

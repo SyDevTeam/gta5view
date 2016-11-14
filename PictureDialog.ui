@@ -148,6 +148,12 @@
             </property>
             <item>
              <widget class="QPushButton" name="cmdExport">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
@@ -164,6 +170,12 @@
             </item>
             <item>
              <widget class="QPushButton" name="cmdClose">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="focusPolicy">
                <enum>Qt::NoFocus</enum>
               </property>
@@ -172,6 +184,9 @@
               </property>
               <property name="text">
                <string>&amp;Close</string>
+              </property>
+              <property name="icon">
+               <iconset theme="dialog-close"/>
               </property>
               <property name="autoDefault">
                <bool>false</bool>
