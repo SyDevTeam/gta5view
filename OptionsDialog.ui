@@ -479,7 +479,8 @@
         <string extracomment="OK, Cancel, Apply">&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset theme="dialog-cancel"/>
+        <iconset theme="dialog-cancel">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
