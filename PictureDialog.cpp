@@ -182,7 +182,7 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 ui->cmdExport->click();
                 returnValue = true;
                 break;
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050300
             case Qt::Key_Exit:
                 ui->cmdClose->click();
                 returnValue = true;
