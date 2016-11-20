@@ -400,7 +400,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         QObject::connect(pictureWidget, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
         QObject::connect(pictureWidget, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
 
-        pictureWidget->setMaximumSize(desktopRect.width(), desktopRect.height());
+        pictureWidget->setMinimumSize(desktopRect.width(), desktopRect.height());
         pictureWidget->setMaximumSize(desktopRect.width(), desktopRect.height());
         pictureWidget->showFullScreen();
         pictureWidget->setFocus();
