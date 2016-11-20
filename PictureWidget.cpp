@@ -98,7 +98,7 @@ void PictureWidget::setImage(QImage image_)
 
 void PictureWidget::updateWindowSize(int screenID)
 {
-    if (screenID = QApplication::desktop()->screenNumber(this))
+    if (screenID == QApplication::desktop()->screenNumber(this))
     {
         QRect desktopRect = QApplication::desktop()->screenGeometry(this);
         this->move(desktopRect.x(), desktopRect.y());
