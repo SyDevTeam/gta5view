@@ -19,6 +19,8 @@
 #include "PictureDialog.h"
 #include "PictureWidget.h"
 #include "UiModLabel.h"
+#include <QDesktopWidget>
+#include <QApplication>
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QPixmap>
@@ -42,6 +44,7 @@ PictureWidget::PictureWidget(QWidget *parent) : QDialog(parent)
 
     QObject::connect(pictureLabel, SIGNAL(mouseDoubleClicked(Qt::MouseButton)), this, SLOT(pictureDoubleClicked(Qt::MouseButton)));
     QObject::connect(pictureLabel, SIGNAL(customContextMenuRequested(QPoint)), parent, SLOT(exportCustomContextMenuRequested(QPoint)));
+    QObject::connect(QApplication::desktop(), SIGNAL(resized(int)), this, SLOT(updateWindowSize(int)));
 
     setLayout(widgetLayout);
 }
@@ -81,12 +84,27 @@ void PictureWidget::pictureDoubleClicked(Qt::MouseButton button)
     }
 }
 
-void PictureWidget::setImage(QImage image, QRect rec)
+void PictureWidget::setImage(QImage image_, QRect rec)
 {
+    image = image_;
     pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(rec.width(), rec.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
 }
 
-void PictureWidget::setImage(QImage image)
+void PictureWidget::setImage(QImage image_)
 {
+    image = image_;
     pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(geometry().width(), geometry().height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+}
+
+void PictureWidget::updateWindowSize(int screenID)
+{
+    if (screenID = QApplication::desktop()->screenNumber(this))
+    {
+        QRect desktopRect = QApplication::desktop()->screenGeometry(this);
+        this->move(desktopRect.x(), desktopRect.y());
+        this->resize(desktopRect.width(), desktopRect.height());
+        this->showFullScreen();
+        pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(desktopRect.width(), desktopRect.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+
+    }
 }

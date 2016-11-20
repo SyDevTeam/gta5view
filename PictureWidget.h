@@ -42,9 +42,11 @@ protected:
 private:
     QHBoxLayout *widgetLayout;
     UiModLabel *pictureLabel;
+    QImage image;
 
 private slots:
     void pictureDoubleClicked(Qt::MouseButton button);
+    void updateWindowSize(int screenID);
 
 signals:
     void nextPictureRequested();
