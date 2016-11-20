@@ -386,7 +386,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 {
     if (button == Qt::LeftButton)
     {
-        QRect desktopRect = QApplication::desktop()->screenGeometry();
+        QRect desktopRect = QApplication::desktop()->screenGeometry(this);
         PictureWidget *pictureWidget = new PictureWidget(this);
         pictureWidget->setObjectName("PictureWidget");
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
@@ -400,8 +400,11 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         QObject::connect(pictureWidget, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
         QObject::connect(pictureWidget, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
 
+        pictureWidget->setMaximumSize(desktopRect.width(), desktopRect.height());
+        pictureWidget->setMaximumSize(desktopRect.width(), desktopRect.height());
         pictureWidget->showFullScreen();
         pictureWidget->setFocus();
+        pictureWidget->raise();
         pictureWidget->exec();
 
         fullscreenWidget = 0;

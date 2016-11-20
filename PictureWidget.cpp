@@ -23,6 +23,7 @@
 #include <QKeyEvent>
 #include <QPixmap>
 #include <QEvent>
+#include <QDebug>
 
 PictureWidget::PictureWidget(QWidget *parent) : QDialog(parent)
 {
