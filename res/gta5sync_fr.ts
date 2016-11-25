@@ -1077,7 +1077,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="211"/>
         <source>Ctrl+P</source>
-        <translation>Ctrl + P</translation>
+        <translation>Ctrl+P</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="220"/>
@@ -1092,7 +1092,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="226"/>
         <source>Ctrl+Q</source>
-        <translation>Ctrl + Q</translation>
+        <translation>Ctrl+Q</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="231"/>
@@ -1112,7 +1112,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="246"/>
         <source>Ctrl+S</source>
-        <translation>Ctrl + S</translation>
+        <translation>Ctrl+S</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="255"/>
@@ -1122,7 +1122,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="258"/>
         <source>Ctrl+A</source>
-        <translation>Ctrl + A</translation>
+        <translation>Ctrl+A</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="267"/>
@@ -1132,7 +1132,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="270"/>
         <source>Ctrl+D</source>
-        <translation>Ctrl + D</translation>
+        <translation>Ctrl+D</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="279"/>
@@ -1142,7 +1142,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="282"/>
         <source>Ctrl+E</source>
-        <translation>Ctrl + E</translation>
+        <translation>Ctrl+E</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="287"/>
@@ -1152,7 +1152,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="290"/>
         <source>Ctrl+Del</source>
-        <translation>Ctrl + Suppr</translation>
+        <translation>Ctrl+Del</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="299"/>
@@ -1162,7 +1162,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="302"/>
         <source>Ctrl+I</source>
-        <translation>Ctrl + I</translation>
+        <translation>Ctrl+I</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="311"/>
@@ -1172,7 +1172,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="314"/>
         <source>Ctrl+O</source>
-        <translation>Ctrl + O</translation>
+        <translation>Ctrl+O</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
@@ -1191,7 +1191,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="325"/>
         <source>Ctrl+G</source>
-        <translation>Ctrl + G</translation>
+        <translation>Ctrl+G</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="330"/>
@@ -1201,7 +1201,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="333"/>
         <source>Shift+E</source>
-        <translation>Maj + E</translation>
+        <translation>Shift+E</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="187"/>
@@ -1216,7 +1216,7 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../UserInterface.ui" line="341"/>
         <source>Shift+D</source>
-        <translation>Maj + D</translation>
+        <translation>Shift+D</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="57"/>
