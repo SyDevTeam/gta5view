@@ -147,7 +147,8 @@
              <string>&amp;Close</string>
             </property>
             <property name="icon">
-             <iconset theme="dialog-close"/>
+             <iconset theme="dialog-close">
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="autoDefault">
              <bool>true</bool>
@@ -168,7 +169,7 @@
      <x>0</x>
      <y>0</y>
      <width>625</width>
-     <height>21</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -262,10 +263,6 @@
    </property>
   </action>
   <action name="actionSelect_all">
-   <property name="icon">
-    <iconset>
-     <normaloff>.</normaloff>.</iconset>
-   </property>
    <property name="text">
     <string>Select &amp;All</string>
    </property>
@@ -274,10 +271,6 @@
    </property>
   </action>
   <action name="actionDeselect_all">
-   <property name="icon">
-    <iconset>
-     <normaloff>.</normaloff>.</iconset>
-   </property>
    <property name="text">
     <string>&amp;Deselect All</string>
    </property>
@@ -286,10 +279,6 @@
    </property>
   </action>
   <action name="actionExport_selected">
-   <property name="icon">
-    <iconset>
-     <normaloff>.</normaloff>.</iconset>
-   </property>
    <property name="text">
     <string>&amp;Export selected...</string>
    </property>
@@ -306,10 +295,6 @@
    </property>
   </action>
   <action name="action_Import">
-   <property name="icon">
-    <iconset>
-     <normaloff>.</normaloff>.</iconset>
-   </property>
    <property name="text">
     <string>&amp;Import files...</string>
    </property>
@@ -318,10 +303,6 @@
    </property>
   </action>
   <action name="actionOpen_File">
-   <property name="icon">
-    <iconset>
-     <normaloff>.</normaloff>.</iconset>
-   </property>
    <property name="text">
     <string>&amp;Open File...</string>
    </property>
