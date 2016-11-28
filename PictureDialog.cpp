@@ -389,7 +389,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         QRect desktopRect = QApplication::desktop()->screenGeometry(this);
         PictureWidget *pictureWidget = new PictureWidget(this);
         pictureWidget->setObjectName("PictureWidget");
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x050600
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::MaximizeUsingFullscreenGeometryHint);
 #else
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint);
