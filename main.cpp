@@ -33,6 +33,7 @@
 #include <QTranslator>
 #include <QMessageBox>
 #include <QFileInfo>
+#include <QSysInfo>
 #include <QRawFont>
 #include <QObject>
 #include <QString>
@@ -53,21 +54,24 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(GTA5SYNC_APPVER);
 
 #ifdef GTA5SYNC_WIN
-#if QT_VERSION >= 0x050000
-    // Get Windows Font
-    NONCLIENTMETRICS ncm;
-    ncm.cbSize = sizeof(ncm);
-    SystemParametersInfo(SPI_GETNONCLIENTMETRICS, ncm.cbSize, &ncm, 0);
-    LOGFONTW uiFont = ncm.lfMessageFont;
-    QString uiFontStr(QString::fromStdWString(std::wstring(uiFont.lfFaceName)));
+#if QT_VERSION >= 0x050400
+    if (QSysInfo::windowsVersion() >= 0x0080)
+    {
+        // Get Windows Font
+        NONCLIENTMETRICS ncm;
+        ncm.cbSize = sizeof(ncm);
+        SystemParametersInfo(SPI_GETNONCLIENTMETRICS, ncm.cbSize, &ncm, 0);
+        LOGFONTW uiFont = ncm.lfMessageFont;
+        QString uiFontStr(QString::fromStdWString(std::wstring(uiFont.lfFaceName)));
 
 #ifdef GTA5SYNC_DEBUG
-    QMessageBox::information(a.desktop(), QApplication::tr("Font"), QApplication::tr("Selected Font: %1").arg(uiFontStr));
+        QMessageBox::information(a.desktop(), QApplication::tr("Font"), QApplication::tr("Selected Font: %1").arg(uiFontStr));
 #endif
 
-    // Set Application Font
-    QFont appFont(uiFontStr, 9);
-    a.setFont(appFont);
+        // Set Application Font
+        QFont appFont(uiFontStr, 9);
+        a.setFont(appFont);
+    }
 #endif
 #endif
 
