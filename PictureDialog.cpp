@@ -389,7 +389,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         QRect desktopRect = QApplication::desktop()->screenGeometry(this);
         PictureWidget *pictureWidget = new PictureWidget(this);
         pictureWidget->setObjectName("PictureWidget");
-        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::WindowContextHelpButtonHint);
+        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::MaximizeUsingFullscreenGeometryHint);
         pictureWidget->setWindowTitle(this->windowTitle());
         pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color: black;}");
         pictureWidget->setImage(snapmaticPicture, desktopRect);

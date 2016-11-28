@@ -30,6 +30,7 @@
 #include "IconLoader.h"
 #include "AppEnv.h"
 #include "config.h"
+#include <QStyleFactory>
 #include <QFileDialog>
 #include <QHBoxLayout>
 #include <QSpacerItem>
