@@ -45,6 +45,7 @@
 #include <QKeyEvent>
 #include <QMimeData>
 #include <QToolBar>
+#include <QPicture>
 #include <QBuffer>
 #include <QDebug>
 #include <QList>
@@ -85,6 +86,9 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     // Global map
     globalMap = GlobalString::getGlobalMap();
 
+    // Event connects
+    connect(ui->labJSON, SIGNAL(resized(QSize)), this, SLOT(adaptNewDialogSize(QSize)));
+
     installEventFilter(this);
     installEventFilter(ui->labPicture);
     ui->labPicture->setFocusPolicy(Qt::StrongFocus);
@@ -112,6 +116,18 @@ void PictureDialog::addPreviousNextButtons()
     navienabled = true;
 #endif
 #endif
+}
+
+void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
+{
+    Q_UNUSED(newLabelSize)
+    int newDialogHeight = ui->labPicture->pixmap()->height();
+    newDialogHeight = newDialogHeight + ui->jsonFrame->height();
+    setMinimumSize(width(), newDialogHeight);
+    setMaximumSize(width(), newDialogHeight);
+    resize(width(), newDialogHeight);
+    ui->labPicture->updateGeometry();
+    ui->jsonFrame->updateGeometry();
 }
 
 void PictureDialog::stylizeDialog()

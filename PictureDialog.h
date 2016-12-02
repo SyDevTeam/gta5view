@@ -53,6 +53,7 @@ public slots:
     void playerNameUpdated();
     void dialogNextPictureRequested();
     void dialogPreviousPictureRequested();
+    void adaptNewDialogSize(QSize newLabelSize);
     void exportCustomContextMenuRequested(const QPoint &pos);
 
 private slots:

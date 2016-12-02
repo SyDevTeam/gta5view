@@ -93,7 +93,7 @@
          <number>4</number>
         </property>
         <item>
-         <widget class="QLabel" name="labJSON">
+         <widget class="UiModLabel" name="labJSON">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -189,7 +189,8 @@
                <string>&amp;Close</string>
               </property>
               <property name="icon">
-               <iconset theme="dialog-close"/>
+               <iconset theme="dialog-close">
+                <normaloff>.</normaloff>.</iconset>
               </property>
               <property name="autoDefault">
                <bool>false</bool>

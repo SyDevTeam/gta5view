@@ -228,6 +228,7 @@ void ProfileInterface::dialogNextPictureRequested(QWidget *dialog)
             QString newWidgetKey = pictureKeyList.at(picIndex);
             SnapmaticWidget *picWidget = (SnapmaticWidget*)widgets.key(newWidgetKey);
             picDialog->setSnapmaticPicture(picWidget->getPicture(), picIndex);
+            //picDialog->adaptNewDialogSize();
         }
     }
 }
@@ -261,6 +262,7 @@ void ProfileInterface::dialogPreviousPictureRequested(QWidget *dialog)
             QString newWidgetKey = pictureKeyList.at(picIndex );
             SnapmaticWidget *picWidget = (SnapmaticWidget*)widgets.key(newWidgetKey);
             picDialog->setSnapmaticPicture(picWidget->getPicture(), picIndex);
+            //picDialog->adaptNewDialogSize();
         }
     }
 }

@@ -60,3 +60,9 @@ void UiModLabel::mouseDoubleClickEvent(QMouseEvent *ev)
     QLabel::mouseDoubleClickEvent(ev);
     emit mouseDoubleClicked(ev->button());
 }
+
+void UiModLabel::resizeEvent(QResizeEvent *ev)
+{
+    QLabel::resizeEvent(ev);
+    emit resized(ev->size());
+}

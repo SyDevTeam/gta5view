@@ -22,6 +22,7 @@
 #include <QWidget>
 #include <QString>
 #include <QLabel>
+#include <QSize>
 
 class UiModLabel : public QLabel
 {
@@ -37,12 +38,14 @@ protected:
     void mousePressEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
     void mouseDoubleClickEvent(QMouseEvent *ev);
+    void resizeEvent(QResizeEvent *ev);
 
 signals:
     void mouseMoved();
     void mousePressed(Qt::MouseButton button);
     void mouseReleased(Qt::MouseButton button);
     void mouseDoubleClicked(Qt::MouseButton button);
+    void resized(QSize newSize);
 };
 
 #endif // UIMODLABEL_H

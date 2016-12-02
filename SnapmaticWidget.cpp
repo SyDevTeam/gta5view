@@ -122,6 +122,7 @@ void SnapmaticWidget::on_cmdView_clicked()
     // show picture dialog
     picDialog->show();
     if (navigationBar) picDialog->stylizeDialog();
+    //picDialog->adaptNewDialogSize();
     picDialog->setMinimumSize(picDialog->size());
     picDialog->setMaximumSize(picDialog->size());
     picDialog->exec();
