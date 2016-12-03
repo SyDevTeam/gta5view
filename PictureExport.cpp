@@ -85,7 +85,7 @@ fileDialogPreSave:
     fileDialog.setDefaultSuffix("suffix");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
     fileDialog.setWindowTitle(PictureDialog::tr("Export as JPG picture..."));
-    fileDialog.setLabelText(QFileDialog::Accept, PictureDialog::tr("&Export"));
+    fileDialog.setLabelText(QFileDialog::Accept, PictureDialog::tr("Export"));
 
     QStringList filters;
     filters << PictureDialog::tr("JPEG picture (*.jpg)");
