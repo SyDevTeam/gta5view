@@ -32,7 +32,7 @@
 #ifndef GTA5SYNC_DAILYB
 #define GTA5SYNC_APPVER "1.0.0"
 #else
-#define GTA5SYNC_APPVER QString::number(GTA5SYNC_APPVER_DAILY)
+#define GTA5SYNC_APPVER QString::number(GTA5SYNC_DAILYB)
 #endif
 #endif
 
