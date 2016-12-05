@@ -2,10 +2,10 @@
 Version=1.0
 Encoding=UTF-8
 Type=Application
-Name=gta5sync
-Comment=gta5sync
+Name=gta5view
+Comment=gta5view
 Categories=Qt;Application;Utility;
-Exec=gta5sync
-Icon=gta5sync
+Exec=gta5view
+Icon=gta5view
 Terminal=false
 StartupNotify=false

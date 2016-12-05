@@ -145,8 +145,8 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
 # UNIX SYSTEM STUFF
 
 unix: !macx: appfiles.path = $$(INSTALL_PATH)/share/applications
-unix: !macx: appfiles.files = $$PWD/res/gta5sync.desktop
+unix: !macx: appfiles.files = $$PWD/res/gta5view.desktop
 unix: !macx: pixmaps.path = $$(INSTALL_PATH)/share/pixmaps
-unix: !macx: pixmaps.files = $$PWD/res/gta5sync.xpm
+unix: !macx: pixmaps.files = $$PWD/res/gta5view.xpm
 unix: !macx: target.path = $$(INSTALL_PATH)/bin
 unix: !macx: INSTALLS += target pixmaps appfiles
