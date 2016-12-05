@@ -1,5 +1,5 @@
 #/*****************************************************************************
-#* gta5sync GRAND THEFT AUTO V SYNC
+#* gta5view Grand Theft Auto V Profile Viewer
 #* Copyright (C) 2015-2016 Syping
 #*
 #* This program is free software: you can redistribute it and/or modify
@@ -21,8 +21,8 @@ QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: QT += winextras
 
-DEPLOYMENT.display_name = gta5sync
-TARGET = gta5sync
+DEPLOYMENT.display_name = gta5view
+TARGET = gta5view
 TEMPLATE = app
 
 SOURCES += main.cpp \

@@ -4,12 +4,10 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../AboutDialog.ui" line="14"/>
         <source>About gta5sync</source>
-        <translation>Über gta5sync</translation>
+        <translation type="vanished">Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="29"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 A project for viewing and sync Grand Theft Auto V Snapmatic&lt;br/&gt;
@@ -21,7 +19,7 @@ Compiled with Qt %2&lt;br/&gt;
 Running with Qt %3&lt;br/&gt;
 &lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 Ein Projekt zum ansehen und synchronisieren von&lt;br/&gt;
 Grand Theft Auto V Snapmatic Bilder und Spielständen&lt;br/&gt;
@@ -54,6 +52,36 @@ Gebaut mit Qt %2&lt;br/&gt;
 Läuft auf Qt %3&lt;br/&gt;
 &lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.ui" line="14"/>
+        <source>About gta5view</source>
+        <translation>Über gta5view</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.ui" line="29"/>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5view&lt;/span&gt;&lt;br/&gt;
+&lt;br/&gt;
+A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
+Pictures and Savegames&lt;br/&gt;
+&lt;br/&gt;
+Project version: %1&lt;br/&gt;
+Project build: %4, %5&lt;br/&gt;
+Compiled with Qt %2&lt;br/&gt;
+Running with Qt %3&lt;br/&gt;
+&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5view is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5view&lt;/span&gt;&lt;br/&gt;
+&lt;br/&gt;
+Ein Projekt zum ansehen von&lt;br/&gt;
+Grand Theft Auto V Snapmatic Bilder und Spielständen&lt;br/&gt;
+&lt;br/&gt;
+Projektversion: %1&lt;br/&gt;
+Projektbau: %4, %5&lt;br/&gt;
+Gebaut mit Qt %2&lt;br/&gt;
+Läuft auf Qt %3&lt;br/&gt;
+&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5view ist lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="76"/>
@@ -316,23 +344,21 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Sprache</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="419"/>
         <source>Sync</source>
-        <translation>Sync</translation>
+        <translation type="vanished">Sync</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="425"/>
         <source>Sync is not implemented at current time</source>
-        <translation>Sync wurde bisher nicht implementiert</translation>
+        <translation type="vanished">Sync wurde bisher nicht implementiert</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="463"/>
+        <location filename="../OptionsDialog.ui" line="443"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="479"/>
+        <location filename="../OptionsDialog.ui" line="460"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>Abbre&amp;chen</translation>
@@ -1410,9 +1436,8 @@ Exportieren als:</translation>
         <translation type="obsolete">GTA V Sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="20"/>
         <source>gta5sync - %1</source>
-        <translation>gta5sync - %1</translation>
+        <translation type="vanished">gta5sync - %1</translation>
     </message>
     <message>
         <source>File</source>
@@ -1435,7 +1460,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="269"/>
+        <location filename="../UserInterface.ui" line="270"/>
         <source>Ctrl+A</source>
         <translation>Strg+A</translation>
     </message>
@@ -1448,7 +1473,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Optionen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="309"/>
+        <location filename="../UserInterface.ui" line="310"/>
         <source>Ctrl+O</source>
         <translation>Strg+O</translation>
     </message>
@@ -1457,7 +1482,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="261"/>
+        <location filename="../UserInterface.ui" line="262"/>
         <source>Ctrl+S</source>
         <translation>Strg+S</translation>
     </message>
@@ -1474,7 +1499,7 @@ Exportieren als:</translation>
         <translation type="obsolete">Auswahl exportieren</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="285"/>
+        <location filename="../UserInterface.ui" line="286"/>
         <source>Ctrl+E</source>
         <translation>Strg+E</translation>
     </message>
@@ -1483,27 +1508,32 @@ Exportieren als:</translation>
         <translation type="obsolete">Auswahl löschen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="277"/>
+        <location filename="../UserInterface.ui" line="278"/>
         <source>Ctrl+D</source>
         <translation>Strg+D</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="238"/>
+        <location filename="../UserInterface.ui" line="239"/>
         <source>Exit</source>
         <translation>Beenden</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="202"/>
+        <location filename="../UserInterface.ui" line="203"/>
         <source>&amp;Selection visibility</source>
         <translation>Auswahl &amp;Sichtbarkeit</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="235"/>
+        <location filename="../UserInterface.ui" line="224"/>
+        <source>&amp;About gta5view</source>
+        <translation>&amp;Über gta5view</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="236"/>
         <source>&amp;Exit</source>
         <translation>B&amp;eenden</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="241"/>
+        <location filename="../UserInterface.ui" line="242"/>
         <source>Ctrl+Q</source>
         <translation>Strg+Q</translation>
     </message>
@@ -1513,27 +1543,32 @@ Exportieren als:</translation>
         <translation>Profil auswählen</translation>
     </message>
     <message>
+        <location filename="../UserInterface.ui" line="20"/>
+        <source>gta5view - %1</source>
+        <translation>gta5view - %1</translation>
+    </message>
+    <message>
         <location filename="../UserInterface.ui" line="105"/>
         <source>%1 %2</source>
         <translation>%1 %2</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="176"/>
+        <location filename="../UserInterface.ui" line="177"/>
         <source>&amp;File</source>
         <translation>&amp;Datei</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="186"/>
+        <location filename="../UserInterface.ui" line="187"/>
         <source>&amp;Help</source>
         <translation>&amp;Hilfe</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="192"/>
+        <location filename="../UserInterface.ui" line="193"/>
         <source>&amp;Edit</source>
         <translation>Bearb&amp;eiten</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="198"/>
+        <location filename="../UserInterface.ui" line="199"/>
         <source>&amp;Profile</source>
         <translation>&amp;Profil</translation>
     </message>
@@ -1542,48 +1577,47 @@ Exportieren als:</translation>
         <translation type="vanished">Auswahl Sichtbarkeit</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="223"/>
         <source>&amp;About gta5sync</source>
-        <translation>&amp;Über gta5sync</translation>
+        <translation type="vanished">&amp;Über gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="246"/>
+        <location filename="../UserInterface.ui" line="247"/>
         <source>Close &amp;Profile</source>
         <translation>&amp;Profil schließen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="249"/>
+        <location filename="../UserInterface.ui" line="250"/>
         <source>Ctrl+End</source>
         <translation>Strg+Ende</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="293"/>
+        <location filename="../UserInterface.ui" line="294"/>
         <source>Ctrl+Del</source>
         <translation>Strg+Entf</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="306"/>
+        <location filename="../UserInterface.ui" line="307"/>
         <source>&amp;Open File...</source>
         <translation>Datei &amp;öffnen...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="314"/>
+        <location filename="../UserInterface.ui" line="315"/>
         <location filename="../UserInterface.cpp" line="125"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>Wähle &amp;GTA V Ordner...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="320"/>
+        <location filename="../UserInterface.ui" line="321"/>
         <source>Ctrl+G</source>
         <translation>Strg+G</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="325"/>
+        <location filename="../UserInterface.ui" line="326"/>
         <source>Show In-gam&amp;e</source>
         <translation>Im Spiel anzeig&amp;en</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="333"/>
+        <location filename="../UserInterface.ui" line="334"/>
         <source>Hi&amp;de In-game</source>
         <translation>Im Spiel ausblen&amp;den</translation>
     </message>
@@ -1596,7 +1630,7 @@ Exportieren als:</translation>
         <translation type="vanished">Im Spiel aktivier&amp;en</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="328"/>
+        <location filename="../UserInterface.ui" line="329"/>
         <source>Shift+E</source>
         <translation>Umschalt+E</translation>
     </message>
@@ -1605,7 +1639,7 @@ Exportieren als:</translation>
         <translation type="vanished">Im Spiel &amp;deaktivieren</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="336"/>
+        <location filename="../UserInterface.ui" line="337"/>
         <source>Shift+D</source>
         <translation>Umschalt+D</translation>
     </message>
@@ -1619,7 +1653,7 @@ Exportieren als:</translation>
         <translation type="obsolete">&amp;Profil auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="226"/>
+        <location filename="../UserInterface.ui" line="227"/>
         <source>Ctrl+P</source>
         <translation>Strg+P</translation>
     </message>
@@ -1628,27 +1662,27 @@ Exportieren als:</translation>
         <translation type="obsolete">&amp;Optionen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="258"/>
+        <location filename="../UserInterface.ui" line="259"/>
         <source>&amp;Settings</source>
         <translation>Ein&amp;stellungen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="266"/>
+        <location filename="../UserInterface.ui" line="267"/>
         <source>Select &amp;All</source>
         <translation>&amp;Alles auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="274"/>
+        <location filename="../UserInterface.ui" line="275"/>
         <source>&amp;Deselect All</source>
         <translation>Alles a&amp;bwählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="282"/>
+        <location filename="../UserInterface.ui" line="283"/>
         <source>&amp;Export selected...</source>
         <translation>Auswahl &amp;exportieren...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="290"/>
+        <location filename="../UserInterface.ui" line="291"/>
         <source>&amp;Remove selected</source>
         <translation>Auswahl entfe&amp;rnen</translation>
     </message>
@@ -1657,12 +1691,12 @@ Exportieren als:</translation>
         <translation type="obsolete">Strg+R</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="298"/>
+        <location filename="../UserInterface.ui" line="299"/>
         <source>&amp;Import files...</source>
         <translation>Dateien &amp;importieren...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="301"/>
+        <location filename="../UserInterface.ui" line="302"/>
         <source>Ctrl+I</source>
         <translation>Strg+I</translation>
     </message>
@@ -1677,7 +1711,7 @@ Exportieren als:</translation>
         <translation>Profil auswählen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="317"/>
+        <location filename="../UserInterface.ui" line="318"/>
         <location filename="../OptionsDialog.cpp" line="431"/>
         <location filename="../UserInterface.cpp" line="74"/>
         <location filename="../UserInterface.cpp" line="448"/>

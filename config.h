@@ -25,7 +25,7 @@
 #endif
 
 #ifndef GTA5SYNC_APPSTR
-#define GTA5SYNC_APPSTR "gta5sync"
+#define GTA5SYNC_APPSTR "gta5view"
 #endif
 
 #ifndef GTA5SYNC_APPVER

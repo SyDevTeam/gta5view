@@ -414,26 +414,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabSync">
-      <attribute name="title">
-       <string>Sync</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="vlSync">
-       <item>
-        <widget class="QLabel" name="labSync">
-         <property name="text">
-          <string>Sync is not implemented at current time</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
     </widget>
    </item>
    <item>
@@ -463,7 +443,8 @@
         <string extracomment="OK, Cancel, Apply">&amp;OK</string>
        </property>
        <property name="icon">
-        <iconset theme="dialog-ok"/>
+        <iconset theme="dialog-ok">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>
@@ -479,7 +460,8 @@
         <string extracomment="OK, Cancel, Apply">&amp;Cancel</string>
        </property>
        <property name="icon">
-        <iconset theme="dialog-cancel"/>
+        <iconset theme="dialog-cancel">
+         <normaloff>.</normaloff>.</iconset>
        </property>
       </widget>
      </item>

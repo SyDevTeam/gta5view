@@ -4,12 +4,10 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <location filename="../AboutDialog.ui" line="14"/>
         <source>About gta5sync</source>
-        <translation>À propos de gta5sync</translation>
+        <translation type="vanished">À propos de gta5sync</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="29"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 A project for viewing and sync Grand Theft Auto V Snapmatic&lt;br/&gt;
@@ -21,7 +19,7 @@ Compiled with Qt %2&lt;br/&gt;
 Running with Qt %3&lt;br/&gt;
 &lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 Un outil pour gérer et synchroniser les photos Snapmatic&lt;br/&gt;
 et les fichiers de sauvegarde de Grand Theft Auto V&lt;br/&gt;
@@ -33,6 +31,26 @@ Fonctionne avec Qt %3&lt;br/&gt;
 &lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;
 gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.ui" line="14"/>
+        <source>About gta5view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.ui" line="29"/>
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5view&lt;/span&gt;&lt;br/&gt;
+&lt;br/&gt;
+A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
+Pictures and Savegames&lt;br/&gt;
+&lt;br/&gt;
+Project version: %1&lt;br/&gt;
+Project build: %4, %5&lt;br/&gt;
+Compiled with Qt %2&lt;br/&gt;
+Running with Qt %3&lt;br/&gt;
+&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5view is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="76"/>
@@ -243,23 +261,21 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
         <translation>Langue</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="419"/>
         <source>Sync</source>
-        <translation>Synchronisation</translation>
+        <translation type="vanished">Synchronisation</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="425"/>
         <source>Sync is not implemented at current time</source>
-        <translation>La synchronisation n&apos;est pas encore implémentée</translation>
+        <translation type="vanished">La synchronisation n&apos;est pas encore implémentée</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="463"/>
+        <location filename="../OptionsDialog.ui" line="443"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="479"/>
+        <location filename="../OptionsDialog.ui" line="460"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;Annuler</translation>
@@ -1029,9 +1045,8 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
 <context>
     <name>UserInterface</name>
     <message>
-        <location filename="../UserInterface.ui" line="20"/>
         <source>gta5sync - %1</source>
-        <translation>gta5sync - %1</translation>
+        <translation type="vanished">gta5sync - %1</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="74"/>
@@ -1054,138 +1069,137 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
         <translation>Fer&amp;mer</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="176"/>
+        <location filename="../UserInterface.ui" line="177"/>
         <source>&amp;File</source>
         <translation>&amp;Fichier</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="186"/>
+        <location filename="../UserInterface.ui" line="187"/>
         <source>&amp;Help</source>
         <translation>Ai&amp;de</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="192"/>
+        <location filename="../UserInterface.ui" line="193"/>
         <source>&amp;Edit</source>
         <translation>&amp;Éditer</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="198"/>
+        <location filename="../UserInterface.ui" line="199"/>
         <source>&amp;Profile</source>
         <translation>&amp;Profil</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="223"/>
         <source>&amp;About gta5sync</source>
-        <translation>&amp;À propos de gta5sync</translation>
+        <translation type="vanished">&amp;À propos de gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="226"/>
+        <location filename="../UserInterface.ui" line="227"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="235"/>
+        <location filename="../UserInterface.ui" line="236"/>
         <source>&amp;Exit</source>
         <translation>&amp;Quitter</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="238"/>
+        <location filename="../UserInterface.ui" line="239"/>
         <source>Exit</source>
         <translation>Quitter</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="241"/>
+        <location filename="../UserInterface.ui" line="242"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="246"/>
+        <location filename="../UserInterface.ui" line="247"/>
         <source>Close &amp;Profile</source>
         <translation>Fermer le &amp;profil</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="249"/>
+        <location filename="../UserInterface.ui" line="250"/>
         <source>Ctrl+End</source>
         <translation>Ctrl + Fin</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="258"/>
+        <location filename="../UserInterface.ui" line="259"/>
         <source>&amp;Settings</source>
         <translation>Paramètre&amp;s</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="261"/>
+        <location filename="../UserInterface.ui" line="262"/>
         <source>Ctrl+S</source>
         <translation>Ctrl+S</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="266"/>
+        <location filename="../UserInterface.ui" line="267"/>
         <source>Select &amp;All</source>
         <translation>Sélectionner &amp;tout</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="269"/>
+        <location filename="../UserInterface.ui" line="270"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="274"/>
+        <location filename="../UserInterface.ui" line="275"/>
         <source>&amp;Deselect All</source>
         <translation>&amp;Désélectionner tout</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="277"/>
+        <location filename="../UserInterface.ui" line="278"/>
         <source>Ctrl+D</source>
         <translation>Ctrl+D</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="282"/>
+        <location filename="../UserInterface.ui" line="283"/>
         <source>&amp;Export selected...</source>
         <translation>&amp;Exporter la sélection...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="285"/>
+        <location filename="../UserInterface.ui" line="286"/>
         <source>Ctrl+E</source>
         <translation>Ctrl+E</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="290"/>
+        <location filename="../UserInterface.ui" line="291"/>
         <source>&amp;Remove selected</source>
         <translation>&amp;Supprimer la sélection</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="293"/>
+        <location filename="../UserInterface.ui" line="294"/>
         <source>Ctrl+Del</source>
         <translation>Ctrl+Del</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="298"/>
+        <location filename="../UserInterface.ui" line="299"/>
         <source>&amp;Import files...</source>
         <translation>&amp;Importer...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="301"/>
+        <location filename="../UserInterface.ui" line="302"/>
         <source>Ctrl+I</source>
         <translation>Ctrl+I</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="306"/>
+        <location filename="../UserInterface.ui" line="307"/>
         <source>&amp;Open File...</source>
         <translation>&amp;Ouvrir...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="309"/>
+        <location filename="../UserInterface.ui" line="310"/>
         <source>Ctrl+O</source>
         <translation>Ctrl+O</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="314"/>
+        <location filename="../UserInterface.ui" line="315"/>
         <location filename="../UserInterface.cpp" line="125"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>Modifier l&apos;emplacement de &amp;GTA V...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="317"/>
+        <location filename="../UserInterface.ui" line="318"/>
         <location filename="../OptionsDialog.cpp" line="431"/>
         <location filename="../UserInterface.cpp" line="74"/>
         <location filename="../UserInterface.cpp" line="448"/>
@@ -1193,32 +1207,42 @@ gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
         <translation>Modifier l&apos;emplacement de GTA V...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="320"/>
+        <location filename="../UserInterface.ui" line="321"/>
         <source>Ctrl+G</source>
         <translation>Ctrl+G</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="325"/>
+        <location filename="../UserInterface.ui" line="326"/>
         <source>Show In-gam&amp;e</source>
         <translation>Rendre visible &amp;en jeu</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="328"/>
+        <location filename="../UserInterface.ui" line="329"/>
         <source>Shift+E</source>
         <translation>Shift+E</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="202"/>
+        <location filename="../UserInterface.ui" line="203"/>
         <source>&amp;Selection visibility</source>
         <translation>&amp;Visibilité de la sélection</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="333"/>
+        <location filename="../UserInterface.ui" line="20"/>
+        <source>gta5view - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="224"/>
+        <source>&amp;About gta5view</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="334"/>
         <source>Hi&amp;de In-game</source>
         <translation>Ren&amp;dre invisible en jeu</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="336"/>
+        <location filename="../UserInterface.ui" line="337"/>
         <source>Shift+D</source>
         <translation>Shift+D</translation>
     </message>

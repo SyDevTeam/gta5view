@@ -17,7 +17,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>gta5sync - %1</string>
+   <string>gta5view - %1</string>
   </property>
   <widget class="QWidget" name="cwUI">
    <layout class="QVBoxLayout" name="vlUI">
@@ -147,7 +147,8 @@
              <string>&amp;Close</string>
             </property>
             <property name="icon">
-             <iconset theme="dialog-close"/>
+             <iconset theme="dialog-close">
+              <normaloff>.</normaloff>.</iconset>
             </property>
             <property name="autoDefault">
              <bool>true</bool>
@@ -220,7 +221,7 @@
   </widget>
   <action name="actionAbout_gta5sync">
    <property name="text">
-    <string>&amp;About gta5sync</string>
+    <string>&amp;About gta5view</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
