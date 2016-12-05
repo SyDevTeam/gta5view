@@ -73,8 +73,8 @@ Running with Qt %3&lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5view is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5view&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
-Ein Projekt zum ansehen von&lt;br/&gt;
-Grand Theft Auto V Snapmatic Bilder und Spielständen&lt;br/&gt;
+Ein Projekt zum ansehen von Grand Theft Auto V&lt;br/&gt;
+Snapmatic Bilder und Spielständen&lt;br/&gt;
 &lt;br/&gt;
 Projektversion: %1&lt;br/&gt;
 Projektbau: %4, %5&lt;br/&gt;
