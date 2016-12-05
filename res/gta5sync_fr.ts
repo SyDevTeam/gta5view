@@ -55,13 +55,13 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
 Un outil pour gérer les photos Snapmatic&lt;br/&gt;
 et les fichiers de sauvegarde de Grand Theft Auto V&lt;br/&gt;
 &lt;br/&gt;
-gta5sync v%1&lt;br/&gt;
+gta5view v%1&lt;br/&gt;
 Build %4, %5&lt;br/&gt;
 Compilé avec Qt %2&lt;br/&gt;
 Fonctionne avec Qt %3&lt;br/&gt;
 &lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;
-gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+gta5view est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="76"/>
