@@ -16,7 +16,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer
 	mkdir build && cd build
 	qmake -qt=5 ../gta5view.pro # or just qmake ../gta5view.pro
 	make
-	INSTALL_ROOT=/usr checkinstall
+	INSTALL_ROOT=/usr checkinstall --pkgname=gta5view --pkggroup=utility --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5
 
 #### Build gta5view Windows
 
