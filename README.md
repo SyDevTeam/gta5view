@@ -24,3 +24,7 @@ Downloading <a href="https://www.qt.io/">Qt Framework</a> and install it.<br>
 Take the Online Installer and choose the MinGW version or install Microsoft Visual Studio 2013/2015 Community<br>
 Downloading Source Code over GitHub or with your Git client.<br>
 Open the gta5view.pro file with Qt Creator and build it over Qt Creator.<br>
+
+#### Download Binary Releases
+
+Go to <a href="https://github.com/SyDevTeam/gta5view/releases">gta5view release</a> and download the .exe file for Windows, .deb file for Debian/Ubuntu and .rpm file for Red Hat/openSuSE/Fedora.
