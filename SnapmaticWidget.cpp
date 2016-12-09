@@ -86,10 +86,11 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString pic
     picStr = picture->getPictureStr();
     picTitl = picture->getPictureTitl();
 
-    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getPicture(), Qt::AutoColor);
-    SnapmaticPixmap.scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getPicture().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
     ui->labPicStr->setText(picStr + "\n" + picTitl + "");
     ui->labPicture->setPixmap(SnapmaticPixmap);
+
+    picture->clearCache();
 
     adjustTextColor();
 }

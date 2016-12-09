@@ -31,9 +31,11 @@ class SnapmaticPicture : public QObject
     Q_OBJECT
 public:
     explicit SnapmaticPicture(const QString &fileName = "", QObject *parent = 0);
-    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = false);
-    bool readingPicture(bool writeEnabled = false);
+    ~SnapmaticPicture();
+    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = true);
+    bool readingPicture(bool writeEnabled = true, bool cacheEnabled = true);
     bool isPicOk();
+    void clearCache();
     QImage getPicture();
     QString getLastStep();
     QString getPictureStr();
@@ -77,6 +79,7 @@ private:
     QString descStr;
     bool picOk;
     bool writeEnabled;
+    bool cacheEnabled;
 
     // PARSE INT
     int snapmaticHeaderLength;
@@ -106,6 +109,11 @@ private:
     QStringList jsonPlyrsList;
     uint jsonCreatedTimestamp;
     QDateTime jsonCreatedDateTime;
+    bool jsonMeme;
+    bool jsonMug;
+    bool jsonSelfie;
+    bool jsonDirector;
+    bool jsonRockstarEditor;
 
 signals:
 

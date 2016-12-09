@@ -105,6 +105,5 @@ void PictureWidget::updateWindowSize(int screenID)
         this->resize(desktopRect.width(), desktopRect.height());
         this->showFullScreen();
         pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(desktopRect.width(), desktopRect.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
-
     }
 }

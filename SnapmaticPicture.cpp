@@ -67,15 +67,25 @@ SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : Q
     jsonArea = "";
     jsonCreatedTimestamp = 0;
     jsonPlyrsList = QStringList();
+    jsonMeme = 0;
+    jsonMug = 0;
+    jsonSelfie = 0;
+    jsonDirector = 0;
+    jsonRockstarEditor = 0;
 }
 
-bool SnapmaticPicture::readingPicture(bool writeEnabled_)
+SnapmaticPicture::~SnapmaticPicture()
+{
+}
+
+bool SnapmaticPicture::readingPicture(bool writeEnabled_, bool cacheEnabled_)
 {
     // Start opening file
     // lastStep is like currentStep
 
     // Set boolean values
     writeEnabled = writeEnabled_;
+    cacheEnabled = cacheEnabled_;
 
     QFile *picFile = new QFile(picFileName);
     QIODevice *picStream;
@@ -88,6 +98,9 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         return false;
     }
     rawPicContent = picFile->read(snapmaticFileMaxSize);
+    picFile->close();
+    delete picFile;
+
     picStream = new QBuffer(&rawPicContent);
     picStream->open(QIODevice::ReadWrite);
 
@@ -97,7 +110,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",1,NOHEADER";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return false;
     }
     QByteArray snapmaticHeaderLine = picStream->read(snapmaticHeaderLength);
@@ -109,7 +122,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",2,NOHEADER";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return false;
     }
     QByteArray jpegHeaderLine = picStream->read(jpegPreHeaderLength);
@@ -121,7 +134,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",2,NOJPEG";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return false;
     }
 
@@ -131,11 +144,16 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",2,NOPIC";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return false;
     }
     QByteArray jpegRawContent = picStream->read(jpegPicStreamLength);
-    picOk = cachePicture.loadFromData(jpegRawContent, "JPEG");
+    if (cacheEnabled) picOk = cachePicture.loadFromData(jpegRawContent, "JPEG");
+    if (!cacheEnabled)
+    {
+        QImage tempPicture;
+        picOk = tempPicture.loadFromData(jpegRawContent, "JPEG");
+    }
 
     // Read JSON Stream
     if (!picStream->isReadable())
@@ -143,7 +161,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",3,NOJSON";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return picOk;
     }
     else if (picStream->read(4) != "JSON")
@@ -151,7 +169,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",3,CTJSON";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return picOk;
     }
     QByteArray jsonRawContent = picStream->read(jsonStreamLength);
@@ -163,7 +181,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",4,NOTITL";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return picOk;
     }
     else if (picStream->read(4) != "TITL")
@@ -171,7 +189,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",4,CTTITL";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return picOk;
     }
     QByteArray titlRawContent = picStream->read(tideStreamLength);
@@ -182,7 +200,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",5,NODESC";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return picOk;
     }
     else if (picStream->read(4) != "DESC")
@@ -190,7 +208,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
         lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",5,CTDESC";
         picStream->close();
         picStream->deleteLater();
-        delete picFile;
+        delete picStream;
         return picOk;
     }
     QByteArray descRawContent = picStream->read(tideStreamLength);
@@ -200,9 +218,7 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_)
 
     picStream->close();
     picStream->deleteLater();
-    picFile->deleteLater();
     delete picStream;
-    delete picFile;
     if (!writeEnabled) { rawPicContent.clear(); }
     return picOk;
 }
@@ -271,12 +287,12 @@ void SnapmaticPicture::parseSnapmaticExportAndSortString()
     }
 }
 
-bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool writeEnabled_)
+bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool writeEnabled_, bool cacheEnabled_)
 {
     if (fileName != "")
     {
         picFileName = fileName;
-        return readingPicture(writeEnabled_);
+        return readingPicture(writeEnabled_, cacheEnabled_);
     }
     else
     {
@@ -384,7 +400,63 @@ QString SnapmaticPicture::getLastStep()
 
 QImage SnapmaticPicture::getPicture()
 {
-    return cachePicture;
+    if (cacheEnabled)
+    {
+        return cachePicture;
+    }
+    else if (writeEnabled)
+    {
+        bool returnOk;
+        QImage returnPicture;
+
+        QBuffer snapmaticStream(&rawPicContent);
+        snapmaticStream.open(QIODevice::ReadOnly);
+        if (snapmaticStream.seek(jpegStreamEditorBegin))
+        {
+            QByteArray jpegRawContent = snapmaticStream.read(jpegPicStreamLength);
+            returnOk = returnPicture.loadFromData(jpegRawContent, "JPEG");
+        }
+        snapmaticStream.close();
+
+        if (returnOk)
+        {
+            return returnPicture;
+        }
+    }
+    else
+    {
+        bool returnOk;
+        QImage returnPicture;
+        QIODevice *picStream;
+
+        QFile *picFile = new QFile(picFileName);
+        if (!picFile->open(QFile::ReadOnly))
+        {
+            lastStep = "1;/1,OpenFile," + StringParser::convertDrawStringForLog(picFileName);
+            picFile->deleteLater();
+            delete picFile;
+            return QImage(0, 0, QImage::Format_RGB32);
+        }
+        rawPicContent = picFile->read(snapmaticFileMaxSize);
+        picFile->close();
+        delete picFile;
+
+        picStream = new QBuffer(&rawPicContent);
+        picStream->open(QIODevice::ReadWrite);
+        if (picStream->seek(jpegStreamEditorBegin))
+        {
+            QByteArray jpegRawContent = picStream->read(jpegPicStreamLength);
+            returnOk = returnPicture.loadFromData(jpegRawContent, "JPEG");
+        }
+        picStream->close();
+        delete picStream;
+
+        if (returnOk)
+        {
+            return returnPicture;
+        }
+    }
+    return QImage(0, 0, QImage::Format_RGB32);
 }
 
 bool SnapmaticPicture::isPicOk()
@@ -395,6 +467,12 @@ bool SnapmaticPicture::isPicOk()
 void SnapmaticPicture::setPicFileName(QString picFileName_)
 {
     picFileName = picFileName_;
+}
+
+void SnapmaticPicture::clearCache()
+{
+    cacheEnabled = false;
+    cachePicture = QImage(0, 0, QImage::Format_RGB32);
 }
 
 // JSON part
@@ -431,6 +509,26 @@ void SnapmaticPicture::parseJsonContent()
     if (jsonMap.contains("plyrs"))
     {
         jsonPlyrsList = jsonMap["plyrs"].toStringList();
+    }
+    if (jsonMap.contains("meme"))
+    {
+        jsonMeme = jsonMap["meme"].toBool();
+    }
+    if (jsonMap.contains("mug"))
+    {
+        jsonMug = jsonMap["mug"].toBool();
+    }
+    if (jsonMap.contains("slf"))
+    {
+        jsonSelfie = jsonMap["slf"].toBool();
+    }
+    if (jsonMap.contains("drctr"))
+    {
+        jsonDirector = jsonMap["drctr"].toBool();
+    }
+    if (jsonMap.contains("rsedtr"))
+    {
+        jsonRockstarEditor = jsonMap["rsedtr"].toBool();
     }
 
     jsonOk = true;
