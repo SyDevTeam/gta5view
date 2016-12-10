@@ -585,6 +585,7 @@ bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties newSpJson)
             snapmaticStream.close();
             if (result != 0)
             {
+                localSpJson = newSpJson;
                 jsonStr = newJsonStr;
                 return true;
             }
