@@ -37,7 +37,7 @@ AppEnv::AppEnv()
 QString AppEnv::getGameFolder(bool *ok)
 {
     QDir dir;
-    QString GTAV_FOLDER(qgetenv("GTAV_FOLDER"));
+    QString GTAV_FOLDER = QString::fromUtf8(qgetenv("GTAV_FOLDER"));
     if (GTAV_FOLDER != "")
     {
         dir.setPath(GTAV_FOLDER);
@@ -52,21 +52,21 @@ QString AppEnv::getGameFolder(bool *ok)
     QString GTAV_defaultFolder = StandardPaths::documentsLocation() + QDir::separator() + "Rockstar Games" + QDir::separator() + "GTA V";
     QString GTAV_returnFolder = GTAV_defaultFolder;
 
-    QSettings SyncSettings("Syping", "gta5sync");
+    QSettings SyncSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     SyncSettings.beginGroup("dir");
     bool forceDir = SyncSettings.value("force", false).toBool();
-    if (forceDir)
-    {
-        GTAV_returnFolder = SyncSettings.value("dir", GTAV_defaultFolder).toString();
-    }
+    GTAV_returnFolder = SyncSettings.value("dir", GTAV_defaultFolder).toString();
     SyncSettings.endGroup();
 
-    dir.setPath(GTAV_returnFolder);
-    if (dir.exists())
+    if (forceDir)
     {
-        if (ok != 0) *ok = true;
-        qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
-        return dir.absolutePath();
+        dir.setPath(GTAV_returnFolder);
+        if (dir.exists())
+        {
+            if (ok != 0) *ok = true;
+            qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
+            return dir.absolutePath();
+        }
     }
 
     dir.setPath(GTAV_defaultFolder);
@@ -75,6 +75,17 @@ QString AppEnv::getGameFolder(bool *ok)
         if (ok != 0) *ok = true;
         qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return dir.absolutePath();
+    }
+
+    if (!forceDir)
+    {
+        dir.setPath(GTAV_returnFolder);
+        if (dir.exists())
+        {
+            if (ok != 0) *ok = true;
+            qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
+            return dir.absolutePath();
+        }
     }
 
     if (ok != 0) *ok = false;
@@ -107,7 +118,7 @@ QString AppEnv::getPluginsFolder()
 
 QByteArray AppEnv::getUserAgent()
 {
-    return QString("Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 gta5sync/1.0").toUtf8();
+    return QString("Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 %1/%2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
 }
 
 QUrl AppEnv::getCrewFetchingUrl(QString crewID)

@@ -339,7 +339,10 @@ bool SnapmaticPicture::setPicture(const QImage &picture)
         int result = snapmaticStream.write(picByteArray);
         if (result != 0)
         {
-            cachePicture = picture;
+            if (cacheEnabled)
+            {
+                cachePicture = picture;
+            }
             return true;
         }
         return false;
