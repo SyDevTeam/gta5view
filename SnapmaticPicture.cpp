@@ -301,7 +301,7 @@ bool SnapmaticPicture::setPicture(const QImage &picture)
             QByteArray picByteArray1;
             QBuffer picStream1(&picByteArray1);
             picStream1.open(QIODevice::WriteOnly);
-            saveSuccess = picture.save(&picStream1, "JPEG", 100);
+            saveSuccess = picture.save(&picStream1, "JPEG", 95);
             picStream1.close();
 
             if (picByteArray1.length() > jpegPicStreamLength)
@@ -309,7 +309,7 @@ bool SnapmaticPicture::setPicture(const QImage &picture)
                 QByteArray picByteArray2;
                 QBuffer picStream2(&picByteArray2);
                 picStream2.open(QIODevice::WriteOnly);
-                saveSuccess = picture.save(&picStream2, "JPEG", 90);
+                saveSuccess = picture.save(&picStream2, "JPEG", 80);
                 picStream2.close();
                 if (picByteArray2.length() > jpegPicStreamLength)
                 {
@@ -322,7 +322,10 @@ bool SnapmaticPicture::setPicture(const QImage &picture)
             {
                 picByteArray = picByteArray1;
             }
-            Q_UNUSED(saveSuccess)
+        }
+        while (picByteArray.length() != jpegPicStreamLength)
+        {
+            picByteArray.append((char)0x00);
         }
         int result = snapmaticStream.write(picByteArray);
         if (result != 0)
@@ -470,7 +473,7 @@ void SnapmaticPicture::clearCache()
 
 void SnapmaticPicture::parseJsonContent()
 {
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonStr.toLatin1());
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonStr.toUtf8());
     QJsonObject jsonObject = jsonDocument.object();
 
     if (jsonObject.contains("loc"))
@@ -536,6 +539,67 @@ QString SnapmaticPicture::getJsonStr()
 SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
 {
     return localSpJson;
+}
+
+bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties newSpJson)
+{
+    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonStr.toUtf8());
+    QJsonObject jsonObject = jsonDocument.object();
+
+    QJsonObject locObject;
+    locObject["x"] = newSpJson.location.x;
+    locObject["y"] = newSpJson.location.y;
+    locObject["z"] = newSpJson.location.z;
+
+    jsonObject["loc"] = locObject;
+    jsonObject["area"] = newSpJson.area;
+    jsonObject["crewid"] = newSpJson.crewID;
+    jsonObject["creat"] = QJsonValue::fromVariant(newSpJson.createdTimestamp);
+    jsonObject["plyrs"] = QJsonValue::fromVariant(newSpJson.playersList);
+    jsonObject["meme"] = newSpJson.isMeme;
+    jsonObject["mug"] = newSpJson.isMug;
+    jsonObject["slf"] = newSpJson.isSelfie;
+    jsonObject["drctr"] = newSpJson.isFromDirector;
+    jsonObject["rsedtr"] = newSpJson.isFromRSEditor;
+
+    jsonDocument.setObject(jsonObject);
+
+    QString newJsonStr = QString::fromUtf8(jsonDocument.toJson(QJsonDocument::Compact));
+    if (newJsonStr.length() < jsonStreamEditorLength)
+    {
+        if (writeEnabled)
+        {
+            QByteArray jsonByteArray = newJsonStr.toUtf8();
+            while (jsonByteArray.length() != jsonStreamEditorLength)
+            {
+                jsonByteArray.append((char)0x00);
+            }
+            QBuffer snapmaticStream(&rawPicContent);
+            snapmaticStream.open(QIODevice::ReadWrite);
+            if (!snapmaticStream.seek(jsonStreamEditorBegin))
+            {
+                snapmaticStream.close();
+                return false;
+            }
+            int result = snapmaticStream.write(jsonByteArray);
+            snapmaticStream.close();
+            if (result != 0)
+            {
+                jsonStr = newJsonStr;
+                return true;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+    else
+    {
+        return false;
+    }
+
+    return true;
 }
 
 // VISIBILITY

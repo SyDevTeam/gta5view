@@ -72,6 +72,7 @@ public:
     bool isJsonOk();
     QString getJsonStr();
     SnapmaticProperties getSnapmaticProperties();
+    bool setSnapmaticProperties(SnapmaticProperties newSpJson);
 
     // VISIBILITY
     bool isHidden();
@@ -112,9 +113,9 @@ private:
     QByteArray rawPicContent;
 
     // JSON
+    void parseJsonContent();
     bool jsonOk;
     QString jsonStr;
-    void parseJsonContent();
     SnapmaticProperties localSpJson;
 
 signals:
