@@ -435,7 +435,7 @@ int main(int argc, char *argv[])
         picDialog->setWindowIcon(IconLoader::loadingAppIcon());
         picDialog->setSnapmaticPicture(&picture, readOk);
 
-        int crewID = picture.getCrewNumber();
+        int crewID = picture.getSnapmaticProperties().crewID;
         if (crewID != 0) { crewDB->addCrew(crewID); }
         if (!readOk) { return 1; }
 

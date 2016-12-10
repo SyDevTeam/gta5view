@@ -26,6 +26,25 @@
 #include <QImage>
 #include <QFile>
 
+struct SnapmaticProperties {
+    struct SnapmaticLocation {
+        double x;
+        double y;
+        double z;
+    };
+    int crewID;
+    QString area;
+    QStringList playersList;
+    uint createdTimestamp;
+    QDateTime createdDateTime;
+    bool isMeme;
+    bool isMug;
+    bool isSelfie;
+    bool isFromDirector;
+    bool isFromRSEditor;
+    SnapmaticLocation location;
+};
+
 class SnapmaticPicture : public QObject
 {
     Q_OBJECT
@@ -51,13 +70,8 @@ public:
 
     // JSON
     bool isJsonOk();
-    QString getArea();
-    int getCrewNumber();
     QString getJsonStr();
-    double getLocationX();
-    double getLocationY();
-    double getLocationZ();
-    QStringList getPlayers();
+    SnapmaticProperties getSnapmaticProperties();
 
     // VISIBILITY
     bool isHidden();
@@ -98,22 +112,10 @@ private:
     QByteArray rawPicContent;
 
     // JSON
-    void parseJsonContent();
     bool jsonOk;
-    int jsonCrewID;
     QString jsonStr;
-    double jsonLocX;
-    double jsonLocY;
-    double jsonLocZ;
-    QString jsonArea;
-    QStringList jsonPlyrsList;
-    uint jsonCreatedTimestamp;
-    QDateTime jsonCreatedDateTime;
-    bool jsonMeme;
-    bool jsonMug;
-    bool jsonSelfie;
-    bool jsonDirector;
-    bool jsonRockstarEditor;
+    void parseJsonContent();
+    SnapmaticProperties localSpJson;
 
 signals:
 

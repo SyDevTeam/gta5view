@@ -407,7 +407,7 @@ void UserInterface::openSnapmaticFile(SnapmaticPicture *picture)
     picDialog->setSnapmaticPicture(picture, true);
     picDialog->setModal(true);
 
-    int crewID = picture->getCrewNumber();
+    int crewID = picture->getSnapmaticProperties().crewID;
     if (crewID != 0) { crewDB->addCrew(crewID); }
 
     QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));

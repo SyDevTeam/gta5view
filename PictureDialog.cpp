@@ -265,14 +265,14 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
     }
     if (picture->isJsonOk())
     {
-        locX = QString::number(picture->getLocationX());
-        locY = QString::number(picture->getLocationY());
-        locZ = QString::number(picture->getLocationZ());
-        crewID = crewDB->getCrewName(picture->getCrewNumber());
-        created = picture->getCreatedDateTime().toString(Qt::DefaultLocaleShortDate);
-        plyrsList = picture->getPlayers();
+        locX = QString::number(picture->getSnapmaticProperties().location.x);
+        locY = QString::number(picture->getSnapmaticProperties().location.y);
+        locZ = QString::number(picture->getSnapmaticProperties().location.z);
+        crewID = crewDB->getCrewName(picture->getSnapmaticProperties().crewID);
+        created = picture->getSnapmaticProperties().createdDateTime.toString(Qt::DefaultLocaleShortDate);
+        plyrsList = picture->getSnapmaticProperties().playersList;
         picTitl = picture->getPictureTitl();
-        picArea = picture->getArea();
+        picArea = picture->getSnapmaticProperties().area;
         if (globalMap.contains(picArea))
         {
             picAreaStr = globalMap[picArea];

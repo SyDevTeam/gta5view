@@ -60,18 +60,6 @@ SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : Q
     // INIT JSON
     jsonOk = 0;
     jsonStr = "";
-    jsonLocX = 0;
-    jsonLocY = 0;
-    jsonLocZ = 0;
-    jsonCrewID = 0;
-    jsonArea = "";
-    jsonCreatedTimestamp = 0;
-    jsonPlyrsList = QStringList();
-    jsonMeme = 0;
-    jsonMug = 0;
-    jsonSelfie = 0;
-    jsonDirector = 0;
-    jsonRockstarEditor = 0;
 }
 
 SnapmaticPicture::~SnapmaticPicture()
@@ -484,54 +472,52 @@ void SnapmaticPicture::parseJsonContent()
 {
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonStr.toLatin1());
     QJsonObject jsonObject = jsonDocument.object();
-    QVariantMap jsonMap = jsonObject.toVariantMap();
 
-    if (jsonMap.contains("loc"))
+    if (jsonObject.contains("loc"))
     {
         QJsonObject locObject = jsonObject["loc"].toObject();
-        QVariantMap locMap = locObject.toVariantMap();
-        if (locMap.contains("x")) { jsonLocX = locMap["x"].toDouble(); }
-        if (locMap.contains("y")) { jsonLocY = locMap["y"].toDouble(); }
-        if (locMap.contains("z")) { jsonLocZ = locMap["z"].toDouble(); }
+        if (locObject.contains("x")) { localSpJson.location.x = locObject["x"].toDouble(); }
+        if (locObject.contains("y")) { localSpJson.location.y = locObject["y"].toDouble(); }
+        if (locObject.contains("z")) { localSpJson.location.z = locObject["z"].toDouble(); }
     }
-    if (jsonMap.contains("area"))
+    if (jsonObject.contains("area"))
     {
-        jsonArea = jsonMap["area"].toString();
+        localSpJson.area = jsonObject["area"].toString();
     }
-    if (jsonMap.contains("crewid"))
+    if (jsonObject.contains("crewid"))
     {
-        jsonCrewID = jsonMap["crewid"].toInt();
+        localSpJson.crewID = jsonObject["crewid"].toInt();
     }
-    if (jsonMap.contains("creat"))
+    if (jsonObject.contains("creat"))
     {
         QDateTime createdTimestamp;
-        jsonCreatedTimestamp = jsonMap["creat"].toUInt();
-        createdTimestamp.setTime_t(jsonCreatedTimestamp);
-        jsonCreatedDateTime = createdTimestamp;
+        localSpJson.createdTimestamp = jsonObject["creat"].toVariant().toUInt();
+        createdTimestamp.setTime_t(localSpJson.createdTimestamp);
+        localSpJson.createdDateTime = createdTimestamp;
     }
-    if (jsonMap.contains("plyrs"))
+    if (jsonObject.contains("plyrs"))
     {
-        jsonPlyrsList = jsonMap["plyrs"].toStringList();
+        localSpJson.playersList = jsonObject["plyrs"].toVariant().toStringList();
     }
-    if (jsonMap.contains("meme"))
+    if (jsonObject.contains("meme"))
     {
-        jsonMeme = jsonMap["meme"].toBool();
+        localSpJson.isMeme = jsonObject["meme"].toBool();
     }
-    if (jsonMap.contains("mug"))
+    if (jsonObject.contains("mug"))
     {
-        jsonMug = jsonMap["mug"].toBool();
+        localSpJson.isMug = jsonObject["mug"].toBool();
     }
-    if (jsonMap.contains("slf"))
+    if (jsonObject.contains("slf"))
     {
-        jsonSelfie = jsonMap["slf"].toBool();
+        localSpJson.isSelfie = jsonObject["slf"].toBool();
     }
-    if (jsonMap.contains("drctr"))
+    if (jsonObject.contains("drctr"))
     {
-        jsonDirector = jsonMap["drctr"].toBool();
+        localSpJson.isFromDirector = jsonObject["drctr"].toBool();
     }
-    if (jsonMap.contains("rsedtr"))
+    if (jsonObject.contains("rsedtr"))
     {
-        jsonRockstarEditor = jsonMap["rsedtr"].toBool();
+        localSpJson.isFromRSEditor = jsonObject["rsedtr"].toBool();
     }
 
     jsonOk = true;
@@ -542,44 +528,14 @@ bool SnapmaticPicture::isJsonOk()
     return jsonOk;
 }
 
-QString SnapmaticPicture::getArea()
-{
-    return jsonArea;
-}
-
 QString SnapmaticPicture::getJsonStr()
 {
     return jsonStr;
 }
 
-int SnapmaticPicture::getCrewNumber()
+SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
 {
-    return jsonCrewID;
-}
-
-double SnapmaticPicture::getLocationX()
-{
-    return jsonLocX;
-}
-
-double SnapmaticPicture::getLocationY()
-{
-    return jsonLocY;
-}
-
-double SnapmaticPicture::getLocationZ()
-{
-    return jsonLocZ;
-}
-
-QStringList SnapmaticPicture::getPlayers()
-{
-    return jsonPlyrsList;
-}
-
-QDateTime SnapmaticPicture::getCreatedDateTime()
-{
-    return jsonCreatedDateTime;
+    return localSpJson;
 }
 
 // VISIBILITY

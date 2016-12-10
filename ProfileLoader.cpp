@@ -74,7 +74,7 @@ void ProfileLoader::run()
         if (picture->readingPicture())
         {
             emit pictureLoaded(picture, picturePath);
-            int crewNumber = picture->getCrewNumber();
+            int crewNumber = picture->getSnapmaticProperties().crewID;
             if (!crewList.contains(crewNumber))
             {
                 crewList.append(crewNumber);
