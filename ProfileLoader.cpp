@@ -43,12 +43,14 @@ void ProfileLoader::run()
     QStringList BackupFiles = SavegameFiles.filter(".bak", Qt::CaseInsensitive);
     profileDir.setNameFilters(QStringList("PGTA*"));
     QStringList SnapmaticPics = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
+    BackupFiles.append(SnapmaticPics.filter(".bak", Qt::CaseInsensitive));
 
     SavegameFiles.removeDuplicates();
     SnapmaticPics.removeDuplicates();
     foreach(const QString &BackupFile, BackupFiles)
     {
         SavegameFiles.removeAll(BackupFile);
+        SnapmaticPics.removeAll(BackupFile);
     }
 
     int maximumV = SavegameFiles.length() + SnapmaticPics.length();

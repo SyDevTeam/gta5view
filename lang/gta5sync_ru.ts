@@ -250,7 +250,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="460"/>
+        <location filename="../OptionsDialog.ui" line="459"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation type="unfinished"></translation>
@@ -534,11 +534,11 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <location filename="../ProfileInterface.cpp" line="452"/>
         <location filename="../ProfileInterface.cpp" line="482"/>
         <location filename="../ProfileInterface.cpp" line="487"/>
-        <location filename="../ProfileInterface.cpp" line="502"/>
-        <location filename="../ProfileInterface.cpp" line="507"/>
-        <location filename="../ProfileInterface.cpp" line="518"/>
-        <location filename="../ProfileInterface.cpp" line="555"/>
-        <location filename="../ProfileInterface.cpp" line="561"/>
+        <location filename="../ProfileInterface.cpp" line="506"/>
+        <location filename="../ProfileInterface.cpp" line="511"/>
+        <location filename="../ProfileInterface.cpp" line="522"/>
+        <location filename="../ProfileInterface.cpp" line="559"/>
+        <location filename="../ProfileInterface.cpp" line="565"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
@@ -603,68 +603,68 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="502"/>
+        <location filename="../ProfileInterface.cpp" line="506"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="507"/>
+        <location filename="../ProfileInterface.cpp" line="511"/>
         <source>Failed to import the Snapmatic picture, the picture is already in the game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="518"/>
+        <location filename="../ProfileInterface.cpp" line="522"/>
         <source>Failed to import the Snapmatic picture, can&apos;t copy the file into profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="555"/>
+        <location filename="../ProfileInterface.cpp" line="559"/>
         <source>Failed to import the Savegame, can&apos;t copy the file into profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="561"/>
+        <location filename="../ProfileInterface.cpp" line="565"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="647"/>
-        <location filename="../ProfileInterface.cpp" line="665"/>
+        <location filename="../ProfileInterface.cpp" line="651"/>
+        <location filename="../ProfileInterface.cpp" line="669"/>
         <source>JPG pictures and GTA Snapmatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="648"/>
-        <location filename="../ProfileInterface.cpp" line="670"/>
+        <location filename="../ProfileInterface.cpp" line="652"/>
+        <location filename="../ProfileInterface.cpp" line="674"/>
         <source>JPG pictures only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="649"/>
-        <location filename="../ProfileInterface.cpp" line="674"/>
+        <location filename="../ProfileInterface.cpp" line="653"/>
+        <location filename="../ProfileInterface.cpp" line="678"/>
         <source>GTA Snapmatic only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="761"/>
-        <location filename="../ProfileInterface.cpp" line="804"/>
+        <location filename="../ProfileInterface.cpp" line="765"/>
+        <location filename="../ProfileInterface.cpp" line="808"/>
         <source>No Snapmatic pictures or Savegames files are selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="769"/>
-        <location filename="../ProfileInterface.cpp" line="798"/>
-        <location filename="../ProfileInterface.cpp" line="804"/>
+        <location filename="../ProfileInterface.cpp" line="773"/>
+        <location filename="../ProfileInterface.cpp" line="802"/>
+        <location filename="../ProfileInterface.cpp" line="808"/>
         <source>Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="769"/>
+        <location filename="../ProfileInterface.cpp" line="773"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="798"/>
+        <location filename="../ProfileInterface.cpp" line="802"/>
         <source>Failed at remove the complete selected Snapmatic pictures and/or Savegame files</source>
         <translation type="unfinished"></translation>
     </message>
@@ -685,30 +685,30 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="624"/>
-        <location filename="../ProfileInterface.cpp" line="662"/>
-        <location filename="../ProfileInterface.cpp" line="739"/>
-        <location filename="../ProfileInterface.cpp" line="761"/>
+        <location filename="../ProfileInterface.cpp" line="628"/>
+        <location filename="../ProfileInterface.cpp" line="666"/>
+        <location filename="../ProfileInterface.cpp" line="743"/>
+        <location filename="../ProfileInterface.cpp" line="765"/>
         <source>Export selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="662"/>
+        <location filename="../ProfileInterface.cpp" line="666"/>
         <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="705"/>
+        <location filename="../ProfileInterface.cpp" line="709"/>
         <source>Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="706"/>
+        <location filename="../ProfileInterface.cpp" line="710"/>
         <source>Initializing export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="739"/>
+        <location filename="../ProfileInterface.cpp" line="743"/>
         <source>Export failed with...
 
 %1</source>
@@ -952,6 +952,69 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
 </context>
 <context>
+    <name>SnapmaticEditor</name>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="14"/>
+        <location filename="../SnapmaticEditor.ui" line="57"/>
+        <location filename="../SnapmaticEditor.cpp" line="208"/>
+        <source>Snapmatic Properties</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="20"/>
+        <source>Snapmatic Type</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="26"/>
+        <location filename="../SnapmaticEditor.ui" line="91"/>
+        <source>Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="33"/>
+        <location filename="../SnapmaticEditor.ui" line="63"/>
+        <source>Selfie</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="40"/>
+        <location filename="../SnapmaticEditor.ui" line="84"/>
+        <source>Mugshot</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="47"/>
+        <source>Custom</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="70"/>
+        <source>Director</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="77"/>
+        <source>Meme</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="129"/>
+        <source>&amp;Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="139"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="208"/>
+        <source>Patching of Snapmatic Properties failed because of I/O Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>SnapmaticWidget</name>
     <message>
         <location filename="../SnapmaticWidget.ui" line="14"/>
@@ -990,80 +1053,85 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="149"/>
-        <location filename="../SnapmaticWidget.cpp" line="144"/>
-        <location filename="../SnapmaticWidget.cpp" line="157"/>
+        <location filename="../SnapmaticWidget.cpp" line="146"/>
+        <location filename="../SnapmaticWidget.cpp" line="159"/>
         <source>Delete picture</source>
         <translation>Удалить картинку</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="144"/>
+        <location filename="../SnapmaticWidget.cpp" line="146"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation>Уверены, что хотите удалить %1 из коллекции картинок Snapmatic?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="157"/>
+        <location filename="../SnapmaticWidget.cpp" line="159"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation>Не удалось удалить %1 из колелкции картинок Snapmatic </translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="209"/>
+        <location filename="../SnapmaticWidget.cpp" line="211"/>
         <source>Edi&amp;t</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="212"/>
+        <location filename="../SnapmaticWidget.cpp" line="214"/>
         <source>Show &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="216"/>
+        <location filename="../SnapmaticWidget.cpp" line="218"/>
         <source>Hide &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="218"/>
-        <source>&amp;Export</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="219"/>
-        <source>Export as &amp;JPG picture...</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../SnapmaticWidget.cpp" line="220"/>
-        <source>Export as &amp;GTA Snapmatic...</source>
+        <source>&amp;Edit Properties</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="221"/>
-        <source>&amp;View</source>
+        <source>&amp;Export</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="222"/>
+        <source>Export as &amp;JPG picture...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="223"/>
+        <source>Export as &amp;GTA Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="224"/>
+        <source>&amp;View</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="227"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="228"/>
-        <location filename="../SnapmaticWidget.cpp" line="240"/>
+        <location filename="../SnapmaticWidget.cpp" line="231"/>
+        <location filename="../SnapmaticWidget.cpp" line="243"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="229"/>
+        <location filename="../SnapmaticWidget.cpp" line="232"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="230"/>
-        <location filename="../SnapmaticWidget.cpp" line="241"/>
+        <location filename="../SnapmaticWidget.cpp" line="233"/>
+        <location filename="../SnapmaticWidget.cpp" line="244"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="234"/>
+        <location filename="../SnapmaticWidget.cpp" line="237"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1095,93 +1163,93 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="177"/>
+        <location filename="../UserInterface.ui" line="176"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="187"/>
+        <location filename="../UserInterface.ui" line="186"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="193"/>
+        <location filename="../UserInterface.ui" line="192"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="199"/>
+        <location filename="../UserInterface.ui" line="198"/>
         <source>&amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="236"/>
+        <location filename="../UserInterface.ui" line="235"/>
         <source>&amp;Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="239"/>
+        <location filename="../UserInterface.ui" line="238"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="247"/>
+        <location filename="../UserInterface.ui" line="246"/>
         <source>Close &amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="250"/>
+        <location filename="../UserInterface.ui" line="249"/>
         <source>Ctrl+End</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="259"/>
+        <location filename="../UserInterface.ui" line="258"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="294"/>
+        <location filename="../UserInterface.ui" line="293"/>
         <source>Ctrl+Del</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="299"/>
+        <location filename="../UserInterface.ui" line="298"/>
         <source>&amp;Import files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="302"/>
+        <location filename="../UserInterface.ui" line="301"/>
         <source>Ctrl+I</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="315"/>
+        <location filename="../UserInterface.ui" line="314"/>
         <location filename="../UserInterface.cpp" line="125"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="321"/>
+        <location filename="../UserInterface.ui" line="320"/>
         <source>Ctrl+G</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="326"/>
+        <location filename="../UserInterface.ui" line="325"/>
         <source>Show In-gam&amp;e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="329"/>
+        <location filename="../UserInterface.ui" line="328"/>
         <source>Shift+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="334"/>
+        <location filename="../UserInterface.ui" line="333"/>
         <source>Hi&amp;de In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="337"/>
+        <location filename="../UserInterface.ui" line="336"/>
         <source>Shift+D</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1196,32 +1264,32 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="203"/>
+        <location filename="../UserInterface.ui" line="202"/>
         <source>&amp;Selection visibility</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="224"/>
+        <location filename="../UserInterface.ui" line="223"/>
         <source>&amp;About gta5view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="267"/>
+        <location filename="../UserInterface.ui" line="266"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="275"/>
+        <location filename="../UserInterface.ui" line="274"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="283"/>
+        <location filename="../UserInterface.ui" line="282"/>
         <source>&amp;Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="291"/>
+        <location filename="../UserInterface.ui" line="290"/>
         <source>&amp;Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1238,7 +1306,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">О программе gta5sync</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="270"/>
+        <location filename="../UserInterface.ui" line="269"/>
         <source>Ctrl+A</source>
         <translation>Ctrl+A</translation>
     </message>
@@ -1247,37 +1315,37 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="obsolete">Закрыть</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="242"/>
+        <location filename="../UserInterface.ui" line="241"/>
         <source>Ctrl+Q</source>
         <translation>Ctrl+Q</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="227"/>
+        <location filename="../UserInterface.ui" line="226"/>
         <source>Ctrl+P</source>
         <translation>Ctrl+P</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="307"/>
+        <location filename="../UserInterface.ui" line="306"/>
         <source>&amp;Open File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="310"/>
+        <location filename="../UserInterface.ui" line="309"/>
         <source>Ctrl+O</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="262"/>
+        <location filename="../UserInterface.ui" line="261"/>
         <source>Ctrl+S</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="286"/>
+        <location filename="../UserInterface.ui" line="285"/>
         <source>Ctrl+E</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="278"/>
+        <location filename="../UserInterface.ui" line="277"/>
         <source>Ctrl+D</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1288,7 +1356,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="318"/>
+        <location filename="../UserInterface.ui" line="317"/>
         <location filename="../OptionsDialog.cpp" line="431"/>
         <location filename="../UserInterface.cpp" line="74"/>
         <location filename="../UserInterface.cpp" line="448"/>

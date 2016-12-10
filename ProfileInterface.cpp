@@ -497,6 +497,10 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, QString
     {
         adjustedFileName.remove(adjustedFileName.length() - 7, 7);
     }
+    if (adjustedFileName.right(4) == ".bak") // for the backup file system
+    {
+        adjustedFileName.remove(adjustedFileName.length() - 4, 4);
+    }
     if (picFileName.left(4) != "PGTA")
     {
         if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, file not begin with PGTA"));

@@ -48,6 +48,7 @@ SOURCES += main.cpp \
     SavegameDialog.cpp \
     SavegameWidget.cpp \
     SidebarGenerator.cpp \
+    SnapmaticEditor.cpp \
     SnapmaticPicture.cpp \
     SnapmaticWidget.cpp \
     StandardPaths.cpp \
@@ -79,6 +80,7 @@ HEADERS  += \
     SavegameDialog.h \
     SavegameWidget.h \
     SidebarGenerator.h \
+    SnapmaticEditor.h \
     SnapmaticPicture.h \
     SnapmaticWidget.h \
     StandardPaths.h \
@@ -94,6 +96,7 @@ FORMS    += \
     ProfileInterface.ui \
     SavegameDialog.ui \
     SavegameWidget.ui \
+    SnapmaticEditor.ui \
     SnapmaticWidget.ui \
     UserInterface.ui
 

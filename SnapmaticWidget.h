@@ -67,6 +67,7 @@ private slots:
     void dialogPreviousPictureRequested();
     void makePictureVisibleSlot();
     void makePictureHiddenSlot();
+    void editSnapmaticProperties();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);

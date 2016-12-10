@@ -19,6 +19,7 @@
 #include "SnapmaticWidget.h"
 #include "ui_SnapmaticWidget.h"
 #include "SnapmaticPicture.h"
+#include "SnapmaticEditor.h"
 #include "DatabaseThread.h"
 #include "PictureDialog.h"
 #include "PictureExport.h"
@@ -216,6 +217,7 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
     {
         editMenu.addAction(tr("Hide &In-game"), this, SLOT(makePictureHiddenSlot()));
     }
+    editMenu.addAction(tr("&Edit Properties"), this, SLOT(editSnapmaticProperties()));
     QMenu exportMenu(tr("&Export"), this);
     exportMenu.addAction(tr("Export as &JPG picture..."), this, SLOT(on_cmdExport_clicked()));
     exportMenu.addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(on_cmdCopy_clicked()));
@@ -310,6 +312,16 @@ void SnapmaticWidget::makePictureHiddenSlot()
 void SnapmaticWidget::makePictureVisibleSlot()
 {
     makePictureVisible();
+}
+
+void SnapmaticWidget::editSnapmaticProperties()
+{
+    SnapmaticEditor *snapmaticEditor = new SnapmaticEditor(this);
+    snapmaticEditor->setWindowFlags(snapmaticEditor->windowFlags()^Qt::WindowContextHelpButtonHint);
+    snapmaticEditor->setSnapmaticPicture(smpic);
+    snapmaticEditor->setModal(true);
+    snapmaticEditor->exec();
+    delete snapmaticEditor;
 }
 
 bool SnapmaticWidget::isSelected()
