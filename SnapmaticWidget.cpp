@@ -217,7 +217,7 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
     {
         editMenu.addAction(tr("Hide &In-game"), this, SLOT(makePictureHiddenSlot()));
     }
-    editMenu.addAction(tr("&Edit Properties"), this, SLOT(editSnapmaticProperties()));
+    editMenu.addAction(tr("&Edit Properties..."), this, SLOT(editSnapmaticProperties()));
     QMenu exportMenu(tr("&Export"), this);
     exportMenu.addAction(tr("Export as &JPG picture..."), this, SLOT(on_cmdExport_clicked()));
     exportMenu.addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(on_cmdCopy_clicked()));

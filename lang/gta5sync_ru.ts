@@ -1085,7 +1085,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="220"/>
-        <source>&amp;Edit Properties</source>
+        <source>&amp;Edit Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
