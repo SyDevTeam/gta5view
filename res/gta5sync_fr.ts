@@ -955,7 +955,7 @@ gta5view est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../SnapmaticEditor.ui" line="40"/>
         <source>Regular</source>
-        <translation type="unfinished"></translation>
+        <translation>Normal</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="47"/>
@@ -980,17 +980,17 @@ gta5view est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../SnapmaticEditor.ui" line="101"/>
         <source>Extras</source>
-        <translation type="unfinished"></translation>
+        <translation>Extras</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="107"/>
         <source>Qualify as Avatar automatically at apply</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualifier comme Avatar</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="114"/>
         <source>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Qualifier comme Avatar permet d&apos;utiliser cette image en tant que photo de profil sur le Social Club</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="155"/>
