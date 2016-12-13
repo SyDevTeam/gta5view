@@ -30,7 +30,7 @@
 
 #ifndef GTA5SYNC_APPVER
 #ifndef GTA5SYNC_DAILYB
-#define GTA5SYNC_APPVER "1.0.0"
+#define GTA5SYNC_APPVER "1.1.0"
 #else
 #define GTA5SYNC_APPVER QString("%1").arg(GTA5SYNC_DAILYB)
 #endif
