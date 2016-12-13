@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>350</width>
-    <height>250</height>
+    <width>375</width>
+    <height>305</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,31 +20,31 @@
       <string>Snapmatic Type</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_2">
-      <item row="2" column="0">
+      <item row="2" column="1">
        <widget class="QRadioButton" name="rbEditor">
         <property name="text">
          <string>Editor</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="0" column="1">
        <widget class="QRadioButton" name="rbSelfie">
         <property name="text">
          <string>Selfie</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QRadioButton" name="rbMugshot">
+      <item row="0" column="0">
+       <widget class="QRadioButton" name="rbCustom">
         <property name="text">
-         <string>Mugshot</string>
+         <string>Regular</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QRadioButton" name="rbCustom">
+      <item row="2" column="0">
+       <widget class="QRadioButton" name="rbMugshot">
         <property name="text">
-         <string>Custom</string>
+         <string>Mugshot</string>
         </property>
        </widget>
       </item>
@@ -57,17 +57,10 @@
       <string>Snapmatic Properties</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QCheckBox" name="cbSelfie">
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="cbEditor">
         <property name="text">
-         <string>Selfie</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QCheckBox" name="cbDirector">
-        <property name="text">
-         <string>Director</string>
+         <string>Editor</string>
         </property>
        </widget>
       </item>
@@ -78,17 +71,50 @@
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
+      <item row="0" column="2">
+       <widget class="QCheckBox" name="cbDirector">
+        <property name="text">
+         <string>Director</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="cbSelfie">
+        <property name="text">
+         <string>Selfie</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
        <widget class="QCheckBox" name="cbMugshot">
         <property name="text">
          <string>Mugshot</string>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QCheckBox" name="cbEditor">
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QGroupBox" name="gbExtras">
+     <property name="title">
+      <string>Extras</string>
+     </property>
+     <layout class="QVBoxLayout" name="vlExtras">
+      <item>
+       <widget class="QCheckBox" name="cbQualify">
         <property name="text">
-         <string>Editor</string>
+         <string>Qualify as Avatar automatically at apply</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="labQualify">
+        <property name="text">
+         <string>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</string>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

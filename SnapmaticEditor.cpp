@@ -28,6 +28,10 @@ SnapmaticEditor::SnapmaticEditor(QWidget *parent) :
     ui(new Ui::SnapmaticEditor)
 {
     ui->setupUi(this);
+    ui->cbSelfie->setVisible(false);
+    ui->cbMugshot->setVisible(false);
+    ui->cbEditor->setVisible(false);
+    ui->cmdApply->setDefault(true);
     smpic = 0;
 }
 
@@ -101,16 +105,9 @@ void SnapmaticEditor::on_rbSelfie_toggled(bool checked)
 {
     if (checked)
     {
-        ui->cbSelfie->setChecked(true);
         ui->cbMugshot->setChecked(false);
         ui->cbEditor->setChecked(false);
-        ui->cbDirector->setChecked(false);
-        ui->cbMeme->setChecked(false);
-        ui->cbSelfie->setEnabled(false);
-        ui->cbMugshot->setEnabled(false);
-        ui->cbEditor->setEnabled(false);
-        ui->cbDirector->setEnabled(false);
-        ui->cbMeme->setEnabled(false);
+        ui->cbSelfie->setChecked(true);
     }
 }
 
@@ -119,15 +116,9 @@ void SnapmaticEditor::on_rbMugshot_toggled(bool checked)
     if (checked)
     {
         ui->cbSelfie->setChecked(false);
-        ui->cbMugshot->setChecked(true);
         ui->cbEditor->setChecked(false);
         ui->cbDirector->setChecked(false);
-        ui->cbMeme->setChecked(false);
-        ui->cbSelfie->setEnabled(false);
-        ui->cbMugshot->setEnabled(false);
-        ui->cbEditor->setEnabled(false);
-        ui->cbDirector->setEnabled(false);
-        ui->cbMeme->setEnabled(false);
+        ui->cbMugshot->setChecked(true);
     }
 }
 
@@ -137,14 +128,8 @@ void SnapmaticEditor::on_rbEditor_toggled(bool checked)
     {
         ui->cbSelfie->setChecked(false);
         ui->cbMugshot->setChecked(false);
-        ui->cbEditor->setChecked(true);
         ui->cbDirector->setChecked(false);
-        ui->cbMeme->setChecked(false);
-        ui->cbSelfie->setEnabled(false);
-        ui->cbMugshot->setEnabled(false);
-        ui->cbEditor->setEnabled(false);
-        ui->cbDirector->setEnabled(false);
-        ui->cbMeme->setEnabled(false);
+        ui->cbEditor->setChecked(true);
     }
 }
 
@@ -155,13 +140,6 @@ void SnapmaticEditor::on_rbCustom_toggled(bool checked)
         ui->cbSelfie->setChecked(false);
         ui->cbMugshot->setChecked(false);
         ui->cbEditor->setChecked(false);
-        ui->cbDirector->setChecked(false);
-        ui->cbMeme->setChecked(false);
-        ui->cbSelfie->setEnabled(true);
-        ui->cbMugshot->setEnabled(true);
-        ui->cbEditor->setEnabled(true);
-        ui->cbDirector->setEnabled(true);
-        ui->cbMeme->setEnabled(true);
     }
 }
 
@@ -175,6 +153,22 @@ void SnapmaticEditor::setSnapmaticPicture(SnapmaticPicture *picture)
     ui->cbEditor->setChecked(localSpJson.isFromRSEditor);
     ui->cbDirector->setChecked(localSpJson.isFromDirector);
     ui->cbMeme->setChecked(localSpJson.isMeme);
+    if (ui->cbSelfie->isChecked())
+    {
+        ui->rbSelfie->setChecked(true);
+    }
+    else if (ui->cbMugshot->isChecked())
+    {
+        ui->rbMugshot->setChecked(true);
+    }
+    else if (ui->cbEditor->isChecked())
+    {
+        ui->rbEditor->setChecked(true);
+    }
+    else
+    {
+        ui->rbCustom->setChecked(true);
+    }
 }
 
 void SnapmaticEditor::on_cmdCancel_clicked()
@@ -184,6 +178,10 @@ void SnapmaticEditor::on_cmdCancel_clicked()
 
 void SnapmaticEditor::on_cmdApply_clicked()
 {
+    if (ui->cbQualify->isChecked())
+    {
+        qualifyAvatar();
+    }
     localSpJson.isSelfie = ui->cbSelfie->isChecked();
     localSpJson.isMug = ui->cbMugshot->isChecked();
     localSpJson.isFromRSEditor = ui->cbEditor->isChecked();
@@ -209,4 +207,37 @@ void SnapmaticEditor::on_cmdApply_clicked()
         }
     }
     close();
+}
+
+void SnapmaticEditor::qualifyAvatar()
+{
+    ui->rbSelfie->setChecked(true);
+    ui->cbDirector->setChecked(false);
+    ui->cbMeme->setChecked(false);
+    ui->cmdApply->setDefault(true);
+}
+
+void SnapmaticEditor::on_cbQualify_toggled(bool checked)
+{
+    if (checked)
+    {
+        ui->cbMeme->setEnabled(false);
+        ui->cbDirector->setEnabled(false);
+        ui->rbCustom->setEnabled(false);
+        ui->rbSelfie->setEnabled(false);
+        ui->rbEditor->setEnabled(false);
+        ui->rbMugshot->setEnabled(false);
+    }
+    else
+    {
+        ui->cbMeme->setEnabled(true);
+        ui->rbCustom->setEnabled(true);
+        ui->rbSelfie->setEnabled(true);
+        ui->rbEditor->setEnabled(true);
+        ui->rbMugshot->setEnabled(true);
+        if (ui->rbSelfie->isChecked() || ui->rbCustom->isChecked())
+        {
+            ui->cbDirector->setEnabled(true);
+        }
+    }
 }

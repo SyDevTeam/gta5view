@@ -47,10 +47,13 @@ private slots:
     void on_cmdCancel_clicked();
     void on_cmdApply_clicked();
 
+    void on_cbQualify_toggled(bool checked);
+
 private:
     Ui::SnapmaticEditor *ui;
     SnapmaticProperties localSpJson;
     SnapmaticPicture *smpic;
+    void qualifyAvatar();
 };
 
 #endif // SNAPMATICEDITOR_H
