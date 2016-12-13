@@ -931,7 +931,7 @@ gta5view est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../SnapmaticEditor.ui" line="14"/>
         <location filename="../SnapmaticEditor.ui" line="57"/>
-        <location filename="../SnapmaticEditor.cpp" line="208"/>
+        <location filename="../SnapmaticEditor.cpp" line="206"/>
         <source>Snapmatic Properties</source>
         <translation>Propriétés Snapmatic</translation>
     </message>
@@ -942,49 +942,68 @@ gta5view est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="26"/>
-        <location filename="../SnapmaticEditor.ui" line="91"/>
+        <location filename="../SnapmaticEditor.ui" line="63"/>
         <source>Editor</source>
         <translation>Éditeur</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="33"/>
-        <location filename="../SnapmaticEditor.ui" line="63"/>
+        <location filename="../SnapmaticEditor.ui" line="84"/>
         <source>Selfie</source>
         <translation>Selfie</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="40"/>
-        <location filename="../SnapmaticEditor.ui" line="84"/>
+        <source>Regular</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="47"/>
+        <location filename="../SnapmaticEditor.ui" line="91"/>
         <source>Mugshot</source>
         <translation>Mugshot</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="47"/>
         <source>Custom</source>
-        <translation>Personnalisé</translation>
+        <translation type="vanished">Personnalisé</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="70"/>
+        <location filename="../SnapmaticEditor.ui" line="77"/>
         <source>Director</source>
         <translation>Director</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="77"/>
+        <location filename="../SnapmaticEditor.ui" line="70"/>
         <source>Meme</source>
         <translation>Meme</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="129"/>
+        <location filename="../SnapmaticEditor.ui" line="101"/>
+        <source>Extras</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="107"/>
+        <source>Qualify as Avatar automatically at apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="114"/>
+        <source>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="155"/>
         <source>&amp;Apply</source>
         <translation>A&amp;ppliquer</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="139"/>
+        <location filename="../SnapmaticEditor.ui" line="165"/>
         <source>&amp;Cancel</source>
         <translation>A&amp;nnuler</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="208"/>
+        <location filename="../SnapmaticEditor.cpp" line="206"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
         <translation>La modification des propriétés Snapmatic a échoué : erreur d&apos;entrée/sortie</translation>
     </message>

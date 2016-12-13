@@ -956,7 +956,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     <message>
         <location filename="../SnapmaticEditor.ui" line="14"/>
         <location filename="../SnapmaticEditor.ui" line="57"/>
-        <location filename="../SnapmaticEditor.cpp" line="208"/>
+        <location filename="../SnapmaticEditor.cpp" line="206"/>
         <source>Snapmatic Properties</source>
         <translation type="unfinished"></translation>
     </message>
@@ -967,49 +967,64 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="26"/>
-        <location filename="../SnapmaticEditor.ui" line="91"/>
+        <location filename="../SnapmaticEditor.ui" line="63"/>
         <source>Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="33"/>
-        <location filename="../SnapmaticEditor.ui" line="63"/>
+        <location filename="../SnapmaticEditor.ui" line="84"/>
         <source>Selfie</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="40"/>
-        <location filename="../SnapmaticEditor.ui" line="84"/>
-        <source>Mugshot</source>
+        <source>Regular</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="47"/>
-        <source>Custom</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.ui" line="70"/>
-        <source>Director</source>
+        <location filename="../SnapmaticEditor.ui" line="91"/>
+        <source>Mugshot</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="77"/>
+        <source>Director</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="70"/>
         <source>Meme</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="129"/>
+        <location filename="../SnapmaticEditor.ui" line="101"/>
+        <source>Extras</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="107"/>
+        <source>Qualify as Avatar automatically at apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="114"/>
+        <source>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="155"/>
         <source>&amp;Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="139"/>
+        <location filename="../SnapmaticEditor.ui" line="165"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="208"/>
+        <location filename="../SnapmaticEditor.cpp" line="206"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
         <translation type="unfinished"></translation>
     </message>
