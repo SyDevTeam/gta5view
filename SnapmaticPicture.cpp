@@ -298,6 +298,7 @@ bool SnapmaticPicture::setPicture(const QImage &picture)
         if (snapmaticStream.seek(jpegStreamEditorBegin))
         {
             bool saveSuccess;
+            Q_UNUSED(saveSuccess)
             QByteArray picByteArray1;
             QBuffer picStream1(&picByteArray1);
             picStream1.open(QIODevice::WriteOnly);
@@ -400,7 +401,7 @@ QImage SnapmaticPicture::getPicture()
     }
     else if (writeEnabled)
     {
-        bool returnOk;
+        bool returnOk = 0;
         QImage returnPicture;
 
         QBuffer snapmaticStream(&rawPicContent);
@@ -419,7 +420,7 @@ QImage SnapmaticPicture::getPicture()
     }
     else
     {
-        bool returnOk;
+        bool returnOk = 0;
         QImage returnPicture;
         QIODevice *picStream;
 
@@ -475,6 +476,7 @@ void SnapmaticPicture::parseJsonContent()
 {
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonStr.toUtf8());
     QJsonObject jsonObject = jsonDocument.object();
+    QVariantMap jsonMap = jsonObject.toVariantMap(); // backward compatibility
 
     if (jsonObject.contains("loc"))
     {
@@ -494,13 +496,13 @@ void SnapmaticPicture::parseJsonContent()
     if (jsonObject.contains("creat"))
     {
         QDateTime createdTimestamp;
-        localSpJson.createdTimestamp = jsonObject["creat"].toVariant().toUInt();
+        localSpJson.createdTimestamp = jsonMap["creat"].toUInt();
         createdTimestamp.setTime_t(localSpJson.createdTimestamp);
         localSpJson.createdDateTime = createdTimestamp;
     }
     if (jsonObject.contains("plyrs"))
     {
-        localSpJson.playersList = jsonObject["plyrs"].toVariant().toStringList();
+        localSpJson.playersList = jsonMap["plyrs"].toStringList();
     }
     if (jsonObject.contains("meme"))
     {
