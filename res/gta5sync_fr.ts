@@ -933,60 +933,60 @@ gta5view est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
         <location filename="../SnapmaticEditor.ui" line="57"/>
         <location filename="../SnapmaticEditor.cpp" line="208"/>
         <source>Snapmatic Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Propriétés Snapmatic</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="20"/>
         <source>Snapmatic Type</source>
-        <translation type="unfinished"></translation>
+        <translation>Type Snapmatic</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="26"/>
         <location filename="../SnapmaticEditor.ui" line="91"/>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditeur</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="33"/>
         <location filename="../SnapmaticEditor.ui" line="63"/>
         <source>Selfie</source>
-        <translation type="unfinished"></translation>
+        <translation>Selfie</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="40"/>
         <location filename="../SnapmaticEditor.ui" line="84"/>
         <source>Mugshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Mugshot</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="47"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translation>Personnalisé</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="70"/>
         <source>Director</source>
-        <translation type="unfinished"></translation>
+        <translation>Director</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="77"/>
         <source>Meme</source>
-        <translation type="unfinished"></translation>
+        <translation>Meme</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="129"/>
         <source>&amp;Apply</source>
-        <translation type="unfinished"></translation>
+        <translation>A&amp;ppliquer</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="139"/>
         <source>&amp;Cancel</source>
-        <translation type="unfinished">&amp;Annuler</translation>
+        <translation>A&amp;nnuler</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.cpp" line="208"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
-        <translation type="unfinished"></translation>
+        <translation>La modification des propriétés Snapmatic a échoué : erreur d&apos;entrée/sortie</translation>
     </message>
 </context>
 <context>
@@ -1071,7 +1071,7 @@ gta5view est distribué sous license &lt;a href=&quot;https://www.gnu.org/licens
     <message>
         <location filename="../SnapmaticWidget.cpp" line="220"/>
         <source>&amp;Edit Properties...</source>
-        <translation type="unfinished"></translation>
+        <translation>Modifier les &amp;propriétés...</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="221"/>
