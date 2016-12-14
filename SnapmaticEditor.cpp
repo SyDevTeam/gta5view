@@ -191,17 +191,17 @@ void SnapmaticEditor::on_cmdApply_clicked()
     {
         QString originalFileName = smpic->getPictureFileName();
         QString adjustedFileName = originalFileName;
-        QString backupFileName = originalFileName + ".bak";
         if (adjustedFileName.right(7) == ".hidden") // for the hidden file system
         {
             adjustedFileName.remove(adjustedFileName.length() - 7, 7);
         }
+        QString backupFileName = adjustedFileName + ".bak";
         if (!QFile::exists(backupFileName))
         {
             QFile::copy(adjustedFileName, backupFileName);
         }
         smpic->setSnapmaticProperties(localSpJson);
-        if (!smpic->exportPicture(adjustedFileName))
+        if (!smpic->exportPicture(originalFileName))
         {
             QMessageBox::warning(this, tr("Snapmatic Properties"), tr("Patching of Snapmatic Properties failed because of I/O Error"));
         }
