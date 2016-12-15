@@ -1,4 +1,5 @@
 IDI_ICON1               ICON    DISCARDABLE     "5sync.ico"
+CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "gta5view.exe.manifest"
 
 #include <windows.h>
 
