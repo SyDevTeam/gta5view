@@ -414,26 +414,6 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabSync">
-      <attribute name="title">
-       <string>Sync</string>
-      </attribute>
-      <layout class="QVBoxLayout" name="vlSync">
-       <item>
-        <widget class="QLabel" name="labSync">
-         <property name="text">
-          <string>Sync is not implemented at current time</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignCenter</set>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
     </widget>
    </item>
    <item>
