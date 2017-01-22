@@ -53,7 +53,7 @@ Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 i
 &lt;br/&gt;
 %9&lt;br/&gt;
 &lt;br/&gt;
-%8 v%1&lt;br/&gt;
+Version %1&lt;br/&gt;
 Build %4&lt;br/&gt;
 Compilé avec Qt %2&lt;br/&gt;
 Fonctionne avec Qt %3&lt;br/&gt;
@@ -458,7 +458,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../PictureDialog.cpp" line="294"/>
         <source>Avatar Preview Mode&lt;br&gt;Press A for Default View</source>
-        <translation type="unfinished"></translation>
+        <translation>Aperçu avatar&lt;br&gt;Appuyer sur A pour la vue par défaut</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="337"/>
