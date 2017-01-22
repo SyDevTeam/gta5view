@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>About gta5view</string>
+   <string>About %1</string>
   </property>
   <property name="modal">
    <bool>true</bool>
@@ -26,17 +26,16 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5view&lt;/span&gt;&lt;br/&gt;
+      <string>&lt;span style=&quot; font-weight:600;&quot;&gt;%8&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
-A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
-Pictures and Savegames&lt;br/&gt;
+%9&lt;br/&gt;
 &lt;br/&gt;
 Project version: %1&lt;br/&gt;
-Project build: %4, %5&lt;br/&gt;
+Project build: %4&lt;br/&gt;
 Compiled with Qt %2&lt;br/&gt;
 Running with Qt %3&lt;br/&gt;
 &lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5view is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</string>
+Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

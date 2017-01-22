@@ -65,6 +65,7 @@ private slots:
     void exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen);
     void nextPictureRequestedSlot();
     void previousPictureRequestedSlot();
+    void renderPicture();
 
 signals:
     void nextPictureRequested();
@@ -85,6 +86,8 @@ private:
     QWidget *fullscreenWidget;
     QAction *jpegExportAction;
     QAction *pgtaExportAction;
+    QImage avatarPreviewImage;
+    QImage avatarAreaPicture;
     QImage snapmaticPicture;
     QString jsonDrawString;
     QString windowTitleStr;
@@ -100,8 +103,12 @@ private:
     QString locZ;
     bool rqfullscreen;
     bool navienabled;
+    bool previewmode;
     bool indexed;
     int index;
+    int avatarLocX;
+    int avatarLocY;
+    int avatarSize;
     QMenu *exportMenu;
 };
 

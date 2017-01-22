@@ -38,6 +38,7 @@ private slots:
 private:
     Ui::AboutDialog *ui;
     QString aboutStr;
+    QString titleStr;
 };
 
 #endif // ABOUTDIALOG_H

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="de_DE">
+<TS version="2.1" language="de_DE">
 <context>
     <name>AboutDialog</name>
     <message>
         <source>About gta5sync</source>
-        <translation>Über gta5sync</translation>
+        <translation type="vanished">Über gta5sync</translation>
     </message>
     <message>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
@@ -19,7 +19,7 @@ Compiled with Qt %2&lt;br/&gt;
 Running with Qt %3&lt;br/&gt;
 &lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 Ein Projekt zum ansehen und synchronisieren von&lt;br/&gt;
 Grand Theft Auto V Snapmatic Bilder und Spielständen&lt;br/&gt;
@@ -29,7 +29,7 @@ Projektbau: %4, %5&lt;br/&gt;
 Gebaut mit Qt %2&lt;br/&gt;
 Läuft auf Qt %3&lt;br/&gt;
 &lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync ist lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
@@ -42,7 +42,7 @@ Compiled with Qt %2&lt;br/&gt;
 Running with Qt %3&lt;br/&gt;
 &lt;br/&gt;
 Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
+        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 Ein Projekt zum ansehen und synchronisieren von Grand Theft Auto 5 Snapmatic Bilder und Spielständen&lt;br/&gt;
 &lt;br/&gt;
@@ -55,36 +55,34 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="14"/>
-        <source>About gta5view</source>
-        <translation>Über gta5view</translation>
+        <source>About %1</source>
+        <translation>Über %1</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5view&lt;/span&gt;&lt;br/&gt;
+        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%8&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
-A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
-Pictures and Savegames&lt;br/&gt;
+%9&lt;br/&gt;
 &lt;br/&gt;
 Project version: %1&lt;br/&gt;
-Project build: %4, %5&lt;br/&gt;
+Project build: %4&lt;br/&gt;
 Compiled with Qt %2&lt;br/&gt;
 Running with Qt %3&lt;br/&gt;
 &lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5view is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5view&lt;/span&gt;&lt;br/&gt;
+Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;%8&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
-Ein Projekt zum ansehen von Grand Theft Auto V&lt;br/&gt;
-Snapmatic Bilder und Spielständen&lt;br/&gt;
+%9&lt;br/&gt;
 &lt;br/&gt;
 Projektversion: %1&lt;br/&gt;
-Projektbau: %4, %5&lt;br/&gt;
+Projektbau: %4&lt;br/&gt;
 Gebaut mit Qt %2&lt;br/&gt;
 Läuft auf Qt %3&lt;br/&gt;
 &lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5view ist lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 ist lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="76"/>
+        <location filename="../AboutDialog.ui" line="75"/>
         <source>&amp;Close</source>
         <translation>S&amp;chließen</translation>
     </message>
@@ -103,6 +101,20 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     <message>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation type="obsolete">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;Ein Projekt zum ansehen und synchronisieren von Grand Theft Auto 5 Snapmatic Bilder und Spielständen&lt;br/&gt;&lt;br/&gt;Projektversion: %1&lt;br/&gt;Gebaut mit Qt %2&lt;br/&gt;Läuft auf Qt %3&lt;br/&gt;&lt;br/&gt;Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.cpp" line="39"/>
+        <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
+Pictures and Savegames</source>
+        <translation>Ein Projekt zum ansehen von Grand Theft Auto V&lt;br/&gt;
+Snapmatic Bilder und Spielständen</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.cpp" line="43"/>
+        <source>A project for viewing and sync Grand Theft Auto V Snapmatic&lt;br/&gt;
+Pictures and Savegames</source>
+        <translation>Ein Projekt zum ansehen und synchronisieren von&lt;br/&gt;
+Grand Theft Auto V Snapmatic Bilder und Spielständen</translation>
     </message>
 </context>
 <context>
@@ -188,11 +200,11 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <source>gta5sync - Settings</source>
-        <translation>gta5sync - Einstellungen</translation>
+        <translation type="vanished">gta5sync - Einstellungen</translation>
     </message>
     <message>
         <source>Profile</source>
-        <translation>Profil</translation>
+        <translation type="vanished">Profil</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="33"/>
@@ -344,21 +356,23 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Sprache</translation>
     </message>
     <message>
+        <location filename="../OptionsDialog.ui" line="419"/>
         <source>Sync</source>
         <translation>Sync</translation>
     </message>
     <message>
+        <location filename="../OptionsDialog.ui" line="425"/>
         <source>Sync is not implemented at current time</source>
         <translation>Sync wurde bisher nicht implementiert</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="443"/>
+        <location filename="../OptionsDialog.ui" line="463"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="459"/>
+        <location filename="../OptionsDialog.ui" line="479"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>Abbre&amp;chen</translation>
@@ -394,7 +408,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <source>The new Custom Folder initialize after you restart %1.</source>
-        <translation>Der eigene Ordner initialisiert sobald du %1 neugestartet hast.</translation>
+        <translation type="vanished">Der eigene Ordner initialisiert sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="275"/>
@@ -507,41 +521,46 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
         <translation>Schließen</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="82"/>
+        <location filename="../PictureDialog.cpp" line="93"/>
         <source>Export as &amp;JPG picture...</source>
         <translation>Exportiere als &amp;JPG Bild...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="83"/>
+        <location filename="../PictureDialog.cpp" line="94"/>
         <source>Export as &amp;GTA Snapmatic...</source>
         <translation>Exportiere als &amp;GTA Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="257"/>
-        <location filename="../PictureDialog.cpp" line="314"/>
+        <location filename="../PictureDialog.cpp" line="281"/>
+        <location filename="../PictureDialog.cpp" line="348"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Snapmatic Bildansicht</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="257"/>
-        <location filename="../PictureDialog.cpp" line="314"/>
+        <location filename="../PictureDialog.cpp" line="281"/>
+        <location filename="../PictureDialog.cpp" line="348"/>
         <source>Failed at %1</source>
         <translation>Fehlgeschlagen bei %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="303"/>
-        <location filename="../PictureDialog.cpp" line="313"/>
+        <location filename="../PictureDialog.cpp" line="294"/>
+        <source>Avatar Preview Mode&lt;br&gt;Press A for Default View</source>
+        <translation>Avatar Vorschaumodus&lt;br&gt;Drücke A für Standardansicht</translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.cpp" line="337"/>
+        <location filename="../PictureDialog.cpp" line="347"/>
         <source>No player</source>
         <translation>Keine Spieler</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="306"/>
-        <location filename="../PictureDialog.cpp" line="313"/>
+        <location filename="../PictureDialog.cpp" line="340"/>
+        <location filename="../PictureDialog.cpp" line="347"/>
         <source>No crew</source>
         <translation>Keine Crew</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="313"/>
+        <location filename="../PictureDialog.cpp" line="347"/>
         <source>Unknown Location</source>
         <translation>Unbekannter Standort</translation>
     </message>
@@ -735,25 +754,25 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="365"/>
-        <location filename="../UserInterface.cpp" line="308"/>
+        <location filename="../UserInterface.cpp" line="309"/>
         <source>All profile files (SGTA* PGTA*)</source>
         <translation>Alle Profildateien (SGTA* PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="366"/>
-        <location filename="../UserInterface.cpp" line="309"/>
+        <location filename="../UserInterface.cpp" line="310"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Spielstanddateien (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="367"/>
-        <location filename="../UserInterface.cpp" line="310"/>
+        <location filename="../UserInterface.cpp" line="311"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Snapmatic Bilder (PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="368"/>
-        <location filename="../UserInterface.cpp" line="311"/>
+        <location filename="../UserInterface.cpp" line="312"/>
         <source>All files (**)</source>
         <translation>Alle Dateien (**)</translation>
     </message>
@@ -768,13 +787,13 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="435"/>
-        <location filename="../UserInterface.cpp" line="351"/>
+        <location filename="../UserInterface.cpp" line="352"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Fehler beim Lesen vom Snapmatic Bild</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="452"/>
-        <location filename="../UserInterface.cpp" line="367"/>
+        <location filename="../UserInterface.cpp" line="368"/>
         <source>Failed to read Savegame file</source>
         <translation>Fehler beim Lesen von Spielstanddatei</translation>
     </message>
@@ -796,7 +815,7 @@ Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping
     <message>
         <location filename="../ProfileInterface.cpp" line="408"/>
         <location filename="../ProfileInterface.cpp" line="487"/>
-        <location filename="../UserInterface.cpp" line="399"/>
+        <location filename="../UserInterface.cpp" line="400"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
@@ -1028,17 +1047,17 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>The Third Way (100%) - 00/00/00 00:00:00</source>
-        <translation>The Third Way (100%) - 00/00/00 00:00:00</translation>
+        <translation type="vanished">The Third Way (100%) - 00/00/00 00:00:00</translation>
     </message>
     <message>
         <source>Savegame %1
 %2</source>
-        <translation>Spielstand %1
+        <translation type="vanished">Spielstand %1
 %2</translation>
     </message>
     <message>
         <source>SAVE - %1&lt;br&gt;%2</source>
-        <translation>SPIELSTAND - %1&lt;br&gt;%2</translation>
+        <translation type="vanished">SPIELSTAND - %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="86"/>
@@ -1084,7 +1103,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>AUTO</source>
-        <translation>AUTO</translation>
+        <translation type="vanished">AUTO</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="57"/>
@@ -1293,7 +1312,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Custom</source>
-        <translation>Eigenes</translation>
+        <translation type="vanished">Eigenes</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="77"/>
@@ -1329,6 +1348,14 @@ Exportieren als:</translation>
         <location filename="../SnapmaticEditor.ui" line="165"/>
         <source>&amp;Cancel</source>
         <translation>Abbre&amp;chen</translation>
+    </message>
+    <message>
+        <source>Apply</source>
+        <translation type="vanished">Übernehmen</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation type="vanished">Cancel</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.cpp" line="206"/>
@@ -1387,11 +1414,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Enable &amp;In-game</source>
-        <translation>&amp;Im Spiel aktivieren</translation>
+        <translation type="vanished">&amp;Im Spiel aktivieren</translation>
     </message>
     <message>
         <source>Disable &amp;In-game</source>
-        <translation>&amp;Im Spiel deaktivieren</translation>
+        <translation type="vanished">&amp;Im Spiel deaktivieren</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="221"/>
@@ -1418,7 +1445,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>&amp;Edit Properties</source>
-        <translation>&amp;Eigenschaften bearbeiten</translation>
+        <translation type="vanished">&amp;Eigenschaften bearbeiten</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="220"/>
@@ -1528,7 +1555,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>gta5sync - %1</source>
-        <translation>gta5sync - %1</translation>
+        <translation type="vanished">gta5sync - %1</translation>
     </message>
     <message>
         <source>File</source>
@@ -1614,9 +1641,8 @@ Exportieren als:</translation>
         <translation>Auswahl &amp;Sichtbarkeit</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="223"/>
-        <source>&amp;About gta5view</source>
-        <translation>&amp;Über gta5view</translation>
+        <source>&amp;About Product</source>
+        <translation type="vanished">&amp;Über Produkt</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="235"/>
@@ -1632,11 +1658,6 @@ Exportieren als:</translation>
         <location filename="../UserInterface.ui" line="74"/>
         <source>Select profile</source>
         <translation>Profil auswählen</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="20"/>
-        <source>gta5view - %1</source>
-        <translation>gta5view - %1</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="105"/>
@@ -1665,11 +1686,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Selection visibility</source>
-        <translation>Auswahl Sichtbarkeit</translation>
+        <translation type="vanished">Auswahl Sichtbarkeit</translation>
     </message>
     <message>
         <source>&amp;About gta5sync</source>
-        <translation>&amp;Über gta5sync</translation>
+        <translation type="vanished">&amp;Über gta5sync</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="246"/>
@@ -1693,7 +1714,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="314"/>
-        <location filename="../UserInterface.cpp" line="125"/>
+        <location filename="../UserInterface.cpp" line="126"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>Wähle &amp;GTA V Ordner...</translation>
     </message>
@@ -1714,11 +1735,11 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>Hid&amp;e In-game</source>
-        <translation>Im Spiel ausblen&amp;den</translation>
+        <translation type="vanished">Im Spiel ausblen&amp;den</translation>
     </message>
     <message>
         <source>&amp;Enable In-game</source>
-        <translation>Im Spiel aktivier&amp;en</translation>
+        <translation type="vanished">Im Spiel aktivier&amp;en</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="328"/>
@@ -1727,7 +1748,7 @@ Exportieren als:</translation>
     </message>
     <message>
         <source>&amp;Disable In-game</source>
-        <translation>Im Spiel &amp;deaktivieren</translation>
+        <translation type="vanished">Im Spiel &amp;deaktivieren</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="336"/>
@@ -1796,25 +1817,25 @@ Exportieren als:</translation>
         <translation type="obsolete">GTA V Ordner nicht gefunden!</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="60"/>
-        <location filename="../UserInterface.cpp" line="195"/>
+        <location filename="../UserInterface.cpp" line="61"/>
+        <location filename="../UserInterface.cpp" line="196"/>
         <source>Select Profile</source>
         <translation>Profil auswählen</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="317"/>
         <location filename="../OptionsDialog.cpp" line="431"/>
-        <location filename="../UserInterface.cpp" line="74"/>
-        <location filename="../UserInterface.cpp" line="448"/>
+        <location filename="../UserInterface.cpp" line="75"/>
+        <location filename="../UserInterface.cpp" line="449"/>
         <source>Select GTA V Folder...</source>
         <translation>Wähle GTA V Ordner...</translation>
     </message>
     <message>
         <source>Select GTA V &amp;Folder...</source>
-        <translation>Wähle GTA V &amp;Ordner...</translation>
+        <translation type="vanished">Wähle GTA V &amp;Ordner...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="305"/>
+        <location filename="../UserInterface.cpp" line="306"/>
         <source>Open File...</source>
         <translation>Datei öffnen...</translation>
     </message>
@@ -1823,20 +1844,27 @@ Exportieren als:</translation>
         <translation type="obsolete">Importieren</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="58"/>
+        <location filename="../UserInterface.ui" line="20"/>
+        <location filename="../UserInterface.cpp" line="59"/>
         <source>%2 - %1</source>
         <translation>%2 - %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="351"/>
-        <location filename="../UserInterface.cpp" line="367"/>
-        <location filename="../UserInterface.cpp" line="394"/>
-        <location filename="../UserInterface.cpp" line="399"/>
+        <location filename="../UserInterface.ui" line="223"/>
+        <location filename="../UserInterface.cpp" line="58"/>
+        <source>&amp;About %1</source>
+        <translation>&amp;Über %1</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="352"/>
+        <location filename="../UserInterface.cpp" line="368"/>
+        <location filename="../UserInterface.cpp" line="395"/>
+        <location filename="../UserInterface.cpp" line="400"/>
         <source>Open File</source>
         <translation>Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="394"/>
+        <location filename="../UserInterface.cpp" line="395"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>Kann nicht %1 öffnen weil Dateiformat nicht gültig ist</translation>
     </message>

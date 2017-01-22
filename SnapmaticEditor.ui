@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>375</width>
-    <height>305</height>
+    <height>306</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <property name="title">
       <string>Snapmatic Type</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_2">
+     <layout class="QGridLayout" name="gdType">
       <item row="2" column="1">
        <widget class="QRadioButton" name="rbEditor">
         <property name="text">
@@ -56,7 +56,7 @@
      <property name="title">
       <string>Snapmatic Properties</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout">
+     <layout class="QGridLayout" name="gdProperties">
       <item row="5" column="1">
        <widget class="QCheckBox" name="cbEditor">
         <property name="text">

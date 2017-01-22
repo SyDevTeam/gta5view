@@ -37,6 +37,7 @@
 #include <QDesktopWidget>
 #include <QJsonDocument>
 #include <QApplication>
+#include <QStaticText>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QJsonObject>
@@ -45,7 +46,9 @@
 #include <QKeyEvent>
 #include <QMimeData>
 #include <QToolBar>
+#include <QPainter>
 #include <QPicture>
+#include <QBitmap>
 #include <QBuffer>
 #include <QDebug>
 #include <QList>
@@ -65,6 +68,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     plyrsList = QStringList();
     fullscreenWidget = 0;
     rqfullscreen = 0;
+    previewmode = 0;
     navienabled = 0;
     indexed = 0;
     picArea = "";
@@ -76,6 +80,13 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     locY = "";
     locZ = "";
     smpic = 0;
+
+    // Avatar area
+    avatarPreviewImage = QImage();
+    avatarAreaPicture = QImage(":/img/avatararea.png");
+    avatarLocX = 145;
+    avatarLocY = 66;
+    avatarSize = 470;
 
     // Export menu
     exportMenu = new QMenu(this);
@@ -123,6 +134,7 @@ void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
     Q_UNUSED(newLabelSize)
     int newDialogHeight = ui->labPicture->pixmap()->height();
     newDialogHeight = newDialogHeight + ui->jsonFrame->height();
+    if (navienabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
     setMinimumSize(width(), newDialogHeight);
     setMaximumSize(width(), newDialogHeight);
     resize(width(), newDialogHeight);
@@ -198,6 +210,18 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 ui->cmdExport->click();
                 returnValue = true;
                 break;
+            case Qt::Key_A:
+                if (previewmode)
+                {
+                    previewmode = false;
+                    renderPicture();
+                }
+                else
+                {
+                    previewmode = true;
+                    renderPicture();
+                }
+                break;
 #if QT_VERSION >= 0x050300
             case Qt::Key_Exit:
                 ui->cmdClose->click();
@@ -260,7 +284,17 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
     if (picture->isPicOk())
     {
         snapmaticPicture = picture->getPicture();
-        ui->labPicture->setPixmap(QPixmap::fromImage(snapmaticPicture, Qt::AutoColor));
+
+        // Generating Avatar Preview
+        QPixmap finalPixmap(960, 536);
+        QPainter snapPainter(&finalPixmap);
+        snapPainter.drawImage(0, 0, snapmaticPicture);
+        snapPainter.drawImage(0, 0, avatarAreaPicture);
+        snapPainter.setPen(QColor::fromRgb(255, 255, 255, 255));
+        snapPainter.drawStaticText(3, 3, tr("Avatar Preview Mode<br>Press A for Default View"));
+        avatarPreviewImage = finalPixmap.toImage();
+
+        renderPicture();
         ui->cmdExport->setEnabled(true);
     }
     if (picture->isJsonOk())
@@ -344,6 +378,18 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, int index)
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture)
 {
     setSnapmaticPicture(picture, true);
+}
+
+void PictureDialog::renderPicture()
+{
+    if (!previewmode)
+    {
+        ui->labPicture->setPixmap(QPixmap::fromImage(snapmaticPicture));
+    }
+    else
+    {
+        ui->labPicture->setPixmap(QPixmap::fromImage(avatarPreviewImage));
+    }
 }
 
 void PictureDialog::playerNameUpdated()

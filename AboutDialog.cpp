@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -27,11 +27,23 @@ AboutDialog::AboutDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     aboutStr = ui->labAbout->text();
+    titleStr = this->windowTitle();
     QString appVersion = qApp->applicationVersion();
     QString buildType = GTA5SYNC_BUILDTYPE;
     buildType.replace("_", " ");
+    QString projectBuild = QString("%1, %2").arg(__DATE__, __TIME__);
     QString buildStr = QString("%1, %2").arg(QT_VERSION_STR, GTA5SYNC_COMPILER);
-    ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", buildStr, qVersion(), __DATE__, __TIME__));
+    QString projectDes = tr(GTA5SYNC_APPDES);
+    if (GTA5SYNC_APPSTR == "gta5view")
+    {
+        projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+    }
+    else if (GTA5SYNC_APPSTR == "gta5sync")
+    {
+        projectDes = tr("A project for viewing and sync Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+    }
+    ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", buildStr, qVersion(), projectBuild, GTA5SYNC_APPVENDORLINK, GTA5SYNC_APPVENDOR, GTA5SYNC_COPYRIGHT, GTA5SYNC_APPSTR, projectDes));
+    this->setWindowTitle(titleStr.arg(GTA5SYNC_APPSTR));
 }
 
 AboutDialog::~AboutDialog()
