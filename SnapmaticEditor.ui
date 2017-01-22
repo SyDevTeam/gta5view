@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>375</width>
-    <height>306</height>
+    <height>305</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,107 +15,137 @@
   </property>
   <layout class="QVBoxLayout" name="vlEditor">
    <item>
-    <widget class="QGroupBox" name="gbMode">
-     <property name="title">
-      <string>Snapmatic Type</string>
+    <widget class="QWidget" name="frameWidget" native="true">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
      </property>
-     <layout class="QGridLayout" name="gdType">
-      <item row="2" column="1">
-       <widget class="QRadioButton" name="rbEditor">
-        <property name="text">
-         <string>Editor</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QRadioButton" name="rbSelfie">
-        <property name="text">
-         <string>Selfie</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QRadioButton" name="rbCustom">
-        <property name="text">
-         <string>Regular</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QRadioButton" name="rbMugshot">
-        <property name="text">
-         <string>Mugshot</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="gbProperties">
-     <property name="title">
-      <string>Snapmatic Properties</string>
-     </property>
-     <layout class="QGridLayout" name="gdProperties">
-      <item row="5" column="1">
-       <widget class="QCheckBox" name="cbEditor">
-        <property name="text">
-         <string>Editor</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QCheckBox" name="cbMeme">
-        <property name="text">
-         <string>Meme</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="2">
-       <widget class="QCheckBox" name="cbDirector">
-        <property name="text">
-         <string>Director</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QCheckBox" name="cbSelfie">
-        <property name="text">
-         <string>Selfie</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="QCheckBox" name="cbMugshot">
-        <property name="text">
-         <string>Mugshot</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item>
-    <widget class="QGroupBox" name="gbExtras">
-     <property name="title">
-      <string>Extras</string>
-     </property>
-     <layout class="QVBoxLayout" name="vlExtras">
+     <layout class="QVBoxLayout" name="vlFrame">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
       <item>
-       <widget class="QCheckBox" name="cbQualify">
-        <property name="text">
-         <string>Qualify as Avatar automatically at apply</string>
+       <widget class="QGroupBox" name="gbMode">
+        <property name="title">
+         <string>Snapmatic Type</string>
         </property>
+        <layout class="QGridLayout" name="gdType">
+         <item row="2" column="1">
+          <widget class="QRadioButton" name="rbEditor">
+           <property name="text">
+            <string>Editor</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QRadioButton" name="rbSelfie">
+           <property name="text">
+            <string>Selfie</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QRadioButton" name="rbCustom">
+           <property name="text">
+            <string>Regular</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QRadioButton" name="rbMugshot">
+           <property name="text">
+            <string>Mugshot</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="labQualify">
-        <property name="text">
-         <string>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</string>
+       <widget class="QGroupBox" name="gbProperties">
+        <property name="title">
+         <string>Snapmatic Properties</string>
         </property>
-        <property name="wordWrap">
-         <bool>true</bool>
+        <layout class="QGridLayout" name="gdProperties">
+         <item row="5" column="1">
+          <widget class="QCheckBox" name="cbEditor">
+           <property name="text">
+            <string>Editor</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="1">
+          <widget class="QCheckBox" name="cbMeme">
+           <property name="text">
+            <string>Meme</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QCheckBox" name="cbDirector">
+           <property name="text">
+            <string>Director</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QCheckBox" name="cbSelfie">
+           <property name="text">
+            <string>Selfie</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QCheckBox" name="cbMugshot">
+           <property name="text">
+            <string>Mugshot</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gbExtras">
+        <property name="title">
+         <string>Extras</string>
         </property>
+        <layout class="QVBoxLayout" name="vlExtras">
+         <item>
+          <widget class="QCheckBox" name="cbQualify">
+           <property name="text">
+            <string>Qualify as Avatar automatically at apply</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QLabel" name="labQualify">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
@@ -151,6 +181,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="cmdApply">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>&amp;Apply</string>
        </property>
@@ -161,6 +197,12 @@
      </item>
      <item>
       <widget class="QPushButton" name="cmdCancel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>&amp;Cancel</string>
        </property>

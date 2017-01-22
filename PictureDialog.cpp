@@ -137,9 +137,10 @@ void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
     if (navienabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
     setMinimumSize(width(), newDialogHeight);
     setMaximumSize(width(), newDialogHeight);
-    resize(width(), newDialogHeight);
+    setFixedHeight(newDialogHeight);
     ui->labPicture->updateGeometry();
     ui->jsonFrame->updateGeometry();
+    updateGeometry();
 }
 
 void PictureDialog::stylizeDialog()

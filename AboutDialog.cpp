@@ -34,11 +34,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QString projectBuild = QString("%1, %2").arg(__DATE__, __TIME__);
     QString buildStr = QString("%1, %2").arg(QT_VERSION_STR, GTA5SYNC_COMPILER);
     QString projectDes = tr(GTA5SYNC_APPDES);
-    if (GTA5SYNC_APPSTR == "gta5view")
+    if (QString(GTA5SYNC_APPSTR) == "gta5view")
     {
         projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
     }
-    else if (GTA5SYNC_APPSTR == "gta5sync")
+    else if (QString(GTA5SYNC_APPSTR) == "gta5sync")
     {
         projectDes = tr("A project for viewing and sync Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
     }
