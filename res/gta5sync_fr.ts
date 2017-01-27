@@ -395,12 +395,12 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../PictureCopy.cpp" line="58"/>
         <source>GTA V Export (*.g5e)</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V Export (*.g5e)</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="59"/>
         <source>GTA V Raw Export (*.auto)</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V Export Brut (*.g5e)</translation>
     </message>
     <message>
         <location filename="../PictureCopy.cpp" line="60"/>
@@ -410,7 +410,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../PictureCopy.cpp" line="125"/>
         <source>Exported Snapmatic to &quot;%1&quot; because of using the .auto extension.</source>
-        <translation type="unfinished"></translation>
+        <translation>Exporté comme &quot;%1&quot; avec l&apos;utilisation de l&apos;extension .auto.</translation>
     </message>
     <message>
         <source>All files (**)</source>
@@ -463,7 +463,9 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <source>Key 1 - Avatar Preview Mode
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
-        <translation type="unfinished"></translation>
+        <translation>Touche 1 - Mode Aperçu Avatar
+Touche 2 - Activer/désactiver l&apos;overlay
+Touches fléchées - Naviguer</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="352"/>
@@ -481,7 +483,8 @@ Arrow Keys - Navigate</source>
         <location filename="../PictureDialog.cpp" line="474"/>
         <source>Avatar Preview Mode
 Press 1 for Default View</source>
-        <translation type="unfinished"></translation>
+        <translation>Mode Aperçu Avatar
+Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <source>Avatar Preview Mode&lt;br&gt;Press A for Default View</source>
@@ -677,7 +680,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="514"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e</source>
-        <translation type="unfinished"></translation>
+        <translation>Impossible d&apos;importer la photo Snapmatic,nom de fichier incorrect (PGTA*, *.g5e)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="519"/>
@@ -776,13 +779,13 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="366"/>
         <location filename="../UserInterface.cpp" line="309"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
-        <translation type="unfinished"></translation>
+        <translation>Tous les fichiers de profil (*.g5e SGTA* PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="367"/>
         <location filename="../UserInterface.cpp" line="310"/>
         <source>GTA V Export (*.g5e)</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V Export (*.g5e)</translation>
     </message>
 </context>
 <context>
