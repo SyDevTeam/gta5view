@@ -21,8 +21,11 @@ QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: QT += winextras
 
+DEFINES += GTA5SYNC_DISABLED # disabling sync (remove it for building gta5sync)
+
 DEPLOYMENT.display_name = gta5view
 TARGET = gta5view
+
 TEMPLATE = app
 
 SOURCES += main.cpp \

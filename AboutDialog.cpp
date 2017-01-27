@@ -33,15 +33,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
     buildType.replace("_", " ");
     QString projectBuild = QString("%1, %2").arg(__DATE__, __TIME__);
     QString buildStr = QString("%1, %2").arg(QT_VERSION_STR, GTA5SYNC_COMPILER);
-    QString projectDes = tr(GTA5SYNC_APPDES);
-    if (QString(GTA5SYNC_APPSTR) == "gta5view")
-    {
-        projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
-    }
-    else if (QString(GTA5SYNC_APPSTR) == "gta5sync")
-    {
-        projectDes = tr("A project for viewing and sync Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
-    }
+#ifdef GTA5SYNC_ENABLED
+     QString projectDes = tr("A project for viewing and sync Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+#else
+     QString projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+#endif
     ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", buildStr, qVersion(), projectBuild, GTA5SYNC_APPVENDORLINK, GTA5SYNC_APPVENDOR, GTA5SYNC_COPYRIGHT, GTA5SYNC_APPSTR, projectDes));
     this->setWindowTitle(titleStr.arg(GTA5SYNC_APPSTR));
 }

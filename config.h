@@ -28,8 +28,16 @@
 #define GTA5SYNC_APPVENDORLINK "https://github.com/Syping/"
 #endif
 
+#ifndef GTA5SYNC_DISABLED
+#define GTA5SYNC_ENABLED
+#endif
+
 #ifndef GTA5SYNC_APPSTR
+#ifdef GTA5SYNC_ENABLED
+#define GTA5SYNC_APPSTR "gta5sync"
+#else
 #define GTA5SYNC_APPSTR "gta5view"
+#endif
 #endif
 
 #ifndef GTA5SYNC_APPDES
