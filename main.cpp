@@ -402,8 +402,9 @@ int main(int argc, char *argv[])
             {
                 QString argumentFileName = argumentFileInfo.fileName();
                 QString argumentFileType = argumentFileName.left(4);
+                QString argumentFileExt = argumentFileName.right(4);
 
-                if (argumentFileType == "PGTA")
+                if (argumentFileType == "PGTA" || argumentFileExt == ".g5e")
                 {
                     arg1 = currentArg;
                     selectedAction = "showpic";

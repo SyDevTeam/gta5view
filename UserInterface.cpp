@@ -306,7 +306,8 @@ fileDialogPreOpen:
     fileDialog.setWindowTitle(tr("Open File..."));
 
     QStringList filters;
-    filters << ProfileInterface::tr("All profile files (SGTA* PGTA*)");
+    filters << ProfileInterface::tr("All profile files (*.g5e SGTA* PGTA*)");
+    filters << ProfileInterface::tr("GTA V Export (*.g5e)");
     filters << ProfileInterface::tr("Savegames files (SGTA*)");
     filters << ProfileInterface::tr("Snapmatic pictures (PGTA*)");
     filters << ProfileInterface::tr("All files (**)");
@@ -338,7 +339,7 @@ bool UserInterface::openFile(QString selectedFile, bool warn)
     QString selectedFileName = QFileInfo(selectedFile).fileName();
     if (QFile::exists(selectedFile))
     {
-        if (selectedFileName.left(4) == "PGTA")
+        if (selectedFileName.left(4) == "PGTA" || selectedFileName.right(4) == ".g5e")
         {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
             if (picture->readingPicture())

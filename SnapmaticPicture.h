@@ -65,7 +65,7 @@ public:
     QString getExportPictureFileName();
     QDateTime getCreatedDateTime();
     bool setPicture(const QImage &picture);
-    bool exportPicture(const QString &fileName);
+    bool exportPicture(const QString &fileName, bool customFormat = false);
     void setPicFileName(QString picFileName_);
 
     // JSON

@@ -19,6 +19,7 @@
 #ifndef PICTURECOPY_H
 #define PICTURECOPY_H
 
+#include "SnapmaticPicture.h"
 #include <QWidget>
 #include <QString>
 
@@ -26,7 +27,7 @@ class PictureCopy
 {
 public:
     PictureCopy();
-    static void copyPicture(QWidget *parent, QString picPath);
+    static void copyPicture(QWidget *parent, QString picPath, SnapmaticPicture *picture);
 };
 
 #endif // PICTURECOPY_H

@@ -521,11 +521,11 @@ void PictureDialog::copySnapmaticPicture()
 {
     if (rqfullscreen && fullscreenWidget)
     {
-        PictureCopy::copyPicture(fullscreenWidget, picPath);
+        PictureCopy::copyPicture(fullscreenWidget, picPath, smpic);
     }
     else
     {
-        PictureCopy::copyPicture(this, picPath);
+        PictureCopy::copyPicture(this, picPath, smpic);
     }
 }
 

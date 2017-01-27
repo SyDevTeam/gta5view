@@ -23,6 +23,7 @@
 #include <QStringList>
 #include <QVariantMap>
 #include <QJsonArray>
+#include <QFileInfo>
 #include <QString>
 #include <QBuffer>
 #include <QDebug>
@@ -85,9 +86,72 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_, bool cacheEnabled_)
         delete picFile;
         return false;
     }
-    rawPicContent = picFile->read(snapmaticFileMaxSize);
-    picFile->close();
-    delete picFile;
+
+    if (picFileName.right(4) != ".g5e")
+    {
+        rawPicContent = picFile->read(snapmaticFileMaxSize);
+        picFile->close();
+        delete picFile;
+    }
+    else
+    {
+        QByteArray g5eContent = picFile->read(snapmaticFileMaxSize + 1024);
+        picFile->close();
+        delete picFile;
+
+        // Reading g5e Content
+        g5eContent.remove(0, 1);
+        if (g5eContent.left(3) == "G5E")
+        {
+            g5eContent.remove(0, 3);
+            if (g5eContent.left(2).toHex() == "1000")
+            {
+                g5eContent.remove(0, 2);
+                if (g5eContent.left(3) == "LEN")
+                {
+                    g5eContent.remove(0, 3);
+                    int fileNameLength = g5eContent.left(1).toHex().toInt();
+                    g5eContent.remove(0, 1);
+                    if (g5eContent.left(3) == "FIL")
+                    {
+                        g5eContent.remove(0, 3);
+                        picFileName = g5eContent.left(fileNameLength);
+                        g5eContent.remove(0, fileNameLength);
+                        if (g5eContent.left(3) == "COM")
+                        {
+                            g5eContent.remove(0, 3);
+                            rawPicContent = qUncompress(g5eContent);
+                        }
+                        else
+                        {
+                            lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",4,G5E_FORMATERROR";
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",3,G5E_FORMATERROR";
+                        return false;
+                    }
+                }
+                else
+                {
+                    lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",2,G5E_FORMATERROR";
+                    return false;
+                }
+            }
+            else
+            {
+                lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",1,G5E_NOTCOMPATIBLE";
+                return false;
+            }
+        }
+        else
+        {
+            lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(picFileName) + ",1,G5E_FORMATERROR";
+            return false;
+        }
+    }
 
     picStream = new QBuffer(&rawPicContent);
     picStream->open(QIODevice::ReadWrite);
@@ -270,7 +334,7 @@ void SnapmaticPicture::parseSnapmaticExportAndSortString()
             cmpPicTitl.replace("?", "");
             cmpPicTitl.replace(".", "");
             sortStr = yearStr + monthStr + dayStr + timeStr;
-            picExportFileName = sortStr + "_" + cmpPicTitl +  ".jpg";
+            picExportFileName = sortStr + "_" + cmpPicTitl;
         }
     }
 }
@@ -342,14 +406,44 @@ bool SnapmaticPicture::setPicture(const QImage &picture)
     return false;
 }
 
-bool SnapmaticPicture::exportPicture(const QString &fileName)
+bool SnapmaticPicture::exportPicture(const QString &fileName, bool customFormat)
 {
     QFile *picFile = new QFile(fileName);
     if (picFile->open(QIODevice::WriteOnly))
     {
-        picFile->write(rawPicContent);
-        picFile->close();
-        picFile->deleteLater();
+        if (!customFormat)
+        {
+            // Classic straight export
+            picFile->write(rawPicContent);
+            picFile->close();
+            picFile->deleteLater();
+        }
+        else
+        {
+            // Modern compressed export
+            QString stockFileName = QFileInfo(picFileName).fileName();
+            QByteArray stockFileNameUTF8 = stockFileName.toUtf8();
+            QByteArray numberLength = QByteArray::number(stockFileNameUTF8.length());
+            if (numberLength.length() == 1)
+            {
+                numberLength.insert(0, "0");
+            }
+            else if (numberLength.length() != 2)
+            {
+                numberLength == "00";
+            }
+            picFile->write(QByteArray::fromHex("00")); // First Null Byte
+            picFile->write("G5E"); // GTA 5 Export
+            picFile->write(QByteArray::fromHex("1000")); // 2 byte GTA 5 Export Version
+            picFile->write("LEN"); // Before Length
+            picFile->write(QByteArray::fromHex(numberLength)); // Length in HEX before Compressed
+            picFile->write("FIL"); // Before File Name
+            picFile->write(stockFileNameUTF8); // File Name
+            picFile->write("COM"); // Before Compressed
+            picFile->write(qCompress(rawPicContent, 9)); // Compressed Snapmatic
+            picFile->close();
+            picFile->deleteLater();
+        }
         return true;
     }
     else

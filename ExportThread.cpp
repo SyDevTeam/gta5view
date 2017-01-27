@@ -25,6 +25,7 @@
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QFileInfo>
+#include <QDebug>
 #include <QFile>
 
 ExportThread::ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, int exportCount, QObject *parent) : QThread(parent),
@@ -85,6 +86,10 @@ void ExportThread::run()
                 if (pictureExportEnabled)
                 {
                     QString exportFileName = PictureExport::getPictureFileName(picture);
+                    if (exportFileName.right(4) != ".jpg" && exportFileName.right(4) != ".png")
+                    {
+                        exportFileName.append(".jpg");
+                    }
 
                     intExportProgress++;
                     emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
@@ -119,14 +124,11 @@ void ExportThread::run()
                 }
                 if (pictureCopyEnabled)
                 {
-                    QString originalFileName = picWidget->getPicturePath();
-                    QString adjustedFileName = originalFileName;
-                    if (adjustedFileName.right(7) == ".hidden") // for the hidden file system
+                    QString exportFileName = PictureExport::getPictureFileName(picture);
+                    if (exportFileName.right(4) != ".g5e")
                     {
-                        adjustedFileName.remove(adjustedFileName.length() - 7, 7);
+                        exportFileName.append(".g5e");
                     }
-                    QFileInfo adjustedFileInfo(adjustedFileName);
-                    QString exportFileName = adjustedFileInfo.fileName();
 
                     intExportProgress++;
                     emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
@@ -134,7 +136,7 @@ void ExportThread::run()
 
                     QString exportFilePath = exportDirectory + "/" + exportFileName;
                     if (QFile::exists(exportFilePath)) {QFile::remove(exportFilePath);}
-                    if (!QFile::copy(originalFileName, exportFilePath))
+                    if (!picture->exportPicture(exportDirectory + "/" + exportFileName, true))
                     {
                         failedCopyPictures.append(exportFileName);
                     }
