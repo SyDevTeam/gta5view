@@ -7,7 +7,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer
 
 #### Screenshots
 <img src="https://i.imgur.com/OaizCYM.png"/>
-<img src="https://i.imgur.com/ya5eFSS.png"/>
+<img src="https://i.imgur.com/MhkGbRU.png"/>
 <img src="https://i.imgur.com/qkCQ26U.png"/>
 
 #### Build gta5view Debian/Ubuntu
