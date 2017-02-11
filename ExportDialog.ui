@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="modal">
+   <bool>true</bool>
+  </property>
   <layout class="QVBoxLayout" name="vlExport">
    <property name="leftMargin">
     <number>0</number>
@@ -206,9 +209,6 @@
            </property>
            <property name="text">
             <string>&amp;Close</string>
-           </property>
-           <property name="icon">
-            <iconset theme="dialog-close"/>
            </property>
           </widget>
          </item>

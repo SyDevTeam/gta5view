@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -45,7 +45,7 @@ fileDialogPreSave:
     fileDialog.setDefaultSuffix("");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
     fileDialog.setWindowTitle(SavegameWidget::tr(("Export Savegame...")));
-    fileDialog.setLabelText(QFileDialog::Accept, SavegameWidget::tr("&Export"));
+    fileDialog.setLabelText(QFileDialog::Accept, SavegameWidget::tr("Export"));
 
     QStringList filters;
     filters << SavegameWidget::tr("Savegame files (SGTA*)");

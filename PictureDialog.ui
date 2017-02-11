@@ -188,9 +188,6 @@
               <property name="text">
                <string>&amp;Close</string>
               </property>
-              <property name="icon">
-               <iconset theme="dialog-close"/>
-              </property>
               <property name="autoDefault">
                <bool>false</bool>
               </property>

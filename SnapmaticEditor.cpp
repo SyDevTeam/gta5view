@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -32,6 +32,16 @@ SnapmaticEditor::SnapmaticEditor(QWidget *parent) :
     ui->cbMugshot->setVisible(false);
     ui->cbEditor->setVisible(false);
     ui->cmdApply->setDefault(true);
+
+    if (QIcon::hasThemeIcon("dialog-apply"))
+    {
+        ui->cmdApply->setIcon(QIcon::fromTheme("dialog-apply"));
+    }
+    if (QIcon::hasThemeIcon("dialog-cancel"))
+    {
+        ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
+    }
+
     smpic = 0;
 }
 
@@ -189,7 +199,7 @@ void SnapmaticEditor::on_cmdApply_clicked()
     localSpJson.isMeme = ui->cbMeme->isChecked();
     if (smpic)
     {
-        QString originalFileName = smpic->getPictureFileName();
+        QString originalFileName = smpic->getPictureFilePath();
         QString adjustedFileName = originalFileName;
         if (adjustedFileName.right(7) == ".hidden") // for the hidden file system
         {

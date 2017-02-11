@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -28,12 +28,13 @@
 
 struct SnapmaticProperties {
     struct SnapmaticLocation {
+        QString area;
         double x;
         double y;
         double z;
     };
+    int uid;
     int crewID;
-    QString area;
     QStringList playersList;
     uint createdTimestamp;
     QDateTime createdDateTime;
@@ -51,22 +52,35 @@ class SnapmaticPicture : public QObject
 public:
     explicit SnapmaticPicture(const QString &fileName = "", QObject *parent = 0);
     ~SnapmaticPicture();
-    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = true);
+    void reset();
+    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = false);
     bool readingPicture(bool writeEnabled = true, bool cacheEnabled = true);
     bool isPicOk();
     void clearCache();
-    QImage getPicture();
+    QImage getImage();
     QString getLastStep();
     QString getPictureStr();
+    QString getPictureHead();
     QString getPictureTitl();
     QString getPictureDesc();
     QString getPictureSortStr();
     QString getPictureFileName();
+    QString getPictureFilePath();
     QString getExportPictureFileName();
-    QDateTime getCreatedDateTime();
-    bool setPicture(const QImage &picture);
+    int getContentMaxLength();
+    bool setImage(const QImage &picture);
+    bool setPictureTitl(const QString &newTitle);
+    bool setPictureStream(const QByteArray &picByteArray);
     bool exportPicture(const QString &fileName, bool customFormat = false);
-    void setPicFileName(QString picFileName_);
+    void setPicFileName(QString picFileName);
+    void setPicFilePath(QString picFilePath);
+    void updateStrings();
+
+    // ALTERNATIVES
+    QString getPictureTitle() { return getPictureTitl(); }
+    QString getPictureString() { return getPictureStr(); }
+    QString getPictureDescription() { return getPictureDesc(); }
+    bool setPictureTitle(const QString &newTitle) { return setPictureTitl(newTitle); }
 
     // JSON
     bool isJsonOk();
@@ -80,13 +94,14 @@ public:
     bool setPictureVisible();
 
 private:
-    QString getSnapmaticPictureString(const QByteArray &snapmaticHeader);
+    QString getSnapmaticHeaderString(const QByteArray &snapmaticHeader);
     QString getSnapmaticJSONString(const QByteArray &jsonBytes);
     QString getSnapmaticTIDEString(const QByteArray &tideBytes);
-    void parseSnapmaticExportAndSortString();
     QImage cachePicture;
     QString picExportFileName;
     QString picFileName;
+    QString picFilePath;
+    QString pictureHead;
     QString pictureStr;
     QString lastStep;
     QString sortStr;
@@ -95,6 +110,8 @@ private:
     bool picOk;
     bool writeEnabled;
     bool cacheEnabled;
+    bool isCustomFormat;
+    int jpegRawContentSize;
 
     // PARSE INT
     int snapmaticHeaderLength;
@@ -110,6 +127,9 @@ private:
     int jpegStreamEditorBegin;
     int jsonStreamEditorBegin;
     int jsonStreamEditorLength;
+    int titlStreamEditorBegin;
+    int titlStreamEditorLength;
+    int titlStreamCharacterMax;
     QByteArray rawPicContent;
 
     // JSON

@@ -60,6 +60,11 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     ui->labVersion->setText(ui->labVersion->text().arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+
+    if (QIcon::hasThemeIcon("dialog-close"))
+    {
+        ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
+    }
 }
 
 void UserInterface::setupDirEnv()

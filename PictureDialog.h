@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -36,9 +36,7 @@ class PictureDialog : public QDialog
     Q_OBJECT
 public:
     explicit PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB,  QWidget *parent = 0);
-    void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk, bool indexed, int index);
-    void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk);
-    void setSnapmaticPicture(SnapmaticPicture *picture, QString picPath);
+    void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool indexed, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
     void setSnapmaticPicture(SnapmaticPicture *picture, int index);

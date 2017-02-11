@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -57,6 +57,15 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->rbPicDesktopRes->setText(ui->rbPicDesktopRes->text().arg(QString::number(desktopSizeWidth), QString::number(desktopSizeHeight)));
     ui->rbPicDefaultRes->setText(ui->rbPicDefaultRes->text().arg(QString::number(defExportSize.width()), QString::number(defExportSize.height())));
 
+    if (QIcon::hasThemeIcon("dialog-ok"))
+    {
+        ui->cmdOK->setIcon(QIcon::fromTheme("dialog-ok"));
+    }
+    if (QIcon::hasThemeIcon("dialog-cancel"))
+    {
+        ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
+    }
+
     setupTreeWidget();
     setupLanguageBox();
     setupRadioButtons();
@@ -64,6 +73,10 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     setupPictureSettings();
     setupCustomGTAFolder();
     setupSnapmaticPictureViewer();
+
+#ifdef GTA5SYNC_DISABLED
+    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSync));
+#endif
 
     this->setWindowTitle(windowTitle().arg(GTA5SYNC_APPSTR));
 }

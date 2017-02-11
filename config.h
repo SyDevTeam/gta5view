@@ -50,7 +50,7 @@
 
 #ifndef GTA5SYNC_APPVER
 #ifndef GTA5SYNC_DAILYB
-#define GTA5SYNC_APPVER "1.2.0"
+#define GTA5SYNC_APPVER "1.3.0"
 #else
 #define GTA5SYNC_APPVER QString("%1").arg(GTA5SYNC_DAILYB)
 #endif
@@ -88,6 +88,14 @@
 #else
 #define GTA5SYNC_COMPILER QString("Unknown Compiler")
 #endif
+#endif
+
+#ifndef GTA5SYNC_BUILDDATETIME
+#define GTA5SYNC_BUILDDATETIME QString("%1, %2").arg(__DATE__, __TIME__);
+#endif
+
+#ifndef GTA5SYNC_BUILDSTRING
+#define GTA5SYNC_BUILDSTRING QString("%1, %2").arg(QT_VERSION_STR, GTA5SYNC_COMPILER);
 #endif
 
 #endif // CONFIG_H

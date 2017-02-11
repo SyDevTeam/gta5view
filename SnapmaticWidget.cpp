@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,6 @@
 #include "DatabaseThread.h"
 #include "PictureDialog.h"
 #include "PictureExport.h"
-#include "PictureCopy.h"
 #include "config.h"
 #include <QMessageBox>
 #include <QPixmap>
@@ -80,25 +79,20 @@ bool SnapmaticWidget::eventFilter(QObject *obj, QEvent *ev)
     return false;
 }
 
-void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath)
+void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
 {
     smpic = picture;
-    picPath = picturePath;
-    picStr = picture->getPictureStr();
+    picPath = picture->getPictureFilePath();
     picTitl = picture->getPictureTitl();
+    picStr = picture->getPictureStr();
 
-    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getPicture().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
+    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getImage().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::KeepAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
     ui->labPicStr->setText(picStr + "\n" + picTitl + "");
     ui->labPicture->setPixmap(SnapmaticPixmap);
 
     picture->clearCache();
 
     adjustTextColor();
-}
-
-void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
-{
-    setSnapmaticPicture(picture, picture->getPictureFileName());
 }
 
 void SnapmaticWidget::on_cmdView_clicked()
@@ -110,7 +104,7 @@ void SnapmaticWidget::on_cmdView_clicked()
 
     PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, this);
     picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-    picDialog->setSnapmaticPicture(smpic, picPath, true);
+    picDialog->setSnapmaticPicture(smpic, true);
     picDialog->setModal(true);
 
     // be ready for playerName updated
@@ -133,12 +127,12 @@ void SnapmaticWidget::on_cmdView_clicked()
 
 void SnapmaticWidget::on_cmdCopy_clicked()
 {
-    PictureCopy::copyPicture(this, picPath, smpic);
+    PictureExport::exportAsSnapmatic(this, smpic);
 }
 
 void SnapmaticWidget::on_cmdExport_clicked()
 {
-    PictureExport::exportPicture(this, smpic);
+    PictureExport::exportAsPicture(this, smpic);
 }
 
 void SnapmaticWidget::on_cmdDelete_clicked()
@@ -285,7 +279,7 @@ bool SnapmaticWidget::makePictureHidden()
     SnapmaticPicture *picture = (SnapmaticPicture*)smpic;
     if (picture->setPictureHidden())
     {
-        picPath = picture->getPictureFileName();
+        picPath = picture->getPictureFilePath();
         adjustTextColor();
         return true;
     }
@@ -297,7 +291,7 @@ bool SnapmaticWidget::makePictureVisible()
     SnapmaticPicture *picture = (SnapmaticPicture*)smpic;
     if (picture->setPictureVisible())
     {
-        picPath = picture->getPictureFileName();
+        picPath = picture->getPictureFilePath();
         adjustTextColor();
         return true;
     }

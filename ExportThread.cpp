@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -96,7 +96,7 @@ void ExportThread::run()
                     emit exportProgressUpdate(intExportProgress);
 
                     // Scale Picture
-                    QImage exportPicture = picture->getPicture();
+                    QImage exportPicture = picture->getImage();
                     if (sizeMode == "Desktop")
                     {
                         QRect desktopResolution = QApplication::desktop()->screenGeometry();

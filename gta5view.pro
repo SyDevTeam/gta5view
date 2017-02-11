@@ -37,8 +37,8 @@ SOURCES += main.cpp \
     ExportThread.cpp \
     GlobalString.cpp \
     IconLoader.cpp \
+    ImportDialog.cpp \
     OptionsDialog.cpp \
-    PictureCopy.cpp \
     PictureDialog.cpp \
     PictureExport.cpp \
     PictureWidget.cpp \
@@ -62,15 +62,14 @@ SOURCES += main.cpp \
 HEADERS  += \
     AboutDialog.h \
     AppEnv.h \
-    config.h \
     CrewDatabase.h \
     DatabaseThread.h \
     ExportDialog.h \
     ExportThread.h \
     GlobalString.h \
     IconLoader.h \
+    ImportDialog.h \
     OptionsDialog.h \
-    PictureCopy.h \
     PictureDialog.h \
     PictureExport.h \
     PictureWidget.h \
@@ -91,9 +90,12 @@ HEADERS  += \
     UserInterface.h \
     uimod/UiModLabel.h
 
+PRECOMPILED_HEADER += config.h
+
 FORMS    += \
     AboutDialog.ui \
     ExportDialog.ui \
+    ImportDialog.ui \
     OptionsDialog.ui \
     PictureDialog.ui \
     ProfileInterface.ui \
@@ -115,7 +117,7 @@ DISTFILES += res/app.rc \
     res/gta5sync.desktop \
     res/gta5sync_de.ts \
     res/gta5sync_fr.ts \
-    res/gta5view.exe.manifest \
+    res/gta5sync.exe.manifest \
     lang/qtbase_ru.qm \
     lang/gta5sync_ru.ts \
     lang/qt_ru.qm \

@@ -23,6 +23,7 @@
         <file>960x536.png</file>
         <file>empty1x16.png</file>
         <file>avatararea.png</file>
+        <file>avatarareaimport.png</file>
     </qresource>
     <qresource prefix="/global">
         <file>global.de.ini</file>
@@ -31,5 +32,8 @@
         <file>global.fr.ini</file>
         <file>global.zh.ini</file>
         <file>global.es.ini</file>
+    </qresource>
+    <qresource prefix="/template">
+        <file>template.g5e</file>
     </qresource>
 </RCC>

@@ -414,6 +414,26 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabSync">
+      <attribute name="title">
+       <string>Sync</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vlSync">
+       <item>
+        <widget class="QLabel" name="labSync">
+         <property name="text">
+          <string>Sync is not implemented at current time</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
    <item>
@@ -442,13 +462,10 @@
        <property name="text">
         <string extracomment="OK, Cancel, Apply">&amp;OK</string>
        </property>
-       <property name="icon">
-        <iconset theme="dialog-ok"/>
-       </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="cmdClose">
+      <widget class="QPushButton" name="cmdCancel">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -457,9 +474,6 @@
        </property>
        <property name="text">
         <string extracomment="OK, Cancel, Apply">&amp;Cancel</string>
-       </property>
-       <property name="icon">
-        <iconset theme="dialog-cancel"/>
        </property>
       </widget>
      </item>
@@ -470,7 +484,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>cmdClose</sender>
+   <sender>cmdCancel</sender>
    <signal>clicked()</signal>
    <receiver>OptionsDialog</receiver>
    <slot>close()</slot>

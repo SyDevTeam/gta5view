@@ -9,6 +9,11 @@ SavegameDialog::SavegameDialog(QWidget *parent) :
 {
     ui->setupUi(this);
     savegameLabStr = ui->labSavegameText->text();
+
+    if (QIcon::hasThemeIcon("dialog-close"))
+    {
+        ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
+    }
 }
 
 SavegameDialog::~SavegameDialog()

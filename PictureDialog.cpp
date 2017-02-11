@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 #include "StandardPaths.h"
 #include "PictureExport.h"
 #include "GlobalString.h"
-#include "PictureCopy.h"
 #include "UiModLabel.h"
 
 #ifdef GTA5SYNC_WIN
@@ -102,6 +101,12 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
 
     // Event connects
     connect(ui->labJSON, SIGNAL(resized(QSize)), this, SLOT(adaptNewDialogSize(QSize)));
+
+    // Dialog buttons
+    if (QIcon::hasThemeIcon("dialog-close"))
+    {
+        ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
+    }
 
     installEventFilter(this);
     installEventFilter(ui->labPicture);
@@ -340,12 +345,12 @@ void PictureDialog::renderOverlayPicture()
     overlayTempImage = overlayTempPixmap.toImage();
 }
 
-void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picturePath, bool readOk, bool _indexed, int _index)
+void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool _indexed, int _index)
 {
     snapmaticPicture = QImage();
     indexed = _indexed;
     index = _index;
-    picPath = picturePath;
+    picPath = picture->getPictureFilePath();
     smpic = picture;
     if (!readOk)
     {
@@ -354,7 +359,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
     }
     if (picture->isPicOk())
     {
-        snapmaticPicture = picture->getPicture();
+        snapmaticPicture = picture->getImage();
         renderPicture();
         ui->cmdExport->setEnabled(true);
     }
@@ -367,7 +372,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
         created = picture->getSnapmaticProperties().createdDateTime.toString(Qt::DefaultLocaleShortDate);
         plyrsList = picture->getSnapmaticProperties().playersList;
         picTitl = picture->getPictureTitl();
-        picArea = picture->getSnapmaticProperties().area;
+        picArea = picture->getSnapmaticProperties().location.area;
         if (globalMap.contains(picArea))
         {
             picAreaStr = globalMap[picArea];
@@ -411,24 +416,14 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString pictu
     emit newPictureCommited(snapmaticPicture);
 }
 
-void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picPath, bool readOk)
-{
-    setSnapmaticPicture(picture, picPath, readOk, false, 0);
-}
-
-void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, QString picPath)
-{
-    setSnapmaticPicture(picture, picPath, true);
-}
-
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, int index)
 {
-    setSnapmaticPicture(picture, picture->getPictureFileName(), readOk, true, index);
+    setSnapmaticPicture(picture, readOk, true, index);
 }
 
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk)
 {
-    setSnapmaticPicture(picture, picture->getPictureFileName(), readOk);
+    setSnapmaticPicture(picture, readOk, false, 0);
 }
 
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, int index)
@@ -509,11 +504,11 @@ void PictureDialog::exportSnapmaticPicture()
 {
     if (rqfullscreen && fullscreenWidget)
     {
-        PictureExport::exportPicture(fullscreenWidget, smpic);
+        PictureExport::exportAsPicture(fullscreenWidget, smpic);
     }
     else
     {
-        PictureExport::exportPicture(this, smpic);
+        PictureExport::exportAsPicture(this, smpic);
     }
 }
 
@@ -521,11 +516,11 @@ void PictureDialog::copySnapmaticPicture()
 {
     if (rqfullscreen && fullscreenWidget)
     {
-        PictureCopy::copyPicture(fullscreenWidget, picPath, smpic);
+        PictureExport::exportAsSnapmatic(fullscreenWidget, smpic);
     }
     else
     {
-        PictureCopy::copyPicture(this, picPath, smpic);
+        PictureExport::exportAsSnapmatic(this, smpic);
     }
 }
 
@@ -537,9 +532,9 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         PictureWidget *pictureWidget = new PictureWidget(this);
         pictureWidget->setObjectName("PictureWidget");
 #if QT_VERSION >= 0x050600
-        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::MaximizeUsingFullscreenGeometryHint);
+        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::WindowStaysOnTopHint^Qt::MaximizeUsingFullscreenGeometryHint);
 #else
-        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint);
+        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::WindowStaysOnTopHint);
 #endif
         pictureWidget->setWindowTitle(this->windowTitle());
         pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color: black;}");

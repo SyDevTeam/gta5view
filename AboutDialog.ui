@@ -74,9 +74,6 @@ Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 i
        <property name="text">
         <string>&amp;Close</string>
        </property>
-       <property name="icon">
-        <iconset theme="dialog-close"/>
-       </property>
       </widget>
      </item>
     </layout>
