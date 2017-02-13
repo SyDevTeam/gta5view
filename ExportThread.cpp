@@ -17,6 +17,7 @@
 *****************************************************************************/
 
 #include "SnapmaticPicture.h"
+#include "ProfileInterface.h"
 #include "PictureExport.h"
 #include "ProfileWidget.h"
 #include "ExportThread.h"

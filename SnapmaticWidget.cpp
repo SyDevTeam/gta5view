@@ -48,7 +48,6 @@ SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewD
     palette.setCurrentColorGroup(QPalette::Disabled);
     highlightHiddenColor = palette.text().color();
 
-    snwgt = parent;
     picPath = "";
     picStr = "";
     smpic = 0;
@@ -201,43 +200,7 @@ void SnapmaticWidget::pictureSelected()
 
 void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
-    QMenu contextMenu(this);
-    QMenu editMenu(tr("Edi&t"), this);
-    if (isHidden())
-    {
-        editMenu.addAction(tr("Show &In-game"), this, SLOT(makePictureVisibleSlot()));
-    }
-    else
-    {
-        editMenu.addAction(tr("Hide &In-game"), this, SLOT(makePictureHiddenSlot()));
-    }
-    editMenu.addAction(tr("&Edit Properties..."), this, SLOT(editSnapmaticProperties()));
-    QMenu exportMenu(tr("&Export"), this);
-    exportMenu.addAction(tr("Export as &JPG picture..."), this, SLOT(on_cmdExport_clicked()));
-    exportMenu.addAction(tr("Export as &GTA Snapmatic..."), this, SLOT(on_cmdCopy_clicked()));
-    contextMenu.addAction(tr("&View"), this, SLOT(on_cmdView_clicked()));
-    contextMenu.addMenu(&editMenu);
-    contextMenu.addMenu(&exportMenu);
-    contextMenu.addAction(tr("&Remove"), this, SLOT(on_cmdDelete_clicked()));
-    if (ui->cbSelected->isVisible())
-    {
-        contextMenu.addSeparator();
-        if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Select"), this, SLOT(pictureSelected())); }
-        if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Deselect"), this, SLOT(pictureSelected())); }
-        contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
-        ProfileInterface *profileInterface = (ProfileInterface*)snwgt;
-        if (profileInterface->selectedWidgets() != 0)
-        {
-            contextMenu.addAction(tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
-        }
-    }
-    else
-    {
-        contextMenu.addSeparator();
-        contextMenu.addAction(tr("&Select"), this, SLOT(pictureSelected()));
-        contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
-    }
-    contextMenu.exec(ev->globalPos());
+    emit contextMenuTriggered(ev);
 }
 
 void SnapmaticWidget::dialogNextPictureRequested()
@@ -276,10 +239,9 @@ void SnapmaticWidget::adjustTextColor()
 
 bool SnapmaticWidget::makePictureHidden()
 {
-    SnapmaticPicture *picture = (SnapmaticPicture*)smpic;
-    if (picture->setPictureHidden())
+    if (smpic->setPictureHidden())
     {
-        picPath = picture->getPictureFilePath();
+        picPath = smpic->getPictureFilePath();
         adjustTextColor();
         return true;
     }
@@ -288,10 +250,9 @@ bool SnapmaticWidget::makePictureHidden()
 
 bool SnapmaticWidget::makePictureVisible()
 {
-    SnapmaticPicture *picture = (SnapmaticPicture*)smpic;
-    if (picture->setPictureVisible())
+    if (smpic->setPictureVisible())
     {
-        picPath = picture->getPictureFilePath();
+        picPath = smpic->getPictureFilePath();
         adjustTextColor();
         return true;
     }

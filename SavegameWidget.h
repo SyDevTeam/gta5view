@@ -18,8 +18,6 @@
 
 #ifndef SAVEGAMEWIDGET_H
 #define SAVEGAMEWIDGET_H
-
-#include "ProfileInterface.h"
 #include "ProfileWidget.h"
 #include "SavegameData.h"
 #include <QContextMenuEvent>
@@ -78,6 +76,7 @@ signals:
     void widgetDeselected();
     void allWidgetsSelected();
     void allWidgetsDeselected();
+    void contextMenuTriggered(QContextMenuEvent *ev);
 };
 
 #endif // SAVEGAMEWIDGET_H

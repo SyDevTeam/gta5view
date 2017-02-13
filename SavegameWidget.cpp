@@ -19,7 +19,6 @@
 #include "SavegameWidget.h"
 #include "ui_SavegameWidget.h"
 #include "SidebarGenerator.h"
-#include "ProfileInterface.h"
 #include "SavegameDialog.h"
 #include "StandardPaths.h"
 #include "SavegameData.h"
@@ -205,31 +204,7 @@ void SavegameWidget::savegameSelected()
 
 void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
 {
-    QMenu contextMenu(this);
-    contextMenu.addAction(tr("&View"), this, SLOT(on_cmdView_clicked()));
-    contextMenu.addAction(tr("&Export"), this, SLOT(on_cmdCopy_clicked()));
-    contextMenu.addAction(tr("&Remove"), this, SLOT(on_cmdDelete_clicked()));
-    if (ui->cbSelected->isVisible())
-    {
-        contextMenu.addSeparator();
-        if (!ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Select"), this, SLOT(savegameSelected())); }
-        if (ui->cbSelected->isChecked()) { contextMenu.addAction(tr("&Deselect"), this, SLOT(savegameSelected())); }
-        contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
-        ProfileInterface *profileInterface = (ProfileInterface*)snwgt;
-        if (profileInterface->selectedWidgets() != 0)
-        {
-            contextMenu.addAction(tr("&Deselect All"), this, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
-        }
-    }
-    else
-    {
-        contextMenu.addSeparator();
-        contextMenu.addAction(tr("&Select"), this, SLOT(savegameSelected()));
-        contextMenu.addAction(tr("Select &All"), this, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
-    }
-    //ui->SavegameFrame->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
-    contextMenu.exec(ev->globalPos());
-    //ui->SavegameFrame->setStyleSheet("");
+    emit contextMenuTriggered(ev);
 }
 
 void SavegameWidget::on_cbSelected_stateChanged(int arg1)

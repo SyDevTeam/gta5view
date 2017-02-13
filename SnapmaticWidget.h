@@ -20,7 +20,6 @@
 #define SNAPMATICWIDGET_H
 
 #include "SnapmaticPicture.h"
-#include "ProfileInterface.h"
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "ProfileWidget.h"
@@ -97,6 +96,7 @@ signals:
     void allWidgetsDeselected();
     void nextPictureRequested(QWidget *dialog);
     void previousPictureRequested(QWidget *dialog);
+    void contextMenuTriggered(QContextMenuEvent *ev);
 };
 
 #endif // SNAPMATICWIDGET_H
