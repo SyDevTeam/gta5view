@@ -485,7 +485,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, bool customFormat)
             }
             else if (numberLength.length() != 2)
             {
-                numberLength == "00";
+                numberLength = "00";
             }
             picFile->write(QByteArray::fromHex("00")); // First Null Byte
             picFile->write("G5E"); // GTA 5 Export
