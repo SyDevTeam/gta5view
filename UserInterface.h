@@ -26,6 +26,7 @@
 #include "CrewDatabase.h"
 #include "SavegameData.h"
 #include <QMainWindow>
+#include <QCloseEvent>
 #include <QString>
 #include <QMap>
 
@@ -61,6 +62,9 @@ private slots:
     void on_action_Enable_In_game_triggered();
     void on_action_Disable_In_game_triggered();
     void settingsApplied(int contentMode, QString language);
+
+protected:
+    void closeEvent(QCloseEvent *ev);
 
 private:
     ProfileDatabase *profileDB;

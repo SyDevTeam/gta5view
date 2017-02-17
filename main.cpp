@@ -425,60 +425,67 @@ int main(int argc, char *argv[])
 
     if (selectedAction == "showpic")
     {
-        CrewDatabase *crewDB = new CrewDatabase();
-        ProfileDatabase *profileDB = new ProfileDatabase();
-        DatabaseThread *threadDB = new DatabaseThread(crewDB);
-        PictureDialog *picDialog = new PictureDialog(profileDB, crewDB);
+        CrewDatabase crewDB;
+        ProfileDatabase profileDB;
+        DatabaseThread threadDB(&crewDB);
+        PictureDialog picDialog(true, &profileDB, &crewDB);
         SnapmaticPicture picture;
 
         bool readOk = picture.readingPictureFromFile(arg1);
-        picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-        picDialog->setWindowIcon(IconLoader::loadingAppIcon());
-        picDialog->setSnapmaticPicture(&picture, readOk);
+        picDialog.setWindowFlags(picDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+        picDialog.setWindowIcon(IconLoader::loadingAppIcon());
+        picDialog.setSnapmaticPicture(&picture, readOk);
 
         int crewID = picture.getSnapmaticProperties().crewID;
-        if (crewID != 0) { crewDB->addCrew(crewID); }
+        if (crewID != 0) { crewDB.addCrew(crewID); }
         if (!readOk) { return 1; }
 
-        QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
-        QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(playerNameUpdated()));
-        threadDB->start();
+        QEventLoop threadLoop;
+        QObject::connect(&threadDB, SIGNAL(playerNameFound(int, QString)), &profileDB, SLOT(setPlayerName(int, QString)));
+        QObject::connect(&threadDB, SIGNAL(playerNameUpdated()), &picDialog, SLOT(playerNameUpdated()));
+        QObject::connect(&threadDB, SIGNAL(finished()), &threadLoop, SLOT(quit()));
+        QObject::connect(&picDialog, SIGNAL(endDatabaseThread()), &threadDB, SLOT(doEndThread()));
+        threadDB.start();
 
-        picDialog->show();
-        picDialog->setMinimumSize(picDialog->size());
-        picDialog->setMaximumSize(picDialog->size());
+        picDialog.show();
 
-        return a.exec();
+        threadLoop.exec();
+
+        return 0;
     }
     else if (selectedAction == "showsgd")
     {
-        SavegameDialog *savegameDialog = new SavegameDialog();
+        SavegameDialog savegameDialog;
         SavegameData savegame;
 
         bool readOk = savegame.readingSavegameFromFile(arg1);
-        savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-        savegameDialog->setWindowIcon(IconLoader::loadingAppIcon());
-        savegameDialog->setSavegameData(&savegame, arg1, readOk);
+        savegameDialog.setWindowFlags(savegameDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+        savegameDialog.setWindowIcon(IconLoader::loadingAppIcon());
+        savegameDialog.setSavegameData(&savegame, arg1, readOk);
 
         if (!readOk) { return 1; }
 
-        savegameDialog->show();
+        savegameDialog.show();
 
         return a.exec();
     }
 
-    CrewDatabase *crewDB = new CrewDatabase();
-    ProfileDatabase *profileDB = new ProfileDatabase();
-    DatabaseThread *threadDB = new DatabaseThread(crewDB);
+    CrewDatabase crewDB;
+    ProfileDatabase profileDB;
+    DatabaseThread threadDB(&crewDB);
 
-    QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
-    threadDB->start();
+    QEventLoop threadLoop;
+    QObject::connect(&threadDB, SIGNAL(playerNameFound(int, QString)), &profileDB, SLOT(setPlayerName(int, QString)));
+    QObject::connect(&threadDB, SIGNAL(finished()), &threadLoop, SLOT(quit()));
+    threadDB.start();
 
-    UserInterface *uiWindow = new UserInterface(profileDB, crewDB, threadDB);
-    uiWindow->setWindowIcon(IconLoader::loadingAppIcon());
-    uiWindow->setupDirEnv();
-    uiWindow->show();
+    UserInterface uiWindow(&profileDB, &crewDB, &threadDB);
+    uiWindow.setWindowIcon(IconLoader::loadingAppIcon());
+    uiWindow.setupDirEnv();
+    uiWindow.show();
 
-    return a.exec();
+    threadLoop.exec();
+
+    return 0;
 }
 

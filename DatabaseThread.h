@@ -29,6 +29,9 @@ class DatabaseThread : public QThread
 public:
     explicit DatabaseThread(CrewDatabase *crewDB, QObject *parent = 0);
 
+public slots:
+    void doEndThread();
+
 private:
     CrewDatabase *crewDB;
     void scanCrewMembersList(QStringList crewList, int maxPages, int requestDelay);
@@ -43,7 +46,7 @@ protected:
 signals:
     void playerNameFound(int playerID, QString playerName);
     void playerNameUpdated();
-
+    void threadEndCommited();
 };
 
 #endif // DATABASETHREAD_H

@@ -35,7 +35,11 @@ class PictureDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB,  QWidget *parent = 0);
+    explicit PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
+    explicit PictureDialog(QWidget *parent = 0);
+    explicit PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
+    explicit PictureDialog(bool primaryWindow, QWidget *parent = 0);
+    void setupPictureDialog(bool withDatabase);
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool indexed, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
@@ -70,8 +74,10 @@ signals:
     void nextPictureRequested();
     void previousPictureRequested();
     void newPictureCommited(QImage picture);
+    void endDatabaseThread();
 
 protected:
+    void closeEvent(QCloseEvent *ev);
     bool eventFilter(QObject *obj, QEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
     bool event(QEvent *event);
@@ -100,10 +106,12 @@ private:
     QString locX;
     QString locY;
     QString locZ;
-    bool overlayenabled;
-    bool rqfullscreen;
-    bool navienabled;
-    bool previewmode;
+    bool overlayEnabled;
+    bool primaryWindow;
+    bool withDatabase;
+    bool rqFullscreen;
+    bool naviEnabled;
+    bool previewMode;
     bool indexed;
     int index;
     int avatarLocX;

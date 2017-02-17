@@ -53,8 +53,8 @@ public:
     explicit SnapmaticPicture(const QString &fileName = "", QObject *parent = 0);
     ~SnapmaticPicture();
     void reset();
-    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = false);
-    bool readingPicture(bool writeEnabled = true, bool cacheEnabled = true);
+    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = false);
+    bool readingPicture(bool writeEnabled = true, bool cacheEnabled = true, bool fastLoad = false);
     bool isPicOk();
     void clearCache();
     QImage getImage();
@@ -92,6 +92,9 @@ public:
     bool isHidden();
     bool setPictureHidden();
     bool setPictureVisible();
+
+    // PREDEFINED PROPERTIES
+    QSize getSnapmaticResolution();
 
 private:
     QString getSnapmaticHeaderString(const QByteArray &snapmaticHeader);
@@ -131,6 +134,9 @@ private:
     int titlStreamEditorLength;
     int titlStreamCharacterMax;
     QByteArray rawPicContent;
+
+    // PREDEFINED PROPERTIES
+    QSize snapmaticResolution;
 
     // JSON
     void parseJsonContent();

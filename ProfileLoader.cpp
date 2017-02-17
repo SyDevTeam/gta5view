@@ -73,7 +73,7 @@ void ProfileLoader::run()
         emit loadingProgress(curFile, maximumV);
         QString picturePath = profileFolder + QDir::separator() + SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
-        if (picture->readingPicture())
+        if (picture->readingPicture(true, true, true))
         {
             emit pictureLoaded(picture);
             int crewNumber = picture->getSnapmaticProperties().crewID;

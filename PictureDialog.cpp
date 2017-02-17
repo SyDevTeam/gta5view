@@ -49,6 +49,7 @@
 #include <QPicture>
 #include <QBitmap>
 #include <QBuffer>
+#include <QImage>
 #include <QDebug>
 #include <QList>
 #include <QDrag>
@@ -60,15 +61,43 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     QDialog(parent), profileDB(profileDB), crewDB(crewDB),
     ui(new Ui::PictureDialog)
 {
+    primaryWindow = false;
+    setupPictureDialog(true);
+}
+
+PictureDialog::PictureDialog(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::PictureDialog)
+{
+    primaryWindow = false;
+    setupPictureDialog(false);
+}
+
+PictureDialog::PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent) :
+    QDialog(parent), primaryWindow(primaryWindow), profileDB(profileDB), crewDB(crewDB),
+    ui(new Ui::PictureDialog)
+{
+    setupPictureDialog(true);
+}
+
+PictureDialog::PictureDialog(bool primaryWindow, QWidget *parent) :
+    QDialog(parent), primaryWindow(primaryWindow),
+    ui(new Ui::PictureDialog)
+{
+    setupPictureDialog(false);
+}
+
+void PictureDialog::setupPictureDialog(bool withDatabase_)
+{
     ui->setupUi(this);
     windowTitleStr = this->windowTitle();
     jsonDrawString = ui->labJSON->text();
     ui->cmdExport->setEnabled(0);
     plyrsList = QStringList();
     fullscreenWidget = 0;
-    rqfullscreen = 0;
-    previewmode = 0;
-    navienabled = 0;
+    rqFullscreen = 0;
+    previewMode = 0;
+    naviEnabled = 0;
     indexed = 0;
     picArea = "";
     picTitl = "";
@@ -80,6 +109,9 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     locZ = "";
     smpic = 0;
 
+    // With datebase
+    withDatabase = withDatabase_;
+
     // Avatar area
     avatarAreaPicture = QImage(":/img/avatararea.png");
     avatarLocX = 145;
@@ -88,7 +120,7 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
 
     // Overlay area
     renderOverlayPicture();
-    overlayenabled = 1;
+    overlayEnabled = 1;
 
     // Export menu
     exportMenu = new QMenu(this);
@@ -121,6 +153,15 @@ PictureDialog::~PictureDialog()
     delete ui;
 }
 
+void PictureDialog::closeEvent(QCloseEvent *ev)
+{
+    Q_UNUSED(ev)
+    if (primaryWindow && withDatabase)
+    {
+        emit endDatabaseThread();
+    }
+}
+
 void PictureDialog::addPreviousNextButtons()
 {
     // Windows Vista additions
@@ -132,7 +173,7 @@ void PictureDialog::addPreviousNextButtons()
     uiToolbar->addAction(QIcon(":/img/back.png"), "", this, SLOT(previousPictureRequestedSlot()));
     uiToolbar->addAction(QIcon(":/img/next.png"), "", this, SLOT(nextPictureRequestedSlot()));
     ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
-    navienabled = true;
+    naviEnabled = true;
 #endif
 #endif
 }
@@ -142,7 +183,7 @@ void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
     Q_UNUSED(newLabelSize)
     int newDialogHeight = ui->labPicture->pixmap()->height();
     newDialogHeight = newDialogHeight + ui->jsonFrame->height();
-    if (navienabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
+    if (naviEnabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
     setMinimumSize(width(), newDialogHeight);
     setMaximumSize(width(), newDialogHeight);
     setFixedHeight(newDialogHeight);
@@ -176,7 +217,7 @@ bool PictureDialog::event(QEvent *event)
 {
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050200
-    if (navienabled)
+    if (naviEnabled)
     {
         if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange)
         {
@@ -220,27 +261,27 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 returnValue = true;
                 break;
             case Qt::Key_1:
-                if (previewmode)
+                if (previewMode)
                 {
-                    previewmode = false;
+                    previewMode = false;
                     renderPicture();
                 }
                 else
                 {
-                    previewmode = true;
+                    previewMode = true;
                     renderPicture();
                 }
                 break;
             case Qt::Key_2:
-                if (overlayenabled)
+                if (overlayEnabled)
                 {
-                    overlayenabled = false;
-                    if (!previewmode) renderPicture();
+                    overlayEnabled = false;
+                    if (!previewMode) renderPicture();
                 }
                 else
                 {
-                    overlayenabled = true;
-                    if (!previewmode) renderPicture();
+                    overlayEnabled = true;
+                    if (!previewMode) renderPicture();
                 }
                 break;
 #if QT_VERSION >= 0x050300
@@ -251,6 +292,10 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
 #endif
             case Qt::Key_Enter: case Qt::Key_Return:
                 on_labPicture_mouseDoubleClicked(Qt::LeftButton);
+                returnValue = true;
+                break;
+            case Qt::Key_Escape:
+                ui->cmdClose->click();
                 returnValue = true;
                 break;
             }
@@ -266,7 +311,7 @@ void PictureDialog::triggerFullscreenDoubeClick()
 
 void PictureDialog::exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen)
 {
-    rqfullscreen = fullscreen;
+    rqFullscreen = fullscreen;
     exportMenu->popup(pos);
 }
 
@@ -295,10 +340,10 @@ void PictureDialog::renderOverlayPicture()
     // Generating Overlay Preview
     QRect preferedRect = QRect(0, 0, 200, 160);
     QString overlayText = tr("Key 1 - Avatar Preview Mode\nKey 2 - Toggle Overlay\nArrow Keys - Navigate");
-    QPixmap overlayPixmap(1, 1);
-    overlayPixmap.fill(Qt::transparent);
+    QImage overlayImage(1, 1, QImage::Format_ARGB32_Premultiplied);
+    overlayImage.fill(Qt::transparent);
 
-    QPainter overlayPainter(&overlayPixmap);
+    QPainter overlayPainter(&overlayImage);
     QFont overlayPainterFont;
     overlayPainterFont.setPixelSize(12);
     overlayPainter.setFont(overlayPainterFont);
@@ -317,8 +362,8 @@ void PictureDialog::renderOverlayPicture()
         overlaySpace.setHeight(overlaySpace.height() + 6);
     }
 
-    overlayPixmap = overlayPixmap.scaled(overlaySpace.size());
-    overlayPainter.begin(&overlayPixmap);
+    overlayImage = overlayImage.scaled(overlaySpace.size());
+    overlayPainter.begin(&overlayImage);
     overlayPainter.setPen(QColor::fromRgb(255, 255, 255, 255));
     overlayPainter.setFont(overlayPainterFont);
     overlayPainter.drawText(preferedRect, Qt::AlignLeft | hOverlay | Qt::TextDontClip | Qt::TextWordWrap, overlayText);
@@ -333,16 +378,15 @@ void PictureDialog::renderOverlayPicture()
         overlaySpace.setWidth(overlaySpace.width() + 6);
     }
 
-    QPixmap overlayBorderImage(overlaySpace.width(), overlaySpace.height());
+    QImage overlayBorderImage(overlaySpace.width(), overlaySpace.height(), QImage::Format_ARGB6666_Premultiplied);
     overlayBorderImage.fill(QColor(15, 15, 15, 162));
 
-    QPixmap overlayTempPixmap(overlaySpace.size());
-    overlayTempPixmap.fill(Qt::transparent);
-    QPainter overlayTempPainter(&overlayTempPixmap);
-    overlayTempPainter.drawPixmap(0, 0, overlayBorderImage);
-    overlayTempPainter.drawPixmap(3, 3, overlayPixmap);
+    overlayTempImage = QImage(overlaySpace.width(), overlaySpace.height(), QImage::Format_ARGB6666_Premultiplied);
+    overlayTempImage.fill(Qt::transparent);
+    QPainter overlayTempPainter(&overlayTempImage);
+    overlayTempPainter.drawImage(0, 0, overlayBorderImage);
+    overlayTempPainter.drawImage(3, 3, overlayImage);
     overlayTempPainter.end();
-    overlayTempImage = overlayTempPixmap.toImage();
 }
 
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool _indexed, int _index)
@@ -368,7 +412,14 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         locX = QString::number(picture->getSnapmaticProperties().location.x);
         locY = QString::number(picture->getSnapmaticProperties().location.y);
         locZ = QString::number(picture->getSnapmaticProperties().location.z);
-        crewID = crewDB->getCrewName(picture->getSnapmaticProperties().crewID);
+        if (withDatabase)
+        {
+            crewID = crewDB->getCrewName(picture->getSnapmaticProperties().crewID);
+        }
+        else
+        {
+            crewID = QString::number(picture->getSnapmaticProperties().crewID);
+        }
         created = picture->getSnapmaticProperties().createdDateTime.toString(Qt::DefaultLocaleShortDate);
         plyrsList = picture->getSnapmaticProperties().playersList;
         picTitl = picture->getPictureTitl();
@@ -387,7 +438,15 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         {
             foreach (const QString &player, plyrsList)
             {
-                QString playerName = profileDB->getPlayerName(player.toInt());
+                QString playerName;
+                if (withDatabase)
+                {
+                    playerName = profileDB->getPlayerName(player.toInt());
+                }
+                else
+                {
+                    playerName = player;
+                }
                 plyrsStr.append(", <a href=\"https://socialclub.rockstargames.com/member/");
                 plyrsStr.append(playerName);
                 plyrsStr.append("/");
@@ -438,9 +497,9 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture)
 
 void PictureDialog::renderPicture()
 {
-    if (!previewmode)
+    if (!previewMode)
     {
-        if (overlayenabled)
+        if (overlayEnabled)
         {
             QPixmap overlayAreaPixmap(960, 536);
             overlayAreaPixmap.fill(Qt::transparent);
@@ -479,7 +538,15 @@ void PictureDialog::playerNameUpdated()
         QString plyrsStr;
         foreach (const QString &player, plyrsList)
         {
-            QString playerName = profileDB->getPlayerName(player.toInt());
+            QString playerName;
+            if (withDatabase)
+            {
+                playerName = profileDB->getPlayerName(player.toInt());
+            }
+            else
+            {
+                playerName = player;
+            }
             plyrsStr.append(", <a href=\"https://socialclub.rockstargames.com/member/");
             if (playerName != player)
             {
@@ -502,7 +569,7 @@ void PictureDialog::playerNameUpdated()
 
 void PictureDialog::exportSnapmaticPicture()
 {
-    if (rqfullscreen && fullscreenWidget)
+    if (rqFullscreen && fullscreenWidget)
     {
         PictureExport::exportAsPicture(fullscreenWidget, smpic);
     }
@@ -514,7 +581,7 @@ void PictureDialog::exportSnapmaticPicture()
 
 void PictureDialog::copySnapmaticPicture()
 {
-    if (rqfullscreen && fullscreenWidget)
+    if (rqFullscreen && fullscreenWidget)
     {
         PictureExport::exportAsSnapmatic(fullscreenWidget, smpic);
     }

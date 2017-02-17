@@ -201,6 +201,12 @@ void UserInterface::closeProfile()
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
 }
 
+void UserInterface::closeEvent(QCloseEvent *ev)
+{
+    Q_UNUSED(ev)
+    threadDB->doEndThread();
+}
+
 UserInterface::~UserInterface()
 {
     foreach (QPushButton *profileBtn, profileBtns)
