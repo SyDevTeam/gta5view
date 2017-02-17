@@ -83,6 +83,7 @@ protected:
     bool event(QEvent *event);
 
 private:
+    bool primaryWindow;
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
     Ui::PictureDialog *ui;
@@ -107,7 +108,6 @@ private:
     QString locY;
     QString locZ;
     bool overlayEnabled;
-    bool primaryWindow;
     bool withDatabase;
     bool rqFullscreen;
     bool naviEnabled;
