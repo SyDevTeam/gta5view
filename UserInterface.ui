@@ -224,10 +224,6 @@
    </property>
   </action>
   <action name="actionExit">
-   <property name="icon">
-    <iconset theme="application-exit">
-     <normaloff>.</normaloff>.</iconset>
-   </property>
    <property name="text">
     <string>&amp;Exit</string>
    </property>
@@ -247,10 +243,6 @@
    </property>
   </action>
   <action name="actionOptions">
-   <property name="icon">
-    <iconset theme="preferences-system">
-     <normaloff>.</normaloff>.</iconset>
-   </property>
    <property name="text">
     <string>&amp;Settings</string>
    </property>
