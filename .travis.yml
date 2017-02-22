@@ -1,0 +1,38 @@
+dist: trusty
+sudo: required
+
+language: cpp
+
+env:
+- PACKAGE_VERSION="0.1.0"
+
+before_install:
+  - test -n $CC  && unset CC
+  - test -n $CXX && unset CXX
+
+install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq checkinstall dpkg-dev g++ gcc qtbase5-dev qt5-qmake
+  
+before_script:
+  - export INSTALL_ROOT=/usr
+  - if [ `git name-rev --tags --name-only $(git rev-parse HEAD)` == "undefined" ]; then export APPLICATION_VERSION="$PACKAGE_VERSION.$TRAVIS_BUILD_NUMBER"; else export APPLICATION_VERSION=`git name-rev --tags --name-only $(git rev-parse HEAD)`; fi
+  - echo "gta5view build version is $APPLICATION_VERSION"
+  - mkdir build
+  - mkdir package
+  - cd build
+  - echo "Grand Theft Auto V Snapmatic and Savegame viewer" > ./description-pak
+
+script:
+  - qmake -qt=5 "DEFINES+=GTA5SYNC_BUILDTYPE=\\\\\\\"TravisCI\\\\\\\"" "DEFINES+=GTA5SYNC_DAILYB=\\\\\\\"$APPLICATION_VERSION\\\\\\\"" ../gta5view.pro
+  - make -j 4
+  - sudo checkinstall -D --default --nodoc --pkgname=gta5view --pkgversion=$APPLICATION_VERSION --pkgrelease=travis1 --pkggroup=utility --maintainer="Syping on Travis \<travisci@syping.de\>"  --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5 --pakdir=../package
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "gNWX6TnP8hmwJLXQLi5EnCevgfCaA5MSW135rYY1EpU38eNRz/uMwVr+WV905+qRkhQzllgsuwgqDymDUlhLjbVrgNkWtw0Urt19BmFSeKm/FvwJIypFgaCHf+4wd9iiaPZjvVa95+wevbpABnmRSyDVo1PpGSjlcY5GdEQU/QsQtQdjJu52BPxb6Xbe1ycqGEizpxnwJvJERoBiaWcocVU+GdAdCzqp09u6M9B9ytq0lb9+nHwvizirnkvsPnXR8QIy9XA8fi86Xtq2Ij9hTja+r2bdqvsTJUWQRgSVbrEvRKzLIHFU8ZazjgeVopPhb1Gb9ToWeKcu7l4lW242sDsdSLLGIHvaQhKIeBIkIk3OyrhGcoZczQtHKjSyZtFDU9r7NNgnJqOEwdbvBIRHkOJa4Nqv2edzSeWrNh4w8LLC5r6CdXQpgLArU/o914qb3zGSyZQ5TO6xIP86IkG9XCSCs5LIG/bu6DkVirasKdEXdS2vFmasklkVfdLmkT21EjOTMD5bsNyzBh6NtR5qSkYmiNlWE7JUBOXLoQY6nQvcfu8ybnAuxSAWOd6xaoGHOtVZ1RAK6ZBGGPOiScKceVFHWxmc0XmRHNtkEpXN4AV4R5NPZUT189SgrIylIWZSJ++ezhkIO6IM7z0C0OLpGjZ4/9a/3RChqd/0LpGBCFE="
+  file: "../package/gta5view_$APPLICATION_VERSION-travis1_amd64.deb"
+  skip_cleanup: true
+  on:
+    tags: true
