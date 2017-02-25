@@ -96,6 +96,9 @@ public:
     // PREDEFINED PROPERTIES
     QSize getSnapmaticResolution();
 
+    // VERIFY CONTENT
+    static bool verifyTitle(const QString &title);
+
 private:
     QString getSnapmaticHeaderString(const QByteArray &snapmaticHeader);
     QString getSnapmaticJSONString(const QByteArray &jsonBytes);
@@ -116,23 +119,7 @@ private:
     bool isCustomFormat;
     int jpegRawContentSize;
 
-    // PARSE INT
-    int snapmaticHeaderLength;
-    int snapmaticUsefulLength;
-    int snapmaticFileMaxSize;
-    int jpegHeaderLineDifStr;
-    int jpegPreHeaderLength;
-    int jpegPicStreamLength;
-    int jsonStreamLength;
-    int tideStreamLength;
-
-    // PARSE EDITOR
-    int jpegStreamEditorBegin;
-    int jsonStreamEditorBegin;
-    int jsonStreamEditorLength;
-    int titlStreamEditorBegin;
-    int titlStreamEditorLength;
-    int titlStreamCharacterMax;
+    // PICTURE STREAM
     QByteArray rawPicContent;
 
     // PREDEFINED PROPERTIES
@@ -143,6 +130,9 @@ private:
     bool jsonOk;
     QString jsonStr;
     SnapmaticProperties localSpJson;
+
+    // VERIFY CONTENT
+    static bool verifyTitleChar(const QChar &titleChar);
 
 signals:
 

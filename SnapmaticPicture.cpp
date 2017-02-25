@@ -31,27 +31,26 @@
 #include <QImage>
 #include <QFile>
 
+// PARSER ALLOCATIONS
+#define snapmaticHeaderLength 278
+#define snapmaticUsefulLength 260
+#define snapmaticFileMaxSize 528192
+#define jpegHeaderLineDifStr 2
+#define jpegPreHeaderLength 14
+#define jpegPicStreamLength 524288
+#define jsonStreamLength 3076
+#define tideStreamLength 260
+
+// EDITOR ALLOCATIONS
+#define jpegStreamEditorBegin 292
+#define jsonStreamEditorBegin 524588
+#define jsonStreamEditorLength 3072
+#define titlStreamEditorBegin 527668
+#define titlStreamEditorLength 256
+#define titlStreamCharacterMax 39
+
 SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : QObject(parent), picFilePath(fileName)
 {
-    // PARSE INT INIT - DO NOT CHANGE THIS VALUES
-    snapmaticHeaderLength = 278;
-    snapmaticUsefulLength = 260;
-    snapmaticFileMaxSize = 528192;
-    jpegHeaderLineDifStr = 2;
-    jpegPreHeaderLength = 14;
-    jpegPicStreamLength = 524288;
-    jsonStreamLength = 3076;
-    tideStreamLength = 260;
-
-    // PARSE EDITOR INIT
-    jpegStreamEditorBegin = 292;
-    jsonStreamEditorBegin = 524588;
-    jsonStreamEditorLength = 3072;
-    titlStreamEditorBegin = 527668;
-    titlStreamEditorLength = 256;
-    titlStreamCharacterMax = 39;
-    rawPicContent = "";
-
     // PREDEFINED PROPERTIES
     snapmaticResolution = QSize(960, 536);
 
@@ -64,10 +63,8 @@ SnapmaticPicture::~SnapmaticPicture()
 
 void SnapmaticPicture::reset()
 {
-    // PARSE EDITOR INIT
-    rawPicContent = "";
-
     // INIT PIC
+    rawPicContent = "";
     cachePicture = QImage(0, 0, QImage::Format_RGB888);
     jpegRawContentSize = 0;
     picExportFileName = "";
@@ -362,6 +359,8 @@ void SnapmaticPicture::updateStrings()
     cmpPicTitl.replace(" ", "_");
     cmpPicTitl.replace(":", "-");
     cmpPicTitl.replace("\\", "");
+    cmpPicTitl.replace("{", "");
+    cmpPicTitl.replace("}", "");
     cmpPicTitl.replace("/", "");
     cmpPicTitl.replace("<", "");
     cmpPicTitl.replace(">", "");
@@ -866,4 +865,31 @@ bool SnapmaticPicture::setPictureVisible()
 QSize SnapmaticPicture::getSnapmaticResolution()
 {
     return snapmaticResolution;
+}
+
+// VERIFY CONTENT
+
+bool SnapmaticPicture::verifyTitle(const QString &title)
+{
+    // VERIFY TITLE FOR BE A VALID SNAPMATIC TITLE
+    if (title.length() <= titlStreamCharacterMax)
+    {
+        foreach(const QChar &titleChar, title)
+        {
+            if (!verifyTitleChar(titleChar)) return false;
+        }
+        return true;
+    }
+    return false;
+}
+
+bool SnapmaticPicture::verifyTitleChar(const QChar &titleChar)
+{
+    // VERIFY CHAR FOR BE A VALID SNAPMATIC CHARACTER
+    if (titleChar.isLetterOrNumber() || titleChar.isPrint())
+    {
+        if (titleChar == '<' || titleChar == '>' || titleChar == '\\') return false;
+        return true;
+    }
+    return false;
 }

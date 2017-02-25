@@ -1063,7 +1063,7 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
     SnapmaticWidget *picWidget = (SnapmaticWidget*)sender();
     QMenu contextMenu(picWidget);
     QMenu editMenu(SnapmaticWidget::tr("Edi&t"), picWidget);
-    if (isHidden())
+    if (picWidget->isHidden())
     {
         editMenu.addAction(SnapmaticWidget::tr("Show &In-game"), picWidget, SLOT(makePictureVisibleSlot()));
     }
