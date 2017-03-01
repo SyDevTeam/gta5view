@@ -19,15 +19,15 @@
 #include "StringParser.h"
 #include "SavegameData.h"
 #include <QTextCodec>
+#include <QByteArray>
 #include <QDebug>
 #include <QFile>
 
+#define savegameHeaderLength 260
+#define verificationValue QByteArray::fromHex("00000001")
+
 SavegameData::SavegameData(const QString &fileName, QObject *parent) : QObject(parent), savegameFileName(fileName)
 {
-    // PARSE INT INIT - DO NOT CHANGE THIS VALUES
-    savegameHeaderLength = 260;
-    verificationValue = QByteArray::fromHex("00000001");
-
     // INIT SAVEGAME
     savegameStr = "";
     savegameOk = 0;

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016 Syping
+* Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -38,6 +38,7 @@ protected:
     void mousePressEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
     void mouseDoubleClickEvent(QMouseEvent *ev);
+    void paintEvent(QPaintEvent *ev);
     void resizeEvent(QResizeEvent *ev);
 
 signals:
@@ -45,6 +46,7 @@ signals:
     void mousePressed(Qt::MouseButton button);
     void mouseReleased(Qt::MouseButton button);
     void mouseDoubleClicked(Qt::MouseButton button);
+    void labelPainted();
     void resized(QSize newSize);
 };
 

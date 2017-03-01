@@ -29,6 +29,7 @@
 #include <QBuffer>
 #include <QDebug>
 #include <QImage>
+#include <QSize>
 #include <QFile>
 
 // PARSER ALLOCATIONS
@@ -49,11 +50,13 @@
 #define titlStreamEditorLength 256
 #define titlStreamCharacterMax 39
 
+// IMAGES VALUES
+#define snapmaticResolutionW 960
+#define snapmaticResolutionH 536
+#define snapmaticResolution QSize(snapmaticResolutionW, snapmaticResolutionH)
+
 SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : QObject(parent), picFilePath(fileName)
 {
-    // PREDEFINED PROPERTIES
-    snapmaticResolution = QSize(960, 536);
-
     reset();
 }
 
@@ -65,7 +68,7 @@ void SnapmaticPicture::reset()
 {
     // INIT PIC
     rawPicContent = "";
-    cachePicture = QImage(0, 0, QImage::Format_RGB888);
+    cachePicture = QImage();
     jpegRawContentSize = 0;
     picExportFileName = "";
     isCustomFormat = 0;
@@ -483,51 +486,6 @@ bool SnapmaticPicture::setPictureTitl(const QString &newTitle_)
     return false;
 }
 
-bool SnapmaticPicture::exportPicture(const QString &fileName, bool customFormat)
-{
-    QFile *picFile = new QFile(fileName);
-    if (picFile->open(QIODevice::WriteOnly))
-    {
-        if (!customFormat)
-        {
-            // Classic straight export
-            picFile->write(rawPicContent);
-            picFile->close();
-            picFile->deleteLater();
-        }
-        else
-        {
-            // Modern compressed export
-            QByteArray stockFileNameUTF8 = picFileName.toUtf8();
-            QByteArray numberLength = QByteArray::number(stockFileNameUTF8.length());
-            if (numberLength.length() == 1)
-            {
-                numberLength.insert(0, "0");
-            }
-            else if (numberLength.length() != 2)
-            {
-                numberLength = "00";
-            }
-            picFile->write(QByteArray::fromHex("00")); // First Null Byte
-            picFile->write("G5E"); // GTA 5 Export
-            picFile->write(QByteArray::fromHex("1000")); // 2 byte GTA 5 Export Version
-            picFile->write("LEN"); // Before Length
-            picFile->write(QByteArray::fromHex(numberLength)); // Length in HEX before Compressed
-            picFile->write("FIL"); // Before File Name
-            picFile->write(stockFileNameUTF8); // File Name
-            picFile->write("COM"); // Before Compressed
-            picFile->write(qCompress(rawPicContent, 9)); // Compressed Snapmatic
-            picFile->close();
-            picFile->deleteLater();
-        }
-        return true;
-    }
-    else
-    {
-        return false;
-    }
-}
-
 QString SnapmaticPicture::getExportPictureFileName()
 {
     return picExportFileName;
@@ -655,23 +613,33 @@ bool SnapmaticPicture::isPicOk()
     return picOk;
 }
 
-void SnapmaticPicture::setPicFileName(QString picFileName_)
-{
-    picFileName = picFileName_;
-}
-
-void SnapmaticPicture::setPicFilePath(QString picFilePath_)
-{
-    picFilePath = picFilePath_;
-}
-
 void SnapmaticPicture::clearCache()
 {
     cacheEnabled = false;
-    cachePicture = QImage(0, 0, QImage::Format_RGB888);
+    cachePicture = QImage();
+}
+
+void SnapmaticPicture::emitUpdate()
+{
+    emit updated();
 }
 
 // JSON part
+
+bool SnapmaticPicture::isJsonOk()
+{
+    return jsonOk;
+}
+
+QString SnapmaticPicture::getJsonStr()
+{
+    return jsonStr;
+}
+
+SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
+{
+    return localSpJson;
+}
 
 void SnapmaticPicture::parseJsonContent()
 {
@@ -731,21 +699,6 @@ void SnapmaticPicture::parseJsonContent()
     }
 
     jsonOk = true;
-}
-
-bool SnapmaticPicture::isJsonOk()
-{
-    return jsonOk;
-}
-
-QString SnapmaticPicture::getJsonStr()
-{
-    return jsonStr;
-}
-
-SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
-{
-    return localSpJson;
 }
 
 bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties newSpJson)
@@ -809,6 +762,70 @@ bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties newSpJson)
     }
 
     return true;
+}
+
+// FILE MANAGEMENT
+
+bool SnapmaticPicture::exportPicture(const QString &fileName, bool customFormat)
+{
+    QFile *picFile = new QFile(fileName);
+    if (picFile->open(QIODevice::WriteOnly))
+    {
+        if (!customFormat)
+        {
+            // Classic straight export
+            picFile->write(rawPicContent);
+            picFile->close();
+            picFile->deleteLater();
+        }
+        else
+        {
+            // Modern compressed export
+            QByteArray stockFileNameUTF8 = picFileName.toUtf8();
+            QByteArray numberLength = QByteArray::number(stockFileNameUTF8.length());
+            if (numberLength.length() == 1)
+            {
+                numberLength.insert(0, "0");
+            }
+            else if (numberLength.length() != 2)
+            {
+                numberLength = "00";
+            }
+            picFile->write(QByteArray::fromHex("00")); // First Null Byte
+            picFile->write("G5E"); // GTA 5 Export
+            picFile->write(QByteArray::fromHex("1000")); // 2 byte GTA 5 Export Version
+            picFile->write("LEN"); // Before Length
+            picFile->write(QByteArray::fromHex(numberLength)); // Length in HEX before Compressed
+            picFile->write("FIL"); // Before File Name
+            picFile->write(stockFileNameUTF8); // File Name
+            picFile->write("COM"); // Before Compressed
+            picFile->write(qCompress(rawPicContent, 9)); // Compressed Snapmatic
+            picFile->close();
+            picFile->deleteLater();
+        }
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void SnapmaticPicture::setPicFileName(const QString &picFileName_)
+{
+    picFileName = picFileName_;
+}
+
+void SnapmaticPicture::setPicFilePath(const QString &picFilePath_)
+{
+    picFilePath = picFilePath_;
+}
+
+bool SnapmaticPicture::deletePicFile()
+{
+    if (!QFile::exists(picFilePath)) return true;
+    if (QFile::remove(picFilePath)) return true;
+    return false;
 }
 
 // VISIBILITY

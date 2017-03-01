@@ -34,7 +34,7 @@ void SavegameCopy::copySavegame(QWidget *parent, QString sgdPath)
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("FileDialogs");
 
-fileDialogPreSave:
+fileDialogPreSave: //Work?
     QFileInfo sgdFileInfo(sgdPath);
     QFileDialog fileDialog(parent);
     fileDialog.setFileMode(QFileDialog::AnyFile);
@@ -72,12 +72,12 @@ fileDialogPreSave:
                     if (!QFile::remove(selectedFile))
                     {
                         QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Failed to overwrite %1 with current Savegame").arg("\""+selectedFile+"\""));
-                        goto fileDialogPreSave;
+                        goto fileDialogPreSave; //Work?
                     }
                 }
                 else
                 {
-                    goto fileDialogPreSave;
+                    goto fileDialogPreSave; //Work?
                 }
             }
 
@@ -85,13 +85,13 @@ fileDialogPreSave:
             if (!isCopied)
             {
                 QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Failed to export current Savegame"));
-                goto fileDialogPreSave;
+                goto fileDialogPreSave; //Work?
             }
         }
         else
         {
             QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("No valid file is selected"));
-            goto fileDialogPreSave;
+            goto fileDialogPreSave; //Work?
         }
     }
 

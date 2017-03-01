@@ -208,7 +208,6 @@ void UserInterface::closeProfile()
         ui->menuProfile->setEnabled(false);
         ui->actionSelect_profile->setEnabled(false);
         ui->swProfile->removeWidget(profileUI);
-        profileUI->deleteLater();
         delete profileUI;
     }
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
@@ -248,11 +247,10 @@ void UserInterface::openSelectProfile()
 void UserInterface::on_actionAbout_gta5sync_triggered()
 {
     AboutDialog *aboutDialog = new AboutDialog(this);
-    aboutDialog->setWindowFlags(aboutDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    aboutDialog->setWindowIcon(windowIcon());
     aboutDialog->setModal(true);
     aboutDialog->show();
     aboutDialog->exec();
-    aboutDialog->deleteLater();
     delete aboutDialog;
 }
 
@@ -297,13 +295,14 @@ void UserInterface::on_actionDelete_selected_triggered()
 void UserInterface::on_actionOptions_triggered()
 {
     OptionsDialog *optionsDialog = new OptionsDialog(profileDB, this);
-    optionsDialog->setWindowFlags(optionsDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    optionsDialog->setWindowIcon(windowIcon());
     optionsDialog->commitProfiles(GTAV_Profiles);
-    QObject::connect(optionsDialog, SIGNAL(settingsApplied(int,QString)), this, SLOT(settingsApplied(int,QString)));
+    QObject::connect(optionsDialog, SIGNAL(settingsApplied(int, QString)), this, SLOT(settingsApplied(int, QString)));
 
     optionsDialog->setModal(true);
     optionsDialog->show();
     optionsDialog->exec();
+
     delete optionsDialog;
 }
 
@@ -428,35 +427,30 @@ bool UserInterface::openFile(QString selectedFile, bool warn)
 
 void UserInterface::openSnapmaticFile(SnapmaticPicture *picture)
 {
-    PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, this);
-    picDialog->setWindowFlags(picDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-    picDialog->setSnapmaticPicture(picture, true);
-    picDialog->setModal(true);
+    PictureDialog picDialog(profileDB, crewDB, this);
+    picDialog.setSnapmaticPicture(picture, true);
+    picDialog.setModal(true);
 
     int crewID = picture->getSnapmaticProperties().crewID;
     if (crewID != 0) { crewDB->addCrew(crewID); }
 
     QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
-    QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(playerNameUpdated()));
+    QObject::connect(threadDB, SIGNAL(playerNameUpdated()), &picDialog, SLOT(playerNameUpdated()));
 
-    picDialog->show();
-    picDialog->setMinimumSize(picDialog->size());
-    picDialog->setMaximumSize(picDialog->size());
+    picDialog.show();
+    picDialog.setMinimumSize(picDialog.size());
+    picDialog.setMaximumSize(picDialog.size());
 
-    picDialog->exec();
-    delete picDialog;
+    picDialog.exec();
 }
 
 void UserInterface::openSavegameFile(SavegameData *savegame)
 {
-    SavegameDialog *sgdDialog = new SavegameDialog(this);
-    sgdDialog->setWindowFlags(sgdDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-    sgdDialog->setSavegameData(savegame, savegame->getSavegameFileName(), true);
-    sgdDialog->setModal(true);
-
-    sgdDialog->show();
-    sgdDialog->exec();
-    delete sgdDialog;
+    SavegameDialog sgdDialog(this);
+    sgdDialog.setSavegameData(savegame, savegame->getSavegameFileName(), true);
+    sgdDialog.setModal(true);
+    sgdDialog.show();
+    sgdDialog.exec();
 }
 
 void UserInterface::settingsApplied(int _contentMode, QString _language)

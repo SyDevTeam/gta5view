@@ -42,6 +42,7 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture);
     void setSelectionMode(bool selectionMode);
     void setSelected(bool isSelected);
+    bool deletePicture();
     bool makePictureVisible();
     bool makePictureHidden();
     SnapmaticPicture *getPicture();
@@ -66,6 +67,7 @@ private slots:
     void makePictureVisibleSlot();
     void makePictureHiddenSlot();
     void editSnapmaticProperties();
+    void snapmaticUpdated();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *ev);

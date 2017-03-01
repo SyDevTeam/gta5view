@@ -19,6 +19,9 @@
 #include "SnapmaticEditor.h"
 #include "ui_SnapmaticEditor.h"
 #include "SnapmaticPicture.h"
+#include "StringParser.h"
+#include <QTextDocument>
+#include <QInputDialog>
 #include <QMessageBox>
 #include <QDebug>
 #include <QFile>
@@ -42,6 +45,7 @@ SnapmaticEditor::SnapmaticEditor(QWidget *parent) :
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
 
+    snapmaticTitle = "";
     smpic = 0;
 }
 
@@ -179,6 +183,30 @@ void SnapmaticEditor::setSnapmaticPicture(SnapmaticPicture *picture)
     {
         ui->rbCustom->setChecked(true);
     }
+    setSnapmaticTitle(picture->getPictureTitle());
+}
+
+void SnapmaticEditor::setSnapmaticTitle(const QString &title)
+{
+    if (title.length() > 39)
+    {
+        snapmaticTitle = title.left(39);
+    }
+    else
+    {
+        snapmaticTitle = title;
+    }
+    QString editStr = QString("<a href=\"g5e://edittitle\" style=\"text-decoration: none;\">%1</a>").arg(tr("Edit"));
+    QString titleStr = tr("Title: %1 (%2)").arg(StringParser::escapeString(snapmaticTitle), editStr);
+    ui->labTitle->setText(titleStr);
+    if (SnapmaticPicture::verifyTitle(snapmaticTitle))
+    {
+        ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: green\">%1</a>").arg(tr("Yes", "Yes, should work fine"))));
+    }
+    else
+    {
+        ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: red\">%1</a>").arg(tr("No", "No, could lead to issues"))));
+    }
 }
 
 void SnapmaticEditor::on_cmdCancel_clicked()
@@ -210,10 +238,19 @@ void SnapmaticEditor::on_cmdApply_clicked()
         {
             QFile::copy(adjustedFileName, backupFileName);
         }
+        SnapmaticProperties fallbackProperties = smpic->getSnapmaticProperties();
+        QString fallbackTitle = smpic->getPictureTitle();
         smpic->setSnapmaticProperties(localSpJson);
+        smpic->setPictureTitle(snapmaticTitle);
         if (!smpic->exportPicture(originalFileName))
         {
             QMessageBox::warning(this, tr("Snapmatic Properties"), tr("Patching of Snapmatic Properties failed because of I/O Error"));
+            smpic->setSnapmaticProperties(fallbackProperties);
+            smpic->setPictureTitle(fallbackTitle);
+        }
+        else
+        {
+            smpic->emitUpdate();
         }
     }
     close();
@@ -248,6 +285,19 @@ void SnapmaticEditor::on_cbQualify_toggled(bool checked)
         if (ui->rbSelfie->isChecked() || ui->rbCustom->isChecked())
         {
             ui->cbDirector->setEnabled(true);
+        }
+    }
+}
+
+void SnapmaticEditor::on_labTitle_linkActivated(const QString &link)
+{
+    if (link == "g5e://edittitle")
+    {
+        bool ok;
+        QString newTitle = QInputDialog::getText(this, tr("Snapmatic Title"), tr("New Snapmatic title:"), QLineEdit::Normal, snapmaticTitle, &ok, windowFlags());
+        if (ok && !newTitle.isEmpty())
+        {
+            setSnapmaticTitle(newTitle);
         }
     }
 }

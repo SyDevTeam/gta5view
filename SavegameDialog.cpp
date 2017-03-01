@@ -7,6 +7,10 @@ SavegameDialog::SavegameDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::SavegameDialog)
 {
+    // Set Window Flags
+    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+
+    // Setup User Interface
     ui->setupUi(this);
     savegameLabStr = ui->labSavegameText->text();
 

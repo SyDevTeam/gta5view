@@ -44,6 +44,7 @@ private slots:
     void on_cbAvatar_clicked();
     void on_cmdCancel_clicked();
     void on_cmdOK_clicked();
+    void on_labPicture_labelPainted();
 
 private:
     Ui::ImportDialog *ui;

@@ -30,6 +30,7 @@ public:
     static QString convertDrawStringForLog(const QString &inputStr);
     static QString convertLogStringForDraw(const QString &inputStr);
     static QString convertBuildedString(const QString &buildedStr);
+    static QString escapeString(const QString &toEscape);
 };
 
 #endif // STRINGPARSER_H

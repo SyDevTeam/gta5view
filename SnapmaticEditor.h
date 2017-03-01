@@ -33,6 +33,7 @@ class SnapmaticEditor : public QDialog
 public:
     explicit SnapmaticEditor(QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture);
+    void setSnapmaticTitle(const QString &title);
     ~SnapmaticEditor();
 
 private slots:
@@ -47,11 +48,13 @@ private slots:
     void on_cmdCancel_clicked();
     void on_cmdApply_clicked();
     void on_cbQualify_toggled(bool checked);
+    void on_labTitle_linkActivated(const QString &link);
 
 private:
     Ui::SnapmaticEditor *ui;
     SnapmaticProperties localSpJson;
     SnapmaticPicture *smpic;
+    QString snapmaticTitle;
     void qualifyAvatar();
 };
 

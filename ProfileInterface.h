@@ -98,8 +98,8 @@ private:
     bool importSavegameData(SavegameData *savegame, QString sgdPath, bool warn = true);
     void pictureLoaded(SnapmaticPicture *picture, bool inserted);
     void savegameLoaded(SavegameData *savegame, QString savegamePath, bool inserted);
-    void savegameDeleted(SavegameWidget *sgdWidget);
-    void pictureDeleted(SnapmaticWidget *picWidget);
+    void savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteEmited = false);
+    void pictureDeleted(SnapmaticWidget *picWidget, bool isRemoteEmited = false);
     void insertSnapmaticIPI(QWidget *widget);
     void insertSavegameIPI(QWidget *widget);
     void sortingProfileInterface();

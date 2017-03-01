@@ -432,7 +432,6 @@ int main(int argc, char *argv[])
         SnapmaticPicture picture;
 
         bool readOk = picture.readingPictureFromFile(arg1);
-        picDialog.setWindowFlags(picDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
         picDialog.setWindowIcon(IconLoader::loadingAppIcon());
         picDialog.setSnapmaticPicture(&picture, readOk);
 

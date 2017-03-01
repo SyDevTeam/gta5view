@@ -23,6 +23,7 @@
 #include "SidebarGenerator.h"
 #include "StandardPaths.h"
 #include "PictureExport.h"
+#include "StringParser.h"
 #include "GlobalString.h"
 #include "UiModLabel.h"
 
@@ -89,6 +90,10 @@ PictureDialog::PictureDialog(bool primaryWindow, QWidget *parent) :
 
 void PictureDialog::setupPictureDialog(bool withDatabase_)
 {
+    // Set Window Flags
+    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+
+    // Setup User Interface
     ui->setupUi(this);
     windowTitleStr = this->windowTitle();
     jsonDrawString = ui->labJSON->text();
@@ -422,7 +427,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         }
         created = picture->getSnapmaticProperties().createdDateTime.toString(Qt::DefaultLocaleShortDate);
         plyrsList = picture->getSnapmaticProperties().playersList;
-        picTitl = picture->getPictureTitl();
+        picTitl = StringParser::escapeString(picture->getPictureTitle());
         picArea = picture->getSnapmaticProperties().location.area;
         if (globalMap.contains(picArea))
         {
@@ -596,7 +601,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
     if (button == Qt::LeftButton)
     {
         QRect desktopRect = QApplication::desktop()->screenGeometry(this);
-        PictureWidget *pictureWidget = new PictureWidget(this);
+        PictureWidget *pictureWidget = new PictureWidget(this); // Work!
         pictureWidget->setObjectName("PictureWidget");
 #if QT_VERSION >= 0x050600
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::WindowStaysOnTopHint^Qt::MaximizeUsingFullscreenGeometryHint);
@@ -620,8 +625,8 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         pictureWidget->raise();
         pictureWidget->exec();
 
-        fullscreenWidget = 0;
-        delete pictureWidget;
+        fullscreenWidget = 0; // Work!
+        delete pictureWidget; // Work!
     }
 }
 

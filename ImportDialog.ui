@@ -42,7 +42,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QLabel" name="labPicture">
+    <widget class="UiModLabel" name="labPicture">
      <property name="minimumSize">
       <size>
        <width>430</width>
@@ -175,6 +175,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>UiModLabel</class>
+   <extends>QLabel</extends>
+   <header>UiModLabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

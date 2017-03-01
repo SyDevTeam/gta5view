@@ -25,9 +25,10 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::AboutDialog)
 {
-    ui->setupUi(this);
-    aboutStr = ui->labAbout->text();
-    titleStr = this->windowTitle();
+    // Set Window Flags
+    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+
+    // Build Strings
     QString appVersion = qApp->applicationVersion();
     QString buildType = GTA5SYNC_BUILDTYPE;
     buildType.replace("_", " ");
@@ -38,6 +39,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
 #else
      QString projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
 #endif
+
+    // Setup User Interface
+    ui->setupUi(this);
+    aboutStr = ui->labAbout->text();
+    titleStr = this->windowTitle();
     ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", buildStr, qVersion(), projectBuild, GTA5SYNC_APPVENDORLINK, GTA5SYNC_APPVENDOR, GTA5SYNC_COPYRIGHT, GTA5SYNC_APPSTR, projectDes));
     this->setWindowTitle(titleStr.arg(GTA5SYNC_APPSTR));
 

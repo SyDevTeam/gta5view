@@ -37,6 +37,10 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     QDialog(parent), profileDB(profileDB),
     ui(new Ui::OptionsDialog)
 {
+    // Set Window Flags
+    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+
+    // Setup User Interface
     ui->setupUi(this);
     ui->tabWidget->setCurrentIndex(0);
     ui->labPicCustomRes->setVisible(false);

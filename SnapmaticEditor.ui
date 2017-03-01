@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>375</width>
-    <height>319</height>
+    <width>400</width>
+    <height>350</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -120,6 +120,50 @@
        </widget>
       </item>
       <item>
+       <widget class="QGroupBox" name="gbTitle">
+        <property name="title">
+         <string>Snapmatic Title</string>
+        </property>
+        <layout class="QVBoxLayout" name="vlTitle">
+         <item>
+          <widget class="UiModLabel" name="labTitle">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="contextMenuPolicy">
+            <enum>Qt::NoContextMenu</enum>
+           </property>
+           <property name="text">
+            <string>Title: %1 (%2)</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="UiModLabel" name="labAppropriate">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Appropriate: %1</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
        <widget class="QGroupBox" name="gbExtras">
         <property name="title">
          <string>Extras</string>
@@ -133,7 +177,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="labQualify">
+          <widget class="UiModLabel" name="labQualify">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
              <horstretch>0</horstretch>
@@ -212,6 +256,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>UiModLabel</class>
+   <extends>QLabel</extends>
+   <header>UiModLabel.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

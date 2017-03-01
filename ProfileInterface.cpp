@@ -42,6 +42,7 @@
 #include <QPalette>
 #include <QPainter>
 #include <QRegExp>
+#include <QAction>
 #include <QDebug>
 #include <QColor>
 #include <QTimer>
@@ -79,22 +80,18 @@ ProfileInterface::~ProfileInterface()
     foreach(ProfileWidget *widget, widgets.keys())
     {
         widgets.remove(widget);
-        widget->deleteLater();
         delete widget;
     }
     foreach(SavegameData *savegame, savegames)
     {
         savegames.removeAll(savegame);
-        savegame->deleteLater();
         delete savegame;
     }
     foreach(SnapmaticPicture *picture, pictures)
     {
         pictures.removeAll(picture);
-        picture->deleteLater();
         delete picture;
     }
-    profileLoader->deleteLater();
     delete profileLoader;
 
     delete ui;
@@ -318,32 +315,50 @@ void ProfileInterface::profileLoaded_p()
 
 void ProfileInterface::savegameDeleted_event()
 {
-    savegameDeleted((SavegameWidget*)sender());
+    savegameDeleted((SavegameWidget*)sender(), true);
 }
 
-void ProfileInterface::savegameDeleted(SavegameWidget *sgdWidget)
+void ProfileInterface::savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteEmited)
 {
     SavegameData *savegame = sgdWidget->getSavegame();
     if (sgdWidget->isSelected()) { sgdWidget->setSelected(false); }
     widgets.remove(sgdWidget);
-    sgdWidget->close();
-    sgdWidget->deleteLater();
+
+    // Deleting when the widget did send a event cause a crash
+    if (isRemoteEmited)
+    {
+        sgdWidget->deleteLater();
+    }
+    else
+    {
+        delete sgdWidget;
+    }
+
     savegames.removeAll(savegame);
     delete savegame;
 }
 
 void ProfileInterface::pictureDeleted_event()
 {
-    pictureDeleted((SnapmaticWidget*)sender());
+    pictureDeleted((SnapmaticWidget*)sender(), true);
 }
 
-void ProfileInterface::pictureDeleted(SnapmaticWidget *picWidget)
+void ProfileInterface::pictureDeleted(SnapmaticWidget *picWidget, bool isRemoteEmited)
 {
     SnapmaticPicture *picture = picWidget->getPicture();
     if (picWidget->isSelected()) { picWidget->setSelected(false); }
     widgets.remove(picWidget);
-    picWidget->close();
-    picWidget->deleteLater();
+
+    // Deleting when the widget did send a event cause a crash
+    if (isRemoteEmited)
+    {
+        picWidget->deleteLater();
+    }
+    else
+    {
+        delete picWidget;
+    }
+
     pictures.removeAll(picture);
     delete picture;
 }
@@ -359,7 +374,7 @@ void ProfileInterface::on_cmdImport_clicked()
     settings.beginGroup("FileDialogs");
     settings.beginGroup("ImportCopy");
 
-fileDialogPreOpen:
+fileDialogPreOpen: //Work?
     QFileDialog fileDialog(this);
     fileDialog.setFileMode(QFileDialog::ExistingFiles);
     fileDialog.setViewMode(QFileDialog::Detail);
@@ -390,7 +405,7 @@ fileDialogPreOpen:
         if (selectedFiles.length() == 1)
         {
             QString selectedFile = selectedFiles.at(0);
-            if (!importFile(selectedFile, true, 0)) goto fileDialogPreOpen;
+            if (!importFile(selectedFile, true, 0)) goto fileDialogPreOpen; //Work?
         }
         else if (selectedFiles.length() > 1)
         {
@@ -463,7 +478,7 @@ fileDialogPreOpen:
         else
         {
             QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
-            goto fileDialogPreOpen;
+            goto fileDialogPreOpen; //Work?
         }
     }
 
@@ -920,7 +935,6 @@ void ProfileInterface::exportSelected()
 
             if (exportThread->isFinished())
             {
-                exportThread->deleteLater();
                 delete exportThread;
             }
             else
@@ -928,7 +942,6 @@ void ProfileInterface::exportSelected()
                 QEventLoop threadFinishLoop;
                 QObject::connect(exportThread, SIGNAL(finished()), &threadFinishLoop, SLOT(quit()));
                 threadFinishLoop.exec();
-                exportThread->deleteLater();
                 delete exportThread;
             }
         }
@@ -954,8 +967,7 @@ void ProfileInterface::deleteSelected()
                     if (widget->getWidgetType() == "SnapmaticWidget")
                     {
                         SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
-                        QString fileName = picWidget->getPicturePath();
-                        if (!QFile::exists(fileName) || QFile::remove(fileName))
+                        if (picWidget->getPicture()->deletePicFile())
                         {
                             pictureDeleted(picWidget);
                         }

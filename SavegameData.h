@@ -40,10 +40,6 @@ private:
     QString savegameStr;
     QString lastStep;
     bool savegameOk;
-
-    // PARSE INT
-    QByteArray verificationValue;
-    int savegameHeaderLength;
 };
 
 #endif // SAVEGAMEDATA_H

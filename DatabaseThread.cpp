@@ -150,9 +150,7 @@ void DatabaseThread::scanCrewReference(QStringList crewList, int requestDelay)
             waitingLoop->exec();
             delete waitingLoop;
 
-            netReply->deleteLater();
             delete netReply;
-            netManager->deleteLater();
             delete netManager;
         }
     }
@@ -224,9 +222,7 @@ void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int
                     currentPage++;
                 }
 
-                netReply->deleteLater();
                 delete netReply;
-                netManager->deleteLater();
                 delete netManager;
             }
         }

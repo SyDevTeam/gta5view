@@ -18,6 +18,7 @@
 
 #include "StringParser.h"
 #include "config.h"
+#include <QTextDocument>
 #include <QApplication>
 #include <QTextCodec>
 #include <QByteArray>
@@ -59,4 +60,13 @@ QString StringParser::convertBuildedString(const QString &buildedStr)
     outputStr.replace("$RUNDIR", QFileInfo(qApp->applicationFilePath()).absoluteDir().absolutePath());
     outputStr.replace("$SEPARATOR", QDir::separator());
     return outputStr;
+}
+
+QString StringParser::escapeString(const QString &toEscape)
+{
+#if QT_VERSION >= 0x050000
+    return toEscape.toHtmlEscaped();
+#else
+    return Qt::escape(toEscape);
+#endif
 }
