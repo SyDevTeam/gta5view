@@ -16,6 +16,7 @@ install:
   
 before_script:
   - export INSTALL_ROOT=/usr
+  - if [ `git name-rev --tags --name-only $(git rev-parse HEAD)` == "undefined" ]; then export APPLICATION_VERSION="$PACKAGE_VERSION.$TRAVIS_BUILD_NUMBER"; else export APPLICATION_VERSION=`git name-rev --tags --name-only $(git rev-parse HEAD)`; fi
   - echo "gta5view build version is $PACKAGE_VERSION"
   - mkdir build
   - mkdir package
@@ -23,12 +24,15 @@ before_script:
   - echo "Grand Theft Auto V Snapmatic and Savegame viewer" > ./description-pak
 
 script:
-  - qmake -qt=5 "DEFINES+=GTA5SYNC_BUILDTYPE=\\\\\\\"Developer\\\\\\\"" "DEFINES+=GTA5SYNC_DAILYB=\\\\\\\"$PACKAGE_VERSION-dev2\\\\\\\"" ../gta5view.pro  - make -j 4
+  - qmake -qt=5 "DEFINES+=GTA5SYNC_BUILDTYPE=\\\\\\\"Developer\\\\\\\"" "DEFINES+=GTA5SYNC_DAILYB=\\\\\\\"$PACKAGE_VERSION-dev2\\\\\\\"" ../gta5view.pro
+  - make -j 4
   - sudo checkinstall -D --default --nodoc --pkgname=gta5view --pkgversion=$PACKAGE_VERSION --pkgrelease=dev2 --pkggroup=utility --maintainer="Syping on Travis \<travisci@syping.de\>"  --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5 --pakdir=../package
+
 deploy:
   provider: releases
   api_key:
     secure: "o7VneEz1aHfdVwZvOZLfopf6uJWNrFsZaBvunTmXFzpmNFhlNS1qwqgMUkIA2yBRbZ3wIzVs4vfwIHv7W9yE/PqK+AYL+R8+AwKGrwlgT4HqJNuk6VM/LNJ6GwT/qkQuaoOVw29bUjmzzgIRdHmw53SlJv6Hh1VE8HphlTT//aex6nCfcFhUZ0BETdZDWz5FSHwL3NalUoqfKfQrJeky5RXzCyCANQC2tKt0bV46GaWIgWrDo2KCTNqPtRWWf5GDmnkXE5IYRMQ3mXvO9iYh0v5Y2jo4PiXGUiFUU6Z3aAWFAiPdGclrBO697cf3lCTzDMhuCETR153qFYsLShUlFf61ITAmCeHAWETjZDri0lmPONo3GoNB6alGfYEA51qw14kXakrTpICtTJj7gw/gtUYOabW6hrzmieNzMBIy62RikDPjyakFnuwW2qNHRlD65e0jYv+6nCpb6E+OV16Ysh1zhV2vTfpfzVmSuyu2J+ELqXD3OZCXRSPpDIih9UQ8335p8FBji6jHORcgym/TRgdgRmENibh8tLzWp+UjpWHuWfcpvZgOskjfwU0iDMCayMJ7tDpOhXHcAhDRnd6XRIiOJ5YZCzflj2nEwmt3YUd7DwXS/AU+WHOmcNQBjXBxF/FJa35XXcy3HKJM5TTKqtph3medo30us5yXHeG6NNg="
-  file: "../package/gta5view_$PACKAGE_VERSION-dev2_amd64.deb"  skip_cleanup: true
+  file: "../package/gta5view_$PACKAGE_VERSION-dev2_amd64.deb"
+  skip_cleanup: true
   on:
     tags: true
