@@ -458,7 +458,6 @@ int main(int argc, char *argv[])
         SavegameData savegame;
 
         bool readOk = savegame.readingSavegameFromFile(arg1);
-        savegameDialog.setWindowFlags(savegameDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
         savegameDialog.setWindowIcon(IconLoader::loadingAppIcon());
         savegameDialog.setSavegameData(&savegame, arg1, readOk);
 

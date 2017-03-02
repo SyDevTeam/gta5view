@@ -149,7 +149,6 @@ void SavegameWidget::on_cmdDelete_clicked()
 void SavegameWidget::on_cmdView_clicked()
 {
     SavegameDialog *savegameDialog = new SavegameDialog(this);
-    savegameDialog->setWindowFlags(savegameDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
     savegameDialog->setSavegameData(sgdata, sgdPath, true);
     savegameDialog->setModal(true);
     savegameDialog->show();

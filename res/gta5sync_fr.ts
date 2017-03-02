@@ -1080,7 +1080,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <location filename="../SnapmaticEditor.ui" line="71"/>
         <location filename="../SnapmaticEditor.ui" line="115"/>
         <source>Mugshot</source>
-        <translation>Mugshot</translation>
+        <translation>Photo d&apos;identité</translation>
     </message>
     <message>
         <source>Custom</source>
@@ -1100,20 +1100,20 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <location filename="../SnapmaticEditor.ui" line="125"/>
         <location filename="../SnapmaticEditor.cpp" line="297"/>
         <source>Snapmatic Title</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre Snapmatic</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="140"/>
         <location filename="../SnapmaticEditor.cpp" line="200"/>
         <source>Title: %1 (%2)</source>
-        <translation type="unfinished"></translation>
+        <translation>Titre : %1 (%2)</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="156"/>
         <location filename="../SnapmaticEditor.cpp" line="204"/>
         <location filename="../SnapmaticEditor.cpp" line="208"/>
         <source>Appropriate: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Valide : %1</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="169"/>
@@ -1143,19 +1143,21 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../SnapmaticEditor.cpp" line="199"/>
         <source>Edit</source>
-        <translation type="unfinished"></translation>
+        <translation>Éditer</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.cpp" line="204"/>
         <source>Yes</source>
         <comment>Yes, should work fine</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Oui, devrait fonctionner</translatorcomment>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.cpp" line="208"/>
         <source>No</source>
         <comment>No, could lead to issues</comment>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Non, pourrait causer des erreurs</translatorcomment>
+        <translation>Non</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.cpp" line="247"/>
@@ -1165,7 +1167,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../SnapmaticEditor.cpp" line="297"/>
         <source>New Snapmatic title:</source>
-        <translation type="unfinished"></translation>
+        <translation>Nouveau titre Snapmatic :</translation>
     </message>
 </context>
 <context>
