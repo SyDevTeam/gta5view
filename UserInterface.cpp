@@ -68,13 +68,13 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     }
     if (QIcon::hasThemeIcon("preferences-system"))
     {
-#ifndef Q_WS_MAC // Setting icon for preferences/settings/options lead to a crash in Mac OS X
+#ifndef Q_OS_MACOS // Setting icon for preferences/settings/options lead to a crash in Mac OS X
         ui->actionOptions->setIcon(QIcon::fromTheme("preferences-system"));
 #endif
     }
     if (QIcon::hasThemeIcon("application-exit"))
     {
-#ifndef Q_WS_MAC // Setting icon for exit/quit lead to a crash in Mac OS X
+#ifndef Q_OS_MACOS // Setting icon for exit/quit lead to a crash in Mac OS X
         ui->actionExit->setIcon(QIcon::fromTheme("application-exit"));
 #endif
     }
@@ -249,7 +249,12 @@ void UserInterface::on_actionAbout_gta5sync_triggered()
     AboutDialog *aboutDialog = new AboutDialog(this);
     aboutDialog->setWindowIcon(windowIcon());
     aboutDialog->setModal(true);
+#ifdef Q_OS_ANDROID
+    // Android ...
+    aboutDialog->showMaximized();
+#else
     aboutDialog->show();
+#endif
     aboutDialog->exec();
     delete aboutDialog;
 }
@@ -300,7 +305,12 @@ void UserInterface::on_actionOptions_triggered()
     QObject::connect(optionsDialog, SIGNAL(settingsApplied(int, QString)), this, SLOT(settingsApplied(int, QString)));
 
     optionsDialog->setModal(true);
+#ifdef Q_OS_ANDROID
+    // Android ...
+    optionsDialog->showMaximized();
+#else
     optionsDialog->show();
+#endif
     optionsDialog->exec();
 
     delete optionsDialog;
@@ -437,9 +447,14 @@ void UserInterface::openSnapmaticFile(SnapmaticPicture *picture)
     QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
     QObject::connect(threadDB, SIGNAL(playerNameUpdated()), &picDialog, SLOT(playerNameUpdated()));
 
+#ifdef Q_OS_ANDROID
+    // Android optimization should be put here
+    picDialog.showMaximized();
+#else
     picDialog.show();
     picDialog.setMinimumSize(picDialog.size());
     picDialog.setMaximumSize(picDialog.size());
+#endif
 
     picDialog.exec();
 }
@@ -449,7 +464,12 @@ void UserInterface::openSavegameFile(SavegameData *savegame)
     SavegameDialog sgdDialog(this);
     sgdDialog.setSavegameData(savegame, savegame->getSavegameFileName(), true);
     sgdDialog.setModal(true);
+#ifdef Q_OS_ANDROID
+    // Android optimization should be put here
+    sgdDialog.showMaximized();
+#else
     sgdDialog.show();
+#endif
     sgdDialog.exec();
 }
 

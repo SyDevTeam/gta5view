@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>350</height>
+    <height>362</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -81,13 +81,6 @@
          <string>Snapmatic Properties</string>
         </property>
         <layout class="QGridLayout" name="gdProperties">
-         <item row="5" column="1">
-          <widget class="QCheckBox" name="cbEditor">
-           <property name="text">
-            <string>Editor</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
           <widget class="QCheckBox" name="cbMeme">
            <property name="text">
@@ -102,37 +95,30 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="1">
-          <widget class="QCheckBox" name="cbSelfie">
-           <property name="text">
-            <string>Selfie</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QCheckBox" name="cbMugshot">
-           <property name="text">
-            <string>Mugshot</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="gbTitle">
+       <widget class="QGroupBox" name="gbValues">
         <property name="title">
-         <string>Snapmatic Title</string>
+         <string>Snapmatic Values</string>
         </property>
         <layout class="QVBoxLayout" name="vlTitle">
          <item>
-          <widget class="UiModLabel" name="labTitle">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
+          <widget class="UiModLabel" name="labCrew">
+           <property name="contextMenuPolicy">
+            <enum>Qt::NoContextMenu</enum>
            </property>
+           <property name="text">
+            <string>Crew: %1 (%2)</string>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="UiModLabel" name="labTitle">
            <property name="contextMenuPolicy">
             <enum>Qt::NoContextMenu</enum>
            </property>
@@ -146,12 +132,6 @@
          </item>
          <item>
           <widget class="UiModLabel" name="labAppropriate">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
            <property name="text">
             <string>Appropriate: %1</string>
            </property>

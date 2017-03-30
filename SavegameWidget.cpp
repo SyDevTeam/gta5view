@@ -151,9 +151,13 @@ void SavegameWidget::on_cmdView_clicked()
     SavegameDialog *savegameDialog = new SavegameDialog(this);
     savegameDialog->setSavegameData(sgdata, sgdPath, true);
     savegameDialog->setModal(true);
+#ifdef Q_OS_ANDROID
+    // Android ...
+    savegameDialog->showMaximized();
+#else
     savegameDialog->show();
+#endif
     savegameDialog->exec();
-    savegameDialog->deleteLater();
     delete savegameDialog;
 }
 

@@ -19,7 +19,9 @@
 #include "StringParser.h"
 #include "config.h"
 #include <QTextDocument>
+#ifndef GTA5VIEW_CMD
 #include <QApplication>
+#endif
 #include <QTextCodec>
 #include <QByteArray>
 #include <QFileInfo>
@@ -52,6 +54,7 @@ QString StringParser::convertLogStringForDraw(const QString &inputStr)
     return outputStr.replace("&c;",",").replace("&u;","&");
 }
 
+#ifndef GTA5VIEW_CMD
 QString StringParser::convertBuildedString(const QString &buildedStr)
 {
     QString outputStr = buildedStr;
@@ -61,6 +64,7 @@ QString StringParser::convertBuildedString(const QString &buildedStr)
     outputStr.replace("$SEPARATOR", QDir::separator());
     return outputStr;
 }
+#endif
 
 QString StringParser::escapeString(const QString &toEscape)
 {

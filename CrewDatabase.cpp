@@ -60,7 +60,9 @@ QStringList CrewDatabase::getCrews()
 
 QString CrewDatabase::getCrewName(int crewID)
 {
-    return crewDB->value(QString::number(crewID), crewID).toString();
+    QString crewStr = crewDB->value(QString::number(crewID), crewID).toString();
+    if (crewID == 0) crewStr = tr("No Crew", "");
+    return crewStr;
 }
 
 void CrewDatabase::setCrewName(int crewID, QString crewName)

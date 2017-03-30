@@ -137,7 +137,7 @@ void ExportThread::run()
 
                     QString exportFilePath = exportDirectory + "/" + exportFileName;
                     if (QFile::exists(exportFilePath)) {QFile::remove(exportFilePath);}
-                    if (!picture->exportPicture(exportDirectory + "/" + exportFileName, true))
+                    if (!picture->exportPicture(exportDirectory + "/" + exportFileName, "G5E"))
                     {
                         failedCopyPictures.append(exportFileName);
                     }

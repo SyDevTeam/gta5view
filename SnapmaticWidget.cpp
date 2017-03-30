@@ -125,11 +125,16 @@ void SnapmaticWidget::on_cmdView_clicked()
     if (navigationBar) picDialog->addPreviousNextButtons();
 
     // show picture dialog
+#ifdef Q_OS_ANDROID
+    // Android ...
+    picDialog->showMaximized();
+#else
     picDialog->show();
     if (navigationBar) picDialog->stylizeDialog();
     //picDialog->adaptNewDialogSize();
     picDialog->setMinimumSize(picDialog->size());
     picDialog->setMaximumSize(picDialog->size());
+#endif
     picDialog->exec();
     delete picDialog;
 }
@@ -283,7 +288,7 @@ void SnapmaticWidget::makePictureVisibleSlot()
 
 void SnapmaticWidget::editSnapmaticProperties()
 {
-    SnapmaticEditor *snapmaticEditor = new SnapmaticEditor(this);
+    SnapmaticEditor *snapmaticEditor = new SnapmaticEditor(crewDB, this);
     snapmaticEditor->setWindowFlags(snapmaticEditor->windowFlags()^Qt::WindowContextHelpButtonHint);
     snapmaticEditor->setSnapmaticPicture(smpic);
     snapmaticEditor->setModal(true);

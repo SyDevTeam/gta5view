@@ -480,7 +480,11 @@ int main(int argc, char *argv[])
     UserInterface uiWindow(&profileDB, &crewDB, &threadDB);
     uiWindow.setWindowIcon(IconLoader::loadingAppIcon());
     uiWindow.setupDirEnv();
+#ifdef Q_OS_ANDROID
+    uiWindow.showMaximized();
+#else
     uiWindow.show();
+#endif
 
     threadLoop.exec();
 

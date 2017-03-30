@@ -259,7 +259,7 @@ fileDialogPreSave: //Work?
 
             if (selectedFile.right(4) == ".g5e")
             {
-                bool isExported = picture->exportPicture(selectedFile, true);
+                bool isExported = picture->exportPicture(selectedFile, "G5E");
                 if (!isExported)
                 {
                     QMessageBox::warning(parent, PictureDialog::tr("Export as GTA Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));
@@ -280,7 +280,7 @@ fileDialogPreSave: //Work?
                 {
                     selectedFile.remove(".rem");
                 }
-                bool isCopied = picture->exportPicture(selectedFile, false);
+                bool isCopied = picture->exportPicture(selectedFile, "PGTA");
                 if (!isCopied)
                 {
                     QMessageBox::warning(parent, PictureDialog::tr("Export as GTA Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));

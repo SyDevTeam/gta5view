@@ -75,7 +75,7 @@ public:
     void emitUpdate();
 
     // FILE MANAGEMENT
-    bool exportPicture(const QString &fileName, bool customFormat = false);
+    bool exportPicture(const QString &fileName, const QString format = "PGTA");
     void setPicFileName(const QString &picFileName);
     void setPicFilePath(const QString &picFilePath);
     bool deletePicFile();
@@ -122,6 +122,7 @@ private:
     bool cacheEnabled;
     bool isCustomFormat;
     int jpegRawContentSize;
+    int jpegRawContentSizeE;
 
     // PICTURE STREAM
     QByteArray rawPicContent;
