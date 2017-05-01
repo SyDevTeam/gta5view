@@ -50,9 +50,6 @@
         <property name="text">
          <string/>
         </property>
-        <property name="pixmap">
-         <pixmap resource="res/app.qrc">:/img/savegame.png</pixmap>
-        </property>
        </widget>
       </item>
       <item>
@@ -130,8 +127,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="res/app.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

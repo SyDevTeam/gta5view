@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -50,7 +50,7 @@
 
 #ifndef GTA5SYNC_APPVER
 #ifndef GTA5SYNC_DAILYB
-#define GTA5SYNC_APPVER "1.4.0-dev3"
+#define GTA5SYNC_APPVER "1.4.0-dev4"
 #else
 #define GTA5SYNC_APPVER QString("%1").arg(GTA5SYNC_DAILYB)
 #endif

@@ -18,6 +18,7 @@
 
 #include "ImportDialog.h"
 #include "ui_ImportDialog.h"
+#include "AppEnv.h"
 #include <QPainter>
 #include <QPixmap>
 #include <QImage>
@@ -26,8 +27,6 @@
 // IMAGES VALUES
 #define snapmaticResolutionW 960
 #define snapmaticResolutionH 536
-#define snapmaticResolutionLW 430
-#define snapmaticResolutionLH 240
 #define snapmaticAvatarResolution 470
 #define snapmaticAvatarPlacementW 145
 #define snapmaticAvatarPlacementH 66
@@ -50,6 +49,15 @@ ImportDialog::ImportDialog(QWidget *parent) :
     }
 
     ui->rbKeep->setChecked(true);
+
+    qreal screenRatio = AppEnv::screenRatio();
+    snapmaticResolutionLW = 430 * screenRatio;
+    snapmaticResolutionLH = 240 * screenRatio;
+    setMinimumSize(430 * screenRatio, 380 * screenRatio);
+    setMaximumSize(430 * screenRatio, 380 * screenRatio);
+    setFixedSize(430 * screenRatio, 380 * screenRatio);
+    ui->vlButtom->setSpacing(6 * screenRatio);
+    ui->vlButtom->setContentsMargins(9 * screenRatio, 6 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 }
 
 ImportDialog::~ImportDialog()

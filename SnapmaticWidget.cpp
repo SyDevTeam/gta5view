@@ -24,6 +24,7 @@
 #include "PictureDialog.h"
 #include "PictureExport.h"
 #include "StringParser.h"
+#include "AppEnv.h"
 #include "config.h"
 #include <QMessageBox>
 #include <QPixmap>
@@ -86,6 +87,9 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
     picTitl = picture->getPictureTitl();
     picStr = picture->getPictureStr();
     QObject::connect(picture, SIGNAL(updated()), this, SLOT(snapmaticUpdated()));
+
+    qreal screenRatio = AppEnv::screenRatio();
+    ui->labPicture->setFixedSize(48 * screenRatio, 27 * screenRatio);
 
     QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getImage().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
     ui->labPicStr->setText(picStr + "\n" + picTitl + "");

@@ -28,6 +28,7 @@
 #include "ProfileLoader.h"
 #include "ExportThread.h"
 #include "ImportDialog.h"
+#include "AppEnv.h"
 #include "config.h"
 #include <QProgressDialog>
 #include <QProgressBar>
@@ -73,6 +74,11 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     {
         ui->cmdCloseProfile->setIcon(QIcon::fromTheme("dialog-close"));
     }
+
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    ui->hlButtons->setSpacing(6 * screenRatio);
+    ui->hlButtons->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 }
 
 ProfileInterface::~ProfileInterface()

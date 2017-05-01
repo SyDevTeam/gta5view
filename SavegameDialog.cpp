@@ -1,6 +1,7 @@
 #include "SavegameDialog.h"
 #include "ui_SavegameDialog.h"
 #include "SavegameCopy.h"
+#include "AppEnv.h"
 #include <QMessageBox>
 
 SavegameDialog::SavegameDialog(QWidget *parent) :
@@ -18,6 +19,10 @@ SavegameDialog::SavegameDialog(QWidget *parent) :
     {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
+
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    resize(400 * screenRatio, 105 * screenRatio);
 }
 
 SavegameDialog::~SavegameDialog()

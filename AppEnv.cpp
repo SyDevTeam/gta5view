@@ -20,10 +20,14 @@
 #include "AppEnv.h"
 #include "StringParser.h"
 #include "StandardPaths.h"
-#include <QDir>
-#include <QDebug>
 #include <QtGlobal>
+#include <QDesktopWidget>
+#include <QApplication>
 #include <QSettings>
+#include <QScreen>
+#include <QDebug>
+#include <QRect>
+#include <QDir>
 #include <iostream>
 using namespace std;
 
@@ -129,4 +133,14 @@ QUrl AppEnv::getCrewFetchingUrl(QString crewID)
 QUrl AppEnv::getPlayerFetchingUrl(QString crewID, QString pageNumber)
 {
     return QUrl(QString("https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=%1&pageNumber=%2").arg(crewID, pageNumber));
+}
+
+qreal AppEnv::screenRatio()
+{
+#if QT_VERSION >= 0x050000
+    qreal dpi = QGuiApplication::primaryScreen()->logicalDotsPerInch();
+#else
+    qreal dpi = qApp->desktop()->logicalDpiX();
+#endif
+    return (dpi / 96);
 }

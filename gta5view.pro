@@ -21,11 +21,10 @@ QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: QT += winextras
 
-DEFINES += GTA5SYNC_DISABLED # disabling sync (remove it for building gta5sync)
+DEFINES += GTA5SYNC_DISABLED
 
 DEPLOYMENT.display_name = gta5view
 TARGET = gta5view
-
 TEMPLATE = app
 
 SOURCES += main.cpp \
@@ -118,6 +117,7 @@ DISTFILES += res/app.rc \
     res/gta5sync_de.ts \
     res/gta5sync_fr.ts \
     res/gta5view.exe.manifest \
+    res/gta5view.png \
     lang/qtbase_ru.qm \
     lang/gta5sync_ru.ts \
     lang/qt_ru.qm \
@@ -157,6 +157,6 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
 unix: !macx: appfiles.path = $$(INSTALL_PATH)/share/applications
 unix: !macx: appfiles.files = $$PWD/res/gta5view.desktop
 unix: !macx: pixmaps.path = $$(INSTALL_PATH)/share/pixmaps
-unix: !macx: pixmaps.files = $$PWD/res/gta5view.xpm
+unix: !macx: pixmaps.files = $$PWD/res/gta5view.png
 unix: !macx: target.path = $$(INSTALL_PATH)/bin
 unix: !macx: INSTALLS += target pixmaps appfiles

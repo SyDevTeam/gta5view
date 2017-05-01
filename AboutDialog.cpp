@@ -19,6 +19,7 @@
 #include <QStringBuilder>
 #include "AboutDialog.h"
 #include "ui_AboutDialog.h"
+#include "AppEnv.h"
 #include "config.h"
 
 AboutDialog::AboutDialog(QWidget *parent) :
@@ -51,6 +52,10 @@ AboutDialog::AboutDialog(QWidget *parent) :
     {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
+
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    resize(375 * screenRatio, 260 * screenRatio);
 }
 
 AboutDialog::~AboutDialog()

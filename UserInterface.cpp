@@ -78,6 +78,12 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
         ui->actionExit->setIcon(QIcon::fromTheme("application-exit"));
 #endif
     }
+
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    resize(625 * screenRatio, 500 * screenRatio);
+    ui->vlUserInterface->setSpacing(6 * screenRatio);
+    ui->vlUserInterface->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 }
 
 void UserInterface::setupDirEnv()
@@ -139,11 +145,12 @@ void UserInterface::setupDirEnv()
 
 void UserInterface::setupProfileUi()
 {
+    qreal screenRatio = AppEnv::screenRatio();
     if (GTAV_Profiles.length() == 0)
     {
         QPushButton *changeDirBtn = new QPushButton(tr("Select &GTA V Folder..."), ui->swSelection);
         changeDirBtn->setObjectName("cmdChangeDir");
-        changeDirBtn->setMinimumSize(0, 40);
+        changeDirBtn->setMinimumSize(0, 40 * screenRatio);
         changeDirBtn->setAutoDefault(true);
         ui->vlButtons->addWidget(changeDirBtn);
         profileBtns.append(changeDirBtn);
@@ -154,7 +161,7 @@ void UserInterface::setupProfileUi()
     {
         QPushButton *profileBtn = new QPushButton(GTAV_Profile, ui->swSelection);
         profileBtn->setObjectName(GTAV_Profile);
-        profileBtn->setMinimumSize(0, 40);
+        profileBtn->setMinimumSize(0, 40 * screenRatio);
         profileBtn->setAutoDefault(true);
         ui->vlButtons->addWidget(profileBtn);
         profileBtns.append(profileBtn);

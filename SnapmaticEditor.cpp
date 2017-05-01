@@ -20,6 +20,7 @@
 #include "ui_SnapmaticEditor.h"
 #include "SnapmaticPicture.h"
 #include "StringParser.h"
+#include "AppEnv.h"
 #include <QTextDocument>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -44,6 +45,10 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, QWidget *parent) :
 
     snapmaticTitle = "";
     smpic = 0;
+
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    resize(400 * screenRatio, 360 * screenRatio);
 }
 
 SnapmaticEditor::~SnapmaticEditor()

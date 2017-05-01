@@ -70,6 +70,10 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
 
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    resize(435 * screenRatio, 405 * screenRatio);
+
     setupTreeWidget();
     setupLanguageBox();
     setupRadioButtons();

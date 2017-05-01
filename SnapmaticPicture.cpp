@@ -813,6 +813,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, const QString form
     }
     else
     {
+        delete picFile;
         return false;
     }
 }

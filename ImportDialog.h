@@ -53,6 +53,8 @@ private:
     QImage workImage;
     QImage newImage;
     bool doImport;
+    int snapmaticResolutionLW;
+    int snapmaticResolutionLH;
 };
 
 #endif // IMPORTDIALOG_H
