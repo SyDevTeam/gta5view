@@ -24,7 +24,7 @@ before_script:
   - echo "Grand Theft Auto V Snapmatic and Savegame viewer" > ./description-pak
 
 script:
-  - qmake -qt=5 "DEFINES+=GTA5SYNC_BUILDTYPE=\\\\\\\"Developer\\\\\\\"" "DEFINES+=GTA5SYNC_DAILYB=\\\\\\\"$PACKAGE_VERSION-rc1\\\\\\\"" ../gta5view.pro
+  - qmake -qt=5 "DEFINES+=GTA5SYNC_DAILYB=\\\\\\\"$PACKAGE_VERSION-rc1\\\\\\\"" ../gta5view.pro
   - make -j 4
   - sudo checkinstall -D --default --nodoc --pkgname=gta5view --pkgversion=$PACKAGE_VERSION --pkgrelease=rc1 --pkggroup=utility --maintainer="Syping on Travis \<travisci@syping.de\>"  --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5 --pakdir=../package
 
