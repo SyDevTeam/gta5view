@@ -502,7 +502,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple, int cu
         if (selectedFileName.left(4) == "PGTA" || selectedFileName.right(4) == ".g5e")
         {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
-            if (picture->readingPicture())
+            if (picture->readingPicture(true, true, true))
             {
                 bool success = importSnapmaticPicture(picture, notMultiple);
                 if (!success) delete picture;
@@ -534,7 +534,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple, int cu
         else if(selectedFileName.right(4) == ".jpg" || selectedFileName.right(4) == ".png")
         {
             SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
-            if (picture->readingPicture(true, false))
+            if (picture->readingPicture(true, false, true, false))
             {
                 if (!notMultiple)
                 {

@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5sync-spv Grand Theft Auto Snapmatic Picture Viewer
 * Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -53,8 +53,8 @@ public:
     explicit SnapmaticPicture(const QString &fileName = "", QObject *parent = 0);
     ~SnapmaticPicture();
     void reset();
-    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = false);
-    bool readingPicture(bool writeEnabled = true, bool cacheEnabled = true, bool fastLoad = false);
+    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
+    bool readingPicture(bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
     bool isPicOk();
     void clearCache();
     QImage getImage();
@@ -118,6 +118,7 @@ private:
     QString titlStr;
     QString descStr;
     bool picOk;
+    bool lowRamMode;
     bool writeEnabled;
     bool cacheEnabled;
     bool isCustomFormat;

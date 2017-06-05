@@ -26,16 +26,16 @@
       </sizepolicy>
      </property>
      <property name="text">
-      <string>&lt;span style=&quot; font-weight:600;&quot;&gt;%8&lt;/span&gt;&lt;br/&gt;
+      <string>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
-%9&lt;br/&gt;
+%2&lt;br/&gt;
 &lt;br/&gt;
-Project version: %1&lt;br/&gt;
-Project build: %4&lt;br/&gt;
-Compiled with Qt %2&lt;br/&gt;
-Running with Qt %3&lt;br/&gt;
+Version %3&lt;br/&gt;
+Created on %4&lt;br/&gt;
+Built with Qt %5&lt;br/&gt;
+Running with Qt %6&lt;br/&gt;
 &lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</string>
+%7</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

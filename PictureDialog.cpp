@@ -518,27 +518,32 @@ void PictureDialog::renderPicture()
     {
         if (overlayEnabled)
         {
-            QPixmap overlayAreaPixmap(960 * screenRatio, 536 * screenRatio);
-            overlayAreaPixmap.fill(Qt::transparent);
-            QPainter overlayAreaPainter(&overlayAreaPixmap);
+            QPixmap shownImagePixmap(960 * screenRatio, 536 * screenRatio);
+            shownImagePixmap.fill(Qt::transparent);
+            QPainter shownImagePainter(&shownImagePixmap);
             if (screenRatio == 1)
             {
-                overlayAreaPainter.drawImage(0, 0, snapmaticPicture);
-                overlayAreaPainter.drawImage(3 * screenRatio, 3 * screenRatio, overlayTempImage);
+                shownImagePainter.drawImage(0, 0, snapmaticPicture);
+                shownImagePainter.drawImage(3 * screenRatio, 3 * screenRatio, overlayTempImage);
             }
             else
             {
-                overlayAreaPainter.drawImage(0, 0, snapmaticPicture.scaledToHeight(536 * screenRatio, Qt::SmoothTransformation));
-                overlayAreaPainter.drawImage(3 * screenRatio, 3 * screenRatio, overlayTempImage);
+                shownImagePainter.drawImage(0, 0, snapmaticPicture.scaledToHeight(536 * screenRatio, Qt::SmoothTransformation));
+                shownImagePainter.drawImage(3 * screenRatio, 3 * screenRatio, overlayTempImage);
             }
-            overlayAreaPainter.end();
-            ui->labPicture->setPixmap(overlayAreaPixmap);
+            shownImagePainter.end();
+            ui->labPicture->setPixmap(shownImagePixmap);
         }
         else
         {
             if (screenRatio != 1)
             {
-                ui->labPicture->setPixmap(QPixmap::fromImage(snapmaticPicture.scaledToHeight(536 * screenRatio, Qt::SmoothTransformation)));
+                QPixmap shownImagePixmap(960 * screenRatio, 536 * screenRatio);
+                shownImagePixmap.fill(Qt::transparent);
+                QPainter shownImagePainter(&shownImagePixmap);
+                shownImagePainter.drawImage(0, 0, snapmaticPicture.scaledToHeight(536 * screenRatio, Qt::SmoothTransformation));
+                shownImagePainter.end();
+                ui->labPicture->setPixmap(shownImagePixmap);
             }
             else
             {

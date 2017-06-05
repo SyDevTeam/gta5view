@@ -35,17 +35,67 @@ AboutDialog::AboutDialog(QWidget *parent) :
     buildType.replace("_", " ");
     QString projectBuild = GTA5SYNC_BUILDDATETIME;
     QString buildStr = GTA5SYNC_BUILDSTRING;
-#ifdef GTA5SYNC_ENABLED
-     QString projectDes = tr("A project for viewing and sync Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+
+    // Additional Content
+    QString usingStr = tr("Using %1 %2", "Exp. Using libmyfuck");
+    QString translatedByStr = tr("Translated by %1", "Exp. Translated by Syping");
+    QString translatedByVal = tr("NAME_OF_TRANSLATOR", "Your Name (The person behind your screen looking at this text!)");
+    QString translatorProfile = tr("TRANSLATOR_PROFILE", "mailto: http:// https:// Exp. https://github.com/Syping/");
+    QString additionalContent = "";
+    if (translatedByVal != "NAME_OF_TRANSLATOR")
+    {
+        if (translatorProfile != "TRANSLATOR_PROFILE")
+        {
+            additionalContent.append(translatedByStr.arg(QString("<a href=\"%1\">%2</a>").arg(translatorProfile, translatedByVal)));
+        }
+        else
+        {
+            additionalContent.append(translatedByStr.arg(translatedByVal));
+        }
+    }
+#ifdef WITH_LIBJPEGTURBO // DONT USE IT FOR NOW
+    bool additionalContentClip = false;
+    if (!additionalContent.isEmpty())
+    {
+        additionalContentClip = true;
+        additionalContent.append(" (");
+    }
+    additionalContent.append(usingStr.arg("libjpegturbo", WITH_LIBJPEGTURBO));
+    if (additionalContentClip)
+    {
+        additionalContent.append(")");
+    }
 #else
-     QString projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+    Q_UNUSED(usingStr)
 #endif
+
+    // Project Description
+#ifdef GTA5SYNC_ENABLED
+    QString projectDes = tr("A project for viewing and sync Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+#else
+    QString projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+#endif
+
+    // Copyright Description
+    QString copyrightDes1 = tr("Copyright &copy; <a href=\"%1\">%2</a> %3");
+    copyrightDes1 = copyrightDes1.arg(GTA5SYNC_APPVENDORLINK, GTA5SYNC_APPVENDOR, GTA5SYNC_COPYRIGHT);
+    QString copyrightDes2 = tr("%1 is licensed under <a href=\"https://www.gnu.org/licenses/gpl-3.0.html#content\">GNU GPLv3</a>");
+    copyrightDes2 = copyrightDes2.arg(GTA5SYNC_APPSTR);
+    QString copyrightDesA;
+    if (!additionalContent.isEmpty())
+    {
+        copyrightDesA = copyrightDes1 % "<br/>" % additionalContent % "<br/>" % copyrightDes2;
+    }
+    else
+    {
+        copyrightDesA = copyrightDes1 % "<br/>" % copyrightDes2;
+    }
 
     // Setup User Interface
     ui->setupUi(this);
     aboutStr = ui->labAbout->text();
     titleStr = this->windowTitle();
-    ui->labAbout->setText(aboutStr.arg(appVersion % " (" % buildType % ")", buildStr, qVersion(), projectBuild, GTA5SYNC_APPVENDORLINK, GTA5SYNC_APPVENDOR, GTA5SYNC_COPYRIGHT, GTA5SYNC_APPSTR, projectDes));
+    ui->labAbout->setText(aboutStr.arg(GTA5SYNC_APPSTR, projectDes, appVersion % " (" % buildType % ")", projectBuild, buildStr, qVersion(), copyrightDesA));
     this->setWindowTitle(titleStr.arg(GTA5SYNC_APPSTR));
 
     if (QIcon::hasThemeIcon("dialog-close"))
@@ -55,7 +105,14 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
-    resize(375 * screenRatio, 260 * screenRatio);
+    if (!additionalContent.isEmpty())
+    {
+        resize(375 * screenRatio, 270 * screenRatio);
+    }
+    else
+    {
+        resize(375 * screenRatio, 260 * screenRatio);
+    }
 }
 
 AboutDialog::~AboutDialog()
