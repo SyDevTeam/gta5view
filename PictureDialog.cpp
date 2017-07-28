@@ -158,6 +158,10 @@ void PictureDialog::setupPictureDialog(bool withDatabase_)
     installEventFilter(ui->labPicture);
     ui->labPicture->setFixedSize(960 * screenRatio, 536 * screenRatio);
     ui->labPicture->setFocusPolicy(Qt::StrongFocus);
+
+    // Pre-adapt window for DPI
+    setFixedWidth(960 * screenRatio);
+    setFixedHeight(536 * screenRatio);
 }
 
 PictureDialog::~PictureDialog()

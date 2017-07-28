@@ -56,7 +56,8 @@ SOURCES += main.cpp \
     StandardPaths.cpp \
     StringParser.cpp \
     UserInterface.cpp \
-    uimod/UiModLabel.cpp
+    uimod/UiModLabel.cpp \
+    uimod/UiModWidget.cpp
 
 HEADERS  += \
     AboutDialog.h \
@@ -87,7 +88,8 @@ HEADERS  += \
     StandardPaths.h \
     StringParser.h \
     UserInterface.h \
-    uimod/UiModLabel.h
+    uimod/UiModLabel.h \
+    uimod/UiModWidget.h
 
 PRECOMPILED_HEADER += config.h
 

@@ -142,5 +142,9 @@ qreal AppEnv::screenRatio()
 #else
     qreal dpi = qApp->desktop()->logicalDpiX();
 #endif
+#ifdef Q_OS_MAC
+    return (dpi / 72);
+#else
     return (dpi / 96);
+#endif
 }

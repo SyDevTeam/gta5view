@@ -103,14 +103,17 @@
          <property name="widgetResizable">
           <bool>true</bool>
          </property>
-         <widget class="QWidget" name="saProfileContent">
+         <widget class="UiModWidget" name="saProfileContent">
           <property name="geometry">
            <rect>
             <x>0</x>
             <y>0</y>
-            <width>98</width>
-            <height>28</height>
+            <width>398</width>
+            <height>257</height>
            </rect>
+          </property>
+          <property name="acceptDrops">
+           <bool>true</bool>
           </property>
           <layout class="QVBoxLayout" name="vlProfile">
            <property name="leftMargin">
@@ -225,6 +228,17 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>UiModWidget</class>
+   <extends>QWidget</extends>
+   <header>UiModWidget.h</header>
+   <container>1</container>
+   <slots>
+    <signal>dropped(QMimeData*)</signal>
+   </slots>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>
