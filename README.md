@@ -6,9 +6,9 @@ Grand Theft Auto V Savegame and Snapmatic viewer
 - Choosing between multiple Social Club accounts as GTA V profiles IDs
 
 #### Screenshots
-<img src="https://i.imgur.com/OaizCYM.png"/>
-<img src="https://i.imgur.com/MhkGbRU.png"/>
-<img src="https://i.imgur.com/qkCQ26U.png"/>
+<img src="https://i.imgur.com/ncMtWjR.png"/>
+<img src="https://i.imgur.com/4THtwb1.png"/>
+<img src="https://i.imgur.com/STkRl6j.png"/>
 
 #### Build gta5view Debian/Ubuntu
 
