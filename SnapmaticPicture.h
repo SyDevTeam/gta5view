@@ -53,6 +53,7 @@ public:
     explicit SnapmaticPicture(const QString &fileName = "", QObject *parent = 0);
     ~SnapmaticPicture();
     void reset();
+    bool preloadFile();
     bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
     bool readingPicture(bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
     bool isPicOk();
@@ -121,6 +122,7 @@ private:
     bool lowRamMode;
     bool writeEnabled;
     bool cacheEnabled;
+    bool isLoadedInRAM;
     bool isCustomFormat;
     int jpegRawContentSize;
     int jpegRawContentSizeE;
@@ -138,7 +140,9 @@ private:
     static bool verifyTitleChar(const QChar &titleChar);
 
 signals:
+    void preloaded();
     void updated();
+    void loaded();
 
 public slots:
 };

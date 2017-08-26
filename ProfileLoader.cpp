@@ -91,3 +91,13 @@ void ProfileLoader::run()
         crewDB->addCrew(crewID);
     }
 }
+
+void ProfileLoader::preloaded()
+{
+
+}
+
+void ProfileLoader::loaded()
+{
+
+}

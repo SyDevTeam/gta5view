@@ -132,6 +132,9 @@ win32: RC_FILE += res/app.rc
 win32: LIBS += -luser32
 win32: CONFIG -= embed_manifest_exe
 
+# MAC OS X ONLY
+macx: ICON = res/5sync.icns
+
 # QT4 ONLY STUFF
 
 isEqual(QT_MAJOR_VERSION, 4): INCLUDEPATH += ./qjson4

@@ -56,11 +56,11 @@ QString AppEnv::getGameFolder(bool *ok)
     QString GTAV_defaultFolder = StandardPaths::documentsLocation() + QDir::separator() + "Rockstar Games" + QDir::separator() + "GTA V";
     QString GTAV_returnFolder = GTAV_defaultFolder;
 
-    QSettings SyncSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-    SyncSettings.beginGroup("dir");
-    bool forceDir = SyncSettings.value("force", false).toBool();
-    GTAV_returnFolder = SyncSettings.value("dir", GTAV_defaultFolder).toString();
-    SyncSettings.endGroup();
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("dir");
+    bool forceDir = settings.value("force", false).toBool();
+    GTAV_returnFolder = settings.value("dir", GTAV_defaultFolder).toString();
+    settings.endGroup();
 
     if (forceDir)
     {
@@ -125,9 +125,14 @@ QByteArray AppEnv::getUserAgent()
     return QString("Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 %1/%2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
 }
 
+// QUrl AppEnv::getCrewFetchingUrl(QString crewID)
+// {
+//     return QUrl(QString("https://socialclub.rockstargames.com/reference/crewfeed/%1").arg(crewID));
+// }
+
 QUrl AppEnv::getCrewFetchingUrl(QString crewID)
 {
-    return QUrl(QString("https://socialclub.rockstargames.com/reference/crewfeed/%1").arg(crewID));
+    return QUrl(QString("https://socialclub.rockstargames.com/crew/%1/%1").arg(crewID));
 }
 
 QUrl AppEnv::getPlayerFetchingUrl(QString crewID, QString pageNumber)

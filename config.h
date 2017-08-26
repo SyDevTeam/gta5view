@@ -50,14 +50,14 @@
 
 #ifndef GTA5SYNC_APPVER
 #ifndef GTA5SYNC_DAILYB
-#define GTA5SYNC_APPVER "1.4.0-rc2"
+#define GTA5SYNC_APPVER "1.4.0"
 #else
 #define GTA5SYNC_APPVER QString("%1").arg(GTA5SYNC_DAILYB)
 #endif
 #endif
 
 #ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE "Release Candidate"
+#define GTA5SYNC_BUILDTYPE "Custom"
 #endif
 
 #ifndef GTA5SYNC_SHARE

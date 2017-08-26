@@ -21,6 +21,7 @@
 #include "SnapmaticPicture.h"
 #include "StringParser.h"
 #include "AppEnv.h"
+#include <QStringBuilder>
 #include <QTextDocument>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -230,7 +231,7 @@ void SnapmaticEditor::on_cmdApply_clicked()
         {
             adjustedFileName.remove(adjustedFileName.length() - 7, 7);
         }
-        QString backupFileName = adjustedFileName + ".bak";
+        QString backupFileName = adjustedFileName % ".bak";
         if (!QFile::exists(backupFileName))
         {
             QFile::copy(adjustedFileName, backupFileName);
@@ -307,6 +308,10 @@ void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
         int indexNum = 0;
         QStringList itemList;
         QStringList crewList = crewDB->getCrews();
+        if (!crewList.contains(QLatin1String("0")))
+        {
+            crewList.append(QLatin1String("0"));
+        }
         crewList.sort();
         foreach(const QString &crew, crewList)
         {

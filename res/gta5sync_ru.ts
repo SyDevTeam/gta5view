@@ -1496,7 +1496,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="247"/>
         <source>&amp;Settings</source>
-        <translation>Оп&amp;ции</translation>
+        <translation>&amp;Настройки</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="282"/>

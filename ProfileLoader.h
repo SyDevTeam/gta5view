@@ -39,6 +39,10 @@ private:
     CrewDatabase *crewDB;
     ProfileLoader *profileLoader;
 
+private slots:
+    void preloaded();
+    void loaded();
+
 signals:
     void pictureLoaded(SnapmaticPicture *picture);
     void savegameLoaded(SavegameData *savegame, QString savegamePath);

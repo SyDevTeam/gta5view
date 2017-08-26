@@ -82,6 +82,80 @@ void DatabaseThread::run()
     }
 }
 
+// void DatabaseThread::scanCrewReference(QStringList crewList, int requestDelay)
+// {
+//     foreach (const QString &crewID, crewList)
+//     {
+//         if (threadRunning && crewID != "0")
+//         {
+//             QNetworkAccessManager *netManager = new QNetworkAccessManager();
+
+//             QNetworkRequest netRequest(AppEnv::getCrewFetchingUrl(crewID));
+//             netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
+//             netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+//             netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
+//             netRequest.setRawHeader("Connection", "keep-alive");
+
+//             QNetworkReply *netReply = netManager->get(netRequest);
+
+//             QEventLoop *downloadLoop = new QEventLoop();
+//             QObject::connect(netReply, SIGNAL(finished()), downloadLoop, SLOT(quit()));
+//             QObject::connect(this, SIGNAL(threadEndCommited()), downloadLoop, SLOT(quit()));
+//             QTimer::singleShot(30000, downloadLoop, SLOT(quit()));
+//             downloadLoop->exec();
+//             delete downloadLoop;
+
+//             if (netReply->isFinished())
+//             {
+//                 QByteArray crewJson = netReply->readAll();
+//                 QJsonDocument crewDocument = QJsonDocument::fromJson(crewJson);
+//                 QJsonObject crewObject = crewDocument.object();
+//                 QVariantMap crewMap = crewObject.toVariantMap();
+//                 QString crewName;
+//                 bool isFound = false;
+
+//                 if (crewMap.contains("activities"))
+//                 {
+//                     QList<QVariant> activitiesList = crewMap["activities"].toList();
+//                     foreach (const QVariant &activitiesVariant, activitiesList)
+//                     {
+//                         QMap<QString, QVariant> activityRootMap = activitiesVariant.toMap();
+//                         foreach(const QVariant &activityRootVariant, activityRootMap)
+//                         {
+//                             QMap<QString, QVariant> activityMap = activityRootVariant.toMap();
+//                             foreach(const QVariant &activityVariant, activityMap)
+//                             {
+//                                 QMap<QString, QVariant> activityFinalMap = activityVariant.toMap();
+//                                 if (activityFinalMap.contains("id") && activityFinalMap["id"] == crewID)
+//                                 {
+//                                     if (activityFinalMap.contains("name") && isFound == false)
+//                                     {
+//                                         isFound = true;
+//                                         crewName = activityFinalMap["name"].toString();
+//                                     }
+//                                 }
+//                             }
+//                         }
+//                     }
+//                 }
+//                 if (!crewName.isNull())
+//                 {
+//                     crewDB->setCrewName(crewID.toInt(), crewName);
+//                 }
+//             }
+
+//             QEventLoop *waitingLoop = new QEventLoop();
+//             QTimer::singleShot(requestDelay, waitingLoop, SLOT(quit()));
+//             QObject::connect(this, SIGNAL(threadEndCommited()), waitingLoop, SLOT(quit()));
+//             waitingLoop->exec();
+//             delete waitingLoop;
+
+//             delete netReply;
+//             delete netManager;
+//         }
+//     }
+// }
+
 void DatabaseThread::scanCrewReference(QStringList crewList, int requestDelay)
 {
     foreach (const QString &crewID, crewList)
@@ -91,6 +165,9 @@ void DatabaseThread::scanCrewReference(QStringList crewList, int requestDelay)
             QNetworkAccessManager *netManager = new QNetworkAccessManager();
 
             QNetworkRequest netRequest(AppEnv::getCrewFetchingUrl(crewID));
+#if QT_VERSION >= 0x050600
+            netRequest.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
             netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
             netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
             netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
@@ -107,38 +184,18 @@ void DatabaseThread::scanCrewReference(QStringList crewList, int requestDelay)
 
             if (netReply->isFinished())
             {
-                QByteArray crewJson = netReply->readAll();
-                QJsonDocument crewDocument = QJsonDocument::fromJson(crewJson);
-                QJsonObject crewObject = crewDocument.object();
-                QVariantMap crewMap = crewObject.toVariantMap();
                 QString crewName;
-                bool isFound = false;
-
-                if (crewMap.contains("activities"))
+                QByteArray crewHtml = netReply->readAll();
+                QStringList crewHtmlSplit1 = QString::fromUtf8(crewHtml).split("<title>Rockstar Games Social Club - Crew : ");
+                if (crewHtmlSplit1.length() >= 2)
                 {
-                    QList<QVariant> activitiesList = crewMap["activities"].toList();
-                    foreach (const QVariant &activitiesVariant, activitiesList)
+                    QStringList crewHtmlSplit2 = QString(crewHtmlSplit1.at(1)).split("</title>");
+                    if (crewHtmlSplit2.length() >= 1)
                     {
-                        QMap<QString, QVariant> activityRootMap = activitiesVariant.toMap();
-                        foreach(const QVariant &activityRootVariant, activityRootMap)
-                        {
-                            QMap<QString, QVariant> activityMap = activityRootVariant.toMap();
-                            foreach(const QVariant &activityVariant, activityMap)
-                            {
-                                QMap<QString, QVariant> activityFinalMap = activityVariant.toMap();
-                                if (activityFinalMap.contains("id") && activityFinalMap["id"] == crewID)
-                                {
-                                    if (activityFinalMap.contains("name") && isFound == false)
-                                    {
-                                        isFound = true;
-                                        crewName = activityFinalMap["name"].toString();
-                                    }
-                                }
-                            }
-                        }
+                        crewName = crewHtmlSplit2.at(0);
                     }
                 }
-                if (!crewName.isNull())
+                if (!crewName.isEmpty())
                 {
                     crewDB->setCrewName(crewID.toInt(), crewName);
                 }
@@ -171,6 +228,9 @@ void DatabaseThread::scanCrewMembersList(QStringList crewList, int maxPages, int
                 QNetworkAccessManager *netManager = new QNetworkAccessManager();
 
                 QNetworkRequest netRequest(AppEnv::getPlayerFetchingUrl(crewID, QString::number(currentPage)));
+#if QT_VERSION >= 0x050600
+                netRequest.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
                 netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
                 netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
                 netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");

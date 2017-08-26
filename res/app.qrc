@@ -31,10 +31,11 @@
     <qresource prefix="/global">
         <file>global.de.ini</file>
         <file>global.en.ini</file>
-        <file>global.ja.ini</file>
-        <file>global.fr.ini</file>
-        <file>global.zh.ini</file>
         <file>global.es.ini</file>
+        <file>global.fr.ini</file>
+        <file>global.ja.ini</file>
+        <file>global.ru.ini</file>
+        <file>global.zh.ini</file>
     </qresource>
     <qresource prefix="/template">
         <file>template.g5e</file>

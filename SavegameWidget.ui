@@ -40,6 +40,9 @@
      <layout class="QHBoxLayout" name="hlSavegame">
       <item>
        <widget class="QCheckBox" name="cbSelected">
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
         <property name="text">
          <string/>
         </property>

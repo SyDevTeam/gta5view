@@ -88,6 +88,9 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 
 void UserInterface::setupDirEnv()
 {
+    // settings init
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+
     bool folderExists;
     GTAV_Folder = AppEnv::getGameFolder(&folderExists);
     if (folderExists)
@@ -102,11 +105,18 @@ void UserInterface::setupDirEnv()
             folderExists = true;
             QDir::setCurrent(GTAV_Folder);
             AppEnv::setGameFolder(GTAV_Folder);
+
+            // First time folder selection save
+            settings.beginGroup("dir");
+            if (settings.value("dir", "").toString().isEmpty())
+            {
+                settings.setValue("dir", GTAV_Folder);
+            }
+            settings.endGroup();
         }
     }
 
     // profiles init
-    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Profile");
     QString defaultProfile = settings.value("Default", "").toString();
 
