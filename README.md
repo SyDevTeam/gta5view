@@ -28,4 +28,4 @@ Open the gta5view.pro file with Qt Creator and build it over Qt Creator.<br>
 
 #### Download Binary Releases
 
-Go to <a href="https://github.com/SyDevTeam/gta5view/releases">gta5view release</a> and download the .exe file for Windows, .deb file for Debian/Ubuntu and .rpm file for Red Hat/openSuSE/Fedora.
+Go to <a href="https://github.com/SyDevTeam/gta5view/releases">gta5view release</a> and download the .exe file for Windows, .deb file for Debian/Ubuntu and .dmg file for OS X
