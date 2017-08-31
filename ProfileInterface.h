@@ -94,7 +94,7 @@ private:
     int selectedWidgts;
     int contentMode;
 
-    bool importFile(QString selectedFile, bool notMultiple, int currentId);
+    bool importFile(QString selectedFile, bool notMultiple);
     void importFilesProgress(QStringList selectedFiles);
     bool importSnapmaticPicture(SnapmaticPicture *picture, bool warn = true);
     bool importSavegameData(SavegameData *savegame, QString sgdPath, bool warn = true);
