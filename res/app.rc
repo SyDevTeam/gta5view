@@ -7,8 +7,8 @@ CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "gta5view.exe.manifest"
 #include <windows.h>
 
 VS_VERSION_INFO     VERSIONINFO
-FILEVERSION         1, 4, 1, 0
-PRODUCTVERSION      1, 4, 1, 0
+FILEVERSION         1, 4, 2, 0
+PRODUCTVERSION      1, 4, 2, 0
 FILEFLAGSMASK       0x3fL
 FILEFLAGS           0
 FILEOS              VOS_NT_WINDOWS32
@@ -25,12 +25,12 @@ BEGIN
         BEGIN
             VALUE   "CompanyName",      "Syping"
             VALUE   "FileDescription",  "gta5view\0"
-            VALUE   "FileVersion",      "1.4.1\0"
+            VALUE   "FileVersion",      "1.4.2\0"
             VALUE   "InternalName",     "gta5view\0"
             VALUE   "LegalCopyright",   "Copyright © 2016-2017 Syping\0"
             VALUE   "OriginalFilename", "gta5view.exe\0"
             VALUE   "ProductName",      "gta5view\0"
-            VALUE   "ProductVersion",   "1.4.1\0"
+            VALUE   "ProductVersion",   "1.4.2\0"
         END
     END
 END
