@@ -32,6 +32,7 @@
 #include "config.h"
 #include <QProgressDialog>
 #include <QStringBuilder>
+#include <QImageReader>
 #include <QProgressBar>
 #include <QInputDialog>
 #include <QPushButton>
@@ -526,16 +527,25 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
             {
                 if (!notMultiple)
                 {
-                    QImage snapmaticImage;
-                    QString customImageTitle;
-                    QPixmap snapmaticPixmap(960, 536);
-                    snapmaticPixmap.fill(Qt::black);
-                    QPainter snapmaticPainter(&snapmaticPixmap);
-                    if (!snapmaticImage.load(selectedFile))
+                    QFile snapmaticFile(selectedFile);
+                    if (!snapmaticFile.open(QFile::ReadOnly))
                     {
                         delete picture;
                         return false;
                     }
+                    QImage snapmaticImage;
+                    QImageReader snapmaticImageReader;
+                    snapmaticImageReader.setDecideFormatFromContent(true);
+                    snapmaticImageReader.setDevice(&snapmaticFile);
+                    if (!snapmaticImageReader.read(&snapmaticImage))
+                    {
+                        delete picture;
+                        return false;
+                    }
+                    QString customImageTitle;
+                    QPixmap snapmaticPixmap(960, 536);
+                    snapmaticPixmap.fill(Qt::black);
+                    QPainter snapmaticPainter(&snapmaticPixmap);
                     if (snapmaticImage.height() == snapmaticImage.width())
                     {
                         // Avatar mode
@@ -609,8 +619,17 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                 else
                 {
                     bool success = false;
+                    QFile snapmaticFile(selectedFile);
+                    if (!snapmaticFile.open(QFile::ReadOnly))
+                    {
+                        delete picture;
+                        return false;
+                    }
                     QImage snapmaticImage;
-                    if (!snapmaticImage.load(selectedFile))
+                    QImageReader snapmaticImageReader;
+                    snapmaticImageReader.setDecideFormatFromContent(true);
+                    snapmaticImageReader.setDevice(&snapmaticFile);
+                    if (!snapmaticImageReader.read(&snapmaticImage))
                     {
                         delete picture;
                         return false;
@@ -1160,8 +1179,8 @@ void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
 
     if (pathList.length() == 1)
     {
-       QString selectedFile = pathList.at(0);
-       importFile(selectedFile, true);
+        QString selectedFile = pathList.at(0);
+        importFile(selectedFile, true);
     }
     else if (pathList.length() > 1)
     {
