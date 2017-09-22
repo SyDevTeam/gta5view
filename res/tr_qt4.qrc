@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/tr">
+        <file>qt_de.qm</file>
+        <file>qt_fr.qm</file>
+        <file>qt_ru.qm</file>
+    </qresource>
+</RCC>
