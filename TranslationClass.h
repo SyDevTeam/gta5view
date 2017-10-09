@@ -53,6 +53,7 @@ private:
     QString currentLanguage;
     QString userLanguage;
     int currentLangIndex;
+    bool isEnglishMode;
     bool isLangLoaded;
 };
 

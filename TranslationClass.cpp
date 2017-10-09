@@ -69,6 +69,7 @@ void TranslationClass::loadTranslation(QApplication *app)
 #ifndef GTA5SYNC_QCONF // Classic modable loading method
     QString externalLanguageStr;
     bool externalLanguageReady = false;
+    bool externalEnglishMode = false;
     bool loadInternalLang = false;
     bool trLoadSuccess = false;
     if (isUserLanguageSystem_p())
@@ -115,11 +116,12 @@ void TranslationClass::loadTranslation(QApplication *app)
     }
     if (trLoadSuccess)
     {
-        if (currentLangIndex != 0) // Don't install the language until we know we not have a better language for the user
+        if (currentLangIndex != 0 || isEnglishMode) // Don't install the language until we know we not have a better language for the user
         {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "externalLanguageReady" << currentLanguage;
 #endif
+            externalEnglishMode = isEnglishMode;
             externalLanguageStr = currentLanguage;
             externalLanguageReady = true;
         }
@@ -157,8 +159,9 @@ void TranslationClass::loadTranslation(QApplication *app)
         trLoadSuccess = loadSystemTranslation_p(inLangPath, &inAppTranslator);
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "externalLangIndex" << externalLangIndex << "internalLangIndex" << currentLangIndex;
+        qDebug() << "externalEnglishMode" << externalEnglishMode << "internalEnglishMode" << isEnglishMode;
 #endif
-        if (trLoadSuccess && externalLangIndex > currentLangIndex)
+        if ((trLoadSuccess && externalLangIndex > currentLangIndex) || (trLoadSuccess && externalEnglishMode && !isEnglishMode))
         {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "installInternalTranslation";
@@ -180,6 +183,7 @@ void TranslationClass::loadTranslation(QApplication *app)
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "installExternalTranslation";
 #endif
+            isEnglishMode = externalEnglishMode;
             currentLanguage = externalLanguageStr;
             app->installTranslator(&exAppTranslator);
             if (loadQtTranslation_p(exLangPath, &exQtTranslator))
@@ -306,6 +310,7 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
 #ifdef GTA5SYNC_DEBUG
                     qDebug() << "loadLanguageFileSuccess" << QString(langPath % QDir::separator() % "gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm");
 #endif
+                    isEnglishMode = false;
                     currentLanguage = languageName;
                     currentLangIndex = currentLangCounter;
                     return true;
@@ -321,16 +326,28 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
 #ifdef GTA5SYNC_DEBUG
                     qDebug() << "loadLanguageFileSuccess" << QString(langPath % QDir::separator() % "gta5sync_" % langList.at(0) % ".qm");
 #endif
+                    isEnglishMode = false;
+                    currentLanguage = languageName;
+                    currentLangIndex = currentLangCounter;
+                    return true;
+                }
+                else if (langList.at(0) == "en")
+                {
+#ifdef GTA5SYNC_DEBUG
+                    qDebug() << "languageEnglishMode index" << currentLangCounter;
+#endif
+                    isEnglishMode = true;
                     currentLanguage = languageName;
                     currentLangIndex = currentLangCounter;
                     return true;
                 }
             }
-            if (langList.at(0) == "en")
+            else if (langList.at(0) == "en")
             {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "languageEnglishMode index" << currentLangCounter;
 #endif
+                isEnglishMode = true;
                 currentLanguage = languageName;
                 currentLangIndex = currentLangCounter;
                 return true;
@@ -345,10 +362,12 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
             {
                 if (appTranslator->load(langPath % QDir::separator() % "gta5sync_" % langList.at(0) % ".qm"))
                 {
+                    isEnglishMode = false;
 #ifdef GTA5SYNC_DEBUG
                     qDebug() << "loadLanguageFileSuccess" << QString(langPath % QDir::separator() % "gta5sync_" % langList.at(0) % ".qm");
 #endif
                     currentLanguage = languageName;
+                    currentLangIndex = currentLangCounter;
                     return true;
                 }
             }
@@ -505,6 +524,7 @@ void TranslationClass::unloadTranslation(QApplication *app)
         currentLangIndex = 0;
         currentLanguage = QString();
         QLocale::setDefault(QLocale::c());
+        isEnglishMode = false;
         isLangLoaded = false;
     }
 #ifdef _MSC_VER // Fix dumb Microsoft compiler warning
