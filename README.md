@@ -12,12 +12,12 @@ Grand Theft Auto V Savegame and Snapmatic viewer
 
 #### Build gta5view Debian/Ubuntu
 
-	apt-get install git gcc g++ qtbase5-dev qt5-qmake make checkinstall
+	apt-get install git gcc g++ qtbase5-dev qttranslations5-l10n qt5-qmake make checkinstall
 	git clone https://github.com/SyDevTeam/gta5view
 	mkdir build && cd build
-	qmake -qt=5 ../gta5view.pro # or just qmake ../gta5view.pro
+	qmake -qt=5 GTA5SYNC_PREFIX=/usr ../gta5view.pro # or just qmake GTA5SYNC_PREFIX=/usr ../gta5view.pro
 	make
-	INSTALL_ROOT=/usr checkinstall --pkgname=gta5view --pkggroup=utility --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5
+	checkinstall --pkgname=gta5view --pkggroup=utility --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5,qttranslations5-l10n
 
 #### Build gta5view Windows
 
