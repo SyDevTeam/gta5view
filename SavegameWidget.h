@@ -41,6 +41,7 @@ public:
     SavegameData* getSavegame();
     QString getWidgetType();
     bool isSelected();
+    void retranslate();
     ~SavegameWidget();
 
 private slots:
@@ -53,7 +54,6 @@ private slots:
     void deselectAllWidgets();
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *ev);
     void mouseDoubleClickEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
@@ -62,13 +62,11 @@ protected:
 private:
     Ui::SavegameWidget *ui;
     SavegameData *sgdata;
-    QColor highlightBackColor;
-    QColor highlightTextColor;
     QString labelAutosaveStr;
     QString labelSaveStr;
     QString sgdPath;
     QString sgdStr;
-    QWidget *snwgt;
+    void renderString(const QString &savegameString, const QString &fileName);
 
 signals:
     void savegameDeleted();

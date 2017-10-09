@@ -18,10 +18,12 @@
 
 #include "OptionsDialog.h"
 #include "ui_OptionsDialog.h"
+#include "TranslationClass.h"
 #include "StandardPaths.h"
 #include "UserInterface.h"
 #include "AppEnv.h"
 #include "config.h"
+#include <QStringBuilder>
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QFileDialog>
@@ -45,7 +47,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->tabWidget->setCurrentIndex(0);
     ui->labPicCustomRes->setVisible(false);
 
-    QRect desktopResolution = QApplication::desktop()->screenGeometry(parent);
+    QRect desktopResolution = qApp->desktop()->screenGeometry(parent);
     int desktopSizeWidth = desktopResolution.width();
     int desktopSizeHeight = desktopResolution.height();
     aspectRatio = Qt::KeepAspectRatio;
@@ -115,7 +117,7 @@ void OptionsDialog::setupTreeWidget()
 
             QTreeWidgetItem *playerItem = new QTreeWidgetItem(playerTreeViewList);
             ui->twPlayers->addTopLevelItem(playerItem);
-            playerItems.append(playerItem);
+            playerItems += playerItem;
         }
     }
     ui->twPlayers->sortItems(1, Qt::AscendingOrder);
@@ -127,47 +129,25 @@ void OptionsDialog::setupLanguageBox()
     currentLanguage = settings->value("Language","System").toString();
     settings->endGroup();
 
-    QStringList langList = QLocale::system().name().split("_");
-    if (langList.length() > 0)
-    {
-        QString cbSysStr = tr("%1 (%2 if available)", "System like PC System = %1, System Language like Deutsch = %2").arg(tr("System",
-                                                                                                                              "System like PC System"), QLocale::languageToString(QLocale(langList.at(0)).language()));
-        ui->cbLanguage->addItem(cbSysStr, "System");
-    }
+    QString cbSysStr = tr("%1 (Next Closest Language)", "First language a person can talk with a different person/application. \"Native\" or \"Not Native\".").arg(tr("System",
+                                                                                                                                                                      "System in context of System default"));
+    ui->cbLanguage->addItem(cbSysStr, "System");
 
-    QString cbEngStr = "English (English) [en]";
-    ui->cbLanguage->addItem(QIcon::fromTheme("flag-us"), cbEngStr, "en");
-    if (currentLanguage == "en")
-    {
-#if QT_VERSION >= 0x050000
-        ui->cbLanguage->setCurrentText(cbEngStr);
-#else
-        int indexOfEnglish = ui->cbLanguage->findText(cbEngStr);
-        ui->cbLanguage->setCurrentIndex(indexOfEnglish);
+    QStringList availableLanguages;
+    availableLanguages << QString("en_GB");
+#ifndef GTA5SYNC_QCONF
+    availableLanguages << TCInstance->listTranslations(AppEnv::getExLangFolder());
 #endif
-    }
+    availableLanguages << TCInstance->listTranslations(AppEnv::getInLangFolder());
+    availableLanguages.removeDuplicates();
+    availableLanguages.sort();
 
-    QDir langDir;
-    langDir.setNameFilters(QStringList("gta5sync_*.qm"));
-    langDir.setPath(AppEnv::getLangFolder());
-    QStringList langFiles;
-    langFiles << langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort);
-    langDir.setPath(":/tr");
-    langFiles << langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort);
-    langFiles.removeDuplicates();
-
-    foreach(const QString &langFile, langFiles)
+    foreach(const QString &lang, availableLanguages)
     {
-        QString lang = langFile;
-        lang.remove("gta5sync_");
-        lang.remove(".qm");
-
         QLocale langLocale(lang);
-        QString languageNameInternational = QLocale::languageToString(langLocale.language());
-        QString languageNameNative = langLocale.nativeLanguageName();
+        QString cbLangStr = langLocale.nativeLanguageName() % " (" % langLocale.nativeCountryName() % ") [" % lang % "]";
 
-        QString cbLangStr = languageNameNative + " (" + languageNameInternational + ") [" + lang + "]";
-        QString langIconStr = "flag-" + lang;
+        QString langIconStr = "flag-" % TranslationClass::getCountryCode(langLocale);
 
         ui->cbLanguage->addItem(QIcon::fromTheme(langIconStr), cbLangStr, lang);
         if (currentLanguage == lang)
@@ -276,24 +256,26 @@ void OptionsDialog::applySettings()
     settings->endGroup();
 
 #if QT_VERSION >= 0x050000
+    bool languageChanged = ui->cbLanguage->currentData().toString() != currentLanguage;
+#else
+    bool languageChanged = ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentLanguage;
+#endif
+    if (languageChanged)
+    {
+        TCInstance->unloadTranslation(qApp);
+        TCInstance->initUserLanguage();
+        TCInstance->loadTranslation(qApp);
+    }
+
+#if QT_VERSION >= 0x050000
     emit settingsApplied(newContentMode, ui->cbLanguage->currentData().toString());
 #else
     emit settingsApplied(newContentMode, ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString());
 #endif
 
-#if QT_VERSION >= 0x050000
-    bool languageChanged = ui->cbLanguage->currentData().toString() != currentLanguage;
-#else
-    bool languageChanged = ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentLanguage;
-#endif
-
     if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder))
     {
-        QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The new Custom Folder will initialize after you restart %1.").arg(GTA5SYNC_APPSTR));
-    }
-    if (languageChanged)
-    {
-        QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The language change will take effect after you restart %1.").arg(GTA5SYNC_APPSTR));
+        QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The new Custom Folder will initialise after you restart %1.").arg(GTA5SYNC_APPSTR));
     }
 }
 

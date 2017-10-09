@@ -31,26 +31,30 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     // Build Strings
     QString appVersion = qApp->applicationVersion();
-    QString buildType = GTA5SYNC_BUILDTYPE;
+    QString buildType = tr(GTA5SYNC_BUILDTYPE);
     buildType.replace("_", " ");
     QString projectBuild = GTA5SYNC_BUILDDATETIME;
     QString buildStr = GTA5SYNC_BUILDSTRING;
 
-    // Additional Content
-    QString usingStr = tr("Using %1 %2", "Exp. Using libmyfuck");
-    QString translatedByStr = tr("Translated by %1", "Exp. Translated by Syping");
-    QString translatedByVal = tr("NAME_OF_TRANSLATOR", "Your Name (The person behind your screen looking at this text!)");
-    QString translatorProfile = tr("TRANSLATOR_PROFILE", "mailto: http:// https:// Exp. https://github.com/Syping/");
+    // Translator Comments
+    //: Using specific library, example Using libmyfuck
+    QString usingStr = tr("Using %1 %2");
+    //: Translated by translator, example Translated by Syping
+    QString translatedByStr = tr("Translated by %1");
+    //: Enter your name there
+    QString translatedByVal = tr("NAME_OF_TRANSLATOR");
+    //: Enter your proilfe there, example a GitHub profile, E-Mail with "mailto: afucker@sumfuck.com" or a webpage
+    QString translatorProfile = tr("TRANSLATOR_PROFILE");
     QString additionalContent = "";
     if (translatedByVal != "NAME_OF_TRANSLATOR")
     {
         if (translatorProfile != "TRANSLATOR_PROFILE")
         {
-            additionalContent.append(translatedByStr.arg(QString("<a href=\"%1\">%2</a>").arg(translatorProfile, translatedByVal)));
+            additionalContent += translatedByStr.arg(QString("<a href=\"%1\">%2</a>").arg(translatorProfile, translatedByVal));
         }
         else
         {
-            additionalContent.append(translatedByStr.arg(translatedByVal));
+            additionalContent += translatedByStr.arg(translatedByVal);
         }
     }
 #ifdef WITH_LIBJPEGTURBO // DONT USE IT FOR NOW
@@ -58,12 +62,12 @@ AboutDialog::AboutDialog(QWidget *parent) :
     if (!additionalContent.isEmpty())
     {
         additionalContentClip = true;
-        additionalContent.append(" (");
+        additionalContent += " (";
     }
-    additionalContent.append(usingStr.arg("libjpegturbo", WITH_LIBJPEGTURBO));
+    additionalContent += usingStr.arg("libjpegturbo", WITH_LIBJPEGTURBO);
     if (additionalContentClip)
     {
-        additionalContent.append(")");
+        additionalContent += ")";
     }
 #else
     Q_UNUSED(usingStr)

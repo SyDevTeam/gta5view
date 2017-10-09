@@ -21,11 +21,13 @@
 #include "PictureDialog.h"
 #include "StandardPaths.h"
 #include "SidebarGenerator.h"
+#include <QStringBuilder>
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSettings>
+#include <QRegExp>
 #include <QDebug>
 
 PictureExport::PictureExport()
@@ -85,11 +87,11 @@ fileDialogPreSave: //Work?
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("suffix");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-    fileDialog.setWindowTitle(PictureDialog::tr("Export as JPG picture..."));
+    fileDialog.setWindowTitle(PictureDialog::tr("Export as Picture..."));
     fileDialog.setLabelText(QFileDialog::Accept, PictureDialog::tr("Export"));
 
     QStringList filters;
-    filters << PictureDialog::tr("JPEG picture (*.jpg)");
+    filters << PictureDialog::tr("JPEG Graphics (*.jpg *.jpeg)");
     filters << PictureDialog::tr("Portable Network Graphics (*.png)");
     fileDialog.setNameFilters(filters);
 
@@ -97,9 +99,9 @@ fileDialogPreSave: //Work?
 
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::picturesLocation()).toString());
-    fileDialog.restoreGeometry(settings.value(parent->objectName() + "+Geomtery", "").toByteArray());
+    fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geomtery", "").toByteArray());
 
-    QString newPictureFileName = getPictureFileName(picture) + defaultExportFormat;
+    QString newPictureFileName = getPictureFileName(picture) % defaultExportFormat;
     fileDialog.selectFile(newPictureFileName);
 
     if (fileDialog.exec())
@@ -140,11 +142,11 @@ fileDialogPreSave: //Work?
 
             if (QFile::exists(selectedFile))
             {
-                if (QMessageBox::Yes == QMessageBox::warning(parent, PictureDialog::tr("Export as JPG picture"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+                if (QMessageBox::Yes == QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
                 {
                     if (!QFile::remove(selectedFile))
                     {
-                        QMessageBox::warning(parent, PictureDialog::tr("Export as JPG picture"), PictureDialog::tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
+                        QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
                         goto fileDialogPreSave; //Work?
                     }
                 }
@@ -178,18 +180,18 @@ fileDialogPreSave: //Work?
 
             if (!isSaved)
             {
-                QMessageBox::warning(parent, PictureDialog::tr("Export as JPG picture"), PictureDialog::tr("Failed to export current Snapmatic picture"));
+                QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to export current Snapmatic picture"));
                 goto fileDialogPreSave; //Work?
             }
         }
         else
         {
-            QMessageBox::warning(parent, PictureDialog::tr("Export as JPG picture"), PictureDialog::tr("No valid file is selected"));
+            QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("No valid file is selected"));
             goto fileDialogPreSave; //Work?
         }
     }
 
-    settings.setValue(parent->objectName() + "+Geometry", fileDialog.saveGeometry());
+    settings.setValue(parent->objectName() % "+Geometry", fileDialog.saveGeometry());
     settings.setValue("Directory", fileDialog.directory().absolutePath());
     settings.endGroup();
     settings.endGroup();
@@ -217,7 +219,7 @@ fileDialogPreSave: //Work?
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix(".rem");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-    fileDialog.setWindowTitle(PictureDialog::tr("Export as GTA Snapmatic..."));
+    fileDialog.setWindowTitle(PictureDialog::tr("Export as Snapmatic..."));
     fileDialog.setLabelText(QFileDialog::Accept, PictureDialog::tr("Export"));
 
     QStringList filters;
@@ -230,8 +232,8 @@ fileDialogPreSave: //Work?
 
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::documentsLocation()).toString());
-    fileDialog.selectFile(QString(picture->getExportPictureFileName() + ".g5e"));
-    fileDialog.restoreGeometry(settings.value(parent->objectName() + "+Geomtery", "").toByteArray());
+    fileDialog.selectFile(QString(picture->getExportPictureFileName() % ".g5e"));
+    fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geomtery", "").toByteArray());
 
 
     if (fileDialog.exec())
@@ -240,14 +242,26 @@ fileDialogPreSave: //Work?
         if (selectedFiles.length() == 1)
         {
             QString selectedFile = selectedFiles.at(0);
+            bool isAutoExt = false;
+            if (selectedFile.right(5) == ".auto")
+            {
+                isAutoExt = true;
+                QString dirPath = QFileInfo(selectedFile).dir().path();
+                QString stockFileName = sgdFileInfo.fileName();
+                selectedFile = dirPath % "/" % stockFileName;
+            }
+            else if (selectedFile.right(4) == ".rem")
+            {
+                selectedFile.remove(selectedFile.length() - 4, 4);
+            }
 
             if (QFile::exists(selectedFile))
             {
-                if (QMessageBox::Yes == QMessageBox::warning(parent, PictureDialog::tr("Export as GTA Snapmatic"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
+                if (QMessageBox::Yes == QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
                 {
                     if (!QFile::remove(selectedFile))
                     {
-                        QMessageBox::warning(parent, PictureDialog::tr("Export as GTA Snapmatic"), PictureDialog::tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
+                        QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
                         goto fileDialogPreSave; //Work?
                     }
                 }
@@ -259,47 +273,35 @@ fileDialogPreSave: //Work?
 
             if (selectedFile.right(4) == ".g5e")
             {
-                bool isExported = picture->exportPicture(selectedFile, "G5E");
+                bool isExported = picture->exportPicture(selectedFile, SnapmaticFormat::G5E_Format);
                 if (!isExported)
                 {
-                    QMessageBox::warning(parent, PictureDialog::tr("Export as GTA Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));
+                    QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));
                     goto fileDialogPreSave; //Work?
                 }
             }
             else
             {
-                bool isAutoExt = false;
-                if (selectedFile.right(5) == ".auto")
-                {
-                    isAutoExt = true;
-                    QString dirPath = QFileInfo(selectedFile).dir().path();
-                    QString stockFileName = sgdFileInfo.fileName();
-                    selectedFile = dirPath + "/" + stockFileName;
-                }
-                else if (selectedFile.right(4) == ".rem")
-                {
-                    selectedFile.remove(".rem");
-                }
-                bool isCopied = picture->exportPicture(selectedFile, "PGTA");
+                bool isCopied = picture->exportPicture(selectedFile, SnapmaticFormat::PGTA_Format);
                 if (!isCopied)
                 {
-                    QMessageBox::warning(parent, PictureDialog::tr("Export as GTA Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));
+                    QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));
                     goto fileDialogPreSave; //Work?
                 }
                 else
                 {
-                    if (isAutoExt) QMessageBox::information(parent, PictureDialog::tr("Export as GTA Snapmatic"), PictureDialog::tr("Exported Snapmatic to \"%1\" because of using the .auto extension.").arg(selectedFile));
+                    if (isAutoExt) QMessageBox::information(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Exported Snapmatic to \"%1\" because of using the .auto extension.").arg(selectedFile));
                 }
             }
         }
         else
         {
-            QMessageBox::warning(parent, PictureDialog::tr("Export as GTA Snapmatic"), PictureDialog::tr("No valid file is selected"));
+            QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("No valid file is selected"));
             goto fileDialogPreSave; //Work?
         }
     }
 
-    settings.setValue(parent->objectName() + "+Geometry", fileDialog.saveGeometry());
+    settings.setValue(parent->objectName() % "+Geometry", fileDialog.saveGeometry());
     settings.setValue("Directory", fileDialog.directory().absolutePath());
     settings.endGroup();
 }

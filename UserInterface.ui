@@ -127,6 +127,9 @@
               <verstretch>0</verstretch>
              </sizepolicy>
             </property>
+            <property name="toolTip">
+             <string>Reload profile overview</string>
+            </property>
             <property name="text">
              <string>&amp;Reload</string>
             </property>
@@ -142,6 +145,9 @@
               <horstretch>0</horstretch>
               <verstretch>0</verstretch>
              </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string extracomment="Close %1 &lt;- (gta5view/gta5sync) - %1 will be replaced automatically">Close %1</string>
             </property>
             <property name="text">
              <string>&amp;Close</string>

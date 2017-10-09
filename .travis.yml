@@ -4,7 +4,7 @@ sudo: required
 language: cpp
 
 env:
-- PACKAGE_VERSION="1.4.0"
+- PACKAGE_VERSION="1.5.0"
 
 before_install:
   - test -n $CC  && unset CC
@@ -12,27 +12,42 @@ before_install:
 
 install:
   - sudo apt-get update -qq
-  - sudo apt-get install -qq checkinstall dpkg-dev g++ gcc qtbase5-dev qt5-qmake
+  - sudo apt-get install -qq checkinstall dpkg-dev g++ gcc qtbase5-dev qt5-qmake qttranslations5-l10n libqt4-dev
   
 before_script:
-  - export INSTALL_ROOT=/usr
   - if [ `git name-rev --tags --name-only $(git rev-parse HEAD)` == "undefined" ]; then export APPLICATION_VERSION="$PACKAGE_VERSION.$TRAVIS_BUILD_NUMBER"; else export APPLICATION_VERSION=`git name-rev --tags --name-only $(git rev-parse HEAD)`; fi
   - echo "gta5view build version is $APPLICATION_VERSION"
   - mkdir build
   - mkdir package
+  - chmod -x res/gta5sync_*.qm res/gta5view.desktop res/gta5view.png
   - cd build
+  - mkdir qt4
+  - cd qt4
   - echo "Grand Theft Auto V Snapmatic and Savegame viewer" > ./description-pak
+  - cd ..
+  - mkdir qt5
+  - cd qt5
+  - echo "Grand Theft Auto V Snapmatic and Savegame viewer" > ./description-pak
+  - cd ..
 
 script:
-  - qmake -qt=5 "DEFINES+=GTA5SYNC_BUILDTYPE=\\\\\\\"Release\\\\\\\"" "DEFINES+=GTA5SYNC_DAILYB=\\\\\\\"$APPLICATION_VERSION\\\\\\\"" ../gta5view.pro
+  - cd qt5
+  - qmake -qt=5 GTA5SYNC_PREFIX=/usr QMAKE_CXXFLAGS+=-std=c++11 DEFINES+=GTA5SYNC_BUILDTYPE_DEV "DEFINES+=GTA5SYNC_APPVER=\\\\\\\"$APPLICATION_VERSION\\\\\\\"" DEFINES+=GTA5SYNC_QCONF ../../gta5view.pro
   - make -j 4
-  - sudo checkinstall -D --default --nodoc --pkgname=gta5view --pkgversion=$APPLICATION_VERSION --pkgrelease=travis1 --pkggroup=utility --maintainer="Syping on Travis \<travisci@syping.de\>"  --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5 --pakdir=../package
+  - sudo checkinstall -D --default --nodoc --install=no --pkgname=gta5view --pkgversion=$APPLICATION_VERSION --pkgrelease=travis1 --pkggroup=utility --maintainer="Syping on Travis \<travisci@syping.de\>" --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5,qttranslations5-l10n --conflicts=gta5view-qt4 --replaces=gta5view-qt4 --pakdir=../../package
+  - cd ..
+  - cd qt4
+  - qmake -qt=4 GTA5SYNC_PREFIX=/usr QMAKE_CXXFLAGS+=-std=c++11 DEFINES+=GTA5SYNC_BUILDTYPE_DEV "DEFINES+=GTA5SYNC_APPVER=\\\\\\\"$APPLICATION_VERSION\\\\\\\"" DEFINES+=GTA5SYNC_QCONF ../../gta5view.pro
+  - make -j 4
+  - sudo checkinstall -D --default --nodoc --install=no --pkgname=gta5view-qt4 --pkgversion=$APPLICATION_VERSION --pkgrelease=travis1 --pkggroup=utility --maintainer="Syping on Travis \<travisci@syping.de\>" --requires=libqtcore4,libqtgui4,libqt4-network,qtcore4-l10n --conflicts=gta5view --replaces=gta5view --pakdir=../../package
+  - cd ..
 
 deploy:
   provider: releases
   api_key:
     secure: "o7VneEz1aHfdVwZvOZLfopf6uJWNrFsZaBvunTmXFzpmNFhlNS1qwqgMUkIA2yBRbZ3wIzVs4vfwIHv7W9yE/PqK+AYL+R8+AwKGrwlgT4HqJNuk6VM/LNJ6GwT/qkQuaoOVw29bUjmzzgIRdHmw53SlJv6Hh1VE8HphlTT//aex6nCfcFhUZ0BETdZDWz5FSHwL3NalUoqfKfQrJeky5RXzCyCANQC2tKt0bV46GaWIgWrDo2KCTNqPtRWWf5GDmnkXE5IYRMQ3mXvO9iYh0v5Y2jo4PiXGUiFUU6Z3aAWFAiPdGclrBO697cf3lCTzDMhuCETR153qFYsLShUlFf61ITAmCeHAWETjZDri0lmPONo3GoNB6alGfYEA51qw14kXakrTpICtTJj7gw/gtUYOabW6hrzmieNzMBIy62RikDPjyakFnuwW2qNHRlD65e0jYv+6nCpb6E+OV16Ysh1zhV2vTfpfzVmSuyu2J+ELqXD3OZCXRSPpDIih9UQ8335p8FBji6jHORcgym/TRgdgRmENibh8tLzWp+UjpWHuWfcpvZgOskjfwU0iDMCayMJ7tDpOhXHcAhDRnd6XRIiOJ5YZCzflj2nEwmt3YUd7DwXS/AU+WHOmcNQBjXBxF/FJa35XXcy3HKJM5TTKqtph3medo30us5yXHeG6NNg="
-  file: "../package/gta5view_$APPLICATION_VERSION-travis1_amd64.deb"
+  file_glob: true
+  file: "../package/gta5view*.deb"
   skip_cleanup: true
   on:
     tags: true

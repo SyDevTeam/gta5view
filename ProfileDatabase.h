@@ -21,6 +21,7 @@
 
 #include <QSettings>
 #include <QObject>
+#include <QMutex>
 #include <QMap>
 
 class ProfileDatabase : public QObject
@@ -33,6 +34,7 @@ public:
     ~ProfileDatabase();
 
 private:
+    mutable QMutex mutex;
     QSettings *profileDB;
 
 public slots:

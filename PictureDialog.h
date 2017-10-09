@@ -52,6 +52,7 @@ public:
     ~PictureDialog();
 
 public slots:
+    void crewNameUpdated();
     void playerNameUpdated();
     void dialogNextPictureRequested();
     void dialogPreviousPictureRequested();
@@ -67,8 +68,11 @@ private slots:
     void exportCustomContextMenuRequestedPrivate(const QPoint &pos, bool fullscreen);
     void nextPictureRequestedSlot();
     void previousPictureRequestedSlot();
+    void editSnapmaticProperties();
     void renderOverlayPicture();
     void renderPicture();
+    void openPreviewMap();
+    void updated();
 
 signals:
     void nextPictureRequested();
@@ -83,6 +87,8 @@ protected:
     bool event(QEvent *event);
 
 private:
+    QString generateCrewString();
+    QString generatePlayersString();
     bool primaryWindow;
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
@@ -92,6 +98,9 @@ private:
     QWidget *fullscreenWidget;
     QAction *jpegExportAction;
     QAction *pgtaExportAction;
+    QAction *propEditorAction;
+    QAction *openViewerAction;
+    QAction *manageMenuSep1;
     QImage avatarAreaPicture;
     QImage snapmaticPicture;
     QImage overlayTempImage;
@@ -103,6 +112,7 @@ private:
     QString picTitl;
     QString picPath;
     QString created;
+    QString crewStr;
     QString crewID;
     QString locX;
     QString locY;
@@ -117,7 +127,7 @@ private:
     int avatarLocX;
     int avatarLocY;
     int avatarSize;
-    QMenu *exportMenu;
+    QMenu *manageMenu;
 };
 
 #endif // PICTUREDIALOG_H

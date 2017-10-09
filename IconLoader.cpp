@@ -38,3 +38,13 @@ QIcon IconLoader::loadingAppIcon()
     appIcon.addFile(":/img/5sync-256.png", QSize(256, 256));
     return appIcon;
 }
+
+QIcon IconLoader::loadingPointmakerIcon()
+{
+    QIcon pointmakerIcon;
+    pointmakerIcon.addFile(":/img/pointmaker-8.png", QSize(8, 8));
+    pointmakerIcon.addFile(":/img/pointmaker-16.png", QSize(16, 16));
+    pointmakerIcon.addFile(":/img/pointmaker-24.png", QSize(24, 24));
+    pointmakerIcon.addFile(":/img/pointmaker-32.png", QSize(32, 32));
+    return pointmakerIcon;
+}

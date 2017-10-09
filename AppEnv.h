@@ -30,13 +30,15 @@ public:
     // Folder Stuff
     static QString getGameFolder(bool *ok = 0);
     static bool setGameFolder(QString gameFolder);
-    static QString getLangFolder();
+    static QString getExLangFolder();
+    static QString getInLangFolder();
     static QString getPluginsFolder();
 
     // Web Stuff
     static QByteArray getUserAgent();
     static QUrl getCrewFetchingUrl(QString crewID);
     static QUrl getPlayerFetchingUrl(QString crewID, QString pageNumber);
+    static QUrl getPlayerFetchingUrl(QString crewID, int pageNumber);
 
     // Screen Stuff
     static qreal screenRatio();

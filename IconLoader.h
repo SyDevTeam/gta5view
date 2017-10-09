@@ -26,6 +26,7 @@ class IconLoader
 public:
     IconLoader();
     static QIcon loadingAppIcon();
+    static QIcon loadingPointmakerIcon();
 };
 
 #endif // ICONLOADER_H

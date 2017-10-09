@@ -28,6 +28,11 @@ ProfileWidget::~ProfileWidget()
 {
 }
 
+void ProfileWidget::retranslate()
+{
+    qDebug() << "ProfileWidget::retranslate got used without overwrite";
+}
+
 bool ProfileWidget::isSelected()
 {
     qDebug() << "ProfileWidget::isSelected got used without overwrite";

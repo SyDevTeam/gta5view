@@ -57,18 +57,14 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     QString exportSavegameStr = tr("Export Savegame...");
     Q_UNUSED(exportSavegameStr)
 
-    QPalette palette;
-    highlightBackColor = palette.highlight().color();
-    highlightTextColor = palette.highlightedText().color();
-
     labelAutosaveStr = tr("AUTOSAVE - %1\n%2");
     labelSaveStr = tr("SAVE %3 - %1\n%2");
-    snwgt = parent;
-    sgdPath = "";
-    sgdStr = "";
-    sgdata = 0;
 
-    installEventFilter(this);
+    ui->SavegameFrame->setMouseTracking(true);
+    ui->labSavegamePic->setMouseTracking(true);
+    ui->labSavegameStr->setMouseTracking(true);
+    ui->cbSelected->setMouseTracking(true);
+    sgdata = nullptr;
 }
 
 SavegameWidget::~SavegameWidget()
@@ -76,32 +72,22 @@ SavegameWidget::~SavegameWidget()
     delete ui;
 }
 
-bool SavegameWidget::eventFilter(QObject *obj, QEvent *ev)
-{
-    if (obj == this)
-    {
-        if (ev->type() == QEvent::Enter)
-        {
-            setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
-            return true;
-        }
-        else if(ev->type() == QEvent::Leave)
-        {
-            setStyleSheet("");
-            return true;
-        }
-    }
-    return false;
-}
-
 void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePath)
 {
     // BETA CODE
+    QString savegameString = savegame->getSavegameStr();
+    QString fileName = QFileInfo(savegame->getSavegameFileName()).fileName();
+    renderString(savegameString, fileName);
+    sgdStr = savegameString;
+    sgdPath = savegamePath;
+    sgdata = savegame;
+}
+
+void SavegameWidget::renderString(const QString &savegameString, const QString &fileName)
+{
     bool validNumber;
     QString savegameName = tr("WRONG FORMAT");
     QString savegameDate = tr("WRONG FORMAT");
-    QString savegameString = savegame->getSavegameStr();
-    QString fileName = QFileInfo(savegame->getSavegameFileName()).fileName();
     QStringList savegameNDL = QString(savegameString).split(" - ");
     if (savegameNDL.length() >= 2)
     {
@@ -124,9 +110,15 @@ void SavegameWidget::setSavegameData(SavegameData *savegame, QString savegamePat
     {
         ui->labSavegameStr->setText(labelSaveStr.arg(savegameDate, savegameName, tr("UNKNOWN")));
     }
-    sgdStr = savegameString;
-    sgdPath = savegamePath;
-    sgdata = savegame;
+}
+
+void SavegameWidget::retranslate()
+{
+    labelAutosaveStr = tr("AUTOSAVE - %1\n%2");
+    labelSaveStr = tr("SAVE %3 - %1\n%2");
+
+    QString fileName = QFileInfo(sgdata->getSavegameFileName()).fileName();
+    renderString(sgdStr, fileName);
 }
 
 void SavegameWidget::on_cmdCopy_clicked()
@@ -188,7 +180,18 @@ void SavegameWidget::mouseReleaseEvent(QMouseEvent *ev)
     {
         if (getContentMode() == 0 && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
         {
-            on_cmdView_clicked();
+            if (ev->modifiers().testFlag(Qt::ShiftModifier))
+            {
+                ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
+            }
+            else
+            {
+                on_cmdView_clicked();
+            }
+        }
+        else if (!ui->cbSelected->isVisible() && getContentMode() == 1 && ev->button() == Qt::LeftButton && ev->modifiers().testFlag(Qt::ShiftModifier))
+        {
+            ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
         }
     }
 }

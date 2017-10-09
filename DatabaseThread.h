@@ -34,16 +34,18 @@ public slots:
 
 private:
     CrewDatabase *crewDB;
-    void scanCrewMembersList(QStringList crewList, int maxPages, int requestDelay);
-    void scanCrewReference(QStringList crewList, int requestDelay);
+    void scanCrewMembersList(const QStringList &crewList, const int &maxPages, const int &requestDelay);
+    void scanCrewReference(const QStringList &crewList, const int &requestDelay);
+    QStringList deleteCompatibleCrews(const QStringList &crewList);
     bool threadRunning;
-    int crewMaxPages;
     int plyrPerReq;
 
 protected:
     void run();
 
 signals:
+    void crewNameFound(int crewID, QString crewName);
+    void crewNameUpdated();
     void playerNameFound(int playerID, QString playerName);
     void playerNameUpdated();
     void threadEndCommited();

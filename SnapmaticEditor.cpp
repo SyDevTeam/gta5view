@@ -310,12 +310,12 @@ void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
         QStringList crewList = crewDB->getCrews();
         if (!crewList.contains(QLatin1String("0")))
         {
-            crewList.append(QLatin1String("0"));
+            crewList += QLatin1String("0");
         }
         crewList.sort();
         foreach(const QString &crew, crewList)
         {
-            itemList.append(QString("%1 (%2)").arg(crew, returnCrewName(crew.toInt())));
+            itemList += QString("%1 (%2)").arg(crew, returnCrewName(crew.toInt()));
         }
         if (crewList.contains(QString::number(crewID)))
         {

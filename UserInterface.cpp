@@ -31,6 +31,7 @@
 #include "AppEnv.h"
 #include "config.h"
 #include <QtGlobal>
+#include <QStringBuilder>
 #include <QStyleFactory>
 #include <QFileDialog>
 #include <QHBoxLayout>
@@ -57,10 +58,11 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->actionSelect_profile->setEnabled(false);
     ui->actionAbout_gta5sync->setIcon(IconLoader::loadingAppIcon());
     ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
+    ui->cmdClose->setToolTip(ui->cmdClose->toolTip().arg(GTA5SYNC_APPSTR));
     defaultWindowTitle = tr("%2 - %1").arg("%1", GTA5SYNC_APPSTR);
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
-    ui->labVersion->setText(ui->labVersion->text().arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
 
     if (QIcon::hasThemeIcon("dialog-close"))
     {
@@ -130,7 +132,7 @@ void UserInterface::setupDirEnv()
     if (folderExists)
     {
         QDir GTAV_ProfilesDir;
-        GTAV_ProfilesFolder = GTAV_Folder + QDir::separator() + "Profiles";
+        GTAV_ProfilesFolder = GTAV_Folder % QDir::separator() % "Profiles";
         GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
 
         GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
@@ -163,7 +165,7 @@ void UserInterface::setupProfileUi()
         changeDirBtn->setMinimumSize(0, 40 * screenRatio);
         changeDirBtn->setAutoDefault(true);
         ui->vlButtons->addWidget(changeDirBtn);
-        profileBtns.append(changeDirBtn);
+        profileBtns += changeDirBtn;
 
         QObject::connect(changeDirBtn, SIGNAL(clicked(bool)), this, SLOT(changeFolder_clicked()));
     }
@@ -174,7 +176,7 @@ void UserInterface::setupProfileUi()
         profileBtn->setMinimumSize(0, 40 * screenRatio);
         profileBtn->setAutoDefault(true);
         ui->vlButtons->addWidget(profileBtn);
-        profileBtns.append(profileBtn);
+        profileBtns += profileBtn;
 
         QObject::connect(profileBtn, SIGNAL(clicked(bool)), this, SLOT(profileButton_clicked()));
     }
@@ -203,13 +205,14 @@ void UserInterface::profileButton_clicked()
     openProfile(profileBtn->objectName());
 }
 
-void UserInterface::openProfile(QString profileName)
+void UserInterface::openProfile(const QString &profileName_)
 {
     profileOpen = true;
+    profileName = profileName_;
     profileUI = new ProfileInterface(profileDB, crewDB, threadDB);
     ui->swProfile->addWidget(profileUI);
     ui->swProfile->setCurrentWidget(profileUI);
-    profileUI->setProfileFolder(GTAV_ProfilesFolder + QDir::separator() + profileName, profileName);
+    profileUI->setProfileFolder(GTAV_ProfilesFolder % QDir::separator() % profileName, profileName);
     profileUI->settingsApplied(contentMode, language);
     profileUI->setupProfileInterface();
     QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));
@@ -222,6 +225,7 @@ void UserInterface::closeProfile()
     if (profileOpen)
     {
         profileOpen = false;
+        profileName.clear();
         ui->menuProfile->setEnabled(false);
         ui->actionSelect_profile->setEnabled(false);
         ui->swProfile->removeWidget(profileUI);
@@ -461,7 +465,7 @@ void UserInterface::openSnapmaticFile(SnapmaticPicture *picture)
     int crewID = picture->getSnapmaticProperties().crewID;
     if (crewID != 0) { crewDB->addCrew(crewID); }
 
-    QObject::connect(threadDB, SIGNAL(playerNameFound(int, QString)), profileDB, SLOT(setPlayerName(int, QString)));
+    QObject::connect(threadDB, SIGNAL(crewNameUpdated()), &picDialog, SLOT(crewNameUpdated()));
     QObject::connect(threadDB, SIGNAL(playerNameUpdated()), &picDialog, SLOT(playerNameUpdated()));
 
 #ifdef Q_OS_ANDROID
@@ -492,7 +496,11 @@ void UserInterface::openSavegameFile(SavegameData *savegame)
 
 void UserInterface::settingsApplied(int _contentMode, QString _language)
 {
-    language = _language;
+    if (language != _language)
+    {
+        retranslateUi();
+        language = _language;
+    }
     contentMode = _contentMode;
     if (profileOpen)
     {
@@ -525,5 +533,20 @@ void UserInterface::on_action_Disable_In_game_triggered()
     if (profileOpen)
     {
         profileUI->disableSelected();
+    }
+}
+
+void UserInterface::retranslateUi()
+{
+    ui->retranslateUi(this);
+    ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
+    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+    if (profileOpen)
+    {
+        this->setWindowTitle(defaultWindowTitle.arg(profileName));
+    }
+    else
+    {
+        this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     }
 }

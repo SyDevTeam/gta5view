@@ -26,6 +26,8 @@
 #include <QImage>
 #include <QFile>
 
+enum class SnapmaticFormat : int { Auto_Format = 0, PGTA_Format = 1, JPEG_Format = 2, G5E_Format = 3 };
+
 struct SnapmaticProperties {
     struct SnapmaticLocation {
         QString area;
@@ -58,7 +60,7 @@ public:
     bool readingPicture(bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
     bool isPicOk();
     void clearCache();
-    QImage getImage();
+    QImage getImage(bool fastLoad = false);
     QString getLastStep();
     QString getPictureStr();
     QString getPictureHead();
@@ -76,7 +78,7 @@ public:
     void emitUpdate();
 
     // FILE MANAGEMENT
-    bool exportPicture(const QString &fileName, const QString format = "PGTA");
+    bool exportPicture(const QString &fileName, SnapmaticFormat format = SnapmaticFormat::Auto_Format);
     void setPicFileName(const QString &picFileName);
     void setPicFilePath(const QString &picFilePath);
     bool deletePicFile();
@@ -92,6 +94,7 @@ public:
     QString getJsonStr();
     SnapmaticProperties getSnapmaticProperties();
     bool setSnapmaticProperties(SnapmaticProperties newSpJson);
+    bool setJsonStr(const QString &jsonStr);
 
     // VISIBILITY
     bool isHidden();
@@ -100,6 +103,10 @@ public:
 
     // PREDEFINED PROPERTIES
     QSize getSnapmaticResolution();
+
+    // SNAPMATIC DEFAULTS
+    bool isSnapmaticDefaultsEnforced();
+    void setSnapmaticDefaultsEnforced(bool enforced);
 
     // VERIFY CONTENT
     static bool verifyTitle(const QString &title);
@@ -124,6 +131,7 @@ private:
     bool cacheEnabled;
     bool isLoadedInRAM;
     bool isCustomFormat;
+    bool careSnapDefault;
     int jpegRawContentSize;
     int jpegRawContentSizeE;
 

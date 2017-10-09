@@ -20,6 +20,7 @@
 #include "SnapmaticPicture.h"
 #include "SavegameData.h"
 #include "CrewDatabase.h"
+#include <QStringBuilder>
 #include <QStringList>
 #include <QString>
 #include <QFile>
@@ -43,7 +44,7 @@ void ProfileLoader::run()
     QStringList BackupFiles = SavegameFiles.filter(".bak", Qt::CaseInsensitive);
     profileDir.setNameFilters(QStringList("PGTA*"));
     QStringList SnapmaticPics = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
-    BackupFiles.append(SnapmaticPics.filter(".bak", Qt::CaseInsensitive));
+    BackupFiles += SnapmaticPics.filter(".bak", Qt::CaseInsensitive);
 
     SavegameFiles.removeDuplicates();
     SnapmaticPics.removeDuplicates();
@@ -60,7 +61,7 @@ void ProfileLoader::run()
     foreach(const QString &SavegameFile, SavegameFiles)
     {
         emit loadingProgress(curFile, maximumV);
-        QString sgdPath = profileFolder + QDir::separator() + SavegameFile;
+        QString sgdPath = profileFolder % QDir::separator() % SavegameFile;
         SavegameData *savegame = new SavegameData(sgdPath);
         if (savegame->readingSavegame())
         {
@@ -71,7 +72,7 @@ void ProfileLoader::run()
     foreach(const QString &SnapmaticPic, SnapmaticPics)
     {
         emit loadingProgress(curFile, maximumV);
-        QString picturePath = profileFolder + QDir::separator() + SnapmaticPic;
+        QString picturePath = profileFolder % QDir::separator() % SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
         if (picture->readingPicture(true, true, true))
         {
@@ -79,17 +80,19 @@ void ProfileLoader::run()
             int crewNumber = picture->getSnapmaticProperties().crewID;
             if (!crewList.contains(crewNumber))
             {
-                crewList.append(crewNumber);
+                crewList += crewNumber;
             }
         }
         curFile++;
     }
 
     // adding found crews
+    crewDB->setAddingCrews(true);
     foreach(int crewID, crewList)
     {
         crewDB->addCrew(crewID);
     }
+    crewDB->setAddingCrews(false);
 }
 
 void ProfileLoader::preloaded()

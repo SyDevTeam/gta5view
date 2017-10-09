@@ -18,6 +18,7 @@
 
 #ifndef CONFIG_H
 #define CONFIG_H
+#include <QtGlobal>
 #include <QString>
 
 #ifndef GTA5SYNC_APPVENDOR
@@ -50,9 +51,51 @@
 
 #ifndef GTA5SYNC_APPVER
 #ifndef GTA5SYNC_DAILYB
-#define GTA5SYNC_APPVER "1.4.4"
+#define GTA5SYNC_APPVER "1.5.0-dev1"
 #else
-#define GTA5SYNC_APPVER QString("%1").arg(GTA5SYNC_DAILYB)
+#define GTA5SYNC_APPVER GTA5SYNC_DAILYB
+#endif
+#endif
+
+#ifdef GTA5SYNC_BUILDTYPE_REL
+#ifndef GTA5SYNC_BUILDTYPE
+#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Release")
+#endif
+#endif
+
+#ifdef GTA5SYNC_BUILDTYPE_RC
+#ifndef GTA5SYNC_BUILDTYPE
+#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Release Candidate")
+#endif
+#endif
+
+#ifdef GTA5SYNC_BUILDTYPE_DAILY
+#ifndef GTA5SYNC_BUILDTYPE
+#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Daily Build")
+#endif
+#endif
+
+#ifdef GTA5SYNC_BUILDTYPE_DEV
+#ifndef GTA5SYNC_BUILDTYPE
+#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Developer")
+#endif
+#endif
+
+#ifdef GTA5SYNC_BUILDTYPE_BETA
+#ifndef GTA5SYNC_BUILDTYPE
+#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Beta")
+#endif
+#endif
+
+#ifdef GTA5SYNC_BUILDTYPE_ALPHA
+#ifndef GTA5SYNC_BUILDTYPE
+#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Alpha")
+#endif
+#endif
+
+#ifdef GTA5SYNC_DAILYB
+#ifndef GTA5SYNC_BUILDTYPE
+#define GTA5SYNC_BUILDTYPE "Daily Build"
 #endif
 #endif
 
@@ -60,16 +103,33 @@
 #define GTA5SYNC_BUILDTYPE "Custom"
 #endif
 
+#ifdef GTA5SYNC_QCONF
 #ifndef GTA5SYNC_SHARE
-#define GTA5SYNC_SHARE "$RUNDIR"
+#define GTA5SYNC_SHARE "RUNDIR:SEPARATOR:..SEPARATOR:share"
+#endif
+#ifndef GTA5SYNC_LANG
+#define GTA5SYNC_LANG "QCONFLANG:"
+#endif
+#ifndef GTA5SYNC_PLUG
+#define GTA5SYNC_PLUG "QCONFPLUG:"
+#endif
+#ifdef GTA5SYNC_QCONF_IN
+#ifndef GTA5SYNC_INLANG
+#define GTA5SYNC_INLANG ":/tr"
+#endif
+#endif
+#endif
+
+#ifndef GTA5SYNC_SHARE
+#define GTA5SYNC_SHARE "RUNDIR:"
 #endif
 
 #ifndef GTA5SYNC_LANG
-#define GTA5SYNC_LANG "$SHAREDIR$SEPARATORlang"
+#define GTA5SYNC_LANG "SHAREDDIR:SEPARATOR:lang"
 #endif
 
 #ifndef GTA5SYNC_PLUG
-#define GTA5SYNC_PLUG "$RUNDIR$SEPARATORplugins"
+#define GTA5SYNC_PLUG "RUNDIR:SEPARATOR:plugins"
 #endif
 
 #ifdef GTA5SYNC_WINRT
@@ -91,11 +151,11 @@
 #endif
 
 #ifndef GTA5SYNC_BUILDDATETIME
-#define GTA5SYNC_BUILDDATETIME QString("%1, %2").arg(__DATE__, __TIME__);
+#define GTA5SYNC_BUILDDATETIME QString("%1, %2").arg(__DATE__, __TIME__)
 #endif
 
 #ifndef GTA5SYNC_BUILDSTRING
-#define GTA5SYNC_BUILDSTRING QString("%1, %2").arg(QT_VERSION_STR, GTA5SYNC_COMPILER);
+#define GTA5SYNC_BUILDSTRING QString("%1, %2").arg(QT_VERSION_STR, GTA5SYNC_COMPILER)
 #endif
 
 #endif // CONFIG_H

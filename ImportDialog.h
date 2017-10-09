@@ -35,16 +35,16 @@ public:
     QImage image();
     QString getImageTitle();
     void setImage(const QImage &image);
-    bool isDoImport();
+    bool isImportAgreed();
 
 private slots:
     void processImage();
-    void on_rbIgnore_clicked();
-    void on_rbKeep_clicked();
-    void on_cbAvatar_clicked();
+    void on_cbIgnore_toggled(bool checked);
+    void on_cbAvatar_toggled(bool checked);
     void on_cmdCancel_clicked();
     void on_cmdOK_clicked();
     void on_labPicture_labelPainted();
+    void on_cmdColourChange_clicked();
 
 private:
     Ui::ImportDialog *ui;
@@ -52,7 +52,9 @@ private:
     QString imageTitle;
     QImage workImage;
     QImage newImage;
-    bool doImport;
+    QColor selectedColour;
+    bool insideAvatarZone;
+    bool importAgreed;
     int snapmaticResolutionLW;
     int snapmaticResolutionLH;
 };

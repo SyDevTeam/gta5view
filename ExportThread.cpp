@@ -23,6 +23,7 @@
 #include "ExportThread.h"
 #include "SavegameData.h"
 #include "config.h"
+#include <QStringBuilder>
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QFileInfo>
@@ -81,7 +82,7 @@ void ExportThread::run()
         {
             if (widget->getWidgetType() == "SnapmaticWidget")
             {
-                SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
+                SnapmaticWidget *picWidget = qobject_cast<SnapmaticWidget*>(widget);
                 SnapmaticPicture *picture = picWidget->getPicture();
 
                 if (pictureExportEnabled)
@@ -89,7 +90,7 @@ void ExportThread::run()
                     QString exportFileName = PictureExport::getPictureFileName(picture);
                     if (exportFileName.right(4) != ".jpg" && exportFileName.right(4) != ".png")
                     {
-                        exportFileName.append(".jpg");
+                        exportFileName += ".jpg";
                     }
 
                     intExportProgress++;
@@ -100,7 +101,7 @@ void ExportThread::run()
                     QImage exportPicture = picture->getImage();
                     if (sizeMode == "Desktop")
                     {
-                        QRect desktopResolution = QApplication::desktop()->screenGeometry();
+                        QRect desktopResolution = qApp->desktop()->screenGeometry();
                         exportPicture = exportPicture.scaled(desktopResolution.width(), desktopResolution.height(), aspectRatio, Qt::SmoothTransformation);
                     }
                     else if (sizeMode == "Custom")
@@ -111,16 +112,16 @@ void ExportThread::run()
                     bool isSaved;
                     if (useCustomQuality)
                     {
-                        isSaved = exportPicture.save(exportDirectory + "/" + exportFileName, "JPEG", customQuality);
+                        isSaved = exportPicture.save(exportDirectory % "/" % exportFileName, "JPEG", customQuality);
                     }
                     else
                     {
-                        isSaved = exportPicture.save(exportDirectory + "/" + exportFileName, "JPEG", 100);
+                        isSaved = exportPicture.save(exportDirectory % "/" % exportFileName, "JPEG", 100);
                     }
 
                     if (!isSaved)
                     {
-                        failedExportPictures.append(exportFileName);
+                        failedExportPictures += exportFileName;
                     }
                 }
                 if (pictureCopyEnabled)
@@ -128,24 +129,24 @@ void ExportThread::run()
                     QString exportFileName = PictureExport::getPictureFileName(picture);
                     if (exportFileName.right(4) != ".g5e")
                     {
-                        exportFileName.append(".g5e");
+                        exportFileName += ".g5e";
                     }
 
                     intExportProgress++;
                     emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
                     emit exportProgressUpdate(intExportProgress);
 
-                    QString exportFilePath = exportDirectory + "/" + exportFileName;
+                    QString exportFilePath = exportDirectory % "/" % exportFileName;
                     if (QFile::exists(exportFilePath)) {QFile::remove(exportFilePath);}
-                    if (!picture->exportPicture(exportDirectory + "/" + exportFileName, "G5E"))
+                    if (!picture->exportPicture(exportDirectory % "/" % exportFileName, SnapmaticFormat::G5E_Format))
                     {
-                        failedCopyPictures.append(exportFileName);
+                        failedCopyPictures += exportFileName;
                     }
                 }
             }
             else if (widget->getWidgetType() == "SavegameWidget")
             {
-                SavegameWidget *sgdWidget = (SavegameWidget*)widget;
+                SavegameWidget *sgdWidget = qobject_cast<SavegameWidget*>(widget);
                 SavegameData *savegame = sgdWidget->getSavegame();
 
                 QString originalFileName = savegame->getSavegameFileName();
@@ -156,11 +157,11 @@ void ExportThread::run()
                 emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
                 emit exportProgressUpdate(intExportProgress);
 
-                QString exportFilePath = exportDirectory + "/" + exportFileName;
+                QString exportFilePath = exportDirectory % "/" % exportFileName;
                 if (QFile::exists(exportFilePath)) {QFile::remove(exportFilePath);}
                 if (!QFile::copy(originalFileName, exportFilePath))
                 {
-                    failedSavegames.append(exportFileName);
+                    failedSavegames += exportFileName;
                 }
             }
         }

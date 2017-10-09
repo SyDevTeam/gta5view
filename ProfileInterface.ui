@@ -195,7 +195,7 @@
         </sizepolicy>
        </property>
        <property name="toolTip">
-        <string>Import exported file</string>
+        <string>Import file</string>
        </property>
        <property name="text">
         <string>&amp;Import...</string>

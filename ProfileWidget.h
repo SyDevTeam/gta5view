@@ -32,6 +32,7 @@ public:
     virtual bool isSelected();
     virtual QString getWidgetType();
     virtual int getContentMode();
+    virtual void retranslate();
     ~ProfileWidget();
 
 private:

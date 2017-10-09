@@ -19,10 +19,13 @@
 #include "ImportDialog.h"
 #include "ui_ImportDialog.h"
 #include "AppEnv.h"
+#include <QColorDialog>
+#include <QMessageBox>
 #include <QPainter>
 #include <QPixmap>
 #include <QImage>
 #include <QDebug>
+#include <QRgb>
 
 // IMAGES VALUES
 #define snapmaticResolutionW 960
@@ -36,8 +39,10 @@ ImportDialog::ImportDialog(QWidget *parent) :
     ui(new Ui::ImportDialog)
 {
     ui->setupUi(this);
-    doImport = false;
+    importAgreed = false;
+    insideAvatarZone = false;
     avatarAreaImage = QImage(":/img/avatarareaimport.png");
+    selectedColour = QColor::fromRgb(0, 0, 0, 255);
 
     if (QIcon::hasThemeIcon("dialog-ok"))
     {
@@ -48,7 +53,8 @@ ImportDialog::ImportDialog(QWidget *parent) :
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
 
-    ui->rbKeep->setChecked(true);
+    ui->cbIgnore->setChecked(false);
+    ui->labColour->setText(tr("Background Colour: <span style=\"color: %1\">%1</span>").arg(selectedColour.name()));
 
     qreal screenRatio = AppEnv::screenRatio();
     snapmaticResolutionLW = 430 * screenRatio;
@@ -69,14 +75,14 @@ void ImportDialog::processImage()
 {
     QImage snapmaticImage = workImage;
     QPixmap snapmaticPixmap(snapmaticResolutionW, snapmaticResolutionH);
-    snapmaticPixmap.fill(Qt::black);
+    snapmaticPixmap.fill(selectedColour);
     QPainter snapmaticPainter(&snapmaticPixmap);
-    if (ui->cbAvatar->isChecked())
+    if (insideAvatarZone)
     {
         // Avatar mode
         int diffWidth = 0;
         int diffHeight = 0;
-        if (ui->rbKeep->isChecked())
+        if (!ui->cbIgnore->isChecked())
         {
             snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
             if (snapmaticImage.width() > snapmaticImage.height())
@@ -102,7 +108,7 @@ void ImportDialog::processImage()
         // Picture mode
         int diffWidth = 0;
         int diffHeight = 0;
-        if (ui->rbKeep->isChecked())
+        if (!ui->cbIgnore->isChecked())
         {
             snapmaticImage = snapmaticImage.scaled(snapmaticResolutionW, snapmaticResolutionH, Qt::KeepAspectRatio, Qt::SmoothTransformation);
             if (snapmaticImage.width() != snapmaticResolutionW)
@@ -138,14 +144,15 @@ void ImportDialog::setImage(const QImage &image_)
     workImage = image_;
     if (workImage.width() == workImage.height())
     {
+        insideAvatarZone = true;
         ui->cbAvatar->setChecked(true);
     }
     processImage();
 }
 
-bool ImportDialog::isDoImport()
+bool ImportDialog::isImportAgreed()
 {
-    return doImport;
+    return importAgreed;
 }
 
 QString ImportDialog::getImageTitle()
@@ -153,18 +160,24 @@ QString ImportDialog::getImageTitle()
     return imageTitle;
 }
 
-void ImportDialog::on_rbIgnore_clicked()
+void ImportDialog::on_cbIgnore_toggled(bool checked)
 {
+    Q_UNUSED(checked)
     processImage();
 }
 
-void ImportDialog::on_rbKeep_clicked()
+void ImportDialog::on_cbAvatar_toggled(bool checked)
 {
-    processImage();
-}
-
-void ImportDialog::on_cbAvatar_clicked()
-{
+    if (workImage.width() == workImage.height() && !checked)
+    {
+        if (QMessageBox::No == QMessageBox::warning(this, tr("Snapmatic Avatar Zone"), tr("Are you sure to use a square image outside of the Avatar Zone?\nWhen you want to use it as Avatar the image will be detached!"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
+        {
+            ui->cbAvatar->setChecked(true);
+            insideAvatarZone = true;
+            return;
+        }
+    }
+    insideAvatarZone = ui->cbAvatar->isChecked();
     processImage();
 }
 
@@ -175,16 +188,32 @@ void ImportDialog::on_cmdCancel_clicked()
 
 void ImportDialog::on_cmdOK_clicked()
 {
-    doImport = true;
+    importAgreed = true;
     close();
 }
 
 void ImportDialog::on_labPicture_labelPainted()
 {
-    if (ui->cbAvatar->isChecked())
+    if (insideAvatarZone)
     {
+        QImage avatarAreaFinalImage(avatarAreaImage);
+        if (selectedColour.lightness() > 127)
+        {
+            avatarAreaFinalImage.setColor(1, qRgb(0, 0, 0));
+        }
         QPainter labelPainter(ui->labPicture);
-        labelPainter.drawImage(0, 0, avatarAreaImage.scaled(snapmaticResolutionLW, snapmaticResolutionLH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+        labelPainter.drawImage(0, 0, avatarAreaFinalImage.scaled(snapmaticResolutionLW, snapmaticResolutionLH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         labelPainter.end();
+    }
+}
+
+void ImportDialog::on_cmdColourChange_clicked()
+{
+    QColor newSelectedColour = QColorDialog::getColor(selectedColour, this, tr("Select Colour..."));
+    if (newSelectedColour.isValid())
+    {
+        selectedColour = newSelectedColour;
+        ui->labColour->setText(tr("Background Colour: <span style=\"color: %1\">%1</span>").arg(selectedColour.name()));
+        processImage();
     }
 }

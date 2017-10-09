@@ -18,6 +18,7 @@
 
 #include "StringParser.h"
 #include "SavegameData.h"
+#include <QStringBuilder>
 #include <QTextCodec>
 #include <QByteArray>
 #include <QDebug>
@@ -41,7 +42,7 @@ bool SavegameData::readingSavegame()
     QFile *saveFile = new QFile(savegameFileName);
     if (!saveFile->open(QFile::ReadOnly))
     {
-        lastStep = "1;/1,OpenFile," + StringParser::convertDrawStringForLog(savegameFileName);
+        lastStep = "1;/1,OpenFile," % StringParser::convertDrawStringForLog(savegameFileName);
         saveFile->deleteLater();
         delete saveFile;
         return false;
@@ -50,7 +51,7 @@ bool SavegameData::readingSavegame()
     // Reading Savegame Header
     if (!saveFile->isReadable())
     {
-        lastStep = "2;/3,ReadingFile," + StringParser::convertDrawStringForLog(savegameFileName) + ",1,NOHEADER";
+        lastStep = "2;/3,ReadingFile," % StringParser::convertDrawStringForLog(savegameFileName) % ",1,NOHEADER";
         saveFile->close();
         saveFile->deleteLater();
         delete saveFile;

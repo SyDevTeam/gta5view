@@ -38,6 +38,7 @@
 #include <QPushButton>
 #include <QSpacerItem>
 #include <QMessageBox>
+#include <QMouseEvent>
 #include <QFileDialog>
 #include <QEventLoop>
 #include <QScrollBar>
@@ -64,13 +65,14 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     enabledPicStr = tr("Enabled pictures: %1 of %2");
     selectedWidgts = 0;
     profileFolder = "";
-    profileLoader = 0;
-    saSpacerItem = 0;
+    contextMenuOpened = false;
+    isProfileLoaded = false;
+    previousWidget = nullptr;
+    profileLoader = nullptr;
+    saSpacerItem = nullptr;
 
-    QPalette palette;
-    QColor baseColor = palette.base().color();
-    ui->labVersion->setText(ui->labVersion->text().arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
-    ui->saProfile->setStyleSheet(QString("QWidget#saProfileContent{background-color: rgb(%1, %2, %3)}").arg(QString::number(baseColor.red()),QString::number(baseColor.green()),QString::number(baseColor.blue())));
+    updatePalette();
+    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
     ui->saProfileContent->setFilesMode(true);
 
     if (QIcon::hasThemeIcon("dialog-close"))
@@ -87,6 +89,9 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui->hlButtons->setSpacing(6 * screenRatio);
     ui->hlButtons->setContentsMargins(9 * screenRatio, 15 * screenRatio, 15 * screenRatio, 17 * screenRatio);
 #endif
+
+    setMouseTracking(true);
+    installEventFilter(this);
 }
 
 ProfileInterface::~ProfileInterface()
@@ -94,6 +99,8 @@ ProfileInterface::~ProfileInterface()
     foreach(ProfileWidget *widget, widgets.keys())
     {
         widgets.remove(widget);
+        widget->removeEventFilter(this);
+        widget->disconnect();
         delete widget;
     }
     foreach(SavegameData *savegame, savegames)
@@ -138,6 +145,8 @@ void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePa
     SavegameWidget *sgdWidget = new SavegameWidget(this);
     sgdWidget->setSavegameData(savegame, savegamePath);
     sgdWidget->setContentMode(contentMode);
+    sgdWidget->setMouseTracking(true);
+    sgdWidget->installEventFilter(this);
     widgets[sgdWidget] = "SGD" % QFileInfo(savegamePath).fileName();
     savegames += savegame;
     if (selectedWidgts != 0 || contentMode == 2) { sgdWidget->setSelectionMode(true); }
@@ -160,6 +169,8 @@ void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, bool inserted)
     SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, crewDB, threadDB, this);
     picWidget->setSnapmaticPicture(picture);
     picWidget->setContentMode(contentMode);
+    picWidget->setMouseTracking(true);
+    picWidget->installEventFilter(this);
     widgets[picWidget] = "PIC" % picture->getPictureSortStr();
     pictures += picture;
     if (selectedWidgts != 0 || contentMode == 2) { picWidget->setSelectionMode(true); }
@@ -183,7 +194,7 @@ void ProfileInterface::loadingProgress(int value, int maximum)
 
 void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 {
-    ProfileWidget *proWidget = (ProfileWidget*)widget;
+    ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(widget);
     if (widgets.contains(proWidget))
     {
         QString widgetKey = widgets[proWidget];
@@ -204,7 +215,7 @@ void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 
 void ProfileInterface::insertSavegameIPI(QWidget *widget)
 {
-    ProfileWidget *proWidget = (ProfileWidget*)widget;
+    ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(widget);
     if (widgets.contains(proWidget))
     {
         QString widgetKey = widgets[proWidget];
@@ -221,8 +232,8 @@ void ProfileInterface::insertSavegameIPI(QWidget *widget)
 
 void ProfileInterface::dialogNextPictureRequested(QWidget *dialog)
 {
-    PictureDialog *picDialog = (PictureDialog*)dialog;
-    ProfileWidget *proWidget = (ProfileWidget*)sender();
+    PictureDialog *picDialog = qobject_cast<PictureDialog*>(dialog);
+    ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(sender());
     if (widgets.contains(proWidget))
     {
         QString widgetKey = widgets[proWidget];
@@ -256,8 +267,8 @@ void ProfileInterface::dialogNextPictureRequested(QWidget *dialog)
 
 void ProfileInterface::dialogPreviousPictureRequested(QWidget *dialog)
 {
-    PictureDialog *picDialog = (PictureDialog*)dialog;
-    ProfileWidget *proWidget = (ProfileWidget*)sender();
+    PictureDialog *picDialog = qobject_cast<PictureDialog*>(dialog);
+    ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(sender());
     if (widgets.contains(proWidget))
     {
         QString widgetKey = widgets[proWidget];
@@ -324,12 +335,13 @@ void ProfileInterface::profileLoaded_p()
     ui->swProfile->setCurrentWidget(ui->pageProfile);
     ui->cmdCloseProfile->setEnabled(true);
     ui->cmdImport->setEnabled(true);
+    isProfileLoaded = true;
     emit profileLoaded();
 }
 
 void ProfileInterface::savegameDeleted_event()
 {
-    savegameDeleted((SavegameWidget*)sender(), true);
+    savegameDeleted(qobject_cast<SavegameWidget*>(sender()), true);
 }
 
 void ProfileInterface::savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteEmited)
@@ -338,13 +350,21 @@ void ProfileInterface::savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteE
     if (sgdWidget->isSelected()) { sgdWidget->setSelected(false); }
     widgets.remove(sgdWidget);
 
+    sgdWidget->removeEventFilter(this);
+    if (sgdWidget == previousWidget)
+    {
+        previousWidget = nullptr;
+    }
+
     // Deleting when the widget did send a event cause a crash
     if (isRemoteEmited)
     {
+        sgdWidget->disconnect();
         sgdWidget->deleteLater();
     }
     else
     {
+        sgdWidget->disconnect();
         delete sgdWidget;
     }
 
@@ -354,7 +374,7 @@ void ProfileInterface::savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteE
 
 void ProfileInterface::pictureDeleted_event()
 {
-    pictureDeleted((SnapmaticWidget*)sender(), true);
+    pictureDeleted(qobject_cast<SnapmaticWidget*>(sender()), true);
 }
 
 void ProfileInterface::pictureDeleted(SnapmaticWidget *picWidget, bool isRemoteEmited)
@@ -363,13 +383,21 @@ void ProfileInterface::pictureDeleted(SnapmaticWidget *picWidget, bool isRemoteE
     if (picWidget->isSelected()) { picWidget->setSelected(false); }
     widgets.remove(picWidget);
 
+    picWidget->removeEventFilter(this);
+    if (picWidget == previousWidget)
+    {
+        previousWidget = nullptr;
+    }
+
     // Deleting when the widget did send a event cause a crash
     if (isRemoteEmited)
     {
+        picWidget->disconnect();
         picWidget->deleteLater();
     }
     else
     {
+        picWidget->disconnect();
         delete picWidget;
     }
 
@@ -398,12 +426,24 @@ fileDialogPreOpen: //Work?
     fileDialog.setWindowTitle(tr("Import..."));
     fileDialog.setLabelText(QFileDialog::Accept, tr("Import"));
 
+    // Getting readable Image formats
+    QString imageFormatsStr = " ";
+    foreach(const QByteArray &imageFormat, QImageReader::supportedImageFormats())
+    {
+        imageFormatsStr += QString("*.") % QString::fromUtf8(imageFormat).toLower() % " ";
+    }
+    QString importableFormatsStr = QString("*.g5e SGTA* PGTA*");
+    if (!imageFormatsStr.trimmed().isEmpty())
+    {
+        importableFormatsStr = QString("*.g5e%1SGTA* PGTA*").arg(imageFormatsStr);
+    }
+
     QStringList filters;
-    filters << tr("Importable files (*.g5e *.jpg *.png SGTA* PGTA*)");
+    filters << tr("Importable files (%1)").arg(importableFormatsStr);
     filters << tr("GTA V Export (*.g5e)");
     filters << tr("Savegames files (SGTA*)");
     filters << tr("Snapmatic pictures (PGTA*)");
-    filters << tr("All image files (*.jpg *.png)");
+    filters << tr("All image files (%1)").arg(imageFormatsStr.trimmed());
     filters << tr("All files (**)");
     fileDialog.setNameFilters(filters);
 
@@ -520,7 +560,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                 return false;
             }
         }
-        else if(selectedFileName.right(4) == ".jpg" || selectedFileName.right(4) == ".png")
+        else if(isSupportedImageFile(selectedFileName))
         {
             SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
             if (picture->readingPicture(true, false, true, false))
@@ -631,6 +671,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                     snapmaticImageReader.setDevice(&snapmaticFile);
                     if (!snapmaticImageReader.read(&snapmaticImage))
                     {
+                        QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
                         delete picture;
                         return false;
                     }
@@ -640,7 +681,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                     importDialog->setModal(true);
                     importDialog->show();
                     importDialog->exec();
-                    if (importDialog->isDoImport())
+                    if (importDialog->isImportAgreed())
                     {
                         if (picture->setImage(importDialog->image()))
                         {
@@ -705,9 +746,13 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
             }
             else
             {
-                delete savegame;
+#ifdef GTA5SYNC_DEBUG
+                qDebug() << "ImportError SnapmaticPicture" << picture->getLastStep();
+                qDebug() << "ImportError SavegameData" << savegame->getLastStep();
+#endif
                 delete picture;
-                if (notMultiple) QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because of not valid file format").arg("\""+selectedFileName+"\""));
+                delete savegame;
+                if (notMultiple) QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file format can't be detected").arg("\""+selectedFileName+"\""));
                 return false;
             }
         }
@@ -738,7 +783,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
         if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, the picture is already in the game"));
         return false;
     }
-    else if (picture->exportPicture(profileFolder % QDir::separator() % adjustedFileName, "PGTA"))
+    else if (picture->exportPicture(profileFolder % QDir::separator() % adjustedFileName, SnapmaticFormat::PGTA_Format))
     {
         picture->setPicFilePath(profileFolder % QDir::separator() % adjustedFileName);
         pictureLoaded(picture, true);
@@ -914,8 +959,10 @@ void ProfileInterface::exportSelected()
                 }
                 else
                 {
-                    pictureExportEnabled = true;
-                    pictureCopyEnabled = true;
+                    // Don't export anymore when any Cancel button got clicked
+                    settings.endGroup();
+                    settings.endGroup();
+                    return;
                 }
             }
 
@@ -934,7 +981,7 @@ void ProfileInterface::exportSelected()
             QProgressDialog pbDialog(this);
             pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
             pbDialog.setWindowTitle(tr("Export selected..."));
-            pbDialog.setLabelText(tr("Initializing export..."));
+            pbDialog.setLabelText(tr("Initialising export..."));
             pbDialog.setRange(0, exportCount);
 
             QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
@@ -1003,7 +1050,7 @@ void ProfileInterface::deleteSelected()
                 {
                     if (widget->getWidgetType() == "SnapmaticWidget")
                     {
-                        SnapmaticWidget *picWidget = (SnapmaticWidget*)widget;
+                        SnapmaticWidget *picWidget = qobject_cast<SnapmaticWidget*>(widget);
                         if (picWidget->getPicture()->deletePicFile())
                         {
                             pictureDeleted(picWidget);
@@ -1011,7 +1058,7 @@ void ProfileInterface::deleteSelected()
                     }
                     else if (widget->getWidgetType() == "SavegameWidget")
                     {
-                        SavegameWidget *sgdWidget = (SavegameWidget*)widget;
+                        SavegameWidget *sgdWidget = qobject_cast<SavegameWidget*>(widget);
                         SavegameData *savegame = sgdWidget->getSavegame();
                         QString fileName = savegame->getSavegameFileName();
                         if (!QFile::exists(fileName) || QFile::remove(fileName))
@@ -1038,9 +1085,15 @@ void ProfileInterface::importFiles()
     on_cmdImport_clicked();
 }
 
-void ProfileInterface::settingsApplied(int _contentMode, QString language)
+void ProfileInterface::settingsApplied(int _contentMode, QString _language)
 {
-    Q_UNUSED(language)
+    bool translationUpdated = false;
+    if (language != _language)
+    {
+        retranslateUi();
+        language = _language;
+        translationUpdated = true;
+    }
     contentMode = _contentMode;
 
     if (contentMode == 2)
@@ -1049,6 +1102,7 @@ void ProfileInterface::settingsApplied(int _contentMode, QString language)
         {
             widget->setSelectionMode(true);
             widget->setContentMode(contentMode);
+            if (translationUpdated) widget->retranslate();
         }
     }
     else
@@ -1060,6 +1114,7 @@ void ProfileInterface::settingsApplied(int _contentMode, QString language)
                 widget->setSelectionMode(false);
             }
             widget->setContentMode(contentMode);
+            if (translationUpdated) widget->retranslate();
         }
     }
 }
@@ -1073,7 +1128,7 @@ void ProfileInterface::enableSelected()
         {
             if (widget->getWidgetType() == "SnapmaticWidget")
             {
-                SnapmaticWidget *snapmaticWidget = (SnapmaticWidget*)widget;
+                SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
                 if (!snapmaticWidget->makePictureVisible())
                 {
                     fails++;
@@ -1092,7 +1147,7 @@ void ProfileInterface::disableSelected()
         {
             if (widget->getWidgetType() == "SnapmaticWidget")
             {
-                SnapmaticWidget *snapmaticWidget = (SnapmaticWidget*)widget;
+                SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
                 if (!snapmaticWidget->makePictureHidden())
                 {
                     fails++;
@@ -1109,7 +1164,16 @@ int ProfileInterface::selectedWidgets()
 
 void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
 {
-    SnapmaticWidget *picWidget = (SnapmaticWidget*)sender();
+    SnapmaticWidget *picWidget = qobject_cast<SnapmaticWidget*>(sender());
+    if (picWidget != previousWidget)
+    {
+        if (previousWidget != nullptr)
+        {
+            previousWidget->setStyleSheet(QLatin1String(""));
+        }
+        picWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+        previousWidget = picWidget;
+    }
     QMenu contextMenu(picWidget);
     QMenu editMenu(SnapmaticWidget::tr("Edi&t"), picWidget);
     if (picWidget->isHidden())
@@ -1122,8 +1186,8 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
     }
     editMenu.addAction(SnapmaticWidget::tr("&Edit Properties..."), picWidget, SLOT(editSnapmaticProperties()));
     QMenu exportMenu(SnapmaticWidget::tr("&Export"), this);
-    exportMenu.addAction(SnapmaticWidget::tr("Export as &JPG picture..."), picWidget, SLOT(on_cmdExport_clicked()));
-    exportMenu.addAction(SnapmaticWidget::tr("Export as &GTA Snapmatic..."), picWidget, SLOT(on_cmdCopy_clicked()));
+    exportMenu.addAction(SnapmaticWidget::tr("Export as &Picture..."), picWidget, SLOT(on_cmdExport_clicked()));
+    exportMenu.addAction(SnapmaticWidget::tr("Export as &Snapmatic..."), picWidget, SLOT(on_cmdCopy_clicked()));
     contextMenu.addAction(SnapmaticWidget::tr("&View"), picWidget, SLOT(on_cmdView_clicked()));
     contextMenu.addMenu(&editMenu);
     contextMenu.addMenu(&exportMenu);
@@ -1139,12 +1203,24 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
     {
         contextMenu.addAction(SnapmaticWidget::tr("&Deselect All"), picWidget, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
     }
+    contextMenuOpened = true;
     contextMenu.exec(ev->globalPos());
+    contextMenuOpened = false;
+    hoverProfileWidgetCheck();
 }
 
 void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
 {
-    SavegameWidget *sgdWidget = (SavegameWidget*)sender();
+    SavegameWidget *sgdWidget = qobject_cast<SavegameWidget*>(sender());
+    if (sgdWidget != previousWidget)
+    {
+        if (previousWidget != nullptr)
+        {
+            previousWidget->setStyleSheet(QLatin1String(""));
+        }
+        sgdWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+        previousWidget = sgdWidget;
+    }
     QMenu contextMenu(sgdWidget);
     contextMenu.addAction(SavegameWidget::tr("&View"), sgdWidget, SLOT(on_cmdView_clicked()));
     contextMenu.addAction(SavegameWidget::tr("&Export"), sgdWidget, SLOT(on_cmdCopy_clicked()));
@@ -1160,7 +1236,10 @@ void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
     {
         contextMenu.addAction(SavegameWidget::tr("&Deselect All"), sgdWidget, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
     }
+    contextMenuOpened = true;
     contextMenu.exec(ev->globalPos());
+    contextMenuOpened = false;
+    hoverProfileWidgetCheck();
 }
 
 void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
@@ -1186,4 +1265,201 @@ void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
     {
         importFilesProgress(pathList);
     }
+}
+
+void ProfileInterface::retranslateUi()
+{
+    ui->retranslateUi(this);
+    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+}
+
+bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
+{
+    if (event->type() == QEvent::MouseMove)
+    {
+        if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
+        {
+            ProfileWidget *pWidget = qobject_cast<ProfileWidget*>(watched);
+            if (pWidget->underMouse())
+            {
+                bool styleSheetChanged = false;
+                if (pWidget->getWidgetType() == "SnapmaticWidget")
+                {
+                    if (pWidget != previousWidget)
+                    {
+                        pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                        styleSheetChanged = true;
+                    }
+                }
+                else if (pWidget->getWidgetType() == "SavegameWidget")
+                {
+                    if (pWidget != previousWidget)
+                    {
+                        pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                        styleSheetChanged = true;
+                    }
+                }
+                if (styleSheetChanged)
+                {
+                    if (previousWidget != nullptr)
+                    {
+                        previousWidget->setStyleSheet(QLatin1String(""));
+                    }
+                    previousWidget = pWidget;
+                }
+            }
+            return true;
+        }
+    }
+    else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::WindowActivate)
+    {
+        if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
+        {
+            ProfileWidget *pWidget = nullptr;
+            foreach(ProfileWidget *widget, widgets.keys())
+            {
+                QPoint mousePos = widget->mapFromGlobal(QCursor::pos());
+                if (widget->rect().contains(mousePos))
+                {
+                    pWidget = widget;
+                    break;
+                }
+            }
+            if (pWidget != nullptr)
+            {
+                bool styleSheetChanged = false;
+                if (pWidget->getWidgetType() == "SnapmaticWidget")
+                {
+                    if (pWidget != previousWidget)
+                    {
+                        pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                        styleSheetChanged = true;
+                    }
+                }
+                else if (pWidget->getWidgetType() == "SavegameWidget")
+                {
+                    if (pWidget != previousWidget)
+                    {
+                        pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                        styleSheetChanged = true;
+                    }
+                }
+                if (styleSheetChanged)
+                {
+                    if (previousWidget != nullptr)
+                    {
+                        previousWidget->setStyleSheet(QLatin1String(""));
+                    }
+                    previousWidget = pWidget;
+                }
+            }
+        }
+    }
+    else if (event->type() == QEvent::WindowDeactivate && isProfileLoaded)
+    {
+        if (previousWidget != nullptr)
+        {
+            previousWidget->setStyleSheet(QLatin1String(""));
+            previousWidget = nullptr;
+        }
+    }
+    else if (event->type() == QEvent::Leave && isProfileLoaded && !contextMenuOpened)
+    {
+        if (watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget")
+        {
+            ProfileWidget *pWidget = qobject_cast<ProfileWidget*>(watched);
+            QPoint mousePos = pWidget->mapFromGlobal(QCursor::pos());
+            if (!pWidget->geometry().contains(mousePos))
+            {
+                if (previousWidget != nullptr)
+                {
+                    previousWidget->setStyleSheet(QLatin1String(""));
+                    previousWidget = nullptr;
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void ProfileInterface::hoverProfileWidgetCheck()
+{
+    ProfileWidget *pWidget = nullptr;
+    foreach(ProfileWidget *widget, widgets.keys())
+    {
+        if (widget->underMouse())
+        {
+            pWidget = widget;
+            break;
+        }
+    }
+    if (pWidget != nullptr)
+    {
+        bool styleSheetChanged = false;
+        if (pWidget->getWidgetType() == "SnapmaticWidget")
+        {
+            if (pWidget != previousWidget)
+            {
+                pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                styleSheetChanged = true;
+            }
+        }
+        else if (pWidget->getWidgetType() == "SavegameWidget")
+        {
+            if (pWidget != previousWidget)
+            {
+                pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                styleSheetChanged = true;
+            }
+        }
+        if (styleSheetChanged)
+        {
+            if (previousWidget != nullptr)
+            {
+                previousWidget->setStyleSheet(QLatin1String(""));
+            }
+            previousWidget = pWidget;
+        }
+    }
+    else
+    {
+        if (previousWidget != nullptr)
+        {
+            previousWidget->setStyleSheet(QLatin1String(""));
+            previousWidget = nullptr;
+        }
+    }
+}
+
+void ProfileInterface::updatePalette()
+{
+    QPalette palette;
+    QColor baseColor = palette.base().color();
+    highlightBackColor = palette.highlight().color();
+    highlightTextColor = palette.highlightedText().color();
+    ui->saProfile->setStyleSheet(QString("QWidget#saProfileContent{background-color: rgb(%1, %2, %3)}").arg(QString::number(baseColor.red()), QString::number(baseColor.green()), QString::number(baseColor.blue())));
+    if (previousWidget != nullptr)
+    {
+        if (previousWidget->getWidgetType() == "SnapmaticWidget")
+        {
+            previousWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+        }
+        else if (previousWidget->getWidgetType() == "SavegameWidget")
+        {
+            previousWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+        }
+    }
+}
+
+bool ProfileInterface::isSupportedImageFile(QString selectedFileName)
+{
+    foreach(const QByteArray &imageFormat, QImageReader::supportedImageFormats())
+    {
+        QString imageFormatStr = QString(".") % QString::fromUtf8(imageFormat).toLower();
+        if (selectedFileName.length() >= imageFormatStr.length() && selectedFileName.toLower().right(imageFormatStr.length()) == imageFormatStr)
+        {
+            return true;
+        }
+    }
+    return false;
 }

@@ -50,6 +50,7 @@ public:
     QString getWidgetType();
     bool isSelected();
     bool isHidden();
+    void retranslate();
     ~SnapmaticWidget();
 
 private slots:
@@ -70,7 +71,6 @@ private slots:
     void snapmaticUpdated();
 
 protected:
-    bool eventFilter(QObject *obj, QEvent *ev);
     void mouseDoubleClickEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
@@ -82,13 +82,7 @@ private:
     DatabaseThread *threadDB;
     Ui::SnapmaticWidget *ui;
     SnapmaticPicture *smpic;
-    QColor highlightBackColor;
-    QColor highlightTextColor;
     QColor highlightHiddenColor;
-    QString picPath;
-    QString picTitl;
-    QString picStr;
-    QWidget *snwgt;
 
 signals:
     void pictureDeleted();

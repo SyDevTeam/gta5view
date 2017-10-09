@@ -1,0 +1,27 @@
+# Auto detect text files and perform LF normalization
+* text=auto eol=lf
+
+# Development files
+*.cpp text eol=lf
+*.h text eol=lf
+*.ui text eol=lf
+*.qrc text eol=lf
+
+# Development resources
+*.ini text eol=lf
+
+# Linux development files
+*.desktop text eol=lf
+
+# Windows development files
+*.rc text eol=crlf
+*.exe.manifest text eol=crlf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.qm binary
+*.ico binary
+*.icns binary
+*.xcf binary
+*.g5e binary

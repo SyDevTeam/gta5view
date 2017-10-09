@@ -50,15 +50,18 @@ public:
     void disableSelected();
     void enableSelected();
     int selectedWidgets();
+    void retranslateUi();
     ~ProfileInterface();
 
 public slots:
     void contextMenuTriggeredPIC(QContextMenuEvent* ev);
     void contextMenuTriggeredSGD(QContextMenuEvent* ev);
+    void hoverProfileWidgetCheck();
     void selectAllWidgets();
     void deselectAllWidgets();
     void exportSelected();
     void deleteSelected();
+    void updatePalette();
     void importFiles();
 
 private slots:
@@ -76,6 +79,9 @@ private slots:
     void dialogPreviousPictureRequested(QWidget *dialog);
     void on_saProfileContent_dropped(const QMimeData *mimeData);
 
+protected:
+    bool eventFilter(QObject *watched, QEvent *event);
+
 private:
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
@@ -83,17 +89,24 @@ private:
     Ui::ProfileInterface *ui;
 
     ProfileLoader *profileLoader;
+    ProfileWidget *previousWidget;
     QList<SavegameData*> savegames;
     QList<SnapmaticPicture*> pictures;
     QMap<ProfileWidget*,QString> widgets;
     QSpacerItem *saSpacerItem;
+    QColor highlightBackColor;
+    QColor highlightTextColor;
     QString enabledPicStr;
     QString profileFolder;
     QString profileName;
     QString loadingStr;
+    QString language;
+    bool contextMenuOpened;
+    bool isProfileLoaded;
     int selectedWidgts;
     int contentMode;
 
+    bool isSupportedImageFile(QString selectedFileName);
     bool importFile(QString selectedFile, bool notMultiple);
     void importFilesProgress(QStringList selectedFiles);
     bool importSnapmaticPicture(SnapmaticPicture *picture, bool warn = true);

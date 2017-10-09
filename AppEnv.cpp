@@ -21,6 +21,7 @@
 #include "StringParser.h"
 #include "StandardPaths.h"
 #include <QtGlobal>
+#include <QStringBuilder>
 #include <QDesktopWidget>
 #include <QApplication>
 #include <QSettings>
@@ -53,7 +54,7 @@ QString AppEnv::getGameFolder(bool *ok)
         }
     }
 
-    QString GTAV_defaultFolder = StandardPaths::documentsLocation() + QDir::separator() + "Rockstar Games" + QDir::separator() + "GTA V";
+    QString GTAV_defaultFolder = StandardPaths::documentsLocation() % QDir::separator() % "Rockstar Games" % QDir::separator() % "GTA V";
     QString GTAV_returnFolder = GTAV_defaultFolder;
 
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
@@ -108,14 +109,31 @@ bool AppEnv::setGameFolder(QString gameFolder)
     return false;
 }
 
-QString AppEnv::getLangFolder()
+QString AppEnv::getExLangFolder()
 {
-    return StringParser::convertBuildedString(QString::fromUtf8(GTA5SYNC_LANG));
+    return StringParser::convertBuildedString(GTA5SYNC_LANG);
+}
+
+QString AppEnv::getInLangFolder()
+{
+#ifdef GTA5SYNC_QCONF
+#ifdef GTA5SYNC_INLANG
+    return StringParser::convertBuildedString(GTA5SYNC_INLANG);
+#else
+    return StringParser::convertBuildedString(GTA5SYNC_SHARE % QLatin1String("SEPARATOR:APPNAME:SEPARATOR:translations"));
+#endif
+#else
+#ifdef GTA5SYNC_INLANG
+    return StringParser::convertBuildedString(GTA5SYNC_INLANG);
+#else
+    return QString(":/tr");
+#endif
+#endif
 }
 
 QString AppEnv::getPluginsFolder()
 {
-    return StringParser::convertBuildedString(QString::fromUtf8(GTA5SYNC_PLUG));
+    return StringParser::convertBuildedString(GTA5SYNC_PLUG);
 }
 
 // Web Stuff
@@ -138,6 +156,11 @@ QUrl AppEnv::getCrewFetchingUrl(QString crewID)
 QUrl AppEnv::getPlayerFetchingUrl(QString crewID, QString pageNumber)
 {
     return QUrl(QString("https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=%1&pageNumber=%2").arg(crewID, pageNumber));
+}
+
+QUrl AppEnv::getPlayerFetchingUrl(QString crewID, int pageNumber)
+{
+    return getPlayerFetchingUrl(crewID, QString::number(pageNumber));
 }
 
 qreal AppEnv::screenRatio()

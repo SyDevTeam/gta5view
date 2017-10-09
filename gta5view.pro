@@ -27,6 +27,10 @@ DEPLOYMENT.display_name = gta5view
 TARGET = gta5view
 TEMPLATE = app
 
+DEFINES += GTA5SYNC_CSDF # Not assisting at proper usage of SnapmaticPicture class
+HEADERS += config.h
+PRECOMPILED_HEADER += config.h
+
 SOURCES += main.cpp \
     AboutDialog.cpp \
     AppEnv.cpp \
@@ -37,6 +41,7 @@ SOURCES += main.cpp \
     GlobalString.cpp \
     IconLoader.cpp \
     ImportDialog.cpp \
+    MapPreviewDialog.cpp \
     OptionsDialog.cpp \
     PictureDialog.cpp \
     PictureExport.cpp \
@@ -55,6 +60,7 @@ SOURCES += main.cpp \
     SnapmaticWidget.cpp \
     StandardPaths.cpp \
     StringParser.cpp \
+    TranslationClass.cpp \
     UserInterface.cpp \
     uimod/UiModLabel.cpp \
     uimod/UiModWidget.cpp
@@ -69,6 +75,7 @@ HEADERS  += \
     GlobalString.h \
     IconLoader.h \
     ImportDialog.h \
+    MapPreviewDialog.h \
     OptionsDialog.h \
     PictureDialog.h \
     PictureExport.h \
@@ -87,16 +94,16 @@ HEADERS  += \
     SnapmaticWidget.h \
     StandardPaths.h \
     StringParser.h \
+    TranslationClass.h \
     UserInterface.h \
     uimod/UiModLabel.h \
     uimod/UiModWidget.h
-
-PRECOMPILED_HEADER += config.h
 
 FORMS    += \
     AboutDialog.ui \
     ExportDialog.ui \
     ImportDialog.ui \
+    MapPreviewDialog.ui \
     OptionsDialog.ui \
     PictureDialog.ui \
     ProfileInterface.ui \
@@ -107,21 +114,24 @@ FORMS    += \
     UserInterface.ui
 
 TRANSLATIONS += \
+    res/gta5sync_en_US.ts \
     res/gta5sync_de.ts \
     res/gta5sync_fr.ts \
-    res/gta5sync_ru.ts
+    res/gta5sync_ru.ts \
+    lang/gta5sync_no.ts
 
 RESOURCES += \
     res/tr_g5p.qrc \
     res/app.qrc
 
 DISTFILES += res/app.rc \
-    res/gta5sync.desktop \
+    res/gta5view.desktop \
     res/gta5sync_de.ts \
     res/gta5sync_fr.ts \
     res/gta5sync_ru.ts \
     res/gta5view.exe.manifest \
     res/gta5view.png \
+    lang/gta5sync_no.ts \
     lang/README.txt
 
 INCLUDEPATH += ./uimod
@@ -159,14 +169,28 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
 isEqual(QT_MAJOR_VERSION, 4): RESOURCES += res/tr_qt4.qrc
 
 # QT5 ONLY STUFF
-
 isEqual(QT_MAJOR_VERSION, 5): RESOURCES += res/tr_qt5.qrc
 
-# UNIX SYSTEM STUFF
+# PROJECT INSTALLATION
 
-unix: !macx: appfiles.path = $$(INSTALL_PATH)/share/applications
-unix: !macx: appfiles.files = $$PWD/res/gta5view.desktop
-unix: !macx: pixmaps.path = $$(INSTALL_PATH)/share/pixmaps
-unix: !macx: pixmaps.files = $$PWD/res/gta5view.png
-unix: !macx: target.path = $$(INSTALL_PATH)/bin
-unix: !macx: INSTALLS += target pixmaps appfiles
+isEmpty(GTA5SYNC_PREFIX): GTA5SYNC_PREFIX = /usr/local
+
+appfiles.path = $$GTA5SYNC_PREFIX/share/applications
+appfiles.files = $$PWD/res/gta5view.desktop
+pixmaps.path = $$GTA5SYNC_PREFIX/share/pixmaps
+pixmaps.files = $$PWD/res/gta5view.png
+target.path = $$GTA5SYNC_PREFIX/bin
+INSTALLS += target pixmaps appfiles
+
+# QCONF BASED BUILD STUFF
+
+contains(DEFINES, GTA5SYNC_QCONF){
+    isEqual(QT_MAJOR_VERSION, 4): RESOURCES -= res/tr_qt4.qrc
+    isEqual(QT_MAJOR_VERSION, 5): RESOURCES -= res/tr_qt5.qrc
+    !contains(DEFINES, GTA5SYNC_QCONF_IN){
+        RESOURCES -= res/tr_g5p.qrc
+        langfiles.path = $$GTA5SYNC_PREFIX/share/gta5view/translations
+        langfiles.files = $$PWD/res/gta5sync_en_US.qm $$PWD/res/gta5sync_de.qm $$PWD/res/gta5sync_fr.qm $$PWD/res/gta5sync_ru.qm $$PWD/res/qtbase_en_GB.qm
+        INSTALLS += langfiles
+    }
+}

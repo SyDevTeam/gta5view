@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/tr">
+        <file>gta5sync_en_US.qm</file>
         <file>gta5sync_de.qm</file>
         <file>gta5sync_fr.qm</file>
         <file>gta5sync_ru.qm</file>
