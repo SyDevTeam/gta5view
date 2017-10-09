@@ -362,10 +362,10 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
             {
                 if (appTranslator->load(langPath % QDir::separator() % "gta5sync_" % langList.at(0) % ".qm"))
                 {
-                    isEnglishMode = false;
 #ifdef GTA5SYNC_DEBUG
                     qDebug() << "loadLanguageFileSuccess" << QString(langPath % QDir::separator() % "gta5sync_" % langList.at(0) % ".qm");
 #endif
+                    isEnglishMode = false;
                     currentLanguage = languageName;
                     currentLangIndex = currentLangCounter;
                     return true;
