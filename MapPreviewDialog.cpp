@@ -22,9 +22,6 @@
 #include "AppEnv.h"
 #include <QPainter>
 #include <QDebug>
-#ifdef __MINGW32__
-#include <cmath>
-#endif
 
 MapPreviewDialog::MapPreviewDialog(QWidget *parent) :
     QDialog(parent),
@@ -55,14 +52,14 @@ void MapPreviewDialog::drawPointOnMap(double xpos_d, double ypos_d)
     QSize mapPixelSize = size();
 
     int pointMakerHalfSize = pointMakerSize / 2;
-    long xpos_ms = std::round(xpos_d);
-    long ypos_ms = std::round(ypos_d);
+    long xpos_ms = qRound(xpos_d);
+    long ypos_ms = qRound(ypos_d);
     double xpos_ma = xpos_ms + 4000;
     double ypos_ma = ypos_ms + 4000;
     double xrat = (double)mapPixelSize.width() / 10000;
     double yrat = (double)mapPixelSize.height() / 12000;
-    long xpos_mp = std::round(xpos_ma * xrat);
-    long ypos_mp = std::round(ypos_ma * yrat);
+    long xpos_mp =  qRound(xpos_ma * xrat);
+    long ypos_mp =  qRound(ypos_ma * yrat);
     long xpos_pr = xpos_mp - pointMakerHalfSize;
     long ypos_pr = ypos_mp + pointMakerHalfSize;
 
