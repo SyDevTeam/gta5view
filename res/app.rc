@@ -25,12 +25,12 @@ BEGIN
         BEGIN
             VALUE   "CompanyName",      "Syping"
             VALUE   "FileDescription",  "gta5view\0"
-            VALUE   "FileVersion",      "1.5.0\0"
+            VALUE   "FileVersion",      "1.5.0-alpha11\0"
             VALUE   "InternalName",     "gta5view\0"
             VALUE   "LegalCopyright",   "Copyright © 2016-2017 Syping\0"
             VALUE   "OriginalFilename", "gta5view.exe\0"
             VALUE   "ProductName",      "gta5view\0"
-            VALUE   "ProductVersion",   "1.5.0\0"
+            VALUE   "ProductVersion",   "1.5.0-alpha11\0"
         END
     END
 END
