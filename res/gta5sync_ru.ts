@@ -145,38 +145,39 @@ Grand Theft Auto V Snapmatic картинок и сохранений</translati
     <message>
         <location filename="../config.h" line="61"/>
         <source>Release</source>
-        <translation type="unfinished"></translation>
+        <translation>Релиз</translation>
     </message>
     <message>
         <location filename="../config.h" line="67"/>
         <source>Release Candidate</source>
-        <translation type="unfinished"></translation>
+        <translation>Предварительный выпуск</translation>
     </message>
     <message>
         <location filename="../config.h" line="73"/>
         <location filename="../config.h" line="97"/>
         <source>Daily Build</source>
-        <translation type="unfinished"></translation>
+        <translation>Дневная сборка</translation>
     </message>
     <message>
         <location filename="../config.h" line="79"/>
         <source>Developer</source>
-        <translation type="unfinished"></translation>
+        <translation>Разработчик</translation>
     </message>
     <message>
         <location filename="../config.h" line="85"/>
         <source>Beta</source>
-        <translation type="unfinished"></translation>
+        <translation>Бета</translation>
     </message>
     <message>
         <location filename="../config.h" line="91"/>
         <source>Alpha</source>
-        <translation type="unfinished"></translation>
+        <translation>Альфа</translation>
     </message>
     <message>
         <location filename="../config.h" line="102"/>
         <source>Custom</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Не известен контекст</translatorcomment>
+        <translation>Своя</translation>
     </message>
 </context>
 <context>
@@ -233,12 +234,12 @@ Grand Theft Auto V Snapmatic картинок и сохранений</translati
     <message>
         <location filename="../ExportDialog.ui" line="100"/>
         <source>Custom Size:</source>
-        <translation>Другой размер:</translation>
+        <translation>Размер:</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="123"/>
         <source>x</source>
-        <translation>x</translation>
+        <translation>на</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="198"/>
@@ -282,7 +283,7 @@ Grand Theft Auto V Snapmatic картинок и сохранений</translati
     <message>
         <location filename="../ImportDialog.ui" line="148"/>
         <source>Ignore Aspect Ratio</source>
-        <translation>Игнорировать соотношение сторон</translation>
+        <translation>Игнорировать соотн. сторон</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="135"/>
@@ -294,17 +295,17 @@ Grand Theft Auto V Snapmatic картинок и сохранений</translati
         <location filename="../ImportDialog.cpp" line="57"/>
         <location filename="../ImportDialog.cpp" line="216"/>
         <source>Background Colour: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</source>
-        <translation type="unfinished"></translation>
+        <translation>Цвет фона: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="105"/>
         <source>...</source>
-        <translation type="unfinished">...</translation>
+        <translation>...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="194"/>
         <source>Import picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортировать картинку</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="197"/>
@@ -314,7 +315,7 @@ Grand Theft Auto V Snapmatic картинок и сохранений</translati
     <message>
         <location filename="../ImportDialog.ui" line="210"/>
         <source>Discard picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Отклонить картинку</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="213"/>
@@ -326,17 +327,17 @@ Grand Theft Auto V Snapmatic картинок и сохранений</translati
         <location filename="../ImportDialog.cpp" line="173"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
-        <translation type="unfinished"></translation>
+        <translation>Ты точно хочешь использовать квадратное изображение вне зоны аватарки? Если это аватар, то изображение будет обрезано!</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="173"/>
         <source>Snapmatic Avatar Zone</source>
-        <translation type="unfinished"></translation>
+        <translation>Зона Snapmatic Аватарки</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="212"/>
         <source>Select Colour...</source>
-        <translation type="unfinished"></translation>
+        <translation>Выбрать цвет...</translation>
     </message>
 </context>
 <context>
@@ -344,7 +345,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../MapPreviewDialog.ui" line="26"/>
         <source>Snapmatic Map Viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Просмотрщик карты Snapmatic</translation>
     </message>
 </context>
 <context>
@@ -499,7 +500,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../OptionsDialog.ui" line="463"/>
         <source>Apply changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Применить изменения</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="466"/>
@@ -510,7 +511,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../OptionsDialog.ui" line="479"/>
         <source>Discard changes</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвергнуть изменения</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="482"/>
@@ -533,7 +534,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <location filename="../OptionsDialog.cpp" line="132"/>
         <source>%1 (Next Closest Language)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="132"/>
@@ -550,7 +551,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../OptionsDialog.cpp" line="274"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
-        <translation type="unfinished"></translation>
+        <translation>Другая папка будет загружена после перезапуска %1.</translation>
     </message>
     <message>
         <source>The new Custom Folder will initialize after you restart %1.</source>
@@ -609,7 +610,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../PictureDialog.ui" line="180"/>
         <source>&amp;Manage</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Управление</translation>
     </message>
     <message>
         <source>&amp;Export</source>
@@ -618,12 +619,12 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../PictureDialog.ui" line="177"/>
         <source>Manage picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки картинки</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="199"/>
         <source>Close viewer</source>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть просмотрщик</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="202"/>
@@ -652,7 +653,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <location filename="../PictureDialog.cpp" line="145"/>
         <location filename="../ProfileInterface.cpp" line="1160"/>
         <source>Export as &amp;Picture...</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать как &amp;картинку...</translation>
     </message>
     <message>
         <source>Export as &amp;GTA Snapmatic...</source>
@@ -662,7 +663,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <location filename="../PictureDialog.cpp" line="146"/>
         <location filename="../ProfileInterface.cpp" line="1161"/>
         <source>Export as &amp;Snapmatic...</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать как &amp;Snapmatic...</translation>
     </message>
     <message>
         <source>Edi&amp;t</source>
@@ -671,13 +672,13 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../PictureDialog.cpp" line="148"/>
         <source>Open &amp;Map View...</source>
-        <translation type="unfinished"></translation>
+        <translation>Открыть &amp;карту...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="150"/>
         <location filename="../ProfileInterface.cpp" line="1158"/>
         <source>&amp;Edit Properties...</source>
-        <translation type="unfinished">&amp;Изменить свойства...</translation>
+        <translation>&amp;Изменить свойства...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="373"/>
@@ -710,7 +711,7 @@ Arrow Keys - Navigate</source>
         <location filename="../PictureDialog.cpp" line="475"/>
         <location filename="../PictureDialog.cpp" line="614"/>
         <source>No Players</source>
-        <translation type="unfinished"></translation>
+        <translation>Игроков нет</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="560"/>
@@ -766,12 +767,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../PictureExport.cpp" line="95"/>
         <source>Export as Picture...</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт как картинку...</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="99"/>
         <source>JPEG Graphics (*.jpg *.jpeg)</source>
-        <translation type="unfinished"></translation>
+        <translation>Картинка JPEG (*.jpg *.jpeg)</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="150"/>
@@ -781,27 +782,27 @@ Press 1 for Default View</source>
         <location filename="../PictureExport.cpp" line="211"/>
         <location filename="../PictureExport.cpp" line="218"/>
         <source>Export as Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспорт как картинку</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="202"/>
         <source>Failed to export the picture because the system occurred a write failure</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось экспортировать картинку из-за ошибки системы при записи</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="205"/>
         <source>Failed to export the picture because the format detection failures</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось экспортировать картинку, потому что произошла ошибка при распозновании формата</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="208"/>
         <source>Failed to export the picture because the file can&apos;t be written</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось экспортировать картинку, так как файл не может быть записан</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="211"/>
         <source>Failed to export the picture because of an unknown reason</source>
-        <translation type="unfinished"></translation>
+        <translation>Не удалось экспортировать картинку по неизвестной причине</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="296"/>
@@ -812,7 +813,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../PictureExport.cpp" line="248"/>
         <source>Export as Snapmatic...</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать как Snapmatic...</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="285"/>
@@ -821,7 +822,7 @@ Press 1 for Default View</source>
         <location filename="../PictureExport.cpp" line="310"/>
         <location filename="../PictureExport.cpp" line="316"/>
         <source>Export as Snapmatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Экспортировать как Snapmatic</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="310"/>
@@ -886,7 +887,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.ui" line="198"/>
         <source>Import file</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортировать файл</translation>
     </message>
     <message>
         <source>Import exported file</source>
@@ -1019,22 +1020,22 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="427"/>
         <source>Importable files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Файлы для импорта (%1)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="431"/>
         <source>All image files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>Все файлы изображений (%1)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="659"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
-        <translation type="unfinished"></translation>
+        <translation>Не получилось импортировать %1, файл не может быть правильно обработан</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="740"/>
         <source>Can&apos;t import %1 because file format can&apos;t be detected</source>
-        <translation type="unfinished"></translation>
+        <translation>Не получилось импортировать %1, не удалось определить формат файла</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="755"/>
@@ -1082,7 +1083,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="962"/>
         <source>Initialising export...</source>
-        <translation type="unfinished"></translation>
+        <translation>Подготовка к экспорту...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1015"/>
@@ -1310,7 +1311,7 @@ Press 1 for Default View</source>
         <location filename="../SavegameWidget.cpp" line="131"/>
         <location filename="../SavegameWidget.cpp" line="144"/>
         <source>Delete Savegame</source>
-        <translation type="unfinished"></translation>
+        <translation>Удалить сохранение</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="144"/>
@@ -1479,7 +1480,7 @@ Press 1 for Default View</source>
         <location filename="../SnapmaticEditor.cpp" line="189"/>
         <location filename="../SnapmaticEditor.cpp" line="193"/>
         <source>Appropriate: %1</source>
-        <translation>Разумные: %1</translation>
+        <translation>Подходит: %1</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="149"/>
@@ -1489,12 +1490,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticEditor.ui" line="155"/>
         <source>Qualify as Avatar automatically at apply</source>
-        <translation>При применении автоматически классифицировать как аватар</translation>
+        <translation>При применении настроек пометить как аватар</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="168"/>
         <source>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</source>
-        <translation>C классификацией аватара можно использовать этот Snapmatic в профиле на Social Club</translation>
+        <translation>C меткой аватара можно загрузить эту картинку Snapmatic в профиль на Social Club</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="218"/>
@@ -1699,13 +1700,13 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="131"/>
         <source>Reload profile overview</source>
-        <translation type="unfinished"></translation>
+        <translation>Перезагрузить обзор профилей</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="150"/>
         <source>Close %1</source>
         <extracomment>Close %1 &lt;- (gta5view/gta5sync) - %1 will be replaced automatically</extracomment>
-        <translation type="unfinished"></translation>
+        <translation>Закрыть %1</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="179"/>
