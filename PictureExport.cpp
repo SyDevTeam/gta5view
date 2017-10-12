@@ -30,6 +30,10 @@
 #include <QRegExp>
 #include <QDebug>
 
+#if QT_VERSION >= 0x050000
+#include <QSaveFile>
+#endif
+
 PictureExport::PictureExport()
 {
 
@@ -76,6 +80,7 @@ void PictureExport::exportAsPicture(QWidget *parent, SnapmaticPicture *picture)
     // End Picture Settings
 
     settings.beginGroup("FileDialogs");
+    bool dontUseNativeDialog = settings.value("DontUseNativeDialog", false).toBool();
     settings.beginGroup("ExportAsPicture");
 
 fileDialogPreSave: //Work?
@@ -83,7 +88,7 @@ fileDialogPreSave: //Work?
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, false);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("suffix");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
@@ -99,7 +104,7 @@ fileDialogPreSave: //Work?
 
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::picturesLocation()).toString());
-    fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geomtery", "").toByteArray());
+    fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geometry", "").toByteArray());
 
     QString newPictureFileName = getPictureFileName(picture) % defaultExportFormat;
     fileDialog.selectFile(newPictureFileName);
@@ -142,15 +147,7 @@ fileDialogPreSave: //Work?
 
             if (QFile::exists(selectedFile))
             {
-                if (QMessageBox::Yes == QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-                {
-                    if (!QFile::remove(selectedFile))
-                    {
-                        QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
-                        goto fileDialogPreSave; //Work?
-                    }
-                }
-                else
+                if (QMessageBox::No == QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
                 {
                     goto fileDialogPreSave; //Work?
                 }
@@ -168,19 +165,51 @@ fileDialogPreSave: //Work?
                 exportPicture = exportPicture.scaled(cusExportSize, aspectRatio, Qt::SmoothTransformation);
             }
 
-            bool isSaved;
-            if (useCustomQuality)
+            int errorId = 0;
+            bool isSaved = false;
+#if QT_VERSION >= 0x050000
+            QSaveFile *picFile = new QSaveFile(selectedFile);
+#else
+            QFile *picFile = new QFile(selectedFile);
+#endif
+            if (picFile->open(QIODevice::WriteOnly))
             {
-                isSaved = exportPicture.save(selectedFile, saveFileFormat.toStdString().c_str(), customQuality);
+                isSaved = exportPicture.save(picFile, saveFileFormat.toStdString().c_str(), useCustomQuality ? customQuality : defaultQuality);
+#if QT_VERSION >= 0x050000
+                if (isSaved)
+                {
+                    isSaved = picFile->commit();
+                }
+                else
+                {
+                    errorId = 1;
+                }
+#else
+                picFile->close();
+#endif
             }
             else
             {
-                isSaved = exportPicture.save(selectedFile, saveFileFormat.toStdString().c_str(), 100);
+                errorId = 2;
             }
+            delete picFile;
 
             if (!isSaved)
             {
-                QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to export current Snapmatic picture"));
+                switch (errorId)
+                {
+                case 0:
+                    QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to export the picture because the system occurred a write failure"));
+                    break;
+                case 1:
+                    QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to export the picture because the format detection failures"));
+                    break;
+                case 2:
+                    QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to export the picture because the file can't be written"));
+                    break;
+                default:
+                    QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to export the picture because of an unknown reason"));
+                }
                 goto fileDialogPreSave; //Work?
             }
         }
@@ -201,13 +230,10 @@ void PictureExport::exportAsSnapmatic(QWidget *parent, SnapmaticPicture *picture
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("FileDialogs");
+    bool dontUseNativeDialog = settings.value("DontUseNativeDialog", false).toBool();
     settings.beginGroup("ExportAsSnapmatic");
 
-    QString adjustedPicPath = picture->getPictureFileName();
-    if (adjustedPicPath.right(7) == ".hidden") // for the hidden file system
-    {
-        adjustedPicPath.remove(adjustedPicPath.length() - 7, 7);
-    }
+    QString adjustedPicPath = picture->getOriginalPictureFileName();
 
 fileDialogPreSave: //Work?
     QFileInfo sgdFileInfo(adjustedPicPath);
@@ -215,7 +241,7 @@ fileDialogPreSave: //Work?
     fileDialog.setFileMode(QFileDialog::AnyFile);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptSave);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, false);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix(".rem");
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
@@ -232,9 +258,8 @@ fileDialogPreSave: //Work?
 
     fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::documentsLocation()).toString());
+    fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geometry", "").toByteArray());
     fileDialog.selectFile(QString(picture->getExportPictureFileName() % ".g5e"));
-    fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geomtery", "").toByteArray());
-
 
     if (fileDialog.exec())
     {
@@ -257,15 +282,7 @@ fileDialogPreSave: //Work?
 
             if (QFile::exists(selectedFile))
             {
-                if (QMessageBox::Yes == QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-                {
-                    if (!QFile::remove(selectedFile))
-                    {
-                        QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Failed to overwrite %1 with current Snapmatic picture").arg("\""+selectedFile+"\""));
-                        goto fileDialogPreSave; //Work?
-                    }
-                }
-                else
+                if (QMessageBox::No == QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
                 {
                     goto fileDialogPreSave; //Work?
                 }

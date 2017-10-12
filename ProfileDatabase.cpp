@@ -31,7 +31,7 @@ ProfileDatabase::ProfileDatabase(QObject *parent) : QObject(parent)
     dir.mkpath(StandardPaths::dataLocation());
     dir.setPath(StandardPaths::dataLocation());
     QString dirPath = dir.absolutePath();
-    QString defaultConfPath = dirPath % QDir::separator() % "players.ini";
+    QString defaultConfPath = dirPath % "/players.ini";
 
     QSettings confPathSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     confPathSettings.beginGroup("Database");

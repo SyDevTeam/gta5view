@@ -128,7 +128,7 @@ void SavegameWidget::on_cmdCopy_clicked()
 
 void SavegameWidget::on_cmdDelete_clicked()
 {
-    int uchoice = QMessageBox::question(this, tr("Delete savegame"), tr("Are you sure to delete %1 from your savegames?").arg("\""+sgdStr+"\""), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
+    int uchoice = QMessageBox::question(this, tr("Delete Savegame"), tr("Are you sure to delete %1 from your savegames?").arg("\""+sgdStr+"\""), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
     if (uchoice == QMessageBox::Yes)
     {
         if (!QFile::exists(sgdPath))
@@ -141,7 +141,7 @@ void SavegameWidget::on_cmdDelete_clicked()
         }
         else
         {
-            QMessageBox::warning(this, tr("Delete savegame"), tr("Failed at deleting %1 from your savegames").arg("\""+sgdStr+"\""));
+            QMessageBox::warning(this, tr("Delete Savegame"), tr("Failed at deleting %1 from your savegames").arg("\""+sgdStr+"\""));
         }
     }
 }

@@ -171,17 +171,17 @@ void OptionsDialog::setupRadioButtons()
 
     if (contentModeOk)
     {
-        if (contentMode == 0)
+        switch (contentMode)
         {
+        case 0:
             ui->rbOpenWithSC->setChecked(true);
-        }
-        else if (contentMode == 1)
-        {
+            break;
+        case 1:
             ui->rbOpenWithDC->setChecked(true);
-        }
-        else if (contentMode == 2)
-        {
+            break;
+        case 2:
             ui->rbSelectWithSC->setChecked(true);
+            break;
         }
     }
 }
@@ -267,11 +267,7 @@ void OptionsDialog::applySettings()
         TCInstance->loadTranslation(qApp);
     }
 
-#if QT_VERSION >= 0x050000
-    emit settingsApplied(newContentMode, ui->cbLanguage->currentData().toString());
-#else
-    emit settingsApplied(newContentMode, ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString());
-#endif
+    emit settingsApplied(newContentMode, languageChanged);
 
     if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder))
     {

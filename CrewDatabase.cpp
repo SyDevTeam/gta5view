@@ -31,7 +31,7 @@ CrewDatabase::CrewDatabase(QObject *parent) : QObject(parent)
     dir.mkpath(StandardPaths::dataLocation());
     dir.setPath(StandardPaths::dataLocation());
     QString dirPath = dir.absolutePath();
-    QString defaultConfPath = dirPath % QDir::separator() % "crews.ini";
+    QString defaultConfPath = dirPath % "/crews.ini";
 
     QSettings confPathSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     confPathSettings.beginGroup("Database");

@@ -414,6 +414,7 @@ void ProfileInterface::on_cmdImport_clicked()
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("FileDialogs");
+    bool dontUseNativeDialog = settings.value("DontUseNativeDialog", false).toBool();
     settings.beginGroup("ImportCopy");
 
 fileDialogPreOpen: //Work?
@@ -421,7 +422,7 @@ fileDialogPreOpen: //Work?
     fileDialog.setFileMode(QFileDialog::ExistingFiles);
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
-    fileDialog.setOption(QFileDialog::DontUseNativeDialog, false);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
     fileDialog.setWindowTitle(tr("Import..."));
     fileDialog.setLabelText(QFileDialog::Accept, tr("Import"));
@@ -634,16 +635,16 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                     SnapmaticProperties spJson = picture->getSnapmaticProperties();
                     spJson.uid = QString(currentTime +
                                          QString::number(QDate::currentDate().dayOfYear())).toInt();
-                    bool fExists = QFile::exists(profileFolder % QDir::separator() % "PGTA5" % QString::number(spJson.uid));
-                    bool fExistsHidden = QFile::exists(profileFolder % QDir::separator() % "PGTA5" % QString::number(spJson.uid) % ".hidden");
+                    bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                    bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                     int cEnough = 0;
                     while ((fExists || fExistsHidden) && cEnough < 5000)
                     {
                         currentTime = QString::number(currentTime.toInt() - 1);
                         spJson.uid = QString(currentTime +
                                              QString::number(QDate::currentDate().dayOfYear())).toInt();
-                        fExists = QFile::exists(profileFolder % QDir::separator() % "PGTA5" % QString::number(spJson.uid));
-                        fExistsHidden = QFile::exists(profileFolder % QDir::separator() % "PGTA5" % QString::number(spJson.uid) % ".hidden");
+                        fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                        fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                         cEnough++;
                     }
                     spJson.createdDateTime = QDateTime::currentDateTime();
@@ -689,16 +690,16 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                             SnapmaticProperties spJson = picture->getSnapmaticProperties();
                             spJson.uid = QString(currentTime +
                                                  QString::number(QDate::currentDate().dayOfYear())).toInt();
-                            bool fExists = QFile::exists(profileFolder % QDir::separator() % "PGTA5" % QString::number(spJson.uid));
-                            bool fExistsHidden = QFile::exists(profileFolder % QDir::separator() % "PGTA5" % QString::number(spJson.uid) % ".hidden");
+                            bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                            bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                             int cEnough = 0;
                             while ((fExists || fExistsHidden) && cEnough < 25)
                             {
                                 currentTime = QString::number(currentTime.toInt() - 1);
                                 spJson.uid = QString(currentTime +
                                                      QString::number(QDate::currentDate().dayOfYear())).toInt();
-                                fExists = QFile::exists(profileFolder % QDir::separator() % "PGTA5" % QString::number(spJson.uid));
-                                fExistsHidden = QFile::exists(profileFolder % QDir::separator() % "PGTA5" % QString::number(spJson.uid) % ".hidden");
+                                fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                                fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                                 cEnough++;
                             }
                             spJson.createdDateTime = QDateTime::currentDateTime();
@@ -764,28 +765,20 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
 bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool warn)
 {
     QString picFileName = picture->getPictureFileName();
-    QString adjustedFileName = picFileName;
-    if (adjustedFileName.right(7) == ".hidden") // for the hidden file system
-    {
-        adjustedFileName.remove(adjustedFileName.length() - 7, 7);
-    }
-    if (adjustedFileName.right(4) == ".bak") // for the backup file system
-    {
-        adjustedFileName.remove(adjustedFileName.length() - 4, 4);
-    }
+    QString adjustedFileName = picture->getOriginalPictureFileName();
     if (picFileName.left(4) != "PGTA")
     {
         if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e"));
         return false;
     }
-    else if (QFile::exists(profileFolder % QDir::separator() % adjustedFileName) || QFile::exists(profileFolder % QDir::separator() % adjustedFileName % ".hidden"))
+    else if (QFile::exists(profileFolder % "/" % adjustedFileName) || QFile::exists(profileFolder % "/" % adjustedFileName % ".hidden"))
     {
         if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, the picture is already in the game"));
         return false;
     }
-    else if (picture->exportPicture(profileFolder % QDir::separator() % adjustedFileName, SnapmaticFormat::PGTA_Format))
+    else if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format))
     {
-        picture->setPicFilePath(profileFolder % QDir::separator() % adjustedFileName);
+        picture->setPicFilePath(profileFolder % "/" % adjustedFileName);
         pictureLoaded(picture, true);
         return true;
     }
@@ -811,7 +804,7 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         }
         sgdFileName = "SGTA500" % sgdNumber;
 
-        if (!QFile::exists(profileFolder % QDir::separator() % sgdFileName))
+        if (!QFile::exists(profileFolder % "/" % sgdFileName))
         {
             foundFree = true;
         }
@@ -820,10 +813,10 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
 
     if (foundFree)
     {
-        if (QFile::copy(sgdPath, profileFolder % QDir::separator() % sgdFileName))
+        if (QFile::copy(sgdPath, profileFolder % "/" % sgdFileName))
         {
-            savegame->setSavegameFileName(profileFolder % QDir::separator() % sgdFileName);
-            savegameLoaded(savegame, profileFolder % QDir::separator() % sgdFileName, true);
+            savegame->setSavegameFileName(profileFolder % "/" % sgdFileName);
+            savegameLoaded(savegame, profileFolder % "/" % sgdFileName, true);
             return true;
         }
         else
@@ -896,6 +889,7 @@ void ProfileInterface::exportSelected()
 
         QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
         settings.beginGroup("FileDialogs");
+        //bool dontUseNativeDialog = settings.value("DontUseNativeDialog", false).toBool();
         settings.beginGroup("ExportDirectory");
         QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected"), settings.value(profileName, profileFolder).toString());
         if (exportDirectory != "")
@@ -1085,24 +1079,17 @@ void ProfileInterface::importFiles()
     on_cmdImport_clicked();
 }
 
-void ProfileInterface::settingsApplied(int _contentMode, QString _language)
+void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
 {
-    bool translationUpdated = false;
-    if (language != _language)
-    {
-        retranslateUi();
-        language = _language;
-        translationUpdated = true;
-    }
+    if (languageChanged) retranslateUi();
     contentMode = _contentMode;
-
     if (contentMode == 2)
     {
         foreach(ProfileWidget *widget, widgets.keys())
         {
             widget->setSelectionMode(true);
             widget->setContentMode(contentMode);
-            if (translationUpdated) widget->retranslate();
+            if (languageChanged) widget->retranslate();
         }
     }
     else
@@ -1114,7 +1101,7 @@ void ProfileInterface::settingsApplied(int _contentMode, QString _language)
                 widget->setSelectionMode(false);
             }
             widget->setContentMode(contentMode);
-            if (translationUpdated) widget->retranslate();
+            if (languageChanged) widget->retranslate();
         }
     }
 }
@@ -1184,10 +1171,10 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
     {
         editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), picWidget, SLOT(makePictureHiddenSlot()));
     }
-    editMenu.addAction(SnapmaticWidget::tr("&Edit Properties..."), picWidget, SLOT(editSnapmaticProperties()));
+    editMenu.addAction(PictureDialog::tr("&Edit Properties..."), picWidget, SLOT(editSnapmaticProperties()));
     QMenu exportMenu(SnapmaticWidget::tr("&Export"), this);
-    exportMenu.addAction(SnapmaticWidget::tr("Export as &Picture..."), picWidget, SLOT(on_cmdExport_clicked()));
-    exportMenu.addAction(SnapmaticWidget::tr("Export as &Snapmatic..."), picWidget, SLOT(on_cmdCopy_clicked()));
+    exportMenu.addAction(PictureDialog::tr("Export as &Picture..."), picWidget, SLOT(on_cmdExport_clicked()));
+    exportMenu.addAction(PictureDialog::tr("Export as &Snapmatic..."), picWidget, SLOT(on_cmdCopy_clicked()));
     contextMenu.addAction(SnapmaticWidget::tr("&View"), picWidget, SLOT(on_cmdView_clicked()));
     contextMenu.addMenu(&editMenu);
     contextMenu.addMenu(&exportMenu);

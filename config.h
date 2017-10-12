@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5view Grand Theft Auto V Profile Viewer
+* gta5sync GRAND THEFT AUTO V SYNC
 * Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -18,7 +18,6 @@
 
 #ifndef CONFIG_H
 #define CONFIG_H
-#include <QtGlobal>
 #include <QString>
 
 #ifndef GTA5SYNC_APPVENDOR
@@ -95,12 +94,12 @@
 
 #ifdef GTA5SYNC_DAILYB
 #ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE "Daily Build"
+#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Daily Build")
 #endif
 #endif
 
 #ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE "Custom"
+#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Custom")
 #endif
 
 #ifdef GTA5SYNC_QCONF

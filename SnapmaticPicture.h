@@ -70,6 +70,8 @@ public:
     QString getPictureFileName();
     QString getPictureFilePath();
     QString getExportPictureFileName();
+    QString getOriginalPictureFileName();
+    QString getOriginalPictureFilePath();
     int getContentMaxLength();
     bool setImage(const QImage &picture);
     bool setPictureTitl(const QString &newTitle);

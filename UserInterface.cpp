@@ -132,7 +132,7 @@ void UserInterface::setupDirEnv()
     if (folderExists)
     {
         QDir GTAV_ProfilesDir;
-        GTAV_ProfilesFolder = GTAV_Folder % QDir::separator() % "Profiles";
+        GTAV_ProfilesFolder = GTAV_Folder % "/Profiles";
         GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
 
         GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
@@ -213,7 +213,7 @@ void UserInterface::openProfile(const QString &profileName_)
     ui->swProfile->addWidget(profileUI);
     ui->swProfile->setCurrentWidget(profileUI);
     profileUI->setProfileFolder(GTAV_ProfilesFolder % QDir::separator() % profileName, profileName);
-    profileUI->settingsApplied(contentMode, language);
+    profileUI->settingsApplied(contentMode, false);
     profileUI->setupProfileInterface();
     QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));
     QObject::connect(profileUI, SIGNAL(profileLoaded()), this, SLOT(profileLoaded()));
@@ -323,7 +323,7 @@ void UserInterface::on_actionOptions_triggered()
     OptionsDialog *optionsDialog = new OptionsDialog(profileDB, this);
     optionsDialog->setWindowIcon(windowIcon());
     optionsDialog->commitProfiles(GTAV_Profiles);
-    QObject::connect(optionsDialog, SIGNAL(settingsApplied(int, QString)), this, SLOT(settingsApplied(int, QString)));
+    QObject::connect(optionsDialog, SIGNAL(settingsApplied(int, bool)), this, SLOT(settingsApplied(int, bool)));
 
     optionsDialog->setModal(true);
 #ifdef Q_OS_ANDROID
@@ -494,17 +494,16 @@ void UserInterface::openSavegameFile(SavegameData *savegame)
     sgdDialog.exec();
 }
 
-void UserInterface::settingsApplied(int _contentMode, QString _language)
+void UserInterface::settingsApplied(int _contentMode, bool languageChanged)
 {
-    if (language != _language)
+    if (languageChanged)
     {
         retranslateUi();
-        language = _language;
     }
     contentMode = _contentMode;
     if (profileOpen)
     {
-        profileUI->settingsApplied(contentMode, language);
+        profileUI->settingsApplied(contentMode, languageChanged);
     }
 }
 

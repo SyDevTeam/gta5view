@@ -62,7 +62,7 @@ private slots:
     void on_actionSelect_GTA_Folder_triggered();
     void on_action_Enable_In_game_triggered();
     void on_action_Disable_In_game_triggered();
-    void settingsApplied(int contentMode, QString language);
+    void settingsApplied(int contentMode, bool languageChanged);
 
 protected:
     void closeEvent(QCloseEvent *ev);

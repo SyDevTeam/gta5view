@@ -21,13 +21,10 @@ QT       += core gui network
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: QT += winextras
 
-DEFINES += GTA5SYNC_DISABLED
-
 DEPLOYMENT.display_name = gta5view
 TARGET = gta5view
 TEMPLATE = app
 
-DEFINES += GTA5SYNC_CSDF # Not assisting at proper usage of SnapmaticPicture class
 HEADERS += config.h
 PRECOMPILED_HEADER += config.h
 
@@ -135,6 +132,12 @@ DISTFILES += res/app.rc \
     lang/README.txt
 
 INCLUDEPATH += ./uimod
+
+# GTA5SYNC/GTA5VIEW ONLY
+
+DEFINES += GTA5SYNC_DISABLED
+DEFINES += GTA5SYNC_PROJECT # Enable exclusive gta5sync/gta5view functions
+DEFINES += GTA5SYNC_CSDF # Not assisting at proper usage of SnapmaticPicture class
 
 # WINDOWS ONLY
 

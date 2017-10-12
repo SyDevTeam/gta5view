@@ -23,6 +23,8 @@
 #include <QStringBuilder>
 #include <QStringList>
 #include <QString>
+#include <QThread>
+#include <QList>
 #include <QFile>
 #include <QDir>
 
@@ -61,7 +63,7 @@ void ProfileLoader::run()
     foreach(const QString &SavegameFile, SavegameFiles)
     {
         emit loadingProgress(curFile, maximumV);
-        QString sgdPath = profileFolder % QDir::separator() % SavegameFile;
+        QString sgdPath = profileFolder % "/" % SavegameFile;
         SavegameData *savegame = new SavegameData(sgdPath);
         if (savegame->readingSavegame())
         {
@@ -72,7 +74,7 @@ void ProfileLoader::run()
     foreach(const QString &SnapmaticPic, SnapmaticPics)
     {
         emit loadingProgress(curFile, maximumV);
-        QString picturePath = profileFolder % QDir::separator() % SnapmaticPic;
+        QString picturePath = profileFolder % "/" % SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
         if (picture->readingPicture(true, true, true))
         {

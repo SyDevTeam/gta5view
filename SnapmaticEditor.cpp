@@ -225,22 +225,18 @@ void SnapmaticEditor::on_cmdApply_clicked()
     localSpJson.isMeme = ui->cbMeme->isChecked();
     if (smpic)
     {
-        QString originalFileName = smpic->getPictureFilePath();
-        QString adjustedFileName = originalFileName;
-        if (adjustedFileName.right(7) == ".hidden") // for the hidden file system
-        {
-            adjustedFileName.remove(adjustedFileName.length() - 7, 7);
-        }
-        QString backupFileName = adjustedFileName % ".bak";
+        QString currentFilePath = smpic->getPictureFilePath();
+        QString originalFilePath = smpic->getOriginalPictureFilePath();
+        QString backupFileName = originalFilePath % ".bak";
         if (!QFile::exists(backupFileName))
         {
-            QFile::copy(adjustedFileName, backupFileName);
+            QFile::copy(currentFilePath, backupFileName);
         }
         SnapmaticProperties fallbackProperties = smpic->getSnapmaticProperties();
         QString fallbackTitle = smpic->getPictureTitle();
         smpic->setSnapmaticProperties(localSpJson);
         smpic->setPictureTitle(snapmaticTitle);
-        if (!smpic->exportPicture(originalFileName))
+        if (!smpic->exportPicture(currentFilePath))
         {
             QMessageBox::warning(this, tr("Snapmatic Properties"), tr("Patching of Snapmatic Properties failed because of I/O Error"));
             smpic->setSnapmaticProperties(fallbackProperties);

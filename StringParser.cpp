@@ -17,18 +17,19 @@
 *****************************************************************************/
 
 #include "StringParser.h"
-#include "config.h"
 #include <QTextDocument>
 #include <QLibraryInfo>
-#ifndef GTA5VIEW_CMD
-#include <QApplication>
-#endif
 #include <QTextCodec>
 #include <QByteArray>
 #include <QFileInfo>
 #include <QString>
 #include <QList>
 #include <QDir>
+
+#ifdef GTA5SYNC_PROJECT
+#include <QApplication>
+#include "config.h"
+#endif
 
 StringParser::StringParser()
 {
@@ -46,16 +47,25 @@ QString StringParser::parseTitleString(const QByteArray &commitBytes, int maxLen
 QString StringParser::convertDrawStringForLog(const QString &inputStr)
 {
     QString outputStr = inputStr;
-    return outputStr.replace("&","&u;").replace(",","&c;");
+    return outputStr.replace("&","&u;").replace(",", "&c;");
 }
 
 QString StringParser::convertLogStringForDraw(const QString &inputStr)
 {
     QString outputStr = inputStr;
-    return outputStr.replace("&c;",",").replace("&u;","&");
+    return outputStr.replace("&c;",",").replace("&u;", "&");
 }
 
-#ifndef GTA5VIEW_CMD
+QString StringParser::escapeString(const QString &toEscape)
+{
+#if QT_VERSION >= 0x050000
+    return toEscape.toHtmlEscaped();
+#else
+    return Qt::escape(toEscape);
+#endif
+}
+
+#ifdef GTA5SYNC_PROJECT
 QString StringParser::convertBuildedString(const QString &buildedStr)
 {
     QString outputStr = buildedStr;
@@ -69,12 +79,3 @@ QString StringParser::convertBuildedString(const QString &buildedStr)
     return outputStr;
 }
 #endif
-
-QString StringParser::escapeString(const QString &toEscape)
-{
-#if QT_VERSION >= 0x050000
-    return toEscape.toHtmlEscaped();
-#else
-    return Qt::escape(toEscape);
-#endif
-}

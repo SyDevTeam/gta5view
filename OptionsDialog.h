@@ -48,7 +48,7 @@ private slots:
     void on_cmdExploreFolder_clicked();
 
 signals:
-    void settingsApplied(int contentMode, QString language);
+    void settingsApplied(int contentMode, bool languageChanged);
 
 private:
     ProfileDatabase *profileDB;
