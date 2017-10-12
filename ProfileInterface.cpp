@@ -350,6 +350,7 @@ void ProfileInterface::savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteE
     if (sgdWidget->isSelected()) { sgdWidget->setSelected(false); }
     widgets.remove(sgdWidget);
 
+    sgdWidget->disconnect();
     sgdWidget->removeEventFilter(this);
     if (sgdWidget == previousWidget)
     {
@@ -357,16 +358,7 @@ void ProfileInterface::savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteE
     }
 
     // Deleting when the widget did send a event cause a crash
-    if (isRemoteEmited)
-    {
-        sgdWidget->disconnect();
-        sgdWidget->deleteLater();
-    }
-    else
-    {
-        sgdWidget->disconnect();
-        delete sgdWidget;
-    }
+    isRemoteEmited ? sgdWidget->deleteLater() : delete sgdWidget;
 
     savegames.removeAll(savegame);
     delete savegame;
@@ -383,6 +375,7 @@ void ProfileInterface::pictureDeleted(SnapmaticWidget *picWidget, bool isRemoteE
     if (picWidget->isSelected()) { picWidget->setSelected(false); }
     widgets.remove(picWidget);
 
+    picWidget->disconnect();
     picWidget->removeEventFilter(this);
     if (picWidget == previousWidget)
     {
@@ -390,16 +383,7 @@ void ProfileInterface::pictureDeleted(SnapmaticWidget *picWidget, bool isRemoteE
     }
 
     // Deleting when the widget did send a event cause a crash
-    if (isRemoteEmited)
-    {
-        picWidget->disconnect();
-        picWidget->deleteLater();
-    }
-    else
-    {
-        picWidget->disconnect();
-        delete picWidget;
-    }
+    isRemoteEmited ? picWidget->deleteLater() : delete picWidget;
 
     pictures.removeAll(picture);
     delete picture;
