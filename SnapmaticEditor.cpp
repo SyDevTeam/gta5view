@@ -309,7 +309,7 @@ void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
             crewList += QLatin1String("0");
         }
         crewList.sort();
-        foreach(const QString &crew, crewList)
+        for (QString crew : crewList)
         {
             itemList += QString("%1 (%2)").arg(crew, returnCrewName(crew.toInt()));
         }
@@ -322,7 +322,7 @@ void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
         {
             if (newCrew.contains(" ")) newCrew = newCrew.split(" ").at(0);
             if (newCrew.length() > 10) return;
-            foreach (const QChar &crewChar, newCrew)
+            for (QChar crewChar : newCrew)
             {
                 if (!crewChar.isNumber())
                 {

@@ -1137,7 +1137,7 @@ bool SnapmaticPicture::verifyTitle(const QString &title)
     // VERIFY TITLE FOR BE A VALID SNAPMATIC TITLE
     if (title.length() <= titlStreamCharacterMax)
     {
-        foreach(const QChar &titleChar, title)
+        for (QChar titleChar : title)
         {
             if (!verifyTitleChar(titleChar)) return false;
         }

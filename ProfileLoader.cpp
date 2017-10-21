@@ -50,7 +50,7 @@ void ProfileLoader::run()
 
     SavegameFiles.removeDuplicates();
     SnapmaticPics.removeDuplicates();
-    foreach(const QString &BackupFile, BackupFiles)
+    for (QString BackupFile : BackupFiles)
     {
         SavegameFiles.removeAll(BackupFile);
         SnapmaticPics.removeAll(BackupFile);
@@ -60,7 +60,7 @@ void ProfileLoader::run()
 
     // Loading pictures and savegames
     emit loadingProgress(curFile, maximumV);
-    foreach(const QString &SavegameFile, SavegameFiles)
+    for (QString SavegameFile : SavegameFiles)
     {
         emit loadingProgress(curFile, maximumV);
         QString sgdPath = profileFolder % "/" % SavegameFile;
@@ -71,7 +71,7 @@ void ProfileLoader::run()
         }
         curFile++;
     }
-    foreach(const QString &SnapmaticPic, SnapmaticPics)
+    for (QString SnapmaticPic : SnapmaticPics)
     {
         emit loadingProgress(curFile, maximumV);
         QString picturePath = profileFolder % "/" % SnapmaticPic;
@@ -90,7 +90,7 @@ void ProfileLoader::run()
 
     // adding found crews
     crewDB->setAddingCrews(true);
-    foreach(int crewID, crewList)
+    for (int crewID : crewList)
     {
         crewDB->addCrew(crewID);
     }

@@ -50,6 +50,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     a.setApplicationName(GTA5SYNC_APPSTR);
     a.setApplicationVersion(GTA5SYNC_APPVER);
+    a.setQuitOnLastWindowClosed(false);
 
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050400
@@ -87,7 +88,7 @@ int main(int argc, char *argv[])
     QString arg1;
     applicationArgs.removeAt(0);
 
-    foreach(QString currentArg, applicationArgs)
+    for (QString currentArg : applicationArgs)
     {
         QString reworkedArg;
         if (currentArg.left(9) == "-showpic=" && selectedAction == "")
@@ -182,10 +183,9 @@ int main(int argc, char *argv[])
     ProfileDatabase profileDB;
     DatabaseThread threadDB(&crewDB);
 
-    QEventLoop threadLoop;
     QObject::connect(&threadDB, SIGNAL(crewNameFound(int,QString)), &crewDB, SLOT(setCrewName(int, QString)));
     QObject::connect(&threadDB, SIGNAL(playerNameFound(int, QString)), &profileDB, SLOT(setPlayerName(int, QString)));
-    QObject::connect(&threadDB, SIGNAL(finished()), &threadLoop, SLOT(quit()));
+    QObject::connect(&threadDB, SIGNAL(finished()), &a, SLOT(quit()));
     threadDB.start();
 
     UserInterface uiWindow(&profileDB, &crewDB, &threadDB);
@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
     uiWindow.show();
 #endif
 
-    threadLoop.exec();
+    a.exec();
 
     return 0;
 }

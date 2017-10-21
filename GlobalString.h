@@ -26,7 +26,7 @@ class GlobalString
 {
 public:
     GlobalString();
-    static QString getString(QString valueStr, bool *ok = 0);
+    static QString getString(QString valueStr, bool *ok = nullptr);
     static QString getLanguageFile();
     static QString getLanguage();
     static QMap<QString, QString> getGlobalMap();

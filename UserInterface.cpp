@@ -40,7 +40,6 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QFileInfo>
-#include <QProcess>
 #include <QDebug>
 #include <QFile>
 #include <QDir>
@@ -158,7 +157,7 @@ void UserInterface::setupDirEnv()
 void UserInterface::setupProfileUi()
 {
     qreal screenRatio = AppEnv::screenRatio();
-    if (GTAV_Profiles.length() == 0)
+    if (GTAV_Profiles.isEmpty())
     {
         QPushButton *changeDirBtn = new QPushButton(tr("Select &GTA V Folder..."), ui->swSelection);
         changeDirBtn->setObjectName("cmdChangeDir");
@@ -169,7 +168,7 @@ void UserInterface::setupProfileUi()
 
         QObject::connect(changeDirBtn, SIGNAL(clicked(bool)), this, SLOT(changeFolder_clicked()));
     }
-    else foreach(const QString &GTAV_Profile, GTAV_Profiles)
+    else for (QString GTAV_Profile : GTAV_Profiles)
     {
         QPushButton *profileBtn = new QPushButton(GTAV_Profile, ui->swSelection);
         profileBtn->setObjectName(GTAV_Profile);
@@ -190,7 +189,7 @@ void UserInterface::changeFolder_clicked()
 
 void UserInterface::on_cmdReload_clicked()
 {
-    foreach(QPushButton *profileBtn, profileBtns)
+    foreach (QPushButton *profileBtn, profileBtns)
     {
         ui->vlButtons->removeWidget(profileBtn);
         profileBtns.removeAll(profileBtn);

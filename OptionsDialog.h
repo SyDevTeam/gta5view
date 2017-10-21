@@ -36,7 +36,7 @@ class OptionsDialog : public QDialog
 
 public:
     explicit OptionsDialog(ProfileDatabase *profileDB, QWidget *parent = 0);
-    void commitProfiles(QStringList profiles);
+    void commitProfiles(const QStringList &profiles);
     ~OptionsDialog();
 
 private slots:

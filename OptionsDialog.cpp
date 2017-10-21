@@ -94,16 +94,14 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
 OptionsDialog::~OptionsDialog()
 {
     delete settings;
-    foreach(QTreeWidgetItem *playerItem, playerItems)
-    {
-        delete playerItem;
-    }
+    qDeleteAll(playerItems.begin(), playerItems.end());
+    playerItems.clear();
     delete ui;
 }
 
 void OptionsDialog::setupTreeWidget()
 {
-    foreach(const QString &playerIDStr, profileDB->getPlayers())
+    for (QString playerIDStr : profileDB->getPlayers())
     {
         bool ok;
         int playerID = playerIDStr.toInt(&ok);
@@ -112,8 +110,8 @@ void OptionsDialog::setupTreeWidget()
             QString playerName = profileDB->getPlayerName(playerID);
 
             QStringList playerTreeViewList;
-            playerTreeViewList << playerIDStr;
-            playerTreeViewList << playerName;
+            playerTreeViewList += playerIDStr;
+            playerTreeViewList += playerName;
 
             QTreeWidgetItem *playerItem = new QTreeWidgetItem(playerTreeViewList);
             ui->twPlayers->addTopLevelItem(playerItem);
@@ -126,7 +124,7 @@ void OptionsDialog::setupTreeWidget()
 void OptionsDialog::setupLanguageBox()
 {
     settings->beginGroup("Interface");
-    currentLanguage = settings->value("Language","System").toString();
+    currentLanguage = settings->value("Language", "System").toString();
     settings->endGroup();
 
     QString cbSysStr = tr("%1 (Next Closest Language)", "First language a person can talk with a different person/application. \"Native\" or \"Not Native\".").arg(tr("System",
@@ -142,7 +140,7 @@ void OptionsDialog::setupLanguageBox()
     availableLanguages.removeDuplicates();
     availableLanguages.sort();
 
-    foreach(const QString &lang, availableLanguages)
+    for (QString lang : availableLanguages)
     {
         QLocale langLocale(lang);
         QString cbLangStr = langLocale.nativeLanguageName() % " (" % langLocale.nativeCountryName() % ") [" % lang % "]";
@@ -285,9 +283,9 @@ void OptionsDialog::setupDefaultProfile()
     ui->cbProfiles->addItem(cbNoneStr, "");
 }
 
-void OptionsDialog::commitProfiles(QStringList profiles)
+void OptionsDialog::commitProfiles(const QStringList &profiles)
 {
-    foreach(const QString &profile, profiles)
+    for (QString profile : profiles)
     {
         ui->cbProfiles->addItem(tr("Profile: %1").arg(profile), profile);
         if (defaultProfile == profile)

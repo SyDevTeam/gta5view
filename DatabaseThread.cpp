@@ -125,9 +125,9 @@ void DatabaseThread::run()
 
 void DatabaseThread::scanCrewReference(const QStringList &crewList, const int &requestDelay)
 {
-    foreach (const QString &crewID, crewList)
+    for (QString crewID : crewList)
     {
-        if (threadRunning && crewID != "0")
+        if (threadRunning && crewID != QLatin1String("0"))
         {
             QNetworkAccessManager *netManager = new QNetworkAccessManager();
 
@@ -182,9 +182,9 @@ void DatabaseThread::scanCrewReference(const QStringList &crewList, const int &r
 
 void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int &maxPages, const int &requestDelay)
 {
-    foreach (const QString &crewID, crewList)
+    for (QString crewID : crewList)
     {
-        if (threadRunning && crewID != "0")
+        if (threadRunning && crewID != QLatin1String("0"))
         {
             int currentPage = 0;
             int foundPlayers = 0;
@@ -223,8 +223,8 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
 
                     if (crewMap.contains("Members"))
                     {
-                        QList<QVariant> memberList = crewMap["Members"].toList();
-                        foreach (const QVariant &memberVariant, memberList)
+                        const QList<QVariant> memberList = crewMap["Members"].toList();
+                        for (QVariant memberVariant : memberList)
                         {
                             QMap<QString, QVariant> memberMap = memberVariant.toMap();
                             foundPlayers++;
@@ -232,7 +232,7 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
                             {
                                 int RockstarId = memberMap["RockstarId"].toInt();
                                 QString memberName = memberMap["Name"].toString();
-                                if (memberName != "" && RockstarId != 0)
+                                if (!memberName.isEmpty() && RockstarId != 0)
                                 {
                                     emit playerNameFound(RockstarId, memberName);
                                 }
@@ -256,10 +256,21 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
     }
 }
 
+void DatabaseThread::deleteCompatibleCrews(QStringList *crewList)
+{
+    for (QString& crewNID : *crewList)
+    {
+        if (crewDB->isCompatibleCrew(crewNID))
+        {
+            crewList->removeAll(crewNID);
+        }
+    }
+}
+
 QStringList DatabaseThread::deleteCompatibleCrews(const QStringList &crewList)
 {
     QStringList crewListR = crewList;
-    foreach(const QString &crewNID, crewListR)
+    for (QString& crewNID : crewListR)
     {
         if (crewDB->isCompatibleCrew(crewNID))
         {

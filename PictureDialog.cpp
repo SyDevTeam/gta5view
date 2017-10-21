@@ -594,7 +594,7 @@ QString PictureDialog::generatePlayersString()
     QString plyrsStr;
     if (plyrsList.length() >= 1)
     {
-        foreach (const QString &player, plyrsList)
+        for (QString player : plyrsList)
         {
             QString playerName;
             if (withDatabase)

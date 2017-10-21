@@ -432,38 +432,38 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="132"/>
+        <location filename="../OptionsDialog.cpp" line="130"/>
         <source>%1 (Next Closest Language)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="132"/>
+        <location filename="../OptionsDialog.cpp" line="130"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="274"/>
+        <location filename="../OptionsDialog.cpp" line="272"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="274"/>
+        <location filename="../OptionsDialog.cpp" line="272"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>The new Custom Folder will initialize after you restart %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="284"/>
+        <location filename="../OptionsDialog.cpp" line="282"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="292"/>
+        <location filename="../OptionsDialog.cpp" line="290"/>
+        <location filename="../OptionsDialog.cpp" line="294"/>
         <location filename="../OptionsDialog.cpp" line="296"/>
-        <location filename="../OptionsDialog.cpp" line="298"/>
         <source>Profile: %1</source>
         <translation></translation>
     </message>
@@ -756,19 +756,19 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="428"/>
-        <location filename="../UserInterface.cpp" line="364"/>
+        <location filename="../UserInterface.cpp" line="363"/>
         <source>GTA V Export (*.g5e)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="429"/>
-        <location filename="../UserInterface.cpp" line="365"/>
+        <location filename="../UserInterface.cpp" line="364"/>
         <source>Savegames files (SGTA*)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="430"/>
-        <location filename="../UserInterface.cpp" line="366"/>
+        <location filename="../UserInterface.cpp" line="365"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation></translation>
     </message>
@@ -779,14 +779,14 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="432"/>
-        <location filename="../UserInterface.cpp" line="367"/>
+        <location filename="../UserInterface.cpp" line="366"/>
         <source>All files (**)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="455"/>
         <location filename="../ProfileInterface.cpp" line="745"/>
-        <location filename="../UserInterface.cpp" line="455"/>
+        <location filename="../UserInterface.cpp" line="454"/>
         <source>No valid file is selected</source>
         <translation></translation>
     </message>
@@ -805,13 +805,13 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="527"/>
-        <location filename="../UserInterface.cpp" line="407"/>
+        <location filename="../UserInterface.cpp" line="406"/>
         <source>Failed to read Snapmatic picture</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="543"/>
-        <location filename="../UserInterface.cpp" line="423"/>
+        <location filename="../UserInterface.cpp" line="422"/>
         <source>Failed to read Savegame file</source>
         <translation></translation>
     </message>
@@ -922,7 +922,7 @@ Press 1 for Default View</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="363"/>
+        <location filename="../UserInterface.cpp" line="362"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation></translation>
     </message>
@@ -930,12 +930,12 @@ Press 1 for Default View</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="66"/>
+        <location filename="../main.cpp" line="67"/>
         <source>Font</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="66"/>
+        <location filename="../main.cpp" line="67"/>
         <source>Selected Font: %1</source>
         <translation></translation>
     </message>
@@ -1396,7 +1396,7 @@ Press 1 for Default View</source>
     <name>UserInterface</name>
     <message>
         <location filename="../UserInterface.ui" line="20"/>
-        <location filename="../UserInterface.cpp" line="62"/>
+        <location filename="../UserInterface.cpp" line="61"/>
         <source>%2 - %1</source>
         <translation></translation>
     </message>
@@ -1458,8 +1458,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="226"/>
-        <location filename="../UserInterface.cpp" line="60"/>
-        <location filename="../UserInterface.cpp" line="541"/>
+        <location filename="../UserInterface.cpp" line="59"/>
+        <location filename="../UserInterface.cpp" line="540"/>
         <source>&amp;About %1</source>
         <translation></translation>
     </message>
@@ -1565,15 +1565,15 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="309"/>
-        <location filename="../UserInterface.cpp" line="163"/>
+        <location filename="../UserInterface.cpp" line="162"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="312"/>
-        <location filename="../OptionsDialog.cpp" line="430"/>
-        <location filename="../UserInterface.cpp" line="104"/>
-        <location filename="../UserInterface.cpp" line="512"/>
+        <location filename="../OptionsDialog.cpp" line="428"/>
+        <location filename="../UserInterface.cpp" line="103"/>
+        <location filename="../UserInterface.cpp" line="511"/>
         <source>Select GTA V Folder...</source>
         <translation></translation>
     </message>
@@ -1603,27 +1603,27 @@ Press 1 for Default View</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="64"/>
-        <location filename="../UserInterface.cpp" line="234"/>
-        <location filename="../UserInterface.cpp" line="549"/>
+        <location filename="../UserInterface.cpp" line="63"/>
+        <location filename="../UserInterface.cpp" line="233"/>
+        <location filename="../UserInterface.cpp" line="548"/>
         <source>Select Profile</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="360"/>
+        <location filename="../UserInterface.cpp" line="359"/>
         <source>Open File...</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="407"/>
-        <location filename="../UserInterface.cpp" line="423"/>
-        <location filename="../UserInterface.cpp" line="450"/>
-        <location filename="../UserInterface.cpp" line="455"/>
+        <location filename="../UserInterface.cpp" line="406"/>
+        <location filename="../UserInterface.cpp" line="422"/>
+        <location filename="../UserInterface.cpp" line="449"/>
+        <location filename="../UserInterface.cpp" line="454"/>
         <source>Open File</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="450"/>
+        <location filename="../UserInterface.cpp" line="449"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation></translation>
     </message>

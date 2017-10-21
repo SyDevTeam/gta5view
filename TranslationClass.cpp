@@ -279,7 +279,7 @@ QStringList TranslationClass::listTranslations(const QString &langPath)
     langDir.setNameFilters(QStringList("gta5sync_*.qm"));
     langDir.setPath(langPath);
     QStringList availableLanguages;
-    foreach(const QString &lang, langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort))
+    for (QString &lang : langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort))
     {
         availableLanguages << QString(lang).remove("gta5sync_").remove(".qm");
     }
@@ -292,7 +292,7 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
     qDebug() << "loadSystemTranslation_p";
 #endif
     int currentLangCounter = 0;
-    foreach(const QString &languageName, QLocale::system().uiLanguages())
+    for (QString languageName : QLocale::system().uiLanguages())
     {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadLanguage" << languageName;

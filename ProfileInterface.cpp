@@ -96,19 +96,19 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 
 ProfileInterface::~ProfileInterface()
 {
-    foreach(ProfileWidget *widget, widgets.keys())
+    foreach (ProfileWidget *widget, widgets.keys())
     {
         widgets.remove(widget);
         widget->removeEventFilter(this);
         widget->disconnect();
         delete widget;
     }
-    foreach(SavegameData *savegame, savegames)
+    foreach (SavegameData *savegame, savegames)
     {
         savegames.removeAll(savegame);
         delete savegame;
     }
-    foreach(SnapmaticPicture *picture, pictures)
+    foreach (SnapmaticPicture *picture, pictures)
     {
         pictures.removeAll(picture);
         delete picture;
@@ -308,7 +308,7 @@ void ProfileInterface::sortingProfileInterface()
     QStringList widgetsKeyList = widgets.values();
     qSort(widgetsKeyList.begin(), widgetsKeyList.end());
 
-    foreach(QString widgetKey, widgetsKeyList)
+    for (QString widgetKey : widgetsKeyList)
     {
         ProfileWidget *widget = widgets.key(widgetKey);
         if (widget->getWidgetType() == "SnapmaticWidget")
@@ -413,7 +413,7 @@ fileDialogPreOpen: //Work?
 
     // Getting readable Image formats
     QString imageFormatsStr = " ";
-    foreach(const QByteArray &imageFormat, QImageReader::supportedImageFormats())
+    for (QByteArray imageFormat : QImageReader::supportedImageFormats())
     {
         imageFormatsStr += QString("*.") % QString::fromUtf8(imageFormat).toLower() % " ";
     }
@@ -486,7 +486,7 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
 
     QTime t;
     t.start();
-    foreach(const QString &selectedFile, selectedFiles)
+    for (QString selectedFile : selectedFiles)
     {
         pbDialog.setValue(overallId);
         pbDialog.setLabelText(tr("Import file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
@@ -497,7 +497,7 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
         overallId++;
     }
     pbDialog.close();
-    foreach (const QString &curErrorStr, failedFiles)
+    for (QString curErrorStr : failedFiles)
     {
         errorStr += ", " % curErrorStr;
     }
@@ -820,7 +820,7 @@ void ProfileInterface::profileWidgetSelected()
 {
     if (selectedWidgts == 0)
     {
-        foreach(ProfileWidget *widget, widgets.keys())
+        foreach (ProfileWidget *widget, widgets.keys())
         {
             widget->setSelectionMode(true);
         }
@@ -833,7 +833,7 @@ void ProfileInterface::profileWidgetDeselected()
     if (selectedWidgts == 1)
     {
         int scrollBarValue = ui->saProfile->verticalScrollBar()->value();
-        foreach(ProfileWidget *widget, widgets.keys())
+        foreach (ProfileWidget *widget, widgets.keys())
         {
             if (contentMode != 2)
             {
@@ -847,7 +847,7 @@ void ProfileInterface::profileWidgetDeselected()
 
 void ProfileInterface::selectAllWidgets()
 {
-    foreach(ProfileWidget *widget, widgets.keys())
+    foreach (ProfileWidget *widget, widgets.keys())
     {
         widget->setSelected(true);
     }
@@ -855,7 +855,7 @@ void ProfileInterface::selectAllWidgets()
 
 void ProfileInterface::deselectAllWidgets()
 {
-    foreach(ProfileWidget *widget, widgets.keys())
+    foreach (ProfileWidget *widget, widgets.keys())
     {
         widget->setSelected(false);
     }
@@ -985,7 +985,7 @@ void ProfileInterface::exportSelected()
             errorList << getFailedCopyPictures;
             errorList << getFailedSavegames;
 
-            foreach (const QString &curErrorStr, errorList)
+            for (QString curErrorStr : errorList)
             {
                 errorStr += ", " % curErrorStr;
             }
@@ -1069,7 +1069,7 @@ void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
     contentMode = _contentMode;
     if (contentMode == 2)
     {
-        foreach(ProfileWidget *widget, widgets.keys())
+        foreach (ProfileWidget *widget, widgets.keys())
         {
             widget->setSelectionMode(true);
             widget->setContentMode(contentMode);
@@ -1078,7 +1078,7 @@ void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
     }
     else
     {
-        foreach(ProfileWidget *widget, widgets.keys())
+        foreach (ProfileWidget *widget, widgets.keys())
         {
             if (selectedWidgts == 0)
             {
@@ -1217,9 +1217,8 @@ void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
 {
     if (!mimeData) return;
     QStringList pathList;
-    QList<QUrl> urlList = mimeData->urls();
 
-    foreach(const QUrl &currentUrl, urlList)
+    for (QUrl currentUrl : mimeData->urls())
     {
         if (currentUrl.isLocalFile())
         {
@@ -1287,7 +1286,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
         if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
         {
             ProfileWidget *pWidget = nullptr;
-            foreach(ProfileWidget *widget, widgets.keys())
+            foreach (ProfileWidget *widget, widgets.keys())
             {
                 QPoint mousePos = widget->mapFromGlobal(QCursor::pos());
                 if (widget->rect().contains(mousePos))
@@ -1356,7 +1355,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
 void ProfileInterface::hoverProfileWidgetCheck()
 {
     ProfileWidget *pWidget = nullptr;
-    foreach(ProfileWidget *widget, widgets.keys())
+    foreach (ProfileWidget *widget, widgets.keys())
     {
         if (widget->underMouse())
         {
@@ -1424,7 +1423,7 @@ void ProfileInterface::updatePalette()
 
 bool ProfileInterface::isSupportedImageFile(QString selectedFileName)
 {
-    foreach(const QByteArray &imageFormat, QImageReader::supportedImageFormats())
+    for (QByteArray imageFormat : QImageReader::supportedImageFormats())
     {
         QString imageFormatStr = QString(".") % QString::fromUtf8(imageFormat).toLower();
         if (selectedFileName.length() >= imageFormatStr.length() && selectedFileName.toLower().right(imageFormatStr.length()) == imageFormatStr)

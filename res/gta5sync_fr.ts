@@ -567,25 +567,25 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation type="vanished">Système</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="132"/>
+        <location filename="../OptionsDialog.cpp" line="130"/>
         <source>%1 (Next Closest Language)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="132"/>
+        <location filename="../OptionsDialog.cpp" line="130"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation>Système</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="274"/>
+        <location filename="../OptionsDialog.cpp" line="272"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="274"/>
+        <location filename="../OptionsDialog.cpp" line="272"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
@@ -598,15 +598,15 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation type="vanished">Le changement de langue sera actif au prochain lancement de %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="284"/>
+        <location filename="../OptionsDialog.cpp" line="282"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Aucun profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="292"/>
+        <location filename="../OptionsDialog.cpp" line="290"/>
+        <location filename="../OptionsDialog.cpp" line="294"/>
         <location filename="../OptionsDialog.cpp" line="296"/>
-        <location filename="../OptionsDialog.cpp" line="298"/>
         <source>Profile: %1</source>
         <translation>Profil : %1</translation>
     </message>
@@ -976,13 +976,13 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="429"/>
-        <location filename="../UserInterface.cpp" line="365"/>
+        <location filename="../UserInterface.cpp" line="364"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Fichiers de sauvegarde GTA (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="430"/>
-        <location filename="../UserInterface.cpp" line="366"/>
+        <location filename="../UserInterface.cpp" line="365"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Photos Snapmatic (PGTA*)</translation>
     </message>
@@ -993,7 +993,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="432"/>
-        <location filename="../UserInterface.cpp" line="367"/>
+        <location filename="../UserInterface.cpp" line="366"/>
         <source>All files (**)</source>
         <translation>Tous les fichiers (**)</translation>
     </message>
@@ -1015,7 +1015,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../ProfileInterface.cpp" line="455"/>
         <location filename="../ProfileInterface.cpp" line="745"/>
-        <location filename="../UserInterface.cpp" line="455"/>
+        <location filename="../UserInterface.cpp" line="454"/>
         <source>No valid file is selected</source>
         <translation>Fichier invalide</translation>
     </message>
@@ -1026,13 +1026,13 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="527"/>
-        <location filename="../UserInterface.cpp" line="407"/>
+        <location filename="../UserInterface.cpp" line="406"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Impossible d&apos;ouvrir la photo Snapmatic</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="543"/>
-        <location filename="../UserInterface.cpp" line="423"/>
+        <location filename="../UserInterface.cpp" line="422"/>
         <source>Failed to read Savegame file</source>
         <translation>Impossible de lire le fichier de sauvegarde</translation>
     </message>
@@ -1165,13 +1165,13 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>Impossible de supprimer la sélection</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="363"/>
+        <location filename="../UserInterface.cpp" line="362"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation>Tous les fichiers de profil (*.g5e SGTA* PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="428"/>
-        <location filename="../UserInterface.cpp" line="364"/>
+        <location filename="../UserInterface.cpp" line="363"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
     </message>
@@ -1179,12 +1179,12 @@ Appuyer sur 1 pour le mode par défaut</translation>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="66"/>
+        <location filename="../main.cpp" line="67"/>
         <source>Font</source>
         <translation>Police</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="66"/>
+        <location filename="../main.cpp" line="67"/>
         <source>Selected Font: %1</source>
         <translation>Police sélectionnée : %1</translation>
     </message>
@@ -1824,15 +1824,15 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="309"/>
-        <location filename="../UserInterface.cpp" line="163"/>
+        <location filename="../UserInterface.cpp" line="162"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>Modifier l&apos;emplacement de &amp;GTA V...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="312"/>
-        <location filename="../OptionsDialog.cpp" line="430"/>
-        <location filename="../UserInterface.cpp" line="104"/>
-        <location filename="../UserInterface.cpp" line="512"/>
+        <location filename="../OptionsDialog.cpp" line="428"/>
+        <location filename="../UserInterface.cpp" line="103"/>
+        <location filename="../UserInterface.cpp" line="511"/>
         <source>Select GTA V Folder...</source>
         <translation>Modifier l&apos;emplacement de GTA V...</translation>
     </message>
@@ -1868,39 +1868,39 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="20"/>
-        <location filename="../UserInterface.cpp" line="62"/>
+        <location filename="../UserInterface.cpp" line="61"/>
         <source>%2 - %1</source>
         <translation>%2 - %1</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="226"/>
-        <location filename="../UserInterface.cpp" line="60"/>
-        <location filename="../UserInterface.cpp" line="541"/>
+        <location filename="../UserInterface.cpp" line="59"/>
+        <location filename="../UserInterface.cpp" line="540"/>
         <source>&amp;About %1</source>
         <translation>&amp;À propos de %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="64"/>
-        <location filename="../UserInterface.cpp" line="234"/>
-        <location filename="../UserInterface.cpp" line="549"/>
+        <location filename="../UserInterface.cpp" line="63"/>
+        <location filename="../UserInterface.cpp" line="233"/>
+        <location filename="../UserInterface.cpp" line="548"/>
         <source>Select Profile</source>
         <translation>Sélectionner un profil</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="360"/>
+        <location filename="../UserInterface.cpp" line="359"/>
         <source>Open File...</source>
         <translation>Ouvrir...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="407"/>
-        <location filename="../UserInterface.cpp" line="423"/>
-        <location filename="../UserInterface.cpp" line="450"/>
-        <location filename="../UserInterface.cpp" line="455"/>
+        <location filename="../UserInterface.cpp" line="406"/>
+        <location filename="../UserInterface.cpp" line="422"/>
+        <location filename="../UserInterface.cpp" line="449"/>
+        <location filename="../UserInterface.cpp" line="454"/>
         <source>Open File</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="450"/>
+        <location filename="../UserInterface.cpp" line="449"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>Impossible d&apos;ouvrir %1, format invalide</translation>
     </message>
