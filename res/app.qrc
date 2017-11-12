@@ -30,6 +30,7 @@
         <file>global.ja.ini</file>
         <file>global.ru.ini</file>
         <file>global.zh.ini</file>
+        <file>global.zh.loc</file>
     </qresource>
     <qresource prefix="/template">
         <file>template.g5e</file>

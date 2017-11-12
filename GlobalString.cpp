@@ -74,11 +74,5 @@ QString GlobalString::getLanguageFile()
 
 QString GlobalString::getLanguage()
 {
-    QString language = TCInstance->getCurrentLanguage();
-    QStringList langList = QString(language).replace("-", "_").split("_");
-    if (langList.length() >= 1)
-    {
-        language = langList.at(0);
-    }
-    return language;
+    return TCInstance->getCurrentAreaLanguage();
 }

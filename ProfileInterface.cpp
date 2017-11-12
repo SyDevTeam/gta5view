@@ -96,25 +96,27 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 
 ProfileInterface::~ProfileInterface()
 {
-    foreach (ProfileWidget *widget, widgets.keys())
+    for (ProfileWidget *widget : widgets.keys())
     {
-        widgets.remove(widget);
         widget->removeEventFilter(this);
         widget->disconnect();
         delete widget;
     }
-    foreach (SavegameData *savegame, savegames)
+    widgets.clear();
+
+    for (SavegameData *savegame : savegames)
     {
-        savegames.removeAll(savegame);
         delete savegame;
     }
-    foreach (SnapmaticPicture *picture, pictures)
+    savegames.clear();
+
+    for (SnapmaticPicture *picture : pictures)
     {
-        pictures.removeAll(picture);
         delete picture;
     }
-    delete profileLoader;
+    pictures.clear();
 
+    delete profileLoader;
     delete ui;
 }
 
@@ -617,7 +619,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                     }
                     QString currentTime = QTime::currentTime().toString("HHmmss");
                     SnapmaticProperties spJson = picture->getSnapmaticProperties();
-                    spJson.uid = QString(currentTime +
+                    spJson.uid = QString(currentTime %
                                          QString::number(QDate::currentDate().dayOfYear())).toInt();
                     bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                     bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
@@ -625,7 +627,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                     while ((fExists || fExistsHidden) && cEnough < 5000)
                     {
                         currentTime = QString::number(currentTime.toInt() - 1);
-                        spJson.uid = QString(currentTime +
+                        spJson.uid = QString(currentTime %
                                              QString::number(QDate::currentDate().dayOfYear())).toInt();
                         fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                         fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
@@ -650,11 +652,11 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                         delete picture;
                         return false;
                     }
-                    QImage snapmaticImage;
+                    QImage *importImage = new QImage();
                     QImageReader snapmaticImageReader;
                     snapmaticImageReader.setDecideFormatFromContent(true);
                     snapmaticImageReader.setDevice(&snapmaticFile);
-                    if (!snapmaticImageReader.read(&snapmaticImage))
+                    if (!snapmaticImageReader.read(importImage))
                     {
                         QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
                         delete picture;
@@ -662,7 +664,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                     }
                     ImportDialog *importDialog = new ImportDialog(this);
                     importDialog->setWindowFlags(importDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-                    importDialog->setImage(snapmaticImage);
+                    importDialog->setImage(importImage);
                     importDialog->setModal(true);
                     importDialog->show();
                     importDialog->exec();
@@ -680,7 +682,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                             while ((fExists || fExistsHidden) && cEnough < 25)
                             {
                                 currentTime = QString::number(currentTime.toInt() - 1);
-                                spJson.uid = QString(currentTime +
+                                spJson.uid = QString(currentTime %
                                                      QString::number(QDate::currentDate().dayOfYear())).toInt();
                                 fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                                 fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
@@ -820,7 +822,7 @@ void ProfileInterface::profileWidgetSelected()
 {
     if (selectedWidgts == 0)
     {
-        foreach (ProfileWidget *widget, widgets.keys())
+        for (ProfileWidget *widget : widgets.keys())
         {
             widget->setSelectionMode(true);
         }
@@ -833,7 +835,7 @@ void ProfileInterface::profileWidgetDeselected()
     if (selectedWidgts == 1)
     {
         int scrollBarValue = ui->saProfile->verticalScrollBar()->value();
-        foreach (ProfileWidget *widget, widgets.keys())
+        for (ProfileWidget *widget : widgets.keys())
         {
             if (contentMode != 2)
             {
@@ -847,7 +849,7 @@ void ProfileInterface::profileWidgetDeselected()
 
 void ProfileInterface::selectAllWidgets()
 {
-    foreach (ProfileWidget *widget, widgets.keys())
+    for (ProfileWidget *widget : widgets.keys())
     {
         widget->setSelected(true);
     }
@@ -855,7 +857,7 @@ void ProfileInterface::selectAllWidgets()
 
 void ProfileInterface::deselectAllWidgets()
 {
-    foreach (ProfileWidget *widget, widgets.keys())
+    for (ProfileWidget *widget : widgets.keys())
     {
         widget->setSelected(false);
     }
@@ -879,7 +881,7 @@ void ProfileInterface::exportSelected()
         if (exportDirectory != "")
         {
             settings.setValue(profileName, exportDirectory);
-            foreach (ProfileWidget *widget, widgets.keys())
+            for (ProfileWidget *widget : widgets.keys())
             {
                 if (widget->isSelected())
                 {
@@ -1022,7 +1024,7 @@ void ProfileInterface::deleteSelected()
     {
         if (QMessageBox::Yes == QMessageBox::warning(this, tr("Remove selected"), tr("You really want remove the selected Snapmatic picutres and Savegame files?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
         {
-            foreach (ProfileWidget *widget, widgets.keys())
+            for (ProfileWidget *widget : widgets.keys())
             {
                 if (widget->isSelected())
                 {
@@ -1069,7 +1071,7 @@ void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
     contentMode = _contentMode;
     if (contentMode == 2)
     {
-        foreach (ProfileWidget *widget, widgets.keys())
+        for (ProfileWidget *widget : widgets.keys())
         {
             widget->setSelectionMode(true);
             widget->setContentMode(contentMode);
@@ -1078,7 +1080,7 @@ void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
     }
     else
     {
-        foreach (ProfileWidget *widget, widgets.keys())
+        for (ProfileWidget *widget : widgets.keys())
         {
             if (selectedWidgts == 0)
             {
@@ -1093,7 +1095,7 @@ void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
 void ProfileInterface::enableSelected()
 {
     int fails = 0;
-    foreach (ProfileWidget *widget, widgets.keys())
+    for (ProfileWidget *widget : widgets.keys())
     {
         if (widget->isSelected())
         {
@@ -1112,7 +1114,7 @@ void ProfileInterface::enableSelected()
 void ProfileInterface::disableSelected()
 {
     int fails = 0;
-    foreach (ProfileWidget *widget, widgets.keys())
+    for (ProfileWidget *widget : widgets.keys())
     {
         if (widget->isSelected())
         {
@@ -1286,7 +1288,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
         if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
         {
             ProfileWidget *pWidget = nullptr;
-            foreach (ProfileWidget *widget, widgets.keys())
+            for (ProfileWidget *widget : widgets.keys())
             {
                 QPoint mousePos = widget->mapFromGlobal(QCursor::pos());
                 if (widget->rect().contains(mousePos))
@@ -1355,7 +1357,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
 void ProfileInterface::hoverProfileWidgetCheck()
 {
     ProfileWidget *pWidget = nullptr;
-    foreach (ProfileWidget *widget, widgets.keys())
+    for (ProfileWidget *widget : widgets.keys())
     {
         if (widget->underMouse())
         {

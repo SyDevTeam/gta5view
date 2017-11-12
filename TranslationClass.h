@@ -36,7 +36,9 @@ public:
     void initUserLanguage();
     void loadTranslation(QApplication *app);
     void unloadTranslation(QApplication *app);
-    QStringList listTranslations(const QString &langPath);
+    static QStringList listTranslations(const QString &langPath);
+    static QStringList listAreaTranslations();
+    QString getCurrentAreaLanguage();
     QString getCurrentLanguage();
     bool isLanguageLoaded();
 
@@ -50,6 +52,7 @@ private:
     QTranslator exQtTranslator;
     QTranslator inAppTranslator;
     QTranslator inQtTranslator;
+    QString userAreaLanguage;
     QString currentLanguage;
     QString userLanguage;
     int currentLangIndex;

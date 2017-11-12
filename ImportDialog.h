@@ -34,7 +34,7 @@ public:
     ~ImportDialog();
     QImage image();
     QString getImageTitle();
-    void setImage(const QImage &image);
+    void setImage(QImage *image);
     bool isImportAgreed();
 
 private slots:

@@ -84,6 +84,7 @@ private:
     QStringList GTAV_Profiles;
     void setupProfileUi();
     void openProfile(const QString &profileName);
+    void closeProfile_p();
     void openSelectProfile();
     void retranslateUi();
 

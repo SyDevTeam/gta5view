@@ -30,7 +30,7 @@ public:
     explicit DatabaseThread(CrewDatabase *crewDB, QObject *parent = 0);
 
 public slots:
-    void doEndThread();
+    void terminateThread();
 
 private:
     CrewDatabase *crewDB;
@@ -38,6 +38,7 @@ private:
     void scanCrewReference(const QStringList &crewList, const int &requestDelay);
     void deleteCompatibleCrews(QStringList *crewList);
     QStringList deleteCompatibleCrews(const QStringList &crewList);
+    bool continueLastCrew;
     bool threadRunning;
     int plyrPerReq;
 
@@ -49,7 +50,7 @@ signals:
     void crewNameUpdated();
     void playerNameFound(int playerID, QString playerName);
     void playerNameUpdated();
-    void threadEndCommited();
+    void threadTerminated();
 };
 
 #endif // DATABASETHREAD_H

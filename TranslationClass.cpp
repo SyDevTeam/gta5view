@@ -42,6 +42,7 @@ void TranslationClass::initUserLanguage()
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Interface");
     userLanguage = settings.value("Language", "System").toString();
+    userAreaLanguage = settings.value("AreaLanguage", "Auto").toString();
     settings.endGroup();
 }
 
@@ -279,9 +280,22 @@ QStringList TranslationClass::listTranslations(const QString &langPath)
     langDir.setNameFilters(QStringList("gta5sync_*.qm"));
     langDir.setPath(langPath);
     QStringList availableLanguages;
-    for (QString &lang : langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort))
+    for (QString lang : langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort))
     {
         availableLanguages << QString(lang).remove("gta5sync_").remove(".qm");
+    }
+    return availableLanguages;
+}
+
+QStringList TranslationClass::listAreaTranslations()
+{
+    QDir langDir;
+    langDir.setNameFilters(QStringList("global.*.ini"));
+    langDir.setPath(":/global");
+    QStringList availableLanguages;
+    for (QString lang : langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort))
+    {
+        availableLanguages << QString(lang).remove("global.").remove(".ini");
     }
     return availableLanguages;
 }
@@ -496,6 +510,55 @@ bool TranslationClass::loadQtTranslation_p(const QString &langPath, QTranslator 
 bool TranslationClass::isUserLanguageSystem_p()
 {
     return (userLanguage == "System" || userLanguage.trimmed().isEmpty());
+}
+
+QString TranslationClass::getCurrentAreaLanguage()
+{
+    const QStringList areaTranslations = listAreaTranslations();
+    if (userAreaLanguage == "Auto" || userAreaLanguage.trimmed().isEmpty())
+    {
+#ifdef GTA5SYNC_DEBUG
+        qDebug() << "autoAreaLanguageMode";
+#endif
+        QString langCode = QString(currentLanguage).replace("-", "_");
+        if (areaTranslations.contains(langCode))
+        {
+#ifdef GTA5SYNC_DEBUG
+            qDebug() << "autoAreaLanguageSelected" << langCode;
+#endif
+            return langCode;
+        }
+        else if (langCode.contains("_"))
+        {
+            langCode = langCode.split("_").at(0);
+            if (!areaTranslations.contains(langCode)) goto outputDefaultLanguage;
+#ifdef GTA5SYNC_DEBUG
+            qDebug() << "autoAreaLanguageSelected" << langCode;
+#endif
+            return langCode;
+        }
+    }
+    else if (areaTranslations.contains(userAreaLanguage))
+    {
+#ifdef GTA5SYNC_DEBUG
+        qDebug() << "userAreaLanguageSelected" << userAreaLanguage;
+#endif
+        return userAreaLanguage;
+    }
+    else if (userAreaLanguage.contains("_"))
+    {
+        QString langCode = QString(userAreaLanguage).replace("-", "_").split("_").at(0);
+        if (!areaTranslations.contains(langCode)) goto outputDefaultLanguage;
+#ifdef GTA5SYNC_DEBUG
+        qDebug() << "userAreaLanguageSelected" << langCode;
+#endif
+        return langCode;
+    }
+outputDefaultLanguage:
+#ifdef GTA5SYNC_DEBUG
+    qDebug() << "defaultAreaLanguageSelected";
+#endif
+    return "en";
 }
 
 QString TranslationClass::getCurrentLanguage()

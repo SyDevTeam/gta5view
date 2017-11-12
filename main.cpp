@@ -148,20 +148,17 @@ int main(int argc, char *argv[])
         if (crewID != 0) { crewDB.addCrew(crewID); }
         if (!readOk) { return 1; }
 
-        QEventLoop threadLoop;
         QObject::connect(&threadDB, SIGNAL(crewNameFound(int, QString)), &crewDB, SLOT(setCrewName(int, QString)));
         QObject::connect(&threadDB, SIGNAL(crewNameUpdated()), &picDialog, SLOT(crewNameUpdated()));
         QObject::connect(&threadDB, SIGNAL(playerNameFound(int, QString)), &profileDB, SLOT(setPlayerName(int, QString)));
         QObject::connect(&threadDB, SIGNAL(playerNameUpdated()), &picDialog, SLOT(playerNameUpdated()));
-        QObject::connect(&threadDB, SIGNAL(finished()), &threadLoop, SLOT(quit()));
-        QObject::connect(&picDialog, SIGNAL(endDatabaseThread()), &threadDB, SLOT(doEndThread()));
+        QObject::connect(&threadDB, SIGNAL(finished()), &a, SLOT(quit()));
+        QObject::connect(&picDialog, SIGNAL(endDatabaseThread()), &threadDB, SLOT(terminateThread()));
         threadDB.start();
 
         picDialog.show();
 
-        threadLoop.exec();
-
-        return 0;
+        return a.exec();
     }
     else if (selectedAction == "showsgd")
     {
@@ -174,6 +171,7 @@ int main(int argc, char *argv[])
 
         if (!readOk) { return 1; }
 
+        a.setQuitOnLastWindowClosed(true);
         savegameDialog.show();
 
         return a.exec();
@@ -197,7 +195,5 @@ int main(int argc, char *argv[])
     uiWindow.show();
 #endif
 
-    a.exec();
-
-    return 0;
+    return a.exec();
 }

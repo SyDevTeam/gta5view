@@ -76,7 +76,7 @@ void ExportThread::run()
     // End Picture Settings
 
     int intExportProgress = 0;
-    foreach(ProfileWidget *widget, profileMap.keys())
+    for (ProfileWidget *widget : profileMap.keys())
     {
         if (widget->isSelected())
         {

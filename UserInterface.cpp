@@ -189,12 +189,12 @@ void UserInterface::changeFolder_clicked()
 
 void UserInterface::on_cmdReload_clicked()
 {
-    foreach (QPushButton *profileBtn, profileBtns)
+    for (QPushButton *profileBtn : profileBtns)
     {
         ui->vlButtons->removeWidget(profileBtn);
-        profileBtns.removeAll(profileBtn);
         delete profileBtn;
     }
+    profileBtns.clear();
     setupDirEnv();
 }
 
@@ -223,28 +223,40 @@ void UserInterface::closeProfile()
 {
     if (profileOpen)
     {
-        profileOpen = false;
-        profileName.clear();
-        ui->menuProfile->setEnabled(false);
-        ui->actionSelect_profile->setEnabled(false);
-        ui->swProfile->removeWidget(profileUI);
-        delete profileUI;
+        closeProfile_p();
     }
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
+}
+
+void UserInterface::closeProfile_p()
+{
+    profileOpen = false;
+    profileName.clear();
+    profileName.squeeze();
+    ui->menuProfile->setEnabled(false);
+    ui->actionSelect_profile->setEnabled(false);
+    ui->swProfile->removeWidget(profileUI);
+    profileUI->disconnect();
+    delete profileUI;
 }
 
 void UserInterface::closeEvent(QCloseEvent *ev)
 {
     Q_UNUSED(ev)
-    threadDB->doEndThread();
+    threadDB->terminateThread();
 }
 
 UserInterface::~UserInterface()
 {
-    foreach (QPushButton *profileBtn, profileBtns)
+    if (profileOpen)
+    {
+        closeProfile_p();
+    }
+    for (QPushButton *profileBtn : profileBtns)
     {
         delete profileBtn;
     }
+    profileBtns.clear();
     delete ui;
 }
 

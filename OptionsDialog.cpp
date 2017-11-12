@@ -125,18 +125,21 @@ void OptionsDialog::setupLanguageBox()
 {
     settings->beginGroup("Interface");
     currentLanguage = settings->value("Language", "System").toString();
+    currentAreaLanguage = settings->value("AreaLanguage", "Auto").toString();
     settings->endGroup();
 
     QString cbSysStr = tr("%1 (Next Closest Language)", "First language a person can talk with a different person/application. \"Native\" or \"Not Native\".").arg(tr("System",
                                                                                                                                                                       "System in context of System default"));
+    QString cbAutoStr = tr("%1 (Closest to Interface)", "Next closest language compared to the Interface").arg(tr("Auto", "Automatic language choice."));
     ui->cbLanguage->addItem(cbSysStr, "System");
+    ui->cbAreaLanguage->addItem(cbAutoStr, "Auto");
 
     QStringList availableLanguages;
     availableLanguages << QString("en_GB");
 #ifndef GTA5SYNC_QCONF
-    availableLanguages << TCInstance->listTranslations(AppEnv::getExLangFolder());
+    availableLanguages << TranslationClass::listTranslations(AppEnv::getExLangFolder());
 #endif
-    availableLanguages << TCInstance->listTranslations(AppEnv::getInLangFolder());
+    availableLanguages << TranslationClass::listTranslations(AppEnv::getInLangFolder());
     availableLanguages.removeDuplicates();
     availableLanguages.sort();
 
@@ -144,7 +147,6 @@ void OptionsDialog::setupLanguageBox()
     {
         QLocale langLocale(lang);
         QString cbLangStr = langLocale.nativeLanguageName() % " (" % langLocale.nativeCountryName() % ") [" % lang % "]";
-
         QString langIconStr = "flag-" % TranslationClass::getCountryCode(langLocale);
 
         ui->cbLanguage->addItem(QIcon::fromTheme(langIconStr), cbLangStr, lang);
@@ -158,6 +160,59 @@ void OptionsDialog::setupLanguageBox()
 #endif
         }
     }
+
+    QString aCurrentLanguage = QString("en_GB");
+    if (TCInstance->isLanguageLoaded()) { aCurrentLanguage = TCInstance->getCurrentLanguage(); }
+    QLocale currentLocale = QLocale(aCurrentLanguage);
+    ui->labCurrentLanguage->setText(tr("Current: %1").arg(currentLocale.nativeLanguageName() % " (" % currentLocale.nativeCountryName() % ") [" % aCurrentLanguage % "]"));
+
+    availableLanguages.clear();
+    availableLanguages << TranslationClass::listAreaTranslations();
+    availableLanguages.removeDuplicates();
+    availableLanguages.sort();
+
+    for (QString lang : availableLanguages)
+    {
+        // correcting Language Location if possible
+        QString aLang = lang;
+        if (QFile::exists(":/global/global." % lang % ".loc"))
+        {
+            QFile locFile(":/global/global." % lang % ".loc");
+            if (locFile.open(QFile::ReadOnly))
+            {
+                aLang = QString::fromUtf8(locFile.readLine()).trimmed();
+                locFile.close();
+            }
+        }
+
+        QLocale langLocale(aLang);
+        QString cbLangStr = langLocale.nativeLanguageName() % " (" % langLocale.nativeCountryName() % ") [" % aLang % "]";
+        QString langIconStr = "flag-" % TranslationClass::getCountryCode(langLocale);
+
+        ui->cbAreaLanguage->addItem(QIcon::fromTheme(langIconStr), cbLangStr, lang);
+        if (currentAreaLanguage == lang)
+        {
+#if QT_VERSION >= 0x050000
+            ui->cbAreaLanguage->setCurrentText(cbLangStr);
+#else
+            int indexOfLang = ui->cbAreaLanguage->findText(cbLangStr);
+            ui->cbAreaLanguage->setCurrentIndex(indexOfLang);
+#endif
+        }
+    }
+
+    QString aCurrentAreaLanguage = TCInstance->getCurrentAreaLanguage();
+    if (QFile::exists(":/global/global." % currentAreaLanguage % ".loc"))
+    {
+        QFile locFile(":/global/global." % currentAreaLanguage % ".loc");
+        if (locFile.open(QFile::ReadOnly))
+        {
+            aCurrentAreaLanguage = QString::fromUtf8(locFile.readLine()).trimmed();
+            locFile.close();
+        }
+    }
+    currentLocale = QLocale(aCurrentAreaLanguage);
+    ui->labCurrentAreaLanguage->setText(tr("Current: %1").arg(currentLocale.nativeLanguageName() % " (" % currentLocale.nativeCountryName() % ") [" % aCurrentAreaLanguage % "]"));
 }
 
 void OptionsDialog::setupRadioButtons()
@@ -195,8 +250,10 @@ void OptionsDialog::applySettings()
     settings->beginGroup("Interface");
 #if QT_VERSION >= 0x050000
     settings->setValue("Language", ui->cbLanguage->currentData());
+    settings->setValue("AreaLanguage", ui->cbAreaLanguage->currentData());
 #else
     settings->setValue("Language", ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()));
+    settings->setValue("AreaLanguage", ui->cbAreaLanguage->itemData(ui->cbAreaLanguage->currentIndex()));
 #endif
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050200
@@ -255,14 +312,20 @@ void OptionsDialog::applySettings()
 
 #if QT_VERSION >= 0x050000
     bool languageChanged = ui->cbLanguage->currentData().toString() != currentLanguage;
+    bool languageAreaChanged = ui->cbAreaLanguage->currentData().toString() != currentAreaLanguage;
 #else
     bool languageChanged = ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentLanguage;
+    bool languageAreaChanged = ui->cbAreaLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentAreaLanguage;
 #endif
     if (languageChanged)
     {
         TCInstance->unloadTranslation(qApp);
         TCInstance->initUserLanguage();
         TCInstance->loadTranslation(qApp);
+    }
+    else if (languageAreaChanged)
+    {
+        TCInstance->initUserLanguage();
     }
 
     emit settingsApplied(newContentMode, languageChanged);

@@ -21,7 +21,7 @@
 #include "ProfileDatabase.h"
 #include "ui_PictureDialog.h"
 #include "SidebarGenerator.h"
-#include "MapPreviewDialog.h"
+#include "MapLocationDialog.h"
 #include "SnapmaticEditor.h"
 #include "StandardPaths.h"
 #include "PictureExport.h"
@@ -691,21 +691,48 @@ int PictureDialog::getIndex()
 
 void PictureDialog::openPreviewMap()
 {
-    MapPreviewDialog *mapPreviewDialog;
+    MapLocationDialog *mapLocDialog;
     if (rqFullscreen && fullscreenWidget != nullptr)
     {
-        mapPreviewDialog = new MapPreviewDialog(fullscreenWidget);
+        mapLocDialog = new MapLocationDialog(smpic->getSnapmaticProperties().location.x, smpic->getSnapmaticProperties().location.y, fullscreenWidget);
     }
     else
     {
-        mapPreviewDialog = new MapPreviewDialog(this);
+        mapLocDialog = new MapLocationDialog(smpic->getSnapmaticProperties().location.x, smpic->getSnapmaticProperties().location.y, this);
     }
-    mapPreviewDialog->setWindowIcon(windowIcon());
-    mapPreviewDialog->setModal(true);
-    mapPreviewDialog->drawPointOnMap(smpic->getSnapmaticProperties().location.x, smpic->getSnapmaticProperties().location.y);
-    mapPreviewDialog->show();
-    mapPreviewDialog->exec();
-    delete mapPreviewDialog;
+    mapLocDialog->setWindowIcon(windowIcon());
+    mapLocDialog->setModal(true);
+    mapLocDialog->show();
+    mapLocDialog->exec();
+    if (mapLocDialog->propUpdated())
+    {
+        // Update Snapmatic Properties
+        SnapmaticProperties localSpJson = smpic->getSnapmaticProperties();
+        localSpJson.location.x = mapLocDialog->getXpos();
+        localSpJson.location.y = mapLocDialog->getYpos();
+        localSpJson.location.z = 0;
+
+        // Update Snapmatic Picture
+        QString currentFilePath = smpic->getPictureFilePath();
+        QString originalFilePath = smpic->getOriginalPictureFilePath();
+        QString backupFileName = originalFilePath % ".bak";
+        if (!QFile::exists(backupFileName))
+        {
+            QFile::copy(currentFilePath, backupFileName);
+        }
+        SnapmaticProperties fallbackProperties = smpic->getSnapmaticProperties();
+        smpic->setSnapmaticProperties(localSpJson);
+        if (!smpic->exportPicture(currentFilePath))
+        {
+            QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of I/O Error"));
+            smpic->setSnapmaticProperties(fallbackProperties);
+        }
+        else
+        {
+            updated();
+        }
+    }
+    delete mapLocDialog;
 }
 
 void PictureDialog::editSnapmaticProperties()
@@ -739,6 +766,9 @@ void PictureDialog::updated()
         crewID = QString::number(smpic->getSnapmaticProperties().crewID);
         crewStr = QString::number(smpic->getSnapmaticProperties().crewID);
     }
+    locX = QString::number(smpic->getSnapmaticProperties().location.x);
+    locY = QString::number(smpic->getSnapmaticProperties().location.y);
+    locZ = QString::number(smpic->getSnapmaticProperties().location.z);
     picTitl = StringParser::escapeString(smpic->getPictureTitle());
     ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
 }

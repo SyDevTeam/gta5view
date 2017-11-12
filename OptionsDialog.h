@@ -55,6 +55,7 @@ private:
     Ui::OptionsDialog *ui;
     QList<QTreeWidgetItem*> playerItems;
     Qt::AspectRatioMode aspectRatio;
+    QString currentAreaLanguage;
     QString currentLanguage;
     QString currentCFolder;
     QString defaultProfile;

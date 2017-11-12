@@ -73,6 +73,7 @@ ImportDialog::~ImportDialog()
 
 void ImportDialog::processImage()
 {
+    if (workImage.isNull()) return;
     QImage snapmaticImage = workImage;
     QPixmap snapmaticPixmap(snapmaticResolutionW, snapmaticResolutionH);
     snapmaticPixmap.fill(selectedColour);
@@ -101,7 +102,7 @@ void ImportDialog::processImage()
             snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         }
         snapmaticPainter.drawImage(snapmaticAvatarPlacementW + diffWidth, snapmaticAvatarPlacementH + diffHeight, snapmaticImage);
-        imageTitle = "Custom Avatar";
+        imageTitle = tr("Custom Avatar", "Custom Avatar Description in SC, don't use Special Character!");
     }
     else
     {
@@ -127,7 +128,7 @@ void ImportDialog::processImage()
             snapmaticImage = snapmaticImage.scaled(snapmaticResolutionW, snapmaticResolutionH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         }
         snapmaticPainter.drawImage(0 + diffWidth, 0 + diffHeight, snapmaticImage);
-        imageTitle = "Custom Picture";
+        imageTitle = tr("Custom Picture", "Custom Picture Description in SC, don't use Special Character!");
     }
     snapmaticPainter.end();
     newImage = snapmaticPixmap.toImage();
@@ -139,13 +140,38 @@ QImage ImportDialog::image()
     return newImage;
 }
 
-void ImportDialog::setImage(const QImage &image_)
+void ImportDialog::setImage(QImage *image_)
 {
-    workImage = image_;
-    if (workImage.width() == workImage.height())
+    workImage = QImage();
+    if (image_->width() == image_->height())
     {
         insideAvatarZone = true;
         ui->cbAvatar->setChecked(true);
+        if (image_->height() > snapmaticResolutionH)
+        {
+            workImage = image_->scaled(snapmaticResolutionH, snapmaticResolutionH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+            delete image_;
+        }
+        else
+        {
+            workImage = *image_;
+            delete image_;
+        }
+    }
+    else if (image_->width() > snapmaticResolutionW && image_->width() > image_->height())
+    {
+        workImage = image_->scaledToWidth(snapmaticResolutionW, Qt::SmoothTransformation);
+        delete image_;
+    }
+    else if (image_->height() > snapmaticResolutionH && image_->height() > image_->width())
+    {
+        workImage = image_->scaledToHeight(snapmaticResolutionH, Qt::SmoothTransformation);
+        delete image_;
+    }
+    else
+    {
+        workImage = *image_;
+        delete image_;
     }
     processImage();
 }

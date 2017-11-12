@@ -16,26 +16,48 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef MAPPREVIEWDIALOG_H
-#define MAPPREVIEWDIALOG_H
+#ifndef MAPLOCATIONDIALOG_H
+#define MAPLOCATIONDIALOG_H
 
 #include <QDialog>
+#include <QMouseEvent>
 
 namespace Ui {
-class MapPreviewDialog;
+class MapLocationDialog;
 }
 
-class MapPreviewDialog : public QDialog
+class MapLocationDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit MapPreviewDialog(QWidget *parent = 0);
+    explicit MapLocationDialog(double x, double y, QWidget *parent = 0);
     void drawPointOnMap(double x, double y);
-    ~MapPreviewDialog();
+    bool propUpdated();
+    double getXpos();
+    double getYpos();
+    ~MapLocationDialog();
+
+protected:
+    void mouseMoveEvent(QMouseEvent *ev);
+    void mouseReleaseEvent(QMouseEvent *ev);
+
+private slots:
+    void on_cmdDone_clicked();
+    void on_cmdApply_clicked();
+    void on_cmdChange_clicked();
+    void on_cmdRevert_clicked();
+    void updatePosFromEvent(int x, int y);
+    void on_cmdClose_clicked();
 
 private:
-    Ui::MapPreviewDialog *ui;
+    Ui::MapLocationDialog *ui;
+    double xpos_old;
+    double ypos_old;
+    double xpos_new;
+    double ypos_new;
+    bool propUpdate;
+    bool changeMode;
 };
 
-#endif // MAPPREVIEWDIALOG_H
+#endif // MAPLOCATIONDIALOG_H

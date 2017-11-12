@@ -390,11 +390,37 @@
        <item>
         <widget class="QGroupBox" name="gbLanguage">
          <property name="title">
-          <string>Language</string>
+          <string>Interface</string>
          </property>
          <layout class="QVBoxLayout" name="vlLanguage">
           <item>
            <widget class="QComboBox" name="cbLanguage"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="labCurrentLanguage">
+            <property name="text">
+             <string>Current: %1</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbAreas">
+         <property name="title">
+          <string>Areas</string>
+         </property>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <item>
+           <widget class="QComboBox" name="cbAreaLanguage"/>
+          </item>
+          <item>
+           <widget class="QLabel" name="labCurrentAreaLanguage">
+            <property name="text">
+             <string>Current: %1</string>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
