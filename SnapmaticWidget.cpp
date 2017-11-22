@@ -72,7 +72,7 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
     ui->labPicture->setFixedSize(48 * screenRatio, 27 * screenRatio);
 
     QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getImage().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
-    ui->labPicStr->setText(smpic->getPictureStr() % "\n" % smpic->getPictureTitl() % "");
+    ui->labPicStr->setText(smpic->getPictureStr() % "\n" % smpic->getPictureTitl());
     ui->labPicture->setPixmap(SnapmaticPixmap);
 
     picture->clearCache();

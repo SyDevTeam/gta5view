@@ -50,7 +50,7 @@
 
 #ifndef GTA5SYNC_APPVER
 #ifndef GTA5SYNC_DAILYB
-#define GTA5SYNC_APPVER "1.5.0-dev4"
+#define GTA5SYNC_APPVER "1.5.0-dev5"
 #else
 #define GTA5SYNC_APPVER GTA5SYNC_DAILYB
 #endif

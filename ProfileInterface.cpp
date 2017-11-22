@@ -131,10 +131,12 @@ void ProfileInterface::setProfileFolder(QString folder, QString profile)
 
 void ProfileInterface::setupProfileInterface()
 {
+    fixedPictures.clear();
     ui->labProfileLoading->setText(tr("Loading..."));
     profileLoader = new ProfileLoader(profileFolder, crewDB);
     QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(savegameLoaded_event(SavegameData*, QString)));
     QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*)), this, SLOT(pictureLoaded_event(SnapmaticPicture*)));
+    QObject::connect(profileLoader, SIGNAL(pictureFixed(SnapmaticPicture*)), this, SLOT(pictureFixed_event(SnapmaticPicture*)));
     QObject::connect(profileLoader, SIGNAL(loadingProgress(int,int)), this, SLOT(loadingProgress(int,int)));
     QObject::connect(profileLoader, SIGNAL(finished()), this, SLOT(profileLoaded_p()));
     profileLoader->start();
@@ -167,6 +169,12 @@ void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePa
 void ProfileInterface::pictureLoaded_event(SnapmaticPicture *picture)
 {
     pictureLoaded(picture, false);
+}
+
+void ProfileInterface::pictureFixed_event(SnapmaticPicture *picture)
+{
+    QString fixedPicture = picture->getPictureStr() % " (" % picture->getPictureTitl() % ")";
+    fixedPictures << fixedPicture;
 }
 
 void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, bool inserted)
@@ -342,6 +350,19 @@ void ProfileInterface::profileLoaded_p()
     ui->cmdImport->setEnabled(true);
     isProfileLoaded = true;
     emit profileLoaded();
+
+    if (!fixedPictures.isEmpty())
+    {
+        int fixedInt = 0;
+        QString fixedStr;
+        for (QString fixedPicture : fixedPictures)
+        {
+            if (fixedInt != 0) { fixedStr += "<br>"; }
+            fixedStr += fixedPicture;
+            fixedInt++;
+        }
+        QMessageBox::information(this, tr("Snapmatic Loader"), tr("<h4>Following Snapmatic Pictures got repaired</h4>%1").arg(fixedStr));
+    }
 }
 
 void ProfileInterface::savegameDeleted_event()
@@ -755,6 +776,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool warn)
 {
     QString picFileName = picture->getPictureFileName();
+    qDebug() << picFileName;
     QString adjustedFileName = picture->getOriginalPictureFileName();
     if (picFileName.left(4) != "PGTA")
     {
@@ -768,6 +790,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
     }
     else if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format))
     {
+        picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
         picture->setPicFilePath(profileFolder % "/" % adjustedFileName);
         pictureLoaded(picture, true);
         return true;

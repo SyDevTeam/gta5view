@@ -111,6 +111,11 @@ public:
     bool isSnapmaticDefaultsEnforced();
     void setSnapmaticDefaultsEnforced(bool enforced);
 
+    // SNAPMATIC FORMAT
+    SnapmaticFormat getSnapmaticFormat();
+    void setSnapmaticFormat(SnapmaticFormat format);
+    bool isFormatSwitched();
+
     // VERIFY CONTENT
     static bool verifyTitle(const QString &title);
 
@@ -134,6 +139,7 @@ private:
     bool cacheEnabled;
     bool isLoadedInRAM;
     bool isCustomFormat;
+    bool isFormatSwitch;
     bool careSnapDefault;
     int jpegRawContentSize;
     int jpegRawContentSizeE;

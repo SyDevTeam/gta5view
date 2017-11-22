@@ -91,6 +91,7 @@ void SnapmaticPicture::reset()
 
     // INIT PIC BOOLS
     isCustomFormat = false;
+    isFormatSwitch = false;
     isLoadedInRAM = false;
     lowRamMode = false;
     picOk = false;
@@ -115,6 +116,9 @@ bool SnapmaticPicture::preloadFile()
     QFile *picFile = new QFile(picFilePath);
     picFileName = QFileInfo(picFilePath).fileName();
 
+    bool g5eMode = false;
+    isFormatSwitch = false;
+
     if (!picFile->open(QFile::ReadOnly))
     {
         lastStep = "1;/1,OpenFile," % StringParser::convertDrawStringForLog(picFilePath);
@@ -123,19 +127,38 @@ bool SnapmaticPicture::preloadFile()
     }
     if (picFilePath.right(4) != QLatin1String(".g5e"))
     {
-        rawPicContent = picFile->read(snapmaticFileMaxSize);
+        rawPicContent = picFile->read(snapmaticFileMaxSize + 1024);
         picFile->close();
         delete picFile;
 
-        // Setting is values
-        isCustomFormat = false;
-        isLoadedInRAM = true;
+        if (rawPicContent.mid(1, 3) == QByteArray("G5E"))
+        {
+            isFormatSwitch = true;
+        }
+        else
+        {
+            isCustomFormat = false;
+            isLoadedInRAM = true;
+        }
     }
     else
     {
-        QByteArray g5eContent = picFile->read(snapmaticFileMaxSize + 1024);
-        picFile->close();
-        delete picFile;
+        g5eMode = true;
+    }
+    if (g5eMode || isFormatSwitch)
+    {
+        QByteArray g5eContent;
+        if (!isFormatSwitch)
+        {
+            g5eContent = picFile->read(snapmaticFileMaxSize + 1024);
+            picFile->close();
+            delete picFile;
+        }
+        else
+        {
+            g5eContent = rawPicContent;
+            rawPicContent.clear();
+        }
 
         // Set Custom Format
         isCustomFormat = true;
@@ -1189,6 +1212,37 @@ bool SnapmaticPicture::isSnapmaticDefaultsEnforced()
 void SnapmaticPicture::setSnapmaticDefaultsEnforced(bool enforced)
 {
     careSnapDefault = enforced;
+}
+
+// SNAPMATIC FORMAT
+
+SnapmaticFormat SnapmaticPicture::getSnapmaticFormat()
+{
+    if (isCustomFormat)
+    {
+        return SnapmaticFormat::G5E_Format;
+    }
+    return SnapmaticFormat::PGTA_Format;
+}
+
+void SnapmaticPicture::setSnapmaticFormat(SnapmaticFormat format)
+{
+    if (format == SnapmaticFormat::G5E_Format)
+    {
+        isCustomFormat = true;
+        return;
+    }
+    else if (format == SnapmaticFormat::PGTA_Format)
+    {
+        isCustomFormat = false;
+        return;
+    }
+    qDebug() << "setSnapmaticFormat: Invalid SnapmaticFormat defined, valid SnapmaticFormats are G5E_Format and PGTA_Format";
+}
+
+bool SnapmaticPicture::isFormatSwitched()
+{
+    return isFormatSwitch;
 }
 
 // VERIFY CONTENT

@@ -78,6 +78,14 @@ void ProfileLoader::run()
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
         if (picture->readingPicture(true, true, true))
         {
+            if (picture->isFormatSwitched())
+            {
+                picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
+                if (picture->exportPicture(picturePath, SnapmaticFormat::PGTA_Format))
+                {
+                    emit pictureFixed(picture);
+                }
+            }
             emit pictureLoaded(picture);
             int crewNumber = picture->getSnapmaticProperties().crewID;
             if (!crewList.contains(crewNumber))

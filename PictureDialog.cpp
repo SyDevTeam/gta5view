@@ -763,7 +763,16 @@ void PictureDialog::editSnapmaticProperties()
 void PictureDialog::editSnapmaticRawJson()
 {
     SnapmaticPicture *picture = smpic;
-    JsonEditorDialog *jsonEditor = new JsonEditorDialog(picture, this);
+    JsonEditorDialog *jsonEditor;
+    if (rqFullscreen && fullscreenWidget != nullptr)
+    {
+        jsonEditor = new JsonEditorDialog(picture, fullscreenWidget);
+    }
+    else
+    {
+        jsonEditor = new JsonEditorDialog(picture, this);
+    }
+    jsonEditor->setWindowIcon(windowIcon());
     jsonEditor->setModal(true);
     jsonEditor->show();
     jsonEditor->exec();

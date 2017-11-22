@@ -45,6 +45,7 @@ private slots:
 
 signals:
     void pictureLoaded(SnapmaticPicture *picture);
+    void pictureFixed(SnapmaticPicture *picture);
     void savegameLoaded(SavegameData *savegame, QString savegamePath);
     void loadingProgress(int value, int maximum);
 };

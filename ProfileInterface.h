@@ -69,6 +69,7 @@ private slots:
     void on_cmdCloseProfile_clicked();
     void on_cmdImport_clicked();
     void pictureLoaded_event(SnapmaticPicture *picture);
+    void pictureFixed_event(SnapmaticPicture *picture);
     void savegameLoaded_event(SavegameData *savegame, QString savegamePath);
     void loadingProgress(int value, int maximum);
     void pictureDeleted_event();
@@ -95,6 +96,7 @@ private:
     QList<SnapmaticPicture*> pictures;
     QMap<ProfileWidget*,QString> widgets;
     QSpacerItem *saSpacerItem;
+    QStringList fixedPictures;
     QColor highlightBackColor;
     QColor highlightTextColor;
     QString enabledPicStr;
