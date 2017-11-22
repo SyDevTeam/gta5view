@@ -38,6 +38,7 @@ SOURCES += main.cpp \
     GlobalString.cpp \
     IconLoader.cpp \
     ImportDialog.cpp \
+    JsonEditorDialog.cpp \
     MapLocationDialog.cpp \
     OptionsDialog.cpp \
     PictureDialog.cpp \
@@ -59,6 +60,7 @@ SOURCES += main.cpp \
     StringParser.cpp \
     TranslationClass.cpp \
     UserInterface.cpp \
+    anpro/JSHighlighter.cpp \
     uimod/UiModLabel.cpp \
     uimod/UiModWidget.cpp
 
@@ -72,6 +74,7 @@ HEADERS  += \
     GlobalString.h \
     IconLoader.h \
     ImportDialog.h \
+    JsonEditorDialog.h \
     MapLocationDialog.h \
     OptionsDialog.h \
     PictureDialog.h \
@@ -93,6 +96,7 @@ HEADERS  += \
     StringParser.h \
     TranslationClass.h \
     UserInterface.h \
+    anpro/JSHighlighter.h \
     uimod/UiModLabel.h \
     uimod/UiModWidget.h
 
@@ -100,6 +104,7 @@ FORMS    += \
     AboutDialog.ui \
     ExportDialog.ui \
     ImportDialog.ui \
+    JsonEditorDialog.ui \
     MapLocationDialog.ui \
     OptionsDialog.ui \
     PictureDialog.ui \
@@ -131,7 +136,7 @@ DISTFILES += res/app.rc \
     lang/gta5sync_no.ts \
     lang/README.txt
 
-INCLUDEPATH += ./uimod
+INCLUDEPATH += ./anpro ./uimod
 
 # GTA5SYNC/GTA5VIEW ONLY
 

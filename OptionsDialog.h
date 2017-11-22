@@ -46,6 +46,7 @@ private slots:
     void on_hsPicQuality_valueChanged(int value);
     void on_cbIgnoreAspectRatio_toggled(bool checked);
     void on_cmdExploreFolder_clicked();
+    void on_cbDefaultStyle_toggled(bool checked);
 
 signals:
     void settingsApplied(int contentMode, bool languageChanged);
@@ -61,6 +62,7 @@ private:
     QString defaultProfile;
     QString percentString;
     QSettings *settings;
+    bool withoutPlayers;
     bool currentFFolder;
     int contentMode;
     int customQuality;
@@ -73,6 +75,7 @@ private:
     void setupDefaultProfile();
     void setupPictureSettings();
     void setupCustomGTAFolder();
+    void setupInterfaceSettings();
     void setupSnapmaticPictureViewer();
     void applySettings();
 };

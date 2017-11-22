@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -16,39 +16,41 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef CREWDATABASE_H
-#define CREWDATABASE_H
+#ifndef JSONEDITORDIALOG_H
+#define JSONEDITORDIALOG_H
 
-#include <QSettings>
-#include <QObject>
-#include <QMutex>
-#include <QMap>
+#include "SnapmaticPicture.h"
+#include "JSHighlighter.h"
+#include <QDialog>
 
-class CrewDatabase : public QObject
+namespace Ui {
+class JsonEditorDialog;
+}
+
+class JsonEditorDialog : public QDialog
 {
     Q_OBJECT
+
 public:
-    explicit CrewDatabase(QObject *parent = 0);
-    QString getCrewName(QString crewID);
-    QString getCrewName(int crewID);
-    QStringList getCompatibleCrews();
-    QStringList getCrews();
-    void setAddingCrews(bool addingCrews);
-    bool isCompatibleCrew(QString crewNID);
-    bool isCompatibleCrew(int crewID);
-    bool isAddingCrews();
-    ~CrewDatabase();
+    explicit JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent = 0);
+    bool saveJsonContent();
+    ~JsonEditorDialog();
+
+protected:
+    void closeEvent(QCloseEvent *ev);
+
+private slots:
+    void on_cmdClose_clicked();
+    void on_cmdSave_clicked();
+
+signals:
+    void codeUpdated(QString jsonCode);
 
 private:
-    mutable QMutex mutex;
-    bool addProcess;
-    QSettings *crewDB;
-    QStringList getCrews_p();
-    QStringList getCompatibleCrews_p();
-
-public slots:
-    void setCrewName(int crewID, QString crewName);
-    void addCrew(int crewID);
+    QString jsonCode;
+    JSHighlighter *jsonHl;
+    SnapmaticPicture *smpic;
+    Ui::JsonEditorDialog *ui;
 };
 
-#endif // CREWDATABASE_H
+#endif // JSONEDITORDIALOG_H

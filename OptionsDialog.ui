@@ -314,7 +314,7 @@
         </widget>
        </item>
        <item>
-        <spacer name="vsTabPictures">
+        <spacer name="vsPictures">
          <property name="orientation">
           <enum>Qt::Vertical</enum>
          </property>
@@ -382,15 +382,15 @@
        </item>
       </layout>
      </widget>
-     <widget class="QWidget" name="tabLocalization">
+     <widget class="QWidget" name="tabInterface">
       <attribute name="title">
-       <string>Language</string>
+       <string>Interface</string>
       </attribute>
-      <layout class="QVBoxLayout" name="vlLocalization">
+      <layout class="QVBoxLayout" name="vlInterface">
        <item>
         <widget class="QGroupBox" name="gbLanguage">
          <property name="title">
-          <string>Interface</string>
+          <string>Language for Interface</string>
          </property>
          <layout class="QVBoxLayout" name="vlLanguage">
           <item>
@@ -409,9 +409,9 @@
        <item>
         <widget class="QGroupBox" name="gbAreas">
          <property name="title">
-          <string>Areas</string>
+          <string>Language for Areas</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="vlAreas">
           <item>
            <widget class="QComboBox" name="cbAreaLanguage"/>
           </item>
@@ -419,6 +419,65 @@
            <widget class="QLabel" name="labCurrentAreaLanguage">
             <property name="text">
              <string>Current: %1</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbStyle">
+         <property name="title">
+          <string>Style</string>
+         </property>
+         <layout class="QVBoxLayout" name="vlStyle">
+          <item>
+           <widget class="QCheckBox" name="cbDefaultStyle">
+            <property name="text">
+             <string>Use Default Style (Restart)</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="hlStyle">
+            <item>
+             <widget class="QLabel" name="labStyle">
+              <property name="text">
+               <string>Style:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="cbStyleList">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbFont">
+         <property name="title">
+          <string>Font</string>
+         </property>
+         <layout class="QVBoxLayout" name="vlFont">
+          <item>
+           <widget class="QCheckBox" name="cbAlwaysUseMessageFont">
+            <property name="text">
+             <string>Always use Message Font (Windows 2003 and earlier)</string>
             </property>
            </widget>
           </item>

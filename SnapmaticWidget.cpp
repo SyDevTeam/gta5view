@@ -18,6 +18,8 @@
 
 #include "SnapmaticWidget.h"
 #include "ui_SnapmaticWidget.h"
+#include "MapLocationDialog.h"
+#include "JsonEditorDialog.h"
 #include "SnapmaticPicture.h"
 #include "SnapmaticEditor.h"
 #include "DatabaseThread.h"
@@ -283,11 +285,55 @@ void SnapmaticWidget::makePictureVisibleSlot()
 void SnapmaticWidget::editSnapmaticProperties()
 {
     SnapmaticEditor *snapmaticEditor = new SnapmaticEditor(crewDB, this);
-    snapmaticEditor->setWindowFlags(snapmaticEditor->windowFlags()^Qt::WindowContextHelpButtonHint);
     snapmaticEditor->setSnapmaticPicture(smpic);
     snapmaticEditor->setModal(true);
+    snapmaticEditor->show();
     snapmaticEditor->exec();
     delete snapmaticEditor;
+}
+
+void SnapmaticWidget::editSnapmaticRawJson()
+{
+    JsonEditorDialog *jsonEditor = new JsonEditorDialog(smpic, this);
+    jsonEditor->setModal(true);
+    jsonEditor->show();
+    jsonEditor->exec();
+    delete jsonEditor;
+}
+
+void SnapmaticWidget::openMapViewer()
+{
+    SnapmaticPicture *picture = smpic;
+    MapLocationDialog *mapLocDialog;
+    mapLocDialog = new MapLocationDialog(picture->getSnapmaticProperties().location.x, picture->getSnapmaticProperties().location.y, this);
+    mapLocDialog->setModal(true);
+    mapLocDialog->show();
+    mapLocDialog->exec();
+    if (mapLocDialog->propUpdated())
+    {
+        // Update Snapmatic Properties
+        SnapmaticProperties localSpJson = picture->getSnapmaticProperties();
+        localSpJson.location.x = mapLocDialog->getXpos();
+        localSpJson.location.y = mapLocDialog->getYpos();
+        localSpJson.location.z = 0;
+
+        // Update Snapmatic Picture
+        QString currentFilePath = picture->getPictureFilePath();
+        QString originalFilePath = picture->getOriginalPictureFilePath();
+        QString backupFileName = originalFilePath % ".bak";
+        if (!QFile::exists(backupFileName))
+        {
+            QFile::copy(currentFilePath, backupFileName);
+        }
+        SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
+        picture->setSnapmaticProperties(localSpJson);
+        if (!picture->exportPicture(currentFilePath))
+        {
+            QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of I/O Error"));
+            picture->setSnapmaticProperties(fallbackProperties);
+        }
+    }
+    delete mapLocDialog;
 }
 
 bool SnapmaticWidget::isSelected()

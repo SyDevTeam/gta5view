@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -16,39 +16,41 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef CREWDATABASE_H
-#define CREWDATABASE_H
+#ifndef JSHIGHLIGHTER_H
+#define JSHIGHLIGHTER_H
 
-#include <QSettings>
-#include <QObject>
-#include <QMutex>
-#include <QMap>
+#include <QSyntaxHighlighter>
+#include <QTextCharFormat>
+#include <QTextDocument>
+#include <QTextFormat>
+#include <QStringList>
+#include <QRegExp>
+#include <QVector>
+#include <QHash>
 
-class CrewDatabase : public QObject
+class QTextDocument;
+
+class JSHighlighter : public QSyntaxHighlighter
 {
     Q_OBJECT
+
 public:
-    explicit CrewDatabase(QObject *parent = 0);
-    QString getCrewName(QString crewID);
-    QString getCrewName(int crewID);
-    QStringList getCompatibleCrews();
-    QStringList getCrews();
-    void setAddingCrews(bool addingCrews);
-    bool isCompatibleCrew(QString crewNID);
-    bool isCompatibleCrew(int crewID);
-    bool isAddingCrews();
-    ~CrewDatabase();
+    struct HighlightingRule
+    {
+        QRegExp pattern;
+        QTextCharFormat format;
+    };
+    QVector<HighlightingRule> highlightingRules;
 
-private:
-    mutable QMutex mutex;
-    bool addProcess;
-    QSettings *crewDB;
-    QStringList getCrews_p();
-    QStringList getCompatibleCrews_p();
+    QTextCharFormat keywordFormat;
+    QTextCharFormat doubleFormat;
+    QTextCharFormat quotationFormat;
+    QTextCharFormat objectFormat;
 
-public slots:
-    void setCrewName(int crewID, QString crewName);
-    void addCrew(int crewID);
+    JSHighlighter(QTextDocument *parent = 0);
+
+protected:
+    void highlightBlock(const QString &text) override;
 };
 
-#endif // CREWDATABASE_H
+#endif // JSHIGHLIGHTER_H

@@ -21,6 +21,7 @@
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "SavegameDialog.h"
+#include "OptionsDialog.h"
 #include "PictureDialog.h"
 #include "UserInterface.h"
 #include "CrewDatabase.h"
@@ -28,8 +29,11 @@
 #include "IconLoader.h"
 #include "AppEnv.h"
 #include "config.h"
+#include <QDesktopWidget>
 #include <QStringBuilder>
+#include <QStyleFactory>
 #include <QApplication>
+#include <QMessageBox>
 #include <QStringList>
 #include <QTranslator>
 #include <QFileInfo>
@@ -52,9 +56,25 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(GTA5SYNC_APPVER);
     a.setQuitOnLastWindowClosed(false);
 
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Startup");
+
+    bool isFirstStart = settings.value("IsFirstStart", true).toBool();
+    bool customStyle = settings.value("CustomStyle", false).toBool();
+    QString appStyle = settings.value("AppStyle", "Default").toString();
+
+    if (customStyle)
+    {
+        if (QStyleFactory::keys().contains(appStyle, Qt::CaseInsensitive))
+        {
+            a.setStyle(QStyleFactory::create(appStyle));
+        }
+    }
+
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050400
-    if (QSysInfo::windowsVersion() >= 0x0080)
+    bool alwaysUseMessageFont = settings.value("AlwaysUseMessageFont", false).toBool();
+    if (QSysInfo::windowsVersion() >= 0x0080 || alwaysUseMessageFont)
     {
         // Get Windows Font
         NONCLIENTMETRICS ncm;
@@ -82,6 +102,22 @@ int main(int argc, char *argv[])
 
     TCInstance->initUserLanguage();
     TCInstance->loadTranslation(&a);
+
+    if (isFirstStart)
+    {
+        QMessageBox::StandardButton button = QMessageBox::information(a.desktop(), QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER), QApplication::tr("<h4>Welcome to %1!</h4>You want to configure %1 before you start using it?").arg(GTA5SYNC_APPSTR), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+        if (button == QMessageBox::Yes)
+        {
+            ProfileDatabase profileDB;
+            OptionsDialog optionsDialog(&profileDB);
+            optionsDialog.setWindowIcon(IconLoader::loadingAppIcon());
+            optionsDialog.show();
+            optionsDialog.exec();
+        }
+        settings.setValue("IsFirstStart", false);
+    }
+
+    settings.endGroup();
 
     QStringList applicationArgs = a.arguments();
     QString selectedAction;

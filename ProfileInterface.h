@@ -31,6 +31,7 @@
 #include "CrewDatabase.h"
 #include <QProgressDialog>
 #include <QSpacerItem>
+#include <QDateTime>
 #include <QWidget>
 #include <QList>
 #include <QMap>
@@ -107,7 +108,7 @@ private:
     int contentMode;
 
     bool isSupportedImageFile(QString selectedFileName);
-    bool importFile(QString selectedFile, bool notMultiple);
+    bool importFile(QString selectedFile, QDateTime importDateTime, int *currentTime, bool notMultiple);
     void importFilesProgress(QStringList selectedFiles);
     bool importSnapmaticPicture(SnapmaticPicture *picture, bool warn = true);
     bool importSavegameData(SavegameData *savegame, QString sgdPath, bool warn = true);

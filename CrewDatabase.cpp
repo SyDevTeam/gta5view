@@ -92,6 +92,17 @@ QStringList CrewDatabase::getCompatibleCrews_p()
     return crewDB->childKeys();
 }
 
+QString CrewDatabase::getCrewName(QString crewID)
+{
+    QMutexLocker locker(&mutex);
+#ifdef GTA5SYNC_DEBUG
+    qDebug() << "getCrewName" << crewID;
+#endif
+    QString crewStr = crewDB->value(crewID, crewID).toString();
+    if (crewID == "0") crewStr = tr("No Crew", "");
+    return crewStr;
+}
+
 QString CrewDatabase::getCrewName(int crewID)
 {
     QMutexLocker locker(&mutex);

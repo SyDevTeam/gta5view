@@ -54,6 +54,9 @@
 #include <QUrl>
 #include <QDir>
 
+#define importTimeFormat "HHmmss"
+#define findRetryLimit 500
+
 ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
     QWidget(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
     ui(new Ui::ProfileInterface)
@@ -446,7 +449,9 @@ fileDialogPreOpen: //Work?
         if (selectedFiles.length() == 1)
         {
             QString selectedFile = selectedFiles.at(0);
-            if (!importFile(selectedFile, true)) goto fileDialogPreOpen; //Work?
+            QDateTime importDateTime = QDateTime::currentDateTime();
+            int currentTime = importDateTime.toString(importTimeFormat).toInt();
+            if (!importFile(selectedFile, importDateTime, &currentTime, true)) goto fileDialogPreOpen; //Work?
         }
         else if (selectedFiles.length() > 1)
         {
@@ -486,13 +491,14 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
     pbBar.at(0)->setTextVisible(false);
     pbDialog.show();
 
-    QTime t;
-    t.start();
+    QDateTime importDateTime = QDateTime::currentDateTime();
+    int currentTime = importDateTime.time().toString(importTimeFormat).toInt();
     for (QString selectedFile : selectedFiles)
     {
         pbDialog.setValue(overallId);
         pbDialog.setLabelText(tr("Import file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
-        if (!importFile(selectedFile, false))
+        importDateTime = QDateTime::currentDateTime();
+        if (!importFile(selectedFile, importDateTime, &currentTime, false))
         {
             failedFiles << QFileInfo(selectedFile).fileName();
         }
@@ -510,7 +516,7 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
     }
 }
 
-bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
+bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime, int *currentTime, bool notMultiple)
 {
     QString selectedFileName = QFileInfo(selectedFile).fileName();
     if (QFile::exists(selectedFile))
@@ -590,7 +596,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                             diffWidth = diffWidth / 2;
                         }
                         snapmaticPainter.drawImage(145 + diffWidth, 66 + diffHeight, snapmaticImage);
-                        customImageTitle = "Custom Avatar";
+                        customImageTitle = ImportDialog::tr("Custom Avatar", "Custom Avatar Description in SC, don't use Special Character!");
                     }
                     else
                     {
@@ -609,7 +615,7 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                             diffHeight = diffHeight / 2;
                         }
                         snapmaticPainter.drawImage(0 + diffWidth, 0 + diffHeight, snapmaticImage);
-                        customImageTitle = "Custom Picture";
+                        customImageTitle = ImportDialog::tr("Custom Picture", "Custom Picture Description in SC, don't use Special Character!");
                     }
                     snapmaticPainter.end();
                     if (!picture->setImage(snapmaticPixmap.toImage()))
@@ -617,23 +623,22 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                         delete picture;
                         return false;
                     }
-                    QString currentTime = QTime::currentTime().toString("HHmmss");
                     SnapmaticProperties spJson = picture->getSnapmaticProperties();
-                    spJson.uid = QString(currentTime %
-                                         QString::number(QDate::currentDate().dayOfYear())).toInt();
+                    spJson.uid = QString(QString::number(*currentTime) %
+                                         QString::number(importDateTime.date().dayOfYear())).toInt();
                     bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                     bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                     int cEnough = 0;
-                    while ((fExists || fExistsHidden) && cEnough < 5000)
+                    while ((fExists || fExistsHidden) && cEnough < findRetryLimit)
                     {
-                        currentTime = QString::number(currentTime.toInt() - 1);
-                        spJson.uid = QString(currentTime %
-                                             QString::number(QDate::currentDate().dayOfYear())).toInt();
+                        *currentTime = *currentTime - 1;
+                        spJson.uid = QString(QString::number(*currentTime) %
+                                             QString::number(importDateTime.date().dayOfYear())).toInt();
                         fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                         fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                         cEnough++;
                     }
-                    spJson.createdDateTime = QDateTime::currentDateTime();
+                    spJson.createdDateTime = importDateTime;
                     spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
                     picture->setSnapmaticProperties(spJson);
                     picture->setPicFileName(QString("PGTA5%1").arg(QString::number(spJson.uid)));
@@ -672,23 +677,22 @@ bool ProfileInterface::importFile(QString selectedFile, bool notMultiple)
                     {
                         if (picture->setImage(importDialog->image()))
                         {
-                            QString currentTime = QTime::currentTime().toString("HHmmss");
                             SnapmaticProperties spJson = picture->getSnapmaticProperties();
-                            spJson.uid = QString(currentTime +
-                                                 QString::number(QDate::currentDate().dayOfYear())).toInt();
+                            spJson.uid = QString(QString::number(*currentTime) %
+                                                 QString::number(importDateTime.date().dayOfYear())).toInt();
                             bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                             bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                             int cEnough = 0;
-                            while ((fExists || fExistsHidden) && cEnough < 25)
+                            while ((fExists || fExistsHidden) && cEnough < findRetryLimit)
                             {
-                                currentTime = QString::number(currentTime.toInt() - 1);
-                                spJson.uid = QString(currentTime %
-                                                     QString::number(QDate::currentDate().dayOfYear())).toInt();
+                                *currentTime = *currentTime - 1;
+                                spJson.uid = QString(QString::number(*currentTime) %
+                                                     QString::number(importDateTime.date().dayOfYear())).toInt();
                                 fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                                 fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                                 cEnough++;
                             }
-                            spJson.createdDateTime = QDateTime::currentDateTime();
+                            spJson.createdDateTime = importDateTime;
                             spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
                             picture->setSnapmaticProperties(spJson);
                             picture->setPicFileName(QString("PGTA5%1").arg(QString::number(spJson.uid)));
@@ -1158,6 +1162,9 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
         editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), picWidget, SLOT(makePictureHiddenSlot()));
     }
     editMenu.addAction(PictureDialog::tr("&Edit Properties..."), picWidget, SLOT(editSnapmaticProperties()));
+    editMenu.addSeparator();
+    editMenu.addAction(PictureDialog::tr("Open &Map Viewer..."), picWidget, SLOT(openMapViewer()));
+    editMenu.addAction(PictureDialog::tr("Open &JSON Editor..."), picWidget, SLOT(editSnapmaticRawJson()));
     QMenu exportMenu(SnapmaticWidget::tr("&Export"), this);
     exportMenu.addAction(PictureDialog::tr("Export as &Picture..."), picWidget, SLOT(on_cmdExport_clicked()));
     exportMenu.addAction(PictureDialog::tr("Export as &Snapmatic..."), picWidget, SLOT(on_cmdCopy_clicked()));
@@ -1231,7 +1238,9 @@ void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
     if (pathList.length() == 1)
     {
         QString selectedFile = pathList.at(0);
-        importFile(selectedFile, true);
+        QDateTime importDateTime = QDateTime::currentDateTime();
+        int currentTime = importDateTime.toString(importTimeFormat).toInt();
+        importFile(selectedFile, QDateTime::currentDateTime(), &currentTime, true);
     }
     else if (pathList.length() > 1)
     {

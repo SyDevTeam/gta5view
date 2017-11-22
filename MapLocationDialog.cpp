@@ -34,6 +34,7 @@ MapLocationDialog::MapLocationDialog(double x, double y, QWidget *parent) :
     ui->cmdApply->setVisible(false);
     ui->cmdRevert->setVisible(false);
     ui->cmdDone->setCursor(Qt::ArrowCursor);
+    ui->cmdClose->setCursor(Qt::ArrowCursor);
 
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();

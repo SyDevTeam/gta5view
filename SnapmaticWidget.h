@@ -68,6 +68,8 @@ private slots:
     void makePictureVisibleSlot();
     void makePictureHiddenSlot();
     void editSnapmaticProperties();
+    void editSnapmaticRawJson();
+    void openMapViewer();
     void snapmaticUpdated();
 
 protected:

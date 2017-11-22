@@ -25,6 +25,7 @@
 #include "config.h"
 #include <QStringBuilder>
 #include <QDesktopWidget>
+#include <QStyleFactory>
 #include <QApplication>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -72,17 +73,18 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
 
-    // DPI calculation
-    qreal screenRatio = AppEnv::screenRatio();
-    resize(435 * screenRatio, 405 * screenRatio);
-
     setupTreeWidget();
     setupLanguageBox();
     setupRadioButtons();
     setupDefaultProfile();
     setupPictureSettings();
     setupCustomGTAFolder();
+    setupInterfaceSettings();
     setupSnapmaticPictureViewer();
+
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    resize(435 * screenRatio, 405 * screenRatio);
 
 #ifdef GTA5SYNC_DISABLED
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSync));
@@ -239,6 +241,61 @@ void OptionsDialog::setupRadioButtons()
     }
 }
 
+void OptionsDialog::setupInterfaceSettings()
+{
+    settings->beginGroup("Startup");
+    bool alwaysUseMessageFont = settings->value("AlwaysUseMessageFont", false).toBool();
+    ui->cbAlwaysUseMessageFont->setChecked(alwaysUseMessageFont);
+#ifdef GTA5SYNC_WIN
+    if (QSysInfo::windowsVersion() >= 0x0080)
+    {
+        ui->gbFont->setVisible(false);
+        ui->cbAlwaysUseMessageFont->setVisible(false);
+    }
+#else
+    ui->gbFont->setVisible(false);
+    ui->cbAlwaysUseMessageFont->setVisible(false);
+#endif
+    QString currentStyle = qApp->style()->objectName();
+    QString appStyle = settings->value("AppStyle", currentStyle).toString();
+    bool customStyle = settings->value("CustomStyle", false).toBool();
+    const QStringList availableStyles = QStyleFactory::keys();
+    ui->cbStyleList->addItems(availableStyles);
+    if (availableStyles.contains(appStyle, Qt::CaseInsensitive))
+    {
+        // use 'for' for select to be sure it's case insensitive
+        int currentIndex = 0;
+        for (QString currentStyleFF : availableStyles)
+        {
+            if (currentStyleFF.toLower() == appStyle.toLower())
+            {
+                ui->cbStyleList->setCurrentIndex(currentIndex);
+            }
+            currentIndex++;
+        }
+    }
+    else
+    {
+        if (availableStyles.contains(currentStyle, Qt::CaseInsensitive))
+        {
+            int currentIndex = 0;
+            for (QString currentStyleFF : availableStyles)
+            {
+                if (currentStyleFF.toLower() == currentStyle.toLower())
+                {
+                    ui->cbStyleList->setCurrentIndex(currentIndex);
+                }
+                currentIndex++;
+            }
+        }
+    }
+    if (customStyle)
+    {
+        ui->cbDefaultStyle->setChecked(false);
+    }
+    settings->endGroup();
+}
+
 void OptionsDialog::on_cmdOK_clicked()
 {
     applySettings();
@@ -308,6 +365,22 @@ void OptionsDialog::applySettings()
     settings->beginGroup("dir");
     settings->setValue("dir", ui->txtFolder->text());
     settings->setValue("force", forceCustomFolder);
+    settings->endGroup();
+
+    bool defaultStyle = ui->cbDefaultStyle->isChecked();
+    settings->beginGroup("Startup");
+    if (!defaultStyle)
+    {
+        QString newStyle = ui->cbStyleList->currentText();
+        settings->setValue("CustomStyle", true);
+        settings->setValue("AppStyle", newStyle);
+        qApp->setStyle(QStyleFactory::create(newStyle));
+    }
+    else
+    {
+        settings->setValue("CustomStyle", false);
+    }
+    settings->setValue("AlwaysUseMessageFont", ui->cbAlwaysUseMessageFont->isChecked());
     settings->endGroup();
 
 #if QT_VERSION >= 0x050000
@@ -493,4 +566,9 @@ void OptionsDialog::on_cmdExploreFolder_clicked()
     {
         ui->txtFolder->setText(GTAV_Folder);
     }
+}
+
+void OptionsDialog::on_cbDefaultStyle_toggled(bool checked)
+{
+    ui->cbStyleList->setDisabled(checked);
 }

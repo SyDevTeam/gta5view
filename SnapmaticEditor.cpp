@@ -32,12 +32,23 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, QWidget *parent) :
     QDialog(parent), crewDB(crewDB),
     ui(new Ui::SnapmaticEditor)
 {
+    // Set Window Flags
+    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+
     ui->setupUi(this);
     ui->cmdApply->setDefault(true);
 
-    if (QIcon::hasThemeIcon("dialog-apply"))
+    if (QIcon::hasThemeIcon("dialog-ok-apply"))
+    {
+        ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok-apply"));
+    }
+    else if (QIcon::hasThemeIcon("dialog-apply"))
     {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-apply"));
+    }
+    else if (QIcon::hasThemeIcon("dialog-ok"))
+    {
+        ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
     }
     if (QIcon::hasThemeIcon("dialog-cancel"))
     {

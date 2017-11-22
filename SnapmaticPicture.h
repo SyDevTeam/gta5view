@@ -37,6 +37,7 @@ struct SnapmaticProperties {
     };
     int uid;
     int crewID;
+    int streetID;
     QStringList playersList;
     uint createdTimestamp;
     QDateTime createdDateTime;
@@ -96,7 +97,7 @@ public:
     QString getJsonStr();
     SnapmaticProperties getSnapmaticProperties();
     bool setSnapmaticProperties(SnapmaticProperties newSpJson);
-    bool setJsonStr(const QString &jsonStr);
+    bool setJsonStr(const QString &jsonStr, bool updateProperties = false);
 
     // VISIBILITY
     bool isHidden();

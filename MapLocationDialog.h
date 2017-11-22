@@ -51,13 +51,13 @@ private slots:
     void on_cmdClose_clicked();
 
 private:
-    Ui::MapLocationDialog *ui;
     double xpos_old;
     double ypos_old;
     double xpos_new;
     double ypos_new;
     bool propUpdate;
     bool changeMode;
+    Ui::MapLocationDialog *ui;
 };
 
 #endif // MAPLOCATIONDIALOG_H
