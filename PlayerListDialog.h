@@ -16,31 +16,40 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef PROFILEDATABASE_H
-#define PROFILEDATABASE_H
+#ifndef PLAYERLISTDIALOG_H
+#define PLAYERLISTDIALOG_H
 
-#include <QSettings>
-#include <QObject>
-#include <QMutex>
-#include <QMap>
+#include "ProfileDatabase.h"
+#include <QDialog>
 
-class ProfileDatabase : public QObject
+namespace Ui {
+class PlayerListDialog;
+}
+
+class PlayerListDialog : public QDialog
 {
     Q_OBJECT
+
 public:
-    explicit ProfileDatabase(QObject *parent = 0);
-    QString getPlayerName(QString playerID);
-    QString getPlayerName(int playerID);
-    QStringList getPlayers();
-    ~ProfileDatabase();
+    explicit PlayerListDialog(QStringList players, ProfileDatabase *profileDB, QWidget *parent = 0);
+    ~PlayerListDialog();
+
+private slots:
+    void on_cmdCancel_clicked();
+    void on_cmdMakeAv_clicked();
+    void on_cmdMakeSe_clicked();
+    void on_cmdMakeAd_clicked();
+    void on_cmdApply_clicked();
 
 private:
-    mutable QMutex mutex;
-    QSettings *profileDB;
+    QStringList players;
+    ProfileDatabase *profileDB;
+    Ui::PlayerListDialog *ui;
+    void drawSwitchButtons();
+    void buildInterface();
 
-public slots:
-    void setPlayerName(int playerID, QString playerName);
-
+signals:
+    void playerListUpdated(QStringList playerList);
 };
 
-#endif // PROFILEDATABASE_H
+#endif // PLAYERLISTDIALOG_H

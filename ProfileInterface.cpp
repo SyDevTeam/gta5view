@@ -89,8 +89,16 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui->hlButtons->setSpacing(6 * screenRatio);
     ui->hlButtons->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 #else
-    ui->hlButtons->setSpacing(6 * screenRatio);
-    ui->hlButtons->setContentsMargins(9 * screenRatio, 15 * screenRatio, 15 * screenRatio, 17 * screenRatio);
+    if (QApplication::style()->objectName() == "macintosh")
+    {
+        ui->hlButtons->setSpacing(6 * screenRatio);
+        ui->hlButtons->setContentsMargins(9 * screenRatio, 15 * screenRatio, 15 * screenRatio, 17 * screenRatio);
+    }
+    else
+    {
+        ui->hlButtons->setSpacing(6 * screenRatio);
+        ui->hlButtons->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
+    }
 #endif
 
     setMouseTracking(true);
@@ -512,6 +520,7 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
     pbBar.at(0)->setTextVisible(false);
     pbDialog.show();
 
+    // THREADING HERE PLEASE
     QDateTime importDateTime = QDateTime::currentDateTime();
     int currentTime = importDateTime.time().toString(importTimeFormat).toInt();
     for (QString selectedFile : selectedFiles)
@@ -525,6 +534,7 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
         }
         overallId++;
     }
+
     pbDialog.close();
     for (QString curErrorStr : failedFiles)
     {
@@ -689,7 +699,6 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         return false;
                     }
                     ImportDialog *importDialog = new ImportDialog(this);
-                    importDialog->setWindowFlags(importDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
                     importDialog->setImage(importImage);
                     importDialog->setModal(true);
                     importDialog->show();
@@ -1117,6 +1126,20 @@ void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
             if (languageChanged) widget->retranslate();
         }
     }
+#ifdef Q_OS_MAC
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    if (QApplication::style()->objectName() == "macintosh")
+    {
+        ui->hlButtons->setSpacing(6 * screenRatio);
+        ui->hlButtons->setContentsMargins(9 * screenRatio, 15 * screenRatio, 15 * screenRatio, 17 * screenRatio);
+    }
+    else
+    {
+        ui->hlButtons->setSpacing(6 * screenRatio);
+        ui->hlButtons->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
+    }
+#endif
 }
 
 void ProfileInterface::enableSelected()

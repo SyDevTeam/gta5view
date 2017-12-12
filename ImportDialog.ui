@@ -89,7 +89,7 @@
         <property name="title">
          <string>Settings</string>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QVBoxLayout" name="vlSettings">
          <item>
           <layout class="QHBoxLayout" name="hlColor">
            <item>

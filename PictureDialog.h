@@ -22,10 +22,20 @@
 #include "SnapmaticPicture.h"
 #include "ProfileDatabase.h"
 #include "CrewDatabase.h"
+#include <QResizeEvent>
 #include <QMouseEvent>
+#include <QToolBar>
 #include <QDialog>
 #include <QEvent>
 #include <QMenu>
+
+#ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050200
+#ifdef GTA5SYNC_APV
+#include <dwmapi.h>
+#endif
+#endif
+#endif
 
 namespace Ui {
 class PictureDialog;
@@ -36,10 +46,8 @@ class PictureDialog : public QDialog
     Q_OBJECT
 public:
     explicit PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
-    explicit PictureDialog(QWidget *parent = 0);
     explicit PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
-    explicit PictureDialog(bool primaryWindow, QWidget *parent = 0);
-    void setupPictureDialog(bool withDatabase);
+    void setupPictureDialog();
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool indexed, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk);
@@ -86,6 +94,15 @@ protected:
     bool eventFilter(QObject *obj, QEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
     bool event(QEvent *event);
+#ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050200
+#ifdef GTA5SYNC_APV
+    bool nativeEvent(const QByteArray &eventType, void *message, long *result);
+    LRESULT HitTestNCA(HWND hWnd, LPARAM lParam);
+    void resizeEvent(QResizeEvent *event);
+#endif
+#endif
+#endif
 
 private:
     QString generateCrewString();
@@ -97,13 +114,6 @@ private:
     QMap<QString, QString> globalMap;
     SnapmaticPicture *smpic;
     QWidget *fullscreenWidget;
-    QAction *jpegExportAction;
-    QAction *pgtaExportAction;
-    QAction *propEditorAction;
-    QAction *openViewerAction;
-    QAction *jsonEditorAction;
-    QAction *manageMenuSep1;
-    QAction *manageMenuSep2;
     QImage avatarAreaPicture;
     QImage snapmaticPicture;
     QImage overlayTempImage;
@@ -112,7 +122,6 @@ private:
     QString picAreaStr;
     QString crewStr;
     bool overlayEnabled;
-    bool withDatabase;
     bool rqFullscreen;
     bool naviEnabled;
     bool previewMode;
@@ -122,6 +131,12 @@ private:
     int avatarLocY;
     int avatarSize;
     QMenu *manageMenu;
+#ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050200
+    QPoint dragPosition;
+    bool dragStart;
+#endif
+#endif
 };
 
 #endif // PICTUREDIALOG_H

@@ -57,6 +57,15 @@ QStringList ProfileDatabase::getPlayers()
     return profileDB->childKeys();
 }
 
+QString ProfileDatabase::getPlayerName(QString playerID)
+{
+    QMutexLocker locker(&mutex);
+#ifdef GTA5SYNC_DEBUG
+    qDebug() << "getPlayerName" << playerID;
+#endif
+    return profileDB->value(playerID, playerID).toString();
+}
+
 QString ProfileDatabase::getPlayerName(int playerID)
 {
     QMutexLocker locker(&mutex);

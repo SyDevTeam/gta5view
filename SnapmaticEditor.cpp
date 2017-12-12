@@ -19,8 +19,10 @@
 #include "SnapmaticEditor.h"
 #include "ui_SnapmaticEditor.h"
 #include "SnapmaticPicture.h"
+#include "PlayerListDialog.h"
 #include "StringParser.h"
 #include "AppEnv.h"
+#include <QStringListIterator>
 #include <QStringBuilder>
 #include <QTextDocument>
 #include <QInputDialog>
@@ -28,15 +30,19 @@
 #include <QDebug>
 #include <QFile>
 
-SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, QWidget *parent) :
-    QDialog(parent), crewDB(crewDB),
+SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, ProfileDatabase *profileDB, QWidget *parent) :
+    QDialog(parent), crewDB(crewDB), profileDB(profileDB),
     ui(new Ui::SnapmaticEditor)
 {
     // Set Window Flags
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+#ifdef Q_OS_LINUX
+    // for stupid Window Manager (GNOME 3 should feel triggered)
+    setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
+#endif
 
     ui->setupUi(this);
-    ui->cmdApply->setDefault(true);
+    ui->cmdCancel->setDefault(true);
 
     if (QIcon::hasThemeIcon("dialog-ok-apply"))
     {
@@ -55,7 +61,7 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, QWidget *parent) :
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
 
-    snapmaticTitle = "";
+    snapmaticTitle = QString();
     smpic = 0;
 
     // DPI calculation
@@ -154,14 +160,15 @@ void SnapmaticEditor::on_rbCustom_toggled(bool checked)
 void SnapmaticEditor::setSnapmaticPicture(SnapmaticPicture *picture)
 {
     smpic = picture;
-    localSpJson = smpic->getSnapmaticProperties();
+    snapmaticProperties = smpic->getSnapmaticProperties();
     ui->rbCustom->setChecked(true);
-    crewID = localSpJson.crewID;
-    isSelfie = localSpJson.isSelfie;
-    isMugshot = localSpJson.isMug;
-    isEditor = localSpJson.isFromRSEditor;
-    ui->cbDirector->setChecked(localSpJson.isFromDirector);
-    ui->cbMeme->setChecked(localSpJson.isMeme);
+    crewID = snapmaticProperties.crewID;
+    isSelfie = snapmaticProperties.isSelfie;
+    isMugshot = snapmaticProperties.isMug;
+    isEditor = snapmaticProperties.isFromRSEditor;
+    playersList = snapmaticProperties.playersList;
+    ui->cbDirector->setChecked(snapmaticProperties.isFromDirector);
+    ui->cbMeme->setChecked(snapmaticProperties.isMeme);
     if (isSelfie)
     {
         ui->rbSelfie->setChecked(true);
@@ -180,6 +187,47 @@ void SnapmaticEditor::setSnapmaticPicture(SnapmaticPicture *picture)
     }
     setSnapmaticCrew(returnCrewName(crewID));
     setSnapmaticTitle(picture->getPictureTitle());
+    setSnapmaticPlayers(insertPlayerNames(playersList));
+}
+
+void SnapmaticEditor::insertPlayerNames(QStringList *players)
+{
+    for (int i = 0; i < players->size(); ++i)
+    {
+        players->replace(i, profileDB->getPlayerName(players->at(i)));
+    }
+}
+
+QStringList SnapmaticEditor::insertPlayerNames(const QStringList &players)
+{
+    QStringList playersWI = players;
+    insertPlayerNames(&playersWI);
+    return playersWI;
+}
+
+void SnapmaticEditor::setSnapmaticPlayers(const QStringList &players)
+{
+    QString editStr = QString("<a href=\"g5e://editplayers\" style=\"text-decoration: none;\">%1</a>").arg(tr("Edit"));
+    QString playersStr;
+    if (players.length() != 1)
+    {
+        playersStr = tr("Players: %1 (%2)", "Multiple Player are inserted here");
+    }
+    else
+    {
+        playersStr = tr("Player: %1 (%2)", "One Player is inserted here");
+    }
+    if (players.length() != 0)
+    {
+        ui->labPlayers->setText(playersStr.arg(players.join(", "), editStr));
+    }
+    else
+    {
+        ui->labPlayers->setText(playersStr.arg(QApplication::translate("PictureDialog", "No Players"), editStr));
+    }
+    ui->gbValues->resize(ui->gbValues->sizeHint());
+    ui->frameWidget->resize(ui->frameWidget->sizeHint());
+    resize(width(), heightForWidth(width()));
 }
 
 void SnapmaticEditor::setSnapmaticTitle(const QString &title)
@@ -203,6 +251,9 @@ void SnapmaticEditor::setSnapmaticTitle(const QString &title)
     {
         ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: red\">%1</a>").arg(tr("No", "No, could lead to issues"))));
     }
+    ui->gbValues->resize(ui->gbValues->sizeHint());
+    ui->frameWidget->resize(ui->frameWidget->sizeHint());
+    resize(width(), heightForWidth(width()));
 }
 
 void SnapmaticEditor::setSnapmaticCrew(const QString &crew)
@@ -210,6 +261,9 @@ void SnapmaticEditor::setSnapmaticCrew(const QString &crew)
     QString editStr = QString("<a href=\"g5e://editcrew\" style=\"text-decoration: none;\">%1</a>").arg(tr("Edit"));
     QString crewStr = tr("Crew: %1 (%2)").arg(StringParser::escapeString(crew), editStr);
     ui->labCrew->setText(crewStr);
+    ui->gbValues->resize(ui->gbValues->sizeHint());
+    ui->frameWidget->resize(ui->frameWidget->sizeHint());
+    resize(width(), heightForWidth(width()));
 }
 
 QString SnapmaticEditor::returnCrewName(int crewID_)
@@ -228,12 +282,13 @@ void SnapmaticEditor::on_cmdApply_clicked()
     {
         qualifyAvatar();
     }
-    localSpJson.crewID = crewID;
-    localSpJson.isSelfie = isSelfie;
-    localSpJson.isMug = isMugshot;
-    localSpJson.isFromRSEditor = isEditor;
-    localSpJson.isFromDirector = ui->cbDirector->isChecked();
-    localSpJson.isMeme = ui->cbMeme->isChecked();
+    snapmaticProperties.crewID = crewID;
+    snapmaticProperties.isSelfie = isSelfie;
+    snapmaticProperties.isMug = isMugshot;
+    snapmaticProperties.isFromRSEditor = isEditor;
+    snapmaticProperties.isFromDirector = ui->cbDirector->isChecked();
+    snapmaticProperties.isMeme = ui->cbMeme->isChecked();
+    snapmaticProperties.playersList = playersList;
     if (smpic)
     {
         QString currentFilePath = smpic->getPictureFilePath();
@@ -245,7 +300,7 @@ void SnapmaticEditor::on_cmdApply_clicked()
         }
         SnapmaticProperties fallbackProperties = smpic->getSnapmaticProperties();
         QString fallbackTitle = smpic->getPictureTitle();
-        smpic->setSnapmaticProperties(localSpJson);
+        smpic->setSnapmaticProperties(snapmaticProperties);
         smpic->setPictureTitle(snapmaticTitle);
         if (!smpic->exportPicture(currentFilePath))
         {
@@ -291,6 +346,18 @@ void SnapmaticEditor::on_cbQualify_toggled(bool checked)
         {
             ui->cbDirector->setEnabled(true);
         }
+    }
+}
+
+void SnapmaticEditor::on_labPlayers_linkActivated(const QString &link)
+{
+    if (link == "g5e://editplayers")
+    {
+        PlayerListDialog *playerListDialog = new PlayerListDialog(playersList, profileDB, this);
+        connect(playerListDialog, SIGNAL(playerListUpdated(QStringList)), this, SLOT(playerListUpdated(QStringList)));
+        playerListDialog->show();
+        playerListDialog->exec();
+        delete playerListDialog;
     }
 }
 
@@ -344,4 +411,10 @@ void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
             setSnapmaticCrew(returnCrewName(crewID));
         }
     }
+}
+
+void SnapmaticEditor::playerListUpdated(QStringList playerList)
+{
+    playersList = playerList;
+    setSnapmaticPlayers(insertPlayerNames(playerList));
 }

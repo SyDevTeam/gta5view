@@ -42,13 +42,17 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
 {
     // Set Window Flags
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+#ifdef Q_OS_LINUX
+    // for stupid Window Manager (GNOME 3 should feel triggered)
+    setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
+#endif
 
     // Setup User Interface
     ui->setupUi(this);
     ui->tabWidget->setCurrentIndex(0);
     ui->labPicCustomRes->setVisible(false);
 
-    QRect desktopResolution = qApp->desktop()->screenGeometry(parent);
+    QRect desktopResolution = QApplication::desktop()->screenGeometry(this);
     int desktopSizeWidth = desktopResolution.width();
     int desktopSizeHeight = desktopResolution.height();
     aspectRatio = Qt::KeepAspectRatio;
@@ -256,7 +260,7 @@ void OptionsDialog::setupInterfaceSettings()
     ui->gbFont->setVisible(false);
     ui->cbAlwaysUseMessageFont->setVisible(false);
 #endif
-    QString currentStyle = qApp->style()->objectName();
+    QString currentStyle = QApplication::style()->objectName();
     QString appStyle = settings->value("AppStyle", currentStyle).toString();
     bool customStyle = settings->value("CustomStyle", false).toBool();
     const QStringList availableStyles = QStyleFactory::keys();
@@ -374,7 +378,7 @@ void OptionsDialog::applySettings()
         QString newStyle = ui->cbStyleList->currentText();
         settings->setValue("CustomStyle", true);
         settings->setValue("AppStyle", newStyle);
-        qApp->setStyle(QStyleFactory::create(newStyle));
+        QApplication::setStyle(QStyleFactory::create(newStyle));
     }
     else
     {

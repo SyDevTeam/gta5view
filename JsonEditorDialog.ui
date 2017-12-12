@@ -23,6 +23,9 @@
    <property name="rightMargin">
     <number>0</number>
    </property>
+   <property name="bottomMargin">
+    <number>9</number>
+   </property>
    <item>
     <layout class="QVBoxLayout" name="vlJSON">
      <property name="spacing">

@@ -35,8 +35,13 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
 {
     // Set Window Flags
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowMinMaxButtonsHint);
+#ifdef Q_OS_LINUX
+    // for stupid Window Manager (GNOME 3 should feel triggered)
+    setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
+#endif
 
     ui->setupUi(this);
+    ui->cmdClose->setDefault(true);
     if (QIcon::hasThemeIcon("dialog-close"))
     {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
@@ -46,8 +51,8 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
 #if QT_VERSION >= 0x050200
     ui->txtJSON->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
 #endif
-    QFontMetrics fm(ui->txtJSON->font());
-    ui->txtJSON->setTabStopWidth(fm.width("    "));
+    QFontMetrics fontMetrics(ui->txtJSON->font());
+    ui->txtJSON->setTabStopWidth(fontMetrics.width("    "));
 
     QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonCode.toUtf8());
     ui->txtJSON->setStyleSheet("QPlainTextEdit{background-color: rgb(46, 47, 48); color: rgb(238, 231, 172);}");
@@ -56,7 +61,15 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
 
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
+#ifndef Q_OS_MAC
+    ui->hlButtons->setSpacing(6 * screenRatio);
     ui->hlButtons->setContentsMargins(9 * screenRatio, 0, 9 * screenRatio, 0);
+    ui->vlInterface->setContentsMargins(0, 0, 0, 9 * screenRatio);
+#else
+    ui->hlButtons->setSpacing(6 * screenRatio);
+    ui->hlButtons->setContentsMargins(9 * screenRatio, 0, 9 * screenRatio, 0);
+    ui->vlInterface->setContentsMargins(0, 0, 0, 9 * screenRatio);
+#endif
     if (screenRatio > 1)
     {
         ui->lineJSON->setMinimumHeight(qRound(1 * screenRatio));
@@ -127,7 +140,25 @@ bool JsonEditorDialog::saveJsonContent()
             smpic->setJsonStr(newCode, true);
             if (!smpic->isJsonOk())
             {
-                QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of JSON Error"));
+                QString lastStep = smpic->getLastStep(false);
+                QString readableError;
+                if (lastStep.contains("JSONINCOMPLETE") && lastStep.contains("JSONERROR"))
+                {
+                    readableError = SnapmaticPicture::tr("JSON is incomplete and malformed");
+                }
+                else if (lastStep.contains("JSONINCOMPLETE"))
+                {
+                    readableError = SnapmaticPicture::tr("JSON is incomplete");
+                }
+                else if (lastStep.contains("JSONERROR"))
+                {
+                    readableError = SnapmaticPicture::tr("JSON is malformed");
+                }
+                else
+                {
+                    readableError = tr("JSON Error");
+                }
+                QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of %1").arg(readableError));
                 smpic->setJsonStr(originalCode, true);
                 return false;
             }

@@ -59,10 +59,10 @@ public:
     bool preloadFile();
     bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
     bool readingPicture(bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
-    bool isPicOk();
+    bool isPicOk(); // Please use isPictureOk instead
     void clearCache();
     QImage getImage(bool fastLoad = false);
-    QString getLastStep();
+    QString getLastStep(bool readable = true);
     QString getPictureStr();
     QString getPictureHead();
     QString getPictureTitl();
@@ -75,34 +75,47 @@ public:
     QString getOriginalPictureFilePath();
     int getContentMaxLength();
     bool setImage(const QImage &picture);
-    bool setPictureTitl(const QString &newTitle);
-    bool setPictureStream(const QByteArray &picByteArray);
+    bool setPictureTitl(const QString &newTitle); // Please use setPictureTitle instead
+    bool setPictureStream(const QByteArray &streamArray);
     void updateStrings();
     void emitUpdate();
 
     // FILE MANAGEMENT
     bool exportPicture(const QString &fileName, SnapmaticFormat format = SnapmaticFormat::Auto_Format);
-    void setPicFileName(const QString &picFileName);
-    void setPicFilePath(const QString &picFilePath);
-    bool deletePicFile();
-
-    // ALTERNATIVES
-    QString getPictureTitle() { return getPictureTitl(); }
-    QString getPictureString() { return getPictureStr(); }
-    QString getPictureDescription() { return getPictureDesc(); }
-    bool setPictureTitle(const QString &newTitle) { return setPictureTitl(newTitle); }
+    void setPicFileName(const QString &picFileName); // Please use setPictureFileName instead
+    void setPicFilePath(const QString &picFilePath); // Please use setPictureFilePath instead
+    bool deletePicFile(); // Please use deletePictureFile instead
 
     // JSON
     bool isJsonOk();
-    QString getJsonStr();
+    QString getJsonStr(); // Please use getPictureJson instead
     SnapmaticProperties getSnapmaticProperties();
-    bool setSnapmaticProperties(SnapmaticProperties newSpJson);
-    bool setJsonStr(const QString &jsonStr, bool updateProperties = false);
+    bool setSnapmaticProperties(SnapmaticProperties properties);
+    bool setJsonStr(const QString &jsonStr, bool updateProperties = false); // Please use setPictureJson instead
 
     // VISIBILITY
-    bool isHidden();
+    bool isHidden(); // Please use isPictureHidden instead
+    bool isVisible(); // Please use isPictureVisible instead
     bool setPictureHidden();
     bool setPictureVisible();
+
+    // ALTERNATIVES (MORE DEVELOPER FRIENDLY FUNCTION CALLS)
+    QString getJsonString() { return getJsonStr(); } // Please use getPictureJson instead
+    QString getPictureJson() { return getJsonStr(); }
+    QString getPictureTitle() { return getPictureTitl(); }
+    QString getPictureString() { return getPictureStr(); }
+    QString getPictureDescription() { return getPictureDesc(); }
+    bool setJsonString(const QString &jsonString, bool updateProperties = false) { return setJsonStr(jsonString, updateProperties); } // Please use setPictureJson instead
+    bool setPictureJson(const QString &json, bool updateProperties = false) { return setJsonStr(json, updateProperties); }
+    bool setPictureTitle(const QString &title) { return setPictureTitl(title); }
+    void setPictureFileName(const QString &fileName) { return setPicFileName(fileName); }
+    void setPictureFilePath(const QString &filePath) { return setPicFilePath(filePath); }
+    bool deletePictureFile() { return deletePicFile(); }
+    bool isPictureOk() { return isPicOk(); }
+    bool isPictureHidden() { return isHidden(); }
+    bool isPictureVisible() { return isVisible(); }
+    bool setHidden() { return setPictureHidden(); } // Please use setPictureHidden instead
+    bool setVisible() { return setPictureVisible(); } // Please use setPictureVisible instead
 
     // PREDEFINED PROPERTIES
     QSize getSnapmaticResolution();
@@ -151,7 +164,7 @@ private:
     void parseJsonContent();
     bool jsonOk;
     QString jsonStr;
-    SnapmaticProperties localSpJson;
+    SnapmaticProperties localProperties;
 
     // VERIFY CONTENT
     static bool verifyTitleChar(const QChar &titleChar);

@@ -105,12 +105,25 @@
         </property>
         <layout class="QVBoxLayout" name="vlTitle">
          <item>
+          <widget class="UiModLabel" name="labPlayers">
+           <property name="contextMenuPolicy">
+            <enum>Qt::NoContextMenu</enum>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="wordWrap">
+            <bool>true</bool>
+           </property>
+          </widget>
+         </item>
+         <item>
           <widget class="UiModLabel" name="labCrew">
            <property name="contextMenuPolicy">
             <enum>Qt::NoContextMenu</enum>
            </property>
            <property name="text">
-            <string>Crew: %1 (%2)</string>
+            <string/>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -123,7 +136,7 @@
             <enum>Qt::NoContextMenu</enum>
            </property>
            <property name="text">
-            <string>Title: %1 (%2)</string>
+            <string/>
            </property>
            <property name="wordWrap">
             <bool>true</bool>
@@ -133,7 +146,7 @@
          <item>
           <widget class="UiModLabel" name="labAppropriate">
            <property name="text">
-            <string>Appropriate: %1</string>
+            <string/>
            </property>
            <property name="wordWrap">
             <bool>true</bool>

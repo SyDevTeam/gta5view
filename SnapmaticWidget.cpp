@@ -284,7 +284,7 @@ void SnapmaticWidget::makePictureVisibleSlot()
 
 void SnapmaticWidget::editSnapmaticProperties()
 {
-    SnapmaticEditor *snapmaticEditor = new SnapmaticEditor(crewDB, this);
+    SnapmaticEditor *snapmaticEditor = new SnapmaticEditor(crewDB, profileDB, this);
     snapmaticEditor->setSnapmaticPicture(smpic);
     snapmaticEditor->setModal(true);
     snapmaticEditor->show();

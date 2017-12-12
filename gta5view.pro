@@ -44,6 +44,7 @@ SOURCES += main.cpp \
     PictureDialog.cpp \
     PictureExport.cpp \
     PictureWidget.cpp \
+    PlayerListDialog.cpp \
     ProfileDatabase.cpp \
     ProfileInterface.cpp \
     ProfileLoader.cpp \
@@ -80,6 +81,7 @@ HEADERS  += \
     PictureDialog.h \
     PictureExport.h \
     PictureWidget.h \
+    PlayerListDialog.h \
     ProfileDatabase.h \
     ProfileInterface.h \
     ProfileLoader.h \
@@ -108,6 +110,7 @@ FORMS    += \
     MapLocationDialog.ui \
     OptionsDialog.ui \
     PictureDialog.ui \
+    PlayerListDialog.ui \
     ProfileInterface.ui \
     SavegameDialog.ui \
     SavegameWidget.ui \
