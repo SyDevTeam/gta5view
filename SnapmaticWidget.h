@@ -38,7 +38,7 @@ class SnapmaticWidget : public ProfileWidget
     Q_OBJECT
 
 public:
-    SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
+    SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QString profileName, QWidget *parent = 0);
     void setSnapmaticPicture(SnapmaticPicture *picture);
     void setSelectionMode(bool selectionMode);
     void setSelected(bool isSelected);
@@ -69,8 +69,10 @@ private slots:
     void makePictureHiddenSlot();
     void editSnapmaticProperties();
     void editSnapmaticRawJson();
+    void editSnapmaticImage();
     void openMapViewer();
     void snapmaticUpdated();
+    void customSignal(QString signal);
 
 protected:
     void mouseDoubleClickEvent(QMouseEvent *ev);
@@ -82,6 +84,7 @@ private:
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
     DatabaseThread *threadDB;
+    QString profileName;
     Ui::SnapmaticWidget *ui;
     SnapmaticPicture *smpic;
     QColor highlightHiddenColor;

@@ -40,6 +40,8 @@ namespace Ui {
 class ProfileInterface;
 }
 
+enum class MassTool : int { Qualify = 0, Players = 1, Crew = 2, Title = 3 };
+
 class ProfileInterface : public QWidget
 {
     Q_OBJECT
@@ -48,6 +50,7 @@ public:
     void setProfileFolder(QString folder, QString profile);
     void settingsApplied(int contentMode, bool languageChanged);
     void setupProfileInterface();
+    void massTool(MassTool tool);
     void disableSelected();
     void enableSelected();
     int selectedWidgets();

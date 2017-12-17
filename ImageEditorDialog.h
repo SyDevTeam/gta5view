@@ -16,43 +16,38 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef PLAYERLISTDIALOG_H
-#define PLAYERLISTDIALOG_H
+#ifndef IMAGEEDITORDIALOG_H
+#define IMAGEEDITORDIALOG_H
 
-#include "ProfileDatabase.h"
+#include "SnapmaticPicture.h"
 #include <QDialog>
 
 namespace Ui {
-class PlayerListDialog;
+class ImageEditorDialog;
 }
 
-class PlayerListDialog : public QDialog
+class ImageEditorDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit PlayerListDialog(QStringList players, ProfileDatabase *profileDB, QWidget *parent = 0);
-    QStringList getPlayerList() const;
-    bool isListUpdated();
-    ~PlayerListDialog();
+    explicit ImageEditorDialog(SnapmaticPicture *picture, QString profileName, QWidget *parent = 0);
+    ~ImageEditorDialog();
 
 private slots:
-    void on_cmdCancel_clicked();
-    void on_cmdMakeAv_clicked();
-    void on_cmdMakeSe_clicked();
-    void on_cmdMakeAd_clicked();
-    void on_cmdApply_clicked();
+    void on_cmdClose_clicked();
+    void on_cmdReplace_clicked();
+    void on_cmdSave_clicked();
+    void on_cmdQuestion_clicked();
 
 private:
-    QStringList players;
-    ProfileDatabase *profileDB;
-    Ui::PlayerListDialog *ui;
-    bool listUpdated;
-    void drawSwitchButtons();
-    void buildInterface();
-
-signals:
-    void playerListUpdated(QStringList playerList);
+    SnapmaticPicture *smpic;
+    QString profileName;
+    Ui::ImageEditorDialog *ui;
+    int snapmaticResolutionLW;
+    int snapmaticResolutionLH;
+    bool imageIsChanged;
+    QImage pictureCache;
 };
 
-#endif // PLAYERLISTDIALOG_H
+#endif // IMAGEEDITORDIALOG_H

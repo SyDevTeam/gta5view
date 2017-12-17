@@ -22,6 +22,7 @@
 #include "ui_PictureDialog.h"
 #include "SidebarGenerator.h"
 #include "MapLocationDialog.h"
+#include "ImageEditorDialog.h"
 #include "JsonEditorDialog.h"
 #include "SnapmaticEditor.h"
 #include "StandardPaths.h"
@@ -84,8 +85,23 @@ PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, Q
     setupPictureDialog();
 }
 
+PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, QString profileName, QWidget *parent) :
+    QDialog(parent), profileDB(profileDB), crewDB(crewDB), profileName(profileName),
+    ui(new Ui::PictureDialog)
+{
+    primaryWindow = false;
+    setupPictureDialog();
+}
+
 PictureDialog::PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent) :
     QDialog(parent), primaryWindow(primaryWindow), profileDB(profileDB), crewDB(crewDB),
+    ui(new Ui::PictureDialog)
+{
+    setupPictureDialog();
+}
+
+PictureDialog::PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, CrewDatabase *crewDB, QString profileName, QWidget *parent) :
+    QDialog(parent), primaryWindow(primaryWindow), profileDB(profileDB), crewDB(crewDB), profileName(profileName),
     ui(new Ui::PictureDialog)
 {
     setupPictureDialog();
@@ -137,6 +153,7 @@ void PictureDialog::setupPictureDialog()
     manageMenu->addAction(tr("Export as &Snapmatic..."), this, SLOT(copySnapmaticPicture()));
     manageMenu->addSeparator();
     manageMenu->addAction(tr("&Edit Properties..."), this, SLOT(editSnapmaticProperties()));
+    manageMenu->addAction(tr("&Overwrite Image..."), this, SLOT(editSnapmaticImage()));
     manageMenu->addSeparator();
     QAction *openViewerAction = manageMenu->addAction(tr("Open &Map Viewer..."), this, SLOT(openPreviewMap()));
     openViewerAction->setShortcut(Qt::Key_M);
@@ -583,7 +600,7 @@ void PictureDialog::renderOverlayPicture()
 
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool _indexed, int _index)
 {
-    if (smpic != nullptr) smpic->disconnect(this, SLOT(updated()));
+    if (smpic != nullptr) smpic->disconnect();
     snapmaticPicture = QImage();
     indexed = _indexed;
     index = _index;
@@ -620,6 +637,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
     }
     QObject::connect(smpic, SIGNAL(updated()), this, SLOT(updated()));
+    QObject::connect(smpic, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
     emit newPictureCommited(snapmaticPicture);
 }
 
@@ -808,6 +826,11 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 
         pictureWidget->move(desktopRect.x(), desktopRect.y());
         pictureWidget->resize(desktopRect.width(), desktopRect.height());
+#ifdef GTA5SYNC_WIN
+#if QT_VERSION >= 0x050200
+        QtWin::markFullscreenWindow(pictureWidget, true);
+#endif
+#endif
         pictureWidget->showFullScreen();
         pictureWidget->setFocus();
         pictureWidget->raise();
@@ -847,7 +870,11 @@ void PictureDialog::openPreviewMap()
     }
     mapLocDialog->setWindowIcon(windowIcon());
     mapLocDialog->setModal(true);
+#ifndef Q_OS_ANDROID
     mapLocDialog->show();
+#else
+    mapLocDialog->showMaximized();
+#endif
     mapLocDialog->exec();
     if (mapLocDialog->propUpdated())
     {
@@ -895,9 +922,36 @@ void PictureDialog::editSnapmaticProperties()
     snapmaticEditor->setWindowIcon(windowIcon());
     snapmaticEditor->setSnapmaticPicture(picture);
     snapmaticEditor->setModal(true);
+#ifndef Q_OS_ANDROID
     snapmaticEditor->show();
+#else
+    snapmaticEditor->showMaximized();
+#endif
     snapmaticEditor->exec();
     delete snapmaticEditor;
+}
+
+void PictureDialog::editSnapmaticImage()
+{
+    SnapmaticPicture *picture = smpic;
+    ImageEditorDialog *imageEditor;
+    if (rqFullscreen && fullscreenWidget != nullptr)
+    {
+        imageEditor = new ImageEditorDialog(picture, profileName, fullscreenWidget);
+    }
+    else
+    {
+        imageEditor = new ImageEditorDialog(picture, profileName, this);
+    }
+    imageEditor->setWindowIcon(windowIcon());
+    imageEditor->setModal(true);
+#ifndef Q_OS_ANDROID
+    imageEditor->show();
+#else
+    snapmaticEditor->showMaximized();
+#endif
+    imageEditor->exec();
+    delete imageEditor;
 }
 
 void PictureDialog::editSnapmaticRawJson()
@@ -914,7 +968,11 @@ void PictureDialog::editSnapmaticRawJson()
     }
     jsonEditor->setWindowIcon(windowIcon());
     jsonEditor->setModal(true);
+#ifndef Q_OS_ANDROID
     jsonEditor->show();
+#else
+    jsonEditor->showMaximized();
+#endif
     jsonEditor->exec();
     delete jsonEditor;
 }
@@ -932,4 +990,14 @@ void PictureDialog::updated()
         picAreaStr = picArea;
     }
     ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
+}
+
+void PictureDialog::customSignal(QString signal)
+{
+    SnapmaticPicture *picture = smpic; // used by macro
+    if (signal == "PictureUpdated")
+    {
+        snapmaticPicture = picture->getImage();
+        renderPicture();
+    }
 }

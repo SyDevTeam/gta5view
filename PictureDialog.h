@@ -46,7 +46,9 @@ class PictureDialog : public QDialog
     Q_OBJECT
 public:
     explicit PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
+    explicit PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, QString profileName, QWidget *parent = 0);
     explicit PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent = 0);
+    explicit PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, CrewDatabase *crewDB, QString profileName, QWidget *parent = 0);
     void setupPictureDialog();
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool indexed, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, int index);
@@ -78,10 +80,12 @@ private slots:
     void previousPictureRequestedSlot();
     void editSnapmaticProperties();
     void editSnapmaticRawJson();
+    void editSnapmaticImage();
     void renderOverlayPicture();
     void renderPicture();
     void openPreviewMap();
     void updated();
+    void customSignal(QString signal);
 
 signals:
     void nextPictureRequested();
@@ -110,6 +114,7 @@ private:
     bool primaryWindow;
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
+    QString profileName;
     Ui::PictureDialog *ui;
     QMap<QString, QString> globalMap;
     SnapmaticPicture *smpic;

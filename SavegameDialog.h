@@ -19,6 +19,7 @@ public:
 private slots:
     void on_cmdClose_clicked();
     void on_cmdCopy_clicked();
+    void refreshWindowSize();
 
 private:
     Ui::SavegameDialog *ui;

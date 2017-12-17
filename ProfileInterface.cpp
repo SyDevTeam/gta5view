@@ -18,6 +18,7 @@
 
 #include "ProfileInterface.h"
 #include "ui_ProfileInterface.h"
+#include "PlayerListDialog.h"
 #include "SidebarGenerator.h"
 #include "SnapmaticWidget.h"
 #include "DatabaseThread.h"
@@ -187,7 +188,7 @@ void ProfileInterface::pictureFixed_event(SnapmaticPicture *picture)
 
 void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, bool inserted)
 {
-    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, crewDB, threadDB, this);
+    SnapmaticWidget *picWidget = new SnapmaticWidget(profileDB, crewDB, threadDB, profileName, this);
     picWidget->setSnapmaticPicture(picture);
     picWidget->setContentMode(contentMode);
     picWidget->setMouseTracking(true);
@@ -502,15 +503,15 @@ fileDialogPreOpen: //Work?
 void ProfileInterface::importFilesProgress(QStringList selectedFiles)
 {
     int maximumId = selectedFiles.length();
-    int overallId = 1;
+    int overallId = 0;
     QString errorStr;
-    QStringList failedFiles;
+    QStringList failed;
 
     // Progress dialog
     QProgressDialog pbDialog(this);
     pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
     pbDialog.setWindowTitle(tr("Import..."));
-    pbDialog.setLabelText(tr("Import file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
+    pbDialog.setLabelText(tr("Import file %1 of %2 files").arg(QString::number(1), QString::number(maximumId)));
     pbDialog.setRange(1, maximumId);
     pbDialog.setValue(1);
     pbDialog.setModal(true);
@@ -518,6 +519,7 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
     pbBtn.at(0)->setDisabled(true);
     QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
     pbBar.at(0)->setTextVisible(false);
+    pbDialog.setAutoClose(false);
     pbDialog.show();
 
     // THREADING HERE PLEASE
@@ -525,18 +527,18 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
     int currentTime = importDateTime.time().toString(importTimeFormat).toInt();
     for (QString selectedFile : selectedFiles)
     {
+        overallId++;
         pbDialog.setValue(overallId);
         pbDialog.setLabelText(tr("Import file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
         importDateTime = QDateTime::currentDateTime();
         if (!importFile(selectedFile, importDateTime, &currentTime, false))
         {
-            failedFiles << QFileInfo(selectedFile).fileName();
+            failed << QFileInfo(selectedFile).fileName();
         }
-        overallId++;
     }
 
     pbDialog.close();
-    for (QString curErrorStr : failedFiles)
+    for (QString curErrorStr : failed)
     {
         errorStr += ", " % curErrorStr;
     }
@@ -685,6 +687,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     QFile snapmaticFile(selectedFile);
                     if (!snapmaticFile.open(QFile::ReadOnly))
                     {
+                        QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
                         delete picture;
                         return false;
                     }
@@ -695,6 +698,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     if (!snapmaticImageReader.read(importImage))
                     {
                         QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
+                        delete importImage;
                         delete picture;
                         return false;
                     }
@@ -913,7 +917,7 @@ void ProfileInterface::exportSelected()
         settings.beginGroup("FileDialogs");
         //bool dontUseNativeDialog = settings.value("DontUseNativeDialog", false).toBool();
         settings.beginGroup("ExportDirectory");
-        QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected"), settings.value(profileName, profileFolder).toString());
+        QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected..."), settings.value(profileName, profileFolder).toString());
         if (exportDirectory != "")
         {
             settings.setValue(profileName, exportDirectory);
@@ -951,7 +955,7 @@ void ProfileInterface::exportSelected()
 #endif
 
                 bool itemSelected = false;
-                QString selectedItem = inputDialog.getItem(this, tr("Export selected"), tr("%1Export Snapmatic pictures%2<br><br>JPG pictures make it possible to open the picture with a Image Viewer<br>GTA Snapmatic make it possible to import the picture into the game<br><br>Export as:").arg(ExportPreSpan, ExportPostSpan), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+                QString selectedItem = inputDialog.getItem(this, tr("Export selected..."), tr("%1Export Snapmatic pictures%2<br><br>JPG pictures make it possible to open the picture with a Image Viewer<br>GTA Snapmatic make it possible to import the picture into the game<br><br>Export as:").arg(ExportPreSpan, ExportPostSpan), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
                 if (itemSelected)
                 {
                     if (selectedItem == tr("JPG pictures and GTA Snapmatic"))
@@ -1012,6 +1016,7 @@ void ProfileInterface::exportSelected()
             QObject::connect(exportThread, SIGNAL(exportFinished()), &pbDialog, SLOT(close()));
             exportThread->start();
 
+            pbDialog.setAutoClose(false);
             pbDialog.exec();
             QStringList getFailedSavegames = exportThread->getFailedSavegames();
             QStringList getFailedCopyPictures = exportThread->getFailedCopyPictures();
@@ -1208,6 +1213,7 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
         editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), picWidget, SLOT(makePictureHiddenSlot()));
     }
     editMenu.addAction(PictureDialog::tr("&Edit Properties..."), picWidget, SLOT(editSnapmaticProperties()));
+    editMenu.addAction(PictureDialog::tr("&Overwrite Image..."), picWidget, SLOT(editSnapmaticImage()));
     editMenu.addSeparator();
     editMenu.addAction(PictureDialog::tr("Open &Map Viewer..."), picWidget, SLOT(openMapViewer()));
     editMenu.addAction(PictureDialog::tr("Open &JSON Editor..."), picWidget, SLOT(editSnapmaticRawJson()));
@@ -1489,4 +1495,407 @@ bool ProfileInterface::isSupportedImageFile(QString selectedFileName)
         }
     }
     return false;
+}
+
+void ProfileInterface::massTool(MassTool tool)
+{
+    switch(tool)
+    {
+    case MassTool::Qualify:
+    {
+        QList<SnapmaticWidget*> snapmaticWidgets;
+        for (ProfileWidget *widget : widgets.keys())
+        {
+            if (widget->isSelected())
+            {
+                if (widget->getWidgetType() == "SnapmaticWidget")
+                {
+                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                    snapmaticWidgets += snapmaticWidget;
+                }
+            }
+        }
+
+        if (snapmaticWidgets.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("You don't have any Snapmatics selected!"));
+            return;
+        }
+
+        // Prepare Progress
+
+        int maximumId = snapmaticWidgets.length();
+        int overallId = 0;
+
+        QProgressDialog pbDialog(this);
+        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowTitle(tr("Patch selected..."));
+        pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(1), QString::number(maximumId)));
+        pbDialog.setRange(1, maximumId);
+        pbDialog.setValue(1);
+        pbDialog.setModal(true);
+        QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
+        pbBtn.at(0)->setDisabled(true);
+        QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
+        pbBar.at(0)->setTextVisible(false);
+        pbDialog.setAutoClose(false);
+        pbDialog.show();
+
+        // Begin Progress
+
+        QStringList fails;
+        for (SnapmaticWidget *snapmaticWidget : snapmaticWidgets)
+        {
+            // Update Progress
+            overallId++;
+            pbDialog.setValue(overallId);
+            pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
+
+            SnapmaticPicture *picture = snapmaticWidget->getPicture();
+
+            SnapmaticProperties snapmaticProperties = picture->getSnapmaticProperties();
+            snapmaticProperties.isSelfie = true;
+            snapmaticProperties.isMug = false;
+            snapmaticProperties.isFromRSEditor = false;
+            snapmaticProperties.isFromDirector = false;
+            snapmaticProperties.isMeme = false;
+
+            QString currentFilePath = picture->getPictureFilePath();
+            QString originalFilePath = picture->getOriginalPictureFilePath();
+            QString backupFileName = originalFilePath % ".bak";
+            if (!QFile::exists(backupFileName))
+            {
+                QFile::copy(currentFilePath, backupFileName);
+            }
+            SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
+            picture->setSnapmaticProperties(snapmaticProperties);
+            if (!picture->exportPicture(currentFilePath))
+            {
+                picture->setSnapmaticProperties(fallbackProperties);
+                fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
+            }
+            else
+            {
+                picture->emitUpdate();
+                qApp->processEvents();
+            }
+        }
+        pbDialog.close();
+        if (!fails.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("%1 failed with...\n\n%2", "Action failed with...").arg(tr("Qualify", "%1 failed with..."), fails.join(", ")));
+        }
+    }
+        break;
+    case MassTool::Players:
+    {
+        QList<SnapmaticWidget*> snapmaticWidgets;
+        for (ProfileWidget *widget : widgets.keys())
+        {
+            if (widget->isSelected())
+            {
+                if (widget->getWidgetType() == "SnapmaticWidget")
+                {
+                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                    snapmaticWidgets += snapmaticWidget;
+                }
+            }
+        }
+
+        if (snapmaticWidgets.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("You don't have any Snapmatics selected!"));
+            return;
+        }
+
+        PlayerListDialog *playerListDialog = new PlayerListDialog(QStringList(), profileDB, this);
+        playerListDialog->setModal(true);
+        playerListDialog->show();
+        playerListDialog->exec();
+        if (!playerListDialog->isListUpdated())
+        {
+            return;
+        }
+        QStringList players = playerListDialog->getPlayerList();
+        delete playerListDialog;
+
+        // Prepare Progress
+
+        int maximumId = snapmaticWidgets.length();
+        int overallId = 0;
+
+        QProgressDialog pbDialog(this);
+        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowTitle(tr("Patch selected..."));
+        pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(1), QString::number(maximumId)));
+        pbDialog.setRange(1, maximumId);
+        pbDialog.setValue(1);
+        pbDialog.setModal(true);
+        QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
+        pbBtn.at(0)->setDisabled(true);
+        QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
+        pbBar.at(0)->setTextVisible(false);
+        pbDialog.setAutoClose(false);
+        pbDialog.show();
+
+        // Begin Progress
+
+        QStringList fails;
+        for (SnapmaticWidget *snapmaticWidget : snapmaticWidgets)
+        {
+            // Update Progress
+            overallId++;
+            pbDialog.setValue(overallId);
+            pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
+
+            SnapmaticPicture *picture = snapmaticWidget->getPicture();
+
+            SnapmaticProperties snapmaticProperties = picture->getSnapmaticProperties();
+            snapmaticProperties.playersList = players;
+
+            QString currentFilePath = picture->getPictureFilePath();
+            QString originalFilePath = picture->getOriginalPictureFilePath();
+            QString backupFileName = originalFilePath % ".bak";
+            if (!QFile::exists(backupFileName))
+            {
+                QFile::copy(currentFilePath, backupFileName);
+            }
+            SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
+            picture->setSnapmaticProperties(snapmaticProperties);
+            if (!picture->exportPicture(currentFilePath))
+            {
+                picture->setSnapmaticProperties(fallbackProperties);
+                fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
+            }
+            else
+            {
+                picture->emitUpdate();
+                qApp->processEvents();
+            }
+        }
+        pbDialog.close();
+        if (!fails.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("%1 failed with...\n\n%2", "Action failed with...").arg(tr("Change Players", "%1 failed with..."), fails.join(", ")));
+        }
+    }
+        break;
+    case MassTool::Crew:
+    {
+        QList<SnapmaticWidget*> snapmaticWidgets;
+        for (ProfileWidget *widget : widgets.keys())
+        {
+            if (widget->isSelected())
+            {
+                if (widget->getWidgetType() == "SnapmaticWidget")
+                {
+                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                    snapmaticWidgets += snapmaticWidget;
+                }
+            }
+        }
+
+        if (snapmaticWidgets.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("You don't have any Snapmatics selected!"));
+            return;
+        }
+
+        int crewID = 0;
+        {
+preSelectionCrewID:
+            bool ok;
+            QStringList itemList;
+            QStringList crewList = crewDB->getCrews();
+            if (!crewList.contains(QLatin1String("0")))
+            {
+                crewList += QLatin1String("0");
+            }
+            crewList.sort();
+            for (QString crew : crewList)
+            {
+                itemList += QString("%1 (%2)").arg(crew, crewDB->getCrewName(crew.toInt()));
+            }
+            QString newCrew = QInputDialog::getItem(this, QApplication::translate("SnapmaticEditor", "Snapmatic Crew"), QApplication::translate("SnapmaticEditor", "New Snapmatic crew:"), itemList, 0, true, &ok, windowFlags()^Qt::Dialog^Qt::WindowMinMaxButtonsHint);
+            if (ok && !newCrew.isEmpty())
+            {
+                if (newCrew.contains(" ")) newCrew = newCrew.split(" ").at(0);
+                if (newCrew.length() > 10) return;
+                for (QChar crewChar : newCrew)
+                {
+                    if (!crewChar.isNumber())
+                    {
+                        QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("Failed to enter a valid Snapmatic Crew ID"));
+                        goto preSelectionCrewID;
+                    }
+                }
+                crewID = newCrew.toInt();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        // Prepare Progress
+
+        int maximumId = snapmaticWidgets.length();
+        int overallId = 0;
+
+        QProgressDialog pbDialog(this);
+        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowTitle(tr("Patch selected..."));
+        pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(1), QString::number(maximumId)));
+        pbDialog.setRange(1, maximumId);
+        pbDialog.setValue(1);
+        pbDialog.setModal(true);
+        QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
+        pbBtn.at(0)->setDisabled(true);
+        QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
+        pbBar.at(0)->setTextVisible(false);
+        pbDialog.setAutoClose(false);
+        pbDialog.show();
+
+        // Begin Progress
+
+        QStringList fails;
+        for (SnapmaticWidget *snapmaticWidget : snapmaticWidgets)
+        {
+            // Update Progress
+            overallId++;
+            pbDialog.setValue(overallId);
+            pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
+
+            SnapmaticPicture *picture = snapmaticWidget->getPicture();
+
+            SnapmaticProperties snapmaticProperties = picture->getSnapmaticProperties();
+            snapmaticProperties.crewID = crewID;
+
+            QString currentFilePath = picture->getPictureFilePath();
+            QString originalFilePath = picture->getOriginalPictureFilePath();
+            QString backupFileName = originalFilePath % ".bak";
+            if (!QFile::exists(backupFileName))
+            {
+                QFile::copy(currentFilePath, backupFileName);
+            }
+            SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
+            picture->setSnapmaticProperties(snapmaticProperties);
+            if (!picture->exportPicture(currentFilePath))
+            {
+                picture->setSnapmaticProperties(fallbackProperties);
+                fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
+            }
+            else
+            {
+                picture->emitUpdate();
+                qApp->processEvents();
+            }
+        }
+        pbDialog.close();
+        if (!fails.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("%1 failed with...\n\n%2", "Action failed with...").arg(tr("Change Crew", "%1 failed with..."), fails.join(", ")));
+        }
+    }
+        break;
+    case MassTool::Title:
+    {
+        QList<SnapmaticWidget*> snapmaticWidgets;
+        for (ProfileWidget *widget : widgets.keys())
+        {
+            if (widget->isSelected())
+            {
+                if (widget->getWidgetType() == "SnapmaticWidget")
+                {
+                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                    snapmaticWidgets += snapmaticWidget;
+                }
+            }
+        }
+
+        if (snapmaticWidgets.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("You don't have any Snapmatics selected!"));
+            return;
+        }
+
+        QString snapmaticTitle;
+        {
+preSelectionTitle:
+            bool ok;
+            QString newTitle = QInputDialog::getText(this, QApplication::translate("SnapmaticEditor", "Snapmatic Title"), QApplication::translate("SnapmaticEditor", "New Snapmatic title:"), QLineEdit::Normal, snapmaticTitle, &ok, windowFlags()^Qt::Dialog^Qt::WindowMinMaxButtonsHint);
+            if (ok && !newTitle.isEmpty())
+            {
+                if (!SnapmaticPicture::verifyTitle(newTitle))
+                {
+                    QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("Failed to enter a valid Snapmatic title"));
+                    goto preSelectionTitle;
+                }
+                snapmaticTitle = newTitle;
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        // Prepare Progress
+
+        int maximumId = snapmaticWidgets.length();
+        int overallId = 0;
+
+        QProgressDialog pbDialog(this);
+        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowTitle(tr("Patch selected..."));
+        pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
+        pbDialog.setRange(1, maximumId);
+        pbDialog.setValue(1);
+        pbDialog.setModal(true);
+        QList<QPushButton*> pbBtn = pbDialog.findChildren<QPushButton*>();
+        pbBtn.at(0)->setDisabled(true);
+        QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
+        pbBar.at(0)->setTextVisible(false);
+        pbDialog.setAutoClose(false);
+        pbDialog.show();
+
+        // Begin Progress
+
+        QStringList fails;
+        for (SnapmaticWidget *snapmaticWidget : snapmaticWidgets)
+        {
+            // Update Progress
+            overallId++;
+            pbDialog.setValue(overallId);
+            pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
+
+            SnapmaticPicture *picture = snapmaticWidget->getPicture();
+
+            QString currentFilePath = picture->getPictureFilePath();
+            QString originalFilePath = picture->getOriginalPictureFilePath();
+            QString backupFileName = originalFilePath % ".bak";
+            if (!QFile::exists(backupFileName))
+            {
+                QFile::copy(currentFilePath, backupFileName);
+            }
+            QString fallbackTitle = picture->getPictureTitle();
+            picture->setPictureTitle(snapmaticTitle);
+            if (!picture->exportPicture(currentFilePath))
+            {
+                picture->setPictureTitle(fallbackTitle);
+                fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
+            }
+            else
+            {
+                picture->emitUpdate();
+                qApp->processEvents();
+            }
+        }
+        pbDialog.close();
+        if (!fails.isEmpty())
+        {
+            QMessageBox::warning(this, tr("Snapmatic Mass Tool"), tr("%1 failed with...\n\n%2", "Action failed with...").arg(tr("Change Title", "%1 failed with..."), fails.join(", ")));
+        }
+    }
+        break;
+    }
 }

@@ -29,10 +29,6 @@ MapLocationDialog::MapLocationDialog(double x, double y, QWidget *parent) :
 {
     // Set Window Flags
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#ifdef Q_OS_LINUX
-    // for stupid Window Manager (GNOME 3 should feel triggered)
-    setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
-#endif
 
     ui->setupUi(this);
     ui->cmdDone->setVisible(false);

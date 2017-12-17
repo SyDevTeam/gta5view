@@ -179,6 +179,9 @@ int main(int argc, char *argv[])
         bool readOk = picture.readingPictureFromFile(arg1);
         picDialog.setWindowIcon(IconLoader::loadingAppIcon());
         picDialog.setSnapmaticPicture(&picture, readOk);
+#ifndef Q_OS_LINUX
+        picDialog.setWindowFlags(picDialog.windowFlags()^Qt::Dialog^Qt::Window);
+#endif
 
         int crewID = picture.getSnapmaticProperties().crewID;
         if (crewID != 0) { crewDB.addCrew(crewID); }
@@ -204,6 +207,7 @@ int main(int argc, char *argv[])
         bool readOk = savegame.readingSavegameFromFile(arg1);
         savegameDialog.setWindowIcon(IconLoader::loadingAppIcon());
         savegameDialog.setSavegameData(&savegame, arg1, readOk);
+        savegameDialog.setWindowFlags(savegameDialog.windowFlags()^Qt::Dialog^Qt::Window);
 
         if (!readOk) { return 1; }
 

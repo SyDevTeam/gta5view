@@ -207,10 +207,20 @@
      <addaction name="action_Enable_In_game"/>
      <addaction name="action_Disable_In_game"/>
     </widget>
+    <widget class="QMenu" name="menuManage_selection">
+     <property name="title">
+      <string>Selection &amp;mass tools</string>
+     </property>
+     <addaction name="actionQualify_as_Avatar"/>
+     <addaction name="actionChange_Players"/>
+     <addaction name="actionSet_Crew"/>
+     <addaction name="actionSet_Title"/>
+    </widget>
     <addaction name="action_Import"/>
     <addaction name="actionExport_selected"/>
     <addaction name="actionDelete_selected"/>
     <addaction name="separator"/>
+    <addaction name="menuManage_selection"/>
     <addaction name="menuSelection_visibility"/>
     <addaction name="separator"/>
     <addaction name="actionSelect_all"/>
@@ -226,7 +236,7 @@
     <string>&amp;About %1</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+P</string>
+    <string notr="true">Ctrl+P</string>
    </property>
   </action>
   <action name="actionExit">
@@ -237,7 +247,7 @@
     <string>Exit</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Q</string>
+    <string notr="true">Ctrl+Q</string>
    </property>
   </action>
   <action name="actionSelect_profile">
@@ -245,7 +255,7 @@
     <string>Close &amp;Profile</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+End</string>
+    <string notr="true">Ctrl+End</string>
    </property>
   </action>
   <action name="actionOptions">
@@ -253,7 +263,7 @@
     <string>&amp;Settings</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+S</string>
+    <string notr="true">Ctrl+S</string>
    </property>
   </action>
   <action name="actionSelect_all">
@@ -261,7 +271,7 @@
     <string>Select &amp;All</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+A</string>
+    <string notr="true">Ctrl+A</string>
    </property>
   </action>
   <action name="actionDeselect_all">
@@ -269,7 +279,7 @@
     <string>&amp;Deselect All</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+D</string>
+    <string notr="true">Ctrl+D</string>
    </property>
   </action>
   <action name="actionExport_selected">
@@ -277,7 +287,7 @@
     <string>&amp;Export selected...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+E</string>
+    <string notr="true">Ctrl+E</string>
    </property>
   </action>
   <action name="actionDelete_selected">
@@ -285,7 +295,7 @@
     <string>&amp;Remove selected</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+Del</string>
+    <string notr="true">Ctrl+Del</string>
    </property>
   </action>
   <action name="action_Import">
@@ -293,7 +303,7 @@
     <string>&amp;Import files...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+I</string>
+    <string notr="true">Ctrl+I</string>
    </property>
   </action>
   <action name="actionOpen_File">
@@ -301,7 +311,7 @@
     <string>&amp;Open File...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+O</string>
+    <string notr="true">Ctrl+O</string>
    </property>
   </action>
   <action name="actionSelect_GTA_Folder">
@@ -312,7 +322,7 @@
     <string>Select GTA V Folder...</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+G</string>
+    <string notr="true">Ctrl+G</string>
    </property>
   </action>
   <action name="action_Enable_In_game">
@@ -320,7 +330,7 @@
     <string>Show In-gam&amp;e</string>
    </property>
    <property name="shortcut">
-    <string>Shift+E</string>
+    <string notr="true">Shift+E</string>
    </property>
   </action>
   <action name="action_Disable_In_game">
@@ -328,7 +338,39 @@
     <string>Hi&amp;de In-game</string>
    </property>
    <property name="shortcut">
-    <string>Shift+D</string>
+    <string notr="true">Shift+D</string>
+   </property>
+  </action>
+  <action name="actionSet_Title">
+   <property name="text">
+    <string>Change &amp;Title...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Shift+T</string>
+   </property>
+  </action>
+  <action name="actionSet_Crew">
+   <property name="text">
+    <string>Change &amp;Crew...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Shift+C</string>
+   </property>
+  </action>
+  <action name="actionQualify_as_Avatar">
+   <property name="text">
+    <string>&amp;Qualify as Avatar</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Shift+Q</string>
+   </property>
+  </action>
+  <action name="actionChange_Players">
+   <property name="text">
+    <string>Change &amp;Players...</string>
+   </property>
+   <property name="shortcut">
+    <string notr="true">Shift+P</string>
    </property>
   </action>
  </widget>

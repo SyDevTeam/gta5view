@@ -62,6 +62,10 @@ private slots:
     void on_actionSelect_GTA_Folder_triggered();
     void on_action_Enable_In_game_triggered();
     void on_action_Disable_In_game_triggered();
+    void on_actionQualify_as_Avatar_triggered();
+    void on_actionChange_Players_triggered();
+    void on_actionSet_Crew_triggered();
+    void on_actionSet_Title_triggered();
     void settingsApplied(int contentMode, bool languageChanged);
 
 protected:

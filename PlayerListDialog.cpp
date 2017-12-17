@@ -32,10 +32,8 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
 {
     // Set Window Flags
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#ifdef Q_OS_LINUX
-    // for stupid Window Manager (GNOME 3 should feel triggered)
-    setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
-#endif
+
+    listUpdated = false;
 
     ui->setupUi(this);
     ui->cmdCancel->setDefault(true);
@@ -237,5 +235,16 @@ void PlayerListDialog::on_cmdApply_clicked()
         players += ui->listSePlayers->item(i)->text().split(" ").at(0);
     }
     emit playerListUpdated(players);
+    listUpdated = true;
     close();
+}
+
+QStringList PlayerListDialog::getPlayerList() const
+{
+    return players;
+}
+
+bool PlayerListDialog::isListUpdated()
+{
+    return listUpdated;
 }

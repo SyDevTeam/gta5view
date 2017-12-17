@@ -810,6 +810,9 @@ QImage SnapmaticPicture::getImage(bool fastLoad)
         picStream->close();
         delete picStream;
 
+        rawPicContent.clear();
+        rawPicContent.squeeze();
+
         if (returnOk)
         {
             if (!fastLoadU)
@@ -835,6 +838,22 @@ QImage SnapmaticPicture::getImage(bool fastLoad)
     return QImage();
 }
 
+QByteArray SnapmaticPicture::getPictureStream() // Incomplete because it just work in writeEnabled mode
+{
+    QByteArray jpegRawContent;
+    if (writeEnabled)
+    {
+        QBuffer *picStream = new QBuffer(&rawPicContent);
+        picStream->open(QIODevice::ReadWrite);
+        if (picStream->seek(jpegStreamEditorBegin))
+        {
+            jpegRawContent = picStream->read(jpegPicStreamLength);
+        }
+        delete picStream;
+    }
+    return jpegRawContent;
+}
+
 int SnapmaticPicture::getContentMaxLength()
 {
     return jpegRawContentSize;
@@ -854,6 +873,11 @@ void SnapmaticPicture::clearCache()
 void SnapmaticPicture::emitUpdate()
 {
     emit updated();
+}
+
+void SnapmaticPicture::emitCustomSignal(const QString &signal)
+{
+    emit customSignal(signal);
 }
 
 // JSON part
@@ -1351,7 +1375,7 @@ bool SnapmaticPicture::isFormatSwitched()
 bool SnapmaticPicture::verifyTitle(const QString &title)
 {
     // VERIFY TITLE FOR BE A VALID SNAPMATIC TITLE
-    if (title.length() <= titlStreamCharacterMax)
+    if (title.length() <= titlStreamCharacterMax && title.length() > 0)
     {
         for (QChar titleChar : title)
         {

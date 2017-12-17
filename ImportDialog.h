@@ -45,11 +45,17 @@ private slots:
     void on_cmdOK_clicked();
     void on_labPicture_labelPainted();
     void on_cmdColourChange_clicked();
+    void on_cmdBackgroundChange_clicked();
+    void on_cmdBackgroundWipe_clicked();
+    void on_cbStretch_toggled(bool checked);
+    void on_cbForceAvatarColour_toggled(bool checked);
 
 private:
     Ui::ImportDialog *ui;
     QImage avatarAreaImage;
+    QString backgroundPath;
     QString imageTitle;
+    QImage backImage;
     QImage workImage;
     QImage newImage;
     QColor selectedColour;

@@ -62,6 +62,7 @@ public:
     bool isPicOk(); // Please use isPictureOk instead
     void clearCache();
     QImage getImage(bool fastLoad = false);
+    QByteArray getPictureStream();
     QString getLastStep(bool readable = true);
     QString getPictureStr();
     QString getPictureHead();
@@ -79,6 +80,7 @@ public:
     bool setPictureStream(const QByteArray &streamArray);
     void updateStrings();
     void emitUpdate();
+    void emitCustomSignal(const QString &signal);
 
     // FILE MANAGEMENT
     bool exportPicture(const QString &fileName, SnapmaticFormat format = SnapmaticFormat::Auto_Format);
@@ -170,6 +172,7 @@ private:
     static bool verifyTitleChar(const QChar &titleChar);
 
 signals:
+    void customSignal(QString signal);
     void preloaded();
     void updated();
     void loaded();

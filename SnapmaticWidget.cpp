@@ -18,6 +18,7 @@
 
 #include "SnapmaticWidget.h"
 #include "ui_SnapmaticWidget.h"
+#include "ImageEditorDialog.h"
 #include "MapLocationDialog.h"
 #include "JsonEditorDialog.h"
 #include "SnapmaticPicture.h"
@@ -36,8 +37,8 @@
 #include <QMenu>
 #include <QFile>
 
-SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
-    ProfileWidget(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
+SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QString profileName, QWidget *parent) :
+    ProfileWidget(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB), profileName(profileName),
     ui(new Ui::SnapmaticWidget)
 {
     ui->setupUi(this);
@@ -67,6 +68,7 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
 {
     smpic = picture;
     QObject::connect(picture, SIGNAL(updated()), this, SLOT(snapmaticUpdated()));
+    QObject::connect(picture, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
 
     qreal screenRatio = AppEnv::screenRatio();
     ui->labPicture->setFixedSize(48 * screenRatio, 27 * screenRatio);
@@ -82,13 +84,22 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
 
 void SnapmaticWidget::snapmaticUpdated()
 {
-    ui->labPicStr->setText(smpic->getPictureStr() % "\n" % smpic->getPictureTitl() % "");
+    ui->labPicStr->setText(smpic->getPictureStr() % "\n" % smpic->getPictureTitl());
+}
+
+void SnapmaticWidget::customSignal(QString signal)
+{
+    if (signal == "PictureUpdated")
+    {
+        QPixmap SnapmaticPixmap = QPixmap::fromImage(smpic->getImage().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
+        ui->labPicture->setPixmap(SnapmaticPixmap);
+    }
 }
 
 void SnapmaticWidget::retranslate()
 {
     smpic->updateStrings();
-    ui->labPicStr->setText(smpic->getPictureStr() % "\n" % smpic->getPictureTitl() % "");
+    ui->labPicStr->setText(smpic->getPictureStr() % "\n" % smpic->getPictureTitl());
 }
 
 void SnapmaticWidget::on_cmdView_clicked()
@@ -98,7 +109,7 @@ void SnapmaticWidget::on_cmdView_clicked()
     bool navigationBar = settings.value("NavigationBar", false).toBool();
     settings.endGroup();
 
-    PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, this);
+    PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, profileName, this);
     picDialog->setSnapmaticPicture(smpic, true);
     picDialog->setModal(true);
 
@@ -301,11 +312,19 @@ void SnapmaticWidget::editSnapmaticRawJson()
     delete jsonEditor;
 }
 
+void SnapmaticWidget::editSnapmaticImage()
+{
+    ImageEditorDialog *imageEditor = new ImageEditorDialog(smpic, profileName, this);
+    imageEditor->setModal(true);
+    imageEditor->show();
+    imageEditor->exec();
+    delete imageEditor;
+}
+
 void SnapmaticWidget::openMapViewer()
 {
     SnapmaticPicture *picture = smpic;
-    MapLocationDialog *mapLocDialog;
-    mapLocDialog = new MapLocationDialog(picture->getSnapmaticProperties().location.x, picture->getSnapmaticProperties().location.y, this);
+    MapLocationDialog *mapLocDialog = new MapLocationDialog(picture->getSnapmaticProperties().location.x, picture->getSnapmaticProperties().location.y, this);
     mapLocDialog->setModal(true);
     mapLocDialog->show();
     mapLocDialog->exec();

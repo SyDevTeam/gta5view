@@ -3,6 +3,7 @@
 #include "SavegameCopy.h"
 #include "AppEnv.h"
 #include <QMessageBox>
+#include <QDebug>
 
 SavegameDialog::SavegameDialog(QWidget *parent) :
     QDialog(parent),
@@ -10,10 +11,6 @@ SavegameDialog::SavegameDialog(QWidget *parent) :
 {
     // Set Window Flags
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#ifdef Q_OS_LINUX
-    // for stupid Window Manager (GNOME 3 should feel triggered)
-    setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
-#endif
 
     // Setup User Interface
     ui->setupUi(this);
@@ -24,14 +21,25 @@ SavegameDialog::SavegameDialog(QWidget *parent) :
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
 
-    // DPI calculation
-    qreal screenRatio = AppEnv::screenRatio();
-    resize(400 * screenRatio, 105 * screenRatio);
+    refreshWindowSize();
 }
 
 SavegameDialog::~SavegameDialog()
 {
     delete ui;
+}
+
+void SavegameDialog::refreshWindowSize()
+{
+    // DPI calculation
+    qreal screenRatio = AppEnv::screenRatio();
+    int dpiWindowWidth = 400 * screenRatio;
+    int dpiWindowHeight = 105 * screenRatio;
+    if (dpiWindowHeight < heightForWidth(dpiWindowWidth))
+    {
+        dpiWindowHeight = heightForWidth(dpiWindowWidth);
+    }
+    resize(dpiWindowWidth, dpiWindowHeight);
 }
 
 void SavegameDialog::setSavegameData(SavegameData *savegame, QString savegamePath, bool readOk)
@@ -44,6 +52,7 @@ void SavegameDialog::setSavegameData(SavegameData *savegame, QString savegamePat
     }
     sgdPath = savegamePath;
     ui->labSavegameText->setText(savegameLabStr.arg(savegame->getSavegameStr()));
+    refreshWindowSize();
 }
 
 void SavegameDialog::on_cmdClose_clicked()

@@ -42,10 +42,6 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
 {
     // Set Window Flags
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#ifdef Q_OS_LINUX
-    // for stupid Window Manager (GNOME 3 should feel triggered)
-    setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
-#endif
 
     // Setup User Interface
     ui->setupUi(this);
@@ -86,9 +82,11 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     setupInterfaceSettings();
     setupSnapmaticPictureViewer();
 
+#ifndef Q_QS_ANDROID
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
     resize(435 * screenRatio, 405 * screenRatio);
+#endif
 
 #ifdef GTA5SYNC_DISABLED
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSync));
