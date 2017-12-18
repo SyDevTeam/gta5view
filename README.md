@@ -1,30 +1,32 @@
 ## gta5view
-Grand Theft Auto V Savegame and Snapmatic viewer
+Grand Theft Auto V Savegame and Snapmatic viewer/editor
 
-- Viewing Snapmatics and giving the ability to disable them in-game
-- Import/Export Snapmatics and Savegames
-- Choosing between multiple Social Club accounts as GTA V profiles IDs
+- View Snapmatics with the ability to disable them in-game
+- Edit Snapmatic pictures and properties in multiple ways
+- Import/Export Snapmatics, Savegames and pictures
+- Let choose between multiple Social Club accounts as GTA V profiles IDs
 
 #### Screenshots
-<img src="https://i.imgur.com/ncMtWjR.png"/>
-<img src="https://i.imgur.com/4THtwb1.png"/>
-<img src="https://i.imgur.com/STkRl6j.png"/>
+<img src="https://i.imgur.com/cOcojyq.png"/>
+<img src="https://i.imgur.com/LGmxdgU.png"/>
+<img src="https://i.imgur.com/j1Lodiu.png"/>
+<img src="https://i.imgur.com/pMQD8Qd.png"/>
 
 #### Build gta5view Debian/Ubuntu
 
-	apt-get install git gcc g++ qtbase5-dev qttranslations5-l10n qt5-qmake make checkinstall
+	sudo apt-get install git gcc g++ qtbase5-dev qttranslations5-l10n qt5-qmake make checkinstall
 	git clone https://github.com/SyDevTeam/gta5view
 	mkdir gta5view.build && cd gta5view.build
 	qmake -qt=5 GTA5SYNC_PREFIX=/usr ../gta5view/gta5view.pro # or just qmake GTA5SYNC_PREFIX=/usr ../gta5view/gta5view.pro
 	make
-	checkinstall --pkgname=gta5view --pkggroup=utility --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5,qttranslations5-l10n
+	sudo checkinstall --pkgname=gta5view --pkggroup=utility --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5widgets5,qttranslations5-l10n
 
-#### Build gta5view Windows
+#### Build gta5view Windows (Beginner)
 
-Downloading <a href="https://www.qt.io/">Qt Framework</a> and install it.<br>
+Download <a href="https://www.qt.io/">Qt Framework</a> and install it.<br>
 Take the Online Installer and choose the MinGW version or install Microsoft Visual Studio 2013/2015 Community<br>
-Downloading Source Code over GitHub or with your Git client.<br>
-Open the gta5view.pro file with Qt Creator and build it over Qt Creator.<br>
+Download the Source Code over GitHub or with your Git client.<br>
+Open the gta5view.pro Project file with Qt Creator and build it over Qt Creator.<br>
 
 #### Download Binary Releases
 
