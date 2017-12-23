@@ -11,7 +11,7 @@ mkdir assets && \
 
 # Starting build
 cd build && \
-qmake-static DEFINES+=GTA5SYNC_BUILDTYPE_DEV "DEFINES+=GTA5SYNC_APPVER=\\\\\\\"$APPLICATION_VERSION\\\\\\\"" ../gta5view.pro && \
+qmake-static $QMAKE_FLAGS DEFINES+=GTA5SYNC_BUILDTYPE_DEV "DEFINES+=GTA5SYNC_APPVER=\\\\\\\"$APPLICATION_VERSION\\\\\\\"" ../gta5view.pro && \
 make -j 4 && \
 cp -Rf release/*.exe $PROJECT_DIR/assets/$GTA5VIEW_EXECUTABLE && \
 cd $PROJECT_DIR/assets && \

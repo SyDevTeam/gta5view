@@ -3,13 +3,21 @@ sudo: required
 
 language: cpp
 
+compiler: clang
+
 service:
   - docker
 
 matrix:
   include:
     - env:
-      - BUILD_SCRIPT=linux_travis.sh
+      - BUILD_SCRIPT=debian32_travis.sh
+      - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
+      - APT_INSTALL=clang
+    - env:
+      - BUILD_SCRIPT=debian64_travis.sh
+      - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
+      - APT_INSTALL=clang
     - env:
       - BUILD_SCRIPT=windows_travis.sh
       - QT_SELECT=qt5-i686-w64-mingw32
