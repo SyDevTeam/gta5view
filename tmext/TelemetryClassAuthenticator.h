@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2018 Syping
+* Copyright (C) 2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -16,35 +16,26 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef APPENV_H
-#define APPENV_H
+#ifndef TELEMETRYCLASSAUTHENTICATOR_H
+#define TELEMETRYCLASSAUTHENTICATOR_H
 
+#include <QApplication>
+#include <QObject>
 #include <QString>
 #include <QUrl>
 
-class AppEnv
+class TelemetryClassAuthenticator : public QObject
 {
+    Q_OBJECT
 public:
-    AppEnv();
-
-    // Build Stuff
-    static QString getBuildDateTime();
-
-    // Folder Stuff
-    static QString getGameFolder(bool *ok = 0);
-    static bool setGameFolder(QString gameFolder);
-    static QString getExLangFolder();
-    static QString getInLangFolder();
-    static QString getPluginsFolder();
-
-    // Web Stuff
-    static QByteArray getUserAgent();
-    static QUrl getCrewFetchingUrl(QString crewID);
-    static QUrl getPlayerFetchingUrl(QString crewID, QString pageNumber);
-    static QUrl getPlayerFetchingUrl(QString crewID, int pageNumber);
-
-    // Screen Stuff
-    static qreal screenRatio();
+    static const QUrl getTrackingPushURL();
+    static const QUrl getTrackingRegURL();
+    static const QString getTrackingAuthID();
+    static const QString getTrackingAuthPW();
+    static bool havePushURL();
+    static bool haveRegURL();
+    static bool haveAccessData();
 };
 
-#endif // APPENV_H
+
+#endif // TELEMETRYCLASSAUTHENTICATOR_H

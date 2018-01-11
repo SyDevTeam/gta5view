@@ -24,13 +24,13 @@ BEGIN
         BLOCK   "040904b0"
         BEGIN
             VALUE   "CompanyName",      "Syping"
-            VALUE   "FileDescription",  "gta5view\0"
-            VALUE   "FileVersion",      "1.5.0-dev7\0"
-            VALUE   "InternalName",     "gta5view\0"
-            VALUE   "LegalCopyright",   "Copyright © 2016-2017 Syping\0"
-            VALUE   "OriginalFilename", "gta5view.exe\0"
-            VALUE   "ProductName",      "gta5view\0"
-            VALUE   "ProductVersion",   "1.5.0-dev7\0"
+            VALUE   "FileDescription",  "gta5view"
+            VALUE   "FileVersion",      "1.5.0-dev8"
+            VALUE   "InternalName",     "gta5view"
+            VALUE   "LegalCopyright",   "Copyright © 2016-2017 Syping"
+            VALUE   "OriginalFilename", "gta5view.exe"
+            VALUE   "ProductName",      "gta5view"
+            VALUE   "ProductVersion",   "1.5.0-dev8"
         END
     END
 END

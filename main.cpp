@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -47,6 +47,10 @@
 #ifdef GTA5SYNC_WIN
 #include "windows.h"
 #include <iostream>
+#endif
+
+#ifdef GTA5SYNC_TELEMETRY
+#include "TelemetryClass.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -100,29 +104,55 @@ int main(int argc, char *argv[])
         a.addLibraryPath(pluginsDir);
     }
 
-    TCInstance->initUserLanguage();
-    TCInstance->loadTranslation(&a);
-
-    if (isFirstStart)
-    {
-        QMessageBox::StandardButton button = QMessageBox::information(a.desktop(), QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER), QApplication::tr("<h4>Welcome to %1!</h4>You want to configure %1 before you start using it?").arg(GTA5SYNC_APPSTR), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-        if (button == QMessageBox::Yes)
-        {
-            ProfileDatabase profileDB;
-            OptionsDialog optionsDialog(&profileDB);
-            optionsDialog.setWindowIcon(IconLoader::loadingAppIcon());
-            optionsDialog.show();
-            optionsDialog.exec();
-        }
-        settings.setValue("IsFirstStart", false);
-    }
-
-    settings.endGroup();
-
     QStringList applicationArgs = a.arguments();
     QString selectedAction;
     QString arg1;
     applicationArgs.removeAt(0);
+
+    TCInstance->initUserLanguage();
+    TCInstance->loadTranslation(&a);
+
+    if (!applicationArgs.contains("--skip-firststart"))
+    {
+        if (isFirstStart)
+        {
+            QMessageBox::StandardButton button = QMessageBox::information(a.desktop(), QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER), QApplication::tr("<h4>Welcome to %1!</h4>You want to configure %1 before you start using it?").arg(GTA5SYNC_APPSTR), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+            if (button == QMessageBox::Yes)
+            {
+                ProfileDatabase profileDB;
+                OptionsDialog optionsDialog(&profileDB);
+                optionsDialog.setWindowIcon(IconLoader::loadingAppIcon());
+                optionsDialog.show();
+                optionsDialog.exec();
+            }
+            settings.setValue("IsFirstStart", false);
+        }
+    }
+
+    settings.endGroup();
+
+#ifdef GTA5SYNC_TELEMETRY
+    if (!applicationArgs.contains("--disable-telemetry"))
+    {
+        QObject::connect(Telemetry, SIGNAL(registered()), Telemetry, SLOT(pushStartupSet()));
+        if (!applicationArgs.contains("--skip-telemetryinit"))
+        {
+            Telemetry->init();
+            if (Telemetry->canPush())
+            {
+                Telemetry->pushStartupSet();
+            }
+            else if (Telemetry->canRegister())
+            {
+                Telemetry->registerClient();
+            }
+        }
+    }
+    else
+    {
+        Telemetry->setDisabled(true);
+    }
+#endif
 
     for (QString currentArg : applicationArgs)
     {

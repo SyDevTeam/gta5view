@@ -1,6 +1,6 @@
 #/*****************************************************************************
 #* gta5view Grand Theft Auto V Profile Viewer
-#* Copyright (C) 2015-2017 Syping
+#* Copyright (C) 2015-2018 Syping
 #*
 #* This program is free software: you can redistribute it and/or modify
 #* it under the terms of the GNU General Public License as published by
@@ -60,9 +60,11 @@ SOURCES += main.cpp \
     SnapmaticWidget.cpp \
     StandardPaths.cpp \
     StringParser.cpp \
+    TelemetryClass.cpp \
     TranslationClass.cpp \
     UserInterface.cpp \
     anpro/JSHighlighter.cpp \
+    tmext/TelemetryClassAuthenticator.cpp \
     uimod/UiModLabel.cpp \
     uimod/UiModWidget.cpp
 
@@ -98,9 +100,11 @@ HEADERS  += \
     SnapmaticWidget.h \
     StandardPaths.h \
     StringParser.h \
+    TelemetryClass.h \
     TranslationClass.h \
     UserInterface.h \
     anpro/JSHighlighter.h \
+    tmext/TelemetryClassAuthenticator.h \
     uimod/UiModLabel.h \
     uimod/UiModWidget.h
 
@@ -142,7 +146,7 @@ DISTFILES += res/app.rc \
     lang/gta5sync_no.ts \
     lang/README.txt
 
-INCLUDEPATH += ./anpro ./uimod
+INCLUDEPATH += ./anpro ./tmext ./uimod
 
 # GTA5SYNC/GTA5VIEW ONLY
 
@@ -156,6 +160,7 @@ win32: DEFINES += GTA5SYNC_WIN
 win32: RC_FILE += res/app.rc
 win32: LIBS += -luser32
 win32: CONFIG -= embed_manifest_exe
+contains(DEFINES, GTA5SYNC_APV): greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: LIBS += -ldwmapi
 
 # MAC OS X ONLY
 macx: ICON = res/5sync.icns
@@ -207,4 +212,13 @@ contains(DEFINES, GTA5SYNC_QCONF){
         langfiles.files = $$PWD/res/gta5sync_en_US.qm $$PWD/res/gta5sync_de.qm $$PWD/res/gta5sync_fr.qm $$PWD/res/gta5sync_ru.qm $$PWD/res/qtbase_en_GB.qm
         INSTALLS += langfiles
     }
+}
+
+# TELEMETRY BASED STUFF
+
+!contains(DEFINES, GTA5SYNC_TELEMETRY){
+    SOURCES -= TelemetryClass.cpp \
+        tmext/TelemetryClassAuthenticator.cpp
+    HEADERS -= TelemetryClass.h \
+        tmext/TelemetryClassAuthenticator.h
 }

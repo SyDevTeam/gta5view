@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -64,13 +64,24 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->rbPicDesktopRes->setText(ui->rbPicDesktopRes->text().arg(QString::number(desktopSizeWidth), QString::number(desktopSizeHeight)));
     ui->rbPicDefaultRes->setText(ui->rbPicDefaultRes->text().arg(QString::number(defExportSize.width()), QString::number(defExportSize.height())));
 
+    // Set Icon for OK Button
     if (QIcon::hasThemeIcon("dialog-ok"))
     {
         ui->cmdOK->setIcon(QIcon::fromTheme("dialog-ok"));
     }
+    else if (QIcon::hasThemeIcon("gtk-ok"))
+    {
+        ui->cmdOK->setIcon(QIcon::fromTheme("gtk-ok"));
+    }
+
+    // Set Icon for Cancel Button
     if (QIcon::hasThemeIcon("dialog-cancel"))
     {
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
+    }
+    else if (QIcon::hasThemeIcon("gtk-cancel"))
+    {
+        ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
     }
 
     setupTreeWidget();

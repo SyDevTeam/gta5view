@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -79,9 +79,20 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
     ui->saProfileContent->setFilesMode(true);
 
+    // Set Icon for Close Button
     if (QIcon::hasThemeIcon("dialog-close"))
     {
         ui->cmdCloseProfile->setIcon(QIcon::fromTheme("dialog-close"));
+    }
+    else if (QIcon::hasThemeIcon("gtk-close"))
+    {
+        ui->cmdCloseProfile->setIcon(QIcon::fromTheme("gtk-close"));
+    }
+
+    // Set Icon for Import Button
+    if (QIcon::hasThemeIcon("document-import"))
+    {
+        ui->cmdImport->setIcon(QIcon::fromTheme("document-import"));
     }
 
     // DPI calculation

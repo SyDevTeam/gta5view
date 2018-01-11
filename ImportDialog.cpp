@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -55,13 +55,24 @@ ImportDialog::ImportDialog(QWidget *parent) :
     avatarAreaImage = QImage(":/img/avatarareaimport.png");
     selectedColour = QColor::fromRgb(0, 0, 0, 255);
 
+    // Set Icon for OK Button
     if (QIcon::hasThemeIcon("dialog-ok"))
     {
         ui->cmdOK->setIcon(QIcon::fromTheme("dialog-ok"));
     }
+    else if (QIcon::hasThemeIcon("gtk-ok"))
+    {
+        ui->cmdOK->setIcon(QIcon::fromTheme("gtk-ok"));
+    }
+
+    // Set Icon for Cancel Button
     if (QIcon::hasThemeIcon("dialog-cancel"))
     {
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
+    }
+    else if (QIcon::hasThemeIcon("gtk-cancel"))
+    {
+        ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
     }
 
     ui->cbIgnore->setChecked(false);

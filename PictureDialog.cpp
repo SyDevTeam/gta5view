@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -166,10 +166,14 @@ void PictureDialog::setupPictureDialog()
     // Event connects
     connect(ui->labJSON, SIGNAL(resized(QSize)), this, SLOT(adaptNewDialogSize(QSize)));
 
-    // Dialog buttons
+    // Set Icon for Close Button
     if (QIcon::hasThemeIcon("dialog-close"))
     {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
+    }
+    else if (QIcon::hasThemeIcon("gtk-close"))
+    {
+        ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
     }
 
     installEventFilter(this);

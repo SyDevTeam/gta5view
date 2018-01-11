@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -39,7 +39,9 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, ProfileDatabase *profileD
 
     ui->setupUi(this);
     ui->cmdCancel->setDefault(true);
+    ui->cmdCancel->setFocus();
 
+    // Set Icon for Apply Button
     if (QIcon::hasThemeIcon("dialog-ok-apply"))
     {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok-apply"));
@@ -48,13 +50,27 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, ProfileDatabase *profileD
     {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-apply"));
     }
+    else if (QIcon::hasThemeIcon("gtk-apply"))
+    {
+        ui->cmdApply->setIcon(QIcon::fromTheme("gtk-apply"));
+    }
     else if (QIcon::hasThemeIcon("dialog-ok"))
     {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
     }
+    else if (QIcon::hasThemeIcon("gtk-ok"))
+    {
+        ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
+    }
+
+    // Set Icon for Cancel Button
     if (QIcon::hasThemeIcon("dialog-cancel"))
     {
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
+    }
+    else if (QIcon::hasThemeIcon("gtk-cancel"))
+    {
+        ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
     }
 
     snapmaticTitle = QString();

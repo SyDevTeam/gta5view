@@ -37,7 +37,9 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
 
     ui->setupUi(this);
     ui->cmdCancel->setDefault(true);
+    ui->cmdCancel->setFocus();
 
+    // Set Icon for Apply Button
     if (QIcon::hasThemeIcon("dialog-ok-apply"))
     {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok-apply"));
@@ -46,16 +48,40 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
     {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-apply"));
     }
+    else if (QIcon::hasThemeIcon("gtk-apply"))
+    {
+        ui->cmdApply->setIcon(QIcon::fromTheme("gtk-apply"));
+    }
     else if (QIcon::hasThemeIcon("dialog-ok"))
     {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
     }
+    else if (QIcon::hasThemeIcon("gtk-ok"))
+    {
+        ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
+    }
+
+    // Set Icon for Cancel Button
     if (QIcon::hasThemeIcon("dialog-cancel"))
     {
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
+    else if (QIcon::hasThemeIcon("gtk-cancel"))
+    {
+        ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
+    }
 
-    drawSwitchButtons();
+    // Set Icon for Manage Buttons
+    if (QIcon::hasThemeIcon("go-previous") && QIcon::hasThemeIcon("go-next") && QIcon::hasThemeIcon("list-add"))
+    {
+        ui->cmdMakeAv->setIcon(QIcon::fromTheme("go-previous"));
+        ui->cmdMakeSe->setIcon(QIcon::fromTheme("go-next"));
+        ui->cmdMakeAd->setIcon(QIcon::fromTheme("list-add"));
+    }
+    else
+    {
+        drawSwitchButtons();
+    }
     buildInterface();
 
     // DPI calculation

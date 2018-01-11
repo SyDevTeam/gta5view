@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -38,10 +38,28 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
 
     ui->setupUi(this);
     ui->cmdClose->setDefault(true);
+    ui->cmdClose->setFocus();
+
+    // Set Icon for Close Button
     if (QIcon::hasThemeIcon("dialog-close"))
     {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
+    else if (QIcon::hasThemeIcon("gtk-close"))
+    {
+        ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
+    }
+
+    // Set Icon for Save Button
+    if (QIcon::hasThemeIcon("document-save"))
+    {
+        ui->cmdSave->setIcon(QIcon::fromTheme("document-save"));
+    }
+    else if (QIcon::hasThemeIcon("gtk-save"))
+    {
+        ui->cmdSave->setIcon(QIcon::fromTheme("gtk-save"));
+    }
+
     jsonCode = picture->getJsonStr();
 
 #if QT_VERSION >= 0x050200

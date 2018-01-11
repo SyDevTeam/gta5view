@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -63,16 +63,41 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
 
+    // Set Icon for Close Button
     if (QIcon::hasThemeIcon("dialog-close"))
     {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
+    else if (QIcon::hasThemeIcon("gtk-close"))
+    {
+        ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
+    }
+
+    // Set Icon for Reload Button
+    if (QIcon::hasThemeIcon("view-refresh"))
+    {
+        ui->cmdReload->setIcon(QIcon::fromTheme("view-refresh"));
+    }
+    else if (QIcon::hasThemeIcon("reload"))
+    {
+        ui->cmdReload->setIcon(QIcon::fromTheme("reload"));
+    }
+
+    // Set Icon for Preferences Menu Item
     if (QIcon::hasThemeIcon("preferences-system"))
     {
 #ifndef Q_OS_MACOS // Setting icon for preferences/settings/options lead to a crash in Mac OS X
         ui->actionOptions->setIcon(QIcon::fromTheme("preferences-system"));
 #endif
     }
+    else if (QIcon::hasThemeIcon("configure"))
+    {
+#ifndef Q_OS_MACOS // Setting icon for preferences/settings/options lead to a crash in Mac OS X
+        ui->actionOptions->setIcon(QIcon::fromTheme("configure"));
+#endif
+    }
+
+    // Set Icon for Exit Menu Item
     if (QIcon::hasThemeIcon("application-exit"))
     {
 #ifndef Q_OS_MACOS // Setting icon for exit/quit lead to a crash in Mac OS X

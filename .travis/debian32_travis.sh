@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DOCKER_IMAGE=i386/debian:jessie
-PROJECT_DIR_DOCKER=/gta5view/
+PROJECT_DIR_DOCKER=/gta5view
 
 cd $PROJECT_DIR && \
 docker pull $DOCKER_IMAGE && \

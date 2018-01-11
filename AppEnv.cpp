@@ -37,6 +37,13 @@ AppEnv::AppEnv()
 
 }
 
+// Build Stuff
+
+QString AppEnv::getBuildDateTime()
+{
+    return GTA5SYNC_BUILDDATETIME;
+}
+
 // Folder Stuff
 
 QString AppEnv::getGameFolder(bool *ok)
