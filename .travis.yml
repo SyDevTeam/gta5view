@@ -3,38 +3,39 @@ sudo: required
 
 language: cpp
 
-compiler: clang
-
 service:
   - docker
 
 matrix:
   include:
-    - env:
-      - BUILD_SCRIPT=debian32_travis.sh
-      - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
-      - APT_INSTALL=clang
-    - env:
-      - BUILD_SCRIPT=debian64_travis.sh
-      - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
-      - APT_INSTALL=clang
-    - env:
-      - BUILD_SCRIPT=windows_travis.sh
-      - QT_SELECT=qt5-i686-w64-mingw32
-    - env:
-      - BUILD_SCRIPT=windows_travis.sh
-      - QT_SELECT=qt5-x86_64-w64-mingw32
-      - EXECUTABLE_ARCH=_x64
-
+  - env:
+    - BUILD_SCRIPT=debian32_travis.sh
+    - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
+    - APT_INSTALL=clang
+  - env:
+    - BUILD_SCRIPT=debian64_travis.sh
+    - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
+    - APT_INSTALL=clang
+  - env:
+    - BUILD_SCRIPT=windows_travis.sh
+    - QT_SELECT=qt5-i686-w64-mingw32
+  - env:
+    - BUILD_SCRIPT=windows_travis.sh
+    - QT_SELECT=qt5-x86_64-w64-mingw32
+    - EXECUTABLE_ARCH=_x64
+    
+before_install:
+  - cd tmext && rm -rf TelemetryClassAuthenticator.cpp && openssl aes-256-cbc -K $encrypted_55502862a724_key -iv $encrypted_55502862a724_iv -in TelemetryClassAuthenticator.cpp.enc -out TelemetryClassAuthenticator.cpp -d && cd ..
+    
 script:
-  - .travis/travis.sh
+  - ".travis/travis.sh"
 
 deploy:
   provider: releases
   api_key:
-    secure: "o7VneEz1aHfdVwZvOZLfopf6uJWNrFsZaBvunTmXFzpmNFhlNS1qwqgMUkIA2yBRbZ3wIzVs4vfwIHv7W9yE/PqK+AYL+R8+AwKGrwlgT4HqJNuk6VM/LNJ6GwT/qkQuaoOVw29bUjmzzgIRdHmw53SlJv6Hh1VE8HphlTT//aex6nCfcFhUZ0BETdZDWz5FSHwL3NalUoqfKfQrJeky5RXzCyCANQC2tKt0bV46GaWIgWrDo2KCTNqPtRWWf5GDmnkXE5IYRMQ3mXvO9iYh0v5Y2jo4PiXGUiFUU6Z3aAWFAiPdGclrBO697cf3lCTzDMhuCETR153qFYsLShUlFf61ITAmCeHAWETjZDri0lmPONo3GoNB6alGfYEA51qw14kXakrTpICtTJj7gw/gtUYOabW6hrzmieNzMBIy62RikDPjyakFnuwW2qNHRlD65e0jYv+6nCpb6E+OV16Ysh1zhV2vTfpfzVmSuyu2J+ELqXD3OZCXRSPpDIih9UQ8335p8FBji6jHORcgym/TRgdgRmENibh8tLzWp+UjpWHuWfcpvZgOskjfwU0iDMCayMJ7tDpOhXHcAhDRnd6XRIiOJ5YZCzflj2nEwmt3YUd7DwXS/AU+WHOmcNQBjXBxF/FJa35XXcy3HKJM5TTKqtph3medo30us5yXHeG6NNg="
+    secure: o7VneEz1aHfdVwZvOZLfopf6uJWNrFsZaBvunTmXFzpmNFhlNS1qwqgMUkIA2yBRbZ3wIzVs4vfwIHv7W9yE/PqK+AYL+R8+AwKGrwlgT4HqJNuk6VM/LNJ6GwT/qkQuaoOVw29bUjmzzgIRdHmw53SlJv6Hh1VE8HphlTT//aex6nCfcFhUZ0BETdZDWz5FSHwL3NalUoqfKfQrJeky5RXzCyCANQC2tKt0bV46GaWIgWrDo2KCTNqPtRWWf5GDmnkXE5IYRMQ3mXvO9iYh0v5Y2jo4PiXGUiFUU6Z3aAWFAiPdGclrBO697cf3lCTzDMhuCETR153qFYsLShUlFf61ITAmCeHAWETjZDri0lmPONo3GoNB6alGfYEA51qw14kXakrTpICtTJj7gw/gtUYOabW6hrzmieNzMBIy62RikDPjyakFnuwW2qNHRlD65e0jYv+6nCpb6E+OV16Ysh1zhV2vTfpfzVmSuyu2J+ELqXD3OZCXRSPpDIih9UQ8335p8FBji6jHORcgym/TRgdgRmENibh8tLzWp+UjpWHuWfcpvZgOskjfwU0iDMCayMJ7tDpOhXHcAhDRnd6XRIiOJ5YZCzflj2nEwmt3YUd7DwXS/AU+WHOmcNQBjXBxF/FJa35XXcy3HKJM5TTKqtph3medo30us5yXHeG6NNg=
   file_glob: true
-  file: "assets/*"
+  file: assets/*
   skip_cleanup: true
   on:
     tags: true
