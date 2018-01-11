@@ -119,6 +119,10 @@ void TelemetryClass::push(TelemetryCategory category)
     case TelemetryCategory::ApplicationSpec:
         push(category, getApplicationSpec());
         break;
+    case TelemetryCategory::UserFeedback:
+        break;
+    case TelemetryCategory::CustomEmitted:
+        break;
     }
 }
 
