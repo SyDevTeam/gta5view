@@ -664,5 +664,7 @@ void OptionsDialog::on_cmdUserFeedbackSend_clicked()
 
 void OptionsDialog::on_cmdCopyStatsID_clicked()
 {
+#ifdef GTA5SYNC_TELEMETRY
     QApplication::clipboard()->setText(Telemetry->getRegisteredID());
+#endif
 }
