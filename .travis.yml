@@ -25,7 +25,7 @@ matrix:
     - EXECUTABLE_ARCH=_x64
     
 before_install:
-  - cd tmext && rm -rf TelemetryClassAuthenticator.cpp && openssl aes-256-cbc -K $encrypted_55502862a724_key -iv $encrypted_55502862a724_iv -in TelemetryClassAuthenticator.cpp.enc -out TelemetryClassAuthenticator.cpp -d && cd ..
+  - ".travis/source.sh"
     
 script:
   - ".travis/travis.sh"

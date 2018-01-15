@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -45,15 +45,11 @@
 #endif
 
 #ifndef GTA5SYNC_COPYRIGHT
-#define GTA5SYNC_COPYRIGHT "2016-2017"
+#define GTA5SYNC_COPYRIGHT "2016-2018"
 #endif
 
 #ifndef GTA5SYNC_APPVER
-#ifndef GTA5SYNC_DAILYB
-#define GTA5SYNC_APPVER "1.5.0-dev8"
-#else
-#define GTA5SYNC_APPVER GTA5SYNC_DAILYB
-#endif
+#define GTA5SYNC_APPVER "1.5.0-dev9"
 #endif
 
 #ifdef GTA5SYNC_BUILDTYPE_REL
@@ -89,12 +85,6 @@
 #ifdef GTA5SYNC_BUILDTYPE_ALPHA
 #ifndef GTA5SYNC_BUILDTYPE
 #define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Alpha")
-#endif
-#endif
-
-#ifdef GTA5SYNC_DAILYB
-#ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Daily Build")
 #endif
 #endif
 

@@ -26,18 +26,27 @@
 #include "UserInterface.h"
 #include "CrewDatabase.h"
 #include "SavegameData.h"
+#include "UiModWidget.h"
+#include "UiModLabel.h"
 #include "IconLoader.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QDesktopWidget>
 #include <QStringBuilder>
+#include <QSignalMapper>
 #include <QStyleFactory>
 #include <QApplication>
+#include <QPushButton>
+#include <QSpacerItem>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
 #include <QMessageBox>
 #include <QStringList>
 #include <QTranslator>
+#include <QCheckBox>
 #include <QFileInfo>
 #include <QSysInfo>
+#include <QLayout>
 #include <QObject>
 #include <QString>
 #include <QDebug>
@@ -98,19 +107,28 @@ int main(int argc, char *argv[])
 #endif
 #endif
 
-    QString pluginsDir = AppEnv::getPluginsFolder();
-    if (QFileInfo(pluginsDir).exists())
-    {
-        a.addLibraryPath(pluginsDir);
-    }
-
     QStringList applicationArgs = a.arguments();
     QString selectedAction;
     QString arg1;
     applicationArgs.removeAt(0);
 
-    TCInstance->initUserLanguage();
-    TCInstance->loadTranslation(&a);
+    Translator->initUserLanguage();
+    Translator->loadTranslation(&a);
+
+#ifdef GTA5SYNC_TELEMETRY
+    if (!applicationArgs.contains("--disable-telemetry"))
+    {
+        if (!applicationArgs.contains("--skip-telemetryinit"))
+        {
+            Telemetry->init();
+            Telemetry->work();
+        }
+    }
+    else
+    {
+        Telemetry->setDisabled(true);
+    }
+#endif
 
     if (!applicationArgs.contains("--skip-firststart"))
     {
@@ -129,30 +147,53 @@ int main(int argc, char *argv[])
         }
     }
 
-    settings.endGroup();
-
 #ifdef GTA5SYNC_TELEMETRY
-    if (!applicationArgs.contains("--disable-telemetry"))
+    bool telemetryWindowLaunched = settings.value("TelemetryWindowLaunched", false).toBool();
+    if (!telemetryWindowLaunched && !Telemetry->isEnabled() && !Telemetry->isStateForced())
     {
-        QObject::connect(Telemetry, SIGNAL(registered()), Telemetry, SLOT(pushStartupSet()));
-        if (!applicationArgs.contains("--skip-telemetryinit"))
+        QDialog telemetryDialog;
+        telemetryDialog.setObjectName(QStringLiteral("TelemetryDialog"));
+        telemetryDialog.setWindowTitle(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+        telemetryDialog.setWindowFlags(telemetryDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        telemetryDialog.setWindowIcon(IconLoader::loadingAppIcon());
+        QVBoxLayout telemetryLayout;
+        telemetryLayout.setObjectName(QStringLiteral("TelemetryLayout"));
+        telemetryDialog.setLayout(&telemetryLayout);
+        UiModLabel telemetryLabel(&telemetryDialog);
+        telemetryLabel.setObjectName(QStringLiteral("TelemetryLabel"));
+        telemetryLabel.setText(QString("<h4>%2</h4>%1").arg(QApplication::translate("TelemetryDialog", "You want help %1 to improve in the future by collection of data?").arg(GTA5SYNC_APPSTR), QApplication::translate("TelemetryDialog", "%1 User Statistics").arg(GTA5SYNC_APPSTR)));
+        telemetryLayout.addWidget(&telemetryLabel);
+        QCheckBox telemetryCheckBox(&telemetryDialog);
+        telemetryCheckBox.setObjectName(QStringLiteral("TelemetryCheckBox"));
+        telemetryCheckBox.setText(QApplication::translate("TelemetryDialog", "Yes, I would like to take part."));
+        telemetryCheckBox.setChecked(true);
+        telemetryLayout.addWidget(&telemetryCheckBox);
+        QHBoxLayout telemetryButtonLayout;
+        telemetryButtonLayout.setObjectName(QStringLiteral("TelemetryButtonLayout"));
+        telemetryLayout.addLayout(&telemetryButtonLayout);
+        QSpacerItem telemetryButtonSpacer(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        telemetryButtonLayout.addSpacerItem(&telemetryButtonSpacer);
+        QPushButton telemetryButton(&telemetryDialog);
+        telemetryButton.setObjectName(QStringLiteral("TelemetryButton"));
+        telemetryButton.setText(QApplication::translate("TelemetryDialog", "&OK"));
+        telemetryButtonLayout.addWidget(&telemetryButton);
+        QObject::connect(&telemetryButton, SIGNAL(clicked(bool)), &telemetryDialog, SLOT(close()));
+        telemetryDialog.setFixedSize(telemetryDialog.sizeHint());
+        telemetryDialog.exec();
+        if (telemetryCheckBox.isChecked())
         {
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            telemetrySettings.setValue("IsEnabled", true);
+            telemetrySettings.endGroup();
             Telemetry->init();
-            if (Telemetry->canPush())
-            {
-                Telemetry->pushStartupSet();
-            }
-            else if (Telemetry->canRegister())
-            {
-                Telemetry->registerClient();
-            }
+            Telemetry->work();
         }
-    }
-    else
-    {
-        Telemetry->setDisabled(true);
+        settings.setValue("TelemetryWindowLaunched", true);
     }
 #endif
+
+    settings.endGroup();
 
     for (QString currentArg : applicationArgs)
     {

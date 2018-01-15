@@ -47,6 +47,8 @@ private slots:
     void on_cbIgnoreAspectRatio_toggled(bool checked);
     void on_cmdExploreFolder_clicked();
     void on_cbDefaultStyle_toggled(bool checked);
+    void on_cmdUserFeedbackSend_clicked();
+    void on_cmdCopyStatsID_clicked();
 
 signals:
     void settingsApplied(int contentMode, bool languageChanged);
@@ -76,6 +78,7 @@ private:
     void setupPictureSettings();
     void setupCustomGTAFolder();
     void setupInterfaceSettings();
+    void setupStatisticsSettings();
     void setupSnapmaticPictureViewer();
     void applySettings();
 };

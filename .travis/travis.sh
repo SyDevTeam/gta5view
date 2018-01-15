@@ -8,7 +8,7 @@ if [ `git name-rev --tags --name-only $(git rev-parse HEAD)` == "undefined" ]; t
 export PACKAGE_VERSION=$(grep -oE '^[^\-]*' <<< $APPLICATION_VERSION)
 export PACKAGE_BUILD=$(grep -oP '\-\K.+' <<< $APPLICATION_VERSION)
 export EXECUTABLE_VERSION=${PACKAGE_VERSION}${PACKAGE_BUILD}
-if [ "$PACKAGE_BUILD" == "" ]; then export PACKAGE_BUILD=$TRAVIS_BUILD_NUMBER; fi
+if [ "$PACKAGE_BUILD" == "" ]; then export PACKAGE_BUILD=${TRAVIS_BUILD_NUMBER}; fi
 export PROJECT_DIR=$(pwd)
 
-.travis/$BUILD_SCRIPT
+.travis/${BUILD_SCRIPT}

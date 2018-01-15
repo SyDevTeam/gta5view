@@ -36,6 +36,10 @@
 #include <QFile>
 #include <QDir>
 
+#ifndef GTA5SYNC_TELEMETRY_WEBURL
+#define GTA5SYNC_TELEMETRY_WEBURL ""
+#endif
+
 #ifdef GTA5SYNC_WIN
 #include "windows.h"
 #include "intrin.h"
@@ -51,8 +55,10 @@ void TelemetryClass::init()
     telemetryEnabled = settings.value("IsEnabled", false).toBool();
 #else
     telemetryEnabled = true; // Always enable Telemetry for Developer Versions
+    telemetryStateForced = true;
 #endif
     telemetryClientID = settings.value("ClientID", QString()).toString();
+    telemetryPushAppConf = settings.value("PushAppConf", false).toBool();
     settings.endGroup();
 }
 
@@ -88,6 +94,11 @@ bool TelemetryClass::isRegistered()
     return !telemetryClientID.isEmpty();
 }
 
+QString TelemetryClass::getRegisteredID()
+{
+    return telemetryClientID;
+}
+
 void TelemetryClass::setEnabled(bool enabled)
 {
     telemetryEnabled = enabled;
@@ -114,7 +125,8 @@ void TelemetryClass::push(TelemetryCategory category)
     case TelemetryCategory::UserLocaleData:
         push(category, getSystemLocaleList());
         break;
-    case TelemetryCategory::ApplicationConfiguration:
+    case TelemetryCategory::ApplicationConf:
+        push(category, getApplicationConf());
         break;
     case TelemetryCategory::ApplicationSpec:
         push(category, getApplicationSpec());
@@ -276,6 +288,58 @@ QJsonDocument TelemetryClass::getApplicationSpec()
     return jsonDocument;
 }
 
+QJsonDocument TelemetryClass::getApplicationConf()
+{
+    QJsonDocument jsonDocument;
+    QJsonObject jsonObject;
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+
+    settings.beginGroup("Interface");
+    QJsonObject interfaceObject;
+    interfaceObject["AreaLanguage"] = settings.value("AreaLanguage", "Auto").toString();
+    interfaceObject["Language"] = settings.value("Language", "System").toString();
+    interfaceObject["NavigationBar"] = settings.value("NavigationBar", false).toBool();
+    jsonObject["Interface"] = interfaceObject;
+    settings.endGroup();
+
+    settings.beginGroup("Pictures");
+    QJsonObject picturesObject;
+    picturesObject["AspectRatio"] = ((Qt::AspectRatioMode)settings.value("AspectRatio").toInt() == Qt::IgnoreAspectRatio) ? "IgnoreAspectRatio" : "KeepAspectRatio";
+    picturesObject["CustomQuality"] = settings.value("CustomQuality", 100).toInt();
+    picturesObject["CustomQualityEnabled"] = settings.value("CustomQualityEnabled", false).toBool();
+    picturesObject["ExportSizeMode"] = settings.value("ExportSizeMode", "Default").toString();
+    jsonObject["Pictures"] = picturesObject;
+    settings.endGroup();
+
+    settings.beginGroup("Profile");
+    QJsonObject profileObject;
+    int contentMode = settings.value("ContentMode", 0).toInt();
+    switch (contentMode)
+    {
+    case 0:
+        profileObject["ContentMode"] = "OpenWithSingleClick";
+        break;
+    case 1:
+        profileObject["ContentMode"] = "OpenWithDoubleClick";
+        break;
+    case 2:
+        profileObject["ContentMode"] = "SelectWithSingleClick";
+        break;
+    }
+    jsonObject["Profile"] = profileObject;
+    settings.endGroup();
+
+    settings.beginGroup("Startup");
+    QJsonObject startupObject;
+    startupObject["AppStyle"] = settings.value("AppStyle", "System").toString();
+    startupObject["CustomStyle"] = settings.value("CustomStyle", false).toBool();
+    jsonObject["Startup"] = startupObject;
+    settings.endGroup();
+
+    jsonDocument.setObject(jsonObject);
+    return jsonDocument;
+}
+
 QJsonDocument TelemetryClass::getSystemLocaleList()
 {
     QJsonDocument jsonDocument;
@@ -307,8 +371,8 @@ QString TelemetryClass::categoryToString(TelemetryCategory category)
     case TelemetryCategory::UserLocaleData:
         return QString("UserLocaleData");
         break;
-    case TelemetryCategory::ApplicationConfiguration:
-        return QString("ApplicationConfiguration");
+    case TelemetryCategory::ApplicationConf:
+        return QString("ApplicationConf");
         break;
     case TelemetryCategory::UserFeedback:
         return QString("UserFeedback");
@@ -325,6 +389,11 @@ QString TelemetryClass::categoryToString(TelemetryCategory category)
     }
 }
 
+QUrl TelemetryClass::getWebURL()
+{
+    return QUrl(GTA5SYNC_TELEMETRY_WEBURL);
+}
+
 void TelemetryClass::registerClient()
 {
     QNetworkAccessManager *netManager = new QNetworkAccessManager();
@@ -334,33 +403,88 @@ void TelemetryClass::registerClient()
     connect(netManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(registerFinished(QNetworkReply*)));
 }
 
-void TelemetryClass::pushStartupSet()
+void TelemetryClass::work()
 {
-    push(TelemetryCategory::ApplicationSpec);
-    push(TelemetryCategory::UserLocaleData);
-    push(TelemetryCategory::OperatingSystemSpec);
-    push(TelemetryCategory::HardwareSpec);
+    if (!canPush() && canRegister())
+    {
+        connect(this, SIGNAL(registered(bool)), this, SLOT(work_pd(bool)));
+        registerClient();
+    }
+    else if (canPush())
+    {
+        work_p(true);
+    }
+}
+
+void TelemetryClass::work_p(bool doWork)
+{
+    if (doWork)
+    {
+        push(TelemetryCategory::ApplicationSpec);
+        push(TelemetryCategory::UserLocaleData);
+        push(TelemetryCategory::OperatingSystemSpec);
+        push(TelemetryCategory::HardwareSpec);
+        if (telemetryPushAppConf)
+        {
+            push(TelemetryCategory::ApplicationConf);
+        }
+    }
+}
+
+void TelemetryClass::work_pd(bool doWork)
+{
+    disconnect(this, SIGNAL(registered(bool)), this, SLOT(work_pd(bool)));
+    work_p(doWork);
 }
 
 void TelemetryClass::pushFinished(QNetworkReply *reply)
 {
+    bool isSuccessful = false;
+    if (reply->canReadLine())
+    {
+        QByteArray readedData = reply->readLine();
+        if (QString::fromUtf8(readedData).trimmed() == QString("Submit success!"))
+        {
 #ifdef GTA5SYNC_DEBUG
-    qDebug() << "Telemetry" << reply->readAll().trimmed();
+            qDebug() << "Telemetry" << QString("Submit success!");
 #endif
+            isSuccessful = true;
+#ifdef GTA5SYNC_DEBUG
+            if (reply->isReadable())
+            {
+                readedData = reply->readAll().trimmed();
+                if (!readedData.isEmpty()) { qDebug() << "Telemetry Push" << readedData; }
+            }
+#endif
+        }
+        else
+        {
+#ifdef GTA5SYNC_DEBUG
+            qDebug() << "Telemetry" << QString("Submit failed!");
+#endif
+        }
+    }
+    else
+    {
+#ifdef GTA5SYNC_DEBUG
+        qDebug() << "Telemetry" << QString("Submit failed!");
+#endif
+    }
     reply->deleteLater();
     sender()->deleteLater();
-    emit pushed();
+    emit pushed(isSuccessful);
 }
 
 void TelemetryClass::registerFinished(QNetworkReply *reply)
 {
+    bool isSuccessful = false;
     if (reply->canReadLine())
     {
-        QByteArray readData = reply->readLine();
-        if (QString::fromUtf8(readData).trimmed() == QString("Registration success!") && reply->canReadLine())
+        QByteArray readedData = reply->readLine();
+        if (QString::fromUtf8(readedData).trimmed() == QString("Registration success!") && reply->canReadLine())
         {
-            readData = reply->readLine();
-            telemetryClientID = QString::fromUtf8(readData).trimmed();
+            readedData = reply->readLine();
+            telemetryClientID = QString::fromUtf8(readedData).trimmed();
             QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             settings.beginGroup("Telemetry");
             settings.setValue("ClientID", telemetryClientID);
@@ -368,6 +492,7 @@ void TelemetryClass::registerFinished(QNetworkReply *reply)
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "Telemetry" << QString("Registration success!");
 #endif
+            isSuccessful = true;
         }
         else
         {
@@ -384,5 +509,5 @@ void TelemetryClass::registerFinished(QNetworkReply *reply)
     }
     reply->deleteLater();
     sender()->deleteLater();
-    emit registered();
+    emit registered(isSuccessful);
 }

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5sync GRAND THEFT AUTO V SYNC
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -34,9 +34,7 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
 
     listUpdated = false;
-
     ui->setupUi(this);
-    ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
     // Set Icon for Apply Button
@@ -150,16 +148,19 @@ void PlayerListDialog::drawSwitchButtons()
     QPainter avPainter(&avImage);
     avPainter.setFont(painterFont);
     avPainter.setBrush(palette.buttonText());
+    avPainter.setPen(palette.buttonText().color());
     avPainter.drawText(0, 0, makeAvSize, makeAvSize, Qt::AlignCenter | Qt::TextDontClip, "<");
     avPainter.end();
     QPainter sePainter(&seImage);
     sePainter.setFont(painterFont);
     sePainter.setBrush(palette.buttonText());
+    sePainter.setPen(palette.buttonText().color());
     sePainter.drawText(0, 0, makeSeSize, makeSeSize, Qt::AlignCenter | Qt::TextDontClip, ">");
     sePainter.end();
     QPainter adPainter(&adImage);
     adPainter.setFont(painterFont);
     adPainter.setBrush(palette.buttonText());
+    adPainter.setPen(palette.buttonText().color());
     adPainter.drawText(0, 0, makeAdSize, makeAdSize, Qt::AlignCenter | Qt::TextDontClip, "+");
     adPainter.end();
 
@@ -182,24 +183,32 @@ void PlayerListDialog::buildInterface()
     const QStringList dbPlayers = profileDB->getPlayers();
     for (QString sePlayer : players)
     {
-        ui->listSePlayers->addItem(QString("%1 (%2)").arg(sePlayer, profileDB->getPlayerName(sePlayer)));
+        QListWidgetItem *playerItem = new QListWidgetItem(profileDB->getPlayerName(sePlayer));
+        playerItem->setData(Qt::UserRole, sePlayer);
+        ui->listSePlayers->addItem(playerItem);
     }
     for (QString dbPlayer : dbPlayers)
     {
         if (!players.contains(dbPlayer))
         {
-            ui->listAvPlayers->addItem(QString("%1 (%2)").arg(dbPlayer, profileDB->getPlayerName(dbPlayer)));
+            QListWidgetItem *playerItem = new QListWidgetItem(profileDB->getPlayerName(dbPlayer));
+            playerItem->setData(Qt::UserRole, dbPlayer);
+            ui->listAvPlayers->addItem(playerItem);
         }
     }
+    ui->listAvPlayers->sortItems(Qt::AscendingOrder);
 }
 
 void PlayerListDialog::on_cmdMakeAv_clicked()
 {
     for (QListWidgetItem *item : ui->listSePlayers->selectedItems())
     {
-        QString playerItemText = item->text();
+        QString playerName = item->text();
+        int playerID = item->data(Qt::UserRole).toInt();
         delete item;
-        ui->listAvPlayers->addItem(playerItemText);
+        QListWidgetItem *playerItem = new QListWidgetItem(playerName);
+        playerItem->setData(Qt::UserRole, playerID);
+        ui->listAvPlayers->addItem(playerItem);
         ui->listAvPlayers->sortItems(Qt::AscendingOrder);
     }
 }
@@ -214,9 +223,12 @@ void PlayerListDialog::on_cmdMakeSe_clicked()
     }
     for (QListWidgetItem *item : ui->listAvPlayers->selectedItems())
     {
-        QString playerItemText = item->text();
+        QString playerName = item->text();
+        int playerID = item->data(Qt::UserRole).toInt();
         delete item;
-        ui->listSePlayers->addItem(playerItemText);
+        QListWidgetItem *playerItem = new QListWidgetItem(playerName);
+        playerItem->setData(Qt::UserRole, playerID);
+        ui->listSePlayers->addItem(playerItem);
     }
 }
 
@@ -229,27 +241,30 @@ void PlayerListDialog::on_cmdMakeAd_clicked()
         for (int i = 0; i < ui->listAvPlayers->count(); ++i)
         {
             QListWidgetItem *item = ui->listAvPlayers->item(i);
-            QString playerItemText = item->text();
-            if (playerItemText.split(" ").at(0) == QString::number(playerID))
+            QString itemPlayerName = item->text();
+            int itemPlayerID = item->data(Qt::UserRole).toInt();
+            if (itemPlayerID == playerID)
             {
                 delete item;
-                ui->listSePlayers->addItem(playerItemText);
+                QListWidgetItem *playerItem = new QListWidgetItem(itemPlayerName);
+                playerItem->setData(Qt::UserRole, playerID);
+                ui->listSePlayers->addItem(playerItem);
                 return;
             }
         }
         for (int i = 0; i < ui->listSePlayers->count(); ++i)
         {
             QListWidgetItem *item = ui->listSePlayers->item(i);
-            QString playerItemText = item->text();
-            if (playerItemText.split(" ").at(0) == QString::number(playerID))
+            int itemPlayerID = item->data(Qt::UserRole).toInt();
+            if (itemPlayerID == playerID)
             {
                 QMessageBox::warning(this, tr("Add Player..."), tr("Failed to add Player %1 because Player %1 is already added!").arg(QString::number(playerID)));
-                //ui->listSePlayers->setCurrentItem(item);
                 return;
             }
         }
-        QString playerItemText = QString("%1 (%1)").arg(QString::number(playerID));
-        ui->listSePlayers->addItem(playerItemText);
+        QListWidgetItem *playerItem = new QListWidgetItem(QString::number(playerID));
+        playerItem->setData(Qt::UserRole, playerID);
+        ui->listSePlayers->addItem(playerItem);
     }
 }
 
@@ -258,7 +273,7 @@ void PlayerListDialog::on_cmdApply_clicked()
     players.clear();
     for (int i = 0; i < ui->listSePlayers->count(); ++i)
     {
-        players += ui->listSePlayers->item(i)->text().split(" ").at(0);
+        players += ui->listSePlayers->item(i)->data(Qt::UserRole).toString();
     }
     emit playerListUpdated(players);
     listUpdated = true;

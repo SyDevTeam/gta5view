@@ -38,7 +38,6 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, ProfileDatabase *profileD
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
 
     ui->setupUi(this);
-    ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
     // Set Icon for Apply Button
@@ -240,9 +239,9 @@ void SnapmaticEditor::setSnapmaticPlayers(const QStringList &players)
         ui->labPlayers->setText(playersStr.arg(QApplication::translate("PictureDialog", "No Players"), editStr));
     }
 #ifndef Q_OS_ANDROID
-    ui->gbValues->resize(ui->gbValues->sizeHint());
-    ui->frameWidget->resize(ui->frameWidget->sizeHint());
-    resize(width(), heightForWidth(width()));
+    ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
+    ui->frameWidget->resize(ui->gbValues->width(), ui->frameWidget->heightForWidth(ui->frameWidget->width()));
+    if (heightForWidth(width()) > height()) { resize(width(), heightForWidth(width())); }
 #endif
 }
 
@@ -268,9 +267,9 @@ void SnapmaticEditor::setSnapmaticTitle(const QString &title)
         ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: red\">%1</a>").arg(tr("No", "No, could lead to issues"))));
     }
 #ifndef Q_OS_ANDROID
-    ui->gbValues->resize(ui->gbValues->sizeHint());
-    ui->frameWidget->resize(ui->frameWidget->sizeHint());
-    resize(width(), heightForWidth(width()));
+    ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
+    ui->frameWidget->resize(ui->gbValues->width(), ui->frameWidget->heightForWidth(ui->frameWidget->width()));
+    if (heightForWidth(width()) > height()) { resize(width(), heightForWidth(width())); }
 #endif
 }
 
@@ -280,9 +279,9 @@ void SnapmaticEditor::setSnapmaticCrew(const QString &crew)
     QString crewStr = tr("Crew: %1 (%2)").arg(StringParser::escapeString(crew), editStr);
     ui->labCrew->setText(crewStr);
 #ifndef Q_OS_ANDROID
-    ui->gbValues->resize(ui->gbValues->sizeHint());
-    ui->frameWidget->resize(ui->frameWidget->sizeHint());
-    resize(width(), heightForWidth(width()));
+    ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
+    ui->frameWidget->resize(ui->gbValues->width(), ui->frameWidget->heightForWidth(ui->frameWidget->width()));
+    if (heightForWidth(width()) > height()) { resize(width(), heightForWidth(width())); }
 #endif
 }
 

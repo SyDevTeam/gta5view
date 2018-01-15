@@ -23,7 +23,7 @@ Running with Qt %6&lt;br/&gt;
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.ui" line="75"/>
+        <location filename="../AboutDialog.ui" line="78"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -74,38 +74,37 @@ Pictures and Savegames</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="61"/>
+        <location filename="../config.h" line="57"/>
         <source>Release</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="67"/>
+        <location filename="../config.h" line="63"/>
         <source>Release Candidate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="73"/>
-        <location filename="../config.h" line="97"/>
+        <location filename="../config.h" line="69"/>
         <source>Daily Build</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="79"/>
+        <location filename="../config.h" line="75"/>
         <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="85"/>
+        <location filename="../config.h" line="81"/>
         <source>Beta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="91"/>
+        <location filename="../config.h" line="87"/>
         <source>Alpha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="102"/>
+        <location filename="../config.h" line="92"/>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>
@@ -183,87 +182,178 @@ Pictures and Savegames</source>
     </message>
 </context>
 <context>
+    <name>ImageEditorDialog</name>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="14"/>
+        <source>Overwrite Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="59"/>
+        <location filename="../ImageEditorDialog.cpp" line="74"/>
+        <source>Capacity: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="66"/>
+        <source>?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="90"/>
+        <source>&amp;Import...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="110"/>
+        <source>&amp;Overwrite</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="117"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.cpp" line="193"/>
+        <location filename="../ImageEditorDialog.cpp" line="200"/>
+        <location filename="../ImageEditorDialog.cpp" line="209"/>
+        <source>Snapmatic Image Editor</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.cpp" line="193"/>
+        <source>Patching of Snapmatic Image failed because of I/O Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.cpp" line="200"/>
+        <source>Patching of Snapmatic Image failed because of Image Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.cpp" line="209"/>
+        <source>Every taken Snapmatic have a different Capacity, a Snapmatic with higher Capacity can store a picture with better quality.</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ImportDialog</name>
     <message>
-        <location filename="../ImportDialog.ui" line="26"/>
+        <location filename="../ImportDialog.ui" line="20"/>
         <source>Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="90"/>
-        <source>Settings</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="98"/>
-        <location filename="../ImportDialog.cpp" line="57"/>
-        <location filename="../ImportDialog.cpp" line="242"/>
+        <location filename="../ImportDialog.ui" line="133"/>
+        <location filename="../ImportDialog.cpp" line="79"/>
+        <location filename="../ImportDialog.cpp" line="308"/>
         <source>Background Colour: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="148"/>
+        <location filename="../ImportDialog.ui" line="111"/>
+        <location filename="../ImportDialog.ui" line="252"/>
         <source>Ignore Aspect Ratio</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="135"/>
+        <location filename="../ImportDialog.ui" line="84"/>
+        <source>Picture</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="98"/>
         <source>Avatar</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="105"/>
+        <location filename="../ImportDialog.ui" line="123"/>
+        <source>Background</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="157"/>
+        <location filename="../ImportDialog.ui" line="207"/>
         <source>...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="194"/>
+        <location filename="../ImportDialog.ui" line="183"/>
+        <location filename="../ImportDialog.cpp" line="80"/>
+        <location filename="../ImportDialog.cpp" line="388"/>
+        <source>Background Image:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="214"/>
+        <source>X</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="242"/>
+        <source>Force Colour in Avatar Zone</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="298"/>
         <source>Import picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="197"/>
+        <location filename="../ImportDialog.ui" line="301"/>
         <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="210"/>
+        <location filename="../ImportDialog.ui" line="314"/>
         <source>Discard picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="213"/>
+        <location filename="../ImportDialog.ui" line="317"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="105"/>
-        <location filename="../ProfileInterface.cpp" line="599"/>
+        <location filename="../ImportDialog.cpp" line="171"/>
+        <location filename="../ProfileInterface.cpp" line="643"/>
         <source>Custom Avatar</source>
         <comment>Custom Avatar Description in SC, don&apos;t use Special Character!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="131"/>
-        <location filename="../ProfileInterface.cpp" line="618"/>
+        <location filename="../ImportDialog.cpp" line="197"/>
+        <location filename="../ProfileInterface.cpp" line="662"/>
         <source>Custom Picture</source>
         <comment>Custom Picture Description in SC, don&apos;t use Special Character!</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="199"/>
+        <location filename="../ImportDialog.cpp" line="265"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="199"/>
+        <location filename="../ImportDialog.cpp" line="265"/>
         <source>Snapmatic Avatar Zone</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="238"/>
+        <location filename="../ImportDialog.cpp" line="304"/>
         <source>Select Colour...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="373"/>
+        <source>Background Image: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="373"/>
+        <source>File</source>
+        <comment>Background Image: File</comment>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -275,13 +365,18 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.ui" line="107"/>
+        <location filename="../JsonEditorDialog.ui" line="110"/>
         <source>&amp;Save</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.ui" line="114"/>
+        <location filename="../JsonEditorDialog.ui" line="117"/>
         <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../JsonEditorDialog.cpp" line="172"/>
+        <source>JSON Error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -318,7 +413,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.cpp" line="90"/>
+        <location filename="../MapLocationDialog.cpp" line="91"/>
         <source>X: %1
 Y: %2</source>
         <comment>X and Y position</comment>
@@ -460,130 +555,214 @@ Y: %2</source>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="387"/>
-        <source>Interface</source>
+        <source>Feedback</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="393"/>
+        <source>Participation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="399"/>
+        <location filename="../OptionsDialog.cpp" line="552"/>
+        <source>Participate in %1 User Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="425"/>
+        <source>Categorys</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="434"/>
+        <source>Hardware, Application and OS Specification</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="447"/>
+        <source>System Language Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="457"/>
+        <source>Application Configuration</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="467"/>
+        <source>Other</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="479"/>
+        <location filename="../OptionsDialog.cpp" line="575"/>
+        <location filename="../OptionsDialog.cpp" line="579"/>
+        <source>Participation ID: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="492"/>
+        <source>&amp;Copy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="505"/>
+        <location filename="../OptionsDialog.cpp" line="660"/>
+        <source>User Feedback</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="516"/>
+        <source>Limit: 1 message/day</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="536"/>
+        <source>&amp;Send</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="565"/>
+        <source>Interface</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="571"/>
         <source>Language for Interface</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="402"/>
-        <location filename="../OptionsDialog.ui" line="421"/>
-        <location filename="../OptionsDialog.cpp" line="169"/>
-        <location filename="../OptionsDialog.cpp" line="217"/>
+        <location filename="../OptionsDialog.ui" line="580"/>
+        <location filename="../OptionsDialog.ui" line="602"/>
+        <location filename="../OptionsDialog.cpp" line="192"/>
+        <location filename="../OptionsDialog.cpp" line="240"/>
         <source>Current: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="412"/>
+        <location filename="../OptionsDialog.ui" line="593"/>
         <source>Language for Areas</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="431"/>
+        <location filename="../OptionsDialog.ui" line="615"/>
         <source>Style</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="437"/>
+        <location filename="../OptionsDialog.ui" line="621"/>
         <source>Use Default Style (Restart)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="449"/>
+        <location filename="../OptionsDialog.ui" line="633"/>
         <source>Style:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="474"/>
+        <location filename="../OptionsDialog.ui" line="658"/>
         <source>Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="480"/>
+        <location filename="../OptionsDialog.ui" line="664"/>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="504"/>
+        <location filename="../OptionsDialog.ui" line="688"/>
         <source>Sync</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="510"/>
+        <location filename="../OptionsDialog.ui" line="694"/>
         <source>Sync is not implemented at current time</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="548"/>
+        <location filename="../OptionsDialog.ui" line="732"/>
         <source>Apply changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="551"/>
+        <location filename="../OptionsDialog.ui" line="735"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="564"/>
+        <location filename="../OptionsDialog.ui" line="748"/>
         <source>Discard changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="567"/>
+        <location filename="../OptionsDialog.ui" line="751"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="133"/>
+        <location filename="../OptionsDialog.cpp" line="156"/>
         <source>%1 (Next Closest Language)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="133"/>
+        <location filename="../OptionsDialog.cpp" line="156"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="135"/>
+        <location filename="../OptionsDialog.cpp" line="158"/>
         <source>%1 (Closest to Interface)</source>
         <comment>Next closest language compared to the Interface</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="135"/>
+        <location filename="../OptionsDialog.cpp" line="158"/>
         <source>Auto</source>
         <comment>Automatic language choice.</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="408"/>
+        <location filename="../OptionsDialog.cpp" line="440"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="408"/>
+        <location filename="../OptionsDialog.cpp" line="440"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="418"/>
+        <location filename="../OptionsDialog.cpp" line="450"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="426"/>
-        <location filename="../OptionsDialog.cpp" line="430"/>
-        <location filename="../OptionsDialog.cpp" line="432"/>
+        <location filename="../OptionsDialog.cpp" line="458"/>
+        <location filename="../OptionsDialog.cpp" line="462"/>
+        <location filename="../OptionsDialog.cpp" line="464"/>
         <source>Profile: %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="553"/>
+        <source>View %1 User Statistics Online</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="579"/>
+        <source>Not registered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="660"/>
+        <source>A feedback message have to between 3-1024 characters long</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -623,73 +802,80 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="148"/>
-        <location filename="../ProfileInterface.cpp" line="1169"/>
+        <location filename="../PictureDialog.cpp" line="152"/>
+        <location filename="../ProfileInterface.cpp" line="1262"/>
         <source>Export as &amp;Picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="149"/>
-        <location filename="../ProfileInterface.cpp" line="1170"/>
+        <location filename="../PictureDialog.cpp" line="153"/>
+        <location filename="../ProfileInterface.cpp" line="1263"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="151"/>
-        <location filename="../ProfileInterface.cpp" line="1164"/>
+        <location filename="../PictureDialog.cpp" line="155"/>
+        <location filename="../ProfileInterface.cpp" line="1256"/>
         <source>&amp;Edit Properties...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="153"/>
-        <location filename="../ProfileInterface.cpp" line="1166"/>
+        <location filename="../PictureDialog.cpp" line="156"/>
+        <location filename="../ProfileInterface.cpp" line="1257"/>
+        <source>&amp;Overwrite Image...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.cpp" line="158"/>
+        <location filename="../ProfileInterface.cpp" line="1259"/>
         <source>Open &amp;Map Viewer...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="155"/>
-        <location filename="../ProfileInterface.cpp" line="1167"/>
+        <location filename="../PictureDialog.cpp" line="160"/>
+        <location filename="../ProfileInterface.cpp" line="1260"/>
         <source>Open &amp;JSON Editor...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="380"/>
+        <location filename="../PictureDialog.cpp" line="557"/>
         <source>Key 1 - Avatar Preview Mode
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="439"/>
-        <location filename="../PictureDialog.cpp" line="473"/>
+        <location filename="../PictureDialog.cpp" line="614"/>
+        <location filename="../PictureDialog.cpp" line="641"/>
         <source>Snapmatic Picture Viewer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="439"/>
-        <location filename="../PictureDialog.cpp" line="473"/>
+        <location filename="../PictureDialog.cpp" line="614"/>
+        <location filename="../PictureDialog.cpp" line="641"/>
         <source>Failed at %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="472"/>
-        <location filename="../PictureDialog.cpp" line="591"/>
+        <location filename="../PictureDialog.cpp" line="640"/>
+        <location filename="../PictureDialog.cpp" line="760"/>
         <source>No Crew</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="472"/>
+        <location filename="../PictureDialog.cpp" line="640"/>
         <source>Unknown Location</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="472"/>
-        <location filename="../PictureDialog.cpp" line="618"/>
+        <location filename="../PictureDialog.cpp" line="640"/>
+        <location filename="../PictureDialog.cpp" line="780"/>
+        <location filename="../SnapmaticEditor.cpp" line="239"/>
         <source>No Players</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="557"/>
+        <location filename="../PictureDialog.cpp" line="726"/>
         <source>Avatar Preview Mode
 Press 1 for Default View</source>
         <translation type="unfinished"></translation>
@@ -799,6 +985,60 @@ Press 1 for Default View</source>
     </message>
 </context>
 <context>
+    <name>PlayerListDialog</name>
+    <message>
+        <location filename="../PlayerListDialog.ui" line="14"/>
+        <source>Edit Players...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.ui" line="24"/>
+        <source>Available Players:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.ui" line="102"/>
+        <source>Selected Players:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.ui" line="138"/>
+        <source>&amp;Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.ui" line="145"/>
+        <source>&amp;Cancel</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.cpp" line="221"/>
+        <source>Add Players...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.cpp" line="221"/>
+        <source>Failed to add more Players because the limit of Players are %1!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.cpp" line="238"/>
+        <location filename="../PlayerListDialog.cpp" line="261"/>
+        <source>Add Player...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.cpp" line="238"/>
+        <source>Enter Social Club Player ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../PlayerListDialog.cpp" line="261"/>
+        <source>Failed to add Player %1 because Player %1 is already added!</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ProfileInterface</name>
     <message>
         <location filename="../ProfileInterface.ui" line="14"/>
@@ -843,212 +1083,343 @@ Press 1 for Default View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="68"/>
+        <location filename="../ProfileInterface.cpp" line="69"/>
         <source>Enabled pictures: %1 of %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="134"/>
+        <location filename="../ProfileInterface.cpp" line="155"/>
         <source>Loading...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="416"/>
-        <location filename="../ProfileInterface.cpp" line="483"/>
+        <location filename="../ImageEditorDialog.cpp" line="109"/>
+        <location filename="../ImportDialog.cpp" line="327"/>
+        <location filename="../ProfileInterface.cpp" line="457"/>
+        <location filename="../ProfileInterface.cpp" line="524"/>
         <source>Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="417"/>
-        <location filename="../ProfileInterface.cpp" line="462"/>
-        <location filename="../ProfileInterface.cpp" line="515"/>
-        <location filename="../ProfileInterface.cpp" line="535"/>
-        <location filename="../ProfileInterface.cpp" line="551"/>
-        <location filename="../ProfileInterface.cpp" line="666"/>
-        <location filename="../ProfileInterface.cpp" line="746"/>
-        <location filename="../ProfileInterface.cpp" line="751"/>
-        <location filename="../ProfileInterface.cpp" line="761"/>
-        <location filename="../ProfileInterface.cpp" line="766"/>
-        <location filename="../ProfileInterface.cpp" line="777"/>
-        <location filename="../ProfileInterface.cpp" line="814"/>
-        <location filename="../ProfileInterface.cpp" line="820"/>
+        <location filename="../ImageEditorDialog.cpp" line="110"/>
+        <location filename="../ImageEditorDialog.cpp" line="141"/>
+        <location filename="../ImageEditorDialog.cpp" line="150"/>
+        <location filename="../ImportDialog.cpp" line="328"/>
+        <location filename="../ImportDialog.cpp" line="359"/>
+        <location filename="../ImportDialog.cpp" line="368"/>
+        <location filename="../ProfileInterface.cpp" line="458"/>
+        <location filename="../ProfileInterface.cpp" line="503"/>
+        <location filename="../ProfileInterface.cpp" line="559"/>
+        <location filename="../ProfileInterface.cpp" line="579"/>
+        <location filename="../ProfileInterface.cpp" line="595"/>
+        <location filename="../ProfileInterface.cpp" line="701"/>
+        <location filename="../ProfileInterface.cpp" line="711"/>
+        <location filename="../ProfileInterface.cpp" line="791"/>
+        <location filename="../ProfileInterface.cpp" line="796"/>
+        <location filename="../ProfileInterface.cpp" line="807"/>
+        <location filename="../ProfileInterface.cpp" line="812"/>
+        <location filename="../ProfileInterface.cpp" line="824"/>
+        <location filename="../ProfileInterface.cpp" line="861"/>
+        <location filename="../ProfileInterface.cpp" line="867"/>
         <source>Import</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="433"/>
-        <location filename="../UserInterface.cpp" line="375"/>
+        <location filename="../ImageEditorDialog.cpp" line="141"/>
+        <location filename="../ImportDialog.cpp" line="359"/>
+        <location filename="../ProfileInterface.cpp" line="701"/>
+        <source>Can&apos;t import %1 because file can&apos;t be open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="474"/>
+        <location filename="../UserInterface.cpp" line="402"/>
         <source>GTA V Export (*.g5e)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="434"/>
-        <location filename="../UserInterface.cpp" line="376"/>
+        <location filename="../ProfileInterface.cpp" line="475"/>
+        <location filename="../UserInterface.cpp" line="403"/>
         <source>Savegames files (SGTA*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="435"/>
-        <location filename="../UserInterface.cpp" line="377"/>
+        <location filename="../ProfileInterface.cpp" line="476"/>
+        <location filename="../UserInterface.cpp" line="404"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="432"/>
+        <location filename="../ProfileInterface.cpp" line="473"/>
         <source>Importable files (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="436"/>
+        <location filename="../ImageEditorDialog.cpp" line="120"/>
+        <location filename="../ImportDialog.cpp" line="338"/>
+        <location filename="../ProfileInterface.cpp" line="477"/>
         <source>All image files (%1)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="437"/>
-        <location filename="../UserInterface.cpp" line="378"/>
+        <location filename="../ImageEditorDialog.cpp" line="121"/>
+        <location filename="../ImportDialog.cpp" line="339"/>
+        <location filename="../ProfileInterface.cpp" line="478"/>
+        <location filename="../UserInterface.cpp" line="405"/>
         <source>All files (**)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="462"/>
-        <location filename="../ProfileInterface.cpp" line="751"/>
-        <location filename="../UserInterface.cpp" line="466"/>
+        <location filename="../ProfileInterface.cpp" line="503"/>
+        <location filename="../ProfileInterface.cpp" line="796"/>
+        <location filename="../UserInterface.cpp" line="493"/>
         <source>No valid file is selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="484"/>
-        <location filename="../ProfileInterface.cpp" line="499"/>
+        <location filename="../ProfileInterface.cpp" line="525"/>
+        <location filename="../ProfileInterface.cpp" line="543"/>
         <source>Import file %1 of %2 files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="515"/>
+        <location filename="../ProfileInterface.cpp" line="559"/>
         <source>Import failed with...
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="535"/>
-        <location filename="../UserInterface.cpp" line="418"/>
+        <location filename="../ProfileInterface.cpp" line="579"/>
+        <location filename="../UserInterface.cpp" line="445"/>
         <source>Failed to read Snapmatic picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="551"/>
-        <location filename="../UserInterface.cpp" line="434"/>
+        <location filename="../ProfileInterface.cpp" line="595"/>
+        <location filename="../UserInterface.cpp" line="461"/>
         <source>Failed to read Savegame file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="666"/>
+        <location filename="../ImageEditorDialog.cpp" line="150"/>
+        <location filename="../ImportDialog.cpp" line="368"/>
+        <location filename="../ProfileInterface.cpp" line="711"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="746"/>
+        <location filename="../ProfileInterface.cpp" line="791"/>
         <source>Can&apos;t import %1 because file format can&apos;t be detected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="761"/>
+        <location filename="../ProfileInterface.cpp" line="807"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="766"/>
+        <location filename="../ProfileInterface.cpp" line="812"/>
         <source>Failed to import the Snapmatic picture, the picture is already in the game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="777"/>
+        <location filename="../ProfileInterface.cpp" line="824"/>
         <source>Failed to import the Snapmatic picture, can&apos;t copy the file into profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="814"/>
+        <location filename="../ProfileInterface.cpp" line="861"/>
         <source>Failed to import the Savegame, can&apos;t copy the file into profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="820"/>
+        <location filename="../ProfileInterface.cpp" line="867"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="884"/>
-        <location filename="../ProfileInterface.cpp" line="922"/>
-        <location filename="../ProfileInterface.cpp" line="1001"/>
-        <location filename="../ProfileInterface.cpp" line="1021"/>
-        <source>Export selected</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="907"/>
-        <location filename="../ProfileInterface.cpp" line="925"/>
+        <location filename="../ProfileInterface.cpp" line="954"/>
+        <location filename="../ProfileInterface.cpp" line="972"/>
         <source>JPG pictures and GTA Snapmatic</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="908"/>
-        <location filename="../ProfileInterface.cpp" line="930"/>
+        <location filename="../ProfileInterface.cpp" line="955"/>
+        <location filename="../ProfileInterface.cpp" line="977"/>
         <source>JPG pictures only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="909"/>
-        <location filename="../ProfileInterface.cpp" line="934"/>
+        <location filename="../ProfileInterface.cpp" line="956"/>
+        <location filename="../ProfileInterface.cpp" line="981"/>
         <source>GTA Snapmatic only</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="922"/>
+        <location filename="../ProfileInterface.cpp" line="969"/>
         <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="967"/>
+        <location filename="../ProfileInterface.cpp" line="931"/>
+        <location filename="../ProfileInterface.cpp" line="969"/>
+        <location filename="../ProfileInterface.cpp" line="1014"/>
+        <location filename="../ProfileInterface.cpp" line="1049"/>
+        <location filename="../ProfileInterface.cpp" line="1069"/>
         <source>Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="968"/>
+        <location filename="../ProfileInterface.cpp" line="384"/>
+        <source>Snapmatic Loader</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="384"/>
+        <source>&lt;h4&gt;Following Snapmatic Pictures got repaired&lt;/h4&gt;%1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1015"/>
         <source>Initialising export...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1001"/>
+        <location filename="../ProfileInterface.cpp" line="1049"/>
         <source>Export failed with...
 
 %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1021"/>
-        <location filename="../ProfileInterface.cpp" line="1063"/>
+        <location filename="../ProfileInterface.cpp" line="1069"/>
+        <location filename="../ProfileInterface.cpp" line="1111"/>
         <source>No Snapmatic pictures or Savegames files are selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1029"/>
-        <location filename="../ProfileInterface.cpp" line="1057"/>
-        <location filename="../ProfileInterface.cpp" line="1063"/>
+        <location filename="../ProfileInterface.cpp" line="1077"/>
+        <location filename="../ProfileInterface.cpp" line="1105"/>
+        <location filename="../ProfileInterface.cpp" line="1111"/>
         <source>Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1029"/>
+        <location filename="../ProfileInterface.cpp" line="1077"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1057"/>
+        <location filename="../ProfileInterface.cpp" line="1105"/>
         <source>Failed at remove the complete selected Snapmatic pictures and/or Savegame files</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="374"/>
+        <location filename="../ProfileInterface.cpp" line="1177"/>
+        <location filename="../ProfileInterface.cpp" line="1211"/>
+        <location filename="../ProfileInterface.cpp" line="1562"/>
+        <location filename="../ProfileInterface.cpp" line="1648"/>
+        <location filename="../ProfileInterface.cpp" line="1741"/>
+        <location filename="../ProfileInterface.cpp" line="1859"/>
+        <source>No Snapmatic pictures are selected</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1191"/>
+        <location filename="../ProfileInterface.cpp" line="1225"/>
+        <location filename="../ProfileInterface.cpp" line="1627"/>
+        <location filename="../ProfileInterface.cpp" line="1720"/>
+        <location filename="../ProfileInterface.cpp" line="1838"/>
+        <location filename="../ProfileInterface.cpp" line="1937"/>
+        <source>%1 failed with...
+
+%2</source>
+        <comment>Action failed with...</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1562"/>
+        <location filename="../ProfileInterface.cpp" line="1627"/>
+        <source>Qualify as Avatar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1573"/>
+        <location filename="../ProfileInterface.cpp" line="1670"/>
+        <location filename="../ProfileInterface.cpp" line="1788"/>
+        <location filename="../ProfileInterface.cpp" line="1890"/>
+        <source>Patch selected...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1574"/>
+        <location filename="../ProfileInterface.cpp" line="1593"/>
+        <location filename="../ProfileInterface.cpp" line="1671"/>
+        <location filename="../ProfileInterface.cpp" line="1690"/>
+        <location filename="../ProfileInterface.cpp" line="1789"/>
+        <location filename="../ProfileInterface.cpp" line="1808"/>
+        <location filename="../ProfileInterface.cpp" line="1891"/>
+        <location filename="../ProfileInterface.cpp" line="1910"/>
+        <source>Patch file %1 of %2 files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1627"/>
+        <source>Qualify</source>
+        <comment>%1 failed with...</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1648"/>
+        <location filename="../ProfileInterface.cpp" line="1720"/>
+        <source>Change Players...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1720"/>
+        <source>Change Players</source>
+        <comment>%1 failed with...</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1741"/>
+        <location filename="../ProfileInterface.cpp" line="1769"/>
+        <location filename="../ProfileInterface.cpp" line="1838"/>
+        <source>Change Crew...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1769"/>
+        <source>Failed to enter a valid Snapmatic Crew ID</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1838"/>
+        <source>Change Crew</source>
+        <comment>%1 failed with...</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1859"/>
+        <location filename="../ProfileInterface.cpp" line="1872"/>
+        <location filename="../ProfileInterface.cpp" line="1937"/>
+        <source>Change Title...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1872"/>
+        <source>Failed to enter a valid Snapmatic title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1937"/>
+        <source>Change Title</source>
+        <comment>%1 failed with...</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="401"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1056,17 +1427,17 @@ Press 1 for Default View</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="87"/>
+        <location filename="../main.cpp" line="100"/>
         <source>Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="87"/>
+        <location filename="../main.cpp" line="100"/>
         <source>Selected Font: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="108"/>
+        <location filename="../main.cpp" line="137"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1075,7 +1446,7 @@ Press 1 for Default View</source>
     <name>SavegameDialog</name>
     <message>
         <location filename="../SavegameDialog.ui" line="14"/>
-        <location filename="../SavegameDialog.cpp" line="38"/>
+        <location filename="../SavegameDialog.cpp" line="69"/>
         <source>Savegame Viewer</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1095,7 +1466,7 @@ Press 1 for Default View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SavegameDialog.cpp" line="38"/>
+        <location filename="../SavegameDialog.cpp" line="69"/>
         <source>Failed at %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1144,37 +1515,37 @@ Press 1 for Default View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1205"/>
+        <location filename="../ProfileInterface.cpp" line="1298"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1206"/>
+        <location filename="../ProfileInterface.cpp" line="1299"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1207"/>
+        <location filename="../ProfileInterface.cpp" line="1300"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1209"/>
+        <location filename="../ProfileInterface.cpp" line="1302"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1210"/>
+        <location filename="../ProfileInterface.cpp" line="1303"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1213"/>
+        <location filename="../ProfileInterface.cpp" line="1306"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1217"/>
+        <location filename="../ProfileInterface.cpp" line="1310"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1268,13 +1639,13 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticEditor.ui" line="14"/>
         <location filename="../SnapmaticEditor.ui" line="81"/>
-        <location filename="../JsonEditorDialog.cpp" line="83"/>
-        <location filename="../JsonEditorDialog.cpp" line="130"/>
-        <location filename="../JsonEditorDialog.cpp" line="136"/>
-        <location filename="../JsonEditorDialog.cpp" line="148"/>
-        <location filename="../PictureDialog.cpp" line="732"/>
-        <location filename="../SnapmaticEditor.cpp" line="252"/>
-        <location filename="../SnapmaticWidget.cpp" line="332"/>
+        <location filename="../JsonEditorDialog.cpp" line="109"/>
+        <location filename="../JsonEditorDialog.cpp" line="174"/>
+        <location filename="../JsonEditorDialog.cpp" line="180"/>
+        <location filename="../JsonEditorDialog.cpp" line="192"/>
+        <location filename="../PictureDialog.cpp" line="903"/>
+        <location filename="../SnapmaticEditor.cpp" line="326"/>
+        <location filename="../SnapmaticWidget.cpp" line="351"/>
         <source>Snapmatic Properties</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1319,103 +1690,121 @@ Press 1 for Default View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="113"/>
-        <location filename="../SnapmaticEditor.cpp" line="211"/>
+        <location filename="../SnapmaticEditor.cpp" line="279"/>
         <source>Crew: %1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="126"/>
-        <location filename="../SnapmaticEditor.cpp" line="196"/>
+        <location filename="../SnapmaticEditor.cpp" line="259"/>
         <source>Title: %1 (%2)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="136"/>
-        <location filename="../SnapmaticEditor.cpp" line="200"/>
-        <location filename="../SnapmaticEditor.cpp" line="204"/>
+        <location filename="../SnapmaticEditor.cpp" line="263"/>
+        <location filename="../SnapmaticEditor.cpp" line="267"/>
         <source>Appropriate: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="149"/>
+        <location filename="../SnapmaticEditor.ui" line="171"/>
         <source>Extras</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="155"/>
+        <location filename="../SnapmaticEditor.ui" line="177"/>
         <source>Qualify as Avatar automatically at apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="168"/>
+        <location filename="../SnapmaticEditor.ui" line="190"/>
         <source>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="218"/>
+        <location filename="../SnapmaticEditor.ui" line="240"/>
         <source>&amp;Apply</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="231"/>
+        <location filename="../SnapmaticEditor.ui" line="253"/>
         <source>&amp;Cancel</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="195"/>
-        <location filename="../SnapmaticEditor.cpp" line="210"/>
+        <location filename="../SnapmaticEditor.cpp" line="223"/>
+        <location filename="../SnapmaticEditor.cpp" line="258"/>
+        <location filename="../SnapmaticEditor.cpp" line="278"/>
         <source>Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="200"/>
+        <location filename="../SnapmaticEditor.cpp" line="227"/>
+        <source>Players: %1 (%2)</source>
+        <comment>Multiple Player are inserted here</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="231"/>
+        <source>Player: %1 (%2)</source>
+        <comment>One Player is inserted here</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="263"/>
         <source>Yes</source>
         <comment>Yes, should work fine</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="204"/>
+        <location filename="../SnapmaticEditor.cpp" line="267"/>
         <source>No</source>
         <comment>No, could lead to issues</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="83"/>
+        <location filename="../JsonEditorDialog.cpp" line="109"/>
         <source>&lt;h4&gt;Unsaved changes detected&lt;/h4&gt;You want to save the JSON content before you quit?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="130"/>
-        <location filename="../JsonEditorDialog.cpp" line="148"/>
+        <location filename="../JsonEditorDialog.cpp" line="174"/>
+        <source>Patching of Snapmatic Properties failed because of %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../JsonEditorDialog.cpp" line="192"/>
         <source>Patching of Snapmatic Properties failed because of JSON Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="136"/>
-        <location filename="../PictureDialog.cpp" line="732"/>
-        <location filename="../SnapmaticEditor.cpp" line="252"/>
-        <location filename="../SnapmaticWidget.cpp" line="332"/>
+        <location filename="../JsonEditorDialog.cpp" line="180"/>
+        <location filename="../PictureDialog.cpp" line="903"/>
+        <location filename="../SnapmaticEditor.cpp" line="326"/>
+        <location filename="../SnapmaticWidget.cpp" line="351"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="302"/>
+        <location filename="../ProfileInterface.cpp" line="1867"/>
+        <location filename="../SnapmaticEditor.cpp" line="389"/>
         <source>Snapmatic Title</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="302"/>
+        <location filename="../ProfileInterface.cpp" line="1867"/>
+        <location filename="../SnapmaticEditor.cpp" line="389"/>
         <source>New Snapmatic title:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="331"/>
+        <location filename="../ProfileInterface.cpp" line="1760"/>
+        <location filename="../SnapmaticEditor.cpp" line="418"/>
         <source>Snapmatic Crew</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="331"/>
+        <location filename="../ProfileInterface.cpp" line="1760"/>
+        <location filename="../SnapmaticEditor.cpp" line="418"/>
         <source>New Snapmatic crew:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1423,8 +1812,67 @@ Press 1 for Default View</source>
 <context>
     <name>SnapmaticPicture</name>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="417"/>
+        <location filename="../SnapmaticPicture.cpp" line="440"/>
         <source>PHOTO - %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="660"/>
+        <source>open file %1</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="676"/>
+        <source>header not exists</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="680"/>
+        <source>header is malformed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="684"/>
+        <source>picture not exists (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="688"/>
+        <source>JSON not exists (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="692"/>
+        <source>title not exists (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="696"/>
+        <source>description not exists (%1)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="710"/>
+        <source>reading file %1 because of %2</source>
+        <comment>Example for %2: JSON is malformed error</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../JsonEditorDialog.cpp" line="160"/>
+        <location filename="../SnapmaticPicture.cpp" line="700"/>
+        <source>JSON is incomplete and malformed</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../JsonEditorDialog.cpp" line="164"/>
+        <location filename="../SnapmaticPicture.cpp" line="704"/>
+        <source>JSON is incomplete</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../JsonEditorDialog.cpp" line="168"/>
+        <location filename="../SnapmaticPicture.cpp" line="708"/>
+        <source>JSON is malformed</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1472,8 +1920,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="152"/>
-        <location filename="../SnapmaticWidget.cpp" line="146"/>
-        <location filename="../SnapmaticWidget.cpp" line="155"/>
+        <location filename="../SnapmaticWidget.cpp" line="157"/>
+        <location filename="../SnapmaticWidget.cpp" line="166"/>
         <source>Delete picture</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1483,63 +1931,86 @@ Press 1 for Default View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1155"/>
+        <location filename="../ProfileInterface.cpp" line="1247"/>
         <source>Edi&amp;t</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1158"/>
+        <location filename="../ProfileInterface.cpp" line="1250"/>
         <source>Show &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1162"/>
+        <location filename="../ProfileInterface.cpp" line="1254"/>
         <source>Hide &amp;In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1168"/>
+        <location filename="../ProfileInterface.cpp" line="1261"/>
         <source>&amp;Export</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1171"/>
+        <location filename="../ProfileInterface.cpp" line="1264"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1174"/>
+        <location filename="../ProfileInterface.cpp" line="1267"/>
         <source>&amp;Remove</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1176"/>
+        <location filename="../ProfileInterface.cpp" line="1269"/>
         <source>&amp;Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1177"/>
+        <location filename="../ProfileInterface.cpp" line="1270"/>
         <source>&amp;Deselect</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1180"/>
+        <location filename="../ProfileInterface.cpp" line="1273"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1184"/>
+        <location filename="../ProfileInterface.cpp" line="1277"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="146"/>
+        <location filename="../SnapmaticWidget.cpp" line="157"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="155"/>
+        <location filename="../SnapmaticWidget.cpp" line="166"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>TelemetryDialog</name>
+    <message>
+        <location filename="../main.cpp" line="164"/>
+        <source>You want help %1 to improve in the future by collection of data?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="164"/>
+        <source>%1 User Statistics</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="168"/>
+        <source>Yes, I would like to take part.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="178"/>
+        <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -1608,174 +2079,146 @@ Press 1 for Default View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="226"/>
+        <location filename="../UserInterface.ui" line="212"/>
+        <source>Selection &amp;mass tools</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="236"/>
         <location filename="../UserInterface.cpp" line="59"/>
-        <location filename="../UserInterface.cpp" line="552"/>
+        <location filename="../UserInterface.cpp" line="579"/>
         <source>&amp;About %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="229"/>
-        <source>Ctrl+P</source>
+        <location filename="../UserInterface.ui" line="346"/>
+        <source>Change &amp;Title...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="234"/>
+        <location filename="../UserInterface.ui" line="354"/>
+        <source>Change &amp;Crew...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="362"/>
+        <source>&amp;Qualify as Avatar</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="370"/>
+        <source>Change &amp;Players...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="244"/>
         <source>&amp;Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="237"/>
+        <location filename="../UserInterface.ui" line="247"/>
         <source>Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="240"/>
-        <source>Ctrl+Q</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="245"/>
+        <location filename="../UserInterface.ui" line="255"/>
         <source>Close &amp;Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="248"/>
-        <source>Ctrl+End</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="253"/>
+        <location filename="../UserInterface.ui" line="263"/>
         <source>&amp;Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="256"/>
-        <source>Ctrl+S</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="261"/>
+        <location filename="../UserInterface.ui" line="271"/>
         <source>Select &amp;All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="264"/>
-        <source>Ctrl+A</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="269"/>
+        <location filename="../UserInterface.ui" line="279"/>
         <source>&amp;Deselect All</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="272"/>
-        <source>Ctrl+D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="277"/>
+        <location filename="../UserInterface.ui" line="287"/>
         <source>&amp;Export selected...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="280"/>
-        <source>Ctrl+E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="285"/>
+        <location filename="../UserInterface.ui" line="295"/>
         <source>&amp;Remove selected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="288"/>
-        <source>Ctrl+Del</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="293"/>
+        <location filename="../UserInterface.ui" line="303"/>
         <source>&amp;Import files...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="296"/>
-        <source>Ctrl+I</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="301"/>
+        <location filename="../UserInterface.ui" line="311"/>
         <source>&amp;Open File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="304"/>
-        <source>Ctrl+O</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="309"/>
-        <location filename="../UserInterface.cpp" line="162"/>
+        <location filename="../UserInterface.ui" line="319"/>
+        <location filename="../UserInterface.cpp" line="189"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="312"/>
-        <location filename="../OptionsDialog.cpp" line="564"/>
-        <location filename="../UserInterface.cpp" line="103"/>
-        <location filename="../UserInterface.cpp" line="523"/>
+        <location filename="../UserInterface.ui" line="322"/>
+        <location filename="../OptionsDialog.cpp" line="634"/>
+        <location filename="../UserInterface.cpp" line="130"/>
+        <location filename="../UserInterface.cpp" line="550"/>
         <source>Select GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="315"/>
-        <source>Ctrl+G</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="320"/>
+        <location filename="../UserInterface.ui" line="330"/>
         <source>Show In-gam&amp;e</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="323"/>
-        <source>Shift+E</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="328"/>
+        <location filename="../UserInterface.ui" line="338"/>
         <source>Hi&amp;de In-game</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="331"/>
-        <source>Shift+D</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../UserInterface.cpp" line="63"/>
-        <location filename="../UserInterface.cpp" line="228"/>
-        <location filename="../UserInterface.cpp" line="560"/>
+        <location filename="../UserInterface.cpp" line="255"/>
+        <location filename="../UserInterface.cpp" line="587"/>
         <source>Select Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="371"/>
+        <location filename="../UserInterface.cpp" line="398"/>
         <source>Open File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="418"/>
-        <location filename="../UserInterface.cpp" line="434"/>
+        <location filename="../UserInterface.cpp" line="445"/>
         <location filename="../UserInterface.cpp" line="461"/>
-        <location filename="../UserInterface.cpp" line="466"/>
+        <location filename="../UserInterface.cpp" line="488"/>
+        <location filename="../UserInterface.cpp" line="493"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="461"/>
+        <location filename="../UserInterface.cpp" line="488"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1177"/>
+        <location filename="../ProfileInterface.cpp" line="1191"/>
+        <source>Show In-game</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1211"/>
+        <location filename="../ProfileInterface.cpp" line="1225"/>
+        <source>Hide In-game</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

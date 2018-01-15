@@ -25,16 +25,24 @@
 #include "config.h"
 #include <QStringBuilder>
 #include <QDesktopWidget>
+#include <QJsonDocument>
 #include <QStyleFactory>
 #include <QApplication>
+#include <QJsonObject>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QStringList>
+#include <QClipboard>
 #include <QLocale>
 #include <QString>
+#include <QTimer>
 #include <QDebug>
 #include <QList>
 #include <QDir>
+
+#ifdef GTA5SYNC_TELEMETRY
+#include "TelemetryClass.h"
+#endif
 
 OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     QDialog(parent), profileDB(profileDB),
@@ -47,6 +55,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->setupUi(this);
     ui->tabWidget->setCurrentIndex(0);
     ui->labPicCustomRes->setVisible(false);
+    ui->cmdCancel->setFocus();
 
     QRect desktopResolution = QApplication::desktop()->screenGeometry(this);
     int desktopSizeWidth = desktopResolution.width();
@@ -91,6 +100,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     setupPictureSettings();
     setupCustomGTAFolder();
     setupInterfaceSettings();
+    setupStatisticsSettings();
     setupSnapmaticPictureViewer();
 
 #ifndef Q_QS_ANDROID
@@ -177,7 +187,7 @@ void OptionsDialog::setupLanguageBox()
     }
 
     QString aCurrentLanguage = QString("en_GB");
-    if (TCInstance->isLanguageLoaded()) { aCurrentLanguage = TCInstance->getCurrentLanguage(); }
+    if (Translator->isLanguageLoaded()) { aCurrentLanguage = Translator->getCurrentLanguage(); }
     QLocale currentLocale = QLocale(aCurrentLanguage);
     ui->labCurrentLanguage->setText(tr("Current: %1").arg(currentLocale.nativeLanguageName() % " (" % currentLocale.nativeCountryName() % ") [" % aCurrentLanguage % "]"));
 
@@ -216,7 +226,7 @@ void OptionsDialog::setupLanguageBox()
         }
     }
 
-    QString aCurrentAreaLanguage = TCInstance->getCurrentAreaLanguage();
+    QString aCurrentAreaLanguage = Translator->getCurrentAreaLanguage();
     if (QFile::exists(":/global/global." % currentAreaLanguage % ".loc"))
     {
         QFile locFile(":/global/global." % currentAreaLanguage % ".loc");
@@ -396,6 +406,15 @@ void OptionsDialog::applySettings()
     settings->setValue("AlwaysUseMessageFont", ui->cbAlwaysUseMessageFont->isChecked());
     settings->endGroup();
 
+#ifdef GTA5SYNC_TELEMETRY
+    settings->beginGroup("Telemetry");
+    settings->setValue("PushAppConf", ui->cbAppConfigStats->isChecked());
+    if (!Telemetry->isStateForced()) { settings->setValue("IsEnabled", ui->cbParticipateStats->isChecked()); }
+    settings->endGroup();
+    Telemetry->refresh();
+    Telemetry->work();
+#endif
+
 #if QT_VERSION >= 0x050000
     bool languageChanged = ui->cbLanguage->currentData().toString() != currentLanguage;
     bool languageAreaChanged = ui->cbAreaLanguage->currentData().toString() != currentAreaLanguage;
@@ -405,13 +424,13 @@ void OptionsDialog::applySettings()
 #endif
     if (languageChanged)
     {
-        TCInstance->unloadTranslation(qApp);
-        TCInstance->initUserLanguage();
-        TCInstance->loadTranslation(qApp);
+        Translator->unloadTranslation(qApp);
+        Translator->initUserLanguage();
+        Translator->loadTranslation(qApp);
     }
     else if (languageAreaChanged)
     {
-        TCInstance->initUserLanguage();
+        Translator->initUserLanguage();
     }
 
     emit settingsApplied(newContentMode, languageChanged);
@@ -527,6 +546,44 @@ void OptionsDialog::setupPictureSettings()
     settings->endGroup();
 }
 
+void OptionsDialog::setupStatisticsSettings()
+{
+#ifdef GTA5SYNC_TELEMETRY
+    ui->cbParticipateStats->setText(tr("Participate in %1 User Statistics").arg(GTA5SYNC_APPSTR));
+    ui->labUserStats->setText(QString("<a href=\"%2\">%1</a>").arg(tr("View %1 User Statistics Online").arg(GTA5SYNC_APPSTR), TelemetryClass::getWebURL().toString()));
+
+    ui->gbUserFeedback->setVisible(false);
+    // settings->beginGroup("Startup");
+    // if (settings->value("IsFirstStart", true).toBool() == true)
+    // {
+    //     ui->gbUserFeedback->setVisible(false);
+    // }
+    // settings->endGroup();
+
+    settings->beginGroup("Telemetry");
+    ui->cbParticipateStats->setChecked(Telemetry->isEnabled());
+    ui->cbAppConfigStats->setChecked(settings->value("PushAppConf", false).toBool());
+    settings->endGroup();
+
+    if (Telemetry->isStateForced())
+    {
+        ui->cbParticipateStats->setEnabled(false);
+    }
+
+    if (Telemetry->isRegistered())
+    {
+        ui->labParticipationID->setText(tr("Participation ID: %1").arg(Telemetry->getRegisteredID()));
+    }
+    else
+    {
+        ui->labParticipationID->setText(tr("Participation ID: %1").arg(tr("Not registered")));
+        ui->cmdCopyStatsID->setVisible(false);
+    }
+#else
+    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabStats));
+#endif
+}
+
 void OptionsDialog::on_cbIgnoreAspectRatio_toggled(bool checked)
 {
     if (checked)
@@ -584,4 +641,28 @@ void OptionsDialog::on_cmdExploreFolder_clicked()
 void OptionsDialog::on_cbDefaultStyle_toggled(bool checked)
 {
     ui->cbStyleList->setDisabled(checked);
+}
+
+void OptionsDialog::on_cmdUserFeedbackSend_clicked()
+{
+#ifdef GTA5SYNC_TELEMETRY
+    if (ui->txtUserFeedback->toPlainText().length() < 1024 && ui->txtUserFeedback->toPlainText().length() >= 3)
+    {
+        QJsonDocument feedback;
+        QJsonObject feedbackObject;
+        feedbackObject["Message"] = ui->txtUserFeedback->toPlainText();
+        feedback.setObject(feedbackObject);
+        Telemetry->push(TelemetryCategory::UserFeedback, feedback);
+        ui->txtUserFeedback->setPlainText(QString());
+    }
+    else
+    {
+        QMessageBox::information(this, tr("User Feedback"), tr("A feedback message have to between 3-1024 characters long"));
+    }
+#endif
+}
+
+void OptionsDialog::on_cmdCopyStatsID_clicked()
+{
+    QApplication::clipboard()->setText(Telemetry->getRegisteredID());
 }
