@@ -91,43 +91,46 @@ Running with Qt %6&lt;br/&gt;
         <translation type="vanished">https://github.com/VADemon/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="41"/>
         <source>Using %1 %2</source>
         <extracomment>Using specific library, example Using libmyfuck</extracomment>
-        <translation>Использует %1 %2</translation>
+        <translation type="vanished">Использует %1 %2</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="43"/>
+        <location filename="../AboutDialog.cpp" line="41"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Перевёл %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="45"/>
         <source>NAME_OF_TRANSLATOR</source>
-        <extracomment>Enter your name there</extracomment>
-        <translation>VADemon</translation>
+        <extracomment>Insert your name here in following scheme, First Translator\nSecond Translator</extracomment>
+        <translation type="vanished">VADemon</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="47"/>
         <source>TRANSLATOR_PROFILE</source>
-        <extracomment>Enter your proilfe there, example a GitHub profile, E-Mail with &quot;mailto: afucker@sumfuck.com&quot; or a webpage</extracomment>
-        <translation>https://github.com/VADemon/</translation>
+        <extracomment>Insert your profile here in following scheme, First Translator,https://my.profile\nSecond Translator,mailto: my@mail.com</extracomment>
+        <translation type="vanished">https://github.com/VADemon/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="80"/>
+        <location filename="../AboutDialog.cpp" line="43"/>
+        <source>TRANSLATOR</source>
+        <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
+        <translation>VADemon,https://github.com/VADemon/</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.cpp" line="69"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Проект для просмотра Grand Theft Auto V Snapmatic&lt;br/&gt;
 картинок и сохранений</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="84"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="86"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 под лицензией &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
@@ -136,7 +139,7 @@ Pictures and Savegames</source>
         <translation type="vanished">Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3&lt;br/&gt;%4 под лицензией &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="67"/>
         <source>A project for viewing and sync Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Проект для просмотра и синхронизирования &lt;br/&gt;

@@ -147,13 +147,12 @@ Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 i
         <translation type="obsolete">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;Ein Projekt zum ansehen und synchronisieren von Grand Theft Auto 5 Snapmatic Bilder und Spielständen&lt;br/&gt;&lt;br/&gt;Projektversion: %1&lt;br/&gt;Gebaut mit Qt %2&lt;br/&gt;Läuft auf Qt %3&lt;br/&gt;&lt;br/&gt;Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="41"/>
         <source>Using %1 %2</source>
         <extracomment>Using specific library, example Using libmyfuck</extracomment>
-        <translation>Verwendet %1 %2</translation>
+        <translation type="vanished">Verwendet %1 %2</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="43"/>
+        <location filename="../AboutDialog.cpp" line="41"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Übersetzt von %1</translation>
@@ -179,31 +178,35 @@ Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 i
         <translation type="vanished">https://github.com/Syping/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="45"/>
         <source>NAME_OF_TRANSLATOR</source>
-        <extracomment>Enter your name there</extracomment>
-        <translation>Syping</translation>
+        <extracomment>Insert your name here in following scheme, First Translator\nSecond Translator</extracomment>
+        <translation type="vanished">Syping</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="47"/>
         <source>TRANSLATOR_PROFILE</source>
-        <extracomment>Enter your proilfe there, example a GitHub profile, E-Mail with &quot;mailto: afucker@sumfuck.com&quot; or a webpage</extracomment>
-        <translation>https://github.com/Syping/</translation>
+        <extracomment>Insert your profile here in following scheme, First Translator,https://my.profile\nSecond Translator,mailto: my@mail.com</extracomment>
+        <translation type="vanished">Syping,https://github.com/Syping/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="80"/>
+        <location filename="../AboutDialog.cpp" line="43"/>
+        <source>TRANSLATOR</source>
+        <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
+        <translation>Syping,https://github.com/Syping/</translation>
+    </message>
+    <message>
+        <location filename="../AboutDialog.cpp" line="69"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Ein Projekt zum ansehen von Grand Theft Auto V&lt;br/&gt;
 Snapmatic Bilder und Spielständen</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="84"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="86"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 ist lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
@@ -212,7 +215,7 @@ Snapmatic Bilder und Spielständen</translation>
         <translation type="vanished">Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3&lt;br/&gt;%4 ist lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="67"/>
         <source>A project for viewing and sync Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Ein Projekt zum ansehen und synchronisieren von&lt;br/&gt;

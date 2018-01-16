@@ -37,41 +37,30 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QString buildStr = GTA5SYNC_BUILDSTRING;
 
     // Translator Comments
-    //: Using specific library, example Using libmyfuck
-    QString usingStr = tr("Using %1 %2");
     //: Translated by translator, example Translated by Syping
     QString translatedByStr = tr("Translated by %1");
-    //: Enter your name there
-    QString translatedByVal = tr("NAME_OF_TRANSLATOR");
-    //: Enter your proilfe there, example a GitHub profile, E-Mail with "mailto: afucker@sumfuck.com" or a webpage
-    QString translatorProfile = tr("TRANSLATOR_PROFILE");
-    QString additionalContent = "";
-    if (translatedByVal != "NAME_OF_TRANSLATOR")
+    //: Insert your name here and profile here in following scheme, First Translator,First Profile\\nSecond Translator\\nThird Translator,Second Profile
+    QString translatorVal = tr("TRANSLATOR");
+    QStringList translatorContent;
+    if (translatorVal != "TRANSLATOR")
     {
-        if (translatorProfile != "TRANSLATOR_PROFILE")
+        const QStringList translatorList = translatorVal.split('\n');
+        for (const QString &translatorStr : translatorList)
         {
-            additionalContent += translatedByStr.arg(QString("<a href=\"%1\">%2</a>").arg(translatorProfile, translatedByVal));
+            QStringList translatorStrList = translatorStr.split(',');
+            QString translatorName = translatorStrList.at(0);
+            translatorStrList.removeFirst();
+            QString translatorProfile = translatorStrList.join(QString());
+            if (!translatorProfile.isEmpty())
+            {
+                translatorContent += QString("<a href=\"%1\">%2</a>").arg(translatorProfile, translatorName);
+            }
+            else
+            {
+                translatorContent += translatorName;
+            }
         }
-        else
-        {
-            additionalContent += translatedByStr.arg(translatedByVal);
-        }
     }
-#ifdef WITH_LIBJPEGTURBO // DONT USE IT FOR NOW
-    bool additionalContentClip = false;
-    if (!additionalContent.isEmpty())
-    {
-        additionalContentClip = true;
-        additionalContent += " (";
-    }
-    additionalContent += usingStr.arg("libjpegturbo", WITH_LIBJPEGTURBO);
-    if (additionalContentClip)
-    {
-        additionalContent += ")";
-    }
-#else
-    Q_UNUSED(usingStr)
-#endif
 
     // Project Description
 #ifdef GTA5SYNC_ENABLED
@@ -86,9 +75,9 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QString copyrightDes2 = tr("%1 is licensed under <a href=\"https://www.gnu.org/licenses/gpl-3.0.html#content\">GNU GPLv3</a>");
     copyrightDes2 = copyrightDes2.arg(GTA5SYNC_APPSTR);
     QString copyrightDesA;
-    if (!additionalContent.isEmpty())
+    if (!translatorContent.isEmpty())
     {
-        copyrightDesA = copyrightDes1 % "<br/>" % additionalContent % "<br/>" % copyrightDes2;
+        copyrightDesA = copyrightDes1 % "<br/>" % translatedByStr.arg(translatorContent.join(", ")) % "<br/>" % copyrightDes2;
     }
     else
     {
@@ -114,7 +103,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
-    if (!additionalContent.isEmpty())
+    if (!translatorContent.isEmpty())
     {
         resize(375 * screenRatio, 270 * screenRatio);
     }
