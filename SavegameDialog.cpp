@@ -35,9 +35,20 @@ SavegameDialog::SavegameDialog(QWidget *parent) :
     ui->cmdClose->setFocus();
     savegameLabStr = ui->labSavegameText->text();
 
+    // Set Icon for Close Button
     if (QIcon::hasThemeIcon("dialog-close"))
     {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
+    }
+    else if (QIcon::hasThemeIcon("gtk-close"))
+    {
+        ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
+    }
+
+    // Set Icon for Export Button
+    if (QIcon::hasThemeIcon("document-export"))
+    {
+        ui->cmdCopy->setIcon(QIcon::fromTheme("document-export"));
     }
 
     refreshWindowSize();

@@ -1102,7 +1102,7 @@ void ProfileInterface::deleteSelected()
             }
             if (selectedWidgts != 0)
             {
-                QMessageBox::warning(this, tr("Remove selected"), tr("Failed at remove the complete selected Snapmatic pictures and/or Savegame files"));
+                QMessageBox::warning(this, tr("Remove selected"), tr("Failed to remove all selected Snapmatic pictures and/or Savegame files"));
             }
         }
     }

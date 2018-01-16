@@ -285,12 +285,18 @@ bool SnapmaticWidget::makePictureVisible()
 
 void SnapmaticWidget::makePictureHiddenSlot()
 {
-    makePictureHidden();
+    if (!makePictureHidden())
+    {
+        QMessageBox::warning(this, QApplication::translate("UserInterface", "Hide In-game"), QApplication::translate("SnapmaticWidget", "Failed to hide %1 In-game from your Snapmatic pictures").arg("\""+smpic->getPictureStr()+"\""));
+    }
 }
 
 void SnapmaticWidget::makePictureVisibleSlot()
 {
-    makePictureVisible();
+    if (!makePictureVisible())
+    {
+        QMessageBox::warning(this, QApplication::translate("UserInterface", "Show In-game"), QApplication::translate("SnapmaticWidget", "Failed to show %1 In-game from your Snapmatic pictures").arg("\""+smpic->getPictureStr()+"\""));
+    }
 }
 
 void SnapmaticWidget::editSnapmaticProperties()
