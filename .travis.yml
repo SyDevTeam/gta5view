@@ -1,7 +1,7 @@
 dist: trusty
 sudo: required
 
-language: cpp
+language: generic
 
 service:
   - docker
@@ -9,12 +9,15 @@ service:
 matrix:
   include:
   - env:
-    - BUILD_SCRIPT=debian32_travis.sh
+    - BUILD_SCRIPT=debian_travis.sh
+    - DOCKER_USER=i386
     - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
+    - DEBIAN_VERSION=jessie
     - APT_INSTALL=clang
   - env:
-    - BUILD_SCRIPT=debian64_travis.sh
+    - BUILD_SCRIPT=debian_travis.sh
     - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
+    - DEBIAN_VERSION=jessie
     - APT_INSTALL=clang
   - env:
     - BUILD_SCRIPT=windows_travis.sh

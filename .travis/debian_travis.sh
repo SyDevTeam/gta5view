@@ -1,6 +1,10 @@
 #!/bin/bash
 
-DOCKER_IMAGE=i386/debian:jessie
+if [[ ${DOCKER_USER} ]]; then
+	DOCKER_IMAGE=${DOCKER_USER}/debian:${DEBIAN_VERSION}
+else
+	DOCKER_IMAGE=debian:${DEBIAN_VERSION}
+fi
 PROJECT_DIR_DOCKER=/gta5view
 
 cd ${PROJECT_DIR} && \
