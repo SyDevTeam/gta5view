@@ -6,8 +6,8 @@ export GTA5VIEW_EXECUTABLE=gta5view-${EXECUTABLE_VERSION}${EXECUTABLE_ARCH}.exe 
 cd ${PROJECT_DIR} && \
 echo "gta5view build version is ${APPLICATION_VERSION}" && \
 echo "gta5view executable is ${GTA5VIEW_EXECUTABLE}" && \
-mkdir build && \
-mkdir assets && \
+mkdir -p build && \
+mkdir -p assets && \
 
 # Starting build
 cd build && \

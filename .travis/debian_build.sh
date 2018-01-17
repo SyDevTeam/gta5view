@@ -3,15 +3,15 @@
 # Creating folders
 cd ${PROJECT_DIR} && \
 echo "gta5view build version is ${APPLICATION_VERSION}" && \
-mkdir build && \
-mkdir assets && \
+mkdir -p build && \
+mkdir -p assets && \
 chmod -x res/gta5sync_*.qm res/gta5view.desktop res/gta5view.png && \
 cd build && \
-mkdir qt4 && \
+mkdir -p qt4 && \
 cd qt4 && \
 echo "Grand Theft Auto V Snapmatic and Savegame viewer/manager" > ./description-pak && \
 cd .. && \
-mkdir qt5 && \
+mkdir -p qt5 && \
 cd qt5 && \
 echo "Grand Theft Auto V Snapmatic and Savegame viewer/manager" > ./description-pak && \
 cd .. && \

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>435</width>
-    <height>464</height>
+    <height>474</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -422,7 +422,7 @@
        <item>
         <widget class="QGroupBox" name="gbCategorys">
          <property name="title">
-          <string>Categorys</string>
+          <string>Categories</string>
          </property>
          <layout class="QVBoxLayout" name="vlCategorys">
           <item>

@@ -553,11 +553,6 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="425"/>
-        <source>Categorys</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.ui" line="434"/>
         <source>Hardware, Application and OS Specification</source>
         <translation type="unfinished"></translation>
@@ -628,6 +623,11 @@ Y: %2</source>
     <message>
         <location filename="../OptionsDialog.ui" line="393"/>
         <source>Participation</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="425"/>
+        <source>Categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

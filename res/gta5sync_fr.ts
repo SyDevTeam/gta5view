@@ -714,7 +714,7 @@ Y: %2</source>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="425"/>
-        <source>Categorys</source>
+        <source>Categories</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

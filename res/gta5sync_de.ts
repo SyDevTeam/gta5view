@@ -839,6 +839,11 @@ Y: %2</translation>
         <translation>Teilnahme</translation>
     </message>
     <message>
+        <location filename="../OptionsDialog.ui" line="425"/>
+        <source>Categories</source>
+        <translation>Kategorien</translation>
+    </message>
+    <message>
         <location filename="../OptionsDialog.ui" line="536"/>
         <source>&amp;Send</source>
         <translation>&amp;Senden</translation>
@@ -854,9 +859,8 @@ Y: %2</translation>
         <translation>An %1 Benutzerstatistik teilnehmen</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="425"/>
         <source>Categorys</source>
-        <translation>Kategorien</translation>
+        <translation type="vanished">Kategorien</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="434"/>
