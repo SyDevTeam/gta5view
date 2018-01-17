@@ -127,7 +127,11 @@
 
 #ifndef GTA5SYNC_COMPILER
 #ifdef __clang__
+#ifndef Q_OS_MAC
 #define GTA5SYNC_COMPILER QString("Clang %1.%2.%3").arg(QString::number(__clang_major__), QString::number(__clang_minor__), QString::number(__clang_patchlevel__))
+#else
+#define GTA5SYNC_COMPILER QString("Apple LLVM %1.%2.%3").arg(QString::number(__clang_major__), QString::number(__clang_minor__), QString::number(__clang_patchlevel__))
+#endif
 #elif defined(__GNUC__)
 #define GTA5SYNC_COMPILER QString("GCC %1.%2.%3").arg(QString::number(__GNUC__), QString::number(__GNUC_MINOR__), QString::number(__GNUC_PATCHLEVEL__))
 #elif defined(__GNUG__)
