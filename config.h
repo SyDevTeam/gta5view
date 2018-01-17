@@ -49,7 +49,7 @@
 #endif
 
 #ifndef GTA5SYNC_APPVER
-#define GTA5SYNC_APPVER "1.5.0-dev9"
+#define GTA5SYNC_APPVER "1.5.0-rc1"
 #endif
 
 #ifdef GTA5SYNC_BUILDTYPE_REL

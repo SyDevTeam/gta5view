@@ -151,36 +151,37 @@ int main(int argc, char *argv[])
     bool telemetryWindowLaunched = settings.value("TelemetryWindowLaunched", false).toBool();
     if (!telemetryWindowLaunched && !Telemetry->isEnabled() && !Telemetry->isStateForced())
     {
-        QDialog telemetryDialog;
-        telemetryDialog.setObjectName(QStringLiteral("TelemetryDialog"));
-        telemetryDialog.setWindowTitle(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
-        telemetryDialog.setWindowFlags(telemetryDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
-        telemetryDialog.setWindowIcon(IconLoader::loadingAppIcon());
-        QVBoxLayout telemetryLayout;
-        telemetryLayout.setObjectName(QStringLiteral("TelemetryLayout"));
-        telemetryDialog.setLayout(&telemetryLayout);
-        UiModLabel telemetryLabel(&telemetryDialog);
-        telemetryLabel.setObjectName(QStringLiteral("TelemetryLabel"));
-        telemetryLabel.setText(QString("<h4>%2</h4>%1").arg(QApplication::translate("TelemetryDialog", "You want help %1 to improve in the future by collection of data?").arg(GTA5SYNC_APPSTR), QApplication::translate("TelemetryDialog", "%1 User Statistics").arg(GTA5SYNC_APPSTR)));
-        telemetryLayout.addWidget(&telemetryLabel);
-        QCheckBox telemetryCheckBox(&telemetryDialog);
-        telemetryCheckBox.setObjectName(QStringLiteral("TelemetryCheckBox"));
-        telemetryCheckBox.setText(QApplication::translate("TelemetryDialog", "Yes, I would like to take part."));
-        telemetryCheckBox.setChecked(true);
-        telemetryLayout.addWidget(&telemetryCheckBox);
-        QHBoxLayout telemetryButtonLayout;
-        telemetryButtonLayout.setObjectName(QStringLiteral("TelemetryButtonLayout"));
-        telemetryLayout.addLayout(&telemetryButtonLayout);
-        QSpacerItem telemetryButtonSpacer(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
-        telemetryButtonLayout.addSpacerItem(&telemetryButtonSpacer);
-        QPushButton telemetryButton(&telemetryDialog);
-        telemetryButton.setObjectName(QStringLiteral("TelemetryButton"));
-        telemetryButton.setText(QApplication::translate("TelemetryDialog", "&OK"));
-        telemetryButtonLayout.addWidget(&telemetryButton);
-        QObject::connect(&telemetryButton, SIGNAL(clicked(bool)), &telemetryDialog, SLOT(close()));
-        telemetryDialog.setFixedSize(telemetryDialog.sizeHint());
-        telemetryDialog.exec();
-        if (telemetryCheckBox.isChecked())
+        QDialog *telemetryDialog = new QDialog();
+        telemetryDialog->setObjectName(QStringLiteral("TelemetryDialog"));
+        telemetryDialog->setWindowTitle(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+        telemetryDialog->setWindowFlags(telemetryDialog->windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        telemetryDialog->setWindowIcon(IconLoader::loadingAppIcon());
+        QVBoxLayout *telemetryLayout = new QVBoxLayout(telemetryDialog);
+        telemetryLayout->setObjectName(QStringLiteral("TelemetryLayout"));
+        telemetryDialog->setLayout(telemetryLayout);
+        UiModLabel *telemetryLabel = new UiModLabel(telemetryDialog);
+        telemetryLabel->setObjectName(QStringLiteral("TelemetryLabel"));
+        telemetryLabel->setText(QString("<h4>%2</h4>%1").arg(QApplication::translate("TelemetryDialog", "You want help %1 to improve in the future by collection of data?").arg(GTA5SYNC_APPSTR), QApplication::translate("TelemetryDialog", "%1 User Statistics").arg(GTA5SYNC_APPSTR)));
+        telemetryLayout->addWidget(telemetryLabel);
+        QCheckBox *telemetryCheckBox = new QCheckBox(telemetryDialog);
+        telemetryCheckBox->setObjectName(QStringLiteral("TelemetryCheckBox"));
+        telemetryCheckBox->setText(QApplication::translate("TelemetryDialog", "Yes, I would like to take part."));
+        telemetryCheckBox->setChecked(true);
+        telemetryLayout->addWidget(telemetryCheckBox);
+        QHBoxLayout *telemetryButtonLayout = new QHBoxLayout();
+        telemetryButtonLayout->setObjectName(QStringLiteral("TelemetryButtonLayout"));
+        telemetryLayout->addLayout(telemetryButtonLayout);
+        QSpacerItem *telemetryButtonSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+        telemetryButtonLayout->addSpacerItem(telemetryButtonSpacer);
+        QPushButton *telemetryButton = new QPushButton(telemetryDialog);
+        telemetryButton->setObjectName(QStringLiteral("TelemetryButton"));
+        telemetryButton->setText(QApplication::translate("TelemetryDialog", "&OK"));
+        telemetryButtonLayout->addWidget(telemetryButton);
+        QObject::connect(telemetryButton, SIGNAL(clicked(bool)), telemetryDialog, SLOT(close()));
+        telemetryDialog->setFixedSize(telemetryDialog->sizeHint());
+        telemetryDialog->exec();
+        QObject::disconnect(telemetryButton, SIGNAL(clicked(bool)), telemetryDialog, SLOT(close()));
+        if (telemetryCheckBox->isChecked())
         {
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
@@ -190,6 +191,7 @@ int main(int argc, char *argv[])
             Telemetry->work();
         }
         settings.setValue("TelemetryWindowLaunched", true);
+        delete telemetryDialog;
     }
 #endif
 
