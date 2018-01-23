@@ -4,35 +4,6 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>About gta5sync</source>
-        <translation type="vanished">À propos de gta5sync</translation>
-    </message>
-    <message>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
-&lt;br/&gt;
-A project for viewing and sync Grand Theft Auto V Snapmatic&lt;br/&gt;
-Pictures and Savegames&lt;br/&gt;
-&lt;br/&gt;
-Project version: %1&lt;br/&gt;
-Project build: %4, %5&lt;br/&gt;
-Compiled with Qt %2&lt;br/&gt;
-Running with Qt %3&lt;br/&gt;
-&lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;
-&lt;br/&gt;
-Un outil pour gérer et synchroniser les photos Snapmatic&lt;br/&gt;
-et les fichiers de sauvegarde de Grand Theft Auto V&lt;br/&gt;
-&lt;br/&gt;
-gta5sync v%1&lt;br/&gt;
-Build %4, %5&lt;br/&gt;
-Compilé avec Qt %2&lt;br/&gt;
-Fonctionne avec Qt %3&lt;br/&gt;
-&lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;
-gta5sync est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../AboutDialog.ui" line="14"/>
         <source>About %1</source>
         <translation>À propos de %1</translation>
@@ -61,95 +32,15 @@ Fonctionne avec Qt %6&lt;br/&gt;
 %7</translation>
     </message>
     <message>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
-&lt;br/&gt;
-%2&lt;br/&gt;
-&lt;br/&gt;
-Version %3&lt;br/&gt;
-Created on %4&lt;br/&gt;
-Built with Qt %5&lt;br/&gt;
-Running with Qt %6&lt;br/&gt;
-%8&lt;br/&gt;
-%7</source>
-        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
-&lt;br/&gt;
-%2&lt;br/&gt;
-&lt;br/&gt;
-Version %3&lt;br/&gt;
-Publié le %4&lt;br/&gt;
-Compilé avec Qt %5&lt;br/&gt;
-Fonctionne avec Qt %6&lt;br/&gt;
-%8&lt;br/&gt;
-%7</translation>
-    </message>
-    <message>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%8&lt;/span&gt;&lt;br/&gt;
-&lt;br/&gt;
-%9&lt;br/&gt;
-&lt;br/&gt;
-Project version: %1&lt;br/&gt;
-Project build: %4&lt;br/&gt;
-Compiled with Qt %2&lt;br/&gt;
-Running with Qt %3&lt;br/&gt;
-&lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;%8 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;%8&lt;/span&gt;&lt;br/&gt;
-&lt;br/&gt;
-%9&lt;br/&gt;
-&lt;br/&gt;
-Version %1&lt;br/&gt;
-Build %4&lt;br/&gt;
-Compilé avec Qt %2&lt;br/&gt;
-Fonctionne avec Qt %3&lt;br/&gt;
-&lt;br/&gt;
-Copyright &amp;copy; &lt;a href=&quot;%5&quot;&gt;%6&lt;/a&gt; %7&lt;br/&gt;
-%8 est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
-    </message>
-    <message>
         <location filename="../AboutDialog.ui" line="78"/>
         <source>&amp;Close</source>
         <translation>&amp;Fermer</translation>
-    </message>
-    <message>
-        <source>Using %1 %2</source>
-        <comment>Exp. Using libmyfuck</comment>
-        <translation type="vanished">Utilise %1 %2</translation>
-    </message>
-    <message>
-        <source>Translated by %1</source>
-        <comment>Exp. Translated by Syping</comment>
-        <translation type="vanished">Traduit par %1</translation>
-    </message>
-    <message>
-        <source>NAME_OF_TRANSLATOR</source>
-        <comment>Your Name (The person behind your screen looking at this text!)</comment>
-        <translation type="vanished">Ganjalo</translation>
-    </message>
-    <message>
-        <source>TRANSLATOR_PROFILE</source>
-        <comment>mailto: http:// https:// Exp. https://github.com/Syping/</comment>
-        <translation type="vanished">https://github.com/Ganjalo/</translation>
-    </message>
-    <message>
-        <source>Using %1 %2</source>
-        <extracomment>Using specific library, example Using libmyfuck</extracomment>
-        <translation type="vanished">Utilise %1 %2</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="41"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Traduit par %1</translation>
-    </message>
-    <message>
-        <source>NAME_OF_TRANSLATOR</source>
-        <extracomment>Insert your name here in following scheme, First Translator\nSecond Translator</extracomment>
-        <translation type="vanished">Ganjalo</translation>
-    </message>
-    <message>
-        <source>TRANSLATOR_PROFILE</source>
-        <extracomment>Insert your profile here in following scheme, First Translator,https://my.profile\nSecond Translator,mailto: my@mail.com</extracomment>
-        <translation type="vanished">https://github.com/Ganjalo/</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="43"/>
@@ -173,10 +64,6 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3&lt;br/&gt;%4 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation type="vanished">Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3&lt;br/&gt;%4 est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="67"/>
@@ -357,26 +244,6 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <translation>Importer...</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation type="vanished">Paramètres</translation>
-    </message>
-    <message>
-        <source>&amp;Keep Aspect Ratio</source>
-        <translation type="vanished">&amp;Conserver le rapport d&apos;aspect</translation>
-    </message>
-    <message>
-        <source>&amp;Ignore Aspect Ratio</source>
-        <translation type="vanished">&amp;Ignorer le rapport d&apos;aspect</translation>
-    </message>
-    <message>
-        <source>&amp;Avatar</source>
-        <translation type="vanished">&amp;Avatar</translation>
-    </message>
-    <message>
-        <source>Keep Aspect Ratio</source>
-        <translation type="vanished">Conserver le rapport d&apos;aspect</translation>
-    </message>
-    <message>
         <location filename="../ImportDialog.ui" line="111"/>
         <location filename="../ImportDialog.ui" line="252"/>
         <source>Ignore Aspect Ratio</source>
@@ -488,10 +355,6 @@ When you want to use it as Avatar the image will be detached!</source>
         <comment>Background Image: File</comment>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Import</source>
-        <translation type="obsolete">Importer</translation>
-    </message>
 </context>
 <context>
     <name>JsonEditorDialog</name>
@@ -554,13 +417,6 @@ When you want to use it as Avatar the image will be detached!</source>
 Y: %2</source>
         <comment>X and Y position</comment>
         <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>MapPreviewDialog</name>
-    <message>
-        <source>&amp;Apply</source>
-        <translation type="obsolete">A&amp;ppliquer</translation>
     </message>
 </context>
 <context>
@@ -791,10 +647,6 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Language</source>
-        <translation type="vanished">Langue</translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.ui" line="565"/>
         <source>Interface</source>
         <translation type="unfinished"></translation>
@@ -850,16 +702,6 @@ Y: %2</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <source>%1 (%2 if available)</source>
-        <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
-        <translation type="vanished">%1 (%2 si disponible)</translation>
-    </message>
-    <message>
-        <source>System</source>
-        <comment>System like PC System</comment>
-        <translation type="vanished">Système</translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.cpp" line="156"/>
         <source>%1 (Next Closest Language)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
@@ -910,14 +752,6 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>The new Custom Folder will initialize after you restart %1.</source>
-        <translation type="vanished">Le répertoire personnalisé sera actif au prochain lancement de %1.</translation>
-    </message>
-    <message>
-        <source>The language change will take effect after you restart %1.</source>
-        <translation type="vanished">Le changement de langue sera actif au prochain lancement de %1.</translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.cpp" line="450"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
@@ -955,17 +789,9 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export picture</source>
-        <translation type="vanished">Exporter la photo</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.ui" line="180"/>
         <source>&amp;Manage</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>&amp;Export</source>
-        <translation type="vanished">&amp;Exporter</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="199"/>
@@ -973,17 +799,9 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Close</source>
-        <translation type="vanished">Fermer la visionneuse</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.ui" line="202"/>
         <source>&amp;Close</source>
         <translation>&amp;Fermer</translation>
-    </message>
-    <message>
-        <source>Export as GTA Snapmatic...</source>
-        <translation type="vanished">Exporter comme Snapmatic...</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="202"/>
@@ -1040,14 +858,6 @@ Y: %2</source>
         <translation>Exporté comme &quot;%1&quot; avec l&apos;utilisation de l&apos;extension .auto.</translation>
     </message>
     <message>
-        <source>All files (**)</source>
-        <translation type="vanished">Tous les fichiers (**)</translation>
-    </message>
-    <message>
-        <source>Export as GTA Snapmatic</source>
-        <translation type="vanished">Exporter comme GTA Snapmatic</translation>
-    </message>
-    <message>
         <location filename="../PictureExport.cpp" line="150"/>
         <location filename="../PictureExport.cpp" line="285"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
@@ -1074,22 +884,10 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Failed to overwrite %1 with current Snapmatic picture</source>
-        <translation type="vanished">Echec du remplacement de %1</translation>
-    </message>
-    <message>
-        <source>Failed to copy current Snapmatic picture</source>
-        <translation type="vanished">Echec de la copie</translation>
-    </message>
-    <message>
         <location filename="../PictureExport.cpp" line="218"/>
         <location filename="../PictureExport.cpp" line="316"/>
         <source>No valid file is selected</source>
         <translation>Fichier invalide</translation>
-    </message>
-    <message>
-        <source>Export as &amp;JPG picture...</source>
-        <translation type="vanished">Exporter comme image &amp;JPG...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="152"/>
@@ -1098,18 +896,10 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Export as &amp;GTA Snapmatic...</source>
-        <translation type="vanished">Exporter comme &amp;GTA Snapmatic...</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.cpp" line="153"/>
         <location filename="../ProfileInterface.cpp" line="1263"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Edi&amp;t</source>
-        <translation type="obsolete">Édi&amp;ter</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="156"/>
@@ -1171,25 +961,9 @@ Press 1 for Default View</source>
 Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
-        <source>Avatar Preview Mode&lt;br&gt;Press A for Default View</source>
-        <translation type="vanished">Aperçu avatar&lt;br&gt;Appuyer sur A pour la vue par défaut</translation>
-    </message>
-    <message>
-        <source>No player</source>
-        <translation type="vanished">Aucun joueur</translation>
-    </message>
-    <message>
-        <source>No crew</source>
-        <translation type="vanished">Aucun crew</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.cpp" line="640"/>
         <source>Unknown Location</source>
         <translation>Emplacement inconnu</translation>
-    </message>
-    <message>
-        <source>Export as JPG picture...</source>
-        <translation type="vanished">Exporter comme image JPG...</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="96"/>
@@ -1198,17 +972,9 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>Exporter</translation>
     </message>
     <message>
-        <source>JPEG picture (*.jpg)</source>
-        <translation type="vanished">Image JPEG (*.jpg)</translation>
-    </message>
-    <message>
         <location filename="../PictureExport.cpp" line="100"/>
         <source>Portable Network Graphics (*.png)</source>
         <translation>Portable Network Graphics (*.png)</translation>
-    </message>
-    <message>
-        <source>Export as JPG picture</source>
-        <translation type="vanished">Exporter comme image JPG</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="296"/>
@@ -1300,10 +1066,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Import exported file</source>
-        <translation type="vanished">Importer un profil</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.ui" line="201"/>
         <source>&amp;Import...</source>
         <translation>&amp;Importer...</translation>
@@ -1378,10 +1140,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>Importer</translation>
     </message>
     <message>
-        <source>All profile files (SGTA* PGTA*)</source>
-        <translation type="vanished">Fichiers de profil GTA (SGTA* PGTA*)</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.cpp" line="475"/>
         <location filename="../UserInterface.cpp" line="447"/>
         <source>Savegames files (SGTA*)</source>
@@ -1448,22 +1206,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>Impossible de lire le fichier de sauvegarde</translation>
     </message>
     <message>
-        <source>Can&apos;t import %1 because of not valid file format</source>
-        <translation type="vanished">Impossible d&apos;importer %1, format invalide</translation>
-    </message>
-    <message>
-        <source>Failed to import the Snapmatic picture, file not begin with PGTA</source>
-        <translation type="vanished">Impossible d&apos;importer la photo Snapmatic,nom de fichier incorrect (PGTA*)</translation>
-    </message>
-    <message>
-        <source>Importable files (*.g5e *.jpg *.png SGTA* PGTA*)</source>
-        <translation type="vanished">Fichiers importables (*.g5e *.jpg *.png SGTA* PGTA*)</translation>
-    </message>
-    <message>
-        <source>All image files (*.jpg *.png)</source>
-        <translation type="vanished">Tous les fichiers image (*.jpg *.png)</translation>
-    </message>
-    <message>
         <location filename="../ImageEditorDialog.cpp" line="141"/>
         <location filename="../ImportDialog.cpp" line="359"/>
         <location filename="../ProfileInterface.cpp" line="701"/>
@@ -1506,10 +1248,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <location filename="../ProfileInterface.cpp" line="867"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
         <translation>Impossible d&apos;importer la sauvegarde, aucun emplacement libre</translation>
-    </message>
-    <message>
-        <source>Export selected</source>
-        <translation type="vanished">Exporter la sélection</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="954"/>
@@ -1657,10 +1395,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Initializing export...</source>
-        <translation type="vanished">Initialisation de l&apos;export...</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.cpp" line="1049"/>
         <source>Export failed with...
 
@@ -1686,10 +1420,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <location filename="../ProfileInterface.cpp" line="1077"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
         <translation>Supprimer la sélection ?</translation>
-    </message>
-    <message>
-        <source>Failed at remove the complete selected Snapmatic pictures and/or Savegame files</source>
-        <translation type="vanished">Impossible de supprimer la sélection</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="445"/>
@@ -1954,10 +1684,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <location filename="../SnapmaticEditor.ui" line="71"/>
         <source>Mugshot</source>
         <translation>Photo d&apos;identité</translation>
-    </message>
-    <message>
-        <source>Custom</source>
-        <translation type="vanished">Personnalisé</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="94"/>
@@ -2253,21 +1979,9 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>&amp;Invisible en jeu</translation>
     </message>
     <message>
-        <source>&amp;Edit Properties...</source>
-        <translation type="vanished">Modifier les &amp;propriétés...</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.cpp" line="1261"/>
         <source>&amp;Export</source>
         <translation>&amp;Exporter</translation>
-    </message>
-    <message>
-        <source>Export as &amp;JPG picture...</source>
-        <translation type="vanished">Exporter comme image &amp;JPG...</translation>
-    </message>
-    <message>
-        <source>Export as &amp;GTA Snapmatic...</source>
-        <translation type="vanished">Exporter comme &amp;GTA Snapmatic...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1264"/>
@@ -2326,10 +2040,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
 <context>
     <name>UserInterface</name>
     <message>
-        <source>gta5sync - %1</source>
-        <translation type="vanished">gta5sync - %1</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="74"/>
         <source>Select profile</source>
         <translation>Sélectionner un profil</translation>
@@ -2381,14 +2091,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>&amp;Profil</translation>
     </message>
     <message>
-        <source>&amp;About gta5sync</source>
-        <translation type="vanished">&amp;À propos de gta5sync</translation>
-    </message>
-    <message>
-        <source>Ctrl+P</source>
-        <translation type="vanished">Ctrl+P</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="244"/>
         <source>&amp;Exit</source>
         <translation>&amp;Quitter</translation>
@@ -2399,17 +2101,9 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>Quitter</translation>
     </message>
     <message>
-        <source>Ctrl+Q</source>
-        <translation type="vanished">Ctrl+Q</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="255"/>
         <source>Close &amp;Profile</source>
         <translation>Fermer le &amp;profil</translation>
-    </message>
-    <message>
-        <source>Ctrl+End</source>
-        <translation type="vanished">Ctrl + Fin</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="263"/>
@@ -2417,17 +2111,9 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>Paramètre&amp;s</translation>
     </message>
     <message>
-        <source>Ctrl+S</source>
-        <translation type="vanished">Ctrl+S</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="271"/>
         <source>Select &amp;All</source>
         <translation>Sélectionner &amp;tout</translation>
-    </message>
-    <message>
-        <source>Ctrl+A</source>
-        <translation type="vanished">Ctrl+A</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="279"/>
@@ -2435,17 +2121,9 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>&amp;Désélectionner tout</translation>
     </message>
     <message>
-        <source>Ctrl+D</source>
-        <translation type="vanished">Ctrl+D</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="287"/>
         <source>&amp;Export selected...</source>
         <translation>&amp;Exporter la sélection...</translation>
-    </message>
-    <message>
-        <source>Ctrl+E</source>
-        <translation type="vanished">Ctrl+E</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="295"/>
@@ -2453,26 +2131,14 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>&amp;Supprimer la sélection</translation>
     </message>
     <message>
-        <source>Ctrl+Del</source>
-        <translation type="vanished">Ctrl+Del</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="303"/>
         <source>&amp;Import files...</source>
         <translation>&amp;Importer...</translation>
     </message>
     <message>
-        <source>Ctrl+I</source>
-        <translation type="vanished">Ctrl+I</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="311"/>
         <source>&amp;Open File...</source>
         <translation>&amp;Ouvrir...</translation>
-    </message>
-    <message>
-        <source>Ctrl+O</source>
-        <translation type="vanished">Ctrl+O</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
@@ -2489,17 +2155,9 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>Modifier l&apos;emplacement de GTA V...</translation>
     </message>
     <message>
-        <source>Ctrl+G</source>
-        <translation type="vanished">Ctrl+G</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="330"/>
         <source>Show In-gam&amp;e</source>
         <translation>Rendre visible &amp;en jeu</translation>
-    </message>
-    <message>
-        <source>Shift+E</source>
-        <translation type="vanished">Shift+E</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="370"/>
@@ -2535,10 +2193,6 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <location filename="../UserInterface.ui" line="338"/>
         <source>Hi&amp;de In-game</source>
         <translation>Ren&amp;dre invisible en jeu</translation>
-    </message>
-    <message>
-        <source>Shift+D</source>
-        <translation type="vanished">Shift+D</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="20"/>

@@ -34,16 +34,6 @@ Running with Qt %6&lt;br/&gt;
         <translation></translation>
     </message>
     <message>
-        <source>NAME_OF_TRANSLATOR</source>
-        <extracomment>Insert your name here in following scheme, First Translator\nSecond Translator</extracomment>
-        <translation type="vanished">Syping</translation>
-    </message>
-    <message>
-        <source>TRANSLATOR_PROFILE</source>
-        <extracomment>Insert your profile here in following scheme, First Translator,https://my.profile\nSecond Translator,mailto: my@mail.com</extracomment>
-        <translation type="vanished">https://github.com/Syping/</translation>
-    </message>
-    <message>
         <location filename="../AboutDialog.cpp" line="43"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>

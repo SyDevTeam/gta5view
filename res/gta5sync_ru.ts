@@ -4,10 +4,6 @@
 <context>
     <name>AboutDialog</name>
     <message>
-        <source>About gta5sync</source>
-        <translation type="vanished">О программе gta5sync</translation>
-    </message>
-    <message>
         <location filename="../AboutDialog.ui" line="14"/>
         <source>About %1</source>
         <translation>О программе %1</translation>
@@ -36,80 +32,15 @@ Running with Qt %6&lt;br/&gt;
 %7</translation>
     </message>
     <message>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
-&lt;br/&gt;
-%2&lt;br/&gt;
-&lt;br/&gt;
-Version %3&lt;br/&gt;
-Created on %4&lt;br/&gt;
-Built with Qt %5&lt;br/&gt;
-Running with Qt %6&lt;br/&gt;
-%8&lt;br/&gt;
-%7</source>
-        <translation type="vanished">&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
-&lt;br/&gt;
-%2&lt;br/&gt;
-&lt;br/&gt;
-Версия %3&lt;br/&gt;
-Сделано %4&lt;br/&gt;
-Сделано с Qt %5&lt;br/&gt;
-Выполняется на Qt %6&lt;br/&gt;
-%8&lt;br/&gt;
-%7</translation>
-    </message>
-    <message>
         <location filename="../AboutDialog.ui" line="78"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
-    </message>
-    <message>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;A project for viewing and sync Grand Theft Auto 5 Snapmatic Pictures and Savegames&lt;br/&gt;&lt;br/&gt;Project version: %1&lt;br/&gt;Compiled with Qt %2&lt;br/&gt;Running with Qt %3&lt;br/&gt;&lt;br/&gt;Copyright © &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation type="obsolete">&lt;span style=&quot; font-weight:600;&quot;&gt;gta5sync&lt;/span&gt;&lt;br/&gt;&lt;br/&gt;Проект для просмотра и синхронизации фотографий Snapmatic и сохранений от Grand Theft Auto 5&lt;br/&gt;&lt;br/&gt;Версия проекта: %1&lt;br/&gt;Скомпилировано с Qt %2&lt;br/&gt;Работает на Qt %3&lt;br/&gt;&lt;br/&gt;Copyright © &lt;a href=&quot;https://github.com/Syping/&quot;&gt;Syping&lt;/a&gt; 2016&lt;br/&gt;gta5sync лицензирован по &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
-    </message>
-    <message>
-        <source>Using %1 %2</source>
-        <comment>Exp. Using libmyfuck</comment>
-        <translation type="vanished">Использует %1 %2</translation>
-    </message>
-    <message>
-        <source>Translated by %1</source>
-        <comment>Exp. Translated by Syping</comment>
-        <translation type="vanished">Перевёл %1</translation>
-    </message>
-    <message>
-        <source>NAME_OF_TRANSLATOR</source>
-        <comment>Your Name (The person behind your screen looking at this text!)</comment>
-        <translation type="vanished">VADemon</translation>
-    </message>
-    <message>
-        <source>TRANSLATOR_PROFILE</source>
-        <comment>mailto: http:// https:// Exp. https://github.com/Syping/</comment>
-        <translation type="vanished">https://github.com/VADemon/</translation>
-    </message>
-    <message>
-        <source>Using %1 %2</source>
-        <extracomment>Using specific library, example Using libmyfuck</extracomment>
-        <translation type="vanished">Использует %1 %2</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="41"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Перевёл %1</translation>
-    </message>
-    <message>
-        <source>NAME_OF_TRANSLATOR</source>
-        <extracomment>Insert your name here in following scheme, First Translator\nSecond Translator</extracomment>
-        <translation type="vanished">VADemon</translation>
-    </message>
-    <message>
-        <source>TRANSLATOR_PROFILE</source>
-        <extracomment>Insert your profile here in following scheme, First Translator,https://my.profile\nSecond Translator,mailto: my@mail.com</extracomment>
-        <translation type="vanished">https://github.com/VADemon/</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="43"/>
@@ -133,10 +64,6 @@ Pictures and Savegames</source>
         <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 под лицензией &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
-    </message>
-    <message>
-        <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3&lt;br/&gt;%4 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation type="vanished">Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3&lt;br/&gt;%4 под лицензией &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="67"/>
@@ -319,26 +246,6 @@ Grand Theft Auto V Snapmatic картинок и сохранений</translati
         <translation>Импортировать...</translation>
     </message>
     <message>
-        <source>Settings</source>
-        <translation type="vanished">Настройки</translation>
-    </message>
-    <message>
-        <source>&amp;Keep Aspect Ratio</source>
-        <translation type="vanished">О&amp;ставить соотношение сторон</translation>
-    </message>
-    <message>
-        <source>&amp;Ignore Aspect Ratio</source>
-        <translation type="vanished">&amp;Игнорировать соотношение сторон</translation>
-    </message>
-    <message>
-        <source>&amp;Avatar</source>
-        <translation type="vanished">&amp;Аватар</translation>
-    </message>
-    <message>
-        <source>Keep Aspect Ratio</source>
-        <translation type="vanished">Оставить соотношение сторон</translation>
-    </message>
-    <message>
         <location filename="../ImportDialog.ui" line="111"/>
         <location filename="../ImportDialog.ui" line="252"/>
         <source>Ignore Aspect Ratio</source>
@@ -452,14 +359,6 @@ When you want to use it as Avatar the image will be detached!</source>
         <comment>Background Image: File</comment>
         <translation>Файл</translation>
     </message>
-    <message>
-        <source>Import</source>
-        <translation type="obsolete">Импортировать</translation>
-    </message>
-    <message>
-        <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
-        <translation type="obsolete">Не получилось импортировать %1, файл не может быть правильно обработан</translation>
-    </message>
 </context>
 <context>
     <name>JsonEditorDialog</name>
@@ -490,13 +389,6 @@ When you want to use it as Avatar the image will be detached!</source>
         <location filename="../MapLocationDialog.ui" line="26"/>
         <source>Snapmatic Map Viewer</source>
         <translation>Просмотрщик карты Snapmatic</translation>
-    </message>
-    <message>
-        <source>X: %1
-Y: %2</source>
-        <extracomment>X and Y position</extracomment>
-        <translation type="vanished">X: %1
-Y: %2</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="138"/>
@@ -687,10 +579,6 @@ Y: %2</translation>
         <translation>Категории</translation>
     </message>
     <message>
-        <source>Categorys</source>
-        <translation type="vanished">Категории</translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.ui" line="434"/>
         <source>Hardware, Application and OS Specification</source>
         <translatorcomment>Application = gta5view</translatorcomment>
@@ -766,10 +654,6 @@ Y: %2</translation>
         <translation>Всегда использовать шрифт сообщений (Windows 2003 и ранние)</translation>
     </message>
     <message>
-        <source>Language</source>
-        <translation type="vanished">Язык</translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.ui" line="565"/>
         <source>Interface</source>
         <translation>Интерфейс</translation>
@@ -825,17 +709,6 @@ Y: %2</translation>
         <translation>От&amp;мена</translation>
     </message>
     <message>
-        <source>System</source>
-        <comment>System like PC System</comment>
-        <translatorcomment>может быть надо прилагательное</translatorcomment>
-        <translation type="vanished">Система</translation>
-    </message>
-    <message>
-        <source>%1 (%2 if available)</source>
-        <comment>System like PC System = %1, System Language like Deutsch = %2</comment>
-        <translation type="vanished">%1 (%2 если имеется)</translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.cpp" line="156"/>
         <source>%1 (Next Closest Language)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
@@ -886,14 +759,6 @@ Y: %2</translation>
         <translation>Сообщение обратное связи не должно быть длинее 1024 символов</translation>
     </message>
     <message>
-        <source>The new Custom Folder will initialize after you restart %1.</source>
-        <translation type="vanished">Другая папка будет загружена после перезапуска %1.</translation>
-    </message>
-    <message>
-        <source>The language change will take effect after you restart %1.</source>
-        <translation type="vanished">Язык изменится после перезапуска %1.</translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.cpp" line="450"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
@@ -915,16 +780,6 @@ Y: %2</translation>
         <translation>%1 - Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4&lt;br&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Crew ID: &lt;/span&gt;%5</source>
-        <translation type="obsolete">&lt;span style=&quot; font-weight:600;&quot;&gt;Заголовок: &lt;/span&gt;%6&lt;br&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Позиция: &lt;/span&gt;%1, %2, %3 &lt;br&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Игроки: &lt;/span&gt;%4&lt;br&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;ID группы: &lt;/span&gt;%5</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.ui" line="117"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
@@ -936,17 +791,9 @@ Y: %2</translation>
 &lt;span style=&quot; font-weight:600;&quot;&gt;Сделано: &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <source>Export picture</source>
-        <translation type="vanished">Экспорт картинки</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.ui" line="180"/>
         <source>&amp;Manage</source>
         <translation>&amp;Управление</translation>
-    </message>
-    <message>
-        <source>&amp;Export</source>
-        <translation type="vanished">&amp;Экспорт</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="177"/>
@@ -970,40 +817,16 @@ Y: %2</translation>
         <translation>Экспортировать</translation>
     </message>
     <message>
-        <source>Copy</source>
-        <translation type="obsolete">Копировать</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="vanished">Закрыть</translation>
-    </message>
-    <message>
-        <source>Export as &amp;JPG picture...</source>
-        <translation type="vanished">Эксп&amp;ортировать как картинку JPG...</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.cpp" line="152"/>
         <location filename="../ProfileInterface.cpp" line="1262"/>
         <source>Export as &amp;Picture...</source>
         <translation>Экспортировать как &amp;картинку...</translation>
     </message>
     <message>
-        <source>Export as &amp;GTA Snapmatic...</source>
-        <translation type="vanished">Экс&amp;портировать как GTA Snapmatic...</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.cpp" line="153"/>
         <location filename="../ProfileInterface.cpp" line="1263"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation>Экспортировать как &amp;Snapmatic...</translation>
-    </message>
-    <message>
-        <source>Edi&amp;t</source>
-        <translation type="obsolete">&amp;Правка</translation>
-    </message>
-    <message>
-        <source>Open &amp;Map View...</source>
-        <translation type="vanished">Открыть &amp;карту...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="156"/>
@@ -1065,25 +888,9 @@ Press 1 for Default View</source>
 Нажмите 1 для стандартного просмотра</translation>
     </message>
     <message>
-        <source>No player</source>
-        <translation type="vanished">Игроков нет</translation>
-    </message>
-    <message>
-        <source>No crew</source>
-        <translation type="vanished">Без группы</translation>
-    </message>
-    <message>
         <location filename="../PictureDialog.cpp" line="640"/>
         <source>Unknown Location</source>
         <translation>Неизвестное место</translation>
-    </message>
-    <message>
-        <source>Export as JPG picture...</source>
-        <translation type="vanished">Экспортировать картинкой JPG...</translation>
-    </message>
-    <message>
-        <source>JPEG picture (*.jpg)</source>
-        <translation type="vanished">Картинка JPEG (*.jpg)</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="100"/>
@@ -1091,22 +898,10 @@ Press 1 for Default View</source>
         <translation>Картинка Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <source>Export as JPG picture</source>
-        <translation type="vanished">Экспортировать как картинку JPG</translation>
-    </message>
-    <message>
         <location filename="../PictureExport.cpp" line="150"/>
         <location filename="../PictureExport.cpp" line="285"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
         <translation>Перезаписать %1 текущей картинкой Snapmatic?</translation>
-    </message>
-    <message>
-        <source>Export as GTA Snapmatic</source>
-        <translation type="vanished">Экспортировать как GTA Snapmatic</translation>
-    </message>
-    <message>
-        <source>Failed to overwrite %1 with current Snapmatic picture</source>
-        <translation type="vanished">Не удалось перезаписать %1 картинкой Snapmatic</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="95"/>
@@ -1180,14 +975,6 @@ Press 1 for Default View</source>
         <translation>Выбранный файл неверен</translation>
     </message>
     <message>
-        <source>Copy picture</source>
-        <translation type="obsolete">Скопировать картинку</translation>
-    </message>
-    <message>
-        <source>Export as GTA Snapmatic...</source>
-        <translation type="vanished">Экспортировать как GTA Snapmatic...</translation>
-    </message>
-    <message>
         <location filename="../PictureExport.cpp" line="252"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
@@ -1201,14 +988,6 @@ Press 1 for Default View</source>
         <location filename="../PictureExport.cpp" line="254"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Картинки Snapmatic (PGTA*)</translation>
-    </message>
-    <message>
-        <source>All files (**)</source>
-        <translation type="vanished">Все файлы (**)</translation>
-    </message>
-    <message>
-        <source>Failed to copy current Snapmatic picture</source>
-        <translation type="vanished">Не удалось скопировать текущую картинку Snapmatic</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="160"/>
@@ -1294,10 +1073,6 @@ Press 1 for Default View</source>
         <translation>Импортировать файл</translation>
     </message>
     <message>
-        <source>Import exported file</source>
-        <translation type="vanished">Импортировать экспортированный файл</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.ui" line="201"/>
         <source>&amp;Import...</source>
         <translation>&amp;Импортировать...</translation>
@@ -1311,14 +1086,6 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.ui" line="220"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
-    </message>
-    <message>
-        <source>Import copy</source>
-        <translation type="obsolete">Импортировать копию</translation>
-    </message>
-    <message>
-        <source>Close Profile</source>
-        <translation type="obsolete">Закрыть профиль</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="155"/>
@@ -1369,10 +1136,6 @@ Press 1 for Default View</source>
         <translation>Импортировать</translation>
     </message>
     <message>
-        <source>All profile files (SGTA* PGTA*)</source>
-        <translation type="vanished">Все файлы профиля (SGTA* PGTA*)</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.cpp" line="475"/>
         <location filename="../UserInterface.cpp" line="447"/>
         <source>Savegames files (SGTA*)</source>
@@ -1420,10 +1183,6 @@ Press 1 for Default View</source>
         <translation>Не удалось загрузить файл сохранения</translation>
     </message>
     <message>
-        <source>Can&apos;t import %1 because of not valid file format</source>
-        <translation type="vanished">Не получилось импортировать %1 из-за неправильного формата файла</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.cpp" line="503"/>
         <location filename="../ProfileInterface.cpp" line="796"/>
         <location filename="../UserInterface.cpp" line="537"/>
@@ -1434,14 +1193,6 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="69"/>
         <source>Enabled pictures: %1 of %2</source>
         <translation>Включенные картинки: %1 из %2</translation>
-    </message>
-    <message>
-        <source>Importable files (*.g5e *.jpg *.png SGTA* PGTA*)</source>
-        <translation type="vanished">Подходящие для импорта файлы (*.g5e *.jpg *.png SGTA* PGTA*)</translation>
-    </message>
-    <message>
-        <source>All image files (*.jpg *.png)</source>
-        <translation type="vanished">Все изображения (*.jpg *.png)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="473"/>
@@ -1539,10 +1290,6 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1077"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
         <translation>Точно ли хочешь удалить выбранные картинки Snapmatic и файлы сохранений?</translation>
-    </message>
-    <message>
-        <source>Failed at remove the complete selected Snapmatic pictures and/or Savegame files</source>
-        <translation type="vanished">Не удалось удалить полностью выбранные картинки Snapmatic и/или файлы сохранений</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1562"/>
@@ -1655,26 +1402,6 @@ Press 1 for Default View</source>
         <translation>Изменение заголовка</translation>
     </message>
     <message>
-        <source>Failed to import copy of Snapmatic picture because the file not begin with PGTA</source>
-        <translation type="obsolete">Не удалось имортировать копию картинки Snapmatic, т.к. файл не начинается с PGTA</translation>
-    </message>
-    <message>
-        <source>Failed to import copy of Snapmatic picture because the copy failed</source>
-        <translation type="obsolete">Не получилось имортировать копию картинки Snapmatic, потому что не удалось его скопировать</translation>
-    </message>
-    <message>
-        <source>Failed to import copy of Savegame file because the copy failed</source>
-        <translation type="obsolete">Не получилось имортировать копию сохранения, потому что не удалось его скопировать</translation>
-    </message>
-    <message>
-        <source>Failed to import copy of Savegame file because no free Savegame slot left</source>
-        <translation type="obsolete">Не получилось имортировать копию сохранения, потому что не осталось свободных под них слотов</translation>
-    </message>
-    <message>
-        <source>Export selected</source>
-        <translation type="vanished">Экспортировать выделенное</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.cpp" line="969"/>
         <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
         <translation>%1Эскпортировать картинки Snapmatic%2&lt;br&gt;&lt;br&gt;Картинки JPG можно открыть любым просмотрщиком&lt;br&gt;Картинки формата GTA Snapmatic можно снова импортировать в игру&lt;br&gt;&lt;br&gt;Экспортировать как:</translation>
@@ -1687,10 +1414,6 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1069"/>
         <source>Export selected...</source>
         <translation>Экпортировать выделенное...</translation>
-    </message>
-    <message>
-        <source>Initializing export...</source>
-        <translation type="vanished">Подготавливаю эскпорт...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1049"/>
@@ -1762,14 +1485,6 @@ Press 1 for Default View</source>
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <source>Copy</source>
-        <translation type="obsolete">Копировать</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
-    </message>
-    <message>
         <location filename="../SavegameDialog.cpp" line="80"/>
         <source>Failed at %1</source>
         <translation>Ошибка при %1</translation>
@@ -1781,10 +1496,6 @@ Press 1 for Default View</source>
         <location filename="../SavegameWidget.ui" line="14"/>
         <source>Savegame Widget</source>
         <translation>Виджет сохранений</translation>
-    </message>
-    <message>
-        <source>The Third Way (100%) - 00/00/00 00:00:00</source>
-        <translation type="vanished">Третий путь (100%) - 00/00/00 00:00:00</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="83"/>
@@ -1801,10 +1512,6 @@ Press 1 for Default View</source>
         <location filename="../SavegameCopy.cpp" line="53"/>
         <source>Export</source>
         <translation>Экспорт</translation>
-    </message>
-    <message>
-        <source>Copy</source>
-        <translation type="obsolete">Копировать</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="121"/>
@@ -1941,18 +1648,6 @@ Press 1 for Default View</source>
         <location filename="../SavegameCopy.cpp" line="93"/>
         <source>Failed to export current Savegame</source>
         <translation>Не удалось экспортировать текущее сохранение</translation>
-    </message>
-    <message>
-        <source>Overwrite %1 with current savegame?</source>
-        <translation type="obsolete">Перезаписать %1 текущим сохранением?</translation>
-    </message>
-    <message>
-        <source>Failed to overwrite %1 with current savegame</source>
-        <translation type="obsolete">Не удалось перезаписать %1 текущим сохранением</translation>
-    </message>
-    <message>
-        <source>Failed to copy current savegame</source>
-        <translation type="obsolete">Не удалось скопировать текущее сохранение</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="99"/>
@@ -2282,21 +1977,9 @@ Press 1 for Default View</source>
         <translation>Ск&amp;рыть в игре</translation>
     </message>
     <message>
-        <source>&amp;Edit Properties...</source>
-        <translation type="vanished">&amp;Изменить свойства...</translation>
-    </message>
-    <message>
         <location filename="../ProfileInterface.cpp" line="1261"/>
         <source>&amp;Export</source>
         <translation>&amp;Экспорт</translation>
-    </message>
-    <message>
-        <source>Export as &amp;JPG picture...</source>
-        <translation type="vanished">Эксп&amp;ортировать как картинку JPG...</translation>
-    </message>
-    <message>
-        <source>Export as &amp;GTA Snapmatic...</source>
-        <translation type="vanished">Экс&amp;портировать как GTA Snapmatic...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1264"/>
@@ -2365,10 +2048,6 @@ Press 1 for Default View</source>
 <context>
     <name>UserInterface</name>
     <message>
-        <source>gta5sync - %1</source>
-        <translation type="vanished">gta5sync - %1</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="74"/>
         <source>Select profile</source>
         <translation>Выбор профиля</translation>
@@ -2425,26 +2104,14 @@ Press 1 for Default View</source>
         <translation>Закрыть п&amp;рофиль</translation>
     </message>
     <message>
-        <source>Ctrl+End</source>
-        <translation type="vanished">Ctrl+End</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="263"/>
         <source>&amp;Settings</source>
         <translation>&amp;Настройки</translation>
     </message>
     <message>
-        <source>Ctrl+Del</source>
-        <translation type="vanished">Ctrl+Del</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="303"/>
         <source>&amp;Import files...</source>
         <translation>&amp;Импортировать файлы...</translation>
-    </message>
-    <message>
-        <source>Ctrl+I</source>
-        <translation type="vanished">Ctrl+I</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
@@ -2453,26 +2120,14 @@ Press 1 for Default View</source>
         <translation>Выбрать &amp;папку GTA V...</translation>
     </message>
     <message>
-        <source>Ctrl+G</source>
-        <translation type="vanished">Ctrl+G</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="330"/>
         <source>Show In-gam&amp;e</source>
         <translation>Показывать в и&amp;гре</translation>
     </message>
     <message>
-        <source>Shift+E</source>
-        <translation type="vanished">Shift+E</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="338"/>
         <source>Hi&amp;de In-game</source>
         <translation>Скры&amp;ть в игре</translation>
-    </message>
-    <message>
-        <source>Shift+D</source>
-        <translation type="vanished">Shift+D</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="370"/>
@@ -2530,53 +2185,9 @@ Press 1 for Default View</source>
         <translation>&amp;Удалить выделенное</translation>
     </message>
     <message>
-        <source>File</source>
-        <translation type="obsolete">Файл</translation>
-    </message>
-    <message>
-        <source>Help</source>
-        <translation type="obsolete">Помощь</translation>
-    </message>
-    <message>
-        <source>About gta5sync</source>
-        <translation type="obsolete">О программе gta5sync</translation>
-    </message>
-    <message>
-        <source>Ctrl+A</source>
-        <translation type="vanished">Ctrl+A</translation>
-    </message>
-    <message>
-        <source>Close</source>
-        <translation type="obsolete">Закрыть</translation>
-    </message>
-    <message>
-        <source>Ctrl+Q</source>
-        <translation type="vanished">Ctrl+Q</translation>
-    </message>
-    <message>
-        <source>Ctrl+P</source>
-        <translation type="vanished">Ctrl+P</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="311"/>
         <source>&amp;Open File...</source>
         <translation>&amp;Открыть файл...</translation>
-    </message>
-    <message>
-        <source>Ctrl+O</source>
-        <translation type="vanished">Ctrl+O</translation>
-    </message>
-    <message>
-        <source>Ctrl+S</source>
-        <translation type="vanished">Ctrl+S</translation>
-    </message>
-    <message>
-        <source>Ctrl+E</source>
-        <translation type="vanished">Ctrl+E</translation>
-    </message>
-    <message>
-        <source>Ctrl+D</source>
-        <translation type="vanished">Ctrl+D</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="63"/>
@@ -2625,17 +2236,9 @@ Press 1 for Default View</source>
         <translation>Не удалось открыть %1 из-за неверного формата файла</translation>
     </message>
     <message>
-        <source>gta5sync</source>
-        <translation type="obsolete">gta5sync</translation>
-    </message>
-    <message>
         <location filename="../UserInterface.ui" line="134"/>
         <source>&amp;Reload</source>
         <translation>Пере&amp;загрузить</translation>
-    </message>
-    <message>
-        <source>GTA V Folder not found!</source>
-        <translation type="obsolete">Папка GTA V не была найдена!</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1177"/>
