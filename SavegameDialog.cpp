@@ -50,6 +50,10 @@ SavegameDialog::SavegameDialog(QWidget *parent) :
     {
         ui->cmdCopy->setIcon(QIcon::fromTheme("document-export"));
     }
+    else if (QIcon::hasThemeIcon("document-save"))
+    {
+        ui->cmdCopy->setIcon(QIcon::fromTheme("document-save"));
+    }
 
     refreshWindowSize();
 }

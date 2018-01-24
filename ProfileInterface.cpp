@@ -94,6 +94,10 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     {
         ui->cmdImport->setIcon(QIcon::fromTheme("document-import"));
     }
+    else if (QIcon::hasThemeIcon("document-open"))
+    {
+        ui->cmdImport->setIcon(QIcon::fromTheme("document-open"));
+    }
 
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();

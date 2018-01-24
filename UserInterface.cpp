@@ -136,11 +136,19 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     {
         ui->action_Import->setIcon(QIcon::fromTheme("document-import"));
     }
+    else if (QIcon::hasThemeIcon("document-open"))
+    {
+        ui->action_Import->setIcon(QIcon::fromTheme("document-open"));
+    }
 
     // Set Icon for Profile Export Menu Item
     if (QIcon::hasThemeIcon("document-export"))
     {
         ui->actionExport_selected->setIcon(QIcon::fromTheme("document-export"));
+    }
+    else if (QIcon::hasThemeIcon("document-save"))
+    {
+        ui->actionExport_selected->setIcon(QIcon::fromTheme("document-save"));
     }
 
     // Set Icon for Profile Remove Menu Item
