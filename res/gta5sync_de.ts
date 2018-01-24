@@ -122,7 +122,7 @@ Grand Theft Auto V Snapmatic Bilder und Spielständen</translation>
     <message>
         <location filename="../ExportDialog.ui" line="14"/>
         <source>Dialog</source>
-        <translation></translation>
+        <translation>Dialog</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="51"/>
