@@ -211,7 +211,7 @@ contains(DEFINES, GTA5SYNC_QCONF){
     !contains(DEFINES, GTA5SYNC_QCONF_IN){
         RESOURCES -= res/tr_g5p.qrc
         langfiles.path = $$GTA5SYNC_PREFIX/share/gta5view/translations
-        langfiles.files = $$PWD/res/gta5sync_en_US.qm $$PWD/res/gta5sync_de.qm $$PWD/res/gta5sync_fr.qm $$PWD/res/gta5sync_ru.qm $$PWD/res/qtbase_en_GB.qm
+        langfiles.files = $$PWD/res/gta5sync_en_US.qm $$PWD/res/gta5sync_de.qm $$PWD/res/gta5sync_fr.qm $$PWD/res/gta5sync_ru.qm $$PWD/res/qtbase_en_GB.qm $$PWD/res/qtbase_zh_TW.qm
         INSTALLS += langfiles
     }
 }
