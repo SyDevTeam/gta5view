@@ -3,5 +3,6 @@
         <file>qt_de.qm</file>
         <file>qt_fr.qm</file>
         <file>qt_ru.qm</file>
+        <file>qt_zh_TW.qm</file>
     </qresource>
 </RCC>

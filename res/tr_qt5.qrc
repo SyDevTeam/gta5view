@@ -4,5 +4,6 @@
         <file>qtbase_de.qm</file>
         <file>qtbase_fr.qm</file>
         <file>qtbase_ru.qm</file>
+        <file>qtbase_zh_TW.qm</file>
     </qresource>
 </RCC>

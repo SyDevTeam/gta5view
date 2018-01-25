@@ -4,5 +4,6 @@
         <file>gta5sync_de.qm</file>
         <file>gta5sync_fr.qm</file>
         <file>gta5sync_ru.qm</file>
+        <file>gta5sync_zh_TW.qm</file>
     </qresource>
 </RCC>

@@ -130,6 +130,7 @@ TRANSLATIONS += \
     res/gta5sync_de.ts \
     res/gta5sync_fr.ts \
     res/gta5sync_ru.ts \
+    res/gta5sync_zh_TW.ts \
     lang/gta5sync_no.ts
 
 RESOURCES += \
@@ -141,6 +142,7 @@ DISTFILES += res/app.rc \
     res/gta5sync_de.ts \
     res/gta5sync_fr.ts \
     res/gta5sync_ru.ts \
+    res/gta5sync_zh_TW.ts \
     res/gta5view.exe.manifest \
     res/gta5view.png \
     lang/gta5sync_no.ts \
