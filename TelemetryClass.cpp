@@ -18,6 +18,7 @@
 
 #include "TelemetryClassAuthenticator.h"
 #include "TelemetryClass.h"
+#include "StandardPaths.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QNetworkAccessManager>
@@ -57,7 +58,40 @@ void TelemetryClass::init()
     telemetryEnabled = true; // Always enable Telemetry for Developer Versions
     telemetryStateForced = true;
 #endif
-    telemetryClientID = settings.value("ClientID", QString()).toString();
+    QString telemetryLegacyClientID = settings.value("ClientID", QString()).toString();
+    if (telemetryLegacyClientID.isEmpty())
+    {
+        telemetryClientID = QString::fromUtf8(QByteArray::fromBase64(settings.value("Identification", QByteArray()).toByteArray()));
+    }
+    else
+    {
+        QDir dir;
+        dir.mkpath(StandardPaths::dataLocation());
+        dir.setPath(StandardPaths::dataLocation());
+        QString dirPath = dir.absolutePath();
+        QString portLoc = dirPath % "/.ported";
+        bool telemetryPortedKey = settings.value("IsPorted", false).toBool();
+        bool telemetryPortedFile = QFile::exists(portLoc);
+        if (!telemetryPortedKey && !telemetryPortedFile)
+        {
+            QFile portFile(portLoc);
+            if (portFile.open(QFile::WriteOnly))
+            {
+                portFile.write("\n");
+                portFile.flush();
+            }
+            portFile.close();
+            telemetryClientID = telemetryLegacyClientID;
+            settings.setValue("Identification", telemetryLegacyClientID.toUtf8().toBase64());
+            settings.setValue("IsPorted", true);
+            settings.setValue("ClientID", QString());
+            settings.remove("ClientID");
+        }
+        else
+        {
+            telemetryClientID = QString();
+        }
+    }
     telemetryPushAppConf = settings.value("PushAppConf", false).toBool();
     settings.endGroup();
 }
@@ -75,6 +109,12 @@ bool TelemetryClass::canPush()
 
 bool TelemetryClass::canRegister()
 {
+    QDir dir;
+    dir.mkpath(StandardPaths::dataLocation());
+    dir.setPath(StandardPaths::dataLocation());
+    QString dirPath = dir.absolutePath();
+    QString regLoc = dirPath % "/.reg";
+    if (QFile::exists(regLoc)) return false;
     if (!isEnabled() || isRegistered() || !TelemetryClassAuthenticator::haveRegURL()) return false;
     return true;
 }
@@ -483,12 +523,24 @@ void TelemetryClass::registerFinished(QNetworkReply *reply)
         QByteArray readedData = reply->readLine();
         if (QString::fromUtf8(readedData).trimmed() == QString("Registration success!") && reply->canReadLine())
         {
+            QDir dir;
+            dir.mkpath(StandardPaths::dataLocation());
+            dir.setPath(StandardPaths::dataLocation());
+            QString dirPath = dir.absolutePath();
+            QString regLoc = dirPath % "/.reg";
             readedData = reply->readLine();
             telemetryClientID = QString::fromUtf8(readedData).trimmed();
             QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             settings.beginGroup("Telemetry");
-            settings.setValue("ClientID", telemetryClientID);
+            settings.setValue("Identification", telemetryClientID.toUtf8().toBase64());
             settings.endGroup();
+            QFile regFile(regLoc);
+            if (regFile.open(QFile::WriteOnly))
+            {
+                regFile.write("\n");
+                regFile.flush();
+            }
+            regFile.close();
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "Telemetry" << QString("Registration success!");
 #endif
