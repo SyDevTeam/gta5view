@@ -34,7 +34,7 @@ Running with Qt %6&lt;br/&gt;
     <message>
         <location filename="../AboutDialog.ui" line="78"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="41"/>
@@ -46,7 +46,7 @@ Running with Qt %6&lt;br/&gt;
         <location filename="../AboutDialog.cpp" line="43"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
-        <translation>Ray,http://steamcommunity.com/profiles/76561198282701714</translation>
+        <translation>Ray,https://steamcommunity.com/profiles/76561198282701714/</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="67"/>
@@ -130,12 +130,12 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ExportDialog.ui" line="51"/>
         <source>&amp;JPEG/PNG format</source>
-        <translation>JPEG/PNG 格式 (&amp;J)</translation>
+        <translation>JPEG/PNG 格式(&amp;J)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="58"/>
         <source>GTA &amp;Snapmatic format</source>
-        <translation>GTA Snapmatic 格式 (&amp;S)</translation>
+        <translation>GTA Snapmatic 格式(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="68"/>
@@ -145,17 +145,17 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ExportDialog.ui" line="74"/>
         <source>Default &amp;Size</source>
-        <translation>預設 (&amp;S)</translation>
+        <translation>預設(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="81"/>
         <source>&amp;Desktop Size</source>
-        <translation>桌面尺寸 (&amp;D)</translation>
+        <translation>桌面尺寸(&amp;D)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="88"/>
         <source>&amp;Custom Size</source>
-        <translation>自訂尺寸 (&amp;C)</translation>
+        <translation>自訂尺寸(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="100"/>
@@ -170,12 +170,12 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ExportDialog.ui" line="198"/>
         <source>&amp;Export</source>
-        <translation>匯出 (&amp;E)</translation>
+        <translation>匯出(&amp;E)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="211"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
 </context>
 <context>
@@ -199,17 +199,17 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImageEditorDialog.ui" line="90"/>
         <source>&amp;Import...</source>
-        <translation>匯入 (&amp;I)...</translation>
+        <translation>匯入(&amp;I)...</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="110"/>
         <source>&amp;Overwrite</source>
-        <translation>修改 (&amp;O)</translation>
+        <translation>修改(&amp;O)</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="117"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="193"/>
@@ -300,7 +300,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="301"/>
         <source>&amp;OK</source>
-        <translation>OK (&amp;O)</translation>
+        <translation>確定(&amp;O)</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="314"/>
@@ -310,7 +310,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="317"/>
         <source>&amp;Cancel</source>
-        <translation>取消 (&amp;C)</translation>
+        <translation>取消(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="171"/>
@@ -364,12 +364,12 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../JsonEditorDialog.ui" line="116"/>
         <source>&amp;Save</source>
-        <translation>保存 (&amp;S)</translation>
+        <translation>保存(&amp;S)</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="129"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="172"/>
@@ -387,27 +387,27 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../MapLocationDialog.ui" line="138"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="164"/>
         <source>&amp;Apply</source>
-        <translation>套用 (&amp;A)</translation>
+        <translation>套用(&amp;A)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="177"/>
         <source>&amp;Revert</source>
-        <translation>還原 (&amp;R)</translation>
+        <translation>還原(&amp;R)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="190"/>
         <source>&amp;Set</source>
-        <translation>設置 (&amp;S)</translation>
+        <translation>設置(&amp;S)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="203"/>
         <source>&amp;Done</source>
-        <translation>完成 (&amp;D)</translation>
+        <translation>完成(&amp;D)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.cpp" line="91"/>
@@ -602,7 +602,7 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="492"/>
         <source>&amp;Copy</source>
-        <translation>複製 (&amp;C)</translation>
+        <translation>複製(&amp;C)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="505"/>
@@ -618,7 +618,7 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="536"/>
         <source>&amp;Send</source>
-        <translation>送出 (&amp;S)</translation>
+        <translation>送出(&amp;S)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="565"/>
@@ -687,7 +687,7 @@ Y: %2</translation>
         <location filename="../OptionsDialog.ui" line="735"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
-        <translation>OK (&amp;O)</translation>
+        <translation>確定(&amp;O)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="748"/>
@@ -698,7 +698,7 @@ Y: %2</translation>
         <location filename="../OptionsDialog.ui" line="751"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
-        <translation>取消 (&amp;C)</translation>
+        <translation>取消(&amp;C)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="156"/>
@@ -790,7 +790,7 @@ Y: %2</translation>
     <message>
         <location filename="../PictureDialog.ui" line="180"/>
         <source>&amp;Manage</source>
-        <translation>管理 (&amp;M)</translation>
+        <translation>管理(&amp;M)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="199"/>
@@ -800,43 +800,43 @@ Y: %2</translation>
     <message>
         <location filename="../PictureDialog.ui" line="202"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="152"/>
         <location filename="../ProfileInterface.cpp" line="1266"/>
         <source>Export as &amp;Picture...</source>
-        <translation>匯出成圖片 (&amp;P)...</translation>
+        <translation>匯出成圖片(&amp;P)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="153"/>
         <location filename="../ProfileInterface.cpp" line="1267"/>
         <source>Export as &amp;Snapmatic...</source>
-        <translation>匯出成 Snapmatic (&amp;S)...</translation>
+        <translation>匯出成 Snapmatic(&amp;S)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="155"/>
         <location filename="../ProfileInterface.cpp" line="1260"/>
         <source>&amp;Edit Properties...</source>
-        <translation>編輯屬性 (&amp;E) ...</translation>
+        <translation>編輯屬性(&amp;E) ...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="156"/>
         <location filename="../ProfileInterface.cpp" line="1261"/>
         <source>&amp;Overwrite Image...</source>
-        <translation>修改圖片 (&amp;O)...</translation>
+        <translation>修改圖片(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="158"/>
         <location filename="../ProfileInterface.cpp" line="1263"/>
         <source>Open &amp;Map Viewer...</source>
-        <translation>開啟地圖檢視器 (&amp;M)...</translation>
+        <translation>開啟地圖檢視器(&amp;M)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="160"/>
         <location filename="../ProfileInterface.cpp" line="1264"/>
         <source>Open &amp;JSON Editor...</source>
-        <translation>開啟 JSON 編輯器 (&amp;J)...</translation>
+        <translation>開啟 JSON 編輯器(&amp;J)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="557"/>
@@ -1008,12 +1008,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../PlayerListDialog.ui" line="144"/>
         <source>&amp;Apply</source>
-        <translation>套用 (&amp;A)</translation>
+        <translation>套用(&amp;A)</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.ui" line="157"/>
         <source>&amp;Cancel</source>
-        <translation>取消 (&amp;C)</translation>
+        <translation>取消(&amp;C)</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.cpp" line="221"/>
@@ -1067,7 +1067,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.ui" line="201"/>
         <source>&amp;Import...</source>
-        <translation>匯入 (&amp;I)...</translation>
+        <translation>匯入(&amp;I)...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="217"/>
@@ -1077,7 +1077,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.ui" line="220"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ExportThread.cpp" line="97"/>
@@ -1464,12 +1464,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SavegameDialog.ui" line="70"/>
         <source>&amp;Export</source>
-        <translation>匯出 (&amp;E)</translation>
+        <translation>匯出(&amp;E)</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="83"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.cpp" line="84"/>
@@ -1487,7 +1487,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SavegameWidget.ui" line="67"/>
         <source>SAVE %3 - %1&lt;br&gt;%2</source>
-        <translation>存檔 %3 - %1 &lt;br&gt;%2</translation>
+        <translation>存檔 %3 - %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="83"/>
@@ -1523,37 +1523,37 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="1302"/>
         <source>&amp;View</source>
-        <translation>檢視 (&amp;V)</translation>
+        <translation>檢視(&amp;V)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1303"/>
         <source>&amp;Export</source>
-        <translation>匯出 (&amp;E)</translation>
+        <translation>匯出(&amp;E)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1304"/>
         <source>&amp;Remove</source>
-        <translation>移除 (&amp;R)</translation>
+        <translation>移除(&amp;R)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1306"/>
         <source>&amp;Select</source>
-        <translation>選擇 (&amp;S)</translation>
+        <translation>選擇(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1307"/>
         <source>&amp;Deselect</source>
-        <translation>取消選擇 (&amp;D)</translation>
+        <translation>取消選擇(&amp;D)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1310"/>
         <source>Select &amp;All</source>
-        <translation>選擇全部 (&amp;A)</translation>
+        <translation>選擇全部(&amp;A)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1314"/>
         <source>&amp;Deselect All</source>
-        <translation>取消選擇全部 (&amp;D)</translation>
+        <translation>取消選擇全部(&amp;D)</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="56"/>
@@ -1603,14 +1603,16 @@ Press 1 for Default View</source>
         <location filename="../SavegameWidget.cpp" line="117"/>
         <source>AUTOSAVE - %1
 %2</source>
-        <translation>自動存檔 - %1 %2</translation>
+        <translation>自動存檔 - %1
+%2</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="61"/>
         <location filename="../SavegameWidget.cpp" line="118"/>
         <source>SAVE %3 - %1
 %2</source>
-        <translation>存檔 %3 - %1 %2</translation>
+        <translation>存檔 %3 - %1
+%2</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.cpp" line="89"/>
@@ -1713,12 +1715,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticEditor.ui" line="240"/>
         <source>&amp;Apply</source>
-        <translation>套用 (&amp;A)</translation>
+        <translation>套用(&amp;A)</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="253"/>
         <source>&amp;Cancel</source>
-        <translation>取消 (&amp;C)</translation>
+        <translation>取消(&amp;C)</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="109"/>
@@ -1939,52 +1941,52 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="1251"/>
         <source>Edi&amp;t</source>
-        <translation>編輯 (&amp;E)</translation>
+        <translation>編輯(&amp;E)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1254"/>
         <source>Show &amp;In-game</source>
-        <translation>在遊戲中顯示 (&amp;I)</translation>
+        <translation>在遊戲中顯示(&amp;I)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1258"/>
         <source>Hide &amp;In-game</source>
-        <translation>在遊戲中隱藏 (&amp;I)</translation>
+        <translation>在遊戲中隱藏(&amp;I)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1265"/>
         <source>&amp;Export</source>
-        <translation>匯出 (&amp;E)</translation>
+        <translation>匯出(&amp;E)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1268"/>
         <source>&amp;View</source>
-        <translation>檢視 (&amp;V)</translation>
+        <translation>檢視(&amp;V)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1271"/>
         <source>&amp;Remove</source>
-        <translation>移除 (&amp;R)</translation>
+        <translation>移除(&amp;R)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1273"/>
         <source>&amp;Select</source>
-        <translation>選擇 (&amp;S)</translation>
+        <translation>選擇(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1274"/>
         <source>&amp;Deselect</source>
-        <translation>取消選擇 (&amp;D)</translation>
+        <translation>取消選擇(&amp;D)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1277"/>
         <source>Select &amp;All</source>
-        <translation>選擇全部 (&amp;A)</translation>
+        <translation>選擇全部(&amp;A)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1281"/>
         <source>&amp;Deselect All</source>
-        <translation>取消選擇全部 (&amp;D)</translation>
+        <translation>取消選擇全部(&amp;D)</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="157"/>
@@ -2027,7 +2029,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../main.cpp" line="178"/>
         <source>&amp;OK</source>
-        <translation>OK (&amp;O)</translation>
+        <translation>OK(&amp;O)</translation>
     </message>
 </context>
 <context>
@@ -2056,7 +2058,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="134"/>
         <source>&amp;Reload</source>
-        <translation>重新載入 (&amp;R)</translation>
+        <translation>重新載入(&amp;R)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="150"/>
@@ -2067,49 +2069,49 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="153"/>
         <source>&amp;Close</source>
-        <translation>關閉 (&amp;C)</translation>
+        <translation>關閉(&amp;C)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="179"/>
         <source>&amp;File</source>
-        <translation>檔案 (&amp;F)</translation>
+        <translation>檔案(&amp;F)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="189"/>
         <source>&amp;Help</source>
-        <translation>幫助 (&amp;H)</translation>
+        <translation>幫助(&amp;H)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="195"/>
         <source>&amp;Edit</source>
-        <translation>編輯 (&amp;E)</translation>
+        <translation>編輯(&amp;E)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="201"/>
         <source>&amp;Profile</source>
-        <translation>設定檔 (&amp;P)</translation>
+        <translation>設定檔(&amp;P)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="205"/>
         <source>&amp;Selection visibility</source>
-        <translation>選擇可見度 (&amp;S)</translation>
+        <translation>選擇可見度(&amp;S)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="212"/>
         <source>Selection &amp;mass tools</source>
-        <translation>工具 (&amp;M)</translation>
+        <translation>工具(&amp;M)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
         <location filename="../UserInterface.cpp" line="59"/>
         <location filename="../UserInterface.cpp" line="631"/>
         <source>&amp;About %1</source>
-        <translation>關於 %1 (&amp;A)</translation>
+        <translation>關於 %1(&amp;A)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="244"/>
         <source>&amp;Exit</source>
-        <translation>離開 (&amp;E)</translation>
+        <translation>離開(&amp;E)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="247"/>
@@ -2119,48 +2121,48 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="255"/>
         <source>Close &amp;Profile</source>
-        <translation>關閉設定檔 (&amp;P)</translation>
+        <translation>關閉設定檔(&amp;P)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="263"/>
         <source>&amp;Settings</source>
-        <translation>設定 (&amp;S)</translation>
+        <translation>設定(&amp;S)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="271"/>
         <source>Select &amp;All</source>
-        <translation>選擇全部 (&amp;A)</translation>
+        <translation>選擇全部(&amp;A)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="279"/>
         <source>&amp;Deselect All</source>
-        <translation>取消選擇全部 (&amp;D)</translation>
+        <translation>取消選擇全部(&amp;D)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="287"/>
         <source>&amp;Export selected...</source>
-        <translation>匯出所選 (&amp;E)...</translation>
+        <translation>匯出所選(&amp;E)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="295"/>
         <source>&amp;Remove selected</source>
-        <translation>移除所選 (&amp;R)</translation>
+        <translation>移除所選(&amp;R)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="303"/>
         <source>&amp;Import files...</source>
-        <translation>匯入檔案 (&amp;I)...</translation>
+        <translation>匯入檔案(&amp;I)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="311"/>
         <source>&amp;Open File...</source>
-        <translation>開啟檔案 (&amp;O)...</translation>
+        <translation>開啟檔案(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
         <location filename="../UserInterface.cpp" line="241"/>
         <source>Select &amp;GTA V Folder...</source>
-        <translation>選擇 GTA V 資料夾 (&amp;G)...</translation>
+        <translation>選擇 GTA V 資料夾(&amp;G)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
@@ -2173,32 +2175,32 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="330"/>
         <source>Show In-gam&amp;e</source>
-        <translation>在遊戲中顯示 (&amp;E)</translation>
+        <translation>在遊戲中顯示(&amp;E)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="338"/>
         <source>Hi&amp;de In-game</source>
-        <translation>在遊戲中隱藏 (&amp;D)</translation>
+        <translation>在遊戲中隱藏(&amp;D)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="346"/>
         <source>Change &amp;Title...</source>
-        <translation>更改標題 (&amp;T)...</translation>
+        <translation>更改標題(&amp;T)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="354"/>
         <source>Change &amp;Crew...</source>
-        <translation>更改幫會 (&amp;C)...</translation>
+        <translation>更改幫會(&amp;C)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="362"/>
         <source>&amp;Qualify as Avatar</source>
-        <translation>符合大頭貼資格 (&amp;Q)</translation>
+        <translation>符合大頭貼資格(&amp;Q)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="370"/>
         <source>Change &amp;Players...</source>
-        <translation>更改玩家 (&amp;P)...</translation>
+        <translation>更改玩家(&amp;P)...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1181"/>
