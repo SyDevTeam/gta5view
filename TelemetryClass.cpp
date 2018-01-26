@@ -59,7 +59,7 @@ void TelemetryClass::init()
     telemetryStateForced = true;
 #endif
     QString telemetryLegacyClientID = settings.value("ClientID", QString()).toString();
-    if (telemetryLegacyClientID.isEmpty())
+    if (telemetryLegacyClientID.isEmpty() || telemetryLegacyClientID == "v2+")
     {
         telemetryClientID = QString::fromUtf8(QByteArray::fromBase64(settings.value("Identification", QByteArray()).toByteArray()));
     }
@@ -84,8 +84,7 @@ void TelemetryClass::init()
             telemetryClientID = telemetryLegacyClientID;
             settings.setValue("Identification", telemetryLegacyClientID.toUtf8().toBase64());
             settings.setValue("IsPorted", true);
-            settings.setValue("ClientID", QString());
-            settings.remove("ClientID");
+            settings.setValue("ClientID", "v2+");
         }
         else
         {
