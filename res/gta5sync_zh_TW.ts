@@ -71,37 +71,37 @@ Pictures and Savegames</source>
         <translation>%1 使用 &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt; 授權條款發布</translation>
     </message>
     <message>
-        <location filename="../config.h" line="56"/>
+        <location filename="../config.h" line="57"/>
         <source>Release</source>
         <translation>正式版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="62"/>
+        <location filename="../config.h" line="63"/>
         <source>Release Candidate</source>
         <translation>最終發布版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="68"/>
+        <location filename="../config.h" line="69"/>
         <source>Daily Build</source>
         <translation>每日建置版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="74"/>
+        <location filename="../config.h" line="75"/>
         <source>Developer</source>
         <translation>開發版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="80"/>
+        <location filename="../config.h" line="81"/>
         <source>Beta</source>
         <translation>Beta 版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="86"/>
+        <location filename="../config.h" line="87"/>
         <source>Alpha</source>
         <translation>Alpha 版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="91"/>
+        <location filename="../config.h" line="92"/>
         <source>Custom</source>
         <translation>自訂</translation>
     </message>
@@ -767,9 +767,13 @@ Y: %2</translation>
 <context>
     <name>PictureDialog</name>
     <message>
-        <location filename="../PictureDialog.ui" line="14"/>
         <source>%1 - Snapmatic Picture Viewer</source>
-        <translation>%1 - Snapmatic 圖片檢視器</translation>
+        <translation type="vanished">%1 - Snapmatic 圖片檢視器</translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.ui" line="14"/>
+        <source>Snapmatic Picture Viewer - %1</source>
+        <translation>Snapmatic 圖片檢視器 - %1</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="117"/>
@@ -849,36 +853,36 @@ Arrow Keys - Navigate</source>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="614"/>
-        <location filename="../PictureDialog.cpp" line="641"/>
+        <location filename="../PictureDialog.cpp" line="640"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Snapmatic 圖片檢視器</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="614"/>
-        <location filename="../PictureDialog.cpp" line="641"/>
+        <location filename="../PictureDialog.cpp" line="640"/>
         <source>Failed at %1</source>
         <translation>失敗: %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="640"/>
-        <location filename="../PictureDialog.cpp" line="780"/>
+        <location filename="../PictureDialog.cpp" line="639"/>
+        <location filename="../PictureDialog.cpp" line="779"/>
         <location filename="../SnapmaticEditor.cpp" line="239"/>
         <source>No Players</source>
         <translation>無</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="640"/>
-        <location filename="../PictureDialog.cpp" line="760"/>
+        <location filename="../PictureDialog.cpp" line="639"/>
+        <location filename="../PictureDialog.cpp" line="759"/>
         <source>No Crew</source>
         <translation>無</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="640"/>
+        <location filename="../PictureDialog.cpp" line="639"/>
         <source>Unknown Location</source>
         <translation>未知地點</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="726"/>
+        <location filename="../PictureDialog.cpp" line="725"/>
         <source>Avatar Preview Mode
 Press 1 for Default View</source>
         <translation>大頭貼預覽模式
@@ -1651,7 +1655,7 @@ Press 1 for Default View</source>
         <location filename="../JsonEditorDialog.cpp" line="174"/>
         <location filename="../JsonEditorDialog.cpp" line="180"/>
         <location filename="../JsonEditorDialog.cpp" line="192"/>
-        <location filename="../PictureDialog.cpp" line="903"/>
+        <location filename="../PictureDialog.cpp" line="902"/>
         <location filename="../SnapmaticEditor.cpp" line="326"/>
         <location filename="../SnapmaticWidget.cpp" line="357"/>
         <source>Snapmatic Properties</source>
@@ -1734,7 +1738,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="180"/>
-        <location filename="../PictureDialog.cpp" line="903"/>
+        <location filename="../PictureDialog.cpp" line="902"/>
         <location filename="../SnapmaticEditor.cpp" line="326"/>
         <location filename="../SnapmaticWidget.cpp" line="357"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
@@ -2029,7 +2033,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../main.cpp" line="178"/>
         <source>&amp;OK</source>
-        <translation>OK(&amp;O)</translation>
+        <translation>確定(&amp;O)</translation>
     </message>
 </context>
 <context>

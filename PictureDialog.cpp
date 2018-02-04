@@ -631,8 +631,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         {
             picAreaStr = picArea;
         }
-
-        this->setWindowTitle(windowTitleStr.arg(picture->getPictureStr()));
+        setWindowTitle(windowTitleStr.arg(picTitl));
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
     }
     else
@@ -818,7 +817,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 #else
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::WindowStaysOnTopHint);
 #endif
-        pictureWidget->setWindowTitle(this->windowTitle());
+        pictureWidget->setWindowTitle(windowTitle());
         pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color: black;}");
         pictureWidget->setImage(snapmaticPicture, desktopRect);
         pictureWidget->setModal(true);
@@ -993,6 +992,7 @@ void PictureDialog::updated()
     {
         picAreaStr = picArea;
     }
+    setWindowTitle(windowTitleStr.arg(picTitl));
     ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
 }
 

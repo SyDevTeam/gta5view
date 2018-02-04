@@ -154,7 +154,7 @@ void SnapmaticWidget::on_cmdDelete_clicked()
 
 bool SnapmaticWidget::deletePicture()
 {
-    int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("Are you sure to delete %1 from your Snapmatic pictures?").arg("\""+smpic->getPictureStr()+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+    int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("Are you sure to delete %1 from your Snapmatic pictures?").arg("\""+smpic->getPictureTitle()+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (uchoice == QMessageBox::Yes)
     {
         if (smpic->deletePicFile())
@@ -163,7 +163,7 @@ bool SnapmaticWidget::deletePicture()
         }
         else
         {
-            QMessageBox::warning(this, tr("Delete picture"), tr("Failed at deleting %1 from your Snapmatic pictures").arg("\""+smpic->getPictureStr()+"\""));
+            QMessageBox::warning(this, tr("Delete picture"), tr("Failed at deleting %1 from your Snapmatic pictures").arg("\""+smpic->getPictureTitle()+"\""));
         }
     }
     return false;
@@ -287,7 +287,7 @@ void SnapmaticWidget::makePictureHiddenSlot()
 {
     if (!makePictureHidden())
     {
-        QMessageBox::warning(this, QApplication::translate("UserInterface", "Hide In-game"), QApplication::translate("SnapmaticWidget", "Failed to hide %1 In-game from your Snapmatic pictures").arg("\""+smpic->getPictureStr()+"\""));
+        QMessageBox::warning(this, QApplication::translate("UserInterface", "Hide In-game"), QApplication::translate("SnapmaticWidget", "Failed to hide %1 In-game from your Snapmatic pictures").arg("\""+smpic->getPictureTitle()+"\""));
     }
 }
 
@@ -295,7 +295,7 @@ void SnapmaticWidget::makePictureVisibleSlot()
 {
     if (!makePictureVisible())
     {
-        QMessageBox::warning(this, QApplication::translate("UserInterface", "Show In-game"), QApplication::translate("SnapmaticWidget", "Failed to show %1 In-game from your Snapmatic pictures").arg("\""+smpic->getPictureStr()+"\""));
+        QMessageBox::warning(this, QApplication::translate("UserInterface", "Show In-game"), QApplication::translate("SnapmaticWidget", "Failed to show %1 In-game from your Snapmatic pictures").arg("\""+smpic->getPictureTitle()+"\""));
     }
 }
 
