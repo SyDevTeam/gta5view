@@ -227,9 +227,10 @@ void OptionsDialog::setupLanguageBox()
     }
 
     QString aCurrentAreaLanguage = Translator->getCurrentAreaLanguage();
-    if (QFile::exists(":/global/global." % currentAreaLanguage % ".loc"))
+    if (QFile::exists(":/global/global." % aCurrentAreaLanguage % ".loc"))
     {
-        QFile locFile(":/global/global." % currentAreaLanguage % ".loc");
+        qDebug() << "locFile found";
+        QFile locFile(":/global/global." % aCurrentAreaLanguage % ".loc");
         if (locFile.open(QFile::ReadOnly))
         {
             aCurrentAreaLanguage = QString::fromUtf8(locFile.readLine()).trimmed();
