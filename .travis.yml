@@ -26,6 +26,9 @@ matrix:
     - BUILD_SCRIPT=windows_travis.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
     - EXECUTABLE_ARCH=_x64
+  - env:
+    - BUILD_SCRIPT=wininstall_travis.sh
+    - QT_SELECT=qt5-x86_64-w64-mingw32
   - os: osx
     env: BUILD_SCRIPT=osx_travis.sh
     

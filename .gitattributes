@@ -15,6 +15,7 @@
 
 # Windows development files
 *.rc text eol=crlf
+*.nsi text eol=crlf
 *.exe.manifest text eol=crlf
 
 # Binary files
