@@ -322,6 +322,7 @@ QJsonDocument TelemetryClass::getApplicationSpec()
     jsonObject["Version"] = GTA5SYNC_APPVER;
     jsonObject["BuildDateTime"] = AppEnv::getBuildDateTime();
     jsonObject["BuildType"] = GTA5SYNC_BUILDTYPE;
+    jsonObject["BuildCode"] = AppEnv::getBuildCode();
     jsonObject["QtVersion"] = qVersion();
     jsonDocument.setObject(jsonObject);
     return jsonDocument;

@@ -92,6 +92,10 @@
 #define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Custom")
 #endif
 
+#ifndef GTA5SYNC_BUILDCODE
+#define GTA5SYNC_BUILDCODE "Source"
+#endif
+
 #ifdef GTA5SYNC_QCONF
 #ifndef GTA5SYNC_SHARE
 #define GTA5SYNC_SHARE "RUNDIR:SEPARATOR:..SEPARATOR:share"

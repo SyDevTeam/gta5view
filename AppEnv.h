@@ -29,6 +29,7 @@ public:
 
     // Build Stuff
     static QString getBuildDateTime();
+    static QString getBuildCode();
 
     // Folder Stuff
     static QString getGameFolder(bool *ok = 0);
