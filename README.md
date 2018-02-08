@@ -7,7 +7,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 - Let choose between multiple Social Club accounts as GTA V profiles IDs
 
 #### Screenshots
-<img src="https://i.imgur.com/cOcojyq.png"/>
+<img src="https://i.imgur.com/dQdW3hx.png"/>
 <img src="https://i.imgur.com/SRNQdq6.png"/>
 <img src="https://i.imgur.com/j1Lodiu.png"/>
 
@@ -34,7 +34,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 #### Build gta5view for Windows (Beginner)
 
 Download the <a href="https://www.qt.io/">Qt Framework</a> and install the MinGW version.<br>
-Download the Source Code over GitHub or with your Git client.<br>
+Download the Source Code over <a href="https://github.com/SyDevTeam/gta5view/archive/1.5.x.zip">GitHub</a> or with your Git client.<br>
 Open the gta5view.pro Project file with Qt Creator and build it over Qt Creator.<br>
 
 #### Download Binary Releases
