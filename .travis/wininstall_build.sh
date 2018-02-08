@@ -1,6 +1,7 @@
 #!/bin/bash
 
-apt-get update && apt-get install -y nsis && \
+apt-get update -qq && \
+apt-get install -qq nsis && \
 
 # Creating folders
 cd ${PROJECT_DIR} && \
