@@ -604,7 +604,11 @@ void PictureDialog::renderOverlayPicture()
 
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool _indexed, int _index)
 {
-    if (smpic != nullptr) smpic->disconnect();
+    if (smpic != nullptr)
+    {
+        QObject::disconnect(smpic, SIGNAL(updated()), this, SLOT(updated()));
+        QObject::disconnect(smpic, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
+    }
     snapmaticPicture = QImage();
     indexed = _indexed;
     index = _index;
