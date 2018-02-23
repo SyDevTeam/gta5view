@@ -7,9 +7,9 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 - Let choose between multiple Social Club accounts as GTA V profiles IDs
 
 #### Screenshots
-<img src="https://i.imgur.com/dQdW3hx.png"/>
-<img src="https://i.imgur.com/SRNQdq6.png"/>
-<img src="https://i.imgur.com/j1Lodiu.png"/>
+![Snapmatic Picture Viewer](https://i.imgur.com/dQdW3hx.png)
+![User Interface](https://i.imgur.com/SRNQdq6.png)
+![Snapmatic Properties](https://i.imgur.com/j1Lodiu.png)
 
 #### Build gta5view for Debian/Ubuntu
 
@@ -33,10 +33,10 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 
 #### Build gta5view for Windows (Beginner)
 
-Download the <a href="https://www.qt.io/">Qt Framework</a> and install the MinGW version.<br>
-Download the Source Code over <a href="https://github.com/SyDevTeam/gta5view/archive/1.5.x.zip">GitHub</a> or with your Git client.<br>
-Open the gta5view.pro Project file with Qt Creator and build it over Qt Creator.<br>
+Download the [Qt Framework](https://www.qt.io/) and install the MinGW version.
+Download the Source Code over [GitHub](https://github.com/SyDevTeam/gta5view/archive/1.5.x.zip) or with your Git client.
+Open the gta5view.pro Project file with Qt Creator and build it over Qt Creator.
 
 #### Download Binary Releases
 
-Go to <a href="https://github.com/SyDevTeam/gta5view/releases">gta5view release</a> and download the .exe file for Windows, .deb file for Debian/Ubuntu and .dmg file for OS X.
+Go to [gta5view release](https://github.com/SyDevTeam/gta5view/releases) and download the .exe file for Windows, .deb file for Debian/Ubuntu and .dmg file for OS X.
