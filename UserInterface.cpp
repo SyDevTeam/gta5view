@@ -602,6 +602,10 @@ void UserInterface::on_actionSelect_GTA_Folder_triggered()
     QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
     if (QFileInfo(GTAV_Folder_Temp).exists())
     {
+        if (profileOpen)
+        {
+            closeProfile_p();
+        }
         GTAV_Folder = GTAV_Folder_Temp;
         QDir::setCurrent(GTAV_Folder);
         AppEnv::setGameFolder(GTAV_Folder);
