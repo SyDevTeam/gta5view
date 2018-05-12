@@ -48,7 +48,7 @@ Running with Qt %6&lt;br/&gt;
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation>PROFessoR &apos;AppleSOft&apos;,https://steamcommunity.com/id/AppleSOft
 VenJam1n,https://socialclub.rockstargames.com/member/--VenJam1n--
-twitter,https://twitter.com/_VenJam1n</translation>
+Twitter,https://twitter.com/_VenJam1n</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="67"/>

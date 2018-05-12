@@ -130,6 +130,7 @@ TRANSLATIONS += \
     res/gta5sync_de.ts \
     res/gta5sync_fr.ts \
     res/gta5sync_ru.ts \
+    res/gta5sync_uk.ts \
     res/gta5sync_zh_TW.ts \
     lang/gta5sync_no.ts
 
@@ -142,6 +143,7 @@ DISTFILES += res/app.rc \
     res/gta5sync_de.ts \
     res/gta5sync_fr.ts \
     res/gta5sync_ru.ts \
+    res/gta5sync_uk.ts \
     res/gta5sync_zh_TW.ts \
     res/gta5view.exe.manifest \
     res/gta5view.png \
@@ -211,7 +213,7 @@ contains(DEFINES, GTA5SYNC_QCONF){
     !contains(DEFINES, GTA5SYNC_QCONF_IN){
         RESOURCES -= res/tr_g5p.qrc
         langfiles.path = $$GTA5SYNC_PREFIX/share/gta5view/translations
-        langfiles.files = $$PWD/res/gta5sync_en_US.qm $$PWD/res/gta5sync_de.qm $$PWD/res/gta5sync_fr.qm $$PWD/res/gta5sync_ru.qm $$PWD/res/gta5sync_zh_TW.qm $$PWD/res/qtbase_en_GB.qm $$PWD/res/qtbase_zh_TW.qm
+        langfiles.files = $$PWD/res/gta5sync_en_US.qm $$PWD/res/gta5sync_de.qm $$PWD/res/gta5sync_fr.qm $$PWD/res/gta5sync_ru.qm $$PWD/res/gta5sync_uk.qm $$PWD/res/gta5sync_zh_TW.qm $$PWD/res/qtbase_en_GB.qm $$PWD/res/qtbase_zh_TW.qm
         INSTALLS += langfiles
     }
 }
