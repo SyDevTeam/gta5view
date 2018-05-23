@@ -602,7 +602,7 @@ QString TranslationClass::getCountryCode(QLocale::Country country)
                                                       country);
     if (locales.isEmpty()) return QString();
     QStringList localeStrList = locales.at(0).name().split("_");
-    if (localeStrList.length() <= 2)
+    if (localeStrList.length() >= 2)
     {
         return localeStrList.at(1).toLower();
     }
@@ -615,8 +615,9 @@ QString TranslationClass::getCountryCode(QLocale::Country country)
 QString TranslationClass::getCountryCode(QLocale locale)
 {
     QStringList localeStrList = locale.name().split("_");
-    if (localeStrList.length() <= 2)
+    if (localeStrList.length() >= 2)
     {
+        qDebug() << localeStrList;
         return localeStrList.at(1).toLower();
     }
     else

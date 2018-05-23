@@ -324,14 +324,14 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <location filename="../ProfileInterface.cpp" line="647"/>
         <source>Custom Avatar</source>
         <comment>Custom Avatar Description in SC, don&apos;t use Special Character!</comment>
-        <translation>Custom Avatar</translation>
+        <translation>Avatar personnalisé</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="197"/>
         <location filename="../ProfileInterface.cpp" line="666"/>
         <source>Custom Picture</source>
         <comment>Custom Picture Description in SC, don&apos;t use Special Character!</comment>
-        <translation>Custom Picture</translation>
+        <translation>Image personnalisé</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="265"/>

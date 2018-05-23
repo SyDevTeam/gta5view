@@ -16,7 +16,9 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include <QDesktopServices>
 #include <QStringBuilder>
+#include <QMessageBox>
 #include "AboutDialog.h"
 #include "ui_AboutDialog.h"
 #include "AppEnv.h"
@@ -116,4 +118,17 @@ AboutDialog::AboutDialog(QWidget *parent) :
 AboutDialog::~AboutDialog()
 {
     delete ui;
+}
+
+void AboutDialog::on_labAbout_linkActivated(const QString &link)
+{
+    if (link.left(12) == "g5e://about?")
+    {
+        QStringList aboutStrList = QString(link).remove(0, 12).split(":");
+        QMessageBox::information(this, QString::fromUtf8(QByteArray::fromBase64(aboutStrList.at(0).toUtf8())), QString::fromUtf8(QByteArray::fromBase64(aboutStrList.at(1).toUtf8())));
+    }
+    else
+    {
+        QDesktopServices::openUrl(QUrl(link));
+    }
 }

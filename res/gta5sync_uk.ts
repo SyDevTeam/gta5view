@@ -46,9 +46,7 @@ Running with Qt %6&lt;br/&gt;
         <location filename="../AboutDialog.cpp" line="43"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
-        <translation>PROFessoR &apos;AppleSOft&apos;,https://steamcommunity.com/id/AppleSOft
-VenJam1n,https://socialclub.rockstargames.com/member/--VenJam1n--
-Twitter,https://twitter.com/_VenJam1n</translation>
+        <translation>VenJam1n,g5e://about?VmVuSmFtMW4=:U3RlYW06IDxhIGhyZWY9Imh0dHBzOi8vc3RlYW1jb21tdW5pdHkuY29tL3Byb2ZpbGVzLzc2NTYxMTk3OTg0NjM1ODE2LyI+UFJPRmVzc29SICdBcHBsZVNPZnQnPC9hPjxici8+U29jaWFsIENsdWI6IDxhIGhyZWY9Imh0dHBzOi8vc29jaWFsY2x1Yi5yb2Nrc3RhcmdhbWVzLmNvbS9tZW1iZXIvLS1WZW5KYW0xbi0tLzU2Mzc1NjkiPlZlbkphbTFuPC9hPjxici8+VHdpdHRlcjogPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9fVmVuSmFtMW4iPlZlbkphbTFuPC9hPg==</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="67"/>
@@ -1805,7 +1803,7 @@ Press 1 for Default View</source>
         <location filename="../SnapmaticEditor.cpp" line="263"/>
         <location filename="../SnapmaticEditor.cpp" line="267"/>
         <source>Appropriate: %1</source>
-        <translation>Підходить:%1</translation>
+        <translation>Підходить: %1</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.cpp" line="263"/>
@@ -2114,7 +2112,7 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.cpp" line="59"/>
         <location filename="../UserInterface.cpp" line="635"/>
         <source>&amp;About %1</source>
-        <translation>&amp;Справка %1</translation>
+        <translation>&amp;Про %1</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="244"/>

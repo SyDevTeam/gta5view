@@ -189,7 +189,7 @@ Pictures and Savegames</source>
         <location filename="../ImageEditorDialog.ui" line="59"/>
         <location filename="../ImageEditorDialog.cpp" line="74"/>
         <source>Capacity: %1</source>
-        <translation>大小:%1</translation>
+        <translation>大小: %1</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="66"/>
@@ -848,7 +848,7 @@ Y: %2</translation>
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
         <translation>數字鍵 1 - 大頭接預覽模式
-數字鍵 2 -開關重疊層
+數字鍵 2 - 開關重疊層
 方向鍵 - 導覽</translation>
     </message>
     <message>

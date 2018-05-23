@@ -34,6 +34,7 @@ public:
     ~AboutDialog();
 
 private slots:
+    void on_labAbout_linkActivated(const QString &link);
 
 private:
     Ui::AboutDialog *ui;
