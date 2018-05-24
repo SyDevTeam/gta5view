@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -16,6 +16,7 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#include "SnapmaticPicture.h"
 #include "StringParser.h"
 #include "SavegameData.h"
 #include <QStringBuilder>
@@ -42,7 +43,7 @@ bool SavegameData::readingSavegame()
     QFile *saveFile = new QFile(savegameFileName);
     if (!saveFile->open(QFile::ReadOnly))
     {
-        lastStep = "1;/1,OpenFile," % StringParser::convertDrawStringForLog(savegameFileName);
+        lastStep = "1;/1,OpenFile," % SnapmaticPicture::convertDrawStringForLog(savegameFileName);
         saveFile->deleteLater();
         delete saveFile;
         return false;
@@ -51,7 +52,7 @@ bool SavegameData::readingSavegame()
     // Reading Savegame Header
     if (!saveFile->isReadable())
     {
-        lastStep = "2;/3,ReadingFile," % StringParser::convertDrawStringForLog(savegameFileName) % ",1,NOHEADER";
+        lastStep = "2;/3,ReadingFile," % SnapmaticPicture::convertDrawStringForLog(savegameFileName) % ",1,NOHEADER";
         saveFile->close();
         saveFile->deleteLater();
         delete saveFile;
@@ -78,7 +79,7 @@ QString SavegameData::getSavegameDataString(const QByteArray &savegameHeader)
     QList<QByteArray> savegameBytesList = savegameBytes.split(char(0x01));
     savegameBytes = savegameBytesList.at(1);
     savegameBytesList.clear();
-    return StringParser::parseTitleString(savegameBytes, savegameBytes.length());
+    return SnapmaticPicture::parseTitleString(savegameBytes, savegameBytes.length());
 }
 
 bool SavegameData::readingSavegameFromFile(const QString &fileName)

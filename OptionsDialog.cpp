@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -107,10 +107,6 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
     resize(435 * screenRatio, 405 * screenRatio);
-#endif
-
-#ifdef GTA5SYNC_DISABLED
-    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabSync));
 #endif
 
     this->setWindowTitle(windowTitle().arg(GTA5SYNC_APPSTR));

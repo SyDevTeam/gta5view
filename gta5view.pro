@@ -154,9 +154,8 @@ INCLUDEPATH += ./anpro ./tmext ./uimod
 
 # GTA5SYNC/GTA5VIEW ONLY
 
-DEFINES += GTA5SYNC_DISABLED
 DEFINES += GTA5SYNC_PROJECT # Enable exclusive gta5sync/gta5view functions
-DEFINES += GTA5SYNC_CSDF # Not assisting at proper usage of SnapmaticPicture class
+DEFINES += GTA5SYNC_NOASSIST # Not assisting at proper usage of SnapmaticPicture class
 
 # WINDOWS ONLY
 

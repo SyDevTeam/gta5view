@@ -3,7 +3,7 @@
 !define APP_NAME "gta5view"
 !define COMP_NAME "Syping"
 !define WEB_SITE "https://gta5view.syping.de/"
-!define VERSION "1.5.4.0"
+!define VERSION "1.6.0.0"
 !define COPYRIGHT "Copyright © 2016-2018 Syping"
 !define DESCRIPTION "Grand Theft Auto V Savegame and Snapmatic Viewer/Editor"
 !define INSTALLER_NAME "gta5view_setup.exe"

@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -65,11 +65,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     }
 
     // Project Description
-#ifdef GTA5SYNC_ENABLED
-    QString projectDes = tr("A project for viewing and sync Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
-#else
     QString projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
-#endif
 
     // Copyright Description
     QString copyrightDes1 = tr("Copyright &copy; <a href=\"%1\">%2</a> %3");
