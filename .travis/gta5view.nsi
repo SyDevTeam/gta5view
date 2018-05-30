@@ -79,6 +79,7 @@ InstallDir "$PROGRAMFILES64\Syping\gta5view"
 !insertmacro MUI_LANGUAGE "French"
 !insertmacro MUI_LANGUAGE "German"
 !insertmacro MUI_LANGUAGE "Russian"
+!insertmacro MUI_LANGUAGE "Ukrainian"
 !insertmacro MUI_LANGUAGE "TradChinese"
 
 !insertmacro MUI_RESERVEFILE_LANGDLL
