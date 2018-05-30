@@ -8,11 +8,16 @@ elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
 	brew install lua
 fi
 
-# Check is build not tagged
+# Check if build is not tagged
 if [ "${TRAVIS_TAG}" == "" ]; then
 	export EXECUTABLE_TAG=-$(git rev-parse --short HEAD)
 else
 	export EXECUTABLE_TAG=
+fi
+
+# Check if package code is not set
+if [ "${PACKAGE_CODE}" == "" ]; then
+	export PACKAGE_CODE=GitHub
 fi
 
 if [ `git name-rev --tags --name-only $(git rev-parse HEAD)` == "undefined" ]; then export APPLICATION_VERSION=`lua -e 'for line in io.lines("config.h") do local m = string.match(line, "#define GTA5SYNC_APPVER \"(.+)\"$"); if m then print(m); os.exit(0) end end'`; else export APPLICATION_VERSION=`git name-rev --tags --name-only $(git rev-parse HEAD)`; fi
