@@ -51,6 +51,7 @@
 #include <QDebug>
 #include <QColor>
 #include <QTimer>
+#include <QStyle>
 #include <QFile>
 #include <QUrl>
 #include <QDir>

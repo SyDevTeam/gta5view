@@ -30,10 +30,12 @@ matrix:
   - env:
     - BUILD_SCRIPT=wininstall_travis.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
-    
+  - os: osx
+    env: BUILD_SCRIPT=osx_travis.sh
+
 before_install:
   - ".travis/source.sh"
-    
+
 script:
   - ".travis/travis.sh"
 
