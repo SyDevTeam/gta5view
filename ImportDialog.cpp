@@ -32,6 +32,7 @@
 #include <QPixmap>
 #include <QImage>
 #include <QDebug>
+#include <QStyle>
 #include <QFile>
 #include <QRgb>
 

@@ -11,27 +11,34 @@ matrix:
   - env:
     - BUILD_SCRIPT=debian_travis.sh
     - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
+    - RELEASE_LABEL=Debian 32-Bit Package
     - DEBIAN_VERSION=jessie
     - DOCKER_USER=i386
     - APT_INSTALL=clang
   - env:
     - BUILD_SCRIPT=debian_travis.sh
     - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
+    - RELEASE_LABEL=Debian 64-Bit Package
     - DEBIAN_VERSION=jessie
     - DOCKER_USER=amd64
     - APT_INSTALL=clang
   - env:
     - BUILD_SCRIPT=windows_travis.sh
     - QT_SELECT=qt5-i686-w64-mingw32
+    - RELEASE_LABEL=Windows 32-Bit Portable
   - env:
     - BUILD_SCRIPT=windows_travis.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
+    - RELEASE_LABEL=Windows 64-Bit Portable
     - EXECUTABLE_ARCH=_x64
   - env:
     - BUILD_SCRIPT=wininstall_travis.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
+    - RELEASE_LABEL=Windows 64-Bit Installer
   - os: osx
-    env: BUILD_SCRIPT=osx_travis.sh
+    env:
+        - BUILD_SCRIPT=osx_travis.sh
+        - RELEASE_LABEL=Mac OS X 64-Bit Disk Image
 
 before_install:
   - ".travis/source.sh"
@@ -43,6 +50,7 @@ deploy:
   provider: releases
   api_key:
     secure: o7VneEz1aHfdVwZvOZLfopf6uJWNrFsZaBvunTmXFzpmNFhlNS1qwqgMUkIA2yBRbZ3wIzVs4vfwIHv7W9yE/PqK+AYL+R8+AwKGrwlgT4HqJNuk6VM/LNJ6GwT/qkQuaoOVw29bUjmzzgIRdHmw53SlJv6Hh1VE8HphlTT//aex6nCfcFhUZ0BETdZDWz5FSHwL3NalUoqfKfQrJeky5RXzCyCANQC2tKt0bV46GaWIgWrDo2KCTNqPtRWWf5GDmnkXE5IYRMQ3mXvO9iYh0v5Y2jo4PiXGUiFUU6Z3aAWFAiPdGclrBO697cf3lCTzDMhuCETR153qFYsLShUlFf61ITAmCeHAWETjZDri0lmPONo3GoNB6alGfYEA51qw14kXakrTpICtTJj7gw/gtUYOabW6hrzmieNzMBIy62RikDPjyakFnuwW2qNHRlD65e0jYv+6nCpb6E+OV16Ysh1zhV2vTfpfzVmSuyu2J+ELqXD3OZCXRSPpDIih9UQ8335p8FBji6jHORcgym/TRgdgRmENibh8tLzWp+UjpWHuWfcpvZgOskjfwU0iDMCayMJ7tDpOhXHcAhDRnd6XRIiOJ5YZCzflj2nEwmt3YUd7DwXS/AU+WHOmcNQBjXBxF/FJa35XXcy3HKJM5TTKqtph3medo30us5yXHeG6NNg=
+  label: ${RELEASE_LABEL}
   file_glob: true
   file: assets/*
   skip_cleanup: true
