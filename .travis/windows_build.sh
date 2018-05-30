@@ -15,4 +15,9 @@ qmake-static ${QMAKE_FLAGS} DEFINES+=GTA5SYNC_BUILDTYPE_DEV "DEFINES+=GTA5SYNC_B
 make -j 4 && \
 cp -Rf release/*.exe ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} && \
 cd ${PROJECT_DIR}/assets && \
-upx --best ${GTA5VIEW_EXECUTABLE}
+upx --best ${GTA5VIEW_EXECUTABLE} && \
+
+if [ "${PACKAGE_CODE}" == "Dropbox" ]; then
+	${PROJECT_DIR}/.travis/dropbox_uploader.sh upload ${GTA5VIEW_EXECUTABLE} gta5view-builds/${GTA5VIEW_EXECUTABLE} && \
+	rm -rf ${GTA5VIEW_EXECUTABLE}
+fi

@@ -32,6 +32,10 @@ matrix:
     - RELEASE_LABEL="Windows 64-Bit Portable"
     - EXECUTABLE_ARCH=_x64
   - env:
+    - BUILD_SCRIPT=windows_travis.sh
+    - QT_SELECT=qt5-x86_64-w64-mingw32
+    - PACKAGE_CODE=Dropbox
+  - env:
     - BUILD_SCRIPT=wininstall_travis.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
     - RELEASE_LABEL="Windows 64-Bit Installer"
