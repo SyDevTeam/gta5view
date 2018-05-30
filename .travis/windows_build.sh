@@ -1,5 +1,8 @@
 #!/bin/bash
 
+apt-get update -qq && \
+apt-get install -qq curl && \
+
 export GTA5VIEW_EXECUTABLE=gta5view-${EXECUTABLE_VERSION}${EXECUTABLE_ARCH}.exe && \
 
 # Creating folders
