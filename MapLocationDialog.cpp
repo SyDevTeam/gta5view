@@ -22,6 +22,7 @@
 #include "AppEnv.h"
 #include <QPainter>
 #include <QDebug>
+#include <QStyle>
 
 MapLocationDialog::MapLocationDialog(double x, double y, QWidget *parent) :
     QDialog(parent), xpos_old(x), ypos_old(y),
