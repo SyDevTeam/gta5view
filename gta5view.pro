@@ -131,8 +131,7 @@ TRANSLATIONS += \
     res/gta5sync_fr.ts \
     res/gta5sync_ru.ts \
     res/gta5sync_uk.ts \
-    res/gta5sync_zh_TW.ts \
-    lang/gta5sync_no.ts
+    res/gta5sync_zh_TW.ts
 
 RESOURCES += \
     res/tr_g5p.qrc \
@@ -147,7 +146,6 @@ DISTFILES += res/app.rc \
     res/gta5sync_zh_TW.ts \
     res/gta5view.exe.manifest \
     res/gta5view.png \
-    lang/gta5sync_no.ts \
     lang/README.txt
 
 INCLUDEPATH += ./anpro ./tmext ./uimod
