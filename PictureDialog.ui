@@ -43,9 +43,6 @@
      <property name="text">
       <string/>
      </property>
-     <property name="pixmap">
-      <pixmap resource="res/app.qrc">:/img/960x536.png</pixmap>
-     </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
@@ -230,9 +227,7 @@
    </slots>
   </customwidget>
  </customwidgets>
- <resources>
-  <include location="res/app.qrc"/>
- </resources>
+ <resources/>
  <connections>
   <connection>
    <sender>cmdClose</sender>
