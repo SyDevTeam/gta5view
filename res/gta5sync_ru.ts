@@ -758,7 +758,7 @@ Y: %2</translation>
 <context>
     <name>PictureDialog</name>
     <message>
-        <location filename="../PictureDialog.ui" line="117"/>
+        <location filename="../PictureDialog.ui" line="114"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
@@ -769,12 +769,12 @@ Y: %2</translation>
 &lt;span style=&quot; font-weight:600;&quot;&gt;Сделано: &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="180"/>
+        <location filename="../PictureDialog.ui" line="177"/>
         <source>&amp;Manage</source>
         <translation>&amp;Управление</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="177"/>
+        <location filename="../PictureDialog.ui" line="174"/>
         <source>Manage picture</source>
         <translation>Настройки картинки</translation>
     </message>
@@ -784,12 +784,12 @@ Y: %2</translation>
         <translation>Просмотрщик фотографий Snapmatic - %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="199"/>
+        <location filename="../PictureDialog.ui" line="196"/>
         <source>Close viewer</source>
         <translation>Закрыть просмотрщик</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="202"/>
+        <location filename="../PictureDialog.ui" line="199"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
     </message>
@@ -1439,7 +1439,7 @@ Press 1 for Default View</source>
         <translation>Выбранный шрифт: %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="137"/>
+        <location filename="../main.cpp" line="127"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;Добро пожаловать в %1!&lt;/h4&gt;Хочешь изменить настройки %1 перед использованием?</translation>
     </message>
@@ -2008,22 +2008,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="164"/>
+        <location filename="../main.cpp" line="157"/>
         <source>%1 User Statistics</source>
         <translation>%1 пользовательская статистика</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="164"/>
-        <source>You want help %1 to improve in the future by collection of data?</source>
-        <translation>Хочешь ли помочь будущему развитию %1 отправкой данных?</translation>
+        <location filename="../main.cpp" line="156"/>
+        <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="168"/>
-        <source>Yes, I would like to take part.</source>
-        <translation>Да, хочу участвовать.</translation>
+        <location filename="../main.cpp" line="161"/>
+        <source>Yes, I want include personal usage data.</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="178"/>
+        <location filename="../main.cpp" line="170"/>
         <source>&amp;OK</source>
         <translation>&amp;ОК</translation>
     </message>

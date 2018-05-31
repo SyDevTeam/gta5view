@@ -617,7 +617,6 @@ QString TranslationClass::getCountryCode(QLocale locale)
     QStringList localeStrList = locale.name().split("_");
     if (localeStrList.length() >= 2)
     {
-        qDebug() << localeStrList;
         return localeStrList.at(1).toLower();
     }
     else

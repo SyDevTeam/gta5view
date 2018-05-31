@@ -758,7 +758,7 @@ Y: %2</translation>
         <translation>Snapmatic Bildansicht - %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="117"/>
+        <location filename="../PictureDialog.ui" line="114"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
@@ -769,22 +769,22 @@ Y: %2</translation>
 &lt;span style=&quot; font-weight:600;&quot;&gt;Erstellt: &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="177"/>
+        <location filename="../PictureDialog.ui" line="174"/>
         <source>Manage picture</source>
         <translation>Bild verwalten</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="180"/>
+        <location filename="../PictureDialog.ui" line="177"/>
         <source>&amp;Manage</source>
         <translation>&amp;Verwalten</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="199"/>
+        <location filename="../PictureDialog.ui" line="196"/>
         <source>Close viewer</source>
         <translation>Ansicht schließen</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="202"/>
+        <location filename="../PictureDialog.ui" line="199"/>
         <source>&amp;Close</source>
         <translation>S&amp;chließen</translation>
     </message>
@@ -1432,7 +1432,7 @@ Drücke 1 für Standardmodus</translation>
         <translation>Ausgewähle Schrift: %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="137"/>
+        <location filename="../main.cpp" line="127"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;Willkommen zu %1!&lt;/h4&gt;Möchtest du %1 einstellen bevor du es nutzt?</translation>
     </message>
@@ -2001,22 +2001,22 @@ Drücke 1 für Standardmodus</translation>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="164"/>
+        <location filename="../main.cpp" line="157"/>
         <source>%1 User Statistics</source>
         <translation>%1 Benutzerstatistik</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="164"/>
-        <source>You want help %1 to improve in the future by collection of data?</source>
-        <translation>Möchtest du helfen %1 in der Zukunft zu verbessern durch Sammlung von Daten?</translation>
+        <location filename="../main.cpp" line="156"/>
+        <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
+        <translation>Sollen bei Einreichungen Persönliche Nutzungsdaten einbezogen werden um %1 in der Zukunft zu unterstützen?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="168"/>
-        <source>Yes, I would like to take part.</source>
-        <translation>Ja, ich möchte teilnehmen.</translation>
+        <location filename="../main.cpp" line="161"/>
+        <source>Yes, I want include personal usage data.</source>
+        <translation>Ja, ich möchte Persönliche Nutzungsdaten einbeziehen.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="178"/>
+        <location filename="../main.cpp" line="170"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>

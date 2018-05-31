@@ -52,12 +52,8 @@ void TelemetryClass::init()
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Telemetry");
-#ifndef GTA5SYNC_BUILDTYPE_DEV
-    telemetryEnabled = settings.value("IsEnabled", false).toBool();
-#else
-    telemetryEnabled = true; // Always enable Telemetry for Developer Versions
+    telemetryEnabled = true;
     telemetryStateForced = true;
-#endif
     QString telemetryLegacyClientID = settings.value("ClientID", QString()).toString();
     if (telemetryLegacyClientID.isEmpty() || telemetryLegacyClientID == "v2+")
     {

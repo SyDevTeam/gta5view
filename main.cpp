@@ -116,18 +116,8 @@ int main(int argc, char *argv[])
     Translator->loadTranslation(&a);
 
 #ifdef GTA5SYNC_TELEMETRY
-    if (!applicationArgs.contains("--disable-telemetry"))
-    {
-        if (!applicationArgs.contains("--skip-telemetryinit"))
-        {
-            Telemetry->init();
-            Telemetry->work();
-        }
-    }
-    else
-    {
-        Telemetry->setDisabled(true);
-    }
+    Telemetry->init();
+    Telemetry->work();
 #endif
 
     if (!applicationArgs.contains("--skip-firststart"))
@@ -148,8 +138,9 @@ int main(int argc, char *argv[])
     }
 
 #ifdef GTA5SYNC_TELEMETRY
-    bool telemetryWindowLaunched = settings.value("TelemetryWindowLaunched", false).toBool();
-    if (!telemetryWindowLaunched && !Telemetry->isEnabled() && !Telemetry->isStateForced())
+    bool telemetryWindowLaunched = settings.value("PersonalUsageDataWindowLaunched", false).toBool();
+    bool pushUsageData = settings.value("PushUsageData", false).toBool();
+    if (!telemetryWindowLaunched && !pushUsageData)
     {
         QDialog *telemetryDialog = new QDialog();
         telemetryDialog->setObjectName(QStringLiteral("TelemetryDialog"));
@@ -161,12 +152,13 @@ int main(int argc, char *argv[])
         telemetryDialog->setLayout(telemetryLayout);
         UiModLabel *telemetryLabel = new UiModLabel(telemetryDialog);
         telemetryLabel->setObjectName(QStringLiteral("TelemetryLabel"));
-        telemetryLabel->setText(QString("<h4>%2</h4>%1").arg(QApplication::translate("TelemetryDialog", "You want help %1 to improve in the future by collection of data?").arg(GTA5SYNC_APPSTR), QApplication::translate("TelemetryDialog", "%1 User Statistics").arg(GTA5SYNC_APPSTR)));
+        telemetryLabel->setText(QString("<h4>%2</h4>%1").arg(
+                                    QApplication::translate("TelemetryDialog", "You want help %1 to improve in the future by including personal usage data in your submission?").arg(GTA5SYNC_APPSTR),
+                                    QApplication::translate("TelemetryDialog", "%1 User Statistics").arg(GTA5SYNC_APPSTR)));
         telemetryLayout->addWidget(telemetryLabel);
         QCheckBox *telemetryCheckBox = new QCheckBox(telemetryDialog);
         telemetryCheckBox->setObjectName(QStringLiteral("TelemetryCheckBox"));
-        telemetryCheckBox->setText(QApplication::translate("TelemetryDialog", "Yes, I would like to take part."));
-        telemetryCheckBox->setChecked(true);
+        telemetryCheckBox->setText(QApplication::translate("TelemetryDialog", "Yes, I want include personal usage data."));
         telemetryLayout->addWidget(telemetryCheckBox);
         QHBoxLayout *telemetryButtonLayout = new QHBoxLayout();
         telemetryButtonLayout->setObjectName(QStringLiteral("TelemetryButtonLayout"));
@@ -185,12 +177,12 @@ int main(int argc, char *argv[])
         {
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
-            telemetrySettings.setValue("IsEnabled", true);
+            telemetrySettings.setValue("PushUsageData", true);
             telemetrySettings.endGroup();
             Telemetry->init();
             Telemetry->work();
         }
-        settings.setValue("TelemetryWindowLaunched", true);
+        settings.setValue("PersonalUsageDataWindowLaunched", true);
         delete telemetryDialog;
     }
 #endif
