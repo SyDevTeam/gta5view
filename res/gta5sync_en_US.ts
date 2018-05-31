@@ -538,51 +538,51 @@ Y: %2</source>
     <message>
         <location filename="../OptionsDialog.ui" line="387"/>
         <source>Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.cpp" line="549"/>
         <source>Participate in %1 User Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="434"/>
         <source>Hardware, Application and OS Specification</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="457"/>
         <source>Application Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="467"/>
         <source>Other</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="479"/>
         <location filename="../OptionsDialog.cpp" line="572"/>
         <location filename="../OptionsDialog.cpp" line="576"/>
         <source>Participation ID: %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="492"/>
         <source>&amp;Copy</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="505"/>
         <location filename="../OptionsDialog.cpp" line="657"/>
         <source>User Feedback</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="516"/>
         <source>Limit: 1 message/day</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="593"/>
@@ -617,22 +617,22 @@ Y: %2</source>
     <message>
         <location filename="../OptionsDialog.ui" line="393"/>
         <source>Participation</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="425"/>
         <source>Categories</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="447"/>
         <source>System Language Configuration</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="536"/>
         <source>&amp;Send</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="571"/>
@@ -725,17 +725,17 @@ Y: %2</source>
     <message>
         <location filename="../OptionsDialog.cpp" line="550"/>
         <source>View %1 User Statistics Online</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="576"/>
         <source>Not registered</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="657"/>
         <source>A feedback message have to between 3-1024 characters long</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -743,7 +743,7 @@ Y: %2</source>
     <message>
         <location filename="../PictureDialog.ui" line="14"/>
         <source>Snapmatic Picture Viewer - %1</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="117"/>
@@ -1286,7 +1286,7 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1567"/>
         <location filename="../ProfileInterface.cpp" line="1632"/>
         <source>Qualify as Avatar</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1182"/>
@@ -1296,7 +1296,7 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1746"/>
         <location filename="../ProfileInterface.cpp" line="1864"/>
         <source>No Snapmatic pictures are selected</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1578"/>
@@ -1334,7 +1334,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="1110"/>
         <source>Failed to remove all selected Snapmatic pictures and/or Savegame files</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1632"/>
@@ -1346,7 +1346,7 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1653"/>
         <location filename="../ProfileInterface.cpp" line="1725"/>
         <source>Change Players...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1725"/>
@@ -1359,7 +1359,7 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1774"/>
         <location filename="../ProfileInterface.cpp" line="1843"/>
         <source>Change Crew...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1774"/>
@@ -1377,7 +1377,7 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1877"/>
         <location filename="../ProfileInterface.cpp" line="1942"/>
         <source>Change Title...</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1877"/>
@@ -1965,12 +1965,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="290"/>
         <source>Failed to hide %1 In-game from your Snapmatic pictures</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.cpp" line="298"/>
         <source>Failed to show %1 In-game from your Snapmatic pictures</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -1978,22 +1978,22 @@ Press 1 for Default View</source>
     <message>
         <location filename="../main.cpp" line="164"/>
         <source>%1 User Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../main.cpp" line="164"/>
         <source>You want help %1 to improve in the future by collection of data?</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../main.cpp" line="168"/>
         <source>Yes, I would like to take part.</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../main.cpp" line="178"/>
         <source>&amp;OK</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 <context>
@@ -2196,14 +2196,14 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1196"/>
         <location filename="../SnapmaticWidget.cpp" line="298"/>
         <source>Show In-game</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1216"/>
         <location filename="../ProfileInterface.cpp" line="1230"/>
         <location filename="../SnapmaticWidget.cpp" line="290"/>
         <source>Hide In-game</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
 </context>
 </TS>
