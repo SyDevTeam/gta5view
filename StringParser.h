@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2016-2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -26,9 +26,6 @@ class StringParser
 {
 public:
     StringParser();
-    static QString parseTitleString(const QByteArray &commitBytes, int maxLength);
-    static QString convertDrawStringForLog(const QString &inputStr);
-    static QString convertLogStringForDraw(const QString &inputStr);
     static QString escapeString(const QString &toEscape);
 #ifdef GTA5SYNC_PROJECT
     static QString convertBuildedString(const QString &buildedStr);

@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/img">
-        <file>savegame.png</file>
         <file>5sync-48.png</file>
         <file>5sync-16.png</file>
         <file>5sync-24.png</file>
@@ -10,17 +9,17 @@
         <file>5sync-96.png</file>
         <file>5sync-128.png</file>
         <file>5sync-256.png</file>
-        <file>back.png</file>
-        <file>next.png</file>
-        <file>960x536.png</file>
-        <file>empty1x16.png</file>
         <file>avatararea.png</file>
         <file>avatarareaimport.png</file>
+        <file>back.png</file>
+        <file>empty1x16.png</file>
         <file>mappreview.jpg</file>
+        <file>next.png</file>
         <file>pointmaker-8.png</file>
         <file>pointmaker-16.png</file>
         <file>pointmaker-24.png</file>
         <file>pointmaker-32.png</file>
+        <file>savegame.png</file>
     </qresource>
     <qresource prefix="/global">
         <file>global.de.ini</file>
@@ -33,7 +32,6 @@
         <file>global.ko.ini</file>
         <file>global.pl.ini</file>
         <file>global.pt.ini</file>
-        <file>global.pt.loc</file>
         <file>global.ru.ini</file>
         <file>global.zh.ini</file>
         <file>global.zh.loc</file>

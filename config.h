@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -28,16 +28,8 @@
 #define GTA5SYNC_APPVENDORLINK "https://github.com/Syping/"
 #endif
 
-#ifndef GTA5SYNC_DISABLED
-#define GTA5SYNC_ENABLED
-#endif
-
 #ifndef GTA5SYNC_APPSTR
-#ifdef GTA5SYNC_ENABLED
-#define GTA5SYNC_APPSTR "gta5sync"
-#else
 #define GTA5SYNC_APPSTR "gta5view"
-#endif
 #endif
 
 #ifndef GTA5SYNC_APPDES
@@ -49,7 +41,7 @@
 #endif
 
 #ifndef GTA5SYNC_APPVER
-#define GTA5SYNC_APPVER "1.5.4"
+#define GTA5SYNC_APPVER "1.5.5"
 #endif
 
 #ifdef GTA5SYNC_BUILDTYPE_REL

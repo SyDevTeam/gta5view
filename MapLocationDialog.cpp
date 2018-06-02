@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -22,6 +22,7 @@
 #include "AppEnv.h"
 #include <QPainter>
 #include <QDebug>
+#include <QStyle>
 
 MapLocationDialog::MapLocationDialog(double x, double y, QWidget *parent) :
     QDialog(parent), xpos_old(x), ypos_old(y),

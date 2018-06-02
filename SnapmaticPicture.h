@@ -1,6 +1,6 @@
 /*****************************************************************************
-* gta5sync-spv Grand Theft Auto Snapmatic Picture Viewer
-* Copyright (C) 2016-2017 Syping
+* gta5spv Grand Theft Auto Snapmatic Picture Viewer
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -133,6 +133,11 @@ public:
 
     // VERIFY CONTENT
     static bool verifyTitle(const QString &title);
+
+    // STRING OPERATIONS
+    static QString parseTitleString(const QByteArray &commitBytes, int maxLength);
+    static QString convertDrawStringForLog(const QString &inputStr);
+    static QString convertLogStringForDraw(const QString &inputStr);
 
 private:
     QString getSnapmaticHeaderString(const QByteArray &snapmaticHeader);

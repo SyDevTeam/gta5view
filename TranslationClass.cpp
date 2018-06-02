@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2017 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -617,7 +617,6 @@ QString TranslationClass::getCountryCode(QLocale locale)
     QStringList localeStrList = locale.name().split("_");
     if (localeStrList.length() >= 2)
     {
-        qDebug() << localeStrList;
         return localeStrList.at(1).toLower();
     }
     else

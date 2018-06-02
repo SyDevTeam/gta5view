@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -51,6 +51,7 @@
 #include <QDebug>
 #include <QColor>
 #include <QTimer>
+#include <QStyle>
 #include <QFile>
 #include <QUrl>
 #include <QDir>

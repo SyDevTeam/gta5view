@@ -1,5 +1,5 @@
 /*****************************************************************************
-* gta5sync GRAND THEFT AUTO V SYNC
+* gta5view Grand Theft Auto V Profile Viewer
 * Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
@@ -116,18 +116,8 @@ int main(int argc, char *argv[])
     Translator->loadTranslation(&a);
 
 #ifdef GTA5SYNC_TELEMETRY
-    if (!applicationArgs.contains("--disable-telemetry"))
-    {
-        if (!applicationArgs.contains("--skip-telemetryinit"))
-        {
-            Telemetry->init();
-            Telemetry->work();
-        }
-    }
-    else
-    {
-        Telemetry->setDisabled(true);
-    }
+    Telemetry->init();
+    Telemetry->work();
 #endif
 
     if (!applicationArgs.contains("--skip-firststart"))
@@ -146,55 +136,6 @@ int main(int argc, char *argv[])
             settings.setValue("IsFirstStart", false);
         }
     }
-
-#ifdef GTA5SYNC_TELEMETRY
-    bool telemetryWindowLaunched = settings.value("TelemetryWindowLaunched", false).toBool();
-    if (!telemetryWindowLaunched && !Telemetry->isEnabled() && !Telemetry->isStateForced())
-    {
-        QDialog *telemetryDialog = new QDialog();
-        telemetryDialog->setObjectName(QStringLiteral("TelemetryDialog"));
-        telemetryDialog->setWindowTitle(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
-        telemetryDialog->setWindowFlags(telemetryDialog->windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
-        telemetryDialog->setWindowIcon(IconLoader::loadingAppIcon());
-        QVBoxLayout *telemetryLayout = new QVBoxLayout(telemetryDialog);
-        telemetryLayout->setObjectName(QStringLiteral("TelemetryLayout"));
-        telemetryDialog->setLayout(telemetryLayout);
-        UiModLabel *telemetryLabel = new UiModLabel(telemetryDialog);
-        telemetryLabel->setObjectName(QStringLiteral("TelemetryLabel"));
-        telemetryLabel->setText(QString("<h4>%2</h4>%1").arg(QApplication::translate("TelemetryDialog", "You want help %1 to improve in the future by collection of data?").arg(GTA5SYNC_APPSTR), QApplication::translate("TelemetryDialog", "%1 User Statistics").arg(GTA5SYNC_APPSTR)));
-        telemetryLayout->addWidget(telemetryLabel);
-        QCheckBox *telemetryCheckBox = new QCheckBox(telemetryDialog);
-        telemetryCheckBox->setObjectName(QStringLiteral("TelemetryCheckBox"));
-        telemetryCheckBox->setText(QApplication::translate("TelemetryDialog", "Yes, I would like to take part."));
-        telemetryCheckBox->setChecked(true);
-        telemetryLayout->addWidget(telemetryCheckBox);
-        QHBoxLayout *telemetryButtonLayout = new QHBoxLayout();
-        telemetryButtonLayout->setObjectName(QStringLiteral("TelemetryButtonLayout"));
-        telemetryLayout->addLayout(telemetryButtonLayout);
-        QSpacerItem *telemetryButtonSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
-        telemetryButtonLayout->addSpacerItem(telemetryButtonSpacer);
-        QPushButton *telemetryButton = new QPushButton(telemetryDialog);
-        telemetryButton->setObjectName(QStringLiteral("TelemetryButton"));
-        telemetryButton->setText(QApplication::translate("TelemetryDialog", "&OK"));
-        telemetryButtonLayout->addWidget(telemetryButton);
-        QObject::connect(telemetryButton, SIGNAL(clicked(bool)), telemetryDialog, SLOT(close()));
-        telemetryDialog->setFixedSize(telemetryDialog->sizeHint());
-        telemetryDialog->exec();
-        QObject::disconnect(telemetryButton, SIGNAL(clicked(bool)), telemetryDialog, SLOT(close()));
-        if (telemetryCheckBox->isChecked())
-        {
-            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-            telemetrySettings.beginGroup("Telemetry");
-            telemetrySettings.setValue("IsEnabled", true);
-            telemetrySettings.endGroup();
-            Telemetry->init();
-            Telemetry->work();
-        }
-        settings.setValue("TelemetryWindowLaunched", true);
-        delete telemetryDialog;
-    }
-#endif
-
     settings.endGroup();
 
     for (QString currentArg : applicationArgs)
