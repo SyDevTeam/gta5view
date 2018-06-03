@@ -10,16 +10,14 @@ matrix:
   include:
   - env:
     - BUILD_SCRIPT=debian_travis.sh
-    - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
     - RELEASE_LABEL="Debian 32-Bit Package"
-    - DEBIAN_VERSION=jessie
+    - DEBIAN_VERSION=stretch
     - DOCKER_USER=i386
     - APT_INSTALL=clang
   - env:
     - BUILD_SCRIPT=debian_travis.sh
-    - QMAKE_FLAGS_QT4=QMAKE_CXXFLAGS+=-Wno-missing-field-initializers
     - RELEASE_LABEL="Debian 64-Bit Package"
-    - DEBIAN_VERSION=jessie
+    - DEBIAN_VERSION=stretch
     - DOCKER_USER=amd64
     - APT_INSTALL=clang
   - env:

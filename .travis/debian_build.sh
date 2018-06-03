@@ -9,11 +9,11 @@ chmod -x res/gta5sync_*.qm res/gta5view.desktop res/gta5view.png && \
 cd build && \
 mkdir -p qt4 && \
 cd qt4 && \
-echo "Grand Theft Auto V Snapmatic and Savegame viewer/manager" > ./description-pak && \
+echo "Grand Theft Auto V Snapmatic and Savegame viewer/editor" > ./description-pak && \
 cd .. && \
 mkdir -p qt5 && \
 cd qt5 && \
-echo "Grand Theft Auto V Snapmatic and Savegame viewer/manager" > ./description-pak && \
+echo "Grand Theft Auto V Snapmatic and Savegame viewer/editor" > ./description-pak && \
 cd .. && \
 
 # Prepare checkinstall step
