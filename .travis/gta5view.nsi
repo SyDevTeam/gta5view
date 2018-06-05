@@ -225,8 +225,9 @@ Delete "$INSTDIR\imageformats\qwebp.dll"
 Delete "$INSTDIR\platforms\qwindows.dll"
 
 RmDir "$INSTDIR\lang"
-RmDir "$INSTDIR\platforms"
+RmDir "$INSTDIR\audio"
 RmDir "$INSTDIR\imageformats"
+RmDir "$INSTDIR\platforms"
  
 Delete "$INSTDIR\uninstall.exe"
 !ifdef WEB_SITE
