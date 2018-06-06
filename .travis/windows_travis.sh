@@ -1,6 +1,6 @@
 #!/bin/bash
 
-QT_VERSION=5.9.5
+QT_VERSION=5.9.6
 DOCKER_IMAGE=syping/qt5-static-mingw:${QT_VERSION}
 PROJECT_DIR_DOCKER=/gta5view
 
