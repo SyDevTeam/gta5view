@@ -37,6 +37,7 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowMinMaxButtonsHint);
 
     ui->setupUi(this);
+    ui->cmdClose->setDefault(true);
     ui->cmdClose->setFocus();
 
     // Set Icon for Close Button

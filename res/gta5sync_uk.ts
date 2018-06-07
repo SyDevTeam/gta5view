@@ -182,7 +182,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="59"/>
-        <location filename="../ImageEditorDialog.cpp" line="74"/>
+        <location filename="../ImageEditorDialog.cpp" line="75"/>
         <source>Capacity: %1</source>
         <translation>Величина: %1</translation>
     </message>
@@ -207,24 +207,24 @@ Pictures and Savegames</source>
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="193"/>
-        <location filename="../ImageEditorDialog.cpp" line="200"/>
-        <location filename="../ImageEditorDialog.cpp" line="209"/>
+        <location filename="../ImageEditorDialog.cpp" line="194"/>
+        <location filename="../ImageEditorDialog.cpp" line="201"/>
+        <location filename="../ImageEditorDialog.cpp" line="210"/>
         <source>Snapmatic Image Editor</source>
         <translation>Редактор Snapmatic зображень</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="193"/>
+        <location filename="../ImageEditorDialog.cpp" line="194"/>
         <source>Patching of Snapmatic Image failed because of I/O Error</source>
         <translation>Виправлення Snapmatic зображення не вдалося через I/O Error</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="200"/>
+        <location filename="../ImageEditorDialog.cpp" line="201"/>
         <source>Patching of Snapmatic Image failed because of Image Error</source>
         <translation>Виправлення Snapmatic зображення не вдалося через помилку картинки</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="209"/>
+        <location filename="../ImageEditorDialog.cpp" line="210"/>
         <source>Every taken Snapmatic have a different Capacity, a Snapmatic with higher Capacity can store a picture with better quality.</source>
         <translation>Кожен знятий Snapmatic має різну величину, в залежності від якої можна зберігати зображення більш високої якості.</translation>
     </message>
@@ -368,7 +368,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="172"/>
+        <location filename="../JsonEditorDialog.cpp" line="173"/>
         <source>JSON Error</source>
         <translation>JSON помилка</translation>
     </message>
@@ -559,7 +559,7 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
-        <location filename="../OptionsDialog.cpp" line="549"/>
+        <location filename="../OptionsDialog.cpp" line="551"/>
         <source>Participate in %1 User Statistics</source>
         <translation>Опитування %1 про устаткування ПК</translation>
     </message>
@@ -584,170 +584,154 @@ Y: %2</translation>
         <translation>Налаштування програми</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="467"/>
+        <location filename="../OptionsDialog.ui" line="464"/>
+        <source>Personal Usage Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="474"/>
         <source>Other</source>
         <translation>Інше</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="479"/>
-        <location filename="../OptionsDialog.cpp" line="572"/>
-        <location filename="../OptionsDialog.cpp" line="576"/>
+        <location filename="../OptionsDialog.ui" line="488"/>
+        <location filename="../OptionsDialog.cpp" line="567"/>
+        <location filename="../OptionsDialog.cpp" line="571"/>
         <source>Participation ID: %1</source>
         <translation>ID учасника : %1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="492"/>
+        <location filename="../OptionsDialog.ui" line="501"/>
         <source>&amp;Copy</source>
         <translation>&amp;Копіювати</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="505"/>
-        <location filename="../OptionsDialog.cpp" line="657"/>
-        <source>User Feedback</source>
-        <translation>Відгук користувача</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="516"/>
-        <source>Limit: 1 message/day</source>
-        <translation>Ліміт: 1 повідомлення / день</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="536"/>
-        <source>&amp;Send</source>
-        <translation>&amp;Надіслати</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="565"/>
+        <location filename="../OptionsDialog.ui" line="530"/>
         <source>Interface</source>
         <translation>Інтерфейс</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="571"/>
+        <location filename="../OptionsDialog.ui" line="536"/>
         <source>Language for Interface</source>
         <translation>Мова інтерфейсу</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="580"/>
-        <location filename="../OptionsDialog.ui" line="602"/>
-        <location filename="../OptionsDialog.cpp" line="188"/>
-        <location filename="../OptionsDialog.cpp" line="237"/>
+        <location filename="../OptionsDialog.ui" line="545"/>
+        <location filename="../OptionsDialog.ui" line="567"/>
+        <location filename="../OptionsDialog.cpp" line="189"/>
+        <location filename="../OptionsDialog.cpp" line="238"/>
         <source>Current: %1</source>
         <translation>Зараз: %1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="593"/>
+        <location filename="../OptionsDialog.ui" line="558"/>
         <source>Language for Areas</source>
         <translation>Мова перекладу розташування</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="615"/>
+        <location filename="../OptionsDialog.ui" line="580"/>
         <source>Style</source>
         <translation>Стиль</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="621"/>
+        <location filename="../OptionsDialog.ui" line="586"/>
         <source>Use Default Style (Restart)</source>
         <translation>Використовувати стандартний стиль (Перезапуск)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="633"/>
+        <location filename="../OptionsDialog.ui" line="598"/>
         <source>Style:</source>
         <translation>Стиль:</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="658"/>
+        <location filename="../OptionsDialog.ui" line="623"/>
         <source>Font</source>
         <translation>Шрифт</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="664"/>
+        <location filename="../OptionsDialog.ui" line="629"/>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
         <translation>Завжди використовуйте шрифт повідомлень (Windows 2003 і раніше)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="712"/>
+        <location filename="../OptionsDialog.ui" line="677"/>
         <source>Apply changes</source>
         <translation>Застосувати зміни</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="715"/>
+        <location filename="../OptionsDialog.ui" line="680"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="728"/>
+        <location filename="../OptionsDialog.ui" line="693"/>
         <source>Discard changes</source>
         <translation>Скасувати зміни</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="731"/>
+        <location filename="../OptionsDialog.ui" line="696"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;Скасувати</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="152"/>
+        <location filename="../OptionsDialog.cpp" line="153"/>
         <source>%1 (Next Closest Language)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation>%1 (або наступна найближча мова)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="152"/>
+        <location filename="../OptionsDialog.cpp" line="153"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation>Як у системи</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="154"/>
+        <location filename="../OptionsDialog.cpp" line="155"/>
         <source>%1 (Closest to Interface)</source>
         <comment>Next closest language compared to the Interface</comment>
         <translation>%1 (Співпадає з інтерфейсом)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="154"/>
+        <location filename="../OptionsDialog.cpp" line="155"/>
         <source>Auto</source>
         <comment>Automatic language choice.</comment>
         <translation>Автоматично</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="437"/>
+        <location filename="../OptionsDialog.cpp" line="439"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="437"/>
+        <location filename="../OptionsDialog.cpp" line="439"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>Нова користувацька папка буде ініціалізована після перезапуску %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="447"/>
+        <location filename="../OptionsDialog.cpp" line="449"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Жодного</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="455"/>
-        <location filename="../OptionsDialog.cpp" line="459"/>
+        <location filename="../OptionsDialog.cpp" line="457"/>
         <location filename="../OptionsDialog.cpp" line="461"/>
+        <location filename="../OptionsDialog.cpp" line="463"/>
         <source>Profile: %1</source>
         <translation>Профіль: %1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="550"/>
+        <location filename="../OptionsDialog.cpp" line="552"/>
         <source>View %1 User Statistics Online</source>
         <translation>Переглянути користувацьку статистику %1 онлайн</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="576"/>
+        <location filename="../OptionsDialog.cpp" line="571"/>
         <source>Not registered</source>
         <translation>Не зареєстрований</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.cpp" line="657"/>
-        <source>A feedback message have to between 3-1024 characters long</source>
-        <translation>Повідомлення відгуку має становити від 3-1024 символів</translation>
     </message>
 </context>
 <context>
@@ -848,7 +832,7 @@ Arrow Keys - Navigate</source>
     <message>
         <location filename="../PictureDialog.cpp" line="643"/>
         <location filename="../PictureDialog.cpp" line="783"/>
-        <location filename="../SnapmaticEditor.cpp" line="239"/>
+        <location filename="../SnapmaticEditor.cpp" line="240"/>
         <source>No Players</source>
         <translation>Гравців немає</translation>
     </message>
@@ -1002,28 +986,28 @@ Press 1 for Default View</source>
         <translation>&amp;Скасувати</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="221"/>
+        <location filename="../PlayerListDialog.cpp" line="222"/>
         <source>Add Players...</source>
         <translation>Додати гравців...</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="221"/>
+        <location filename="../PlayerListDialog.cpp" line="222"/>
         <source>Failed to add more Players because the limit of Players are %1!</source>
         <translation>Не вдалося додати більше гравців, бо ліміт %1!</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="238"/>
-        <location filename="../PlayerListDialog.cpp" line="261"/>
+        <location filename="../PlayerListDialog.cpp" line="239"/>
+        <location filename="../PlayerListDialog.cpp" line="262"/>
         <source>Add Player...</source>
         <translation>Додати гравця...</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="238"/>
+        <location filename="../PlayerListDialog.cpp" line="239"/>
         <source>Enter Social Club Player ID</source>
         <translation>Введіть ID гравця Social Club</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="261"/>
+        <location filename="../PlayerListDialog.cpp" line="262"/>
         <source>Failed to add Player %1 because Player %1 is already added!</source>
         <translation>Не вдалося додати гравця %1, оскільки %1 вже доданий!</translation>
     </message>
@@ -1073,7 +1057,7 @@ Press 1 for Default View</source>
         <translation>Експортується файл %1 з %2 файлів</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="109"/>
+        <location filename="../ImageEditorDialog.cpp" line="110"/>
         <location filename="../ImportDialog.cpp" line="328"/>
         <location filename="../ProfileInterface.cpp" line="462"/>
         <location filename="../ProfileInterface.cpp" line="529"/>
@@ -1081,9 +1065,9 @@ Press 1 for Default View</source>
         <translation>Імпортування...</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="110"/>
-        <location filename="../ImageEditorDialog.cpp" line="141"/>
-        <location filename="../ImageEditorDialog.cpp" line="150"/>
+        <location filename="../ImageEditorDialog.cpp" line="111"/>
+        <location filename="../ImageEditorDialog.cpp" line="142"/>
+        <location filename="../ImageEditorDialog.cpp" line="151"/>
         <location filename="../ImportDialog.cpp" line="329"/>
         <location filename="../ImportDialog.cpp" line="360"/>
         <location filename="../ImportDialog.cpp" line="369"/>
@@ -1105,14 +1089,14 @@ Press 1 for Default View</source>
         <translation>Імпорт</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="120"/>
+        <location filename="../ImageEditorDialog.cpp" line="121"/>
         <location filename="../ImportDialog.cpp" line="339"/>
         <location filename="../ProfileInterface.cpp" line="482"/>
         <source>All image files (%1)</source>
         <translation>Файли зображень (%1)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="121"/>
+        <location filename="../ImageEditorDialog.cpp" line="122"/>
         <location filename="../ImportDialog.cpp" line="340"/>
         <location filename="../ProfileInterface.cpp" line="483"/>
         <location filename="../UserInterface.cpp" line="457"/>
@@ -1120,14 +1104,14 @@ Press 1 for Default View</source>
         <translation>Усі файли (**)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="141"/>
+        <location filename="../ImageEditorDialog.cpp" line="142"/>
         <location filename="../ImportDialog.cpp" line="360"/>
         <location filename="../ProfileInterface.cpp" line="706"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
         <translation>Неможливо імпортувати %1, оскільки файл не може бути відкритий</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="150"/>
+        <location filename="../ImageEditorDialog.cpp" line="151"/>
         <location filename="../ImportDialog.cpp" line="369"/>
         <location filename="../ProfileInterface.cpp" line="716"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
@@ -1637,12 +1621,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticEditor.ui" line="14"/>
         <location filename="../SnapmaticEditor.ui" line="81"/>
-        <location filename="../JsonEditorDialog.cpp" line="109"/>
-        <location filename="../JsonEditorDialog.cpp" line="174"/>
-        <location filename="../JsonEditorDialog.cpp" line="180"/>
-        <location filename="../JsonEditorDialog.cpp" line="192"/>
+        <location filename="../JsonEditorDialog.cpp" line="110"/>
+        <location filename="../JsonEditorDialog.cpp" line="175"/>
+        <location filename="../JsonEditorDialog.cpp" line="181"/>
+        <location filename="../JsonEditorDialog.cpp" line="193"/>
         <location filename="../PictureDialog.cpp" line="906"/>
-        <location filename="../SnapmaticEditor.cpp" line="326"/>
+        <location filename="../SnapmaticEditor.cpp" line="327"/>
         <location filename="../SnapmaticWidget.cpp" line="357"/>
         <source>Snapmatic Properties</source>
         <translation>Властивості Snapmatic</translation>
@@ -1713,96 +1697,96 @@ Press 1 for Default View</source>
         <translation>&amp;Скасувати</translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="109"/>
+        <location filename="../JsonEditorDialog.cpp" line="110"/>
         <source>&lt;h4&gt;Unsaved changes detected&lt;/h4&gt;You want to save the JSON content before you quit?</source>
         <translation>&lt;h4&gt; Виявлені незбережені зміни &lt;/h4&gt; Ви хочете зберегти вміст JSON перед тим, як вийти?</translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="174"/>
+        <location filename="../JsonEditorDialog.cpp" line="175"/>
         <source>Patching of Snapmatic Properties failed because of %1</source>
         <translation>Змінити властивості Snapmatic не вдалося тому що%1</translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="180"/>
+        <location filename="../JsonEditorDialog.cpp" line="181"/>
         <location filename="../PictureDialog.cpp" line="906"/>
-        <location filename="../SnapmaticEditor.cpp" line="326"/>
+        <location filename="../SnapmaticEditor.cpp" line="327"/>
         <location filename="../SnapmaticWidget.cpp" line="357"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
         <translation>Змінити властивості Snapmatic не вдалося через I/O Помилку</translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="192"/>
+        <location filename="../JsonEditorDialog.cpp" line="193"/>
         <source>Patching of Snapmatic Properties failed because of JSON Error</source>
         <translation>Змінити властивості Snapmatic не вдалося через JSON Помилку</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1765"/>
-        <location filename="../SnapmaticEditor.cpp" line="418"/>
+        <location filename="../SnapmaticEditor.cpp" line="419"/>
         <source>Snapmatic Crew</source>
         <translation>Snapmatic банда</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1765"/>
-        <location filename="../SnapmaticEditor.cpp" line="418"/>
+        <location filename="../SnapmaticEditor.cpp" line="419"/>
         <source>New Snapmatic crew:</source>
         <translation>Нова Snapmatic банда:</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1872"/>
-        <location filename="../SnapmaticEditor.cpp" line="389"/>
+        <location filename="../SnapmaticEditor.cpp" line="390"/>
         <source>Snapmatic Title</source>
         <translation>Snapmatic назва</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1872"/>
-        <location filename="../SnapmaticEditor.cpp" line="389"/>
+        <location filename="../SnapmaticEditor.cpp" line="390"/>
         <source>New Snapmatic title:</source>
         <translation>Новий Snapmatic заголовок:</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="223"/>
-        <location filename="../SnapmaticEditor.cpp" line="258"/>
-        <location filename="../SnapmaticEditor.cpp" line="278"/>
+        <location filename="../SnapmaticEditor.cpp" line="224"/>
+        <location filename="../SnapmaticEditor.cpp" line="259"/>
+        <location filename="../SnapmaticEditor.cpp" line="279"/>
         <source>Edit</source>
         <translation>Правка</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="227"/>
+        <location filename="../SnapmaticEditor.cpp" line="228"/>
         <source>Players: %1 (%2)</source>
         <comment>Multiple Player are inserted here</comment>
         <translation>Гравці: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="231"/>
+        <location filename="../SnapmaticEditor.cpp" line="232"/>
         <source>Player: %1 (%2)</source>
         <comment>One Player is inserted here</comment>
         <translation>Гравець: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="259"/>
+        <location filename="../SnapmaticEditor.cpp" line="260"/>
         <source>Title: %1 (%2)</source>
         <translation>Назва: %1 (%2)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="263"/>
-        <location filename="../SnapmaticEditor.cpp" line="267"/>
+        <location filename="../SnapmaticEditor.cpp" line="264"/>
+        <location filename="../SnapmaticEditor.cpp" line="268"/>
         <source>Appropriate: %1</source>
         <translation>Підходить: %1</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="263"/>
+        <location filename="../SnapmaticEditor.cpp" line="264"/>
         <source>Yes</source>
         <comment>Yes, should work fine</comment>
         <translation>Так</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="267"/>
+        <location filename="../SnapmaticEditor.cpp" line="268"/>
         <source>No</source>
         <comment>No, could lead to issues</comment>
         <translation>Ні</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="279"/>
+        <location filename="../SnapmaticEditor.cpp" line="280"/>
         <source>Crew: %1 (%2)</source>
         <translation>Банда: %1 (%2)</translation>
     </message>
@@ -1810,19 +1794,19 @@ Press 1 for Default View</source>
 <context>
     <name>SnapmaticPicture</name>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="160"/>
+        <location filename="../JsonEditorDialog.cpp" line="161"/>
         <location filename="../SnapmaticPicture.cpp" line="700"/>
         <source>JSON is incomplete and malformed</source>
         <translation>JSON неповний та неправильний</translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="164"/>
+        <location filename="../JsonEditorDialog.cpp" line="165"/>
         <location filename="../SnapmaticPicture.cpp" line="704"/>
         <source>JSON is incomplete</source>
         <translation>JSON неповний</translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.cpp" line="168"/>
+        <location filename="../JsonEditorDialog.cpp" line="169"/>
         <location filename="../SnapmaticPicture.cpp" line="708"/>
         <source>JSON is malformed</source>
         <translation>JSON неправильний</translation>
@@ -2002,13 +1986,13 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="157"/>
-        <source>%1 User Statistics</source>
-        <translation>%1 Статистика користувачів</translation>
-    </message>
-    <message>
         <location filename="../main.cpp" line="156"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../main.cpp" line="157"/>
+        <source>%1 User Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -2019,7 +2003,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../main.cpp" line="170"/>
         <source>&amp;OK</source>
-        <translation>&amp;OK</translation>
+        <translation type="unfinished">&amp;OK</translation>
     </message>
 </context>
 <context>
@@ -2156,7 +2140,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="631"/>
+        <location filename="../OptionsDialog.cpp" line="626"/>
         <location filename="../UserInterface.cpp" line="182"/>
         <location filename="../UserInterface.cpp" line="602"/>
         <source>Select GTA V Folder...</source>

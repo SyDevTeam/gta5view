@@ -420,11 +420,11 @@
         </widget>
        </item>
        <item>
-        <widget class="QGroupBox" name="gbCategorys">
+        <widget class="QGroupBox" name="gbCategories">
          <property name="title">
           <string>Categories</string>
          </property>
-         <layout class="QVBoxLayout" name="vlCategorys">
+         <layout class="QVBoxLayout" name="vlCategories">
           <item>
            <widget class="QCheckBox" name="cbGeneralStats">
             <property name="enabled">
@@ -458,6 +458,13 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="cbUsageData">
+            <property name="text">
+             <string>Personal Usage Data</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -466,74 +473,32 @@
          <property name="title">
           <string>Other</string>
          </property>
-         <layout class="QHBoxLayout" name="hlOtherStats">
+         <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <widget class="QLabel" name="labParticipationID">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="text">
-             <string>Participation ID: %1</string>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-            <property name="textInteractionFlags">
-             <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="cmdCopyStatsID">
-            <property name="text">
-             <string>&amp;Copy</string>
-            </property>
-            <property name="autoDefault">
-             <bool>false</bool>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </item>
-       <item>
-        <widget class="QGroupBox" name="gbUserFeedback">
-         <property name="title">
-          <string>User Feedback</string>
-         </property>
-         <layout class="QVBoxLayout" name="vlUserFeedback">
-          <item>
-           <widget class="QPlainTextEdit" name="txtUserFeedback"/>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="hlUserFeedbackButtons">
+           <layout class="QHBoxLayout" name="hlParticipation">
             <item>
-             <widget class="QLabel" name="labUserFeedback">
+             <widget class="QLabel" name="labParticipationID">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
               <property name="text">
-               <string>Limit: 1 message/day</string>
+               <string>Participation ID: %1</string>
+              </property>
+              <property name="wordWrap">
+               <bool>true</bool>
+              </property>
+              <property name="textInteractionFlags">
+               <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
               </property>
              </widget>
             </item>
             <item>
-             <spacer name="hsUserFeedbackButtons">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>0</width>
-                <height>0</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
-            <item>
-             <widget class="QPushButton" name="cmdUserFeedbackSend">
+             <widget class="QPushButton" name="cmdCopyStatsID">
               <property name="text">
-               <string>&amp;Send</string>
+               <string>&amp;Copy</string>
               </property>
               <property name="autoDefault">
                <bool>false</bool>

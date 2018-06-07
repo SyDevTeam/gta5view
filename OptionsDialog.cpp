@@ -55,6 +55,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->setupUi(this);
     ui->tabWidget->setCurrentIndex(0);
     ui->labPicCustomRes->setVisible(false);
+    ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
     QRect desktopResolution = QApplication::desktop()->screenGeometry(this);
@@ -406,6 +407,7 @@ void OptionsDialog::applySettings()
 #ifdef GTA5SYNC_TELEMETRY
     settings->beginGroup("Telemetry");
     settings->setValue("PushAppConf", ui->cbAppConfigStats->isChecked());
+    settings->setValue("PushUsageData", ui->cbUsageData->isChecked());
     if (!Telemetry->isStateForced()) { settings->setValue("IsEnabled", ui->cbParticipateStats->isChecked()); }
     settings->endGroup();
     Telemetry->refresh();
@@ -549,17 +551,10 @@ void OptionsDialog::setupStatisticsSettings()
     ui->cbParticipateStats->setText(tr("Participate in %1 User Statistics").arg(GTA5SYNC_APPSTR));
     ui->labUserStats->setText(QString("<a href=\"%2\">%1</a>").arg(tr("View %1 User Statistics Online").arg(GTA5SYNC_APPSTR), TelemetryClass::getWebURL().toString()));
 
-    ui->gbUserFeedback->setVisible(false);
-    // settings->beginGroup("Startup");
-    // if (settings->value("IsFirstStart", true).toBool() == true)
-    // {
-    //     ui->gbUserFeedback->setVisible(false);
-    // }
-    // settings->endGroup();
-
     settings->beginGroup("Telemetry");
     ui->cbParticipateStats->setChecked(Telemetry->isEnabled());
     ui->cbAppConfigStats->setChecked(settings->value("PushAppConf", false).toBool());
+    ui->cbUsageData->setChecked(settings->value("PushUsageData", false).toBool());
     settings->endGroup();
 
     if (Telemetry->isStateForced())
@@ -638,25 +633,6 @@ void OptionsDialog::on_cmdExploreFolder_clicked()
 void OptionsDialog::on_cbDefaultStyle_toggled(bool checked)
 {
     ui->cbStyleList->setDisabled(checked);
-}
-
-void OptionsDialog::on_cmdUserFeedbackSend_clicked()
-{
-#ifdef GTA5SYNC_TELEMETRY
-    if (ui->txtUserFeedback->toPlainText().length() < 1024 && ui->txtUserFeedback->toPlainText().length() >= 3)
-    {
-        QJsonDocument feedback;
-        QJsonObject feedbackObject;
-        feedbackObject["Message"] = ui->txtUserFeedback->toPlainText();
-        feedback.setObject(feedbackObject);
-        Telemetry->push(TelemetryCategory::UserFeedback, feedback);
-        ui->txtUserFeedback->setPlainText(QString());
-    }
-    else
-    {
-        QMessageBox::information(this, tr("User Feedback"), tr("A feedback message have to between 3-1024 characters long"));
-    }
-#endif
 }
 
 void OptionsDialog::on_cmdCopyStatsID_clicked()

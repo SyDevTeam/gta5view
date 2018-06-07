@@ -38,6 +38,7 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, ProfileDatabase *profileD
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
 
     ui->setupUi(this);
+    ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
     // Set Icon for Apply Button

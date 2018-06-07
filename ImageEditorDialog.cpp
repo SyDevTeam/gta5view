@@ -37,6 +37,7 @@ ImageEditorDialog::ImageEditorDialog(SnapmaticPicture *picture, QString profileN
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
 
     ui->setupUi(this);
+    ui->cmdClose->setDefault(true);
     ui->cmdClose->setFocus();
 
     // Set Icon for Close Button

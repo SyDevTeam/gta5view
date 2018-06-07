@@ -35,6 +35,7 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
 
     listUpdated = false;
     ui->setupUi(this);
+    ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
     // Set Icon for Apply Button
