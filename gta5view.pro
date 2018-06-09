@@ -187,14 +187,17 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
     qjson4/QJsonParser.cpp
 
 isEqual(QT_MAJOR_VERSION, 4): RESOURCES += res/tr_qt4.qrc
+isEqual(QT_MAJOR_VERSION, 4): GTA5SYNC_RCC = $$[QT_INSTALL_BINS]/rcc
 
 # QT5 ONLY STUFF
+
 isEqual(QT_MAJOR_VERSION, 5): RESOURCES += res/tr_qt5.qrc
+isEqual(QT_MAJOR_VERSION, 5): GTA5SYNC_RCC = $$[QT_HOST_BINS]/rcc
 
 # RESOURCE COMPILATION
 
 depend.depends += $$PWD/res/global.qrc
-depend.commands += rcc -binary -compress 9 -threshold 0 $$PWD/res/global.qrc -o $$PWD/res/global.rcc
+depend.commands += $$GTA5SYNC_RCC -binary -threshold 0 -compress 9 $$PWD/res/global.qrc -o $$PWD/res/global.rcc
 QMAKE_EXTRA_TARGETS += depend
 
 # PROJECT INSTALLATION
