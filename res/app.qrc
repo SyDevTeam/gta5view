@@ -24,19 +24,7 @@
         <file>watermarkdark.png</file>
     </qresource>
     <qresource prefix="/global">
-        <file>global.de.ini</file>
-        <file>global.en.ini</file>
-        <file>global.es.ini</file>
-        <file>global.es_MX.ini</file>
-        <file>global.fr.ini</file>
-        <file>global.it.ini</file>
-        <file>global.ja.ini</file>
-        <file>global.ko.ini</file>
-        <file>global.pl.ini</file>
-        <file>global.pt.ini</file>
-        <file>global.ru.ini</file>
-        <file>global.zh.ini</file>
-        <file>global.zh.loc</file>
+        <file>global.rcc</file>
     </qresource>
     <qresource prefix="/template">
         <file>template.g5e</file>

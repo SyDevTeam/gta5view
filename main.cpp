@@ -43,6 +43,7 @@
 #include <QMessageBox>
 #include <QStringList>
 #include <QTranslator>
+#include <QResource>
 #include <QCheckBox>
 #include <QFileInfo>
 #include <QSysInfo>
@@ -290,6 +291,8 @@ int main(int argc, char *argv[])
     QObject::connect(&threadDB, SIGNAL(playerNameFound(int, QString)), &profileDB, SLOT(setPlayerName(int, QString)));
     QObject::connect(&threadDB, SIGNAL(finished()), &a, SLOT(quit()));
     threadDB.start();
+
+    QResource::registerResource(":/global/global.rcc");
 
     UserInterface uiWindow(&profileDB, &crewDB, &threadDB);
     uiWindow.setWindowIcon(IconLoader::loadingAppIcon());
