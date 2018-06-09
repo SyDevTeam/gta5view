@@ -45,7 +45,7 @@ else
    QMAKE_PATH=$(find /usr/ -executable -name qmake -type f 2> /dev/null | sed -n 1p)
    if [ "${QMAKE_PATH}" == "" ]; then
       echo "Qt qmake not found"
-	  exit 1
+      exit 1
    fi
    QT_VERSION=$(${QMAKE_PATH} -query "QT_VERSION")
 fi
@@ -60,7 +60,7 @@ else
    MAKE_PATH=$(find /usr/ -executable -name make -type f 2> /dev/null | sed -n 1p)
    if [ "${MAKE_PATH}" == "" ]; then
       echo "Make not found"
-	  exit 1
+      exit 1
    fi
 fi
 
