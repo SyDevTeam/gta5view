@@ -1,0 +1,89 @@
+#!/bin/bash
+#*****************************************************************************
+# gta5view Grand Theft Auto V Profile Viewer
+# Copyright (C) 2018 Syping
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#*****************************************************************************
+
+# Initialise bash script
+set +e
+EXTRA_ARGS=
+
+# Find Source Directory
+SOURCE=${BASH_SOURCE[0]}
+while [ -h "$SOURCE" ]; do
+  SOURCE_DIR=$(cd -P "$(dirname "$SOURCE")" && pwd)
+  SOURCE=$(readlink "$SOURCE")
+  [[ $SOURCE != /* ]] && SOURCE="${SOURCE_DIR}/${SOURCE}"
+done
+SOURCE_DIR=$(cd -P "$(dirname "$SOURCE")" && pwd)
+
+# Find Qt Installation
+QT_SELECT=qt5
+if [ -x "${QMAKE_PATH}" ]; then
+   QMAKE_PATH=${QMAKE_PATH}
+   QT_VERSION=$(${QMAKE_PATH} -query "QT_VERSION")
+elif [ -x "$(command -v qmake-qt5)" ]; then
+   QMAKE_PATH=$(command -v qmake-qt5)
+   QT_VERSION=$(${QMAKE_PATH} -query "QT_VERSION")
+elif [ -x "$(command -v qmake)" ]; then
+   QMAKE_PATH=$(command -v qmake)
+   QT_VERSION=$(${QMAKE_PATH} -query "QT_VERSION")
+else
+   QMAKE_PATH=$(find /usr/ -executable -name qmake -type f 2> /dev/null | sed -n 1p)
+   if [ "${QMAKE_PATH}" == "" ]; then
+      echo "Qt qmake not found"
+	  exit 1
+   fi
+   QT_VERSION=$(${QMAKE_PATH} -query "QT_VERSION")
+fi
+echo "Found Qt ${QT_VERSION} with qmake located at ${QMAKE_PATH}" 
+
+# Find Make Installation
+if [ -x "${MAKE_PATH}" ]; then
+   MAKE_PATH=${MAKE_PATH}
+elif [ -x "$(command -v make)" ]; then
+   MAKE_PATH=$(command -v make)
+else
+   MAKE_PATH=$(find /usr/ -executable -name make -type f 2> /dev/null | sed -n 1p)
+   if [ "${MAKE_PATH}" == "" ]; then
+      echo "Make not found"
+	  exit 1
+   fi
+fi
+
+# Clean Makefile
+if [ ! "${RUN_MAKE_CLEAN}" == "NO" ]; then
+   if [ -f "Makefile" ]; then
+      echo "${MAKE_PATH} distclean"
+      ${MAKE_PATH} distclean
+   fi
+fi
+
+# Set Prefix
+if [ ! "${PREFIX}" == "" ]; then
+   EXTRA_ARGS="${EXTRA_ARGS} GTA5SYNC_PREFIX=${PREFIX}"
+fi
+
+# Generating Makefile
+echo "${QMAKE_PATH}${EXTRA_ARGS} ${SOURCE_DIR}/gta5view.pro"
+${QMAKE_PATH}${EXTRA_ARGS} ${SOURCE_DIR}/gta5view.pro
+
+# Make dependencies
+if [ ! "${RUN_MAKE_DEPEND}" == "NO" ]; then
+   echo "${MAKE_PATH} depend"
+   ${MAKE_PATH} depend
+fi
+exit 0
