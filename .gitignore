@@ -29,3 +29,6 @@
 
 # Qt project user file
 *.pro.user
+
+# Qt resource file
+*.rcc

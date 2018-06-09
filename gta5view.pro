@@ -191,6 +191,12 @@ isEqual(QT_MAJOR_VERSION, 4): RESOURCES += res/tr_qt4.qrc
 # QT5 ONLY STUFF
 isEqual(QT_MAJOR_VERSION, 5): RESOURCES += res/tr_qt5.qrc
 
+# RESOURCE COMPILATION
+
+depend.depends += $$PWD/res/global.qrc
+depend.commands += rcc -binary -compress 9 -threshold 0 $$PWD/res/global.qrc -o $$PWD/res/global.rcc
+QMAKE_EXTRA_TARGETS += depend
+
 # PROJECT INSTALLATION
 
 isEmpty(GTA5SYNC_PREFIX): GTA5SYNC_PREFIX = /usr/local
