@@ -34,7 +34,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 #### Build gta5view for Windows (Beginner)
 
 Download the [Qt Framework](https://www.qt.io/) and install the MinGW version.  
-Download the Source Code over [GitHub](https://github.com/SyDevTeam/gta5view/archive/1.5.x.zip) or with your Git client.  
+Download the Source Code over the Repository or with your Git client.  
 Open the gta5view.pro Project file with Qt Creator and build it over Qt Creator.
 
 #### Download Binary Releases
