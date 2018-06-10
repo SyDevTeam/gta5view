@@ -31,7 +31,7 @@ done
 SOURCE_DIR=$(cd -P "$(dirname "$SOURCE")" && pwd)
 
 # Find Qt Installation
-QT_SELECT=qt5
+export QT_SELECT=qt5
 if [ -x "${QMAKE_PATH}" ]; then
    QMAKE_PATH=${QMAKE_PATH}
    QT_VERSION=$(${QMAKE_PATH} -query "QT_VERSION")
