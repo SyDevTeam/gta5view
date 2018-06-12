@@ -153,7 +153,7 @@ echo "${QMAKE_PATH}${_extra_args} ${SOURCE_DIR}/gta5view.pro"
 ${QMAKE_PATH}${_extra_args} ${SOURCE_DIR}/gta5view.pro
 
 # Make dependencies
-if [ ! "${RUN_MAKE_DEPEND}" == "NO" ]; then
+if [ "${RUN_MAKE_DEPEND}" == "YES" ]; then
    echo "${MAKE_PATH} depend"
    ${MAKE_PATH} depend
 fi
