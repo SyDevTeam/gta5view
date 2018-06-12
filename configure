@@ -17,9 +17,80 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #*****************************************************************************
 
-# Initialise bash script
+# Argbash generated code
+die()
+{
+   local _ret=$2
+   test -n "$_ret" || _ret=1
+   test "$_PRINT_HELP" = yes && print_help >&2
+   echo "$1" >&2
+   exit ${_ret}
+}
+begins_with_short_option()
+{
+   local first_option all_short_options
+   all_short_options='h'
+   first_option="${1:0:1}"
+   test "$all_short_options" = "${all_short_options/$first_option/}" && return 1 || return 0
+}
+_arg_prefix=
+_arg_qmake=
+print_help ()
+{
+   printf '%s\n' "gta5view Configure Script"
+   printf 'Usage: %s [--prefix <arg>] [--qmake <arg>] [-h|--help]\n' "$0"
+   printf '\t%s\n' "-h,--help: Prints help"
+}
+parse_commandline ()
+{
+   while test $# -gt 0
+   do
+      _key="$1"
+      case "$_key" in
+         --prefix)
+            test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+            _arg_prefix="$2"
+            shift
+            ;;
+         --prefix=*)
+            _arg_prefix="${_key##--prefix=}"
+            ;;
+         --qmake)
+            test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+            _arg_qmake="$2"
+            shift
+            ;;
+         --qmake=*)
+            _arg_qmake="${_key##--qmake=}"
+            ;;
+         -h|--help)
+            print_help
+            exit 0
+            ;;
+         -h*)
+            print_help
+            exit 0
+            ;;
+         *)
+            _PRINT_HELP=yes die "FATAL ERROR: Got an unexpected argument '$1'" 1
+            ;;
+      esac
+      shift
+   done
+}
+parse_commandline "$@"
+
+# Initialise bash script - Step 1
+if [ ! "${_arg_prefix}" == "" ]; then
+  PREFIX=${_arg_prefix}
+fi
+if [ ! "${_arg_qmake}" == "" ]; then
+  QMAKE_PATH=${_arg_qmake}
+fi
+
+# Initialise bash script - Step 2
 set +e
-EXTRA_ARGS=
+_extra_args=
 
 # Find Source Directory
 SOURCE=${BASH_SOURCE[0]}
@@ -74,12 +145,12 @@ fi
 
 # Set Prefix
 if [ ! "${PREFIX}" == "" ]; then
-   EXTRA_ARGS="${EXTRA_ARGS} GTA5SYNC_PREFIX=${PREFIX}"
+   _extra_args="${_extra_args} GTA5SYNC_PREFIX=${PREFIX}"
 fi
 
 # Generating Makefile
-echo "${QMAKE_PATH}${EXTRA_ARGS} ${SOURCE_DIR}/gta5view.pro"
-${QMAKE_PATH}${EXTRA_ARGS} ${SOURCE_DIR}/gta5view.pro
+echo "${QMAKE_PATH}${_extra_args} ${SOURCE_DIR}/gta5view.pro"
+${QMAKE_PATH}${_extra_args} ${SOURCE_DIR}/gta5view.pro
 
 # Make dependencies
 if [ ! "${RUN_MAKE_DEPEND}" == "NO" ]; then
