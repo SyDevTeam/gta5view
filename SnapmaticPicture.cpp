@@ -91,6 +91,7 @@ void SnapmaticPicture::reset()
 
     // INIT PIC BOOLS
     isCustomFormat = false;
+    isModernFormat = false;
     isFormatSwitch = false;
     isLoadedInRAM = false;
     lowRamMode = false;
@@ -138,6 +139,7 @@ bool SnapmaticPicture::preloadFile()
         else
         {
             isCustomFormat = false;
+            isModernFormat = false;
             isLoadedInRAM = true;
         }
     }
@@ -204,6 +206,29 @@ bool SnapmaticPicture::preloadFile()
                 else
                 {
                     lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",2,G5E_FORMATERROR";
+                    return false;
+                }
+            }
+            else if (g5eContent.left(2).toHex() == QByteArray("3200"))
+            {
+                g5eContent.remove(0, 2);
+                if (g5eContent.left(2).toHex() == QByteArray("0001"))
+                {
+                    g5eContent.remove(0, 2);
+                    rawPicContent = qUncompress(g5eContent);
+
+                    // Setting is values
+                    isModernFormat = true;
+                    isLoadedInRAM = true;
+                }
+                else if (g5eContent.left(2).toHex() == QByteArray("0002"))
+                {
+                    lastStep = "2;/4,ReadingFile," % convertDrawStringForLog(picFilePath) % ",2,G5E2_FORMATWRONG,G5E2_SGD";
+                    return false;
+                }
+                else
+                {
+                    lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",2,G5E2_MISSINGEXTENSION";
                     return false;
                 }
             }
@@ -440,6 +465,7 @@ void SnapmaticPicture::updateStrings()
     pictureStr = tr("PHOTO - %1").arg(localProperties.createdDateTime.toString("MM/dd/yy HH:mm:ss"));
     sortStr = localProperties.createdDateTime.toString("yyMMddHHmmss") % QString::number(localProperties.uid);
     QString exportStr = localProperties.createdDateTime.toString("yyyyMMdd") % "-" % QString::number(localProperties.uid);
+    if (isModernFormat) { picFileName = "PGTA5" % QString::number(localProperties.uid); }
     picExportFileName = exportStr % "_" % cmpPicTitl;
 }
 
@@ -1132,27 +1158,13 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
     {
         if (format == SnapmaticFormat::G5E_Format)
         {
-            // Modern compressed export
-            QByteArray stockFileNameUTF8 = picFileName.toUtf8();
-            QByteArray numberLength = QByteArray::number(stockFileNameUTF8.length());
-            if (numberLength.length() == 1)
-            {
-                numberLength.insert(0, '0');
-            }
-            else if (numberLength.length() != 2)
-            {
-                numberLength = "00";
-            }
+            // Modern compressed export (v2)
             QByteArray g5eHeader;
-            g5eHeader.reserve(stockFileNameUTF8.length() + 16);
+            g5eHeader.reserve(10);
             g5eHeader += '\x00'; // First Null Byte
             g5eHeader += QByteArray("G5E"); // GTA 5 Export
-            g5eHeader += '\x10'; g5eHeader += '\x00'; // 2 byte GTA 5 Export Version
-            g5eHeader += QByteArray("LEN"); // Before Length
-            g5eHeader += QByteArray::fromHex(numberLength); // Length in HEX before Compressed
-            g5eHeader += QByteArray("FIL"); // Before File Name
-            g5eHeader += stockFileNameUTF8; // File Name
-            g5eHeader += QByteArray("COM"); // Before Compressed
+            g5eHeader += '\x32'; g5eHeader += '\x00'; // 2 byte GTA 5 Export Version
+            g5eHeader += '\x00'; g5eHeader += '\x01'; // 2 byte GTA 5 Export Type
             if (picFile->write(g5eHeader) == -1) { writeFailure = true; }
             if (!lowRamMode)
             {

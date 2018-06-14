@@ -160,6 +160,7 @@ private:
     bool isLoadedInRAM;
     bool isCustomFormat;
     bool isFormatSwitch;
+    bool isModernFormat;
     bool careSnapDefault;
     int jpegRawContentSize;
     int jpegRawContentSizeE;
