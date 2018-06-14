@@ -113,7 +113,7 @@ private:
     int contentMode;
 
     bool isSupportedImageFile(QString selectedFileName);
-    bool importFile(QString selectedFile, QDateTime importDateTime, int *currentTime, bool notMultiple);
+    bool importFile(QString selectedFile, QDateTime importDateTime, bool notMultiple);
     void importFilesProgress(QStringList selectedFiles);
     bool importSnapmaticPicture(SnapmaticPicture *picture, bool warn = true);
     bool importSavegameData(SavegameData *savegame, QString sgdPath, bool warn = true);
@@ -124,6 +124,7 @@ private:
     void insertSnapmaticIPI(QWidget *widget);
     void insertSavegameIPI(QWidget *widget);
     void sortingProfileInterface();
+    static int getRandomUid();
 
 signals:
     void profileLoaded();
