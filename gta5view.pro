@@ -26,7 +26,6 @@ TARGET = gta5view
 TEMPLATE = app
 
 HEADERS += config.h
-PRECOMPILED_HEADER += config.h
 
 SOURCES += main.cpp \
     AboutDialog.cpp \
