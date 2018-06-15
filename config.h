@@ -18,7 +18,10 @@
 
 #ifndef CONFIG_H
 #define CONFIG_H
+
+#if __cplusplus
 #include <QString>
+#endif
 
 #ifndef GTA5SYNC_APPVENDOR
 #define GTA5SYNC_APPVENDOR "Syping"
@@ -44,6 +47,7 @@
 #define GTA5SYNC_APPVER "1.6.0"
 #endif
 
+#if __cplusplus
 #ifdef GTA5SYNC_BUILDTYPE_REL
 #ifndef GTA5SYNC_BUILDTYPE
 #define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Release")
@@ -145,6 +149,7 @@
 
 #ifndef GTA5SYNC_BUILDSTRING
 #define GTA5SYNC_BUILDSTRING QString("%1, %2").arg(QT_VERSION_STR, GTA5SYNC_COMPILER)
+#endif
 #endif
 
 #endif // CONFIG_H
