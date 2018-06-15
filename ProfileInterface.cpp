@@ -29,6 +29,7 @@
 #include "ProfileLoader.h"
 #include "ExportThread.h"
 #include "ImportDialog.h"
+#include "pcg_basic.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QProgressDialog>
@@ -1945,8 +1946,9 @@ preSelectionTitle:
 
 int ProfileInterface::getRandomUid()
 {
-    std::mt19937 rng;
-    rng.seed(std::random_device()());
-    std::uniform_int_distribution<std::mt19937::result_type> uiddist(10000000, 2147483647);
-    return uiddist(rng);
+    pcg32_random_t rng;
+    pcg32_srandom_r(&rng, time(NULL), (intptr_t)&rng);
+    int random_int = pcg32_boundedrand_r(&rng, 2147483647);
+    qDebug() << random_int;
+    return random_int;
 }

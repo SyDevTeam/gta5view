@@ -64,6 +64,7 @@ SOURCES += main.cpp \
     TranslationClass.cpp \
     UserInterface.cpp \
     anpro/JSHighlighter.cpp \
+    pcg/pcg_basic.c \
     tmext/TelemetryClassAuthenticator.cpp \
     uimod/UiModLabel.cpp \
     uimod/UiModWidget.cpp
@@ -104,6 +105,7 @@ HEADERS  += \
     TranslationClass.h \
     UserInterface.h \
     anpro/JSHighlighter.h \
+    pcg/pcg_basic.h \
     tmext/TelemetryClassAuthenticator.h \
     uimod/UiModLabel.h \
     uimod/UiModWidget.h
@@ -148,7 +150,7 @@ DISTFILES += res/app.rc \
     res/gta5view.png \
     lang/README.txt
 
-INCLUDEPATH += ./anpro ./tmext ./uimod
+INCLUDEPATH += ./anpro ./pcg ./tmext ./uimod
 
 # GTA5SYNC/GTA5VIEW ONLY
 

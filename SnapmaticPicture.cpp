@@ -189,6 +189,7 @@ bool SnapmaticPicture::preloadFile()
                             rawPicContent = qUncompress(g5eContent);
 
                             // Setting is values
+                            isModernFormat = false;
                             isLoadedInRAM = true;
                         }
                         else
