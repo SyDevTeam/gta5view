@@ -29,6 +29,7 @@
 #include "ExportThread.h"
 #include "SavegameData.h"
 #include "CrewDatabase.h"
+#include "pcg_basic.h"
 #include <QProgressDialog>
 #include <QSpacerItem>
 #include <QDateTime>
@@ -107,6 +108,7 @@ private:
     QString profileName;
     QString loadingStr;
     QString language;
+    pcg32_random_t rng;
     bool contextMenuOpened;
     bool isProfileLoaded;
     int selectedWidgts;
@@ -124,7 +126,7 @@ private:
     void insertSnapmaticIPI(QWidget *widget);
     void insertSavegameIPI(QWidget *widget);
     void sortingProfileInterface();
-    static int getRandomUid();
+    int getRandomUid();
 
 signals:
     void profileLoaded();

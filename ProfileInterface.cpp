@@ -121,6 +121,9 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     }
 #endif
 
+    // Seed RNG
+    pcg32_srandom_r(&rng, time(NULL), (intptr_t)&rng);
+
     setMouseTracking(true);
     installEventFilter(this);
 }
@@ -804,7 +807,6 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool warn)
 {
     QString picFileName = picture->getPictureFileName();
-    qDebug() << picFileName;
     QString adjustedFileName = picture->getOriginalPictureFileName();
     if (picFileName.left(4) != "PGTA")
     {
@@ -1946,9 +1948,6 @@ preSelectionTitle:
 
 int ProfileInterface::getRandomUid()
 {
-    pcg32_random_t rng;
-    pcg32_srandom_r(&rng, time(NULL), (intptr_t)&rng);
     int random_int = pcg32_boundedrand_r(&rng, 2147483647);
-    qDebug() << random_int;
     return random_int;
 }
