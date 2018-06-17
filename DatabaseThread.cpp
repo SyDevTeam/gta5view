@@ -169,6 +169,10 @@ void DatabaseThread::scanCrewReference(const QStringList &crewList, const int &r
                     emit crewNameFound(crewID.toInt(), crewName);
                 }
             }
+            else
+            {
+                netReply->abort();
+            }
 
             if (threadRunning)
             {

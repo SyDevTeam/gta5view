@@ -29,11 +29,15 @@
 #include "ProfileLoader.h"
 #include "ExportThread.h"
 #include "ImportDialog.h"
+#include "UiModLabel.h"
 #include "pcg_basic.h"
 #include "AppEnv.h"
 #include "config.h"
+#include <QNetworkAccessManager>
 #include <QProgressDialog>
+#include <QNetworkRequest>
 #include <QStringBuilder>
+#include <QNetworkReply>
 #include <QImageReader>
 #include <QProgressBar>
 #include <QInputDialog>
@@ -42,8 +46,10 @@
 #include <QMessageBox>
 #include <QMouseEvent>
 #include <QFileDialog>
+#include <QVBoxLayout>
 #include <QEventLoop>
 #include <QScrollBar>
+#include <QClipboard>
 #include <QFileInfo>
 #include <QPalette>
 #include <QPainter>
@@ -710,19 +716,19 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         delete picture;
                         return false;
                     }
-                    QImage *importImage = new QImage();
+                    QImage *snapmaticImage = new QImage();
                     QImageReader snapmaticImageReader;
                     snapmaticImageReader.setDecideFormatFromContent(true);
                     snapmaticImageReader.setDevice(&snapmaticFile);
-                    if (!snapmaticImageReader.read(importImage))
+                    if (!snapmaticImageReader.read(snapmaticImage))
                     {
                         QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
-                        delete importImage;
+                        delete snapmaticImage;
                         delete picture;
                         return false;
                     }
                     ImportDialog *importDialog = new ImportDialog(this);
-                    importDialog->setImage(importImage);
+                    importDialog->setImage(snapmaticImage);
                     importDialog->setModal(true);
                     importDialog->show();
                     importDialog->exec();
@@ -802,6 +808,60 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
     }
     if (notMultiple) QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
     return false;
+}
+
+bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateTime)
+{
+    SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
+    if (picture->readingPicture(true, false, true, false))
+    {
+        bool success = false;
+        ImportDialog *importDialog = new ImportDialog(this);
+        importDialog->setImage(snapmaticImage);
+        importDialog->setModal(true);
+        importDialog->show();
+        importDialog->exec();
+        if (importDialog->isImportAgreed())
+        {
+            if (picture->setImage(importDialog->image()))
+            {
+                SnapmaticProperties spJson = picture->getSnapmaticProperties();
+                spJson.uid = getRandomUid();
+                bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
+                bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                int cEnough = 0;
+                while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit)
+                {
+                    spJson.uid = getRandomUid();
+                    fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                    fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
+                    fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                    cEnough++;
+                }
+                spJson.createdDateTime = importDateTime;
+                spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
+                picture->setSnapmaticProperties(spJson);
+                picture->setPicFileName(QString("PGTA5%1").arg(QString::number(spJson.uid)));
+                picture->setPictureTitle(importDialog->getImageTitle());
+                picture->updateStrings();
+                success = importSnapmaticPicture(picture, true);
+            }
+        }
+        else
+        {
+            delete picture;
+            success = true;
+        }
+        delete importDialog;
+        if (!success) delete picture;
+        return success;
+    }
+    else
+    {
+        delete picture;
+        return false;
+    }
 }
 
 bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool warn)
@@ -1337,7 +1397,6 @@ void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
     if (pathList.length() == 1)
     {
         QString selectedFile = pathList.at(0);
-        QDateTime importDateTime = QDateTime::currentDateTime();
         importFile(selectedFile, QDateTime::currentDateTime(), true);
     }
     else if (pathList.length() > 1)
@@ -1354,7 +1413,83 @@ void ProfileInterface::retranslateUi()
 
 bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
 {
-    if (event->type() == QEvent::MouseMove)
+    if (event->type() == QEvent::KeyPress)
+    {
+        if (isProfileLoaded)
+        {
+            QKeyEvent *keyEvent = dynamic_cast<QKeyEvent*>(event);
+            switch (keyEvent->key())
+            {
+            case Qt::Key_V:
+                if (QApplication::keyboardModifiers().testFlag(Qt::ControlModifier) && !QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier))
+                {
+                    QImage clipboardImage = QApplication::clipboard()->image();
+                    if (!clipboardImage.isNull())
+                    {
+                        QImage *snapmaticImage = new QImage(clipboardImage);
+                        importImage(snapmaticImage, QDateTime::currentDateTime());
+                    }
+                    QUrl clipboardUrl = QUrl::fromUserInput(QApplication::clipboard()->text());
+                    if (clipboardUrl.isValid())
+                    {
+                        QDialog urlPasteDialog(this);
+                        urlPasteDialog.setObjectName(QStringLiteral("UrlPasteDialog"));
+                        urlPasteDialog.setWindowFlags(urlPasteDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+                        urlPasteDialog.setWindowTitle(tr("Import..."));
+                        urlPasteDialog.setModal(true);
+                        QVBoxLayout urlPasteLayout(&urlPasteDialog);
+                        urlPasteLayout.setObjectName(QStringLiteral("UrlPasteLayout"));
+                        urlPasteDialog.setLayout(&urlPasteLayout);
+                        UiModLabel urlPasteLabel(&urlPasteDialog);
+                        urlPasteLabel.setObjectName("UrlPasteLabel");
+                        urlPasteLabel.setText(tr("Prepare Content for Import..."));
+                        urlPasteLayout.addWidget(&urlPasteLabel);
+                        urlPasteDialog.setFixedSize(urlPasteDialog.sizeHint());
+                        urlPasteDialog.show();
+
+                        QNetworkAccessManager *netManager = new QNetworkAccessManager();
+                        QNetworkRequest netRequest(clipboardUrl);
+                        netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
+                        netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+                        netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
+                        netRequest.setRawHeader("Connection", "keep-alive");
+                        QNetworkReply *netReply = netManager->get(netRequest);
+                        QEventLoop *downloadLoop = new QEventLoop();
+                        QObject::connect(netReply, SIGNAL(finished()), downloadLoop, SLOT(quit()));
+                        QTimer::singleShot(30000, downloadLoop, SLOT(quit()));
+                        downloadLoop->exec();
+                        downloadLoop->disconnect();
+                        delete downloadLoop;
+
+                        urlPasteDialog.close();
+
+                        if (netReply->isFinished())
+                        {
+                            QImage *snapmaticImage = new QImage();
+                            QImageReader snapmaticImageReader;
+                            snapmaticImageReader.setDecideFormatFromContent(true);
+                            snapmaticImageReader.setDevice(netReply);
+                            if (snapmaticImageReader.read(snapmaticImage))
+                            {
+                                importImage(snapmaticImage, QDateTime::currentDateTime());
+                            }
+                            else
+                            {
+                                delete snapmaticImage;
+                            }
+                        }
+                        else
+                        {
+                            netReply->abort();
+                        }
+                        delete netReply;
+                        delete netManager;
+                    }
+                }
+            }
+        }
+    }
+    else if (event->type() == QEvent::MouseMove)
     {
         if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
         {
