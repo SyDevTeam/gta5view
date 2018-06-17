@@ -64,6 +64,7 @@
 #include <QDir>
 
 #include <random>
+#include <ctime>
 
 #define importTimeFormat "HHmmss"
 #define findRetryLimit 500

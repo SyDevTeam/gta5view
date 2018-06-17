@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #*****************************************************************************
 # gta5view Grand Theft Auto V Profile Viewer
 # Copyright (C) 2018 Syping
@@ -35,10 +35,15 @@ begins_with_short_option()
 }
 _arg_prefix=
 _arg_qmake=
+_arg_telemetry_authid=
+_arg_telemetry_authpw=
+_arg_telemetry_pushurl=
+_arg_telemetry_regurl=
+_arg_telemetry_weburl=
 print_help ()
 {
    printf '%s\n' "gta5view Configure Script"
-   printf 'Usage: %s [--prefix <arg>] [--qmake <arg>] [-h|--help]\n' "$0"
+   printf 'Usage: %s [--prefix <arg>] [--qmake <arg>] [--telemetry-authid <arg>] [--telemetry-authpw <arg>] [--telemetry-pushurl <arg>] [--telemetry-regurl <arg>] [--telemetry-weburl <arg>] [-h|--help]\n' "$0"
    printf '\t%s\n' "-h,--help: Prints help"
 }
 parse_commandline ()
@@ -63,6 +68,46 @@ parse_commandline ()
          --qmake=*)
             _arg_qmake="${_key##--qmake=}"
             ;;
+         --telemetry-authid)
+            test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+            _arg_telemetry_authid="$2"
+            shift
+            ;;
+         --telemetry-authid=*)
+            _arg_telemetry_authid="${_key##--telemetry-authid=}"
+            ;;
+         --telemetry-authpw)
+            test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+            _arg_telemetry_authpw="$2"
+            shift
+            ;;
+         --telemetry-authpw=*)
+            _arg_telemetry_authpw="${_key##--telemetry-authpw=}"
+            ;;
+         --telemetry-pushurl)
+            test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+            _arg_telemetry_pushurl="$2"
+            shift
+            ;;
+         --telemetry-pushurl=*)
+            _arg_telemetry_pushurl="${_key##--telemetry-pushurl=}"
+            ;;
+         --telemetry-regurl)
+            test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+            _arg_telemetry_regurl="$2"
+            shift
+            ;;
+         --telemetry-regurl=*)
+            _arg_telemetry_regurl="${_key##--telemetry-regurl=}"
+            ;;
+         --telemetry-weburl)
+            test $# -lt 2 && die "Missing value for the optional argument '$_key'." 1
+            _arg_telemetry_weburl="$2"
+            shift
+            ;;
+         --telemetry-weburl=*)
+            _arg_telemetry_weburl="${_key##--telemetry-weburl=}"
+            ;;
          -h|--help)
             print_help
             exit 0
@@ -81,11 +126,23 @@ parse_commandline ()
 parse_commandline "$@"
 
 # Initialise bash script - Step 1
-if [ ! "${_arg_prefix}" == "" ]; then
+if [ "${_arg_prefix}" != "" ]; then
   PREFIX=${_arg_prefix}
 fi
-if [ ! "${_arg_qmake}" == "" ]; then
+if [ "${_arg_qmake}" != "" ]; then
   QMAKE_PATH=${_arg_qmake}
+fi
+if [ "${_arg_telemetry_authid}" != "" ] && [ "${_arg_telemetry_authpw}" != "" ] && [ "${_arg_telemetry_pushurl}" != "" ] && [ "${_arg_telemetry_regurl}" != "" ]; then
+   _telemetry_args="${_telemetry_args} DEFINES+=GTA5SYNC_TELEMETRY"
+   _telemetry_args="${_telemetry_args} DEFINES+=GTA5SYNC_TELEMETRY_AUTHID=\\\\\\\"${_arg_telemetry_authid}\\\\\\\""
+   _telemetry_args="${_telemetry_args} DEFINES+=GTA5SYNC_TELEMETRY_AUTHPW=\\\\\\\"${_arg_telemetry_authpw}\\\\\\\""
+   _telemetry_args="${_telemetry_args} DEFINES+=GTA5SYNC_TELEMETRY_PUSHURL=\\\\\\\"${_arg_telemetry_pushurl}\\\\\\\""
+   _telemetry_args="${_telemetry_args} DEFINES+=GTA5SYNC_TELEMETRY_REGURL=\\\\\\\"${_arg_telemetry_regurl}\\\\\\\""
+   if [ "${_arg_telemetry_weburl}" != "" ]; then
+      _telemetry_args="${_telemetry_args} DEFINES+=GTA5SYNC_TELEMETRY_WEBURL=\\\\\\\"${_arg_telemetry_weburl}\\\\\\\""
+   fi
+else
+   _telemetry_args=
 fi
 
 # Initialise bash script - Step 2
@@ -136,16 +193,41 @@ else
 fi
 
 # Clean Makefile
-if [ ! "${RUN_MAKE_CLEAN}" == "NO" ]; then
+if [ "${RUN_MAKE_CLEAN}" != "NO" ]; then
    if [ -f "Makefile" ]; then
       echo "${MAKE_PATH} distclean"
       ${MAKE_PATH} distclean
    fi
 fi
 
+# Set qConf
+if [ "${NO_QCONF}" != "YES" ]; then
+   _extra_args="${_extra_args} DEFINES+=GTA5SYNC_QCONF"
+fi
+
 # Set Prefix
-if [ ! "${PREFIX}" == "" ]; then
+if [ "${PREFIX}" != "" ]; then
    _extra_args="${_extra_args} GTA5SYNC_PREFIX=${PREFIX}"
+fi
+
+# Set Build Type
+if [ "${BUILDTYPE}" == "Alpha" ]; then
+   _extra_args="${_extra_args} DEFINES+=GTA5SYNC_BUILDTYPE_ALPHA"
+elif [ "${BUILDTYPE}" == "Beta" ]; then
+   _extra_args="${_extra_args} DEFINES+=GTA5SYNC_BUILDTYPE_BETA"
+elif [ "${BUILDTYPE}" == "Developer" ]; then
+   _extra_args="${_extra_args} DEFINES+=GTA5SYNC_BUILDTYPE_DEV"
+elif [ "${BUILDTYPE}" == "Daily Build" ]; then
+   _extra_args="${_extra_args} DEFINES+=GTA5SYNC_BUILDTYPE_DAILY"
+elif [ "${BUILDTYPE}" == "Release Candidate" ]; then
+   _extra_args="${_extra_args} DEFINES+=GTA5SYNC_BUILDTYPE_RC"
+elif [ "${BUILDTYPE}" == "Release" ]; then
+   _extra_args="${_extra_args} DEFINES+=GTA5SYNC_BUILDTYPE_REL"
+fi
+
+# Add Telemetry Args
+if [ "${_telemetry_args}" != "" ]; then
+   _extra_args="${_extra_args}${_telemetry_args}"
 fi
 
 # Generating Makefile
