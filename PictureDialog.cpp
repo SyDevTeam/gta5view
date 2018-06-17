@@ -955,7 +955,7 @@ void PictureDialog::editSnapmaticImage()
 #ifndef Q_OS_ANDROID
     imageEditor->show();
 #else
-    snapmaticEditor->showMaximized();
+    imageEditor->showMaximized();
 #endif
     imageEditor->exec();
     delete imageEditor;

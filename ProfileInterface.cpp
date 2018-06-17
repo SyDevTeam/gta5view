@@ -1803,7 +1803,13 @@ void ProfileInterface::massTool(MassTool tool)
             return;
         }
 
-        PlayerListDialog *playerListDialog = new PlayerListDialog(QStringList(), profileDB, this);
+        QStringList players;
+        if (snapmaticWidgets.length() == 1)
+        {
+            players = snapmaticWidgets.at(0)->getPicture()->getSnapmaticProperties().playersList;
+        }
+
+        PlayerListDialog *playerListDialog = new PlayerListDialog(players, profileDB, this);
         playerListDialog->setModal(true);
         playerListDialog->show();
         playerListDialog->exec();
@@ -1811,7 +1817,7 @@ void ProfileInterface::massTool(MassTool tool)
         {
             return;
         }
-        QStringList players = playerListDialog->getPlayerList();
+        players = playerListDialog->getPlayerList();
         delete playerListDialog;
 
         // Prepare Progress
@@ -1897,9 +1903,14 @@ void ProfileInterface::massTool(MassTool tool)
         }
 
         int crewID = 0;
+        if (snapmaticWidgets.length() == 1)
+        {
+            crewID = snapmaticWidgets.at(0)->getPicture()->getSnapmaticProperties().crewID;
+        }
         {
 preSelectionCrewID:
             bool ok;
+            int indexNum = 0;
             QStringList itemList;
             QStringList crewList = crewDB->getCrews();
             if (!crewList.contains(QLatin1String("0")))
@@ -1911,7 +1922,11 @@ preSelectionCrewID:
             {
                 itemList += QString("%1 (%2)").arg(crew, crewDB->getCrewName(crew.toInt()));
             }
-            QString newCrew = QInputDialog::getItem(this, QApplication::translate("SnapmaticEditor", "Snapmatic Crew"), QApplication::translate("SnapmaticEditor", "New Snapmatic crew:"), itemList, 0, true, &ok, windowFlags()^Qt::Dialog^Qt::WindowMinMaxButtonsHint);
+            if (crewList.contains(QString::number(crewID)))
+            {
+                indexNum = crewList.indexOf(QRegExp(QString::number(crewID)));
+            }
+            QString newCrew = QInputDialog::getItem(this, QApplication::translate("SnapmaticEditor", "Snapmatic Crew"), QApplication::translate("SnapmaticEditor", "New Snapmatic crew:"), itemList, indexNum, true, &ok, windowFlags()^Qt::Dialog^Qt::WindowMinMaxButtonsHint);
             if (ok && !newCrew.isEmpty())
             {
                 if (newCrew.contains(" ")) newCrew = newCrew.split(" ").at(0);
@@ -2015,6 +2030,10 @@ preSelectionCrewID:
         }
 
         QString snapmaticTitle;
+        if (snapmaticWidgets.length() == 1)
+        {
+            snapmaticTitle = snapmaticWidgets.at(0)->getPicture()->getPictureTitle();
+        }
         {
 preSelectionTitle:
             bool ok;
