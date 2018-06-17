@@ -1070,7 +1070,7 @@ Drücke 1 für Standardmodus</translation>
         <location filename="../ImportDialog.cpp" line="328"/>
         <location filename="../ProfileInterface.cpp" line="474"/>
         <location filename="../ProfileInterface.cpp" line="540"/>
-        <location filename="../ProfileInterface.cpp" line="1438"/>
+        <location filename="../ProfileInterface.cpp" line="1442"/>
         <source>Import...</source>
         <translation>Importieren...</translation>
     </message>
@@ -1242,38 +1242,38 @@ Drücke 1 für Standardmodus</translation>
         <translation>Nur GTA Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1713"/>
-        <location filename="../ProfileInterface.cpp" line="1810"/>
-        <location filename="../ProfileInterface.cpp" line="1928"/>
-        <location filename="../ProfileInterface.cpp" line="2030"/>
+        <location filename="../ProfileInterface.cpp" line="1726"/>
+        <location filename="../ProfileInterface.cpp" line="1823"/>
+        <location filename="../ProfileInterface.cpp" line="1941"/>
+        <location filename="../ProfileInterface.cpp" line="2043"/>
         <source>Patch selected...</source>
         <translation>Auswahl patchen...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1714"/>
-        <location filename="../ProfileInterface.cpp" line="1733"/>
-        <location filename="../ProfileInterface.cpp" line="1811"/>
-        <location filename="../ProfileInterface.cpp" line="1830"/>
-        <location filename="../ProfileInterface.cpp" line="1929"/>
-        <location filename="../ProfileInterface.cpp" line="1948"/>
-        <location filename="../ProfileInterface.cpp" line="2031"/>
-        <location filename="../ProfileInterface.cpp" line="2050"/>
+        <location filename="../ProfileInterface.cpp" line="1727"/>
+        <location filename="../ProfileInterface.cpp" line="1746"/>
+        <location filename="../ProfileInterface.cpp" line="1824"/>
+        <location filename="../ProfileInterface.cpp" line="1843"/>
+        <location filename="../ProfileInterface.cpp" line="1942"/>
+        <location filename="../ProfileInterface.cpp" line="1961"/>
+        <location filename="../ProfileInterface.cpp" line="2044"/>
+        <location filename="../ProfileInterface.cpp" line="2063"/>
         <source>Patch file %1 of %2 files</source>
         <translation>Patche Datei %1 von %2 Dateien</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1702"/>
-        <location filename="../ProfileInterface.cpp" line="1767"/>
+        <location filename="../ProfileInterface.cpp" line="1715"/>
+        <location filename="../ProfileInterface.cpp" line="1780"/>
         <source>Qualify as Avatar</source>
         <translation>Als Avatar qualifizieren</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1243"/>
         <location filename="../ProfileInterface.cpp" line="1277"/>
-        <location filename="../ProfileInterface.cpp" line="1702"/>
-        <location filename="../ProfileInterface.cpp" line="1788"/>
-        <location filename="../ProfileInterface.cpp" line="1881"/>
-        <location filename="../ProfileInterface.cpp" line="1999"/>
+        <location filename="../ProfileInterface.cpp" line="1715"/>
+        <location filename="../ProfileInterface.cpp" line="1801"/>
+        <location filename="../ProfileInterface.cpp" line="1894"/>
+        <location filename="../ProfileInterface.cpp" line="2012"/>
         <source>No Snapmatic pictures are selected</source>
         <translation>Keine Snapmatic Bilder sind ausgewählt</translation>
     </message>
@@ -1285,10 +1285,10 @@ Drücke 1 für Standardmodus</translation>
     <message>
         <location filename="../ProfileInterface.cpp" line="1257"/>
         <location filename="../ProfileInterface.cpp" line="1291"/>
-        <location filename="../ProfileInterface.cpp" line="1767"/>
-        <location filename="../ProfileInterface.cpp" line="1860"/>
-        <location filename="../ProfileInterface.cpp" line="1978"/>
-        <location filename="../ProfileInterface.cpp" line="2077"/>
+        <location filename="../ProfileInterface.cpp" line="1780"/>
+        <location filename="../ProfileInterface.cpp" line="1873"/>
+        <location filename="../ProfileInterface.cpp" line="1991"/>
+        <location filename="../ProfileInterface.cpp" line="2090"/>
         <source>%1 failed with...
 
 %2</source>
@@ -1298,60 +1298,60 @@ Drücke 1 für Standardmodus</translation>
 %2</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1445"/>
+        <location filename="../ProfileInterface.cpp" line="1458"/>
         <source>Prepare Content for Import...</source>
         <translation>Bereite Inhalt für Import vor...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1767"/>
+        <location filename="../ProfileInterface.cpp" line="1780"/>
         <source>Qualify</source>
         <comment>%1 failed with...</comment>
         <translation>Qualifizieren</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1788"/>
-        <location filename="../ProfileInterface.cpp" line="1860"/>
+        <location filename="../ProfileInterface.cpp" line="1801"/>
+        <location filename="../ProfileInterface.cpp" line="1873"/>
         <source>Change Players...</source>
         <translation>Spieler ändern...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1860"/>
+        <location filename="../ProfileInterface.cpp" line="1873"/>
         <source>Change Players</source>
         <comment>%1 failed with...</comment>
         <translation>Spieler ändern</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1881"/>
-        <location filename="../ProfileInterface.cpp" line="1909"/>
-        <location filename="../ProfileInterface.cpp" line="1978"/>
+        <location filename="../ProfileInterface.cpp" line="1894"/>
+        <location filename="../ProfileInterface.cpp" line="1922"/>
+        <location filename="../ProfileInterface.cpp" line="1991"/>
         <source>Change Crew...</source>
         <translation>Crew ändern...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1909"/>
+        <location filename="../ProfileInterface.cpp" line="1922"/>
         <source>Failed to enter a valid Snapmatic Crew ID</source>
         <translation>Fehlgeschlagen beim Eingeben von einer gültigen Crew ID</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1978"/>
+        <location filename="../ProfileInterface.cpp" line="1991"/>
         <source>Change Crew</source>
         <comment>%1 failed with...</comment>
         <translation>Crew ändern</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1999"/>
         <location filename="../ProfileInterface.cpp" line="2012"/>
-        <location filename="../ProfileInterface.cpp" line="2077"/>
+        <location filename="../ProfileInterface.cpp" line="2025"/>
+        <location filename="../ProfileInterface.cpp" line="2090"/>
         <source>Change Title...</source>
         <translation>Titel ändern...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2012"/>
+        <location filename="../ProfileInterface.cpp" line="2025"/>
         <source>Failed to enter a valid Snapmatic title</source>
         <translation>Fehlgeschlagen beim Eingeben eines gültigen Snapmatic Titel</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2077"/>
+        <location filename="../ProfileInterface.cpp" line="2090"/>
         <source>Change Title</source>
         <comment>%1 failed with...</comment>
         <translation>Titel ändern</translation>
@@ -1672,7 +1672,7 @@ Drücke 1 für Standardmodus</translation>
         <translation>Meme</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2007"/>
+        <location filename="../ProfileInterface.cpp" line="2020"/>
         <location filename="../SnapmaticEditor.cpp" line="390"/>
         <source>Snapmatic Title</source>
         <translation>Snapmatic Titel</translation>
@@ -1778,19 +1778,19 @@ Drücke 1 für Standardmodus</translation>
         <translation>Patchen von Snapmatic Eigenschaften fehlgeschlagen wegen I/O Fehler</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2007"/>
+        <location filename="../ProfileInterface.cpp" line="2020"/>
         <location filename="../SnapmaticEditor.cpp" line="390"/>
         <source>New Snapmatic title:</source>
         <translation>Neuer Snapmatic Titel:</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1900"/>
+        <location filename="../ProfileInterface.cpp" line="1913"/>
         <location filename="../SnapmaticEditor.cpp" line="419"/>
         <source>Snapmatic Crew</source>
         <translation>Snapmatic Crew</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1900"/>
+        <location filename="../ProfileInterface.cpp" line="1913"/>
         <location filename="../SnapmaticEditor.cpp" line="419"/>
         <source>New Snapmatic crew:</source>
         <translation>Neue Snapmatic Crew:</translation>

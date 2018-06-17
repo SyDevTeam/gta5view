@@ -1433,15 +1433,28 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                     if (clipboardUrl.isValid())
                     {
                         QDialog urlPasteDialog(this);
+#if QT_VERSION >= 0x050000
                         urlPasteDialog.setObjectName(QStringLiteral("UrlPasteDialog"));
+#else
+                        urlPasteDialog.setObjectName(QString::fromUtf8("UrlPasteDialog"));
+#endif
                         urlPasteDialog.setWindowFlags(urlPasteDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
                         urlPasteDialog.setWindowTitle(tr("Import..."));
                         urlPasteDialog.setModal(true);
                         QVBoxLayout urlPasteLayout(&urlPasteDialog);
+#if QT_VERSION >= 0x050000
                         urlPasteLayout.setObjectName(QStringLiteral("UrlPasteLayout"));
+#else
+                        urlPasteLayout.setObjectName(QString::fromUtf8("UrlPasteLayout"));
+#endif
                         urlPasteDialog.setLayout(&urlPasteLayout);
                         UiModLabel urlPasteLabel(&urlPasteDialog);
-                        urlPasteLabel.setObjectName("UrlPasteLabel");
+#if QT_VERSION >= 0x050000
+                        urlPasteLabel.setObjectName(QStringLiteral("UrlPasteLabel"));
+#else
+                        urlPasteLabel.setObjectName(QString::fromUtf8("UrlPasteLabel"));
+#endif
+
                         urlPasteLabel.setText(tr("Prepare Content for Import..."));
                         urlPasteLayout.addWidget(&urlPasteLabel);
                         urlPasteDialog.setFixedSize(urlPasteDialog.sizeHint());
