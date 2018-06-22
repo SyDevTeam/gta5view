@@ -1,4 +1,4 @@
-image: syping/qt5-x86_64-w64-mingw32:5.9.6
+image: syping/qt5-static-mingw:5.9.6
 
 job:
   variables:
