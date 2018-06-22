@@ -2,7 +2,7 @@
 
 # Install curl and lua
 apt-get update -qq && \
-apt-get install -qq curl git lua5.3 openssl
+apt-get install -qq curl git lua5.2 openssl
 
 # Check if build is not tagged
 if [ "${CI_COMMIT_TAG}" == "" ]; then
