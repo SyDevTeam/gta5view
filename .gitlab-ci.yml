@@ -1,0 +1,9 @@
+image: syping/qt5-x86_64-w64-mingw32:5.9.6
+
+job:
+  variables:
+    BUILD_SCRIPT: "windows_build.sh"
+    QT_SELECT: "qt5-x86_64-w64-mingw32"
+    EXECUTABLE_ARCH: "_x64"
+  script:
+    - .gitlab/gitlab.sh
