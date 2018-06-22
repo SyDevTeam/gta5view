@@ -1,15 +1,11 @@
 #!/bin/bash
 
 # Install curl and lua
-if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
-	sudo apt-get update -qq && \
-	sudo apt-get install -qq curl lua5.2
-elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
-	brew install lua
-fi
+apt-get update -qq && \
+apt-get install -qq curl git lua5.3 openssl
 
 # Check if build is not tagged
-if [ "${TRAVIS_TAG}" == "" ]; then
+if [ "${CI_COMMIT_TAG}" == "" ]; then
 	export EXECUTABLE_TAG=-$(git rev-parse --short HEAD)
 else
 	export EXECUTABLE_TAG=
@@ -17,7 +13,7 @@ fi
 
 # Check if package code is not set
 if [ "${PACKAGE_CODE}" == "" ]; then
-	export PACKAGE_CODE=GitHub
+	export PACKAGE_CODE=GitLab
 fi
 
 .ci/ci.sh

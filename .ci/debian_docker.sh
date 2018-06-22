@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ ${DOCKER_USER} ]]; then
+if [ "${DOCKER_USER}" != "" ]; then
 	DOCKER_IMAGE=${DOCKER_USER}/debian:${DEBIAN_VERSION}
 else
 	DOCKER_IMAGE=debian:${DEBIAN_VERSION}
