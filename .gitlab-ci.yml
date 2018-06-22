@@ -1,9 +1,24 @@
 image: syping/qt5-static-mingw:5.9.6
 
-job:
+job 0:
+  variables:
+    BUILD_SCRIPT: "windows_build.sh"
+    QT_SELECT: "qt5-i686-w64-mingw32"
+  script:
+    - .gitlab/gitlab.sh
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME-win32"
+    paths:
+      - assets/
+
+job 1:
   variables:
     BUILD_SCRIPT: "windows_build.sh"
     QT_SELECT: "qt5-x86_64-w64-mingw32"
     EXECUTABLE_ARCH: "_x64"
   script:
     - .gitlab/gitlab.sh
+  artifacts:
+    name: "$CI_COMMIT_REF_NAME-win64"
+    paths:
+      - assets/
