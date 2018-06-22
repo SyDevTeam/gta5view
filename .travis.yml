@@ -9,37 +9,37 @@ service:
 matrix:
   include:
   - env:
-    - BUILD_SCRIPT=debian_travis.sh
+    - BUILD_SCRIPT=debian_ci.sh
     - RELEASE_LABEL="Debian 32-Bit Package"
     - DEBIAN_VERSION=stretch
     - DOCKER_USER=i386
     - APT_INSTALL=clang
   - env:
-    - BUILD_SCRIPT=debian_travis.sh
+    - BUILD_SCRIPT=debian_ci.sh
     - RELEASE_LABEL="Debian 64-Bit Package"
     - DEBIAN_VERSION=stretch
     - DOCKER_USER=amd64
     - APT_INSTALL=clang
   - env:
-    - BUILD_SCRIPT=windows_travis.sh
+    - BUILD_SCRIPT=windows_ci.sh
     - QT_SELECT=qt5-i686-w64-mingw32
     - RELEASE_LABEL="Windows 32-Bit Portable"
   - env:
-    - BUILD_SCRIPT=windows_travis.sh
+    - BUILD_SCRIPT=windows_ci.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
     - RELEASE_LABEL="Windows 64-Bit Portable"
     - EXECUTABLE_ARCH=_x64
   - env:
-    - BUILD_SCRIPT=windows_travis.sh
+    - BUILD_SCRIPT=windows_ci.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
     - PACKAGE_CODE=Dropbox
   - env:
-    - BUILD_SCRIPT=wininstall_travis.sh
+    - BUILD_SCRIPT=wininstall_ci.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
     - RELEASE_LABEL="Windows 64-Bit Installer"
   - os: osx
     env:
-        - BUILD_SCRIPT=osx_travis.sh
+        - BUILD_SCRIPT=osx_ci.sh
         - RELEASE_LABEL="Mac OS X 64-Bit Disk Image"
 
 before_install:

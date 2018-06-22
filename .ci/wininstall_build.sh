@@ -15,5 +15,5 @@ qmake ${QMAKE_FLAGS} DEFINES+=GTA5SYNC_BUILDTYPE_DEV "DEFINES+=GTA5SYNC_BUILDCOD
 make depend && \
 make -j 4 && \
 cd ${PROJECT_DIR}/assets && \
-makensis -NOCD ${PROJECT_DIR}/.travis/gta5view.nsi && \
+makensis -NOCD ${PROJECT_DIR}/.ci/gta5view.nsi && \
 mv -f gta5view_setup.exe gta5view-${EXECUTABLE_VERSION}_setup.exe
