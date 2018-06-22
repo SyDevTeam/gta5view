@@ -1,17 +1,17 @@
 image: syping/qt5-static-mingw:5.9.6
 
-job 0:
+win32:
   variables:
     BUILD_SCRIPT: "windows_build.sh"
     QT_SELECT: "qt5-i686-w64-mingw32"
   script:
     - .gitlab/gitlab.sh
   artifacts:
-    name: "$CI_COMMIT_REF_NAME-win32"
+    name: "gta5view-$CI_COMMIT_REF_NAME-win32"
     paths:
       - assets/
 
-job 1:
+win64:
   variables:
     BUILD_SCRIPT: "windows_build.sh"
     QT_SELECT: "qt5-x86_64-w64-mingw32"
@@ -19,6 +19,6 @@ job 1:
   script:
     - .gitlab/gitlab.sh
   artifacts:
-    name: "$CI_COMMIT_REF_NAME-win64"
+    name: "gta5view-$CI_COMMIT_REF_NAME-win64"
     paths:
       - assets/
