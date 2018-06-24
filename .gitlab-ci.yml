@@ -1,48 +1,23 @@
-debian32:
-  image: i386/debian:stretch
+debian:
+  image: debian:stretch
   variables:
     BUILD_SCRIPT: "debian_ci.sh"
     APT_INSTALL: "clang"
   script:
     - .gitlab/gitlab.sh
   artifacts:
-    name: "gta5view-$CI_COMMIT_REF_NAME-debian32"
+    name: "gta5view-$CI_COMMIT_REF_NAME-debian"
     paths:
       - assets/*.deb
 
-debian64:
-  image: amd64/debian:stretch
-  variables:
-    BUILD_SCRIPT: "debian_ci.sh"
-    APT_INSTALL: "clang"
-  script:
-    - .gitlab/gitlab.sh
-  artifacts:
-    name: "gta5view-$CI_COMMIT_REF_NAME-debian64"
-    paths:
-      - assets/*.deb
-
-win32:
-  image: syping/qt5-static-mingw:5.9.6
-  variables:
-    BUILD_SCRIPT: "windows_build.sh"
-    QT_SELECT: "qt5-i686-w64-mingw32"
-  script:
-    - .gitlab/gitlab.sh
-  artifacts:
-    name: "gta5view-$CI_COMMIT_REF_NAME-win32"
-    paths:
-      - assets/*.exe
-
-win64:
+windows:
   image: syping/qt5-static-mingw:5.9.6
   variables:
     BUILD_SCRIPT: "windows_build.sh"
     QT_SELECT: "qt5-x86_64-w64-mingw32"
-    EXECUTABLE_ARCH: "_x64"
   script:
     - .gitlab/gitlab.sh
   artifacts:
-    name: "gta5view-$CI_COMMIT_REF_NAME-win64"
+    name: "gta5view-$CI_COMMIT_REF_NAME-windows"
     paths:
       - assets/*.exe

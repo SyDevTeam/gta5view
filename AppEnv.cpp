@@ -152,7 +152,38 @@ QString AppEnv::getPluginsFolder()
 
 QByteArray AppEnv::getUserAgent()
 {
-    return QString("Mozilla/5.0 (X11; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0 %1/%2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
+#if QT_VERSION >= 0x050400
+#ifdef GTA5SYNC_WIN
+    QString kernelVersion = QSysInfo::kernelVersion();
+    const QStringList &kernelVersionList = kernelVersion.split(".");
+    if (kernelVersionList.length() > 2)
+    {
+        kernelVersion = kernelVersionList.at(0) % "." % kernelVersionList.at(1);
+    }
+    QString runArch = QSysInfo::buildCpuArchitecture();
+    if (runArch == "x86_64")
+    {
+        runArch = "Win64; x64";
+    }
+    else if (runArch == "i686")
+    {
+        const QString &curArch = QSysInfo::currentCpuArchitecture();
+        if (curArch == "x86_64")
+        {
+            runArch = "WOW64";
+        }
+        else if (curArch == "i686")
+        {
+            runArch = "Win32; x86";
+        }
+    }
+    return QString("Mozilla/5.0 (Windows NT %1; %2) %3/%4").arg(kernelVersion, runArch, GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
+#else
+    return QString("Mozilla/5.0 (%1; %2) %3/%4").arg(QSysInfo::kernelType(), QSysInfo::kernelVersion(), GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
+#endif
+#else
+    return QString("Mozilla/5.0 %1/%2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
+#endif
 }
 
 // QUrl AppEnv::getCrewFetchingUrl(QString crewID)

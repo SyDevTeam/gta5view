@@ -198,6 +198,7 @@ void TelemetryClass::push(TelemetryCategory category, QJsonDocument json)
 
     QNetworkAccessManager *netManager = new QNetworkAccessManager();
     QNetworkRequest netRequest(TelemetryClassAuthenticator::getTrackingPushURL());
+    netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
     QNetworkReply *netReply = netManager->post(netRequest, httpMultiPart);
     httpMultiPart->setParent(netReply);
 
@@ -209,6 +210,10 @@ QJsonDocument TelemetryClass::getOperatingSystem()
     QJsonDocument jsonDocument;
     QJsonObject jsonObject;
 #if QT_VERSION >= 0x050400
+    jsonObject["KernelType"] = QSysInfo::kernelType();
+    jsonObject["KernelVersion"] = QSysInfo::kernelVersion();
+    jsonObject["ProductType"] = QSysInfo::productType();
+    jsonObject["ProductVersion"] = QSysInfo::productVersion();
     jsonObject["OSName"] = QSysInfo::prettyProductName();
     jsonObject["OSArch"] = QSysInfo::currentCpuArchitecture();
 #endif
@@ -434,6 +439,7 @@ void TelemetryClass::registerClient()
 {
     QNetworkAccessManager *netManager = new QNetworkAccessManager();
     QNetworkRequest netRequest(TelemetryClassAuthenticator::getTrackingRegURL());
+    netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
     netManager->get(netRequest);
 
     connect(netManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(registerFinished(QNetworkReply*)));

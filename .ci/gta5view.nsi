@@ -89,7 +89,7 @@ InstallDir "$PROGRAMFILES64\Syping\gta5view"
 Function .onInit
 !insertmacro MUI_LANGDLL_DISPLAY
 !ifdef WIN32
-	MessageBox MB_OK|MB_ICONSTOP "Can't install the 64bit version on a 32bit system, please download the 32bit version!"
+	MessageBox MB_OK|MB_ICONSTOP "Windows 32-Bit is not supported anymore!"
 	Quit
 !endif
 SetRegView 64
@@ -140,6 +140,9 @@ File "/opt/windev/qt64d-latest/plugins/imageformats/qwbmp.dll"
 File "/opt/windev/qt64d-latest/plugins/imageformats/qwebp.dll"
 SetOutPath "$INSTDIR\platforms"
 File "/opt/windev/qt64d-latest/plugins/platforms/qwindows.dll"
+SetOutPath "$INSTDIR\styles"
+File "/opt/windev/qt64d-latest/plugins/styles/qcleanlooksstyle.dll"
+File "/opt/windev/qt64d-latest/plugins/styles/qplastiquestyle.dll"
 SectionEnd
 
 ######################################################################
@@ -223,11 +226,13 @@ Delete "$INSTDIR\imageformats\qtiff.dll"
 Delete "$INSTDIR\imageformats\qwbmp.dll"
 Delete "$INSTDIR\imageformats\qwebp.dll"
 Delete "$INSTDIR\platforms\qwindows.dll"
-
+Delete "$INSTDIR\styles\qcleanlooksstyle.dll"
+Delete "$INSTDIR\styles\qplastiquestyle.dll"
 RmDir "$INSTDIR\lang"
 RmDir "$INSTDIR\audio"
 RmDir "$INSTDIR\imageformats"
 RmDir "$INSTDIR\platforms"
+RmDir "$INSTDIR\styles"
  
 Delete "$INSTDIR\uninstall.exe"
 !ifdef WEB_SITE
