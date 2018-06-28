@@ -1,16 +1,4 @@
-debian:
-  image: debian:stretch
-  variables:
-    BUILD_SCRIPT: "debian_ci.sh"
-    APT_INSTALL: "clang"
-  script:
-    - .gitlab/gitlab.sh
-  artifacts:
-    name: "gta5view-$CI_COMMIT_REF_NAME-debian"
-    paths:
-      - assets/*.deb
-
-windows:
+Windows Portable:
   image: syping/qt5-static-mingw:5.9.6
   variables:
     BUILD_SCRIPT: "windows_build.sh"
@@ -18,6 +6,18 @@ windows:
   script:
     - .gitlab/gitlab.sh
   artifacts:
-    name: "gta5view-$CI_COMMIT_REF_NAME-windows"
+    name: "gta5view-$CI_COMMIT_REF_NAME-wp"
     paths:
-      - assets/*.exe
+      - "gta5view-*.exe"
+      
+Windows Installer:
+  image: syping/qt5-shared-mingw:5.9.6
+  variables:
+    BUILD_SCRIPT: "wininstall_build.sh"
+    QT_SELECT: "qt5-x86_64-w64-mingw32"
+  script:
+    - .gitlab/gitlab.sh
+  artifacts:
+    name: "gta5view-$CI_COMMIT_REF_NAME-wi"
+    paths:
+      - "gta5view-*.exe"

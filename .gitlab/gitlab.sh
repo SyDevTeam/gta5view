@@ -2,7 +2,7 @@
 
 # Install curl and lua
 apt-get update -qq && \
-apt-get install -qq curl git lua5.2 openssl
+apt-get install -qq curl git lua5.2 nsis openssl
 
 # Decrypt Telemetry Authenticator
 rm -rf tmext/TelemetryClassAuthenticator.cpp && \
@@ -20,4 +20,6 @@ if [ "${PACKAGE_CODE}" == "" ]; then
 	export PACKAGE_CODE=GitLab
 fi
 
-.ci/ci.sh
+# Start CI script and copying assets into base directory
+.ci/ci.sh && \
+cp -Rf assets/* ./
