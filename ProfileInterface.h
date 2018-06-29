@@ -116,8 +116,9 @@ private:
 
     bool isSupportedImageFile(QString selectedFileName);
     bool importFile(QString selectedFile, QDateTime importDateTime, bool notMultiple);
+    bool importUrls(const QMimeData *mimeData);
     bool importImage(QImage *snapmaticImage, QDateTime importDateTime);
-    void importFilesProgress(QStringList selectedFiles);
+    bool importFilesProgress(QStringList selectedFiles);
     bool importSnapmaticPicture(SnapmaticPicture *picture, bool warn = true);
     bool importSavegameData(SavegameData *savegame, QString sgdPath, bool warn = true);
     void pictureLoaded(SnapmaticPicture *picture, bool inserted);

@@ -528,7 +528,7 @@ fileDialogPreOpen: //Work?
     settings.endGroup();
 }
 
-void ProfileInterface::importFilesProgress(QStringList selectedFiles)
+bool ProfileInterface::importFilesProgress(QStringList selectedFiles)
 {
     int maximumId = selectedFiles.length();
     int overallId = 0;
@@ -573,7 +573,9 @@ void ProfileInterface::importFilesProgress(QStringList selectedFiles)
     {
         errorStr.remove(0, 2);
         QMessageBox::warning(this, tr("Import"), tr("Import failed with...\n\n%1").arg(errorStr));
+        return false;
     }
+    return true;
 }
 
 bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime, bool notMultiple)
@@ -808,6 +810,30 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
         }
     }
     if (notMultiple) QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
+    return false;
+}
+
+bool ProfileInterface::importUrls(const QMimeData *mimeData)
+{
+    QStringList pathList;
+
+    for (QUrl currentUrl : mimeData->urls())
+    {
+        if (currentUrl.isLocalFile())
+        {
+            pathList += currentUrl.toLocalFile();
+        }
+    }
+
+    if (pathList.length() == 1)
+    {
+        QString selectedFile = pathList.at(0);
+        return importFile(selectedFile, QDateTime::currentDateTime(), true);
+    }
+    else if (pathList.length() > 1)
+    {
+        return importFilesProgress(pathList);
+    }
     return false;
 }
 
@@ -1385,25 +1411,7 @@ void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
 void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
 {
     if (!mimeData) return;
-    QStringList pathList;
-
-    for (QUrl currentUrl : mimeData->urls())
-    {
-        if (currentUrl.isLocalFile())
-        {
-            pathList += currentUrl.toLocalFile();
-        }
-    }
-
-    if (pathList.length() == 1)
-    {
-        QString selectedFile = pathList.at(0);
-        importFile(selectedFile, QDateTime::currentDateTime(), true);
-    }
-    else if (pathList.length() > 1)
-    {
-        importFilesProgress(pathList);
-    }
+    importUrls(mimeData);
 }
 
 void ProfileInterface::retranslateUi()
@@ -1434,7 +1442,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                     {
                         if (clipboardData->urls().length() >= 2)
                         {
-                            on_saProfileContent_dropped(clipboardData); // replace later with own function importUrls()
+                            importUrls(clipboardData);
                         }
                         else if (clipboardData->urls().length() == 1)
                         {
