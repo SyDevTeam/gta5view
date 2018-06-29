@@ -198,7 +198,7 @@ QUrl AppEnv::getCrewFetchingUrl(QString crewID)
 
 QUrl AppEnv::getPlayerFetchingUrl(QString crewID, QString pageNumber)
 {
-    return QUrl(QString("https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=%1&pageNumber=%2").arg(crewID, pageNumber));
+    return QUrl(QString("https://socialclub.rockstargames.com/crewsapi/GetMembersList?crewId=%1&pageNumber=%2&pageSize=5000").arg(crewID, pageNumber));
 }
 
 QUrl AppEnv::getPlayerFetchingUrl(QString crewID, int pageNumber)

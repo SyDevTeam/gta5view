@@ -137,8 +137,9 @@ void DatabaseThread::scanCrewReference(const QStringList &crewList, const int &r
             netRequest.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 #endif
             netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
-            netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-            netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
+            netRequest.setRawHeader("Accept", "text/html");
+            netRequest.setRawHeader("Accept-Charset", "utf-8");
+            netRequest.setRawHeader("Accept-Language", "en-US,en;q=0.9");
             netRequest.setRawHeader("Connection", "keep-alive");
 
             QNetworkReply *netReply = netManager->get(netRequest);
@@ -209,8 +210,9 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
                 netRequest.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
 #endif
                 netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
-                netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-                netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
+                netRequest.setRawHeader("Accept", "application/json");
+                netRequest.setRawHeader("Accept-Charset", "utf-8");
+                netRequest.setRawHeader("Accept-Language", "en-US,en;q=0.9");
                 netRequest.setRawHeader("Connection", "keep-alive");
 
                 QNetworkReply *netReply = netManager->get(netRequest);

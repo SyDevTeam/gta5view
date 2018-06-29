@@ -1464,8 +1464,9 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                         QNetworkAccessManager *netManager = new QNetworkAccessManager();
                         QNetworkRequest netRequest(clipboardUrl);
                         netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
-                        netRequest.setRawHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
-                        netRequest.setRawHeader("Accept-Language", "en-US;q=0.5,en;q=0.3");
+                        netRequest.setRawHeader("Accept", "text/html");
+                        netRequest.setRawHeader("Accept-Charset", "utf-8");
+                        netRequest.setRawHeader("Accept-Language", "en-US,en;q=0.9");
                         netRequest.setRawHeader("Connection", "keep-alive");
                         QNetworkReply *netReply = netManager->get(netRequest);
                         QEventLoop *downloadLoop = new QEventLoop();
