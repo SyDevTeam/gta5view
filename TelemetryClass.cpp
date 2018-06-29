@@ -239,7 +239,7 @@ QJsonDocument TelemetryClass::getSystemHardware()
             else if (i == 0x80000003) { memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo)); }
             else if (i == 0x80000004) { memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo)); }
         }
-        jsonObject["CPUName"] = QString(CPUBrandString).trimmed();
+        jsonObject["CPUName"] = QString::fromLatin1(CPUBrandString).simplified();
         SYSTEM_INFO sysInfo;
         GetSystemInfo(&sysInfo);
         jsonObject["CPUThreads"] = QString::number(sysInfo.dwNumberOfProcessors);
@@ -265,7 +265,7 @@ QJsonDocument TelemetryClass::getSystemHardware()
                     QByteArray cpuData = cpuInfoBuffer.readLine();
                     if (cpuData.left(toFind.length()) == toFind)
                     {
-                        jsonObject["CPUName"] = QString::fromUtf8(cpuData).split(':').at(1).trimmed();
+                        jsonObject["CPUName"] = QString::fromUtf8(cpuData).split(':').at(1).simplified();
                         break;
                     }
                 }
