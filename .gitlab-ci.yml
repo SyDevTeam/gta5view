@@ -10,7 +10,7 @@ Windows Portable:
   script:
     - .gitlab/gitlab.sh
   artifacts:
-    name: "gta5view-{$CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA:0:8}_portable"
+    name: "gta5view-$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}_portable"
     paths:
       - "gta5view-*.exe"
       
@@ -23,6 +23,6 @@ Windows Installer:
   script:
     - .gitlab/gitlab.sh
   artifacts:
-    name: "gta5view-{$CI_COMMIT_REF_NAME}-${CI_COMMIT_SHA:0:8}_setup"
+    name: "gta5view-$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}_setup"
     paths:
       - "gta5view-*.exe"

@@ -838,6 +838,78 @@ bool ProfileInterface::importUrls(const QMimeData *mimeData)
     return false;
 }
 
+bool ProfileInterface::importRemote(QUrl remoteUrl)
+{
+    bool retValue = false;
+    QDialog urlPasteDialog(this);
+#if QT_VERSION >= 0x050000
+    urlPasteDialog.setObjectName(QStringLiteral("UrlPasteDialog"));
+#else
+    urlPasteDialog.setObjectName(QString::fromUtf8("UrlPasteDialog"));
+#endif
+    urlPasteDialog.setWindowFlags(urlPasteDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+    urlPasteDialog.setWindowTitle(tr("Import..."));
+    urlPasteDialog.setModal(true);
+    QVBoxLayout urlPasteLayout(&urlPasteDialog);
+#if QT_VERSION >= 0x050000
+    urlPasteLayout.setObjectName(QStringLiteral("UrlPasteLayout"));
+#else
+    urlPasteLayout.setObjectName(QString::fromUtf8("UrlPasteLayout"));
+#endif
+    urlPasteDialog.setLayout(&urlPasteLayout);
+    UiModLabel urlPasteLabel(&urlPasteDialog);
+#if QT_VERSION >= 0x050000
+    urlPasteLabel.setObjectName(QStringLiteral("UrlPasteLabel"));
+#else
+    urlPasteLabel.setObjectName(QString::fromUtf8("UrlPasteLabel"));
+#endif
+
+    urlPasteLabel.setText(tr("Prepare Content for Import..."));
+    urlPasteLayout.addWidget(&urlPasteLabel);
+    urlPasteDialog.setFixedSize(urlPasteDialog.sizeHint());
+    urlPasteDialog.show();
+
+    QNetworkAccessManager *netManager = new QNetworkAccessManager();
+    QNetworkRequest netRequest(remoteUrl);
+    netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
+    netRequest.setRawHeader("Accept", "text/html");
+    netRequest.setRawHeader("Accept-Charset", "utf-8");
+    netRequest.setRawHeader("Accept-Language", "en-US,en;q=0.9");
+    netRequest.setRawHeader("Connection", "keep-alive");
+    QNetworkReply *netReply = netManager->get(netRequest);
+    QEventLoop *downloadLoop = new QEventLoop();
+    QObject::connect(netReply, SIGNAL(finished()), downloadLoop, SLOT(quit()));
+    QTimer::singleShot(30000, downloadLoop, SLOT(quit()));
+    downloadLoop->exec();
+    downloadLoop->disconnect();
+    delete downloadLoop;
+
+    urlPasteDialog.close();
+
+    if (netReply->isFinished())
+    {
+        QImage *snapmaticImage = new QImage();
+        QImageReader snapmaticImageReader;
+        snapmaticImageReader.setDecideFormatFromContent(true);
+        snapmaticImageReader.setDevice(netReply);
+        if (snapmaticImageReader.read(snapmaticImage))
+        {
+            retValue = importImage(snapmaticImage, QDateTime::currentDateTime());
+        }
+        else
+        {
+            delete snapmaticImage;
+        }
+    }
+    else
+    {
+        netReply->abort();
+    }
+    delete netReply;
+    delete netManager;
+    return retValue;
+}
+
 bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateTime)
 {
     SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
@@ -1462,72 +1534,22 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                             }
                             else
                             {
-                                QDialog urlPasteDialog(this);
-#if QT_VERSION >= 0x050000
-                                urlPasteDialog.setObjectName(QStringLiteral("UrlPasteDialog"));
-#else
-                                urlPasteDialog.setObjectName(QString::fromUtf8("UrlPasteDialog"));
-#endif
-                                urlPasteDialog.setWindowFlags(urlPasteDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
-                                urlPasteDialog.setWindowTitle(tr("Import..."));
-                                urlPasteDialog.setModal(true);
-                                QVBoxLayout urlPasteLayout(&urlPasteDialog);
-#if QT_VERSION >= 0x050000
-                                urlPasteLayout.setObjectName(QStringLiteral("UrlPasteLayout"));
-#else
-                                urlPasteLayout.setObjectName(QString::fromUtf8("UrlPasteLayout"));
-#endif
-                                urlPasteDialog.setLayout(&urlPasteLayout);
-                                UiModLabel urlPasteLabel(&urlPasteDialog);
-#if QT_VERSION >= 0x050000
-                                urlPasteLabel.setObjectName(QStringLiteral("UrlPasteLabel"));
-#else
-                                urlPasteLabel.setObjectName(QString::fromUtf8("UrlPasteLabel"));
-#endif
-
-                                urlPasteLabel.setText(tr("Prepare Content for Import..."));
-                                urlPasteLayout.addWidget(&urlPasteLabel);
-                                urlPasteDialog.setFixedSize(urlPasteDialog.sizeHint());
-                                urlPasteDialog.show();
-
-                                QNetworkAccessManager *netManager = new QNetworkAccessManager();
-                                QNetworkRequest netRequest(clipboardUrl);
-                                netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
-                                netRequest.setRawHeader("Accept", "text/html");
-                                netRequest.setRawHeader("Accept-Charset", "utf-8");
-                                netRequest.setRawHeader("Accept-Language", "en-US,en;q=0.9");
-                                netRequest.setRawHeader("Connection", "keep-alive");
-                                QNetworkReply *netReply = netManager->get(netRequest);
-                                QEventLoop *downloadLoop = new QEventLoop();
-                                QObject::connect(netReply, SIGNAL(finished()), downloadLoop, SLOT(quit()));
-                                QTimer::singleShot(30000, downloadLoop, SLOT(quit()));
-                                downloadLoop->exec();
-                                downloadLoop->disconnect();
-                                delete downloadLoop;
-
-                                urlPasteDialog.close();
-
-                                if (netReply->isFinished())
-                                {
-                                    QImage *snapmaticImage = new QImage();
-                                    QImageReader snapmaticImageReader;
-                                    snapmaticImageReader.setDecideFormatFromContent(true);
-                                    snapmaticImageReader.setDevice(netReply);
-                                    if (snapmaticImageReader.read(snapmaticImage))
-                                    {
-                                        importImage(snapmaticImage, QDateTime::currentDateTime());
-                                    }
-                                    else
-                                    {
-                                        delete snapmaticImage;
-                                    }
-                                }
-                                else
-                                {
-                                    netReply->abort();
-                                }
-                                delete netReply;
-                                delete netManager;
+                                importRemote(clipboardUrl);
+                            }
+                        }
+                    }
+                    else if (clipboardData->hasText())
+                    {
+                        QUrl clipboardUrl = QUrl::fromUserInput(clipboardData->text());
+                        if (clipboardUrl.isValid())
+                        {
+                            if (clipboardUrl.isLocalFile())
+                            {
+                                importFile(clipboardUrl.toLocalFile(), QDateTime::currentDateTime(), true);
+                            }
+                            else
+                            {
+                                importRemote(clipboardUrl);
                             }
                         }
                     }

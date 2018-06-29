@@ -117,6 +117,7 @@ private:
     bool isSupportedImageFile(QString selectedFileName);
     bool importFile(QString selectedFile, QDateTime importDateTime, bool notMultiple);
     bool importUrls(const QMimeData *mimeData);
+    bool importRemote(QUrl remoteUrl);
     bool importImage(QImage *snapmaticImage, QDateTime importDateTime);
     bool importFilesProgress(QStringList selectedFiles);
     bool importSnapmaticPicture(SnapmaticPicture *picture, bool warn = true);
