@@ -29,7 +29,8 @@ class UiModWidget : public QWidget
     Q_OBJECT
 public:
     UiModWidget(QWidget *parent = 0);
-    void setFilesMode(bool enabled);
+    void setFilesDropEnabled(bool enabled);
+    void setImageDropEnabled(bool enabled);
     ~UiModWidget();
 
 protected:
@@ -38,7 +39,8 @@ protected:
     void paintEvent(QPaintEvent *paintEvent);
 
 private:
-    bool filesMode;
+    bool filesDropEnabled;
+    bool imageDropEnabled;
 
 signals:
     void dropped(const QMimeData *mimeData);

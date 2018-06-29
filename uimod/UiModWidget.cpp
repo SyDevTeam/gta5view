@@ -26,26 +26,32 @@
 
 UiModWidget::UiModWidget(QWidget *parent) : QWidget(parent)
 {
-    filesMode = false;
+    filesDropEnabled = false;
+    imageDropEnabled = false;
 }
 
 UiModWidget::~UiModWidget()
 {
 }
 
-void UiModWidget::setFilesMode(bool filesModeEnabled)
+void UiModWidget::setFilesDropEnabled(bool enabled)
 {
-    filesMode = filesModeEnabled;
+    filesDropEnabled = enabled;
+}
+
+void UiModWidget::setImageDropEnabled(bool enabled)
+{
+    imageDropEnabled = enabled;
 }
 
 void UiModWidget::dragEnterEvent(QDragEnterEvent *dragEnterEvent)
 {
-    if (filesMode && dragEnterEvent->mimeData()->hasUrls())
+    if (filesDropEnabled && dragEnterEvent->mimeData()->hasUrls())
     {
         QStringList pathList;
-        QList<QUrl> urlList = dragEnterEvent->mimeData()->urls();
+        const QList<QUrl> urlList = dragEnterEvent->mimeData()->urls();
 
-        foreach(const QUrl &currentUrl, urlList)
+        for (const QUrl &currentUrl : urlList)
         {
             if (currentUrl.isLocalFile())
             {
@@ -57,6 +63,10 @@ void UiModWidget::dragEnterEvent(QDragEnterEvent *dragEnterEvent)
         {
             dragEnterEvent->acceptProposedAction();
         }
+    }
+    else if (imageDropEnabled && dragEnterEvent->mimeData()->hasImage())
+    {
+        dragEnterEvent->acceptProposedAction();
     }
 }
 

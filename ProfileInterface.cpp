@@ -88,7 +88,8 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 
     updatePalette();
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
-    ui->saProfileContent->setFilesMode(true);
+    ui->saProfileContent->setFilesDropEnabled(true);
+    ui->saProfileContent->setImageDropEnabled(true);
 
     // Set Icon for Close Button
     if (QIcon::hasThemeIcon("dialog-close"))
@@ -1411,7 +1412,15 @@ void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
 void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
 {
     if (!mimeData) return;
-    importUrls(mimeData);
+    if (mimeData->hasImage())
+    {
+        QImage *snapmaticImage = new QImage(qvariant_cast<QImage>(mimeData->imageData()));
+        importImage(snapmaticImage, QDateTime::currentDateTime());
+    }
+    else if (mimeData->hasUrls())
+    {
+        importUrls(mimeData);
+    }
 }
 
 void ProfileInterface::retranslateUi()
