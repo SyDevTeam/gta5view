@@ -1,0 +1,19 @@
+files:
+  - source: '*'
+    ignore:
+      - res
+      - uimod
+      - lang
+      - pcg
+      - anpro
+      - tmext
+      - qjson4
+      - '*.sh'
+      - '*.yml'
+      - '*.md'
+      - '*.nsi'
+      - '*.enc'
+      - LICENSE*
+      - configure
+      - .*
+    translation: /res/gta5sync_%locale_with_underscore%.qm
