@@ -49,6 +49,7 @@ private slots:
     void on_cmdBackgroundWipe_clicked();
     void on_cbStretch_toggled(bool checked);
     void on_cbForceAvatarColour_toggled(bool checked);
+    void on_cbWatermark_toggled(bool checked);
 
 private:
     Ui::ImportDialog *ui;
@@ -60,9 +61,13 @@ private:
     QImage newImage;
     QColor selectedColour;
     bool insideAvatarZone;
+    bool watermarkPicture;
+    bool watermarkAvatar;
+    bool watermarkBlock;
     bool importAgreed;
     int snapmaticResolutionLW;
     int snapmaticResolutionLH;
+    void processWatermark(QPainter *snapmaticPainter);
 };
 
 #endif // IMPORTDIALOG_H

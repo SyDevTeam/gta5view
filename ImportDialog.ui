@@ -7,13 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>516</width>
-    <height>425</height>
+    <height>512</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>516</width>
-    <height>425</height>
+    <height>512</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -85,7 +85,7 @@
         </property>
         <layout class="QVBoxLayout" name="vlSettings">
          <item>
-          <layout class="QHBoxLayout" name="hlCheckboxes">
+          <layout class="QHBoxLayout" name="hlCheckboxesTop">
            <item>
             <widget class="QCheckBox" name="cbAvatar">
              <property name="sizePolicy">
@@ -109,6 +109,23 @@
              </property>
              <property name="text">
               <string>Ignore Aspect Ratio</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="hlCheckboxesButtom">
+           <item>
+            <widget class="QCheckBox" name="cbWatermark">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string>Watermark</string>
              </property>
             </widget>
            </item>

@@ -52,6 +52,8 @@ ImportDialog::ImportDialog(QWidget *parent) :
 
     ui->setupUi(this);
     importAgreed = false;
+    watermarkAvatar = true;
+    watermarkPicture = false;
     insideAvatarZone = false;
     avatarAreaImage = QImage(":/img/avatarareaimport.png");
     selectedColour = QColor::fromRgb(0, 0, 0, 255);
@@ -169,6 +171,7 @@ void ImportDialog::processImage()
             snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         }
         snapmaticPainter.drawImage(snapmaticAvatarPlacementW + diffWidth, snapmaticAvatarPlacementH + diffHeight, snapmaticImage);
+        if (ui->cbWatermark->isChecked()) { processWatermark(&snapmaticPainter); }
         imageTitle = tr("Custom Avatar", "Custom Avatar Description in SC, don't use Special Character!");
     }
     else
@@ -195,11 +198,53 @@ void ImportDialog::processImage()
             snapmaticImage = snapmaticImage.scaled(snapmaticResolutionW, snapmaticResolutionH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         }
         snapmaticPainter.drawImage(0 + diffWidth, 0 + diffHeight, snapmaticImage);
+        if (ui->cbWatermark->isChecked()) { processWatermark(&snapmaticPainter); }
         imageTitle = tr("Custom Picture", "Custom Picture Description in SC, don't use Special Character!");
     }
     snapmaticPainter.end();
     newImage = snapmaticPixmap.toImage();
     ui->labPicture->setPixmap(snapmaticPixmap.scaled(snapmaticResolutionLW, snapmaticResolutionLH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+}
+
+void ImportDialog::processWatermark(QPainter *snapmaticPainter)
+{
+    bool blackWatermark = false;
+    bool redWatermark = false;
+    if (selectedColour.red() > 127)
+    {
+        if (selectedColour.green() > 127 || selectedColour.blue() > 127)
+        {
+            redWatermark = true;
+        }
+    }
+    else
+    {
+        redWatermark = true;
+    }
+    if (selectedColour.lightness() > 127)
+    {
+        blackWatermark = true;
+    }
+    // draw watermark
+    if (redWatermark)
+    {
+        snapmaticPainter->drawImage(0, 0, QImage(":/img/watermark_2r.png"));
+    }
+    else
+    {
+        QImage viewWatermark = QImage(":/img/watermark_2b.png");
+        if (!blackWatermark)
+        {
+            viewWatermark.invertPixels(QImage::InvertRgb);
+        }
+        snapmaticPainter->drawImage(0, 0, viewWatermark);
+    }
+    QImage textWatermark = QImage(":/img/watermark_1b.png");
+    if (!blackWatermark)
+    {
+        textWatermark.invertPixels(QImage::InvertRgb);
+    }
+    snapmaticPainter->drawImage(0, 0, textWatermark);
 }
 
 QImage ImportDialog::image()
@@ -271,6 +316,16 @@ void ImportDialog::on_cbAvatar_toggled(bool checked)
         }
     }
     insideAvatarZone = ui->cbAvatar->isChecked();
+    watermarkBlock = true;
+    if (insideAvatarZone)
+    {
+        ui->cbWatermark->setChecked(watermarkAvatar);
+    }
+    else
+    {
+        ui->cbWatermark->setChecked(watermarkPicture);
+    }
+    watermarkBlock = false;
     processImage();
 }
 
@@ -401,4 +456,20 @@ void ImportDialog::on_cbForceAvatarColour_toggled(bool checked)
 {
     Q_UNUSED(checked)
     processImage();
+}
+
+void ImportDialog::on_cbWatermark_toggled(bool checked)
+{
+    if (!watermarkBlock)
+    {
+        if (insideAvatarZone)
+        {
+            watermarkAvatar = checked;
+        }
+        else
+        {
+            watermarkPicture = checked;
+        }
+        processImage();
+    }
 }

@@ -20,8 +20,9 @@
         <file>pointmaker-24.png</file>
         <file>pointmaker-32.png</file>
         <file>savegame.png</file>
-        <file>watermark.png</file>
-        <file>watermarkdark.png</file>
+        <file>watermark_1b.png</file>
+        <file>watermark_2b.png</file>
+        <file>watermark_2r.png</file>
     </qresource>
     <qresource prefix="/global">
         <file>global.rcc</file>
