@@ -70,6 +70,8 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(GTA5SYNC_APPVER);
     a.setQuitOnLastWindowClosed(false);
 
+    QResource::registerResource(":/global/global.rcc");
+
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Startup");
 
@@ -291,8 +293,6 @@ int main(int argc, char *argv[])
     QObject::connect(&threadDB, SIGNAL(playerNameFound(int, QString)), &profileDB, SLOT(setPlayerName(int, QString)));
     QObject::connect(&threadDB, SIGNAL(finished()), &a, SLOT(quit()));
     threadDB.start();
-
-    QResource::registerResource(":/global/global.rcc");
 
     UserInterface uiWindow(&profileDB, &crewDB, &threadDB);
     uiWindow.setWindowIcon(IconLoader::loadingAppIcon());

@@ -44,6 +44,7 @@
 #define snapmaticUsefulLength 260
 #define snapmaticFileMaxSize 528192
 #define jpegHeaderLineDifStr 2
+#define jpegHeaderLineDifLim 8
 #define jpegPreHeaderLength 14
 #define jpegPicStreamLength 524288
 #define jsonStreamLength 3076
@@ -56,6 +57,9 @@
 #define titlStreamEditorBegin 527668
 #define titlStreamEditorLength 256
 #define titlStreamCharacterMax 39
+
+// LIMIT ALLOCATIONS
+#define jpegStreamLimitBegin 288
 
 // IMAGES VALUES
 #define snapmaticResolutionW 960
@@ -305,6 +309,12 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_, bool cacheEnabled_, bo
         return false;
     }
 
+    // Get JPEG Size Limit
+    jpegHeaderLine.remove(0, jpegHeaderLineDifLim);
+    QString jpegHeaderLineStr = QString::fromUtf8(jpegHeaderLine.toHex().remove(8 - 2, 2));
+    QString hexadecimalStr = jpegHeaderLineStr.mid(4, 2) % jpegHeaderLineStr.mid(2, 2) % jpegHeaderLineStr.mid(0, 2);
+    jpegRawContentSize = hexadecimalStr.toInt(0, 16);
+
     // Read JPEG Stream
     if (!picStream->isReadable())
     {
@@ -314,18 +324,6 @@ bool SnapmaticPicture::readingPicture(bool writeEnabled_, bool cacheEnabled_, bo
         return false;
     }
     QByteArray jpegRawContent = picStream->read(jpegPicStreamLength);
-    if (jpegRawContent.contains("\xFF\xD9"))
-    {
-        int jpegRawContentSizeT = jpegRawContent.indexOf("\xFF\xD9") + 2;
-        jpegRawContentSizeE = jpegRawContentSizeT;
-        jpegRawContentSize = jpegRawContentSizeT;
-        if (jpegRawContent.contains("\xFF\x45\x4F\x49"))
-        {
-            jpegRawContentSizeT = jpegRawContent.indexOf("\xFF\x45\x4F\x49");
-        }
-        jpegRawContent = jpegRawContent.left(jpegRawContentSize);
-        jpegRawContentSize = jpegRawContentSizeT;
-    }
     if (cacheEnabled) picOk = cachePicture.loadFromData(jpegRawContent, "JPEG");
     if (!cacheEnabled)
     {
@@ -507,7 +505,7 @@ bool SnapmaticPicture::setImage(const QImage &picture)
             picStreamT.close();
             if (saveSuccess)
             {
-                if (picByteArrayT.length() > jpegRawContentSize)
+                if (picByteArrayT.length() > jpegPicStreamLength)
                 {
                     comLvl--;
                     saveSuccess = false;
@@ -527,29 +525,34 @@ bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean 
 {
     if (writeEnabled)
     {
-        bool customEOI = false;
         QByteArray picByteArray = streamArray;
         if (lowRamMode) { rawPicContent = qUncompress(rawPicContent); }
         QBuffer snapmaticStream(&rawPicContent);
         snapmaticStream.open(QIODevice::ReadWrite);
         if (!snapmaticStream.seek(jpegStreamEditorBegin)) return false;
         if (picByteArray.length() > jpegPicStreamLength) return false;
-        if (picByteArray.length() < jpegRawContentSize && jpegRawContentSize + 4 < jpegPicStreamLength)
-        {
-            customEOI = true;
-        }
         while (picByteArray.length() != jpegPicStreamLength)
         {
             picByteArray += '\x00';
         }
-        if (customEOI)
-        {
-            picByteArray.replace(jpegRawContentSize, 4, "\xFF\x45\x4F\x49");
-        }
         int result = snapmaticStream.write(picByteArray);
+        QString hexadecimalStr;
+        hexadecimalStr.setNum(streamArray.length(), 16);
+        while (hexadecimalStr.length() != 6)
+        {
+            hexadecimalStr.prepend('0');
+        }
+        hexadecimalStr = hexadecimalStr.mid(4, 2) % hexadecimalStr.mid(2, 2) % hexadecimalStr.mid(0, 2);
+        bool updatedRawContentSize = false;
+        if (snapmaticStream.seek(jpegStreamLimitBegin))
+        {
+            snapmaticStream.write(QByteArray::fromHex(hexadecimalStr.toUtf8()));
+            updatedRawContentSize = true;
+        }
         snapmaticStream.close();
         if (result != 0)
         {
+            if (updatedRawContentSize) { jpegRawContentSize = streamArray.length(); }
             if (cacheEnabled)
             {
                 QImage replacedPicture;
@@ -1031,7 +1034,7 @@ void SnapmaticPicture::parseJsonContent()
         if (jsonObject["rsedtr"].isBool()) { localProperties.isFromRSEditor = jsonObject["rsedtr"].toBool(); }
         else { jsonError = true; }
     }
-    else { jsonIncomplete = true; }
+    // else { jsonIncomplete = true; } // Game release Snapmatic pictures prior May 2015 left out rsedtr, so don't force exists on that one
 
     if (!jsonIncomplete && !jsonError)
     {

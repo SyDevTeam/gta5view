@@ -29,3 +29,7 @@
 
 # Qt project user file
 *.pro.user
+
+# Gettext translation files
+*.po
+*.pot
