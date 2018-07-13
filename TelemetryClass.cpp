@@ -336,6 +336,9 @@ QJsonDocument TelemetryClass::getApplicationSpec()
     jsonObject["Arch"] = QSysInfo::buildCpuArchitecture();
 #endif
     jsonObject["Name"] = GTA5SYNC_APPSTR;
+#ifdef GTA5SYNC_COMMIT
+    jsonObject["Commit"] = GTA5SYNC_COMMIT;
+#endif
     jsonObject["Version"] = GTA5SYNC_APPVER;
     jsonObject["BuildDateTime"] = AppEnv::getBuildDateTime();
     jsonObject["BuildType"] = GTA5SYNC_BUILDTYPE;

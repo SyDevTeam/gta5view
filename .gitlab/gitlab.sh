@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install curl and lua
+# Install curl, git, lua, nsis and openssl
 apt-get update -qq && \
 apt-get install -qq curl git lua5.2 nsis openssl
 
@@ -19,6 +19,9 @@ fi
 if [ "${PACKAGE_CODE}" == "" ]; then
 	export PACKAGE_CODE=GitLab
 fi
+
+# Init Application Commit Hash
+export APPLICATION_COMMIT=$(git rev-parse --short HEAD)
 
 # Start CI script and copying assets into base directory
 .ci/ci.sh && \

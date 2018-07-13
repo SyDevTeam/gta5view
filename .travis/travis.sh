@@ -20,4 +20,8 @@ if [ "${PACKAGE_CODE}" == "" ]; then
 	export PACKAGE_CODE=GitHub
 fi
 
+# Init Application Commit Hash
+export APPLICATION_COMMIT=$(git rev-parse --short HEAD)
+
+# Start CI script
 .ci/ci.sh

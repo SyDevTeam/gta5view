@@ -61,7 +61,13 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     defaultWindowTitle = tr("%2 - %1").arg("%1", GTA5SYNC_APPSTR);
 
     this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
-    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+    QString appVersion = GTA5SYNC_APPVER;
+#ifndef GTA5SYNC_BUILDTYPE_REL
+#ifdef GTA5SYNC_COMMIT
+    appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
+#endif
+#endif
+    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
 
     // Set Icon for Close Button
     if (QIcon::hasThemeIcon("dialog-close"))
@@ -633,7 +639,13 @@ void UserInterface::retranslateUi()
 {
     ui->retranslateUi(this);
     ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
-    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+    QString appVersion = GTA5SYNC_APPVER;
+#ifndef GTA5SYNC_BUILDTYPE_REL
+#ifdef GTA5SYNC_COMMIT
+    appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
+#endif
+#endif
+    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
     if (profileOpen)
     {
         this->setWindowTitle(defaultWindowTitle.arg(profileName));

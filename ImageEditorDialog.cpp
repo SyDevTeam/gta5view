@@ -72,7 +72,6 @@ ImageEditorDialog::ImageEditorDialog(SnapmaticPicture *picture, QString profileN
     snapmaticResolutionLW = 516 * screenRatio; // 430
     snapmaticResolutionLH = 288 * screenRatio; // 240
     ui->labPicture->setMinimumSize(snapmaticResolutionLW, snapmaticResolutionLH);
-    ui->labCapacity->setText(tr("Capacity: %1").arg(QString::number(qRound((double)picture->getContentMaxLength() / 1024)) % " KB"));
 
     imageIsChanged = false;
     pictureCache = picture->getImage();
@@ -203,10 +202,4 @@ void ImageEditorDialog::on_cmdSave_clicked()
         }
     }
     close();
-}
-
-void ImageEditorDialog::on_cmdQuestion_clicked()
-{
-    QMessageBox::information(this, tr("Snapmatic Image Editor"), tr("Every taken Snapmatic have a different Capacity, a Snapmatic with higher Capacity can store a picture with better quality."));
-
 }

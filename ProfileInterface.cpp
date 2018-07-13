@@ -87,7 +87,13 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     saSpacerItem = nullptr;
 
     updatePalette();
-    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+    QString appVersion = GTA5SYNC_APPVER;
+#ifndef GTA5SYNC_BUILDTYPE_REL
+#ifdef GTA5SYNC_COMMIT
+    appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
+#endif
+#endif
+    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
     ui->saProfileContent->setFilesDropEnabled(true);
     ui->saProfileContent->setImageDropEnabled(true);
 
@@ -1498,7 +1504,13 @@ void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
 void ProfileInterface::retranslateUi()
 {
     ui->retranslateUi(this);
-    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+    QString appVersion = GTA5SYNC_APPVER;
+#ifndef GTA5SYNC_BUILDTYPE_REL
+#ifdef GTA5SYNC_COMMIT
+    appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
+#endif
+#endif
+    ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
 }
 
 bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)

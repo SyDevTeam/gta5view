@@ -38,7 +38,6 @@ private slots:
     void on_cmdClose_clicked();
     void on_cmdReplace_clicked();
     void on_cmdSave_clicked();
-    void on_cmdQuestion_clicked();
 
 private:
     SnapmaticPicture *smpic;
