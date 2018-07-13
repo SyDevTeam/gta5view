@@ -37,30 +37,30 @@ Running with Qt %6&lt;br/&gt;
         <translation>關閉(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="43"/>
+        <location filename="../AboutDialog.cpp" line="48"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>繁體中文化: %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="45"/>
+        <location filename="../AboutDialog.cpp" line="50"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation>Ray,https://steamcommunity.com/profiles/76561198282701714/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="68"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>一個 Grand Theft Auto V Snapmatic 圖片、遊戲存檔檢視專案</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="71"/>
+        <location filename="../AboutDialog.cpp" line="76"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>版權 &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="78"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 使用 &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt; 授權條款發布</translation>
     </message>
@@ -181,51 +181,34 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="59"/>
-        <location filename="../ImageEditorDialog.cpp" line="75"/>
-        <source>Capacity: %1</source>
-        <translation>大小: %1</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="66"/>
-        <source>?</source>
-        <translation>?</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="90"/>
         <source>&amp;Import...</source>
         <translation>匯入(&amp;I)...</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="110"/>
+        <location filename="../ImageEditorDialog.ui" line="79"/>
         <source>&amp;Overwrite</source>
         <translation>修改(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="117"/>
+        <location filename="../ImageEditorDialog.ui" line="86"/>
         <source>&amp;Close</source>
         <translation>關閉(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="194"/>
-        <location filename="../ImageEditorDialog.cpp" line="201"/>
-        <location filename="../ImageEditorDialog.cpp" line="210"/>
+        <location filename="../ImageEditorDialog.cpp" line="193"/>
+        <location filename="../ImageEditorDialog.cpp" line="200"/>
         <source>Snapmatic Image Editor</source>
         <translation>Snapmatic 圖片編輯器</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="194"/>
+        <location filename="../ImageEditorDialog.cpp" line="193"/>
         <source>Patching of Snapmatic Image failed because of I/O Error</source>
         <translation>I/O 錯誤，Snapmatic 圖片更新失敗</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="201"/>
+        <location filename="../ImageEditorDialog.cpp" line="200"/>
         <source>Patching of Snapmatic Image failed because of Image Error</source>
         <translation>圖片錯誤，Snapmatic 圖片更新失敗</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.cpp" line="210"/>
-        <source>Every taken Snapmatic have a different Capacity, a Snapmatic with higher Capacity can store a picture with better quality.</source>
-        <translation>每張 Snapmatic 大小皆不同，通常較大的 Snapmatic 圖片品質較佳。</translation>
     </message>
 </context>
 <context>
@@ -313,14 +296,14 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="175"/>
-        <location filename="../ProfileInterface.cpp" line="662"/>
+        <location filename="../ProfileInterface.cpp" line="668"/>
         <source>Custom Avatar</source>
         <comment>Custom Avatar Description in SC, don&apos;t use Special Character!</comment>
         <translation>自訂大頭貼</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="202"/>
-        <location filename="../ProfileInterface.cpp" line="681"/>
+        <location filename="../ProfileInterface.cpp" line="687"/>
         <source>Custom Picture</source>
         <comment>Custom Picture Description in SC, don&apos;t use Special Character!</comment>
         <translation>自訂圖片</translation>
@@ -777,37 +760,37 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="152"/>
-        <location filename="../ProfileInterface.cpp" line="1428"/>
+        <location filename="../ProfileInterface.cpp" line="1434"/>
         <source>Export as &amp;Picture...</source>
         <translation>匯出成圖片(&amp;P)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="153"/>
-        <location filename="../ProfileInterface.cpp" line="1429"/>
+        <location filename="../ProfileInterface.cpp" line="1435"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation>匯出成 Snapmatic(&amp;S)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="155"/>
-        <location filename="../ProfileInterface.cpp" line="1422"/>
+        <location filename="../ProfileInterface.cpp" line="1428"/>
         <source>&amp;Edit Properties...</source>
         <translation>編輯屬性(&amp;E) ...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="156"/>
-        <location filename="../ProfileInterface.cpp" line="1423"/>
+        <location filename="../ProfileInterface.cpp" line="1429"/>
         <source>&amp;Overwrite Image...</source>
         <translation>修改圖片(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="158"/>
-        <location filename="../ProfileInterface.cpp" line="1425"/>
+        <location filename="../ProfileInterface.cpp" line="1431"/>
         <source>Open &amp;Map Viewer...</source>
         <translation>開啟地圖檢視器(&amp;M)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="160"/>
-        <location filename="../ProfileInterface.cpp" line="1426"/>
+        <location filename="../ProfileInterface.cpp" line="1432"/>
         <source>Open &amp;JSON Editor...</source>
         <translation>開啟 JSON 編輯器(&amp;J)...</translation>
     </message>
@@ -1060,64 +1043,64 @@ Press 1 for Default View</source>
         <translation>匯出檔案中 %1 共 %2 個檔案</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="110"/>
+        <location filename="../ImageEditorDialog.cpp" line="109"/>
         <location filename="../ImportDialog.cpp" line="383"/>
-        <location filename="../ProfileInterface.cpp" line="476"/>
-        <location filename="../ProfileInterface.cpp" line="542"/>
-        <location filename="../ProfileInterface.cpp" line="851"/>
+        <location filename="../ProfileInterface.cpp" line="482"/>
+        <location filename="../ProfileInterface.cpp" line="548"/>
+        <location filename="../ProfileInterface.cpp" line="857"/>
         <source>Import...</source>
         <translation>匯入...</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="111"/>
-        <location filename="../ImageEditorDialog.cpp" line="142"/>
-        <location filename="../ImageEditorDialog.cpp" line="151"/>
+        <location filename="../ImageEditorDialog.cpp" line="110"/>
+        <location filename="../ImageEditorDialog.cpp" line="141"/>
+        <location filename="../ImageEditorDialog.cpp" line="150"/>
         <location filename="../ImportDialog.cpp" line="384"/>
         <location filename="../ImportDialog.cpp" line="415"/>
         <location filename="../ImportDialog.cpp" line="424"/>
-        <location filename="../ProfileInterface.cpp" line="477"/>
-        <location filename="../ProfileInterface.cpp" line="521"/>
-        <location filename="../ProfileInterface.cpp" line="576"/>
-        <location filename="../ProfileInterface.cpp" line="598"/>
-        <location filename="../ProfileInterface.cpp" line="614"/>
-        <location filename="../ProfileInterface.cpp" line="719"/>
-        <location filename="../ProfileInterface.cpp" line="729"/>
-        <location filename="../ProfileInterface.cpp" line="808"/>
-        <location filename="../ProfileInterface.cpp" line="813"/>
-        <location filename="../ProfileInterface.cpp" line="973"/>
-        <location filename="../ProfileInterface.cpp" line="978"/>
-        <location filename="../ProfileInterface.cpp" line="990"/>
-        <location filename="../ProfileInterface.cpp" line="1027"/>
+        <location filename="../ProfileInterface.cpp" line="483"/>
+        <location filename="../ProfileInterface.cpp" line="527"/>
+        <location filename="../ProfileInterface.cpp" line="582"/>
+        <location filename="../ProfileInterface.cpp" line="604"/>
+        <location filename="../ProfileInterface.cpp" line="620"/>
+        <location filename="../ProfileInterface.cpp" line="725"/>
+        <location filename="../ProfileInterface.cpp" line="735"/>
+        <location filename="../ProfileInterface.cpp" line="814"/>
+        <location filename="../ProfileInterface.cpp" line="819"/>
+        <location filename="../ProfileInterface.cpp" line="979"/>
+        <location filename="../ProfileInterface.cpp" line="984"/>
+        <location filename="../ProfileInterface.cpp" line="996"/>
         <location filename="../ProfileInterface.cpp" line="1033"/>
+        <location filename="../ProfileInterface.cpp" line="1039"/>
         <source>Import</source>
         <translation>匯入</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="121"/>
+        <location filename="../ImageEditorDialog.cpp" line="120"/>
         <location filename="../ImportDialog.cpp" line="394"/>
-        <location filename="../ProfileInterface.cpp" line="496"/>
+        <location filename="../ProfileInterface.cpp" line="502"/>
         <source>All image files (%1)</source>
         <translation>所有圖片 (%1)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="122"/>
+        <location filename="../ImageEditorDialog.cpp" line="121"/>
         <location filename="../ImportDialog.cpp" line="395"/>
-        <location filename="../ProfileInterface.cpp" line="497"/>
-        <location filename="../UserInterface.cpp" line="457"/>
+        <location filename="../ProfileInterface.cpp" line="503"/>
+        <location filename="../UserInterface.cpp" line="463"/>
         <source>All files (**)</source>
         <translation>所有檔案 (**)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="142"/>
+        <location filename="../ImageEditorDialog.cpp" line="141"/>
         <location filename="../ImportDialog.cpp" line="415"/>
-        <location filename="../ProfileInterface.cpp" line="719"/>
+        <location filename="../ProfileInterface.cpp" line="725"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
         <translation>無法匯入 %1，因為檔案無法開啟</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="151"/>
+        <location filename="../ImageEditorDialog.cpp" line="150"/>
         <location filename="../ImportDialog.cpp" line="424"/>
-        <location filename="../ProfileInterface.cpp" line="729"/>
+        <location filename="../ProfileInterface.cpp" line="735"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
         <translation>無法匯入 %1，因為檔案無法正確解析</translation>
     </message>
@@ -1127,189 +1110,189 @@ Press 1 for Default View</source>
         <translation>開啟圖片 %1 共 %2</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="174"/>
+        <location filename="../ProfileInterface.cpp" line="180"/>
         <source>Loading...</source>
         <translation>載入中...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="403"/>
+        <location filename="../ProfileInterface.cpp" line="409"/>
         <source>Snapmatic Loader</source>
         <translation>Snapmatic 載入器</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="403"/>
+        <location filename="../ProfileInterface.cpp" line="409"/>
         <source>&lt;h4&gt;Following Snapmatic Pictures got repaired&lt;/h4&gt;%1</source>
         <translation>&lt;h4&gt;下列的 Snapmatic 圖片已被更新&lt;/h4&gt;%1</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="492"/>
+        <location filename="../ProfileInterface.cpp" line="498"/>
         <source>Importable files (%1)</source>
         <translation>可匯入的檔案 (%1)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="493"/>
-        <location filename="../UserInterface.cpp" line="454"/>
+        <location filename="../ProfileInterface.cpp" line="499"/>
+        <location filename="../UserInterface.cpp" line="460"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="494"/>
-        <location filename="../UserInterface.cpp" line="455"/>
+        <location filename="../ProfileInterface.cpp" line="500"/>
+        <location filename="../UserInterface.cpp" line="461"/>
         <source>Savegames files (SGTA*)</source>
         <translation>遊戲存檔 (SGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="495"/>
-        <location filename="../UserInterface.cpp" line="456"/>
+        <location filename="../ProfileInterface.cpp" line="501"/>
+        <location filename="../UserInterface.cpp" line="462"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Snapmatic 圖片 (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="521"/>
-        <location filename="../ProfileInterface.cpp" line="813"/>
-        <location filename="../UserInterface.cpp" line="545"/>
+        <location filename="../ProfileInterface.cpp" line="527"/>
+        <location filename="../ProfileInterface.cpp" line="819"/>
+        <location filename="../UserInterface.cpp" line="551"/>
         <source>No valid file is selected</source>
         <translation>沒有選擇有效的檔案</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="543"/>
-        <location filename="../ProfileInterface.cpp" line="560"/>
+        <location filename="../ProfileInterface.cpp" line="549"/>
+        <location filename="../ProfileInterface.cpp" line="566"/>
         <source>Import file %1 of %2 files</source>
         <translation>匯入檔案 %1 共 %2 個</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="576"/>
+        <location filename="../ProfileInterface.cpp" line="582"/>
         <source>Import failed with...
 
 %1</source>
         <translation>%1 匯入失敗</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="598"/>
-        <location filename="../UserInterface.cpp" line="497"/>
+        <location filename="../ProfileInterface.cpp" line="604"/>
+        <location filename="../UserInterface.cpp" line="503"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>無法讀取 Snapmatic 圖片</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="614"/>
-        <location filename="../UserInterface.cpp" line="513"/>
+        <location filename="../ProfileInterface.cpp" line="620"/>
+        <location filename="../UserInterface.cpp" line="519"/>
         <source>Failed to read Savegame file</source>
         <translation>無法讀取遊戲存檔</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="808"/>
+        <location filename="../ProfileInterface.cpp" line="814"/>
         <source>Can&apos;t import %1 because file format can&apos;t be detected</source>
         <translation>無法匯入 %1，因為無法檢測該檔案格式</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="973"/>
+        <location filename="../ProfileInterface.cpp" line="979"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e</source>
         <translation>匯入 Snapmatic 圖片失敗，檔案不是 PGTA 開頭或附檔名不是 .g5e</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="978"/>
+        <location filename="../ProfileInterface.cpp" line="984"/>
         <source>Failed to import the Snapmatic picture, the picture is already in the game</source>
         <translation>匯入 Snapmatic 圖片失敗，圖片已經在遊戲中</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="990"/>
+        <location filename="../ProfileInterface.cpp" line="996"/>
         <source>Failed to import the Snapmatic picture, can&apos;t copy the file into profile</source>
         <translation>匯入 Snapmatic 圖片失敗，無法將該檔案複製到設定檔中</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1027"/>
+        <location filename="../ProfileInterface.cpp" line="1033"/>
         <source>Failed to import the Savegame, can&apos;t copy the file into profile</source>
         <translation>匯入遊戲存檔失敗，無法將該檔案複製到設定檔中</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1033"/>
+        <location filename="../ProfileInterface.cpp" line="1039"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
         <translation>匯入遊戲存檔失敗，沒有遊戲存檔欄位</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1097"/>
-        <location filename="../ProfileInterface.cpp" line="1135"/>
-        <location filename="../ProfileInterface.cpp" line="1180"/>
-        <location filename="../ProfileInterface.cpp" line="1215"/>
-        <location filename="../ProfileInterface.cpp" line="1235"/>
+        <location filename="../ProfileInterface.cpp" line="1103"/>
+        <location filename="../ProfileInterface.cpp" line="1141"/>
+        <location filename="../ProfileInterface.cpp" line="1186"/>
+        <location filename="../ProfileInterface.cpp" line="1221"/>
+        <location filename="../ProfileInterface.cpp" line="1241"/>
         <source>Export selected...</source>
         <translation>匯出所選...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1120"/>
-        <location filename="../ProfileInterface.cpp" line="1138"/>
+        <location filename="../ProfileInterface.cpp" line="1126"/>
+        <location filename="../ProfileInterface.cpp" line="1144"/>
         <source>JPG pictures and GTA Snapmatic</source>
         <translation>JPG 圖片和 GTA Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1121"/>
-        <location filename="../ProfileInterface.cpp" line="1143"/>
+        <location filename="../ProfileInterface.cpp" line="1127"/>
+        <location filename="../ProfileInterface.cpp" line="1149"/>
         <source>JPG pictures only</source>
         <translation>只有 JPG 圖片</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1122"/>
-        <location filename="../ProfileInterface.cpp" line="1147"/>
+        <location filename="../ProfileInterface.cpp" line="1128"/>
+        <location filename="../ProfileInterface.cpp" line="1153"/>
         <source>GTA Snapmatic only</source>
         <translation>只有 GTA Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1135"/>
+        <location filename="../ProfileInterface.cpp" line="1141"/>
         <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
         <translation>%1 匯出 Snapmatic 圖片 %2&lt;br&gt;&lt;br&gt;JPG 圖片可使用圖片檢視器開啟&lt;br&gt;GTA Snapmatic 可以匯入到遊戲中&lt;br&gt;&lt;br&gt;匯出成:</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1181"/>
+        <location filename="../ProfileInterface.cpp" line="1187"/>
         <source>Initialising export...</source>
         <translation>初始化...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1215"/>
+        <location filename="../ProfileInterface.cpp" line="1221"/>
         <source>Export failed with...
 
 %1</source>
         <translation>%1 匯出失敗</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1235"/>
-        <location filename="../ProfileInterface.cpp" line="1277"/>
+        <location filename="../ProfileInterface.cpp" line="1241"/>
+        <location filename="../ProfileInterface.cpp" line="1283"/>
         <source>No Snapmatic pictures or Savegames files are selected</source>
         <translation>未選擇 Snapmatic 圖片或遊戲存檔</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1243"/>
-        <location filename="../ProfileInterface.cpp" line="1271"/>
+        <location filename="../ProfileInterface.cpp" line="1249"/>
         <location filename="../ProfileInterface.cpp" line="1277"/>
+        <location filename="../ProfileInterface.cpp" line="1283"/>
         <source>Remove selected</source>
         <translation>移除所選</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1243"/>
+        <location filename="../ProfileInterface.cpp" line="1249"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
         <translation>你想移除所選的 Snapmatic 圖片/存檔嗎?</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1271"/>
+        <location filename="../ProfileInterface.cpp" line="1277"/>
         <source>Failed to remove all selected Snapmatic pictures and/or Savegame files</source>
         <translation>無法移除所選擇的 Snapmatic 圖片/遊戲存檔</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1343"/>
-        <location filename="../ProfileInterface.cpp" line="1377"/>
-        <location filename="../ProfileInterface.cpp" line="1770"/>
-        <location filename="../ProfileInterface.cpp" line="1856"/>
-        <location filename="../ProfileInterface.cpp" line="1955"/>
-        <location filename="../ProfileInterface.cpp" line="2082"/>
+        <location filename="../ProfileInterface.cpp" line="1349"/>
+        <location filename="../ProfileInterface.cpp" line="1383"/>
+        <location filename="../ProfileInterface.cpp" line="1782"/>
+        <location filename="../ProfileInterface.cpp" line="1868"/>
+        <location filename="../ProfileInterface.cpp" line="1967"/>
+        <location filename="../ProfileInterface.cpp" line="2094"/>
         <source>No Snapmatic pictures are selected</source>
         <translation>未選擇 Snapmatic 圖片</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1357"/>
-        <location filename="../ProfileInterface.cpp" line="1391"/>
-        <location filename="../ProfileInterface.cpp" line="1835"/>
-        <location filename="../ProfileInterface.cpp" line="1934"/>
-        <location filename="../ProfileInterface.cpp" line="2061"/>
-        <location filename="../ProfileInterface.cpp" line="2164"/>
+        <location filename="../ProfileInterface.cpp" line="1363"/>
+        <location filename="../ProfileInterface.cpp" line="1397"/>
+        <location filename="../ProfileInterface.cpp" line="1847"/>
+        <location filename="../ProfileInterface.cpp" line="1946"/>
+        <location filename="../ProfileInterface.cpp" line="2073"/>
+        <location filename="../ProfileInterface.cpp" line="2176"/>
         <source>%1 failed with...
 
 %2</source>
@@ -1319,92 +1302,92 @@ Press 1 for Default View</source>
 %2</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="867"/>
+        <location filename="../ProfileInterface.cpp" line="873"/>
         <source>Prepare Content for Import...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1770"/>
-        <location filename="../ProfileInterface.cpp" line="1835"/>
+        <location filename="../ProfileInterface.cpp" line="1782"/>
+        <location filename="../ProfileInterface.cpp" line="1847"/>
         <source>Qualify as Avatar</source>
         <translation>合格大頭貼</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1781"/>
-        <location filename="../ProfileInterface.cpp" line="1884"/>
-        <location filename="../ProfileInterface.cpp" line="2011"/>
-        <location filename="../ProfileInterface.cpp" line="2117"/>
+        <location filename="../ProfileInterface.cpp" line="1793"/>
+        <location filename="../ProfileInterface.cpp" line="1896"/>
+        <location filename="../ProfileInterface.cpp" line="2023"/>
+        <location filename="../ProfileInterface.cpp" line="2129"/>
         <source>Patch selected...</source>
         <translation>修改所選...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1782"/>
-        <location filename="../ProfileInterface.cpp" line="1801"/>
-        <location filename="../ProfileInterface.cpp" line="1885"/>
-        <location filename="../ProfileInterface.cpp" line="1904"/>
-        <location filename="../ProfileInterface.cpp" line="2012"/>
-        <location filename="../ProfileInterface.cpp" line="2031"/>
-        <location filename="../ProfileInterface.cpp" line="2118"/>
-        <location filename="../ProfileInterface.cpp" line="2137"/>
+        <location filename="../ProfileInterface.cpp" line="1794"/>
+        <location filename="../ProfileInterface.cpp" line="1813"/>
+        <location filename="../ProfileInterface.cpp" line="1897"/>
+        <location filename="../ProfileInterface.cpp" line="1916"/>
+        <location filename="../ProfileInterface.cpp" line="2024"/>
+        <location filename="../ProfileInterface.cpp" line="2043"/>
+        <location filename="../ProfileInterface.cpp" line="2130"/>
+        <location filename="../ProfileInterface.cpp" line="2149"/>
         <source>Patch file %1 of %2 files</source>
         <translation>修改檔案 %1 共 %2 個檔案</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1835"/>
+        <location filename="../ProfileInterface.cpp" line="1847"/>
         <source>Qualify</source>
         <comment>%1 failed with...</comment>
         <translation>合格</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1856"/>
-        <location filename="../ProfileInterface.cpp" line="1934"/>
+        <location filename="../ProfileInterface.cpp" line="1868"/>
+        <location filename="../ProfileInterface.cpp" line="1946"/>
         <source>Change Players...</source>
         <translation>更改玩家...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1934"/>
+        <location filename="../ProfileInterface.cpp" line="1946"/>
         <source>Change Players</source>
         <comment>%1 failed with...</comment>
         <translation>更改玩家</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1955"/>
-        <location filename="../ProfileInterface.cpp" line="1992"/>
-        <location filename="../ProfileInterface.cpp" line="2061"/>
+        <location filename="../ProfileInterface.cpp" line="1967"/>
+        <location filename="../ProfileInterface.cpp" line="2004"/>
+        <location filename="../ProfileInterface.cpp" line="2073"/>
         <source>Change Crew...</source>
         <translation>更改幫會...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1992"/>
+        <location filename="../ProfileInterface.cpp" line="2004"/>
         <source>Failed to enter a valid Snapmatic Crew ID</source>
         <translation>輸入了無效的幫會 ID</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2061"/>
+        <location filename="../ProfileInterface.cpp" line="2073"/>
         <source>Change Crew</source>
         <comment>%1 failed with...</comment>
         <translation>更改幫會</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2082"/>
-        <location filename="../ProfileInterface.cpp" line="2099"/>
-        <location filename="../ProfileInterface.cpp" line="2164"/>
+        <location filename="../ProfileInterface.cpp" line="2094"/>
+        <location filename="../ProfileInterface.cpp" line="2111"/>
+        <location filename="../ProfileInterface.cpp" line="2176"/>
         <source>Change Title...</source>
         <translation>更改標題...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2099"/>
+        <location filename="../ProfileInterface.cpp" line="2111"/>
         <source>Failed to enter a valid Snapmatic title</source>
         <translation>輸入了無效的標題</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2164"/>
+        <location filename="../ProfileInterface.cpp" line="2176"/>
         <source>Change Title</source>
         <comment>%1 failed with...</comment>
         <translation>更改標題</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="453"/>
+        <location filename="../UserInterface.cpp" line="459"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation>所有設定檔檔案 (*.g5e SGTA* PGTA*)</translation>
     </message>
@@ -1412,17 +1395,17 @@ Press 1 for Default View</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="101"/>
+        <location filename="../main.cpp" line="103"/>
         <source>Font</source>
         <translation>字體</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="101"/>
+        <location filename="../main.cpp" line="103"/>
         <source>Selected Font: %1</source>
         <translation>選擇的字體: %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="128"/>
+        <location filename="../main.cpp" line="130"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;歡迎使用 %1!&lt;/h4&gt; 你想在開始前先設定 %1 嗎?</translation>
     </message>
@@ -1500,37 +1483,37 @@ Press 1 for Default View</source>
         <translation>刪除</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1464"/>
+        <location filename="../ProfileInterface.cpp" line="1470"/>
         <source>&amp;View</source>
         <translation>檢視(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1465"/>
+        <location filename="../ProfileInterface.cpp" line="1471"/>
         <source>&amp;Export</source>
         <translation>匯出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1466"/>
+        <location filename="../ProfileInterface.cpp" line="1472"/>
         <source>&amp;Remove</source>
         <translation>移除(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1468"/>
+        <location filename="../ProfileInterface.cpp" line="1474"/>
         <source>&amp;Select</source>
         <translation>選擇(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1469"/>
+        <location filename="../ProfileInterface.cpp" line="1475"/>
         <source>&amp;Deselect</source>
         <translation>取消選擇(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1472"/>
+        <location filename="../ProfileInterface.cpp" line="1478"/>
         <source>Select &amp;All</source>
         <translation>選擇全部(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1476"/>
+        <location filename="../ProfileInterface.cpp" line="1482"/>
         <source>&amp;Deselect All</source>
         <translation>取消選擇全部(&amp;D)</translation>
     </message>
@@ -1725,25 +1708,25 @@ Press 1 for Default View</source>
         <translation>JSON 錯誤，未能更新 Snapmatic 屬性</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1983"/>
+        <location filename="../ProfileInterface.cpp" line="1995"/>
         <location filename="../SnapmaticEditor.cpp" line="419"/>
         <source>Snapmatic Crew</source>
         <translation>幫會</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1983"/>
+        <location filename="../ProfileInterface.cpp" line="1995"/>
         <location filename="../SnapmaticEditor.cpp" line="419"/>
         <source>New Snapmatic crew:</source>
         <translation>輸入新的幫會:</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2094"/>
+        <location filename="../ProfileInterface.cpp" line="2106"/>
         <location filename="../SnapmaticEditor.cpp" line="390"/>
         <source>Snapmatic Title</source>
         <translation>標題</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2094"/>
+        <location filename="../ProfileInterface.cpp" line="2106"/>
         <location filename="../SnapmaticEditor.cpp" line="390"/>
         <source>New Snapmatic title:</source>
         <translation>輸入新的標題:</translation>
@@ -1800,64 +1783,64 @@ Press 1 for Default View</source>
     <name>SnapmaticPicture</name>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="161"/>
-        <location filename="../SnapmaticPicture.cpp" line="727"/>
+        <location filename="../SnapmaticPicture.cpp" line="730"/>
         <source>JSON is incomplete and malformed</source>
         <translation>JSON 不完整和異常</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="165"/>
-        <location filename="../SnapmaticPicture.cpp" line="731"/>
+        <location filename="../SnapmaticPicture.cpp" line="734"/>
         <source>JSON is incomplete</source>
         <translation>JSON 不完整</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="169"/>
-        <location filename="../SnapmaticPicture.cpp" line="735"/>
+        <location filename="../SnapmaticPicture.cpp" line="738"/>
         <source>JSON is malformed</source>
         <translation>JSON 異常</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="466"/>
+        <location filename="../SnapmaticPicture.cpp" line="464"/>
         <source>PHOTO - %1</source>
         <translation>照片 - %1</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="687"/>
+        <location filename="../SnapmaticPicture.cpp" line="690"/>
         <source>open file %1</source>
         <translation>開啟檔案 - %1</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="703"/>
+        <location filename="../SnapmaticPicture.cpp" line="706"/>
         <source>header not exists</source>
         <translation>標頭不存在</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="707"/>
+        <location filename="../SnapmaticPicture.cpp" line="710"/>
         <source>header is malformed</source>
         <translation>標頭異常</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="711"/>
+        <location filename="../SnapmaticPicture.cpp" line="714"/>
         <source>picture not exists (%1)</source>
         <translation>圖片不存在 (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="715"/>
+        <location filename="../SnapmaticPicture.cpp" line="718"/>
         <source>JSON not exists (%1)</source>
         <translation>JSON 不存在 (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="719"/>
+        <location filename="../SnapmaticPicture.cpp" line="722"/>
         <source>title not exists (%1)</source>
         <translation>標題不存在 (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="723"/>
+        <location filename="../SnapmaticPicture.cpp" line="726"/>
         <source>description not exists (%1)</source>
         <translation>描述不存在 (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="737"/>
+        <location filename="../SnapmaticPicture.cpp" line="740"/>
         <source>reading file %1 because of %2</source>
         <comment>Example for %2: JSON is malformed error</comment>
         <translation>讀取檔案 %1 失敗，因為 %2</translation>
@@ -1918,52 +1901,52 @@ Press 1 for Default View</source>
         <translation>刪除</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1413"/>
+        <location filename="../ProfileInterface.cpp" line="1419"/>
         <source>Edi&amp;t</source>
         <translation>編輯(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1416"/>
+        <location filename="../ProfileInterface.cpp" line="1422"/>
         <source>Show &amp;In-game</source>
         <translation>在遊戲中顯示(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1420"/>
+        <location filename="../ProfileInterface.cpp" line="1426"/>
         <source>Hide &amp;In-game</source>
         <translation>在遊戲中隱藏(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1427"/>
+        <location filename="../ProfileInterface.cpp" line="1433"/>
         <source>&amp;Export</source>
         <translation>匯出(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1430"/>
+        <location filename="../ProfileInterface.cpp" line="1436"/>
         <source>&amp;View</source>
         <translation>檢視(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1433"/>
+        <location filename="../ProfileInterface.cpp" line="1439"/>
         <source>&amp;Remove</source>
         <translation>移除(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1435"/>
+        <location filename="../ProfileInterface.cpp" line="1441"/>
         <source>&amp;Select</source>
         <translation>選擇(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1436"/>
+        <location filename="../ProfileInterface.cpp" line="1442"/>
         <source>&amp;Deselect</source>
         <translation>取消選擇(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1439"/>
+        <location filename="../ProfileInterface.cpp" line="1445"/>
         <source>Select &amp;All</source>
         <translation>選擇全部(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1443"/>
+        <location filename="../ProfileInterface.cpp" line="1449"/>
         <source>&amp;Deselect All</source>
         <translation>取消選擇全部(&amp;D)</translation>
     </message>
@@ -1991,22 +1974,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="157"/>
+        <location filename="../main.cpp" line="159"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="158"/>
+        <location filename="../main.cpp" line="160"/>
         <source>%1 User Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="162"/>
+        <location filename="../main.cpp" line="164"/>
         <source>Yes, I want include personal usage data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="171"/>
+        <location filename="../main.cpp" line="173"/>
         <source>&amp;OK</source>
         <translation type="unfinished">確定(&amp;O)</translation>
     </message>
@@ -2083,7 +2066,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
         <location filename="../UserInterface.cpp" line="59"/>
-        <location filename="../UserInterface.cpp" line="635"/>
+        <location filename="../UserInterface.cpp" line="641"/>
         <source>&amp;About %1</source>
         <translation>關於 %1(&amp;A)</translation>
     </message>
@@ -2139,15 +2122,15 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
-        <location filename="../UserInterface.cpp" line="241"/>
+        <location filename="../UserInterface.cpp" line="247"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>選擇 GTA V 資料夾(&amp;G)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
         <location filename="../OptionsDialog.cpp" line="626"/>
-        <location filename="../UserInterface.cpp" line="182"/>
-        <location filename="../UserInterface.cpp" line="602"/>
+        <location filename="../UserInterface.cpp" line="188"/>
+        <location filename="../UserInterface.cpp" line="608"/>
         <source>Select GTA V Folder...</source>
         <translation>選擇 GTA V 資料夾...</translation>
     </message>
@@ -2182,41 +2165,41 @@ Press 1 for Default View</source>
         <translation>更改玩家(&amp;P)...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1343"/>
-        <location filename="../ProfileInterface.cpp" line="1357"/>
+        <location filename="../ProfileInterface.cpp" line="1349"/>
+        <location filename="../ProfileInterface.cpp" line="1363"/>
         <location filename="../SnapmaticWidget.cpp" line="298"/>
         <source>Show In-game</source>
         <translation>在遊戲中顯示</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1377"/>
-        <location filename="../ProfileInterface.cpp" line="1391"/>
+        <location filename="../ProfileInterface.cpp" line="1383"/>
+        <location filename="../ProfileInterface.cpp" line="1397"/>
         <location filename="../SnapmaticWidget.cpp" line="290"/>
         <source>Hide In-game</source>
         <translation>在遊戲中隱藏</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="63"/>
-        <location filename="../UserInterface.cpp" line="307"/>
-        <location filename="../UserInterface.cpp" line="643"/>
+        <location filename="../UserInterface.cpp" line="313"/>
+        <location filename="../UserInterface.cpp" line="655"/>
         <source>Select Profile</source>
         <translation>選擇設定檔</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="450"/>
+        <location filename="../UserInterface.cpp" line="456"/>
         <source>Open File...</source>
         <translation>開啟檔案...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="497"/>
-        <location filename="../UserInterface.cpp" line="513"/>
-        <location filename="../UserInterface.cpp" line="540"/>
-        <location filename="../UserInterface.cpp" line="545"/>
+        <location filename="../UserInterface.cpp" line="503"/>
+        <location filename="../UserInterface.cpp" line="519"/>
+        <location filename="../UserInterface.cpp" line="546"/>
+        <location filename="../UserInterface.cpp" line="551"/>
         <source>Open File</source>
         <translation>開啟檔案</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="540"/>
+        <location filename="../UserInterface.cpp" line="546"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>格式無效，無法開啟 %1</translation>
     </message>
