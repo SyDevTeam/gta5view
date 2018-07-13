@@ -44,6 +44,7 @@
 #ifdef GTA5SYNC_WIN
 #include "windows.h"
 #include "intrin.h"
+#include "d3d9.h"
 #endif
 
 TelemetryClass TelemetryClass::telemetryClassInstance;
@@ -228,16 +229,16 @@ QJsonDocument TelemetryClass::getSystemHardware()
 #ifdef GTA5SYNC_WIN
     {
         int CPUInfo[4] = {-1};
-        unsigned nExIds, i = 0;
+        unsigned nExIds, ic = 0;
         char CPUBrandString[0x40];
         __cpuid(CPUInfo, 0x80000000);
         nExIds = CPUInfo[0];
-        for (i = 0x80000000; i <= nExIds; ++i)
+        for (ic = 0x80000000; ic <= nExIds; ic++)
         {
-            __cpuid(CPUInfo, i);
-            if (i == 0x80000002) { memcpy(CPUBrandString, CPUInfo, sizeof(CPUInfo)); }
-            else if (i == 0x80000003) { memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo)); }
-            else if (i == 0x80000004) { memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo)); }
+            __cpuid(CPUInfo, ic);
+            if (ic == 0x80000002) { memcpy(CPUBrandString, CPUInfo, sizeof(CPUInfo)); }
+            else if (ic == 0x80000003) { memcpy(CPUBrandString + 16, CPUInfo, sizeof(CPUInfo)); }
+            else if (ic == 0x80000004) { memcpy(CPUBrandString + 32, CPUInfo, sizeof(CPUInfo)); }
         }
         jsonObject["CPUName"] = QString::fromLatin1(CPUBrandString).simplified();
         SYSTEM_INFO sysInfo;
@@ -247,6 +248,21 @@ QJsonDocument TelemetryClass::getSystemHardware()
         statex.dwLength = sizeof(statex);
         GlobalMemoryStatusEx(&statex);
         jsonObject["SystemRAM"] = QString(QString::number((statex.ullTotalPhys / 1024) / 1024) % "MB");
+        QStringList gpusList;
+        IDirect3D9 *pD3D = Direct3DCreate9(D3D_SDK_VERSION);
+        int adapters = pD3D->GetAdapterCount();
+        for (int ia = 0; ia < adapters; ia++)
+        {
+            D3DADAPTER_IDENTIFIER9 d3dIdent;
+            HRESULT result = pD3D->GetAdapterIdentifier(ia, 0, &d3dIdent);
+            if (result == D3D_OK)
+            {
+                QString gpuAdapter = QString::fromLatin1(d3dIdent.Description);
+                if (!gpusList.contains(gpuAdapter)) { gpusList << gpuAdapter; }
+            }
+        }
+        pD3D->Release();
+        jsonObject["GPUs"] = QJsonValue::fromVariant(gpusList);
     }
 #else
     QDir procDir("/proc");
