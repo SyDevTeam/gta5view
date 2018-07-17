@@ -55,6 +55,9 @@
        <layout class="QHBoxLayout" name="hlButtons">
         <item>
          <widget class="QPushButton" name="cmdReplace">
+          <property name="toolTip">
+           <string>Import picture</string>
+          </property>
           <property name="text">
            <string>&amp;Import...</string>
           </property>
@@ -75,6 +78,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="cmdSave">
+          <property name="toolTip">
+           <string>Apply changes</string>
+          </property>
           <property name="text">
            <string>&amp;Overwrite</string>
           </property>
@@ -82,6 +88,9 @@
         </item>
         <item>
          <widget class="QPushButton" name="cmdClose">
+          <property name="toolTip">
+           <string>Discard changes</string>
+          </property>
           <property name="text">
            <string>&amp;Close</string>
           </property>

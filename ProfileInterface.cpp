@@ -737,7 +737,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         delete picture;
                         return false;
                     }
-                    ImportDialog *importDialog = new ImportDialog(this);
+                    ImportDialog *importDialog = new ImportDialog(profileName, this);
                     importDialog->setImage(snapmaticImage);
                     importDialog->setModal(true);
                     importDialog->show();
@@ -922,7 +922,7 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
     if (picture->readingPicture(true, false, true, false))
     {
         bool success = false;
-        ImportDialog *importDialog = new ImportDialog(this);
+        ImportDialog *importDialog = new ImportDialog(profileName, this);
         importDialog->setImage(snapmaticImage);
         importDialog->setModal(true);
         importDialog->show();

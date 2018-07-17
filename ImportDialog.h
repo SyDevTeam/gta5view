@@ -20,6 +20,7 @@
 #define IMPORTDIALOG_H
 
 #include <QDialog>
+#include <QMenu>
 
 namespace Ui {
 class ImportDialog;
@@ -30,7 +31,7 @@ class ImportDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit ImportDialog(QWidget *parent = 0);
+    explicit ImportDialog(QString profileName, QWidget *parent = 0);
     ~ImportDialog();
     QImage image();
     QString getImageTitle();
@@ -39,6 +40,7 @@ public:
 
 private slots:
     void processImage();
+    void importNewPicture();
     void on_cbIgnore_toggled(bool checked);
     void on_cbAvatar_toggled(bool checked);
     void on_cmdCancel_clicked();
@@ -52,6 +54,7 @@ private slots:
     void on_cbWatermark_toggled(bool checked);
 
 private:
+    QString profileName;
     Ui::ImportDialog *ui;
     QImage avatarAreaImage;
     QString backgroundPath;
@@ -60,6 +63,7 @@ private:
     QImage workImage;
     QImage newImage;
     QColor selectedColour;
+    QMenu *optionsMenu;
     bool insideAvatarZone;
     bool watermarkPicture;
     bool watermarkAvatar;

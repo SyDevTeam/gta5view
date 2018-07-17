@@ -43,14 +43,16 @@
 #define snapmaticAvatarPlacementW 145
 #define snapmaticAvatarPlacementH 66
 
-ImportDialog::ImportDialog(QWidget *parent) :
-    QDialog(parent),
+ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
+    QDialog(parent), profileName(profileName),
     ui(new Ui::ImportDialog)
 {
     // Set Window Flags
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
 
     ui->setupUi(this);
+    ui->cmdOK->setDefault(true);
+    ui->cmdOK->setFocus();
     importAgreed = false;
     watermarkAvatar = true;
     watermarkPicture = false;
@@ -103,6 +105,11 @@ ImportDialog::ImportDialog(QWidget *parent) :
     }
 #endif
 
+    // Options menu
+    optionsMenu = new QMenu(this);
+    optionsMenu->addAction(tr("&Import new Picture..."), this, SLOT(importNewPicture()));
+    ui->cmdOptions->setMenu(optionsMenu);
+
     setMaximumSize(sizeHint());
     setMinimumSize(sizeHint());
     setFixedSize(sizeHint());
@@ -110,6 +117,7 @@ ImportDialog::ImportDialog(QWidget *parent) :
 
 ImportDialog::~ImportDialog()
 {
+    delete optionsMenu;
     delete ui;
 }
 
@@ -247,6 +255,75 @@ void ImportDialog::processWatermark(QPainter *snapmaticPainter)
     snapmaticPainter->drawImage(0, 0, textWatermark);
 }
 
+void ImportDialog::importNewPicture()
+{
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("FileDialogs");
+    bool dontUseNativeDialog = settings.value("DontUseNativeDialog", false).toBool();
+    settings.beginGroup("ImportCopy");
+
+fileDialogPreOpen: //Work?
+    QFileDialog fileDialog(this);
+    fileDialog.setFileMode(QFileDialog::ExistingFile);
+    fileDialog.setViewMode(QFileDialog::Detail);
+    fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
+    fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
+    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowTitle(QApplication::translate("ProfileInterface", "Import..."));
+    fileDialog.setLabelText(QFileDialog::Accept, QApplication::translate("ProfileInterface", "Import"));
+
+    // Getting readable Image formats
+    QString imageFormatsStr = " ";
+    for (QByteArray imageFormat : QImageReader::supportedImageFormats())
+    {
+        imageFormatsStr += QString("*.") % QString::fromUtf8(imageFormat).toLower() % " ";
+    }
+
+    QStringList filters;
+    filters << QApplication::translate("ProfileInterface", "All image files (%1)").arg(imageFormatsStr.trimmed());
+    filters << QApplication::translate("ProfileInterface", "All files (**)");
+    fileDialog.setNameFilters(filters);
+
+    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
+
+    fileDialog.setSidebarUrls(sidebarUrls);
+    fileDialog.setDirectory(settings.value(profileName % "+Directory", StandardPaths::documentsLocation()).toString());
+    fileDialog.restoreGeometry(settings.value(profileName % "+Geometry", "").toByteArray());
+
+    if (fileDialog.exec())
+    {
+        QStringList selectedFiles = fileDialog.selectedFiles();
+        if (selectedFiles.length() == 1)
+        {
+            QString selectedFile = selectedFiles.at(0);
+            QString selectedFileName = QFileInfo(selectedFile).fileName();
+
+            QFile snapmaticFile(selectedFile);
+            if (!snapmaticFile.open(QFile::ReadOnly))
+            {
+                QMessageBox::warning(this, QApplication::translate("ProfileInterface", "Import"), QApplication::translate("ProfileInterface", "Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
+                goto fileDialogPreOpen;
+            }
+            QImage *importImage = new QImage();
+            QImageReader snapmaticImageReader;
+            snapmaticImageReader.setDecideFormatFromContent(true);
+            snapmaticImageReader.setDevice(&snapmaticFile);
+            if (!snapmaticImageReader.read(importImage))
+            {
+                QMessageBox::warning(this, QApplication::translate("ProfileInterface", "Import"), QApplication::translate("ProfileInterface", "Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
+                delete importImage;
+                goto fileDialogPreOpen;
+            }
+            setImage(importImage);
+        }
+    }
+
+    settings.setValue(profileName % "+Geometry", fileDialog.saveGeometry());
+    settings.setValue(profileName % "+Directory", fileDialog.directory().absolutePath());
+    settings.endGroup();
+    settings.endGroup();
+}
+
 QImage ImportDialog::image()
 {
     return newImage;
@@ -272,16 +349,22 @@ void ImportDialog::setImage(QImage *image_)
     }
     else if (image_->width() > snapmaticResolutionW && image_->width() > image_->height())
     {
+        insideAvatarZone = false;
+        ui->cbAvatar->setChecked(false);
         workImage = image_->scaledToWidth(snapmaticResolutionW, Qt::SmoothTransformation);
         delete image_;
     }
     else if (image_->height() > snapmaticResolutionH && image_->height() > image_->width())
     {
+        insideAvatarZone = false;
+        ui->cbAvatar->setChecked(false);
         workImage = image_->scaledToHeight(snapmaticResolutionH, Qt::SmoothTransformation);
         delete image_;
     }
     else
     {
+        insideAvatarZone = false;
+        ui->cbAvatar->setChecked(false);
         workImage = *image_;
         delete image_;
     }
@@ -306,7 +389,7 @@ void ImportDialog::on_cbIgnore_toggled(bool checked)
 
 void ImportDialog::on_cbAvatar_toggled(bool checked)
 {
-    if (workImage.width() == workImage.height() && !checked)
+    if (!workImage.isNull() && workImage.width() == workImage.height() && !checked)
     {
         if (QMessageBox::No == QMessageBox::warning(this, tr("Snapmatic Avatar Zone"), tr("Are you sure to use a square image outside of the Avatar Zone?\nWhen you want to use it as Avatar the image will be detached!"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
         {

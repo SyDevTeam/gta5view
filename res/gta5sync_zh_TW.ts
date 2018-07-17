@@ -181,16 +181,31 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="59"/>
+        <source>Import picture</source>
+        <translation type="unfinished">匯入圖片</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="62"/>
         <source>&amp;Import...</source>
         <translation>匯入(&amp;I)...</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="79"/>
+        <location filename="../ImageEditorDialog.ui" line="82"/>
+        <source>Apply changes</source>
+        <translation type="unfinished">套用變更</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="85"/>
         <source>&amp;Overwrite</source>
         <translation>修改(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="86"/>
+        <location filename="../ImageEditorDialog.ui" line="92"/>
+        <source>Discard changes</source>
+        <translation type="unfinished">捨棄變更</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="95"/>
         <source>&amp;Close</source>
         <translation>關閉(&amp;C)</translation>
     </message>
@@ -230,7 +245,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="111"/>
-        <location filename="../ImportDialog.ui" line="269"/>
+        <location filename="../ImportDialog.ui" line="278"/>
         <source>Ignore Aspect Ratio</source>
         <translation>忽略長寬比</translation>
     </message>
@@ -246,91 +261,121 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="150"/>
-        <location filename="../ImportDialog.cpp" line="82"/>
-        <location filename="../ImportDialog.cpp" line="364"/>
+        <location filename="../ImportDialog.cpp" line="84"/>
+        <location filename="../ImportDialog.cpp" line="447"/>
         <source>Background Colour: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</source>
         <translation>背景顏色: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="174"/>
-        <location filename="../ImportDialog.ui" line="224"/>
+        <source>Select background colour</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="177"/>
+        <location filename="../ImportDialog.ui" line="230"/>
         <source>...</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="200"/>
-        <location filename="../ImportDialog.cpp" line="83"/>
-        <location filename="../ImportDialog.cpp" line="444"/>
+        <location filename="../ImportDialog.ui" line="203"/>
+        <location filename="../ImportDialog.cpp" line="85"/>
+        <location filename="../ImportDialog.cpp" line="527"/>
         <source>Background Image:</source>
         <translation>背景圖片:</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="231"/>
+        <location filename="../ImportDialog.ui" line="227"/>
+        <source>Select background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="237"/>
+        <source>Remove background image</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="240"/>
         <source>X</source>
         <translation>X</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="259"/>
+        <location filename="../ImportDialog.ui" line="268"/>
         <source>Force Colour in Avatar Zone</source>
         <translation>強制在大頭貼區域使用顏色</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="315"/>
+        <location filename="../ImportDialog.ui" line="305"/>
+        <source>Import options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="308"/>
+        <source>&amp;Options</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="334"/>
         <source>Import picture</source>
         <translation>匯入圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="318"/>
+        <location filename="../ImportDialog.ui" line="337"/>
         <source>&amp;OK</source>
         <translation>確定(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="331"/>
+        <location filename="../ImportDialog.ui" line="350"/>
         <source>Discard picture</source>
         <translation>捨棄圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="334"/>
+        <location filename="../ImportDialog.ui" line="353"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="175"/>
+        <location filename="../ImportDialog.cpp" line="110"/>
+        <source>&amp;Import new Picture...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="183"/>
         <location filename="../ProfileInterface.cpp" line="668"/>
         <source>Custom Avatar</source>
         <comment>Custom Avatar Description in SC, don&apos;t use Special Character!</comment>
         <translation>自訂大頭貼</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="202"/>
+        <location filename="../ImportDialog.cpp" line="210"/>
         <location filename="../ProfileInterface.cpp" line="687"/>
         <source>Custom Picture</source>
         <comment>Custom Picture Description in SC, don&apos;t use Special Character!</comment>
         <translation>自訂圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="311"/>
+        <location filename="../ImportDialog.cpp" line="394"/>
         <source>Snapmatic Avatar Zone</source>
         <translation>Snapmatic 大頭貼區域</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="311"/>
+        <location filename="../ImportDialog.cpp" line="394"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
         <translation>你確定要在大頭貼區域以外的地方使用方形圖片嗎? 作為大頭貼的圖片將被分離!</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="360"/>
+        <location filename="../ImportDialog.cpp" line="443"/>
         <source>Select Colour...</source>
         <translation>選擇顏色...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="429"/>
+        <location filename="../ImportDialog.cpp" line="512"/>
         <source>Background Image: %1</source>
         <translation>背景圖片: %1</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="429"/>
+        <location filename="../ImportDialog.cpp" line="512"/>
         <source>File</source>
         <comment>Background Image: File</comment>
         <translation>文件</translation>
@@ -345,11 +390,21 @@ When you want to use it as Avatar the image will be detached!</source>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="116"/>
+        <source>Apply changes</source>
+        <translation type="unfinished">套用變更</translation>
+    </message>
+    <message>
+        <location filename="../JsonEditorDialog.ui" line="119"/>
         <source>&amp;Save</source>
         <translation>保存(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../JsonEditorDialog.ui" line="129"/>
+        <location filename="../JsonEditorDialog.ui" line="132"/>
+        <source>Discard changes</source>
+        <translation type="unfinished">捨棄變更</translation>
+    </message>
+    <message>
+        <location filename="../JsonEditorDialog.ui" line="135"/>
         <source>&amp;Close</source>
         <translation>關閉(&amp;C)</translation>
     </message>
@@ -368,26 +423,51 @@ When you want to use it as Avatar the image will be detached!</source>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="138"/>
+        <source>Close viewer</source>
+        <translation type="unfinished">關閉檢視器</translation>
+    </message>
+    <message>
+        <location filename="../MapLocationDialog.ui" line="141"/>
         <source>&amp;Close</source>
         <translation>關閉(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.ui" line="164"/>
+        <location filename="../MapLocationDialog.ui" line="167"/>
+        <source>Apply new position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MapLocationDialog.ui" line="170"/>
         <source>&amp;Apply</source>
         <translation>套用(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.ui" line="177"/>
+        <location filename="../MapLocationDialog.ui" line="183"/>
+        <source>Revert old position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MapLocationDialog.ui" line="186"/>
         <source>&amp;Revert</source>
         <translation>還原(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.ui" line="190"/>
-        <source>&amp;Set</source>
-        <translation>設置(&amp;S)</translation>
+        <location filename="../MapLocationDialog.ui" line="199"/>
+        <source>Select new position</source>
+        <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.ui" line="203"/>
+        <location filename="../MapLocationDialog.ui" line="202"/>
+        <source>&amp;Select</source>
+        <translation type="unfinished">選擇(&amp;S)</translation>
+    </message>
+    <message>
+        <location filename="../MapLocationDialog.ui" line="215"/>
+        <source>Quit select position</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../MapLocationDialog.ui" line="218"/>
         <source>&amp;Done</source>
         <translation>完成(&amp;D)</translation>
     </message>
@@ -1044,7 +1124,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="109"/>
-        <location filename="../ImportDialog.cpp" line="383"/>
+        <location filename="../ImportDialog.cpp" line="272"/>
+        <location filename="../ImportDialog.cpp" line="466"/>
         <location filename="../ProfileInterface.cpp" line="482"/>
         <location filename="../ProfileInterface.cpp" line="548"/>
         <location filename="../ProfileInterface.cpp" line="857"/>
@@ -1055,9 +1136,12 @@ Press 1 for Default View</source>
         <location filename="../ImageEditorDialog.cpp" line="110"/>
         <location filename="../ImageEditorDialog.cpp" line="141"/>
         <location filename="../ImageEditorDialog.cpp" line="150"/>
-        <location filename="../ImportDialog.cpp" line="384"/>
-        <location filename="../ImportDialog.cpp" line="415"/>
-        <location filename="../ImportDialog.cpp" line="424"/>
+        <location filename="../ImportDialog.cpp" line="273"/>
+        <location filename="../ImportDialog.cpp" line="304"/>
+        <location filename="../ImportDialog.cpp" line="313"/>
+        <location filename="../ImportDialog.cpp" line="467"/>
+        <location filename="../ImportDialog.cpp" line="498"/>
+        <location filename="../ImportDialog.cpp" line="507"/>
         <location filename="../ProfileInterface.cpp" line="483"/>
         <location filename="../ProfileInterface.cpp" line="527"/>
         <location filename="../ProfileInterface.cpp" line="582"/>
@@ -1077,14 +1161,16 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="120"/>
-        <location filename="../ImportDialog.cpp" line="394"/>
+        <location filename="../ImportDialog.cpp" line="283"/>
+        <location filename="../ImportDialog.cpp" line="477"/>
         <location filename="../ProfileInterface.cpp" line="502"/>
         <source>All image files (%1)</source>
         <translation>所有圖片 (%1)</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="121"/>
-        <location filename="../ImportDialog.cpp" line="395"/>
+        <location filename="../ImportDialog.cpp" line="284"/>
+        <location filename="../ImportDialog.cpp" line="478"/>
         <location filename="../ProfileInterface.cpp" line="503"/>
         <location filename="../UserInterface.cpp" line="463"/>
         <source>All files (**)</source>
@@ -1092,14 +1178,16 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="141"/>
-        <location filename="../ImportDialog.cpp" line="415"/>
+        <location filename="../ImportDialog.cpp" line="304"/>
+        <location filename="../ImportDialog.cpp" line="498"/>
         <location filename="../ProfileInterface.cpp" line="725"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
         <translation>無法匯入 %1，因為檔案無法開啟</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="150"/>
-        <location filename="../ImportDialog.cpp" line="424"/>
+        <location filename="../ImportDialog.cpp" line="313"/>
+        <location filename="../ImportDialog.cpp" line="507"/>
         <location filename="../ProfileInterface.cpp" line="735"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
         <translation>無法匯入 %1，因為檔案無法正確解析</translation>

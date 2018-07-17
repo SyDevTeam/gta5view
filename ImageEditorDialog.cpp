@@ -151,7 +151,7 @@ fileDialogPreOpen: //Work?
                 delete importImage;
                 goto fileDialogPreOpen;
             }
-            ImportDialog *importDialog = new ImportDialog(this);
+            ImportDialog *importDialog = new ImportDialog(profileName, this);
             importDialog->setImage(importImage);
             importDialog->setModal(true);
             importDialog->show();
