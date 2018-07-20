@@ -40,6 +40,7 @@ public:
 
 private slots:
     void processImage();
+    void cropPicture();
     void importNewPicture();
     void on_cbIgnore_toggled(bool checked);
     void on_cbAvatar_toggled(bool checked);

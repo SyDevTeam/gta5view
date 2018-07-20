@@ -63,9 +63,10 @@ SOURCES += main.cpp \
     TelemetryClass.cpp \
     TranslationClass.cpp \
     UserInterface.cpp \
-    anpro/JSHighlighter.cpp \
+    anpro/imagecropper.cpp \
     pcg/pcg_basic.c \
     tmext/TelemetryClassAuthenticator.cpp \
+    uimod/JSHighlighter.cpp \
     uimod/UiModLabel.cpp \
     uimod/UiModWidget.cpp
 
@@ -104,9 +105,12 @@ HEADERS  += \
     TelemetryClass.h \
     TranslationClass.h \
     UserInterface.h \
-    anpro/JSHighlighter.h \
+    anpro/imagecropper.h \
+    anpro/imagecropper_e.h \
+    anpro/imagecropper_p.h \
     pcg/pcg_basic.h \
     tmext/TelemetryClassAuthenticator.h \
+    uimod/JSHighlighter.h \
     uimod/UiModLabel.h \
     uimod/UiModWidget.h
 

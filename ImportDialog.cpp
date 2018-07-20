@@ -20,6 +20,7 @@
 #include "ui_ImportDialog.h"
 #include "SidebarGenerator.h"
 #include "StandardPaths.h"
+#include "imagecropper.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
@@ -108,6 +109,7 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     // Options menu
     optionsMenu = new QMenu(this);
     optionsMenu->addAction(tr("&Import new Picture..."), this, SLOT(importNewPicture()));
+    optionsMenu->addAction(tr("&Crop Picture..."), this, SLOT(cropPicture()));
     ui->cmdOptions->setMenu(optionsMenu);
 
     setMaximumSize(sizeHint());
@@ -253,6 +255,48 @@ void ImportDialog::processWatermark(QPainter *snapmaticPainter)
         textWatermark.invertPixels(QImage::InvertRgb);
     }
     snapmaticPainter->drawImage(0, 0, textWatermark);
+}
+
+void ImportDialog::cropPicture()
+{
+    qreal screenRatio = AppEnv::screenRatio();
+
+    QDialog cropDialog(this);
+    cropDialog.setWindowTitle(tr("Crop Picture..."));
+    cropDialog.setWindowFlags(cropDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    cropDialog.setModal(true);
+
+    QVBoxLayout cropLayout;
+    cropLayout.setContentsMargins(0, 0, 0, 0);
+    cropLayout.setSpacing(0);
+    cropDialog.setLayout(&cropLayout);
+
+    ImageCropper imageCropper(&cropDialog);
+    imageCropper.setBackgroundColor(Qt::black);
+    imageCropper.setCroppingRectBorderColor(QColor(255, 255, 255, 127));
+    imageCropper.setImage(QPixmap::fromImage(workImage, Qt::AutoColor));
+    imageCropper.setProportion(QSize(1, 1));
+    imageCropper.setFixedSize(workImage.size());
+    cropLayout.addWidget(&imageCropper);
+
+    QHBoxLayout buttonLayout;
+    cropLayout.addLayout(&buttonLayout);
+
+    QPushButton cropButton(&cropDialog);
+    cropButton.setMinimumSize(0, 40 * screenRatio);
+    cropButton.setText(tr("&Crop"));
+    cropButton.setToolTip(tr("Crop Picture"));
+    QObject::connect(&cropButton, SIGNAL(clicked(bool)), &cropDialog, SLOT(accept()));
+
+    buttonLayout.addWidget(&cropButton);
+
+    cropDialog.show();
+    cropDialog.setFixedSize(cropDialog.sizeHint());
+    if (cropDialog.exec() == true)
+    {
+        QImage *croppedImage = new QImage(imageCropper.cropImage().toImage());
+        setImage(croppedImage);
+    }
 }
 
 void ImportDialog::importNewPicture()
