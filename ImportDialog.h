@@ -36,7 +36,10 @@ public:
     QImage image();
     QString getImageTitle();
     void setImage(QImage *image);
+    void lockSettings(bool lock);
+    void enableOverwriteMode();
     bool isImportAgreed();
+    bool areSettingsLocked();
 
 private slots:
     void processImage();
@@ -69,6 +72,7 @@ private:
     bool watermarkPicture;
     bool watermarkAvatar;
     bool watermarkBlock;
+    bool settingsLocked;
     bool importAgreed;
     int snapmaticResolutionLW;
     int snapmaticResolutionLH;

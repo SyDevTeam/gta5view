@@ -27,6 +27,7 @@
 #include "SnapmaticEditor.h"
 #include "StandardPaths.h"
 #include "PictureExport.h"
+#include "ImportDialog.h"
 #include "StringParser.h"
 #include "GlobalString.h"
 #include "UiModLabel.h"
@@ -940,25 +941,49 @@ void PictureDialog::editSnapmaticProperties()
 
 void PictureDialog::editSnapmaticImage()
 {
-    SnapmaticPicture *picture = smpic;
-    ImageEditorDialog *imageEditor;
+    QImage *currentImage = new QImage(smpic->getImage());
+    ImportDialog *importDialog;
     if (rqFullscreen && fullscreenWidget != nullptr)
     {
-        imageEditor = new ImageEditorDialog(picture, profileName, fullscreenWidget);
+        importDialog = new ImportDialog(profileName, fullscreenWidget);
     }
     else
     {
-        imageEditor = new ImageEditorDialog(picture, profileName, this);
+        importDialog = new ImportDialog(profileName, this);
     }
-    imageEditor->setWindowIcon(windowIcon());
-    imageEditor->setModal(true);
-#ifndef Q_OS_ANDROID
-    imageEditor->show();
-#else
-    imageEditor->showMaximized();
-#endif
-    imageEditor->exec();
-    delete imageEditor;
+    importDialog->setWindowIcon(windowIcon());
+    importDialog->setImage(currentImage);
+    importDialog->enableOverwriteMode();
+    importDialog->setModal(true);
+    importDialog->exec();
+    if (importDialog->isImportAgreed())
+    {
+        const QByteArray previousPicture = smpic->getPictureStream();
+        bool success = smpic->setImage(importDialog->image());
+        if (success)
+        {
+            QString currentFilePath = smpic->getPictureFilePath();
+            QString originalFilePath = smpic->getOriginalPictureFilePath();
+            QString backupFileName = originalFilePath % ".bak";
+            if (!QFile::exists(backupFileName))
+            {
+                QFile::copy(currentFilePath, backupFileName);
+            }
+            if (!smpic->exportPicture(currentFilePath))
+            {
+                smpic->setPictureStream(previousPicture);
+                QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of I/O Error"));
+                return;
+            }
+            smpic->emitCustomSignal("PictureUpdated");
+        }
+        else
+        {
+            QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of Image Error"));
+            return;
+        }
+    }
+    delete importDialog;
 }
 
 void PictureDialog::editSnapmaticRawJson()

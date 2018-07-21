@@ -27,6 +27,7 @@
 #include "PictureDialog.h"
 #include "PictureExport.h"
 #include "StringParser.h"
+#include "ImportDialog.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
@@ -320,11 +321,40 @@ void SnapmaticWidget::editSnapmaticRawJson()
 
 void SnapmaticWidget::editSnapmaticImage()
 {
-    ImageEditorDialog *imageEditor = new ImageEditorDialog(smpic, profileName, this);
-    imageEditor->setModal(true);
-    imageEditor->show();
-    imageEditor->exec();
-    delete imageEditor;
+    QImage *currentImage = new QImage(smpic->getImage());
+    ImportDialog *importDialog = new ImportDialog(profileName, this);
+    importDialog->setImage(currentImage);
+    importDialog->enableOverwriteMode();
+    importDialog->setModal(true);
+    importDialog->exec();
+    if (importDialog->isImportAgreed())
+    {
+        const QByteArray previousPicture = smpic->getPictureStream();
+        bool success = smpic->setImage(importDialog->image());
+        if (success)
+        {
+            QString currentFilePath = smpic->getPictureFilePath();
+            QString originalFilePath = smpic->getOriginalPictureFilePath();
+            QString backupFileName = originalFilePath % ".bak";
+            if (!QFile::exists(backupFileName))
+            {
+                QFile::copy(currentFilePath, backupFileName);
+            }
+            if (!smpic->exportPicture(currentFilePath))
+            {
+                smpic->setPictureStream(previousPicture);
+                QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of I/O Error"));
+                return;
+            }
+            smpic->emitCustomSignal("PictureUpdated");
+        }
+        else
+        {
+            QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of Image Error"));
+            return;
+        }
+    }
+    delete importDialog;
 }
 
 void SnapmaticWidget::openMapViewer()

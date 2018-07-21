@@ -55,6 +55,7 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     ui->cmdOK->setDefault(true);
     ui->cmdOK->setFocus();
     importAgreed = false;
+    settingsLocked = false;
     watermarkAvatar = true;
     watermarkPicture = false;
     insideAvatarZone = false;
@@ -262,16 +263,31 @@ void ImportDialog::cropPicture()
     qreal screenRatio = AppEnv::screenRatio();
 
     QDialog cropDialog(this);
+#if QT_VERSION >= 0x050000
+    cropDialog.setObjectName(QStringLiteral("CropDialog"));
+#else
+    cropDialog.setObjectName(QString::fromUtf8("CropDialog"));
+#endif
     cropDialog.setWindowTitle(tr("Crop Picture..."));
     cropDialog.setWindowFlags(cropDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
     cropDialog.setModal(true);
 
     QVBoxLayout cropLayout;
+#if QT_VERSION >= 0x050000
+    cropLayout.setObjectName(QStringLiteral("CropLayout"));
+#else
+    cropLayout.setObjectName(QString::fromUtf8("CropLayout"));
+#endif
     cropLayout.setContentsMargins(0, 0, 0, 0);
     cropLayout.setSpacing(0);
     cropDialog.setLayout(&cropLayout);
 
     ImageCropper imageCropper(&cropDialog);
+#if QT_VERSION >= 0x050000
+    imageCropper.setObjectName(QStringLiteral("ImageCropper"));
+#else
+    imageCropper.setObjectName(QString::fromUtf8("ImageCropper"));
+#endif
     imageCropper.setBackgroundColor(Qt::black);
     imageCropper.setCroppingRectBorderColor(QColor(255, 255, 255, 127));
     imageCropper.setImage(QPixmap::fromImage(workImage, Qt::AutoColor));
@@ -280,9 +296,19 @@ void ImportDialog::cropPicture()
     cropLayout.addWidget(&imageCropper);
 
     QHBoxLayout buttonLayout;
+#if QT_VERSION >= 0x050000
+    cropLayout.setObjectName(QStringLiteral("ButtonLayout"));
+#else
+    cropLayout.setObjectName(QString::fromUtf8("ButtonLayout"));
+#endif
     cropLayout.addLayout(&buttonLayout);
 
     QPushButton cropButton(&cropDialog);
+#if QT_VERSION >= 0x050000
+    cropButton.setObjectName(QStringLiteral("CropButton"));
+#else
+    cropButton.setObjectName(QString::fromUtf8("CropButton"));
+#endif
     cropButton.setMinimumSize(0, 40 * screenRatio);
     cropButton.setText(tr("&Crop"));
     cropButton.setToolTip(tr("Crop Picture"));
@@ -292,7 +318,7 @@ void ImportDialog::cropPicture()
 
     cropDialog.show();
     cropDialog.setFixedSize(cropDialog.sizeHint());
-    if (cropDialog.exec() == true)
+    if (cropDialog.exec() == QDialog::Accepted)
     {
         QImage *croppedImage = new QImage(imageCropper.cropImage().toImage());
         setImage(croppedImage);
@@ -413,11 +439,47 @@ void ImportDialog::setImage(QImage *image_)
         delete image_;
     }
     processImage();
+    lockSettings(false);
+}
+
+void ImportDialog::lockSettings(bool lock)
+{
+    ui->cbAvatar->setDisabled(lock);
+    ui->cbForceAvatarColour->setDisabled(lock);
+    ui->cbIgnore->setDisabled(lock);
+    ui->cbStretch->setDisabled(lock);
+    ui->cbWatermark->setDisabled(lock);
+    ui->cmdBackgroundChange->setDisabled(lock);
+    ui->cmdBackgroundWipe->setDisabled(lock);
+    ui->cmdColourChange->setDisabled(lock);
+    ui->labBackgroundImage->setDisabled(lock);
+    ui->labColour->setDisabled(lock);
+    ui->gbSettings->setDisabled(lock);
+    ui->gbBackground->setDisabled(lock);
+    ui->cmdOK->setDisabled(lock);
+    settingsLocked = lock;
+}
+
+void ImportDialog::enableOverwriteMode()
+{
+    setWindowTitle(QApplication::translate("ImageEditorDialog", "Overwrite Image..."));
+    ui->cmdOK->setText(QApplication::translate("ImageEditorDialog", "&Overwrite"));
+    ui->cmdOK->setToolTip(QApplication::translate("ImageEditorDialog", "Apply changes"));
+    ui->cmdCancel->setText(QApplication::translate("ImageEditorDialog", "&Close"));
+    ui->cmdCancel->setToolTip(QApplication::translate("ImageEditorDialog", "Discard changes"));
+    ui->cmdCancel->setDefault(true);
+    ui->cmdCancel->setFocus();
+    lockSettings(true);
 }
 
 bool ImportDialog::isImportAgreed()
 {
     return importAgreed;
+}
+
+bool ImportDialog::areSettingsLocked()
+{
+    return settingsLocked;
 }
 
 QString ImportDialog::getImageTitle()
