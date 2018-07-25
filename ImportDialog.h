@@ -45,6 +45,8 @@ private slots:
     void processImage();
     void cropPicture();
     void importNewPicture();
+    void loadImportSettings();
+    void saveImportSettings();
     void on_cbIgnore_toggled(bool checked);
     void on_cbAvatar_toggled(bool checked);
     void on_cmdCancel_clicked();
@@ -77,6 +79,8 @@ private:
     int snapmaticResolutionLW;
     int snapmaticResolutionLH;
     void processWatermark(QPainter *snapmaticPainter);
+    void processSettings(QString settingsProfile, bool setDefault = false);
+    void saveSettings(QString settingsProfile);
 };
 
 #endif // IMPORTDIALOG_H

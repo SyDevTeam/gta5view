@@ -177,7 +177,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="14"/>
-        <location filename="../ImportDialog.cpp" line="465"/>
+        <location filename="../ImportDialog.cpp" line="635"/>
         <source>Overwrite Image...</source>
         <translation></translation>
     </message>
@@ -193,25 +193,25 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="82"/>
-        <location filename="../ImportDialog.cpp" line="467"/>
+        <location filename="../ImportDialog.cpp" line="637"/>
         <source>Apply changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="85"/>
-        <location filename="../ImportDialog.cpp" line="466"/>
+        <location filename="../ImportDialog.cpp" line="636"/>
         <source>&amp;Overwrite</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="92"/>
-        <location filename="../ImportDialog.cpp" line="469"/>
+        <location filename="../ImportDialog.cpp" line="639"/>
         <source>Discard changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="95"/>
-        <location filename="../ImportDialog.cpp" line="468"/>
+        <location filename="../ImportDialog.cpp" line="638"/>
         <source>&amp;Close</source>
         <translation></translation>
     </message>
@@ -239,8 +239,9 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="150"/>
-        <location filename="../ImportDialog.cpp" line="86"/>
-        <location filename="../ImportDialog.cpp" line="553"/>
+        <location filename="../ImportDialog.cpp" line="94"/>
+        <location filename="../ImportDialog.cpp" line="311"/>
+        <location filename="../ImportDialog.cpp" line="723"/>
         <source>Background Colour: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</source>
         <translation>Background Color: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
@@ -282,7 +283,8 @@ Pictures and Savegames</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="618"/>
+        <location filename="../ImportDialog.cpp" line="314"/>
+        <location filename="../ImportDialog.cpp" line="788"/>
         <source>Background Image: %1</source>
         <translation></translation>
     </message>
@@ -338,68 +340,141 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="203"/>
-        <location filename="../ImportDialog.cpp" line="87"/>
-        <location filename="../ImportDialog.cpp" line="633"/>
+        <location filename="../ImportDialog.cpp" line="95"/>
+        <location filename="../ImportDialog.cpp" line="319"/>
+        <location filename="../ImportDialog.cpp" line="803"/>
         <source>Background Image:</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="112"/>
+        <location filename="../ImportDialog.cpp" line="120"/>
         <source>&amp;Import new Picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="113"/>
+        <location filename="../ImportDialog.cpp" line="121"/>
         <source>&amp;Crop Picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="186"/>
+        <location filename="../ImportDialog.cpp" line="123"/>
+        <source>&amp;Load Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="124"/>
+        <source>&amp;Save Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="197"/>
         <location filename="../ProfileInterface.cpp" line="668"/>
         <source>Custom Avatar</source>
         <comment>Custom Avatar Description in SC, don&apos;t use Special Character!</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="213"/>
+        <location filename="../ImportDialog.cpp" line="224"/>
         <location filename="../ProfileInterface.cpp" line="687"/>
         <source>Custom Picture</source>
         <comment>Custom Picture Description in SC, don&apos;t use Special Character!</comment>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="271"/>
+        <location filename="../ImportDialog.cpp" line="314"/>
+        <source>Storage</source>
+        <comment>Background Image: Storage</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="351"/>
         <source>Crop Picture...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="313"/>
+        <location filename="../ImportDialog.cpp" line="393"/>
         <source>&amp;Crop</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="314"/>
+        <location filename="../ImportDialog.cpp" line="394"/>
         <source>Crop Picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="../ImportDialog.cpp" line="481"/>
+        <location filename="../ImportDialog.cpp" line="529"/>
+        <source>Please import a new picture first</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="486"/>
+        <location filename="../ImportDialog.cpp" line="496"/>
+        <source>Default</source>
+        <comment>Default as Default Profile</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="487"/>
+        <location filename="../ImportDialog.cpp" line="488"/>
+        <location filename="../ImportDialog.cpp" line="489"/>
+        <location filename="../ImportDialog.cpp" line="490"/>
+        <location filename="../ImportDialog.cpp" line="491"/>
         <location filename="../ImportDialog.cpp" line="500"/>
+        <location filename="../ImportDialog.cpp" line="504"/>
+        <location filename="../ImportDialog.cpp" line="508"/>
+        <location filename="../ImportDialog.cpp" line="512"/>
+        <location filename="../ImportDialog.cpp" line="516"/>
+        <location filename="../ImportDialog.cpp" line="534"/>
+        <location filename="../ImportDialog.cpp" line="535"/>
+        <location filename="../ImportDialog.cpp" line="536"/>
+        <location filename="../ImportDialog.cpp" line="537"/>
+        <location filename="../ImportDialog.cpp" line="538"/>
+        <location filename="../ImportDialog.cpp" line="543"/>
+        <location filename="../ImportDialog.cpp" line="547"/>
+        <location filename="../ImportDialog.cpp" line="551"/>
+        <location filename="../ImportDialog.cpp" line="555"/>
+        <location filename="../ImportDialog.cpp" line="559"/>
+        <source>Profile %1</source>
+        <comment>Profile %1 as Profile 1</comment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="481"/>
+        <location filename="../ImportDialog.cpp" line="492"/>
+        <source>Load Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="492"/>
+        <location filename="../ImportDialog.cpp" line="539"/>
+        <source>Please select your settings profile</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="529"/>
+        <location filename="../ImportDialog.cpp" line="539"/>
+        <source>Save Settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="670"/>
         <source>Snapmatic Avatar Zone</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="500"/>
+        <location filename="../ImportDialog.cpp" line="670"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="549"/>
+        <location filename="../ImportDialog.cpp" line="719"/>
         <source>Select Colour...</source>
         <translation>Select Color...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="618"/>
+        <location filename="../ImportDialog.cpp" line="788"/>
         <source>File</source>
         <comment>Background Image: File</comment>
         <translation></translation>
@@ -1161,8 +1236,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="109"/>
-        <location filename="../ImportDialog.cpp" line="342"/>
-        <location filename="../ImportDialog.cpp" line="572"/>
+        <location filename="../ImportDialog.cpp" line="422"/>
+        <location filename="../ImportDialog.cpp" line="742"/>
         <location filename="../ProfileInterface.cpp" line="482"/>
         <location filename="../ProfileInterface.cpp" line="548"/>
         <location filename="../ProfileInterface.cpp" line="857"/>
@@ -1173,12 +1248,12 @@ Press 1 for Default View</source>
         <location filename="../ImageEditorDialog.cpp" line="110"/>
         <location filename="../ImageEditorDialog.cpp" line="141"/>
         <location filename="../ImageEditorDialog.cpp" line="150"/>
-        <location filename="../ImportDialog.cpp" line="343"/>
-        <location filename="../ImportDialog.cpp" line="374"/>
-        <location filename="../ImportDialog.cpp" line="383"/>
-        <location filename="../ImportDialog.cpp" line="573"/>
-        <location filename="../ImportDialog.cpp" line="604"/>
-        <location filename="../ImportDialog.cpp" line="613"/>
+        <location filename="../ImportDialog.cpp" line="423"/>
+        <location filename="../ImportDialog.cpp" line="454"/>
+        <location filename="../ImportDialog.cpp" line="463"/>
+        <location filename="../ImportDialog.cpp" line="743"/>
+        <location filename="../ImportDialog.cpp" line="774"/>
+        <location filename="../ImportDialog.cpp" line="783"/>
         <location filename="../ProfileInterface.cpp" line="483"/>
         <location filename="../ProfileInterface.cpp" line="527"/>
         <location filename="../ProfileInterface.cpp" line="582"/>
@@ -1221,16 +1296,16 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="120"/>
-        <location filename="../ImportDialog.cpp" line="353"/>
-        <location filename="../ImportDialog.cpp" line="583"/>
+        <location filename="../ImportDialog.cpp" line="433"/>
+        <location filename="../ImportDialog.cpp" line="753"/>
         <location filename="../ProfileInterface.cpp" line="502"/>
         <source>All image files (%1)</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="121"/>
-        <location filename="../ImportDialog.cpp" line="354"/>
-        <location filename="../ImportDialog.cpp" line="584"/>
+        <location filename="../ImportDialog.cpp" line="434"/>
+        <location filename="../ImportDialog.cpp" line="754"/>
         <location filename="../ProfileInterface.cpp" line="503"/>
         <location filename="../UserInterface.cpp" line="463"/>
         <source>All files (**)</source>
@@ -1270,16 +1345,16 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="141"/>
-        <location filename="../ImportDialog.cpp" line="374"/>
-        <location filename="../ImportDialog.cpp" line="604"/>
+        <location filename="../ImportDialog.cpp" line="454"/>
+        <location filename="../ImportDialog.cpp" line="774"/>
         <location filename="../ProfileInterface.cpp" line="725"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
         <translation></translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="150"/>
-        <location filename="../ImportDialog.cpp" line="383"/>
-        <location filename="../ImportDialog.cpp" line="613"/>
+        <location filename="../ImportDialog.cpp" line="463"/>
+        <location filename="../ImportDialog.cpp" line="783"/>
         <location filename="../ProfileInterface.cpp" line="735"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
         <translation></translation>
@@ -1805,11 +1880,21 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="240"/>
+        <source>Apply changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="243"/>
         <source>&amp;Apply</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.ui" line="253"/>
+        <location filename="../SnapmaticEditor.ui" line="256"/>
+        <source>Discard changes</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.ui" line="259"/>
         <source>&amp;Cancel</source>
         <translation></translation>
     </message>

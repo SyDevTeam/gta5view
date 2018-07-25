@@ -24,6 +24,7 @@
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
+#include <QInputDialog>
 #include <QImageReader>
 #include <QColorDialog>
 #include <QFileDialog>
@@ -61,6 +62,13 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     insideAvatarZone = false;
     avatarAreaImage = QImage(":/img/avatarareaimport.png");
     selectedColour = QColor::fromRgb(0, 0, 0, 255);
+
+    // Set Import Settings
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Import");
+    QString currentProfile = settings.value("Profile", "Default").toString();
+    settings.endGroup();
+    processSettings(currentProfile);
 
     // Set Icon for OK Button
     if (QIcon::hasThemeIcon("dialog-ok"))
@@ -111,6 +119,9 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     optionsMenu = new QMenu(this);
     optionsMenu->addAction(tr("&Import new Picture..."), this, SLOT(importNewPicture()));
     optionsMenu->addAction(tr("&Crop Picture..."), this, SLOT(cropPicture()));
+    optionsMenu->addSeparator();
+    optionsMenu->addAction(tr("&Load Settings..."), this, SLOT(loadImportSettings()));
+    optionsMenu->addAction(tr("&Save Settings..."), this, SLOT(saveImportSettings()));
     ui->cmdOptions->setMenu(optionsMenu);
 
     setMaximumSize(sizeHint());
@@ -258,6 +269,75 @@ void ImportDialog::processWatermark(QPainter *snapmaticPainter)
     snapmaticPainter->drawImage(0, 0, textWatermark);
 }
 
+void ImportDialog::processSettings(QString settingsProfile, bool setDefault)
+{
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Import");
+    if (setDefault)
+    {
+        settings.setValue("Profile", settingsProfile);
+    }
+    if (settingsProfile == "Default")
+    {
+        watermarkAvatar = true;
+        watermarkPicture = false;
+        selectedColour = QColor::fromRgb(0, 0, 0, 255);
+        backImage = QImage();
+        ui->cbStretch->setChecked(false);
+        ui->cbForceAvatarColour->setChecked(false);
+    }
+    else
+    {
+        settings.beginGroup(settingsProfile);
+        watermarkAvatar = settings.value("WatermarkAvatar", true).toBool();
+        watermarkPicture = settings.value("WatermarkPicture", false).toBool();
+        backImage = qvariant_cast<QImage>(settings.value("BackgroundImage", QImage()));
+        selectedColour = qvariant_cast<QColor>(settings.value("SelectedColour", QColor::fromRgb(0, 0, 0, 255)));
+        ui->cbStretch->setChecked(settings.value("BackgroundStretch", false).toBool());
+        ui->cbForceAvatarColour->setChecked(settings.value("ForceAvatarColour", false).toBool());
+        settings.endGroup();
+    }
+    if (!workImage.isNull())
+    {
+        if (ui->cbAvatar->isChecked())
+        {
+            ui->cbWatermark->setChecked(watermarkAvatar);
+        }
+        else
+        {
+            ui->cbWatermark->setChecked(watermarkPicture);
+        }
+    }
+    ui->labColour->setText(tr("Background Colour: <span style=\"color: %1\">%1</span>").arg(selectedColour.name()));
+    if (!backImage.isNull())
+    {
+        ui->labBackgroundImage->setText(tr("Background Image: %1").arg(tr("Storage", "Background Image: Storage")));
+        ui->cmdBackgroundWipe->setVisible(true);
+    }
+    else
+    {
+        ui->labBackgroundImage->setText(tr("Background Image:"));
+        ui->cmdBackgroundWipe->setVisible(false);
+    }
+    settings.endGroup();
+}
+
+void ImportDialog::saveSettings(QString settingsProfile)
+{
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Import");
+    settings.beginGroup(settingsProfile);
+    settings.setValue("WatermarkAvatar", watermarkAvatar);
+    settings.setValue("WatermarkPicture", watermarkPicture);
+    settings.setValue("BackgroundImage", backImage);
+    settings.setValue("SelectedColour", selectedColour);
+    settings.setValue("BackgroundStretch", ui->cbStretch->isChecked());
+    settings.setValue("ForceAvatarColour", ui->cbForceAvatarColour->isChecked());
+    settings.endGroup();
+    settings.setValue("Profile", settingsProfile);
+    settings.endGroup();
+}
+
 void ImportDialog::cropPicture()
 {
     qreal screenRatio = AppEnv::screenRatio();
@@ -392,6 +472,96 @@ fileDialogPreOpen: //Work?
     settings.setValue(profileName % "+Directory", fileDialog.directory().absolutePath());
     settings.endGroup();
     settings.endGroup();
+}
+
+void ImportDialog::loadImportSettings()
+{
+    if (settingsLocked)
+    {
+        QMessageBox::information(this, tr("Load Settings..."), tr("Please import a new picture first"));
+        return;
+    }
+    bool ok;
+    QStringList profileList;
+    profileList << tr("Default", "Default as Default Profile")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("1")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("2")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("3")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("4")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("5");
+    QString sProfile = QInputDialog::getItem(this, tr("Load Settings..."), tr("Please select your settings profile"), profileList, 0, false, &ok, windowFlags());
+    if (ok)
+    {
+        QString pProfile;
+        if (sProfile == tr("Default", "Default as Default Profile"))
+        {
+            pProfile = "Default";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("1"))
+        {
+            pProfile = "Profile 1";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("2"))
+        {
+            pProfile = "Profile 2";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("3"))
+        {
+            pProfile = "Profile 3";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("4"))
+        {
+            pProfile = "Profile 4";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("5"))
+        {
+            pProfile = "Profile 5";
+        }
+        processSettings(pProfile, true);
+        processImage();
+    }
+}
+
+void ImportDialog::saveImportSettings()
+{
+    if (settingsLocked)
+    {
+        QMessageBox::information(this, tr("Save Settings..."), tr("Please import a new picture first"));
+        return;
+    }
+    bool ok;
+    QStringList profileList;
+    profileList << tr("Profile %1", "Profile %1 as Profile 1").arg("1")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("2")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("3")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("4")
+             << tr("Profile %1", "Profile %1 as Profile 1").arg("5");
+    QString sProfile = QInputDialog::getItem(this, tr("Save Settings..."), tr("Please select your settings profile"), profileList, 0, false, &ok, windowFlags());
+    if (ok)
+    {
+        QString pProfile;
+        if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("1"))
+        {
+            pProfile = "Profile 1";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("2"))
+        {
+            pProfile = "Profile 2";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("3"))
+        {
+            pProfile = "Profile 3";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("4"))
+        {
+            pProfile = "Profile 4";
+        }
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("5"))
+        {
+            pProfile = "Profile 5";
+        }
+        saveSettings(pProfile);
+    }
 }
 
 QImage ImportDialog::image()
