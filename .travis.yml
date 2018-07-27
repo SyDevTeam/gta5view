@@ -7,7 +7,8 @@ service:
   - docker
   
 env:
-  - BUILD_TYPE=Development
+  global:
+    - BUILD_TYPE=Development
 
 matrix:
   include:
