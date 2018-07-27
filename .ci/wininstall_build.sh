@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Install nsis
 apt-get update -qq && \
 apt-get install -qq nsis && \
 
@@ -11,7 +12,7 @@ mkdir -p assets && \
 
 # Starting build
 cd build && \
-qmake ${QMAKE_FLAGS} DEFINES+=GTA5SYNC_BUILDTYPE_DEV "DEFINES+=GTA5SYNC_BUILDCODE=\\\\\\\"${PACKAGE_CODE}\\\\\\\"" "DEFINES+=GTA5SYNC_APPVER=\\\\\\\"${APPLICATION_VERSION}\\\\\\\"" "DEFINES+=GTA5SYNC_COMMIT=\\\\\\\"${APPLICATION_COMMIT}\\\\\\\"" DEFINES+=GTA5SYNC_TELEMETRY "DEFINES+=GTA5SYNC_TELEMETRY_WEBURL=\\\\\\\"https://dev.syping.de/gta5view-userstats/\\\\\\\"" DEFINES+=GTA5SYNC_QCONF DEFINES+=GTA5SYNC_INLANG='\\\"RUNDIR:SEPARATOR:lang\\\"' DEFINES+=GTA5SYNC_LANG='\\\"RUNDIR:SEPARATOR:lang\\\"' DEFINES+=GTA5SYNC_PLUG='\\\"RUNDIR:SEPARATOR:plugins\\\"' ../gta5view.pro && \
+qmake ${QMAKE_FLAGS_QT5} ${QMAKE_BUILD_TYPE} "DEFINES+=GTA5SYNC_BUILDCODE=\\\\\\\"${PACKAGE_CODE}\\\\\\\"" "DEFINES+=GTA5SYNC_APPVER=\\\\\\\"${APPLICATION_VERSION}\\\\\\\"" "DEFINES+=GTA5SYNC_COMMIT=\\\\\\\"${APPLICATION_COMMIT}\\\\\\\"" DEFINES+=GTA5SYNC_TELEMETRY "DEFINES+=GTA5SYNC_TELEMETRY_WEBURL=\\\\\\\"https://dev.syping.de/gta5view-userstats/\\\\\\\"" DEFINES+=GTA5SYNC_QCONF DEFINES+=GTA5SYNC_INLANG='\\\"RUNDIR:SEPARATOR:lang\\\"' DEFINES+=GTA5SYNC_LANG='\\\"RUNDIR:SEPARATOR:lang\\\"' DEFINES+=GTA5SYNC_PLUG='\\\"RUNDIR:SEPARATOR:plugins\\\"' ../gta5view.pro && \
 make depend && \
 make -j 4 && \
 cd ${PROJECT_DIR}/assets && \

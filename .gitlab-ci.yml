@@ -1,5 +1,21 @@
 stages:
   - build
+  
+variables:
+  BUILD_TYPE: "Development"
+
+Windows Installer:
+  stage: build
+  image: syping/qt5-shared-mingw:5.9.6
+  variables:
+    BUILD_SCRIPT: "wininstall_build.sh"
+    QT_SELECT: "qt5-x86_64-w64-mingw32"
+  script:
+    - .gitlab/gitlab.sh
+  artifacts:
+    name: "gta5view-$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}_setup"
+    paths:
+      - "gta5view-*.exe"
 
 Windows Portable:
   stage: build
@@ -11,18 +27,5 @@ Windows Portable:
     - .gitlab/gitlab.sh
   artifacts:
     name: "gta5view-$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}_portable"
-    paths:
-      - "gta5view-*.exe"
-      
-Windows Installer:
-  stage: build
-  image: syping/qt5-shared-mingw:5.9.6
-  variables:
-    BUILD_SCRIPT: "wininstall_build.sh"
-    QT_SELECT: "qt5-x86_64-w64-mingw32"
-  script:
-    - .gitlab/gitlab.sh
-  artifacts:
-    name: "gta5view-$CI_COMMIT_REF_NAME-${CI_COMMIT_SHA:0:8}_setup"
     paths:
       - "gta5view-*.exe"

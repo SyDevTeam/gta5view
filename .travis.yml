@@ -5,6 +5,9 @@ language: cpp
 
 service:
   - docker
+  
+env:
+  - BUILD_TYPE=Development
 
 matrix:
   include:
