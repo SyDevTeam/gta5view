@@ -480,7 +480,7 @@ fileDialogPreOpen: //Work?
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
     fileDialog.setWindowTitle(tr("Import..."));
-    fileDialog.setLabelText(QFileDialog::Accept, tr("Import"));
+    fileDialog.setLabelText(QFileDialog::Accept, tr("Import..."));
 
     // Getting readable Image formats
     QString imageFormatsStr = " ";
@@ -524,7 +524,7 @@ fileDialogPreOpen: //Work?
         }
         else
         {
-            QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
+            QMessageBox::warning(this, tr("Import..."), tr("No valid file is selected"));
             goto fileDialogPreOpen; //Work?
         }
     }
@@ -579,7 +579,7 @@ bool ProfileInterface::importFilesProgress(QStringList selectedFiles)
     if (errorStr != "")
     {
         errorStr.remove(0, 2);
-        QMessageBox::warning(this, tr("Import"), tr("Import failed with...\n\n%1").arg(errorStr));
+        QMessageBox::warning(this, tr("Import..."), tr("Import failed with...\n\n%1").arg(errorStr));
         return false;
     }
     return true;
@@ -601,7 +601,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
             }
             else
             {
-                if (notMultiple) QMessageBox::warning(this, tr("Import"), tr("Failed to read Snapmatic picture"));
+                if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("Failed to read Snapmatic picture"));
                 delete picture;
                 return false;
             }
@@ -617,7 +617,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
             }
             else
             {
-                if (notMultiple) QMessageBox::warning(this, tr("Import"), tr("Failed to read Savegame file"));
+                if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("Failed to read Savegame file"));
                 delete savegame;
                 return false;
             }
@@ -722,7 +722,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     QFile snapmaticFile(selectedFile);
                     if (!snapmaticFile.open(QFile::ReadOnly))
                     {
-                        QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
+                        QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
                         delete picture;
                         return false;
                     }
@@ -732,7 +732,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     snapmaticImageReader.setDevice(&snapmaticFile);
                     if (!snapmaticImageReader.read(snapmaticImage))
                     {
-                        QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
+                        QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
                         delete snapmaticImage;
                         delete picture;
                         return false;
@@ -811,12 +811,12 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 #endif
                 delete picture;
                 delete savegame;
-                if (notMultiple) QMessageBox::warning(this, tr("Import"), tr("Can't import %1 because file format can't be detected").arg("\""+selectedFileName+"\""));
+                if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file format can't be detected").arg("\""+selectedFileName+"\""));
                 return false;
             }
         }
     }
-    if (notMultiple) QMessageBox::warning(this, tr("Import"), tr("No valid file is selected"));
+    if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("No valid file is selected"));
     return false;
 }
 
@@ -976,15 +976,86 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
     QString adjustedFileName = picture->getOriginalPictureFileName();
     if (picFileName.left(4) != "PGTA")
     {
-        if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e"));
+        if (warn) QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e"));
         return false;
     }
     else if (QFile::exists(profileFolder % "/" % adjustedFileName) || QFile::exists(profileFolder % "/" % adjustedFileName % ".hidden"))
     {
-        if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, the picture is already in the game"));
-        return false;
+        SnapmaticProperties snapmaticProperties = picture->getSnapmaticProperties();
+        if (warn)
+        {
+            int uchoice = QMessageBox::question(this, tr("Import..."), tr("A Snapmatic picture already exists with the uid %1, you want assign your import a new uid and timestamp?").arg(QString::number(snapmaticProperties.uid)), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
+            if (uchoice == QMessageBox::Yes)
+            {
+                // Update Snapmatic uid
+                snapmaticProperties.uid = getRandomUid();
+                snapmaticProperties.createdDateTime = QDateTime::currentDateTime();
+                snapmaticProperties.createdTimestamp = snapmaticProperties.createdDateTime.toTime_t();
+                bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
+                bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
+                bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
+                int cEnough = 0;
+                while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit)
+                {
+                    snapmaticProperties.uid = getRandomUid();
+                    fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
+                    fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
+                    fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
+                    cEnough++;
+                }
+                if (fExists || fExistsBackup || fExistsHidden)
+                {
+                    // That should never happen
+                    return false;
+                }
+                if (!picture->setSnapmaticProperties(snapmaticProperties))
+                {
+                    // That should never happen
+                    return false;
+                }
+                picture->updateStrings();
+                picFileName = picture->getPictureFileName();
+                adjustedFileName = picture->getOriginalPictureFileName();
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            // Update Snapmatic uid
+            snapmaticProperties.uid = getRandomUid();
+            snapmaticProperties.createdDateTime = QDateTime::currentDateTime();
+            snapmaticProperties.createdTimestamp = snapmaticProperties.createdDateTime.toTime_t();
+            bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
+            bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
+            bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
+            int cEnough = 0;
+            while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit)
+            {
+                snapmaticProperties.uid = getRandomUid();
+                fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
+                fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
+                fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
+                cEnough++;
+            }
+            if (fExists || fExistsBackup || fExistsHidden)
+            {
+                // That should never happen
+                return false;
+            }
+            if (!picture->setSnapmaticProperties(snapmaticProperties))
+            {
+                // That should never happen
+                return false;
+            }
+            picture->updateStrings();
+            picFileName = picture->getPictureFileName();
+            adjustedFileName = picture->getOriginalPictureFileName();
+        }
     }
-    else if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format))
+    if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format))
     {
         picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
         picture->setPicFilePath(profileFolder % "/" % adjustedFileName);
@@ -993,7 +1064,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
     }
     else
     {
-        if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Snapmatic picture, can't copy the file into profile"));
+        if (warn) QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Snapmatic picture, can't copy the file into profile"));
         return false;
     }
 }
@@ -1030,13 +1101,13 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         }
         else
         {
-            if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Savegame, can't copy the file into profile"));
+            if (warn) QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Savegame, can't copy the file into profile"));
             return false;
         }
     }
     else
     {
-        if (warn) QMessageBox::warning(this, tr("Import"), tr("Failed to import the Savegame, no Savegame slot is left"));
+        if (warn) QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Savegame, no Savegame slot is left"));
         return false;
     }
 }

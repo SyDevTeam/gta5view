@@ -183,6 +183,7 @@ bool JsonEditorDialog::saveJsonContent()
                 return false;
             }
             jsonCode = newCode;
+            smpic->updateStrings();
             smpic->emitUpdate();
             return true;
         }

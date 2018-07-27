@@ -330,6 +330,7 @@ void SnapmaticEditor::on_cmdApply_clicked()
         }
         else
         {
+            smpic->updateStrings();
             smpic->emitUpdate();
         }
     }
