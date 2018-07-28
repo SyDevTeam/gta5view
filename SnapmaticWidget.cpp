@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -176,6 +176,7 @@ bool SnapmaticWidget::deletePicture()
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "DeleteSuccess";
+                jsonObject["ExtraFlags"] = "Snapmatic";
                 jsonObject["DeletedSize"] = QString::number(smpic->getContentMaxLength());
                 jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
                 jsonDocument.setObject(jsonObject);

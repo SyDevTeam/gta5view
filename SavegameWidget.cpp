@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2018 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,6 +24,7 @@
 #include "SavegameData.h"
 #include "SavegameCopy.h"
 #include "AppEnv.h"
+#include "config.h"
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
@@ -36,6 +37,13 @@
 #include <QFile>
 #include <QMenu>
 #include <QUrl>
+
+#ifdef GTA5SYNC_TELEMETRY
+#include "TelemetryClass.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QDateTime>
+#endif
 
 SavegameWidget::SavegameWidget(QWidget *parent) :
     ProfileWidget(parent),
@@ -134,9 +142,41 @@ void SavegameWidget::on_cmdDelete_clicked()
         if (!QFile::exists(sgdPath))
         {
             emit savegameDeleted();
+#ifdef GTA5SYNC_TELEMETRY
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "DeleteSuccess";
+                jsonObject["ExtraFlags"] = "Savegame";
+                jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+#endif
         }
-        else if(QFile::remove(sgdPath))
+        else if (QFile::remove(sgdPath))
         {
+#ifdef GTA5SYNC_TELEMETRY
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "DeleteSuccess";
+                jsonObject["ExtraFlags"] = "Savegame";
+                jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+#endif
             emit savegameDeleted();
         }
         else
