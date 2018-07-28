@@ -604,7 +604,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                 bool success = importSnapmaticPicture(picture, notMultiple);
                 if (!success) delete picture;
 #ifdef GTA5SYNC_TELEMETRY
-                if (success)
+                if (success && notMultiple)
                 {
                     QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                     telemetrySettings.beginGroup("Telemetry");
@@ -640,7 +640,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                 bool success = importSavegameData(savegame, selectedFile, notMultiple);
                 if (!success) delete savegame;
 #ifdef GTA5SYNC_TELEMETRY
-                if (success)
+                if (success && notMultiple)
                 {
                     QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                     telemetrySettings.beginGroup("Telemetry");
@@ -861,7 +861,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                 delete savegame;
                 if (!success) delete picture;
 #ifdef GTA5SYNC_TELEMETRY
-                if (success)
+                if (success && notMultiple)
                 {
                     QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                     telemetrySettings.beginGroup("Telemetry");
@@ -888,7 +888,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                 delete picture;
                 if (!success) delete savegame;
 #ifdef GTA5SYNC_TELEMETRY
-                if (success)
+                if (success && notMultiple)
                 {
                     QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                     telemetrySettings.beginGroup("Telemetry");
