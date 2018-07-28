@@ -220,22 +220,22 @@ Pictures and Savegames</source>
         <location filename="../ImageEditorDialog.cpp" line="200"/>
         <location filename="../PictureDialog.cpp" line="998"/>
         <location filename="../PictureDialog.cpp" line="1022"/>
-        <location filename="../SnapmaticWidget.cpp" line="368"/>
-        <location filename="../SnapmaticWidget.cpp" line="392"/>
+        <location filename="../SnapmaticWidget.cpp" line="369"/>
+        <location filename="../SnapmaticWidget.cpp" line="393"/>
         <source>Snapmatic Image Editor</source>
         <translation>Редактор Snapmatic зображень</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="193"/>
         <location filename="../PictureDialog.cpp" line="998"/>
-        <location filename="../SnapmaticWidget.cpp" line="368"/>
+        <location filename="../SnapmaticWidget.cpp" line="369"/>
         <source>Patching of Snapmatic Image failed because of I/O Error</source>
         <translation>Виправлення Snapmatic зображення не вдалося через I/O Error</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="200"/>
         <location filename="../PictureDialog.cpp" line="1022"/>
-        <location filename="../SnapmaticWidget.cpp" line="392"/>
+        <location filename="../SnapmaticWidget.cpp" line="393"/>
         <source>Patching of Snapmatic Image failed because of Image Error</source>
         <translation>Виправлення Snapmatic зображення не вдалося через помилку картинки</translation>
     </message>
@@ -1834,50 +1834,50 @@ Press 1 for Default View</source>
         <translation>Вибрано невірний файл</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="57"/>
+        <location filename="../SavegameWidget.cpp" line="65"/>
         <source>Export Savegame...</source>
         <translation>Експортування файлу збереження...</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="60"/>
-        <location filename="../SavegameWidget.cpp" line="117"/>
+        <location filename="../SavegameWidget.cpp" line="68"/>
+        <location filename="../SavegameWidget.cpp" line="125"/>
         <source>AUTOSAVE - %1
 %2</source>
         <translation>АВТОМАТИЧНЕ ЗБЕРЕЖЕННЯ - %1
 %2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="61"/>
-        <location filename="../SavegameWidget.cpp" line="118"/>
+        <location filename="../SavegameWidget.cpp" line="69"/>
+        <location filename="../SavegameWidget.cpp" line="126"/>
         <source>SAVE %3 - %1
 %2</source>
         <translation>ЗБЕРЕЖЕННЯ %3 - %1
 %2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="89"/>
-        <location filename="../SavegameWidget.cpp" line="90"/>
+        <location filename="../SavegameWidget.cpp" line="97"/>
+        <location filename="../SavegameWidget.cpp" line="98"/>
         <source>WRONG FORMAT</source>
         <translation>НЕПРАВИЛЬНИЙ ФОРМАТ</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="111"/>
+        <location filename="../SavegameWidget.cpp" line="119"/>
         <source>UNKNOWN</source>
         <translation>НЕВІДОМИЙ</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="131"/>
-        <location filename="../SavegameWidget.cpp" line="144"/>
+        <location filename="../SavegameWidget.cpp" line="139"/>
+        <location filename="../SavegameWidget.cpp" line="184"/>
         <source>Delete Savegame</source>
         <translation>Видалити файл збереження</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="131"/>
+        <location filename="../SavegameWidget.cpp" line="139"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Ви впевнені, що хочете видалити %1 зі своїх сейвів?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="144"/>
+        <location filename="../SavegameWidget.cpp" line="184"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Не вдалося видалити %1 із ваших збережених ігор</translation>
     </message>
@@ -1893,7 +1893,7 @@ Press 1 for Default View</source>
         <location filename="../JsonEditorDialog.cpp" line="216"/>
         <location filename="../PictureDialog.cpp" line="913"/>
         <location filename="../SnapmaticEditor.cpp" line="334"/>
-        <location filename="../SnapmaticWidget.cpp" line="426"/>
+        <location filename="../SnapmaticWidget.cpp" line="427"/>
         <source>Snapmatic Properties</source>
         <translation>Властивості Snapmatic</translation>
     </message>
@@ -1986,7 +1986,7 @@ Press 1 for Default View</source>
         <location filename="../JsonEditorDialog.cpp" line="187"/>
         <location filename="../PictureDialog.cpp" line="913"/>
         <location filename="../SnapmaticEditor.cpp" line="334"/>
-        <location filename="../SnapmaticWidget.cpp" line="426"/>
+        <location filename="../SnapmaticWidget.cpp" line="427"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
         <translation>Змінити властивості Snapmatic не вдалося через I/O Помилку</translation>
     </message>
@@ -2179,7 +2179,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticWidget.ui" line="152"/>
         <location filename="../SnapmaticWidget.cpp" line="164"/>
-        <location filename="../SnapmaticWidget.cpp" line="189"/>
+        <location filename="../SnapmaticWidget.cpp" line="190"/>
         <source>Delete picture</source>
         <translation>Видалити фото</translation>
     </message>
@@ -2244,17 +2244,17 @@ Press 1 for Default View</source>
         <translation>Ви дійсно бажаєте видалити %1 з ваших Snapmatic фотографій?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="189"/>
+        <location filename="../SnapmaticWidget.cpp" line="190"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation>Не вдалося видалити%1 з ваших Snapmatic фотографій</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="313"/>
+        <location filename="../SnapmaticWidget.cpp" line="314"/>
         <source>Failed to hide %1 In-game from your Snapmatic pictures</source>
         <translation>Не вдалося сховати %1 Snapmatic у грі</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="321"/>
+        <location filename="../SnapmaticWidget.cpp" line="322"/>
         <source>Failed to show %1 In-game from your Snapmatic pictures</source>
         <translation>Не вдалося показати %1 Snapmatic у грі</translation>
     </message>
@@ -2455,14 +2455,14 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="1525"/>
         <location filename="../ProfileInterface.cpp" line="1539"/>
-        <location filename="../SnapmaticWidget.cpp" line="321"/>
+        <location filename="../SnapmaticWidget.cpp" line="322"/>
         <source>Show In-game</source>
         <translation>Показати у грі</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1559"/>
         <location filename="../ProfileInterface.cpp" line="1573"/>
-        <location filename="../SnapmaticWidget.cpp" line="313"/>
+        <location filename="../SnapmaticWidget.cpp" line="314"/>
         <source>Hide In-game</source>
         <translation>Сховати у грі</translation>
     </message>
