@@ -38,6 +38,12 @@
 #include <QMenu>
 #include <QFile>
 
+#ifdef GTA5SYNC_TELEMETRY
+#include "TelemetryClass.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#endif
+
 SnapmaticWidget::SnapmaticWidget(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QString profileName, QWidget *parent) :
     ProfileWidget(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB), profileName(profileName),
     ui(new Ui::SnapmaticWidget)
@@ -158,8 +164,24 @@ bool SnapmaticWidget::deletePicture()
     int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("Are you sure to delete %1 from your Snapmatic pictures?").arg("\""+smpic->getPictureTitle()+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
     if (uchoice == QMessageBox::Yes)
     {
-        if (smpic->deletePicFile())
+        if (smpic->deletePictureFile())
         {
+#ifdef GTA5SYNC_TELEMETRY
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "DeleteSuccess";
+                jsonObject["DeletedSize"] = QString::number(smpic->getContentMaxLength());
+                jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+#endif
             return true;
         }
         else
@@ -347,6 +369,23 @@ void SnapmaticWidget::editSnapmaticImage()
                 return;
             }
             smpic->emitCustomSignal("PictureUpdated");
+#ifdef GTA5SYNC_TELEMETRY
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "ImageEdited";
+                jsonObject["ExtraFlags"] = "Interface";
+                jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+#endif
         }
         else
         {
@@ -387,6 +426,26 @@ void SnapmaticWidget::openMapViewer()
             QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of I/O Error"));
             picture->setSnapmaticProperties(fallbackProperties);
         }
+#ifdef GTA5SYNC_TELEMETRY
+        else
+        {
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "LocationEdited";
+                jsonObject["ExtraFlags"] = "Interface";
+                jsonObject["EditedSize"] = QString::number(picture->getContentMaxLength());
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+        }
+#endif
     }
     delete mapLocDialog;
 }

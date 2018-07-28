@@ -66,6 +66,12 @@
 #include <random>
 #include <ctime>
 
+#ifdef GTA5SYNC_TELEMETRY
+#include "TelemetryClass.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#endif
+
 #define importTimeFormat "HHmmss"
 #define findRetryLimit 500
 
@@ -597,6 +603,26 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
             {
                 bool success = importSnapmaticPicture(picture, notMultiple);
                 if (!success) delete picture;
+#ifdef GTA5SYNC_TELEMETRY
+                if (success)
+                {
+                    QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+                    telemetrySettings.beginGroup("Telemetry");
+                    bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+                    telemetrySettings.endGroup();
+                    if (pushUsageData && Telemetry->canPush())
+                    {
+                        QJsonDocument jsonDocument;
+                        QJsonObject jsonObject;
+                        jsonObject["Type"] = "ImportSuccess";
+                        jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                        jsonObject["ImportType"] = "Snapmatic";
+                        jsonDocument.setObject(jsonObject);
+                        Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+                    }
+                }
+#endif
                 return success;
             }
             else
@@ -613,6 +639,25 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
             {
                 bool success = importSavegameData(savegame, selectedFile, notMultiple);
                 if (!success) delete savegame;
+#ifdef GTA5SYNC_TELEMETRY
+                if (success)
+                {
+                    QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+                    telemetrySettings.beginGroup("Telemetry");
+                    bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+                    telemetrySettings.endGroup();
+                    if (pushUsageData && Telemetry->canPush())
+                    {
+                        QJsonDocument jsonDocument;
+                        QJsonObject jsonObject;
+                        jsonObject["Type"] = "ImportSuccess";
+                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                        jsonObject["ImportType"] = "Savegame";
+                        jsonDocument.setObject(jsonObject);
+                        Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+                    }
+                }
+#endif
                 return success;
             }
             else
@@ -767,6 +812,27 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                             picture->setPictureTitle(importDialog->getImageTitle());
                             picture->updateStrings();
                             success = importSnapmaticPicture(picture, notMultiple);
+#ifdef GTA5SYNC_TELEMETRY
+                            if (success)
+                            {
+                                QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+                                telemetrySettings.beginGroup("Telemetry");
+                                bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+                                telemetrySettings.endGroup();
+                                if (pushUsageData && Telemetry->canPush())
+                                {
+                                    QJsonDocument jsonDocument;
+                                    QJsonObject jsonObject;
+                                    jsonObject["Type"] = "ImportSuccess";
+                                    jsonObject["ExtraFlag"] = "Dialog";
+                                    jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+                                    jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                                    jsonObject["ImportType"] = "Image";
+                                    jsonDocument.setObject(jsonObject);
+                                    Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+                                }
+                            }
+#endif
                         }
                     }
                     else
@@ -794,6 +860,26 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                 bool success = importSnapmaticPicture(picture, notMultiple);
                 delete savegame;
                 if (!success) delete picture;
+#ifdef GTA5SYNC_TELEMETRY
+                if (success)
+                {
+                    QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+                    telemetrySettings.beginGroup("Telemetry");
+                    bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+                    telemetrySettings.endGroup();
+                    if (pushUsageData && Telemetry->canPush())
+                    {
+                        QJsonDocument jsonDocument;
+                        QJsonObject jsonObject;
+                        jsonObject["Type"] = "ImportSuccess";
+                        jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                        jsonObject["ImportType"] = "Snapmatic";
+                        jsonDocument.setObject(jsonObject);
+                        Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+                    }
+                }
+#endif
                 return success;
             }
             else if (savegame->readingSavegame())
@@ -801,6 +887,25 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                 bool success = importSavegameData(savegame, selectedFile, notMultiple);
                 delete picture;
                 if (!success) delete savegame;
+#ifdef GTA5SYNC_TELEMETRY
+                if (success)
+                {
+                    QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+                    telemetrySettings.beginGroup("Telemetry");
+                    bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+                    telemetrySettings.endGroup();
+                    if (pushUsageData && Telemetry->canPush())
+                    {
+                        QJsonDocument jsonDocument;
+                        QJsonObject jsonObject;
+                        jsonObject["Type"] = "ImportSuccess";
+                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                        jsonObject["ImportType"] = "Savegame";
+                        jsonDocument.setObject(jsonObject);
+                        Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+                    }
+                }
+#endif
                 return success;
             }
             else
@@ -1326,7 +1431,7 @@ void ProfileInterface::deleteSelected()
                     if (widget->getWidgetType() == "SnapmaticWidget")
                     {
                         SnapmaticWidget *picWidget = qobject_cast<SnapmaticWidget*>(widget);
-                        if (picWidget->getPicture()->deletePicFile())
+                        if (picWidget->getPicture()->deletePictureFile())
                         {
                             pictureDeleted(picWidget);
                         }

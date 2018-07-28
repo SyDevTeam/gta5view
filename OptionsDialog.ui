@@ -382,6 +382,72 @@
        </item>
       </layout>
      </widget>
+     <widget class="QWidget" name="tabGame">
+      <attribute name="title">
+       <string>Game</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="vlGame">
+       <item>
+        <widget class="QGroupBox" name="gbSocialClub">
+         <property name="title">
+          <string>Social Club Version</string>
+         </property>
+         <layout class="QVBoxLayout" name="vlGameSocialClub">
+          <item>
+           <widget class="QLabel" name="labSocialClubFound">
+            <property name="text">
+             <string>Found: %1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labSocialClubLanguage">
+            <property name="text">
+             <string>Language: %1</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="gbSteam">
+         <property name="title">
+          <string>Steam Version</string>
+         </property>
+         <layout class="QVBoxLayout" name="vlGameSteam">
+          <item>
+           <widget class="QLabel" name="labSteamFound">
+            <property name="text">
+             <string>Found: %1</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="labSteamLanguage">
+            <property name="text">
+             <string>Language: %1</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <spacer name="vsGame">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </widget>
      <widget class="QWidget" name="tabStats">
       <attribute name="title">
        <string>Feedback</string>
@@ -473,7 +539,7 @@
          <property name="title">
           <string>Other</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout">
+         <layout class="QVBoxLayout" name="vlFeedbackOther">
           <item>
            <layout class="QHBoxLayout" name="hlParticipation">
             <item>

@@ -169,6 +169,8 @@ void TelemetryClass::push(TelemetryCategory category)
         break;
     case TelemetryCategory::UserFeedback:
         break;
+    case TelemetryCategory::PersonalData:
+        break;
     case TelemetryCategory::CustomEmitted:
         break;
     }
@@ -393,6 +395,7 @@ QJsonDocument TelemetryClass::getApplicationConf()
     QJsonObject startupObject;
     startupObject["AppStyle"] = settings.value("AppStyle", "System").toString();
     startupObject["CustomStyle"] = settings.value("CustomStyle", false).toBool();
+    startupObject["StartCount"] = QString::number(settings.value("StartCount", 0).toUInt());
     jsonObject["Startup"] = startupObject;
     settings.endGroup();
 
@@ -434,11 +437,14 @@ QString TelemetryClass::categoryToString(TelemetryCategory category)
     case TelemetryCategory::ApplicationConf:
         return QString("ApplicationConf");
         break;
+    case TelemetryCategory::ApplicationSpec:
+        return QString("ApplicationSpec");
+        break;
     case TelemetryCategory::UserFeedback:
         return QString("UserFeedback");
         break;
-    case TelemetryCategory::ApplicationSpec:
-        return QString("ApplicationSpec");
+    case TelemetryCategory::PersonalData:
+        return QString("PersonalData");
         break;
     case TelemetryCategory::CustomEmitted:
         return QString("CustomEmitted");
@@ -488,6 +494,10 @@ void TelemetryClass::work_p(bool doWork)
         if (telemetryPushAppConf)
         {
             push(TelemetryCategory::ApplicationConf);
+        }
+        else
+        {
+            push(TelemetryCategory::ApplicationConf, QJsonDocument());
         }
     }
 }

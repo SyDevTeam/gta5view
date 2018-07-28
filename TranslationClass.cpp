@@ -517,25 +517,52 @@ QString TranslationClass::getCurrentAreaLanguage()
     const QStringList areaTranslations = listAreaTranslations();
     if (userAreaLanguage == "Auto" || userAreaLanguage.trimmed().isEmpty())
     {
-#ifdef GTA5SYNC_DEBUG
-        qDebug() << "autoAreaLanguageMode";
-#endif
-        QString langCode = QString(currentLanguage).replace("-", "_");
-        if (areaTranslations.contains(langCode))
+        GameLanguage gameLanguage = AppEnv::getGameLanguage(AppEnv::getGameVersion());
+        if (gameLanguage == GameLanguage::Undefined)
         {
 #ifdef GTA5SYNC_DEBUG
-            qDebug() << "autoAreaLanguageSelected" << langCode;
+            qDebug() << "autoAreaLanguageModeInterface";
 #endif
-            return langCode;
+            QString langCode = QString(currentLanguage).replace("-", "_");
+            if (areaTranslations.contains(langCode))
+            {
+#ifdef GTA5SYNC_DEBUG
+                qDebug() << "autoAreaLanguageSelected" << langCode;
+#endif
+                return langCode;
+            }
+            else if (langCode.contains("_"))
+            {
+                langCode = langCode.split("_").at(0);
+                if (!areaTranslations.contains(langCode)) goto outputDefaultLanguage;
+#ifdef GTA5SYNC_DEBUG
+                qDebug() << "autoAreaLanguageSelected" << langCode;
+#endif
+                return langCode;
+            }
         }
-        else if (langCode.contains("_"))
+        else
         {
-            langCode = langCode.split("_").at(0);
-            if (!areaTranslations.contains(langCode)) goto outputDefaultLanguage;
 #ifdef GTA5SYNC_DEBUG
-            qDebug() << "autoAreaLanguageSelected" << langCode;
+            qDebug() << "autoAreaLanguageModeGame";
 #endif
-            return langCode;
+            QString langCode = AppEnv::gameLanguageToString(gameLanguage).replace("-", "_");
+            if (areaTranslations.contains(langCode))
+            {
+#ifdef GTA5SYNC_DEBUG
+                qDebug() << "autoAreaLanguageSelected" << langCode;
+#endif
+                return langCode;
+            }
+            else if (langCode.contains("_"))
+            {
+                langCode = langCode.split("_").at(0);
+                if (!areaTranslations.contains(langCode)) goto outputDefaultLanguage;
+#ifdef GTA5SYNC_DEBUG
+                qDebug() << "autoAreaLanguageSelected" << langCode;
+#endif
+                return langCode;
+            }
         }
     }
     else if (areaTranslations.contains(userAreaLanguage))

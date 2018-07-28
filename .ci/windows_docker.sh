@@ -15,11 +15,7 @@ docker run --rm \
 export GTA5VIEW_EXECUTABLE=gta5view-${EXECUTABLE_VERSION}${EXECUTABLE_ARCH}.exe && \
 
 # Upload Assets to Dropbox
-if [ "${PACKAGE_CODE}" == "Dropbox" ]; then
-	${PROJECT_DIR}/.ci/dropbox_uploader.sh mkdir gta5view-builds/${PACKAGE_VERSION}
-	${PROJECT_DIR}/.ci/dropbox_uploader.sh upload ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} gta5view-builds/${PACKAGE_VERSION}/${GTA5VIEW_EXECUTABLE} && \
-	rm -rf ${GTA5VIEW_EXECUTABLE}
-elif [ "${PACKAGE_CODE}" == "gta5-mods" ]; then
+if [ "${PACKAGE_CODE}" == "gta5-mods" ]; then
 	${PROJECT_DIR}/.ci/dropbox_uploader.sh mkdir gta5-mods/${PACKAGE_VERSION}
 	${PROJECT_DIR}/.ci/dropbox_uploader.sh upload ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} gta5-mods/${PACKAGE_VERSION}/${GTA5VIEW_EXECUTABLE} && \
 	rm -rf ${GTA5VIEW_EXECUTABLE}

@@ -63,13 +63,6 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     avatarAreaImage = QImage(":/img/avatarareaimport.png");
     selectedColour = QColor::fromRgb(0, 0, 0, 255);
 
-    // Set Import Settings
-    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-    settings.beginGroup("Import");
-    QString currentProfile = settings.value("Profile", "Default").toString();
-    settings.endGroup();
-    processSettings(currentProfile);
-
     // Set Icon for OK Button
     if (QIcon::hasThemeIcon("dialog-ok"))
     {
@@ -94,6 +87,13 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     ui->labColour->setText(tr("Background Colour: <span style=\"color: %1\">%1</span>").arg(selectedColour.name()));
     ui->labBackgroundImage->setText(tr("Background Image:"));
     ui->cmdBackgroundWipe->setVisible(false);
+
+    // Set Import Settings
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Import");
+    QString currentProfile = settings.value("Profile", "Default").toString();
+    settings.endGroup();
+    processSettings(currentProfile);
 
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();

@@ -20,13 +20,19 @@
 #include "ui_JsonEditorDialog.h"
 #include "SnapmaticEditor.h"
 #include "AppEnv.h"
+#include "config.h"
 #include <QStringBuilder>
 #include <QJsonDocument>
+#include <QJsonObject>
 #include <QMessageBox>
 
 #if QT_VERSION >= 0x050200
 #include <QFontDatabase>
 #include <QDebug>
+#endif
+
+#ifdef GTA5SYNC_TELEMETRY
+#include "TelemetryClass.h"
 #endif
 
 JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
@@ -185,6 +191,22 @@ bool JsonEditorDialog::saveJsonContent()
             jsonCode = newCode;
             smpic->updateStrings();
             smpic->emitUpdate();
+#ifdef GTA5SYNC_TELEMETRY
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "JSONEdited";
+                jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+#endif
             return true;
         }
         return true;
@@ -198,13 +220,13 @@ bool JsonEditorDialog::saveJsonContent()
 
 void JsonEditorDialog::on_cmdClose_clicked()
 {
-    this->close();
+    close();
 }
 
 void JsonEditorDialog::on_cmdSave_clicked()
 {
     if (saveJsonContent())
     {
-        this->close();
+        close();
     }
 }

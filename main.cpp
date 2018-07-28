@@ -75,6 +75,14 @@ int main(int argc, char *argv[])
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Startup");
 
+#ifdef GTA5SYNC_TELEMETRY
+    // Increase Start count at every startup
+    uint startCount = settings.value("StartCount", 0).toUInt();
+    startCount++;
+    settings.setValue("StartCount", startCount);
+    settings.sync();
+#endif
+
     bool isFirstStart = settings.value("IsFirstStart", true).toBool();
     bool customStyle = settings.value("CustomStyle", false).toBool();
     QString appStyle = settings.value("AppStyle", "Default").toString();
@@ -181,7 +189,9 @@ int main(int argc, char *argv[])
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
             telemetrySettings.setValue("PushUsageData", true);
+            telemetrySettings.setValue("PushAppConf", true);
             telemetrySettings.endGroup();
+            telemetrySettings.sync();
             Telemetry->init();
             Telemetry->work();
         }
@@ -189,7 +199,6 @@ int main(int argc, char *argv[])
         delete telemetryDialog;
     }
 #endif
-
     settings.endGroup();
 
     for (QString currentArg : applicationArgs)

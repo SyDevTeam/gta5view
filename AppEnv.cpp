@@ -206,6 +206,292 @@ QUrl AppEnv::getPlayerFetchingUrl(QString crewID, int pageNumber)
     return getPlayerFetchingUrl(crewID, QString::number(pageNumber));
 }
 
+// Game Stuff
+
+GameVersion AppEnv::getGameVersion()
+{
+#ifdef GTA5SYNC_WIN
+    QString argumentValue;
+#ifdef _WIN64
+    argumentValue = "\\WOW6432Node";
+#endif
+    QSettings registrySettingsSc(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V").arg(argumentValue), QSettings::NativeFormat);
+    QString installFolderSc = registrySettingsSc.value("InstallFolder", "").toString();
+    QDir installFolderScDir(installFolderSc);
+    bool scVersionInstalled = false;
+    if (!installFolderSc.isEmpty() && installFolderScDir.exists())
+    {
+#ifdef GTA5SYNC_DEBUG
+        qDebug() << "gameVersionFoundSocialClubVersion";
+#endif
+        scVersionInstalled = true;
+    }
+
+    QSettings registrySettingsSteam(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\GTAV").arg(argumentValue), QSettings::NativeFormat);
+    QString installFolderSteam = registrySettingsSteam.value("installfoldersteam", "").toString();
+    if (installFolderSteam.right(5) == "\\GTAV")
+    {
+        installFolderSteam = installFolderSteam.remove(installFolderSteam.length() - 5, 5);
+    }
+    QDir installFolderSteamDir(installFolderSteam);
+    bool steamVersionInstalled = false;
+    if (!installFolderSteam.isEmpty() && installFolderSteamDir.exists())
+    {
+#ifdef GTA5SYNC_DEBUG
+        qDebug() << "gameVersionFoundSteamVersion";
+#endif
+        steamVersionInstalled = true;
+    }
+
+    if (scVersionInstalled && steamVersionInstalled)
+    {
+        return GameVersion::BothVersions;
+    }
+    else if (scVersionInstalled)
+    {
+        return GameVersion::SocialClubVersion;
+    }
+    else if (steamVersionInstalled)
+    {
+        return GameVersion::SteamVersion;
+    }
+    else
+    {
+        return GameVersion::NoVersion;
+    }
+#else
+    return GameVersion::NoVersion;
+#endif
+}
+
+GameLanguage AppEnv::getGameLanguage(GameVersion gameVersion)
+{
+    if (gameVersion == GameVersion::SocialClubVersion)
+    {
+#ifdef GTA5SYNC_WIN
+        QString argumentValue;
+#ifdef _WIN64
+        argumentValue = "\\WOW6432Node";
+#endif
+        QSettings registrySettingsSc(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V").arg(argumentValue), QSettings::NativeFormat);
+        QString languageSc = registrySettingsSc.value("Language", "").toString();
+        return gameLanguageFromString(languageSc);
+#else
+        return GameLanguage::Undefined;
+#endif
+    }
+    else if (gameVersion == GameVersion::SteamVersion)
+    {
+#ifdef GTA5SYNC_WIN
+        QString argumentValue;
+#ifdef _WIN64
+        argumentValue = "\\WOW6432Node";
+#endif
+        QSettings registrySettingsSteam(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V Steam").arg(argumentValue), QSettings::NativeFormat);
+        QString languageSteam = registrySettingsSteam.value("Language", "").toString();
+        return gameLanguageFromString(languageSteam);
+#else
+        return GameLanguage::Undefined;
+#endif
+    }
+    else
+    {
+        return GameLanguage::Undefined;
+    }
+}
+
+GameLanguage AppEnv::gameLanguageFromString(QString gameLanguage)
+{
+    if (gameLanguage == "en-US")
+    {
+        return GameLanguage::English;
+    }
+    else if (gameLanguage == "fr-FR")
+    {
+        return GameLanguage::French;
+    }
+    else if (gameLanguage == "it-IT")
+    {
+        return GameLanguage::Italian;
+    }
+    else if (gameLanguage == "de-DE")
+    {
+        return GameLanguage::German;
+    }
+    else if (gameLanguage == "es-ES")
+    {
+        return GameLanguage::Spanish;
+    }
+    else if (gameLanguage == "es-MX")
+    {
+        return GameLanguage::Mexican;
+    }
+    else if (gameLanguage == "pt-BR")
+    {
+        return GameLanguage::Brasilian;
+    }
+    else if (gameLanguage == "ru-RU")
+    {
+        return GameLanguage::Russian;
+    }
+    else if (gameLanguage == "pl-PL")
+    {
+        return GameLanguage::Polish;
+    }
+    else if (gameLanguage == "ja-JP")
+    {
+        return GameLanguage::Japanese;
+    }
+    else if (gameLanguage == "zh-CHS")
+    {
+        return GameLanguage::SChinese;
+    }
+    else if (gameLanguage == "zh-CHT")
+    {
+        return GameLanguage::TChinese;
+    }
+    else if (gameLanguage == "ko-KR")
+    {
+        return GameLanguage::Koreana;
+    }
+    else
+    {
+        return GameLanguage::Undefined;
+    }
+}
+
+QString AppEnv::gameLanguageToString(GameLanguage gameLanguage)
+{
+    if (gameLanguage == GameLanguage::English)
+    {
+        return "en-US";
+    }
+    else if (gameLanguage == GameLanguage::French)
+    {
+        return "fr-FR";
+    }
+    else if (gameLanguage == GameLanguage::Italian)
+    {
+        return "it-IT";
+    }
+    else if (gameLanguage == GameLanguage::German)
+    {
+        return "de-DE";
+    }
+    else if (gameLanguage == GameLanguage::Spanish)
+    {
+        return "es-ES";
+    }
+    else if (gameLanguage == GameLanguage::Mexican)
+    {
+        return "es-MX";
+    }
+    else if (gameLanguage == GameLanguage::Brasilian)
+    {
+        return "pt-BR";
+    }
+    else if (gameLanguage == GameLanguage::Russian)
+    {
+        return "ru-RU";
+    }
+    else if (gameLanguage == GameLanguage::Polish)
+    {
+        return "pl-PL";
+    }
+    else if (gameLanguage == GameLanguage::Japanese)
+    {
+        return "ja-JP";
+    }
+    else if (gameLanguage == GameLanguage::SChinese)
+    {
+        return "zh-CHS";
+    }
+    else if (gameLanguage == GameLanguage::TChinese)
+    {
+        return "zh-CHT";
+    }
+    else if (gameLanguage == GameLanguage::Koreana)
+    {
+        return "ko-KR";
+    }
+    else
+    {
+        return "Undefinied";
+    }
+}
+
+bool AppEnv::setGameLanguage(GameVersion gameVersion, GameLanguage gameLanguage)
+{
+    bool socialClubVersion = false;
+    bool steamVersion = false;
+    if (gameVersion == GameVersion::SocialClubVersion)
+    {
+        socialClubVersion = true;
+    }
+    else if (gameVersion == GameVersion::SteamVersion)
+    {
+        steamVersion = true;
+    }
+    else if (gameVersion == GameVersion::BothVersions)
+    {
+        socialClubVersion = true;
+        steamVersion = true;
+    }
+    else
+    {
+        return false;
+    }
+    if (socialClubVersion)
+    {
+#ifdef GTA5SYNC_WIN
+        QString argumentValue;
+#ifdef _WIN64
+        argumentValue = "\\WOW6432Node";
+#endif
+        QSettings registrySettingsSc(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V").arg(argumentValue), QSettings::NativeFormat);
+        if (gameLanguage != GameLanguage::Undefined)
+        {
+            registrySettingsSc.setValue("Language", gameLanguageToString(gameLanguage));
+        }
+        else
+        {
+            registrySettingsSc.remove("Language");
+        }
+        registrySettingsSc.sync();
+        if (registrySettingsSc.status() != QSettings::NoError)
+        {
+            return false;
+        }
+#endif
+    }
+    if (steamVersion)
+    {
+#ifdef GTA5SYNC_WIN
+        QString argumentValue;
+#ifdef _WIN64
+        argumentValue = "\\WOW6432Node";
+#endif
+        QSettings registrySettingsSteam(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V Steam").arg(argumentValue), QSettings::NativeFormat);
+        if (gameLanguage != GameLanguage::Undefined)
+        {
+            registrySettingsSteam.setValue("Language", gameLanguageToString(gameLanguage));
+        }
+        else
+        {
+            registrySettingsSteam.remove("Language");
+        }
+        registrySettingsSteam.sync();
+        if (registrySettingsSteam.status() != QSettings::NoError)
+        {
+            return false;
+        }
+#endif
+    }
+    return true;
+}
+
+// Screen Stuff
+
 qreal AppEnv::screenRatio()
 {
 #if QT_VERSION >= 0x050000

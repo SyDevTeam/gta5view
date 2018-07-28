@@ -22,6 +22,7 @@
 #include "PlayerListDialog.h"
 #include "StringParser.h"
 #include "AppEnv.h"
+#include "config.h"
 #include <QStringListIterator>
 #include <QStringBuilder>
 #include <QTextDocument>
@@ -29,6 +30,12 @@
 #include <QMessageBox>
 #include <QDebug>
 #include <QFile>
+
+#ifdef GTA5SYNC_TELEMETRY
+#include "TelemetryClass.h"
+#include <QJsonDocument>
+#include <QJsonObject>
+#endif
 
 SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, ProfileDatabase *profileDB, QWidget *parent) :
     QDialog(parent), crewDB(crewDB), profileDB(profileDB),
@@ -261,11 +268,11 @@ void SnapmaticEditor::setSnapmaticTitle(const QString &title)
     ui->labTitle->setText(titleStr);
     if (SnapmaticPicture::verifyTitle(snapmaticTitle))
     {
-        ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: green\">%1</a>").arg(tr("Yes", "Yes, should work fine"))));
+        ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes", "Yes, should work fine"))));
     }
     else
     {
-        ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: red\">%1</a>").arg(tr("No", "No, could lead to issues"))));
+        ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: red\">%1</span>").arg(tr("No", "No, could lead to issues"))));
     }
 #ifndef Q_OS_ANDROID
     ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
@@ -332,6 +339,22 @@ void SnapmaticEditor::on_cmdApply_clicked()
         {
             smpic->updateStrings();
             smpic->emitUpdate();
+#ifdef GTA5SYNC_TELEMETRY
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "PropertyEdited";
+                jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+#endif
         }
     }
     close();

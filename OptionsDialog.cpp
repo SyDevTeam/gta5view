@@ -103,6 +103,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     setupInterfaceSettings();
     setupStatisticsSettings();
     setupSnapmaticPictureViewer();
+    setupWindowsGameSettings();
 
 #ifndef Q_QS_ANDROID
     // DPI calculation
@@ -110,7 +111,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     resize(435 * screenRatio, 405 * screenRatio);
 #endif
 
-    this->setWindowTitle(windowTitle().arg(GTA5SYNC_APPSTR));
+    setWindowTitle(windowTitle().arg(GTA5SYNC_APPSTR));
 }
 
 OptionsDialog::~OptionsDialog()
@@ -150,9 +151,21 @@ void OptionsDialog::setupLanguageBox()
     currentAreaLanguage = settings->value("AreaLanguage", "Auto").toString();
     settings->endGroup();
 
-    QString cbSysStr = tr("%1 (Next Closest Language)", "First language a person can talk with a different person/application. \"Native\" or \"Not Native\".").arg(tr("System",
-                                                                                                                                                                      "System in context of System default"));
+    QString cbSysStr = tr("%1 (Language priority)", "First language a person can talk with a different person/application. \"Native\" or \"Not Native\".").arg(tr("System",
+                                                                                                                                                                  "System in context of System default"));
+#ifdef GTA5SYNC_WIN
+    QString cbAutoStr;
+    if (AppEnv::getGameLanguage(AppEnv::getGameVersion()) != GameLanguage::Undefined)
+    {
+        cbAutoStr = tr("%1 (Game language)", "Next closest language compared to the Game settings").arg(tr("Auto", "Automatic language choice."));
+    }
+    else
+    {
+        cbAutoStr = tr("%1 (Closest to Interface)", "Next closest language compared to the Interface").arg(tr("Auto", "Automatic language choice."));
+    }
+#else
     QString cbAutoStr = tr("%1 (Closest to Interface)", "Next closest language compared to the Interface").arg(tr("Auto", "Automatic language choice."));
+#endif
     ui->cbLanguage->addItem(cbSysStr, "System");
     ui->cbAreaLanguage->addItem(cbAutoStr, "Auto");
 
@@ -412,6 +425,15 @@ void OptionsDialog::applySettings()
     settings->endGroup();
     Telemetry->refresh();
     Telemetry->work();
+    if (ui->cbUsageData->isChecked() && Telemetry->canPush())
+    {
+        QJsonDocument jsonDocument;
+        QJsonObject jsonObject;
+        jsonObject["Type"] = "SettingsUpdated";
+        jsonObject["UpdateTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+        jsonDocument.setObject(jsonObject);
+        Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+    }
 #endif
 
 #if QT_VERSION >= 0x050000
@@ -432,6 +454,7 @@ void OptionsDialog::applySettings()
         Translator->initUserLanguage();
     }
 
+    settings->sync();
     emit settingsApplied(newContentMode, languageChanged);
 
     if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder))
@@ -573,6 +596,77 @@ void OptionsDialog::setupStatisticsSettings()
     }
 #else
     ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabStats));
+#endif
+}
+
+void OptionsDialog::setupWindowsGameSettings()
+{
+#ifdef GTA5SYNC_GAME
+    GameVersion gameVersion = AppEnv::getGameVersion();
+#ifdef GTA5SYNC_WIN
+    if (gameVersion != GameVersion::NoVersion)
+    {
+        if (gameVersion == GameVersion::SocialClubVersion)
+        {
+            ui->gbSteam->setDisabled(true);
+            ui->labSocialClubFound->setText(tr("Found: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes"))));
+            ui->labSteamFound->setText(tr("Found: %1").arg(QString("<span style=\"color: red\">%1</span>").arg(tr("No"))));
+            if (AppEnv::getGameLanguage(GameVersion::SocialClubVersion) != GameLanguage::Undefined)
+            {
+                ui->labSocialClubLanguage->setText(tr("Language: %1").arg(QLocale(AppEnv::gameLanguageToString(AppEnv::getGameLanguage(GameVersion::SocialClubVersion))).nativeLanguageName()));
+            }
+            else
+            {
+                ui->labSocialClubLanguage->setText(tr("Language: %1").arg(tr("OS defined")));
+            }
+            ui->labSteamLanguage->setVisible(false);
+        }
+        else if (gameVersion == GameVersion::SteamVersion)
+        {
+            ui->gbSocialClub->setDisabled(true);
+            ui->labSocialClubFound->setText(tr("Found: %1").arg(QString("<span style=\"color: red\">%1</span>").arg(tr("No"))));
+            ui->labSteamFound->setText(tr("Found: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes"))));
+            ui->labSocialClubLanguage->setVisible(false);
+            if (AppEnv::getGameLanguage(GameVersion::SteamVersion) != GameLanguage::Undefined)
+            {
+                ui->labSteamLanguage->setText(tr("Language: %1").arg(QLocale(AppEnv::gameLanguageToString(AppEnv::getGameLanguage(GameVersion::SteamVersion))).nativeLanguageName()));
+            }
+            else
+            {
+                ui->labSteamLanguage->setText(tr("Language: %1").arg(tr("Steam defined")));
+            }
+        }
+        else
+        {
+            ui->labSocialClubFound->setText(tr("Found: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes"))));
+            ui->labSteamFound->setText(tr("Found: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes"))));
+            if (AppEnv::getGameLanguage(GameVersion::SocialClubVersion) != GameLanguage::Undefined)
+            {
+                ui->labSocialClubLanguage->setText(tr("Language: %1").arg(QLocale(AppEnv::gameLanguageToString(AppEnv::getGameLanguage(GameVersion::SocialClubVersion))).nativeLanguageName()));
+            }
+            else
+            {
+                ui->labSocialClubLanguage->setText(tr("Language: %1").arg(tr("OS defined")));
+            }
+            if (AppEnv::getGameLanguage(GameVersion::SteamVersion) != GameLanguage::Undefined)
+            {
+                ui->labSteamLanguage->setText(tr("Language: %1").arg(QLocale(AppEnv::gameLanguageToString(AppEnv::getGameLanguage(GameVersion::SteamVersion))).nativeLanguageName()));
+            }
+            else
+            {
+                ui->labSteamLanguage->setText(tr("Language: %1").arg(tr("Steam defined")));
+            }
+        }
+    }
+    else
+    {
+        ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabGame));
+    }
+#else
+    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabGame));
+#endif
+#else
+    ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabGame));
 #endif
 }
 

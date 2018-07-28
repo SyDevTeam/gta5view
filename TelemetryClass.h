@@ -25,7 +25,7 @@
 #include <QString>
 #include <QUrl>
 
-enum class TelemetryCategory : int { OperatingSystemSpec = 0, HardwareSpec = 1, UserLocaleData = 2, ApplicationConf = 3, UserFeedback = 4, ApplicationSpec = 5, CustomEmitted = 99};
+enum class TelemetryCategory : int { OperatingSystemSpec = 0, HardwareSpec = 1, UserLocaleData = 2, ApplicationConf = 3, UserFeedback = 4, ApplicationSpec = 5, PersonalData = 6, CustomEmitted = 99 };
 
 class TelemetryClass : public QObject
 {

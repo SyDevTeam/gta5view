@@ -79,6 +79,7 @@ private:
     void setupInterfaceSettings();
     void setupStatisticsSettings();
     void setupSnapmaticPictureViewer();
+    void setupWindowsGameSettings();
     void applySettings();
 };
 

@@ -32,6 +32,7 @@
 #include "GlobalString.h"
 #include "UiModLabel.h"
 #include "AppEnv.h"
+#include "config.h"
 
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050200
@@ -45,6 +46,7 @@
 #include <QJsonDocument>
 #include <QApplication>
 #include <QFontMetrics>
+#include <QJsonObject>
 #include <QSizePolicy>
 #include <QStaticText>
 #include <QFileDialog>
@@ -66,6 +68,10 @@
 #include <QIcon>
 #include <QUrl>
 #include <QDir>
+
+#ifdef GTA5SYNC_TELEMETRY
+#include "TelemetryClass.h"
+#endif
 
 // Macros for better Overview + RAM
 #define locX QString::number(picture->getSnapmaticProperties().location.x)
@@ -910,6 +916,23 @@ void PictureDialog::openPreviewMap()
         else
         {
             updated();
+#ifdef GTA5SYNC_TELEMETRY
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "LocationEdited";
+                jsonObject["ExtraFlags"] = "Viewer";
+                jsonObject["EditedSize"] = QString::number(picture->getContentMaxLength());
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+#endif
         }
     }
     delete mapLocDialog;
@@ -976,6 +999,23 @@ void PictureDialog::editSnapmaticImage()
                 return;
             }
             smpic->emitCustomSignal("PictureUpdated");
+#ifdef GTA5SYNC_TELEMETRY
+            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+            telemetrySettings.beginGroup("Telemetry");
+            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+            telemetrySettings.endGroup();
+            if (pushUsageData && Telemetry->canPush())
+            {
+                QJsonDocument jsonDocument;
+                QJsonObject jsonObject;
+                jsonObject["Type"] = "ImageEdited";
+                jsonObject["ExtraFlags"] = "Viewer";
+                jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+                jsonDocument.setObject(jsonObject);
+                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+            }
+#endif
         }
         else
         {
