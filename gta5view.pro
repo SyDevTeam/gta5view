@@ -133,8 +133,9 @@ FORMS    += \
 
 TRANSLATIONS += \
     res/gta5sync.ts \
-    res/gta5sync_en_US.ts \
     res/gta5sync_de.ts \
+    res/gta5sync_en_US.ts \
+    res/gta5sync_es.ts \
     res/gta5sync_fr.ts \
     res/gta5sync_ru.ts \
     res/gta5sync_uk.ts \
@@ -146,8 +147,9 @@ RESOURCES += \
 
 DISTFILES += res/app.rc \
     res/gta5view.desktop \
-    res/gta5sync_en_US.ts \
     res/gta5sync_de.ts \
+    res/gta5sync_en_US.ts \
+    res/gta5sync_es.ts \
     res/gta5sync_fr.ts \
     res/gta5sync_ru.ts \
     res/gta5sync_uk.ts \

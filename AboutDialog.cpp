@@ -39,7 +39,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QString buildStr = GTA5SYNC_BUILDSTRING;
 #ifndef GTA5SYNC_BUILDTYPE_REL
 #ifdef GTA5SYNC_COMMIT
-    appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
+    if (!appVersion.contains("-")) { appVersion = appVersion % "-" % GTA5SYNC_COMMIT; }
 #endif
 #endif
 
