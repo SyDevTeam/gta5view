@@ -46,6 +46,9 @@ Running with Qt %6&lt;br/&gt;
         <location filename="../AboutDialog.cpp" line="50"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
+        <translatorcomment>PROFessoR &apos;AppleSOft&apos;,https://steamcommunity.com/id/AppleSOft
+VenJam1n,https://socialclub.rockstargames.com/member/--VenJam1n--
+twitter,https://twitter.com/_VenJam1n</translatorcomment>
         <translation>VenJam1n,g5e://about?VmVuSmFtMW4=:U3RlYW06IDxhIGhyZWY9Imh0dHBzOi8vc3RlYW1jb21tdW5pdHkuY29tL3Byb2ZpbGVzLzc2NTYxMTk3OTg0NjM1ODE2LyI+UFJPRmVzc29SICdBcHBsZVNPZnQnPC9hPjxici8+U29jaWFsIENsdWI6IDxhIGhyZWY9Imh0dHBzOi8vc29jaWFsY2x1Yi5yb2Nrc3RhcmdhbWVzLmNvbS9tZW1iZXIvLS1WZW5KYW0xbi0tLzU2Mzc1NjkiPlZlbkphbTFuPC9hPjxici8+VHdpdHRlcjogPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9fVmVuSmFtMW4iPlZlbkphbTFuPC9hPg==</translation>
     </message>
     <message>
@@ -184,7 +187,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImageEditorDialog.ui" line="59"/>
         <source>Import picture</source>
-        <translation type="unfinished">Імпортувати зображення</translation>
+        <translation>Імпортувати зображення</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="62"/>
@@ -195,7 +198,7 @@ Pictures and Savegames</source>
         <location filename="../ImageEditorDialog.ui" line="82"/>
         <location filename="../ImportDialog.cpp" line="637"/>
         <source>Apply changes</source>
-        <translation type="unfinished">Застосувати зміни</translation>
+        <translation>Застосувати зміни</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="85"/>
@@ -207,7 +210,7 @@ Pictures and Savegames</source>
         <location filename="../ImageEditorDialog.ui" line="92"/>
         <location filename="../ImportDialog.cpp" line="639"/>
         <source>Discard changes</source>
-        <translation type="unfinished">Скасувати зміни</translation>
+        <translation>Скасувати зміни</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="95"/>
@@ -266,7 +269,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="128"/>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Водяний знак</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="140"/>
@@ -284,7 +287,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="174"/>
         <source>Select background colour</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть колір фону</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="177"/>
@@ -303,12 +306,12 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="227"/>
         <source>Select background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть фонове зображення</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="237"/>
         <source>Remove background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Видалити фонове зображення</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="240"/>
@@ -323,12 +326,12 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="305"/>
         <source>Import options</source>
-        <translation type="unfinished"></translation>
+        <translation>Параметри імпорту</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="308"/>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Параметри</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="337"/>
@@ -353,22 +356,22 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.cpp" line="120"/>
         <source>&amp;Import new Picture...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Імпортувати нове зображення...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="121"/>
         <source>&amp;Crop Picture...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Обрізати зображення...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="123"/>
         <source>&amp;Load Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Завантажити параметри...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="124"/>
         <source>&amp;Save Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Зберегти параметри...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="197"/>
@@ -388,35 +391,35 @@ Pictures and Savegames</source>
         <location filename="../ImportDialog.cpp" line="314"/>
         <source>Storage</source>
         <comment>Background Image: Storage</comment>
-        <translation type="unfinished"></translation>
+        <translation>Зберігання</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="351"/>
         <source>Crop Picture...</source>
-        <translation type="unfinished"></translation>
+        <translation>Обрізати зображення...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="393"/>
         <source>&amp;Crop</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Обрізати</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="394"/>
         <source>Crop Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Обрізати зображення</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="481"/>
         <location filename="../ImportDialog.cpp" line="529"/>
         <source>Please import a new picture first</source>
-        <translation type="unfinished"></translation>
+        <translation>Спершу імпортуйте нове зображення</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="486"/>
         <location filename="../ImportDialog.cpp" line="496"/>
         <source>Default</source>
         <comment>Default as Default Profile</comment>
-        <translation type="unfinished"></translation>
+        <translation>Стандартний</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="487"/>
@@ -441,19 +444,19 @@ Pictures and Savegames</source>
         <location filename="../ImportDialog.cpp" line="559"/>
         <source>Profile %1</source>
         <comment>Profile %1 as Profile 1</comment>
-        <translation type="unfinished"></translation>
+        <translation>Профіль %1</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="481"/>
         <location filename="../ImportDialog.cpp" line="492"/>
         <source>Load Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Завантажити параметри...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="529"/>
         <location filename="../ImportDialog.cpp" line="539"/>
         <source>Save Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Зберегти параметри...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="670"/>
@@ -482,7 +485,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <location filename="../ImportDialog.cpp" line="492"/>
         <location filename="../ImportDialog.cpp" line="539"/>
         <source>Please select your settings profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Будь ласка, виберіть свій профіль налаштувань</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="788"/>
@@ -501,7 +504,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../JsonEditorDialog.ui" line="116"/>
         <source>Apply changes</source>
-        <translation type="unfinished">Застосувати зміни</translation>
+        <translation>Застосувати зміни</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="119"/>
@@ -511,7 +514,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../JsonEditorDialog.ui" line="132"/>
         <source>Discard changes</source>
-        <translation type="unfinished">Скасувати зміни</translation>
+        <translation>Скасувати зміни</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="135"/>
@@ -534,7 +537,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../MapLocationDialog.ui" line="138"/>
         <source>Close viewer</source>
-        <translation type="unfinished">Закрити переглядач</translation>
+        <translation>Закрити переглядач</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="141"/>
@@ -544,7 +547,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../MapLocationDialog.ui" line="167"/>
         <source>Apply new position</source>
-        <translation type="unfinished"></translation>
+        <translation>Застосувати нову позицію</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="170"/>
@@ -554,7 +557,7 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../MapLocationDialog.ui" line="183"/>
         <source>Revert old position</source>
-        <translation type="unfinished"></translation>
+        <translation>Повернути стару позицію</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="186"/>
@@ -564,17 +567,17 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../MapLocationDialog.ui" line="199"/>
         <source>Select new position</source>
-        <translation type="unfinished"></translation>
+        <translation>Виберіть нову позицію</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="202"/>
         <source>&amp;Select</source>
-        <translation type="unfinished">&amp;Виділення</translation>
+        <translation>&amp;Виділення</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="215"/>
         <source>Quit select position</source>
-        <translation type="unfinished"></translation>
+        <translation>Вийти з вибору позиції</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="218"/>
@@ -726,12 +729,12 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="387"/>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Гра</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="393"/>
         <source>Social Club Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Social Club версія</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
@@ -743,7 +746,7 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="641"/>
         <location filename="../OptionsDialog.cpp" line="642"/>
         <source>Found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Знайдено:%1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
@@ -757,12 +760,13 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="653"/>
         <location filename="../OptionsDialog.cpp" line="657"/>
         <source>Language: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Мова: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="416"/>
         <source>Steam Version</source>
-        <translation type="unfinished"></translation>
+        <translatorcomment>Steam версія</translatorcomment>
+        <translation>Steam Version</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="453"/>
@@ -803,7 +807,7 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="530"/>
         <source>Personal Usage Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Особисті дані використання</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="540"/>
@@ -902,7 +906,7 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="160"/>
         <source>%1 (Game language)</source>
         <comment>Next closest language compared to the Game settings</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 (Мова гри)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="164"/>
@@ -923,7 +927,7 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="154"/>
         <source>%1 (Language priority)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 (пріоритет мови)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="462"/>
@@ -965,25 +969,25 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="641"/>
         <location filename="../OptionsDialog.cpp" line="642"/>
         <source>Yes</source>
-        <translation type="unfinished">Так</translation>
+        <translation>Так</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="613"/>
         <location filename="../OptionsDialog.cpp" line="627"/>
         <source>No</source>
-        <translation type="unfinished">Ні</translation>
+        <translation>Ні</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="620"/>
         <location filename="../OptionsDialog.cpp" line="649"/>
         <source>OS defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Визначається ОС</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="636"/>
         <location filename="../OptionsDialog.cpp" line="657"/>
         <source>Steam defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Визначається Steam</translation>
     </message>
 </context>
 <context>
@@ -1577,12 +1581,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="978"/>
         <source>Prepare Content for Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Підготувати контент для імпорту ...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1092"/>
         <source>A Snapmatic picture already exists with the uid %1, you want assign your import a new uid and timestamp?</source>
-        <translation type="unfinished"></translation>
+        <translation>Snapmatic зображення з uid %1 вже існує, ви хочете призначити для імпорту новий uid та мітку часу?</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1958"/>
@@ -1955,7 +1959,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticEditor.ui" line="240"/>
         <source>Apply changes</source>
-        <translation type="unfinished">Застосувати зміни</translation>
+        <translation>Застосувати зміни</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="243"/>
@@ -1965,7 +1969,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticEditor.ui" line="256"/>
         <source>Discard changes</source>
-        <translation type="unfinished">Скасувати зміни</translation>
+        <translation>Скасувати зміни</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="259"/>
@@ -2264,22 +2268,23 @@ Press 1 for Default View</source>
     <message>
         <location filename="../main.cpp" line="167"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
-        <translation type="unfinished"></translation>
+        <translation>Ви хочете допомогти %1  покращитись у майбутньому, включивши дані особистого користування?</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="168"/>
         <source>%1 User Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>%1 Статистика користувачів</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="172"/>
         <source>Yes, I want include personal usage data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Так, я хочу включити дані особистого користування.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="181"/>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translatorcomment>&amp;OK</translatorcomment>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 <context>
