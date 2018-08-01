@@ -17,7 +17,7 @@ FILESUBTYPE         VFT2_UNKNOWN
 BEGIN
     BLOCK   "VarFileInfo"
     BEGIN
-        VALUE   "Translation",  0x0409,  1200
+        VALUE   "Translation",  0x0809,  1200
     END
     BLOCK   "StringFileInfo"
     BEGIN

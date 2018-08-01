@@ -25,6 +25,7 @@ matrix:
   - env:
     - BUILD_SCRIPT=windows_docker.sh
     - QT_SELECT=qt5-x86_64-w64-mingw32
+    - RELEASE_LABEL="Windows 64-Bit Portable for gta5-mods"
     - PACKAGE_CODE=gta5-mods
   - env:
     - BUILD_SCRIPT=wininstall_docker.sh
