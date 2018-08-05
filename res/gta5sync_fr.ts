@@ -194,7 +194,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImageEditorDialog.ui" line="59"/>
         <source>Import picture</source>
-        <translation type="unfinished">Importer l&apos;image</translation>
+        <translation>Importer l&apos;image</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="62"/>
@@ -205,7 +205,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <location filename="../ImageEditorDialog.ui" line="82"/>
         <location filename="../ImportDialog.cpp" line="637"/>
         <source>Apply changes</source>
-        <translation type="unfinished">Appliquer les changements</translation>
+        <translation>Appliquer les modifications</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="85"/>
@@ -217,7 +217,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <location filename="../ImageEditorDialog.ui" line="92"/>
         <location filename="../ImportDialog.cpp" line="639"/>
         <source>Discard changes</source>
-        <translation type="unfinished">Annuler les changements</translation>
+        <translation>Annuler les modifications</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.ui" line="95"/>
@@ -266,7 +266,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.ui" line="128"/>
         <source>Watermark</source>
-        <translation type="unfinished"></translation>
+        <translation>Filigrane</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="140"/>
@@ -284,7 +284,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.ui" line="174"/>
         <source>Select background colour</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir la couleur de fond</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="177"/>
@@ -295,12 +295,12 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.ui" line="227"/>
         <source>Select background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Choisir l&apos;image de fond</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="237"/>
         <source>Remove background image</source>
-        <translation type="unfinished"></translation>
+        <translation>Supprimer l&apos;image de fond</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="314"/>
@@ -321,12 +321,12 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.ui" line="305"/>
         <source>Import options</source>
-        <translation type="unfinished"></translation>
+        <translation>Options d&apos;importation</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="308"/>
         <source>&amp;Options</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Options</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="337"/>
@@ -359,22 +359,22 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.cpp" line="120"/>
         <source>&amp;Import new Picture...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Importer une nouvelle image...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="121"/>
         <source>&amp;Crop Picture...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rogner l&apos;image...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="123"/>
         <source>&amp;Load Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Charger les paramètres...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="124"/>
         <source>&amp;Save Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Sauvegarder les paramètres...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="197"/>
@@ -394,35 +394,35 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <location filename="../ImportDialog.cpp" line="314"/>
         <source>Storage</source>
         <comment>Background Image: Storage</comment>
-        <translation type="unfinished"></translation>
+        <translation>Stockage</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="351"/>
         <source>Crop Picture...</source>
-        <translation type="unfinished"></translation>
+        <translation>Rogner l&apos;image...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="393"/>
         <source>&amp;Crop</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Rogner</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="394"/>
         <source>Crop Picture</source>
-        <translation type="unfinished"></translation>
+        <translation>Rogner l&apos;image</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="481"/>
         <location filename="../ImportDialog.cpp" line="529"/>
         <source>Please import a new picture first</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez d&apos;abord importer une nouvelle image</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="486"/>
         <location filename="../ImportDialog.cpp" line="496"/>
         <source>Default</source>
         <comment>Default as Default Profile</comment>
-        <translation type="unfinished"></translation>
+        <translation>Défaut</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="487"/>
@@ -447,25 +447,25 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <location filename="../ImportDialog.cpp" line="559"/>
         <source>Profile %1</source>
         <comment>Profile %1 as Profile 1</comment>
-        <translation type="unfinished"></translation>
+        <translation>Profil %1</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="481"/>
         <location filename="../ImportDialog.cpp" line="492"/>
         <source>Load Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Charger les paramètres...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="492"/>
         <location filename="../ImportDialog.cpp" line="539"/>
         <source>Please select your settings profile</source>
-        <translation type="unfinished"></translation>
+        <translation>Veuillez choisir votre profil de paramètres</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="529"/>
         <location filename="../ImportDialog.cpp" line="539"/>
         <source>Save Settings...</source>
-        <translation type="unfinished"></translation>
+        <translation>Sauvegarder les paramètres...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="670"/>
@@ -501,7 +501,7 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
     <message>
         <location filename="../JsonEditorDialog.ui" line="116"/>
         <source>Apply changes</source>
-        <translation type="unfinished">Appliquer les changements</translation>
+        <translation>Appliquer les modifications</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="119"/>
@@ -511,7 +511,7 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
     <message>
         <location filename="../JsonEditorDialog.ui" line="132"/>
         <source>Discard changes</source>
-        <translation type="unfinished">Annuler les changements</translation>
+        <translation>Annuler les modifications</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="135"/>
@@ -534,7 +534,7 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
     <message>
         <location filename="../MapLocationDialog.ui" line="138"/>
         <source>Close viewer</source>
-        <translation type="unfinished">Fermer la visionneuse</translation>
+        <translation>Fermer la visionneuse</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="141"/>
@@ -544,7 +544,7 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
     <message>
         <location filename="../MapLocationDialog.ui" line="167"/>
         <source>Apply new position</source>
-        <translation type="unfinished"></translation>
+        <translation>Appliquer la nouvelle position</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="170"/>
@@ -554,7 +554,7 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
     <message>
         <location filename="../MapLocationDialog.ui" line="183"/>
         <source>Revert old position</source>
-        <translation type="unfinished"></translation>
+        <translation>Revenir à l&apos;ancienne position</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="186"/>
@@ -564,17 +564,17 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
     <message>
         <location filename="../MapLocationDialog.ui" line="199"/>
         <source>Select new position</source>
-        <translation type="unfinished"></translation>
+        <translation>Sélectionner la nouvelle position</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="202"/>
         <source>&amp;Select</source>
-        <translation type="unfinished">&amp;Sélectionner</translation>
+        <translation>&amp;Sélectionner</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="215"/>
         <source>Quit select position</source>
-        <translation type="unfinished"></translation>
+        <translation>Quitter la sélection de position</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="218"/>
@@ -726,12 +726,12 @@ Y : %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="387"/>
         <source>Game</source>
-        <translation type="unfinished"></translation>
+        <translation>Jeu</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="393"/>
         <source>Social Club Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Version du Social Club</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
@@ -743,7 +743,7 @@ Y : %2</translation>
         <location filename="../OptionsDialog.cpp" line="641"/>
         <location filename="../OptionsDialog.cpp" line="642"/>
         <source>Found: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Trouvé : %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
@@ -757,12 +757,12 @@ Y : %2</translation>
         <location filename="../OptionsDialog.cpp" line="653"/>
         <location filename="../OptionsDialog.cpp" line="657"/>
         <source>Language: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>Langue : %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="416"/>
         <source>Steam Version</source>
-        <translation type="unfinished"></translation>
+        <translation>Version de Steam</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="453"/>
@@ -850,7 +850,7 @@ Y : %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="530"/>
         <source>Personal Usage Data</source>
-        <translation type="unfinished"></translation>
+        <translation>Données d&apos;utilisation</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="602"/>
@@ -902,7 +902,7 @@ Y : %2</translation>
         <location filename="../OptionsDialog.cpp" line="160"/>
         <source>%1 (Game language)</source>
         <comment>Next closest language compared to the Game settings</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 (Langue du jeu)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="164"/>
@@ -923,7 +923,7 @@ Y : %2</translation>
         <location filename="../OptionsDialog.cpp" line="154"/>
         <source>%1 (Language priority)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
-        <translation type="unfinished"></translation>
+        <translation>%1 (Priorité de la langue)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="462"/>
@@ -952,25 +952,25 @@ Y : %2</translation>
         <location filename="../OptionsDialog.cpp" line="641"/>
         <location filename="../OptionsDialog.cpp" line="642"/>
         <source>Yes</source>
-        <translation type="unfinished">Oui</translation>
+        <translation>Oui</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="613"/>
         <location filename="../OptionsDialog.cpp" line="627"/>
         <source>No</source>
-        <translation type="unfinished">Non</translation>
+        <translation>Non</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="620"/>
         <location filename="../OptionsDialog.cpp" line="649"/>
         <source>OS defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Défini par le système d&apos;exploitation</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="636"/>
         <location filename="../OptionsDialog.cpp" line="657"/>
         <source>Steam defined</source>
-        <translation type="unfinished"></translation>
+        <translation>Défini par Steam</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="472"/>
@@ -1570,12 +1570,12 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../ProfileInterface.cpp" line="978"/>
         <source>Prepare Content for Import...</source>
-        <translation type="unfinished"></translation>
+        <translation>Préparation du contenu pour l&apos;import...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1092"/>
         <source>A Snapmatic picture already exists with the uid %1, you want assign your import a new uid and timestamp?</source>
-        <translation type="unfinished"></translation>
+        <translation>Un Snapmatic existe déjà avec le uid %1, voulez-vous assigner à votre import un nouvel uid et timestamp ?</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2023"/>
@@ -1989,7 +1989,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../SnapmaticEditor.ui" line="240"/>
         <source>Apply changes</source>
-        <translation type="unfinished">Appliquer les changements</translation>
+        <translation>Appliquer les modifications</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="243"/>
@@ -1999,7 +1999,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../SnapmaticEditor.ui" line="256"/>
         <source>Discard changes</source>
-        <translation type="unfinished">Annuler les changements</translation>
+        <translation>Annuler les modifications</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="259"/>
@@ -2266,22 +2266,22 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../main.cpp" line="167"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
-        <translation type="unfinished"></translation>
+        <translation>Voulez-vous aider au développement de %1 en transmettant vos données d&apos;utilisation ?</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="168"/>
         <source>%1 User Statistics</source>
-        <translation type="unfinished"></translation>
+        <translation>Statistiques utilisateurs %1</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="172"/>
         <source>Yes, I want include personal usage data.</source>
-        <translation type="unfinished"></translation>
+        <translation>Oui, je veux partager mes données d&apos;utilisation.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="181"/>
         <source>&amp;OK</source>
-        <translation type="unfinished">&amp;OK</translation>
+        <translation>&amp;OK</translation>
     </message>
 </context>
 <context>
