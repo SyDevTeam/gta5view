@@ -462,6 +462,8 @@ bool AppEnv::setGameLanguage(GameVersion gameVersion, GameLanguage gameLanguage)
         {
             return false;
         }
+#else
+        Q_UNUSED(gameLanguage)
 #endif
     }
     if (steamVersion)
@@ -485,6 +487,8 @@ bool AppEnv::setGameLanguage(GameVersion gameVersion, GameLanguage gameLanguage)
         {
             return false;
         }
+#else
+        Q_UNUSED(gameLanguage)
 #endif
     }
     return true;

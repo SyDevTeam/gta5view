@@ -19,6 +19,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
     docker run --rm -v ${PWD}:/gta5view -it syping/qt5-static-mingw
     cd /gta5view && mkdir -p build && cd build
     qmake-static ../gta5view.pro
+    make depend
     make -j $(nproc --all)
 
 #### Build gta5view for Debian/Ubuntu
@@ -27,6 +28,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
     git clone https://gitlab.com/Syping/gta5view && cd gta5view
     mkdir -p build && cd build
     ../configure --prefix=/opt/gta5view
+    make depend
     make -j $(nproc --all)
     sudo make install
 
@@ -36,6 +38,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
     git clone https://gitlab.com/Syping/gta5view && cd gta5view
     mkdir -p build && cd build
     ../configure --prefix=/opt/gta5view
+    make depend
     make -j $(nproc --all)
     sudo make install
 
