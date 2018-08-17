@@ -1848,6 +1848,14 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                 }
             }
         }
+        else if (watched->objectName() == "ProfileInterface")
+        {
+            if (previousWidget != nullptr)
+            {
+                previousWidget->setStyleSheet(QLatin1String(""));
+                previousWidget = nullptr;
+            }
+        }
     }
     return false;
 }
