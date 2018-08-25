@@ -2189,6 +2189,10 @@ preSelectionCrewID:
                         goto preSelectionCrewID;
                     }
                 }
+                if (!crewList.contains(newCrew))
+                {
+                    crewDB->addCrew(crewID);
+                }
                 crewID = newCrew.toInt();
             }
             else

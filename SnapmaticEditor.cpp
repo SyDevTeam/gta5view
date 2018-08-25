@@ -452,6 +452,10 @@ void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
                     return;
                 }
             }
+            if (!crewList.contains(newCrew))
+            {
+                crewDB->addCrew(crewID);
+            }
             crewID = newCrew.toInt();
             setSnapmaticCrew(returnCrewName(crewID));
         }
