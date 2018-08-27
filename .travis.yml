@@ -8,7 +8,7 @@ service:
   
 env:
   global:
-    - BUILD_TYPE=RC
+    - BUILD_TYPE=REL
 
 matrix:
   include:
