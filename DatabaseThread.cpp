@@ -44,79 +44,10 @@ void DatabaseThread::run()
 {
     QEventLoop threadLoop;
 
-    QStringList crewList;
-    QStringList crewListR;
-
-    // Register thread loop end signal
     QObject::connect(this, SIGNAL(threadTerminated()), &threadLoop, SLOT(quit()));
-
-    // Setup crewList for Quick time scan
-    crewList = crewDB->getCrews();
-    if (!crewList.isEmpty())
-    {
-        crewListR = deleteCompatibleCrews(crewList);
-    }
-    else
-    {
-        while (crewList.isEmpty() && threadRunning)
-        {
-            QTimer::singleShot(1000, &threadLoop, SLOT(quit()));
-            threadLoop.exec();
-            if (!crewDB->isAddingCrews())
-            {
-                crewList = crewDB->getCrews();
-            }
-        }
-        if (threadRunning)
-        {
-            crewListR = deleteCompatibleCrews(crewList);
-        }
-    }
-
-    // Only do QTS when Thread should be run
-    if (threadRunning)
-    {
-        // Quick time scan
-#ifdef GTA5SYNC_DEBUG
-        qDebug() << "Start QTS";
-#endif
-        if (crewListR.length() <= 5)
-        {
-            scanCrewReference(crewListR, 2500);
-            emit crewNameUpdated();
-        }
-        if (crewList.length() <= 3)
-        {
-            scanCrewMembersList(crewList, 3, 2500);
-            emit playerNameUpdated();
-        }
-        else if (crewList.length() <= 5)
-        {
-            scanCrewMembersList(crewList, 2, 2500);
-            emit playerNameUpdated();
-        }
-
-        if (threadRunning)
-        {
-            QTimer::singleShot(10000, &threadLoop, SLOT(quit()));
-            threadLoop.exec();
-        }
-    }
 
     while (threadRunning)
     {
-        crewList = crewDB->getCrews();
-        crewListR = deleteCompatibleCrews(crewList);
-
-        // Long time scan
-#ifdef GTA5SYNC_DEBUG
-        qDebug() << "Start LTS";
-#endif
-        scanCrewReference(crewListR, 10000);
-        emit crewNameUpdated();
-        scanCrewMembersList(crewList, crewMaxPages, 10000);
-        emit playerNameUpdated();
-
         if (threadRunning)
         {
             QTimer::singleShot(300000, &threadLoop, SLOT(quit()));
