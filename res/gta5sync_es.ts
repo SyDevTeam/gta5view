@@ -101,6 +101,34 @@ Pictures and Savegames</source>
     </message>
 </context>
 <context>
+    <name>DonationDialog</name>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="28"/>
+        <source>Donate</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="30"/>
+        <source>&lt;h4&gt;Hello, thank you for using %1!&lt;/h4&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="32"/>
+        <source>When you think %1 is useful for you, you should consider donate for support future development.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="41"/>
+        <source>Show Again</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="44"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ExportDialog</name>
     <message>
         <location filename="../ExportDialog.ui" line="14"/>
@@ -1649,17 +1677,17 @@ Press 1 for Default View</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="111"/>
+        <location filename="../main.cpp" line="115"/>
         <source>Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="111"/>
+        <location filename="../main.cpp" line="115"/>
         <source>Selected Font: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="138"/>
+        <location filename="../main.cpp" line="142"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2236,22 +2264,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="167"/>
+        <location filename="../main.cpp" line="171"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="168"/>
+        <location filename="../main.cpp" line="172"/>
         <source>%1 User Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="172"/>
+        <location filename="../main.cpp" line="176"/>
         <source>Yes, I want include personal usage data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="181"/>
+        <location filename="../main.cpp" line="185"/>
         <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>

@@ -63,6 +63,10 @@
 #include "TelemetryClass.h"
 #endif
 
+#ifdef GTA5SYNC_DONATION
+#include "DonationDialog.h"
+#endif
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -310,6 +314,18 @@ int main(int argc, char *argv[])
     uiWindow.showMaximized();
 #else
     uiWindow.show();
+#endif
+
+#ifdef GTA5SYNC_DONATION
+    settings.beginGroup("Startup");
+    bool showDonation = settings.value("ShowDonation", true).toBool();
+    settings.endGroup();
+    if (showDonation)
+    {
+        DonationDialog *donorDialog = new DonationDialog();
+        donorDialog->show();
+        QObject::connect(donorDialog, SIGNAL(finished(int)), donorDialog, SLOT(deleteLater()));
+    }
 #endif
 
     return a.exec();

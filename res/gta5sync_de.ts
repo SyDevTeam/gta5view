@@ -111,6 +111,34 @@ Snapmatic Bilder und Spielständen</translation>
     </message>
 </context>
 <context>
+    <name>DonationDialog</name>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="28"/>
+        <source>Donate</source>
+        <translation>Spenden</translation>
+    </message>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="30"/>
+        <source>&lt;h4&gt;Hello, thank you for using %1!&lt;/h4&gt;</source>
+        <translation>&lt;h4&gt;Hallo, danke für das Benutzen von %1&lt;/h1&gt;</translation>
+    </message>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="32"/>
+        <source>When you think %1 is useful for you, you should consider donate for support future development.</source>
+        <translation>Wenn du denkst das %1 für dich nützlich ist, solltest du in Erwägung ziehen für zukünftige Entwicklung zu spenden.</translation>
+    </message>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="41"/>
+        <source>Show Again</source>
+        <translation>Wieder anzeigen</translation>
+    </message>
+    <message>
+        <location filename="../dnr/DonationDialog.cpp" line="44"/>
+        <source>&amp;Close</source>
+        <translation>S&amp;chließen</translation>
+    </message>
+</context>
+<context>
     <name>ExportDialog</name>
     <message>
         <location filename="../ExportDialog.ui" line="14"/>
@@ -1672,17 +1700,17 @@ Drücke 1 für Standardmodus</translation>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="111"/>
+        <location filename="../main.cpp" line="115"/>
         <source>Font</source>
         <translation>Schrift</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="111"/>
+        <location filename="../main.cpp" line="115"/>
         <source>Selected Font: %1</source>
         <translation>Ausgewähle Schrift: %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="138"/>
+        <location filename="../main.cpp" line="142"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;Willkommen zu %1!&lt;/h4&gt;Möchtest du %1 einstellen bevor du es nutzt?</translation>
     </message>
@@ -2261,22 +2289,22 @@ Drücke 1 für Standardmodus</translation>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="168"/>
+        <location filename="../main.cpp" line="172"/>
         <source>%1 User Statistics</source>
         <translation>%1 Benutzerstatistik</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="167"/>
+        <location filename="../main.cpp" line="171"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation>Sollen bei Einreichungen Persönliche Nutzungsdaten einbezogen werden um %1 in der Zukunft zu unterstützen?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="172"/>
+        <location filename="../main.cpp" line="176"/>
         <source>Yes, I want include personal usage data.</source>
         <translation>Ja, ich möchte Persönliche Nutzungsdaten einbeziehen.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="181"/>
+        <location filename="../main.cpp" line="185"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>

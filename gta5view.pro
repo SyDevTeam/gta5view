@@ -64,6 +64,7 @@ SOURCES += main.cpp \
     TranslationClass.cpp \
     UserInterface.cpp \
     anpro/imagecropper.cpp \
+    dnr/DonationDialog.cpp \
     pcg/pcg_basic.c \
     tmext/TelemetryClassAuthenticator.cpp \
     uimod/JSHighlighter.cpp \
@@ -108,6 +109,7 @@ HEADERS  += \
     anpro/imagecropper.h \
     anpro/imagecropper_e.h \
     anpro/imagecropper_p.h \
+    dnr/DonationDialog.h \
     pcg/pcg_basic.h \
     tmext/TelemetryClassAuthenticator.h \
     uimod/JSHighlighter.h \
@@ -158,7 +160,7 @@ DISTFILES += res/app.rc \
     res/gta5view.png \
     lang/README.txt
 
-INCLUDEPATH += ./anpro ./pcg ./tmext ./uimod
+INCLUDEPATH += ./anpro ./dnr ./pcg ./tmext ./uimod
 
 # GTA5SYNC/GTA5VIEW ONLY
 
@@ -233,6 +235,13 @@ contains(DEFINES, GTA5SYNC_QCONF){
         langfiles.files = $$PWD/res/gta5sync_en_US.qm $$PWD/res/gta5sync_de.qm $$PWD/res/gta5sync_fr.qm $$PWD/res/gta5sync_ru.qm $$PWD/res/gta5sync_uk.qm $$PWD/res/gta5sync_zh_TW.qm $$PWD/res/qtbase_en_GB.qm $$PWD/res/qtbase_zh_TW.qm
         INSTALLS += langfiles
     }
+}
+
+# DONATION BASED STUFF
+
+!contains(DEFINES, GTA5SYNC_DONATION){
+    SOURCES -= dnr/DonationDialog.cpp
+    HEADERS -= dnr/DonationDialog.h
 }
 
 # TELEMETRY BASED STUFF
