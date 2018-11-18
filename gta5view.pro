@@ -16,7 +16,7 @@
 #* along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #*****************************************************************************/
 
-QT       += core gui network
+QT       += core gui network svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: QT += winextras
