@@ -1,10 +1,7 @@
 #!/bin/bash
 
-# Install curl and lua
-if [ "${TRAVIS_OS_NAME}" == "linux" ]; then
-	sudo apt-get update -qq && \
-	sudo apt-get install -qq curl lua5.2
-elif [ "${TRAVIS_OS_NAME}" == "osx" ]; then
+# Install lua
+if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
 	brew install lua
 fi
 

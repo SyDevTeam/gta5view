@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Install curl, git, lua, nsis and openssl
-apt-get update -qq && \
-apt-get install -qq curl git lua5.2 nsis openssl
-
 # Decrypt Telemetry Authenticator
 rm -rf tmext/TelemetryClassAuthenticator.cpp && \
 openssl aes-256-cbc -k $tca_pass -in .gitlab/TelemetryClassAuthenticator.cpp.enc -out tmext/TelemetryClassAuthenticator.cpp -d
