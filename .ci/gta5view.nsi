@@ -102,8 +102,8 @@ ${INSTALL_TYPE}
 SetOverwrite ifnewer
 SetOutPath "$INSTDIR"
 File "../build/release/gta5view.exe"
-File "/usr/lib/gcc/x86_64-w64-mingw32/6.3-win32/libgcc_s_seh-1.dll"
-File "/usr/lib/gcc/x86_64-w64-mingw32/6.3-win32/libstdc++-6.dll"
+File "/usr/lib/gcc/x86_64-w64-mingw32/7.3-win32/libgcc_s_seh-1.dll"
+File "/usr/lib/gcc/x86_64-w64-mingw32/7.3-win32/libstdc++-6.dll"
 File "/opt/windev/libressl-latest_qt64d/bin/libcrypto-43.dll"
 File "/opt/windev/libressl-latest_qt64d/bin/libssl-45.dll"
 File "/opt/windev/libjpeg-turbo-latest_qt64d/bin/libjpeg-62.dll"
