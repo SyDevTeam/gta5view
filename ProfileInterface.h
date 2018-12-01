@@ -101,8 +101,6 @@ private:
     QMap<ProfileWidget*,QString> widgets;
     QSpacerItem *saSpacerItem;
     QStringList fixedPictures;
-    QColor highlightBackColor;
-    QColor highlightTextColor;
     QString enabledPicStr;
     QString profileFolder;
     QString profileName;

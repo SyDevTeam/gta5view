@@ -51,7 +51,6 @@
 #include <QScrollBar>
 #include <QClipboard>
 #include <QFileInfo>
-#include <QPalette>
 #include <QPainter>
 #include <QRegExp>
 #include <QAction>
@@ -1588,7 +1587,7 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
         {
             previousWidget->setStyleSheet(QLatin1String(""));
         }
-        picWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+        picWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
         previousWidget = picWidget;
     }
     QMenu contextMenu(picWidget);
@@ -1639,7 +1638,7 @@ void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
         {
             previousWidget->setStyleSheet(QLatin1String(""));
         }
-        sgdWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+        sgdWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color:palette(highlight)}QLabel#labSavegameStr{color:palette(highlighted-text)}"));
         previousWidget = sgdWidget;
     }
     QMenu contextMenu(sgdWidget);
@@ -1757,7 +1756,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                 {
                     if (pWidget != previousWidget)
                     {
-                        pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                        pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
                         styleSheetChanged = true;
                     }
                 }
@@ -1765,7 +1764,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                 {
                     if (pWidget != previousWidget)
                     {
-                        pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                        pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color:palette(highlight)}QLabel#labSavegameStr{color:palette(highlighted-text)}"));
                         styleSheetChanged = true;
                     }
                 }
@@ -1802,7 +1801,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                 {
                     if (pWidget != previousWidget)
                     {
-                        pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                        pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
                         styleSheetChanged = true;
                     }
                 }
@@ -1810,7 +1809,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
                 {
                     if (pWidget != previousWidget)
                     {
-                        pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                        pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color:palette(highlight)}QLabel#labSavegameStr{color:palette(highlighted-text)}"));
                         styleSheetChanged = true;
                     }
                 }
@@ -1878,7 +1877,7 @@ void ProfileInterface::hoverProfileWidgetCheck()
         {
             if (pWidget != previousWidget)
             {
-                pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
                 styleSheetChanged = true;
             }
         }
@@ -1886,7 +1885,7 @@ void ProfileInterface::hoverProfileWidgetCheck()
         {
             if (pWidget != previousWidget)
             {
-                pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+                pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color:palette(highlight)}QLabel#labSavegameStr{color:palette(highlighted-text)}"));
                 styleSheetChanged = true;
             }
         }
@@ -1911,20 +1910,16 @@ void ProfileInterface::hoverProfileWidgetCheck()
 
 void ProfileInterface::updatePalette()
 {
-    QPalette palette;
-    QColor baseColor = palette.base().color();
-    highlightBackColor = palette.highlight().color();
-    highlightTextColor = palette.highlightedText().color();
-    ui->saProfile->setStyleSheet(QString("QWidget#saProfileContent{background-color: rgb(%1, %2, %3)}").arg(QString::number(baseColor.red()), QString::number(baseColor.green()), QString::number(baseColor.blue())));
+    ui->saProfile->setStyleSheet(QString("QWidget#saProfileContent{background-color:palette(base)}"));
     if (previousWidget != nullptr)
     {
         if (previousWidget->getWidgetType() == "SnapmaticWidget")
         {
-            previousWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color: rgb(%1, %2, %3)}QLabel#labPicStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+            previousWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
         }
         else if (previousWidget->getWidgetType() == "SavegameWidget")
         {
-            previousWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color: rgb(%1, %2, %3)}QLabel#labSavegameStr{color: rgb(%4, %5, %6)}").arg(QString::number(highlightBackColor.red()), QString::number(highlightBackColor.green()), QString::number(highlightBackColor.blue()), QString::number(highlightTextColor.red()), QString::number(highlightTextColor.green()), QString::number(highlightTextColor.blue())));
+            previousWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
         }
     }
 }
