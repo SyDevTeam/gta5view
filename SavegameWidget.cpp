@@ -59,7 +59,7 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     ui->labSavegamePic->setFixedSize(48 * screenRatio, 27 * screenRatio);
 
     QPixmap savegamePixmap(":/img/savegame.svgz");
-    if (screenRatio != 1) savegamePixmap = savegamePixmap.scaledToHeight(ui->labSavegamePic->height(), Qt::SmoothTransformation);
+    savegamePixmap = savegamePixmap.scaledToHeight(ui->labSavegamePic->height(), Qt::SmoothTransformation);
     ui->labSavegamePic->setPixmap(savegamePixmap);
 
     QString exportSavegameStr = tr("Export Savegame...");
