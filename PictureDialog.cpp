@@ -188,6 +188,12 @@ void PictureDialog::setupPictureDialog()
     ui->labPicture->setFixedSize(960 * screenRatio, 536 * screenRatio);
     ui->labPicture->setFocusPolicy(Qt::StrongFocus);
 
+    // DPI calculation
+    ui->hlButtons->setSpacing(6 * screenRatio);
+    ui->vlButtons->setSpacing(6 * screenRatio);
+    ui->vlButtons->setContentsMargins(0, 0, 5 * screenRatio, 5 * screenRatio);
+    ui->jsonLayout->setContentsMargins(4 * screenRatio, 10 * screenRatio, 4 * screenRatio, 4 * screenRatio);
+
     // Pre-adapt window for DPI
     setFixedWidth(960 * screenRatio);
     setFixedHeight(536 * screenRatio);
