@@ -103,75 +103,9 @@ PlayerListDialog::~PlayerListDialog()
 
 void PlayerListDialog::drawSwitchButtons()
 {
-    QFont painterFont = ui->cmdApply->font();
-    QPalette palette;
-
-    QFontMetrics fontMetrics(painterFont);
-    QRect makeAvRect = fontMetrics.boundingRect(QRect(0, 0, 0, 0), Qt::AlignCenter | Qt::TextDontClip, "<");
-    QRect makeSeRect = fontMetrics.boundingRect(QRect(0, 0, 0, 0), Qt::AlignCenter | Qt::TextDontClip, ">");
-    QRect makeAdRect = fontMetrics.boundingRect(QRect(0, 0, 0, 0), Qt::AlignCenter | Qt::TextDontClip, "+");
-
-    int makeAvSize;
-    if (makeAvRect.height() > makeAvRect.width())
-    {
-        makeAvSize = makeAvRect.height();
-    }
-    else
-    {
-        makeAvSize = makeAvRect.width();
-    }
-    int makeSeSize;
-    if (makeSeRect.height() > makeSeRect.width())
-    {
-        makeSeSize = makeSeRect.height();
-    }
-    else
-    {
-        makeSeSize = makeSeRect.width();
-    }
-    int makeAdSize;
-    if (makeAdRect.height() > makeAdRect.width())
-    {
-        makeAdSize = makeAdRect.height();
-    }
-    else
-    {
-        makeAdSize = makeAdRect.width();
-    }
-
-    QImage avImage(makeAvSize, makeAvSize, QImage::Format_ARGB32_Premultiplied);
-    avImage.fill(Qt::transparent);
-    QImage seImage(makeSeSize, makeSeSize, QImage::Format_ARGB32_Premultiplied);
-    seImage.fill(Qt::transparent);
-    QImage adImage(makeAdSize, makeAdSize, QImage::Format_ARGB32_Premultiplied);
-    adImage.fill(Qt::transparent);
-
-    QPainter avPainter(&avImage);
-    avPainter.setFont(painterFont);
-    avPainter.setBrush(palette.buttonText());
-    avPainter.setPen(palette.buttonText().color());
-    avPainter.drawText(0, 0, makeAvSize, makeAvSize, Qt::AlignCenter | Qt::TextDontClip, "<");
-    avPainter.end();
-    QPainter sePainter(&seImage);
-    sePainter.setFont(painterFont);
-    sePainter.setBrush(palette.buttonText());
-    sePainter.setPen(palette.buttonText().color());
-    sePainter.drawText(0, 0, makeSeSize, makeSeSize, Qt::AlignCenter | Qt::TextDontClip, ">");
-    sePainter.end();
-    QPainter adPainter(&adImage);
-    adPainter.setFont(painterFont);
-    adPainter.setBrush(palette.buttonText());
-    adPainter.setPen(palette.buttonText().color());
-    adPainter.drawText(0, 0, makeAdSize, makeAdSize, Qt::AlignCenter | Qt::TextDontClip, "+");
-    adPainter.end();
-
-    ui->cmdMakeAv->setIconSize(avImage.size());
-    ui->cmdMakeSe->setIconSize(seImage.size());
-    ui->cmdMakeAd->setIconSize(adImage.size());
-
-    ui->cmdMakeAv->setIcon(QIcon(QPixmap::fromImage(avImage)));
-    ui->cmdMakeSe->setIcon(QIcon(QPixmap::fromImage(seImage)));
-    ui->cmdMakeAd->setIcon(QIcon(QPixmap::fromImage(adImage)));
+    ui->cmdMakeAv->setText("<");
+    ui->cmdMakeSe->setText(">");
+    ui->cmdMakeAd->setText("+");
 }
 
 void PlayerListDialog::on_cmdCancel_clicked()
