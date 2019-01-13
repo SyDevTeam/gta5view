@@ -386,7 +386,7 @@ void PictureDialog::stylizeDialog()
     if (QtWin::isCompositionEnabled())
     {
         QPalette palette;
-        QtWin::extendFrameIntoClientArea(this, 0, this->layout()->menuBar()->height(), 0, 0);
+        QtWin::extendFrameIntoClientArea(this, 0, (layout()->menuBar()->height() * AppEnv::screenRatioPR()), 0, 0);
         ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
         setStyleSheet("PictureDialog { background: transparent; }");
     }
