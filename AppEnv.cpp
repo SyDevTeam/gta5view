@@ -509,3 +509,12 @@ qreal AppEnv::screenRatio()
     return (dpi / 96);
 #endif
 }
+
+qreal AppEnv::screenRatioPR()
+{
+#if QT_VERSION >= 0x050600
+    return QGuiApplication::primaryScreen()->devicePixelRatio();
+#else
+    return 1;
+#endif
+}

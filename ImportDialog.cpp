@@ -142,6 +142,7 @@ void ImportDialog::processImage()
     QPixmap snapmaticPixmap(snapmaticResolutionW, snapmaticResolutionH);
     snapmaticPixmap.fill(selectedColour);
     QPainter snapmaticPainter(&snapmaticPixmap);
+    qreal screenRatioPR = AppEnv::screenRatioPR();
     if (!backImage.isNull())
     {
         if (!ui->cbStretch->isChecked())
@@ -225,7 +226,10 @@ void ImportDialog::processImage()
     }
     snapmaticPainter.end();
     newImage = snapmaticPixmap.toImage();
-    ui->labPicture->setPixmap(snapmaticPixmap.scaled(snapmaticResolutionLW, snapmaticResolutionLH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+#if QT_VERSION >= 0x050600
+    snapmaticPixmap.setDevicePixelRatio(screenRatioPR);
+#endif
+    ui->labPicture->setPixmap(snapmaticPixmap.scaled(snapmaticResolutionLW * screenRatioPR, snapmaticResolutionLH * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
 }
 
 void ImportDialog::processWatermark(QPainter *snapmaticPainter)

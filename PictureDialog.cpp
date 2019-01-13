@@ -138,9 +138,10 @@ void PictureDialog::setupPictureDialog()
 
     // Avatar area
     qreal screenRatio = AppEnv::screenRatio();
-    if (screenRatio != 1)
+    qreal screenRatioPR = AppEnv::screenRatioPR();
+    if (screenRatio != 1 || screenRatioPR != 1)
     {
-        avatarAreaPicture = QImage(":/img/avatararea.png").scaledToHeight(536 * screenRatio, Qt::FastTransformation);
+        avatarAreaPicture = QImage(":/img/avatararea.png").scaledToHeight(536 * screenRatio * screenRatioPR, Qt::FastTransformation);
     }
     else
     {
@@ -149,6 +150,11 @@ void PictureDialog::setupPictureDialog()
     avatarLocX = 145;
     avatarLocY = 66;
     avatarSize = 470;
+
+    // DPI calculation (picture)
+    ui->labPicture->setFixedSize(960 * screenRatio, 536 * screenRatio);
+    ui->labPicture->setFocusPolicy(Qt::StrongFocus);
+    ui->labPicture->setScaledContents(true);
 
     // Overlay area
     renderOverlayPicture();
@@ -185,8 +191,6 @@ void PictureDialog::setupPictureDialog()
 
     installEventFilter(this);
     installEventFilter(ui->labPicture);
-    ui->labPicture->setFixedSize(960 * screenRatio, 536 * screenRatio);
-    ui->labPicture->setFocusPolicy(Qt::StrongFocus);
 
     // DPI calculation
     ui->hlButtons->setSpacing(6 * screenRatio);
@@ -343,7 +347,7 @@ LRESULT PictureDialog::HitTestNCA(HWND hWnd, LPARAM lParam)
 void PictureDialog::resizeEvent(QResizeEvent *event)
 {
     Q_UNUSED(event)
-    //    int newDialogHeight = ui->labPicture->pixmap()->height();
+    //    int newDialogHeight = (ui->labPicture->pixmap()->height() / AppEnv::screenRatioPR());
     //    newDialogHeight = newDialogHeight + ui->jsonFrame->height();
     //    if (naviEnabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
     //    int buttomBorderSize = (frameSize().height() - size().height());
@@ -364,7 +368,7 @@ void PictureDialog::resizeEvent(QResizeEvent *event)
 void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
 {
     Q_UNUSED(newLabelSize)
-    int newDialogHeight = ui->labPicture->pixmap()->height();
+    int newDialogHeight = (ui->labPicture->pixmap()->height() / AppEnv::screenRatioPR());
     newDialogHeight = newDialogHeight + ui->jsonFrame->height();
     if (naviEnabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
     setMaximumSize(width(), newDialogHeight);
@@ -566,24 +570,25 @@ void PictureDialog::renderOverlayPicture()
 {
     // Generating Overlay Preview
     qreal screenRatio = AppEnv::screenRatio();
-    QRect preferedRect = QRect(0, 0, 200 * screenRatio, 160 * screenRatio);
+    qreal screenRatioPR = AppEnv::screenRatioPR();
+    QRect preferedRect = QRect(0, 0, 200 * screenRatio * screenRatioPR, 160 * screenRatio * screenRatioPR);
     QString overlayText = tr("Key 1 - Avatar Preview Mode\nKey 2 - Toggle Overlay\nArrow Keys - Navigate");
 
     QFont overlayPainterFont;
-    overlayPainterFont.setPixelSize(12 * screenRatio);
+    overlayPainterFont.setPixelSize(12 * screenRatio * screenRatioPR);
     QFontMetrics fontMetrics(overlayPainterFont);
     QRect overlaySpace = fontMetrics.boundingRect(preferedRect, Qt::AlignLeft | Qt::AlignTop | Qt::TextDontClip | Qt::TextWordWrap, overlayText);
 
     int hOverlay = Qt::AlignTop;
-    if (overlaySpace.height() < 74 * screenRatio)
+    if (overlaySpace.height() < 74 * screenRatio * screenRatioPR)
     {
         hOverlay = Qt::AlignVCenter;
-        preferedRect.setHeight(71 * screenRatio);
-        overlaySpace.setHeight(80 * screenRatio);
+        preferedRect.setHeight(71 * screenRatio * screenRatioPR);
+        overlaySpace.setHeight(80 * screenRatio * screenRatioPR);
     }
     else
     {
-        overlaySpace.setHeight(overlaySpace.height() + 6 * screenRatio);
+        overlaySpace.setHeight(overlaySpace.height() + 6 * screenRatio * screenRatioPR);
     }
 
     QImage overlayImage(overlaySpace.size(), QImage::Format_ARGB32_Premultiplied);
@@ -595,13 +600,13 @@ void PictureDialog::renderOverlayPicture()
     overlayPainter.drawText(preferedRect, Qt::AlignLeft | hOverlay | Qt::TextDontClip | Qt::TextWordWrap, overlayText);
     overlayPainter.end();
 
-    if (overlaySpace.width() < 194 * screenRatio)
+    if (overlaySpace.width() < 194 * screenRatio * screenRatioPR)
     {
-        overlaySpace.setWidth(200 * screenRatio);
+        overlaySpace.setWidth(200 * screenRatio * screenRatioPR);
     }
     else
     {
-        overlaySpace.setWidth(overlaySpace.width() + 6 * screenRatio);
+        overlaySpace.setWidth(overlaySpace.width() + 6 * screenRatio * screenRatioPR);
     }
 
     QImage overlayBorderImage(overlaySpace.width(), overlaySpace.height(), QImage::Format_ARGB6666_Premultiplied);
@@ -611,7 +616,7 @@ void PictureDialog::renderOverlayPicture()
     overlayTempImage.fill(Qt::transparent);
     QPainter overlayTempPainter(&overlayTempImage);
     overlayTempPainter.drawImage(0, 0, overlayBorderImage);
-    overlayTempPainter.drawImage(3 * screenRatio, 3 * screenRatio, overlayImage);
+    overlayTempPainter.drawImage(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, overlayImage);
     overlayTempPainter.end();
 }
 
@@ -684,63 +689,51 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture)
 void PictureDialog::renderPicture()
 {
     qreal screenRatio = AppEnv::screenRatio();
+    qreal screenRatioPR = AppEnv::screenRatioPR();
     if (!previewMode)
     {
         if (overlayEnabled)
         {
-            QPixmap shownImagePixmap(960 * screenRatio, 536 * screenRatio);
+            QPixmap shownImagePixmap(960 * screenRatio * screenRatioPR, 536 * screenRatio * screenRatioPR);
             shownImagePixmap.fill(Qt::transparent);
             QPainter shownImagePainter(&shownImagePixmap);
-            if (screenRatio == 1)
-            {
-                shownImagePainter.drawImage(0, 0, snapmaticPicture);
-                shownImagePainter.drawImage(3 * screenRatio, 3 * screenRatio, overlayTempImage);
-            }
-            else
-            {
-                shownImagePainter.drawImage(0, 0, snapmaticPicture.scaledToHeight(536 * screenRatio, Qt::SmoothTransformation));
-                shownImagePainter.drawImage(3 * screenRatio, 3 * screenRatio, overlayTempImage);
-            }
+            shownImagePainter.drawImage(0, 0, snapmaticPicture.scaled(960 * screenRatio * screenRatioPR, 536 * screenRatio * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+            shownImagePainter.drawImage(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, overlayTempImage);
             shownImagePainter.end();
+#if QT_VERSION >= 0x050600
+            shownImagePixmap.setDevicePixelRatio(screenRatioPR);
+#endif
             ui->labPicture->setPixmap(shownImagePixmap);
         }
         else
         {
-            if (screenRatio != 1)
-            {
-                QPixmap shownImagePixmap(960 * screenRatio, 536 * screenRatio);
-                shownImagePixmap.fill(Qt::transparent);
-                QPainter shownImagePainter(&shownImagePixmap);
-                shownImagePainter.drawImage(0, 0, snapmaticPicture.scaledToHeight(536 * screenRatio, Qt::SmoothTransformation));
-                shownImagePainter.end();
-                ui->labPicture->setPixmap(shownImagePixmap);
-            }
-            else
-            {
-                ui->labPicture->setPixmap(QPixmap::fromImage(snapmaticPicture));
-            }
+            QPixmap shownImagePixmap(960 * screenRatio * screenRatioPR, 536 * screenRatio * screenRatioPR);
+            shownImagePixmap.fill(Qt::transparent);
+            QPainter shownImagePainter(&shownImagePixmap);
+            shownImagePainter.drawImage(0, 0, snapmaticPicture.scaled(960 * screenRatio * screenRatioPR, 536 * screenRatio * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+            shownImagePainter.end();
+#if QT_VERSION >= 0x050600
+            shownImagePixmap.setDevicePixelRatio(screenRatioPR);
+#endif
+            ui->labPicture->setPixmap(shownImagePixmap);
         }
     }
     else
     {
         // Generating Avatar Preview
-        QPixmap avatarPixmap(960 * screenRatio, 536 * screenRatio);
+        QPixmap avatarPixmap(960 * screenRatio * screenRatioPR, 536 * screenRatio * screenRatioPR);
         QPainter snapPainter(&avatarPixmap);
         QFont snapPainterFont;
-        snapPainterFont.setPixelSize(12 * screenRatio);
-        if (screenRatio == 1)
-        {
-            snapPainter.drawImage(0, 0, snapmaticPicture);
-        }
-        else
-        {
-            snapPainter.drawImage(0, 0, snapmaticPicture.scaledToHeight(536 * screenRatio, Qt::SmoothTransformation));
-        }
+        snapPainterFont.setPixelSize(12 * screenRatio * screenRatioPR);
+        snapPainter.drawImage(0, 0, snapmaticPicture.scaled(960 * screenRatio * screenRatioPR, 536 * screenRatio * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         snapPainter.drawImage(0, 0, avatarAreaPicture);
         snapPainter.setPen(QColor::fromRgb(255, 255, 255, 255));
         snapPainter.setFont(snapPainterFont);
-        snapPainter.drawText(QRect(3 * screenRatio, 3 * screenRatio, 140 * screenRatio, 536 * screenRatio), Qt::AlignLeft | Qt::TextWordWrap, tr("Avatar Preview Mode\nPress 1 for Default View"));
+        snapPainter.drawText(QRect(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, 140 * screenRatio * screenRatioPR, 536 * screenRatio * screenRatioPR), Qt::AlignLeft | Qt::TextWordWrap, tr("Avatar Preview Mode\nPress 1 for Default View"));
         snapPainter.end();
+#if QT_VERSION >= 0x050600
+        avatarPixmap.setDevicePixelRatio(screenRatioPR);
+#endif
         ui->labPicture->setPixmap(avatarPixmap);
     }
 }

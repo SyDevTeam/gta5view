@@ -78,9 +78,16 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
     QObject::connect(picture, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
 
     qreal screenRatio = AppEnv::screenRatio();
+    qreal screenRatioPR = AppEnv::screenRatioPR();
     ui->labPicture->setFixedSize(48 * screenRatio, 27 * screenRatio);
 
-    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getImage().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
+    ui->labPicture->setScaledContents(true);
+
+    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getImage().scaled(ui->labPicture->width() * screenRatioPR, ui->labPicture->height() * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
+#if QT_VERSION >= 0x050600
+    SnapmaticPixmap.setDevicePixelRatio(screenRatioPR);
+#endif
+
     ui->labPicStr->setText(smpic->getPictureStr() % "\n" % smpic->getPictureTitl());
     ui->labPicture->setPixmap(SnapmaticPixmap);
 

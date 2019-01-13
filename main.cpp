@@ -65,6 +65,10 @@
 
 int main(int argc, char *argv[])
 {
+#if QT_VERSION >= 0x050600
+    QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
+    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#endif
     QApplication a(argc, argv);
     a.setApplicationName(GTA5SYNC_APPSTR);
     a.setApplicationVersion(GTA5SYNC_APPVER);

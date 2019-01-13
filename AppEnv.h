@@ -56,6 +56,7 @@ public:
 
     // Screen Stuff
     static qreal screenRatio();
+    static qreal screenRatioPR();
 };
 
 #endif // APPENV_H
