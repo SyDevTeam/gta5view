@@ -79,7 +79,9 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
     }
     else
     {
-        drawSwitchButtons();
+        ui->cmdMakeAv->setIcon(QIcon(":/img/back.svgz"));
+        ui->cmdMakeSe->setIcon(QIcon(":/img/next.svgz"));
+        ui->cmdMakeAd->setIcon(QIcon(":/img/add.svgz"));
     }
     buildInterface();
 
@@ -99,13 +101,6 @@ PlayerListDialog::~PlayerListDialog()
         delete object;
     }
     delete ui;
-}
-
-void PlayerListDialog::drawSwitchButtons()
-{
-    ui->cmdMakeAv->setText("<");
-    ui->cmdMakeSe->setText(">");
-    ui->cmdMakeAd->setText("+");
 }
 
 void PlayerListDialog::on_cmdCancel_clicked()

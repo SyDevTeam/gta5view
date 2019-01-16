@@ -242,8 +242,8 @@ void PictureDialog::addPreviousNextButtons()
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
     uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     uiToolbar->setObjectName("uiToolbar");
-    uiToolbar->addAction(QIcon(":/img/back.svg"), "", this, SLOT(previousPictureRequestedSlot()));
-    uiToolbar->addAction(QIcon(":/img/next.svg"), "", this, SLOT(nextPictureRequestedSlot()));
+    uiToolbar->addAction(QIcon(":/img/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
+    uiToolbar->addAction(QIcon(":/img/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
     layout()->setMenuBar(uiToolbar);
 
     naviEnabled = true;

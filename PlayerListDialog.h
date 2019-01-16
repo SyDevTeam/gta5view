@@ -48,7 +48,6 @@ private:
     ProfileDatabase *profileDB;
     Ui::PlayerListDialog *ui;
     bool listUpdated;
-    void drawSwitchButtons();
     void buildInterface();
 
 signals:
