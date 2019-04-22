@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Prepare OpenSSL
+rm -rf /opt/windev/openssl-latest_qt64s/lib/libcrypto.dll.a && \
+rm -rf /opt/windev/openssl-latest_qt64s/lib/libssl.dll.a && \
+cp -Rf /opt/windev/openssl-latest_qt64s/lib/libcrypto.a /opt/windev/openssl-latest_qt64s/lib/libcrypto.dll.a && \
+cp -Rf /opt/windev/openssl-latest_qt64s/lib/libssl.a /opt/windev/openssl-latest_qt64s/lib/libssl.dll.a && \
+
 # Prepare environment variable
 export GTA5VIEW_EXECUTABLE=gta5view-${EXECUTABLE_VERSION}${EXECUTABLE_ARCH}.exe && \
 

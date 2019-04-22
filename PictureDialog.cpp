@@ -379,14 +379,14 @@ void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
     updateGeometry();
 }
 
-void PictureDialog::stylizeDialog()
+void PictureDialog::styliseDialog()
 {
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050200
     if (QtWin::isCompositionEnabled())
     {
         QPalette palette;
-        QtWin::extendFrameIntoClientArea(this, 0, (layout()->menuBar()->height() * AppEnv::screenRatioPR()), 0, 0);
+        QtWin::extendFrameIntoClientArea(this, 0, qRound(layout()->menuBar()->height() * AppEnv::screenRatioPR()), 0, 0);
         ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
         setStyleSheet("PictureDialog { background: transparent; }");
     }
@@ -409,7 +409,7 @@ bool PictureDialog::event(QEvent *event)
     {
         if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange)
         {
-            stylizeDialog();
+            styliseDialog();
         }
     }
 #endif

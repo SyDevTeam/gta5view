@@ -6,7 +6,7 @@ variables:
 
 Windows Installer:
   stage: build
-  image: sypingauto/gta5view-build:shared
+  image: sypingauto/gta5view-build:1.7-shared
   variables:
     BUILD_SCRIPT: "wininstall_build.sh"
     QT_SELECT: "qt5-x86_64-w64-mingw32"
@@ -19,7 +19,7 @@ Windows Installer:
 
 Windows Portable:
   stage: build
-  image: sypingauto/gta5view-build:static
+  image: sypingauto/gta5view-build:1.7-static
   variables:
     BUILD_SCRIPT: "windows_build.sh"
     QT_SELECT: "qt5-x86_64-w64-mingw32"

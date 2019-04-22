@@ -56,7 +56,7 @@ public:
     void setSnapmaticPicture(SnapmaticPicture *picture, int index);
     void setSnapmaticPicture(SnapmaticPicture *picture);
     void addPreviousNextButtons();
-    void stylizeDialog();
+    void styliseDialog();
     bool isIndexed();
     int getIndex();
     ~PictureDialog();
