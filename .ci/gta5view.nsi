@@ -142,6 +142,7 @@ File "/opt/windev/qt64d-latest/plugins/platforms/qwindows.dll"
 SetOutPath "$INSTDIR\styles"
 File "/opt/windev/qt64d-latest/plugins/styles/qcleanlooksstyle.dll"
 File "/opt/windev/qt64d-latest/plugins/styles/qplastiquestyle.dll"
+File "/opt/windev/qt64d-latest/plugins/styles/qwindowsvistastyle.dll"
 SectionEnd
 
 ######################################################################
@@ -226,6 +227,7 @@ Delete "$INSTDIR\imageformats\qwebp.dll"
 Delete "$INSTDIR\platforms\qwindows.dll"
 Delete "$INSTDIR\styles\qcleanlooksstyle.dll"
 Delete "$INSTDIR\styles\qplastiquestyle.dll"
+Delete "$INSTDIR\styles\qwindowsvistastyle.dll"
 RmDir "$INSTDIR\lang"
 RmDir "$INSTDIR\imageformats"
 RmDir "$INSTDIR\platforms"
