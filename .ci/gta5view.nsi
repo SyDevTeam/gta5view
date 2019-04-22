@@ -4,7 +4,7 @@
 !define COMP_NAME "Syping"
 !define WEB_SITE "https://gta5view.syping.de/"
 !define VERSION "1.7.0.0"
-!define COPYRIGHT "Copyright © 2016-2018 Syping"
+!define COPYRIGHT "Copyright Â© 2016-2019 Syping"
 !define DESCRIPTION "Grand Theft Auto V Savegame and Snapmatic Viewer/Editor"
 !define INSTALLER_NAME "gta5view_setup.exe"
 !define MAIN_APP_EXE "gta5view.exe"
@@ -33,6 +33,7 @@ Caption "${APP_NAME}"
 OutFile "${INSTALLER_NAME}"
 #BrandingText "${APP_NAME}"
 XPStyle on
+Unicode true
 InstallDirRegKey "${REG_ROOT}" "${REG_APP_PATH}" ""
 InstallDir "$PROGRAMFILES64\Syping\gta5view"
 
