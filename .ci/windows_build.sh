@@ -16,4 +16,4 @@ qmake-static ${QMAKE_FLAGS_QT5} ${QMAKE_BUILD_TYPE} "DEFINES+=GTA5SYNC_BUILDCODE
 make depend && \
 make -j 4 && \
 cp -Rf release/*.exe ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} && \
-cd ${PROJECT_DIR}/assets && \
+cd ${PROJECT_DIR}/assets
