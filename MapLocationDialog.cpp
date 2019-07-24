@@ -64,7 +64,6 @@ void MapLocationDialog::drawPointOnMap(double xpos_d, double ypos_d)
     qreal screenRatioPR = AppEnv::screenRatioPR();
     int pointMakerSize = 8 * screenRatio * screenRatioPR;
     QPixmap pointMakerPixmap = IconLoader::loadingPointmakerIcon().pixmap(QSize(pointMakerSize, pointMakerSize));
-    pointMakerPixmap.setDevicePixelRatio(screenRatioPR);
     QSize mapPixelSize = QSize(width() * screenRatioPR, height() * screenRatioPR);
 
     int pointMakerHalfSize = pointMakerSize / 2;
@@ -84,7 +83,9 @@ void MapLocationDialog::drawPointOnMap(double xpos_d, double ypos_d)
     mapPainter.drawPixmap(0, 0, mapPixelSize.width(), mapPixelSize.height(), QPixmap(":/img/mappreview.jpg").scaled(mapPixelSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
     mapPainter.drawPixmap(xpos_pr, mapPixelSize.height() - ypos_pr, pointMakerSize, pointMakerSize, pointMakerPixmap);
     mapPainter.end();
+#if QT_VERSION >= 0x050600
     mapPixmap.setDevicePixelRatio(screenRatioPR);
+#endif
 
     QPalette backgroundPalette;
     backgroundPalette.setBrush(backgroundRole(), QBrush(mapPixmap));
