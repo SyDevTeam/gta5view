@@ -4,8 +4,8 @@
 if [ "${TRAVIS_OS_NAME}" == "osx" ]; then
 	brew install lua
 else
-	apt-get update -qq && \
-	apt-get install -qq lua5.2
+	sudo apt-get update -qq && \
+	sudo apt-get install -qq lua5.2
 fi
 
 # Check if build is not tagged
