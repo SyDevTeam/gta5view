@@ -703,7 +703,7 @@ void OptionsDialog::setupSnapmaticPictureViewer()
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050200
     settings->beginGroup("Interface");
-    ui->cbSnapmaticNavigationBar->setChecked(settings->value("NavigationBar", false).toBool());
+    ui->cbSnapmaticNavigationBar->setChecked(settings->value("NavigationBar", true).toBool());
     settings->endGroup();
 #else
     ui->cbSnapmaticNavigationBar->setVisible(false);

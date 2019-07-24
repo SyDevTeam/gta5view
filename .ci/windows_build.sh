@@ -17,4 +17,3 @@ make depend && \
 make -j 4 && \
 cp -Rf release/*.exe ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} && \
 cd ${PROJECT_DIR}/assets && \
-upx --best ${GTA5VIEW_EXECUTABLE}

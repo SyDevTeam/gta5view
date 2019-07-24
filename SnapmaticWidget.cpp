@@ -120,7 +120,7 @@ void SnapmaticWidget::on_cmdView_clicked()
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Interface");
-    bool navigationBar = settings.value("NavigationBar", false).toBool();
+    bool navigationBar = settings.value("NavigationBar", true).toBool();
     settings.endGroup();
 
     PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, profileName, this);
