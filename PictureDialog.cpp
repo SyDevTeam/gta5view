@@ -761,10 +761,15 @@ void PictureDialog::playerNameUpdated()
 QString PictureDialog::generateCrewString()
 {
     SnapmaticPicture *picture = smpic; // used by macro
-    QString crewIDStr = crewID; // save operation time
+    const QString crewIDStr = crewID; // save operation time
     if (crewIDStr != "0" && !crewIDStr.isEmpty())
     {
-        return QString("<a href=\"https://socialclub.rockstargames.com/crew/" % QString(crewStr).replace(" ", "_") % "/" % crewIDStr % "\">" % crewStr % "</a>");
+        if (crewIDStr != crewStr) {
+            return QString("<a href=\"https://socialclub.rockstargames.com/crew/" % QString(crewStr).replace(" ", "_") % "/" % crewIDStr % "\">" % crewStr % "</a>");
+        }
+        else {
+            return QString(crewIDStr);
+        }
     }
     return tr("No Crew");
 }
@@ -776,11 +781,15 @@ QString PictureDialog::generatePlayersString()
     QString plyrsStr;
     if (playersList.length() >= 1)
     {
-        for (QString player : playersList)
+        for (const QString player : playersList)
         {
-            QString playerName;
-            playerName = profileDB->getPlayerName(player);
-            plyrsStr += ", <a href=\"https://socialclub.rockstargames.com/member/" % playerName % "/" % player % "\">" % playerName % "</a>";
+            const QString playerName = profileDB->getPlayerName(player);
+            if (player != playerName) {
+                plyrsStr += ", <a href=\"https://socialclub.rockstargames.com/member/" % playerName % "/" % player % "\">" % playerName % "</a>";
+            }
+            else {
+                plyrsStr += ", " % player;
+            }
         }
         plyrsStr.remove(0, 2);
     }
