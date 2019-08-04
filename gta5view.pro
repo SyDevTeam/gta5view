@@ -137,6 +137,7 @@ TRANSLATIONS += \
     res/gta5sync_en_US.ts \
     res/gta5sync_es.ts \
     res/gta5sync_fr.ts \
+    res/gta5sync_ko.ts \
     res/gta5sync_ru.ts \
     res/gta5sync_uk.ts \
     res/gta5sync_zh_TW.ts
@@ -151,6 +152,7 @@ DISTFILES += res/app.rc \
     res/gta5sync_en_US.ts \
     res/gta5sync_es.ts \
     res/gta5sync_fr.ts \
+    res/gta5sync_ko.ts \
     res/gta5sync_ru.ts \
     res/gta5sync_uk.ts \
     res/gta5sync_zh_TW.ts \

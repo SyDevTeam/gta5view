@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.1" language="ru_RU">
+<TS version="2.1" language="ko_KR">
 <context>
     <name>AboutDialog</name>
     <message>
         <location filename="../AboutDialog.ui" line="14"/>
         <source>About %1</source>
-        <translation>О программе %1</translation>
+        <translation>%1 정보</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
@@ -24,83 +24,81 @@ Running with Qt %6&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
-Версия %3&lt;br/&gt;
-Сделано %4&lt;br/&gt;
-Сделано с Qt %5&lt;br/&gt;
-Выполняется на Qt %6&lt;br/&gt;
+버전 %3&lt;br/&gt;
+생성됨 %4&lt;br/&gt;
+Qt로 제작 %5&lt;br/&gt;
+Qt로 실행 %6&lt;br/&gt;
 &lt;br/&gt;
 %7</translation>
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="75"/>
         <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <translation>닫기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="48"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
-        <translation>Перевёл %1</translation>
+        <translation>번역 %1</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="50"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
-        <translation>VADemon,https://github.com/VADemon/</translation>
+        <translation>&lt;a href=&quot;https://steamcommunity.com/id/BLACKPINK-/&quot;&gt;가는 말이 고양이&lt;/a&gt;</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="73"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
-        <translation>Проект для просмотра Grand Theft Auto V Snapmatic&lt;br/&gt;
-картинок и сохранений</translation>
+        <translation>Grand Theft Auto V 스냅매틱을 보기 위한 프로젝트입니다&lt;br/&gt;
+사진 및 세이브 파일 관리 지원</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="76"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
-        <translation>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
+        <translation>저작권 &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="78"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
-        <translation>%1 под лицензией &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
+        <translation>%1는 &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt; 에 따라 라이센스가 부여됩니다</translation>
     </message>
     <message>
         <location filename="../config.h" line="53"/>
         <source>Release</source>
-        <translation>Релиз</translation>
+        <translation>릴리스</translation>
     </message>
     <message>
         <location filename="../config.h" line="59"/>
         <source>Release Candidate</source>
-        <translation>Предварительный выпуск</translation>
+        <translation>릴리스 후보</translation>
     </message>
     <message>
         <location filename="../config.h" line="65"/>
         <source>Daily Build</source>
-        <translation>Дневная сборка</translation>
+        <translation>데일리 빌드</translation>
     </message>
     <message>
         <location filename="../config.h" line="71"/>
         <source>Developer</source>
-        <translation>Разработчик</translation>
+        <translation>개발자</translation>
     </message>
     <message>
         <location filename="../config.h" line="77"/>
         <source>Beta</source>
-        <translation>Бета</translation>
+        <translation>베타</translation>
     </message>
     <message>
         <location filename="../config.h" line="83"/>
         <source>Alpha</source>
-        <translation>Альфа</translation>
+        <translation>알파</translation>
     </message>
     <message>
         <location filename="../config.h" line="88"/>
         <source>Custom</source>
-        <translatorcomment>Не известен контекст
-</translatorcomment>
-        <translation>Своя</translation>
+        <translation>사용자 지정</translation>
     </message>
 </context>
 <context>
@@ -109,7 +107,7 @@ Pictures and Savegames</source>
         <location filename="../CrewDatabase.cpp" line="102"/>
         <location filename="../CrewDatabase.cpp" line="113"/>
         <source>No Crew</source>
-        <translation>Вне банды</translation>
+        <translation>조직 없음</translation>
     </message>
 </context>
 <context>
@@ -117,68 +115,106 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ExportDialog.ui" line="14"/>
         <source>Dialog</source>
-        <translatorcomment>Возможно не это имелось ввиду, немецкого перевода нету
-</translatorcomment>
-        <translation>Диалоговое окно</translation>
-    </message>
-    <message>
-        <location filename="../ExportDialog.ui" line="51"/>
-        <source>&amp;JPEG/PNG format</source>
-        <translation>Формат &amp;JPEG/PNG</translation>
-    </message>
-    <message>
-        <location filename="../ExportDialog.ui" line="58"/>
-        <source>GTA &amp;Snapmatic format</source>
-        <translation>Формат GTA &amp;Snapmatic</translation>
+        <translation>다이얼로그</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="45"/>
         <source>Export Format</source>
-        <translation>Формат экспорта</translation>
+        <translation>내보낼 형식</translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="51"/>
+        <source>&amp;JPEG/PNG format</source>
+        <translation>JPEG/PNG 형식(&amp;J)</translation>
+    </message>
+    <message>
+        <location filename="../ExportDialog.ui" line="58"/>
+        <source>GTA &amp;Snapmatic format</source>
+        <translation>GTA 스냅매틱 형식(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="68"/>
         <source>Export Size</source>
-        <translation>Размер экспорта</translation>
+        <translation>내보낼 크기</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="74"/>
         <source>Default &amp;Size</source>
-        <translation>По &amp;умолчанию</translation>
+        <translation>기본 크기(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="81"/>
         <source>&amp;Desktop Size</source>
-        <translation>Размер рабо&amp;чего стола</translation>
+        <translation>바탕화면 크기(&amp;D)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="88"/>
         <source>&amp;Custom Size</source>
-        <translation>&amp;Другой размер</translation>
+        <translation>사용자 정의 크기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="100"/>
         <source>Custom Size:</source>
-        <translation>Размер:</translation>
+        <translation>사용자 정의 크기:</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="123"/>
         <source>x</source>
-        <translation>на</translation>
+        <translation>x</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="198"/>
         <source>&amp;Export</source>
-        <translation>&amp;Экспортировать</translation>
+        <translation>내보내기(&amp;E)</translation>
     </message>
     <message>
         <location filename="../ExportDialog.ui" line="211"/>
         <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <translation>닫기(&amp;C)</translation>
     </message>
 </context>
 <context>
     <name>ImageEditorDialog</name>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="14"/>
+        <location filename="../ImportDialog.cpp" line="639"/>
+        <source>Overwrite Image...</source>
+        <translation>이미지 덮어쓰기...</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="59"/>
+        <source>Import picture</source>
+        <translation>사진 가져오기</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="62"/>
+        <source>&amp;Import...</source>
+        <translation>가져오기(&amp;I)...</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="82"/>
+        <location filename="../ImportDialog.cpp" line="641"/>
+        <source>Apply changes</source>
+        <translation>변경 사항 적용</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="85"/>
+        <location filename="../ImportDialog.cpp" line="640"/>
+        <source>&amp;Overwrite</source>
+        <translation>덮어쓰기(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="92"/>
+        <location filename="../ImportDialog.cpp" line="643"/>
+        <source>Discard changes</source>
+        <translation>변경 사항 무시</translation>
+    </message>
+    <message>
+        <location filename="../ImageEditorDialog.ui" line="95"/>
+        <location filename="../ImportDialog.cpp" line="642"/>
+        <source>&amp;Close</source>
+        <translation>닫기(&amp;C)</translation>
+    </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="193"/>
         <location filename="../ImageEditorDialog.cpp" line="200"/>
@@ -187,61 +223,21 @@ Pictures and Savegames</source>
         <location filename="../SnapmaticWidget.cpp" line="376"/>
         <location filename="../SnapmaticWidget.cpp" line="400"/>
         <source>Snapmatic Image Editor</source>
-        <translation>Редактор картинок Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="14"/>
-        <location filename="../ImportDialog.cpp" line="639"/>
-        <source>Overwrite Image...</source>
-        <translation>Перезаписать картинку...</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="59"/>
-        <source>Import picture</source>
-        <translation>Импортировать картинку</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="62"/>
-        <source>&amp;Import...</source>
-        <translation>&amp;Импортировать...</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="82"/>
-        <location filename="../ImportDialog.cpp" line="641"/>
-        <source>Apply changes</source>
-        <translation>Применить изменения</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="85"/>
-        <location filename="../ImportDialog.cpp" line="640"/>
-        <source>&amp;Overwrite</source>
-        <translation>&amp;Перезаписать</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="92"/>
-        <location filename="../ImportDialog.cpp" line="643"/>
-        <source>Discard changes</source>
-        <translation>Отменить изменения</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="95"/>
-        <location filename="../ImportDialog.cpp" line="642"/>
-        <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <translation>스냅매틱 이미지 편집기</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="193"/>
         <location filename="../PictureDialog.cpp" line="1006"/>
         <location filename="../SnapmaticWidget.cpp" line="376"/>
         <source>Patching of Snapmatic Image failed because of I/O Error</source>
-        <translation>Не удалось изменить картинку Snapmatic из-за ошибки ввода-вывода</translation>
+        <translation>I/O 오류로 인해 스냅매틱 이미지를 패치하지 못했습니다</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="200"/>
         <location filename="../PictureDialog.cpp" line="1030"/>
         <location filename="../SnapmaticWidget.cpp" line="400"/>
         <source>Patching of Snapmatic Image failed because of Image Error</source>
-        <translation>Не удалось изменить картинку Snapmatic из-за ошибки Image Error</translation>
+        <translation>이미지 오류로 인해 스냅매틱 이미지를 패치하지 못했습니다</translation>
     </message>
 </context>
 <context>
@@ -249,33 +245,33 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="20"/>
         <source>Import...</source>
-        <translation>Импортировать...</translation>
+        <translation>가져오기...</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="84"/>
+        <source>Picture</source>
+        <translation>사진</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="98"/>
+        <source>Avatar</source>
+        <translation>아바타</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="111"/>
         <location filename="../ImportDialog.ui" line="278"/>
         <source>Ignore Aspect Ratio</source>
-        <translation>Игнорировать соотн. сторон</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="98"/>
-        <source>Avatar</source>
-        <translation>Аватар</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="84"/>
-        <source>Picture</source>
-        <translation>Картинка</translation>
+        <translation>화면 비율 무시</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="128"/>
         <source>Watermark</source>
-        <translation>Водяной знак</translation>
+        <translation>워터마크</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="140"/>
         <source>Background</source>
-        <translation>Фон</translation>
+        <translation>배경</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="150"/>
@@ -283,12 +279,12 @@ Pictures and Savegames</source>
         <location filename="../ImportDialog.cpp" line="315"/>
         <location filename="../ImportDialog.cpp" line="727"/>
         <source>Background Colour: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</source>
-        <translation>Цвет фона: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
+        <translation>배경 색상: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="174"/>
         <source>Select background colour</source>
-        <translation>Выберите цвет фона</translation>
+        <translation>배경 색상 선택</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="177"/>
@@ -297,140 +293,146 @@ Pictures and Savegames</source>
         <translation>...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="227"/>
-        <source>Select background image</source>
-        <translation>Выбрать фоновое изображение</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="237"/>
-        <source>Remove background image</source>
-        <translation>Убрать фоновую картинку</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.cpp" line="318"/>
-        <location filename="../ImportDialog.cpp" line="792"/>
-        <source>Background Image: %1</source>
-        <translation>Фоновая картинка: %1</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="240"/>
-        <source>X</source>
-        <translatorcomment>latin X
-</translatorcomment>
-        <translation>X</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="268"/>
-        <source>Force Colour in Avatar Zone</source>
-        <translation>Задать цвет в зоне аватарки</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="305"/>
-        <source>Import options</source>
-        <translation>Опции импорта</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="308"/>
-        <source>&amp;Options</source>
-        <translation>&amp;Опции</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="337"/>
-        <source>Import picture</source>
-        <translation>Импортировать картинку</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="340"/>
-        <source>&amp;OK</source>
-        <translation>&amp;ОК</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="353"/>
-        <source>Discard picture</source>
-        <translation>Отклонить картинку</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.ui" line="356"/>
-        <source>&amp;Cancel</source>
-        <translatorcomment>Я не уверен насчет горячих клавиш...
-</translatorcomment>
-        <translation>От&amp;мена</translation>
-    </message>
-    <message>
         <location filename="../ImportDialog.ui" line="203"/>
         <location filename="../ImportDialog.cpp" line="88"/>
         <location filename="../ImportDialog.cpp" line="323"/>
         <location filename="../ImportDialog.cpp" line="807"/>
         <source>Background Image:</source>
-        <translation>Фоновая картинка:</translation>
+        <translation>배경 이미지:</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="227"/>
+        <source>Select background image</source>
+        <translation>배경 이미지 선택</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="237"/>
+        <source>Remove background image</source>
+        <translation>배경 이미지 제거</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="240"/>
+        <source>X</source>
+        <translation>X</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="268"/>
+        <source>Force Colour in Avatar Zone</source>
+        <translation>아바타 구역에 색상을 적용합니다</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="305"/>
+        <source>Import options</source>
+        <translation>가져오기 옵션</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="308"/>
+        <source>&amp;Options</source>
+        <translation>옵션(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="337"/>
+        <source>Import picture</source>
+        <translation>사진 가져오기</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="340"/>
+        <source>&amp;OK</source>
+        <translation>확인(&amp;O)</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="353"/>
+        <source>Discard picture</source>
+        <translation>사진 삭제</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="356"/>
+        <source>&amp;Cancel</source>
+        <translation>취소(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="120"/>
         <source>&amp;Import new Picture...</source>
-        <translation>&amp;Импортировать картинку...</translation>
+        <translation>새로운 사진 가져오기(&amp;I)...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="121"/>
         <source>&amp;Crop Picture...</source>
-        <translation>Об&amp;резать картинку...</translation>
+        <translation>사진 자르기(&amp;C)...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="123"/>
         <source>&amp;Load Settings...</source>
-        <translation>&amp;Загрузить настройки...</translation>
+        <translation>설정 불러오기(&amp;L)...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="124"/>
         <source>&amp;Save Settings...</source>
-        <translation>&amp;Сохранить настройки...</translation>
+        <translation>설정 저장(&amp;S)...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="198"/>
         <location filename="../ProfileInterface.cpp" line="712"/>
         <source>Custom Avatar</source>
         <comment>Custom Avatar Description in SC, don&apos;t use Special Character!</comment>
-        <translation>Свой Аватар</translation>
+        <translatorcomment>소셜클럽의 사용자 지정 아바타 설명입니다. 특수 문자를 사용하지 마십시오!</translatorcomment>
+        <translation>사용자 지정 아바타</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="225"/>
         <location filename="../ProfileInterface.cpp" line="731"/>
         <source>Custom Picture</source>
         <comment>Custom Picture Description in SC, don&apos;t use Special Character!</comment>
-        <translation>Своя Картинка</translation>
+        <translatorcomment>소셜클럽의 사용자 지정 그림 설명입니다. 특수 문자를 사용하지 마십시오!</translatorcomment>
+        <translation>사용자 지정 사진</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="318"/>
+        <location filename="../ImportDialog.cpp" line="792"/>
+        <source>Background Image: %1</source>
+        <translation>배경 이미지: %1</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="318"/>
         <source>Storage</source>
         <comment>Background Image: Storage</comment>
-        <translation>Хранилище</translation>
+        <translatorcomment>배경 이미지: 저장됨</translatorcomment>
+        <translation>저장됨</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="355"/>
         <source>Crop Picture...</source>
-        <translation>Обрезать картинку...</translation>
+        <translation>사진 자르기...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="397"/>
         <source>&amp;Crop</source>
-        <translation>Об&amp;резать</translation>
+        <translation>자르기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="398"/>
         <source>Crop Picture</source>
-        <translation>Обрезать картинку</translation>
+        <translation>사진 자르기</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="485"/>
+        <location filename="../ImportDialog.cpp" line="496"/>
+        <source>Load Settings...</source>
+        <translation>설정 불러오기...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="485"/>
         <location filename="../ImportDialog.cpp" line="533"/>
         <source>Please import a new picture first</source>
-        <translation>Импортируй сначала новую картинку</translation>
+        <translation>먼저 새 사진을 가져오세요</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="490"/>
         <location filename="../ImportDialog.cpp" line="500"/>
         <source>Default</source>
         <comment>Default as Default Profile</comment>
-        <translation>По умолчанию</translation>
+        <translatorcomment>기본 프로필로 기본 설정</translatorcomment>
+        <translation>기본</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="491"/>
@@ -455,47 +457,44 @@ Pictures and Savegames</source>
         <location filename="../ImportDialog.cpp" line="563"/>
         <source>Profile %1</source>
         <comment>Profile %1 as Profile 1</comment>
-        <translation>Профиль %1</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.cpp" line="485"/>
-        <location filename="../ImportDialog.cpp" line="496"/>
-        <source>Load Settings...</source>
-        <translation>Загрузить настройки...</translation>
+        <translatorcomment>%1을 프로필 1로 지정합니다.</translatorcomment>
+        <translation>프로필 %1</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="496"/>
         <location filename="../ImportDialog.cpp" line="543"/>
         <source>Please select your settings profile</source>
-        <translation>Пожалуйста, выбери профиль для настроек</translation>
+        <translation>설정 프로필을 선택하세요</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="533"/>
         <location filename="../ImportDialog.cpp" line="543"/>
         <source>Save Settings...</source>
-        <translation>Сохранить настройки...</translation>
+        <translation>설정 저장...</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.cpp" line="674"/>
+        <source>Snapmatic Avatar Zone</source>
+        <translation>스낵매틱 아바타 영역</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="674"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
-        <translation>Ты точно хочешь использовать квадратное изображение вне зоны аватарки? Если это аватар, то изображение будет обрезано!</translation>
-    </message>
-    <message>
-        <location filename="../ImportDialog.cpp" line="674"/>
-        <source>Snapmatic Avatar Zone</source>
-        <translation>Зона Snapmatic Аватарки</translation>
+        <translation>아바타 구역 밖에서 네모난 이미지를 정말 사용합니까?
+아바타로 사용하려는 경우 이미지가 분리됩니다!</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="723"/>
         <source>Select Colour...</source>
-        <translation>Выбрать цвет...</translation>
+        <translation>색상 선택...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="792"/>
         <source>File</source>
         <comment>Background Image: File</comment>
-        <translation>Файл</translation>
+        <translatorcomment>배경 이미지: 파일</translatorcomment>
+        <translation>파일</translation>
     </message>
 </context>
 <context>
@@ -503,32 +502,32 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../JsonEditorDialog.ui" line="14"/>
         <source>Snapmatic JSON Editor</source>
-        <translation>Редактор JSON для Snapmatic</translation>
+        <translation>스냅매틱 JSON 편집기</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="116"/>
         <source>Apply changes</source>
-        <translation>Применить изменения</translation>
+        <translation>변경 사항 적용</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="119"/>
         <source>&amp;Save</source>
-        <translation>&amp;Сохранить</translation>
+        <translation>저장(&amp;S)</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="132"/>
         <source>Discard changes</source>
-        <translation>Отменить изменения</translation>
+        <translation>변경 사항 무시</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.ui" line="135"/>
         <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <translation>닫기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="180"/>
         <source>JSON Error</source>
-        <translation>Ошибка JSON</translation>
+        <translation>JSON 오류</translation>
     </message>
 </context>
 <context>
@@ -536,63 +535,64 @@ When you want to use it as Avatar the image will be detached!</source>
     <message>
         <location filename="../MapLocationDialog.ui" line="26"/>
         <source>Snapmatic Map Viewer</source>
-        <translation>Просмотрщик карты Snapmatic</translation>
+        <translation>스냅매틱 지도 뷰어</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="138"/>
         <source>Close viewer</source>
-        <translation>Закрыть просмотрщик</translation>
+        <translation>뷰어 닫기</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="141"/>
         <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <translation>닫기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="167"/>
         <source>Apply new position</source>
-        <translation>Применить новую позицию</translation>
+        <translation>새 위치 적용</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="170"/>
         <source>&amp;Apply</source>
-        <translation>&amp;Применить</translation>
+        <translation>적용(&amp;A)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="183"/>
         <source>Revert old position</source>
-        <translation>Вернуть старую позицию</translation>
+        <translation>이전 위치 되돌리기</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="186"/>
         <source>&amp;Revert</source>
-        <translation>&amp;Откатить</translation>
+        <translation>되돌리기(&amp;R)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="199"/>
         <source>Select new position</source>
-        <translation>Выбрать новую позицию</translation>
+        <translation>새 위치 선택</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="202"/>
         <source>&amp;Select</source>
-        <translation>&amp;Выбрать</translation>
+        <translation>선택(&amp;S)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="215"/>
         <source>Quit select position</source>
-        <translation>Покинуть выбор позиции</translation>
+        <translation>선택 위치 종료</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="218"/>
         <source>&amp;Done</source>
-        <translation>&amp;Готово</translation>
+        <translation>완료(&amp;D)</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.cpp" line="96"/>
         <source>X: %1
 Y: %2</source>
         <comment>X and Y position</comment>
+        <translatorcomment>X 및 Y 위치</translatorcomment>
         <translation>X: %1
 Y: %2</translation>
     </message>
@@ -600,69 +600,49 @@ Y: %2</translation>
 <context>
     <name>OptionsDialog</name>
     <message>
-        <location filename="../OptionsDialog.ui" line="33"/>
-        <source>Content Open/Select Mode</source>
-        <translation>Открывать/выбирать содержимое</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="39"/>
-        <source>Open with Singleclick</source>
-        <translation>Открывать одним щелчком</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="49"/>
-        <source>Open with Doubleclick</source>
-        <translation>Открывать двойным щелчком</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="56"/>
-        <source>Select with Singleclick</source>
-        <translation>Выбирать одним щелчком</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="66"/>
-        <source>Default Profile</source>
-        <translation>Профиль по умолчанию</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="122"/>
-        <source>Pictures</source>
-        <translation>Картинки</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="128"/>
-        <source>Export Size</source>
-        <translation>Размер экспорта</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="144"/>
-        <source>Screen Resolution: %1x%2</source>
-        <translation>Разрешение экрана: %1x%2</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="134"/>
-        <source>Default: %1x%2</source>
-        <translation>По умолчанию: %1x%2</translation>
-    </message>
-    <message>
         <location filename="../OptionsDialog.ui" line="14"/>
         <source>%1 - Settings</source>
-        <translation>%1 - Настройки</translation>
+        <translation>%1 - 설정</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="27"/>
         <source>Profiles</source>
-        <translation>Профили</translation>
+        <translation>프로필</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="33"/>
+        <source>Content Open/Select Mode</source>
+        <translation>컨텐츠 열기/선택 모드</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="39"/>
+        <source>Open with Singleclick</source>
+        <translation>한 번 클릭으로 열기</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="49"/>
+        <source>Open with Doubleclick</source>
+        <translation>두 번 클릭으로 열기</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="56"/>
+        <source>Select with Singleclick</source>
+        <translation>한 번 클릭으로 선택</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="66"/>
+        <source>Default Profile</source>
+        <translation>기본 프로필</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="78"/>
         <source>Custom GTA V Folder</source>
-        <translation>Другая папка GTA V</translation>
+        <translation>사용자 지정 GTA V 폴더</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="84"/>
         <source>Force using Custom Folder</source>
-        <translation>Использовать эту папку GTA V</translation>
+        <translation>사용자 지정 폴더를 강제로 사용합니다</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="96"/>
@@ -670,10 +650,30 @@ Y: %2</translation>
         <translation>...</translation>
     </message>
     <message>
+        <location filename="../OptionsDialog.ui" line="122"/>
+        <source>Pictures</source>
+        <translation>사진들</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="128"/>
+        <source>Export Size</source>
+        <translation>내보낼 크기</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="134"/>
+        <source>Default: %1x%2</source>
+        <translation>기본: %1x%2</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="144"/>
+        <source>Screen Resolution: %1x%2</source>
+        <translation>화면 해상도: %1x%2</translation>
+    </message>
+    <message>
         <location filename="../OptionsDialog.ui" line="153"/>
         <location filename="../OptionsDialog.ui" line="163"/>
         <source>Custom Size:</source>
-        <translation>Другой размер:</translation>
+        <translation>사용자 지정 크기:</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="189"/>
@@ -683,22 +683,22 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="229"/>
         <source>Ignore Aspect Ratio</source>
-        <translation>Игнорировать соотношение сторон</translation>
+        <translation>화면 비율 무시</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="241"/>
         <source>Export Quality</source>
-        <translation>Качество экспорта</translation>
+        <translation>내보낼 품질</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="247"/>
         <source>Enable Custom Quality</source>
-        <translation>Выставить другое качество</translation>
+        <translation>사용자 지정 품질 사용</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="259"/>
         <source>Quality:</source>
-        <translation>Качество:</translation>
+        <translation>품질:</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="288"/>
@@ -708,37 +708,37 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="303"/>
         <source>Picture Viewer</source>
-        <translation>Просмотрщик картинок</translation>
+        <translation>사진 뷰어</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="309"/>
         <source>Enable Navigation Bar</source>
-        <translation>Вкл. навигационную панель</translation>
+        <translation>탐색바 사용</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="333"/>
         <source>Players</source>
-        <translation>Игроки</translation>
+        <translation>플레이어</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="373"/>
         <source>ID</source>
-        <translation>ID</translation>
+        <translation>아이디</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="378"/>
         <source>Name</source>
-        <translation>Имя</translation>
+        <translation>이름</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="387"/>
         <source>Game</source>
-        <translation>Игра</translation>
+        <translation>게임</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="393"/>
         <source>Social Club Version</source>
-        <translation>Версия Social Club</translation>
+        <translation>소셜 클럽 버전</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
@@ -750,7 +750,7 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="641"/>
         <location filename="../OptionsDialog.cpp" line="642"/>
         <source>Found: %1</source>
-        <translation>Найдено: %1</translation>
+        <translation>찾음: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
@@ -764,109 +764,80 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="653"/>
         <location filename="../OptionsDialog.cpp" line="657"/>
         <source>Language: %1</source>
-        <translation>Язык: %1</translation>
+        <translation>언어: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="416"/>
         <source>Steam Version</source>
-        <translation>Версия Steam</translation>
+        <translation>스팀 버전</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="453"/>
         <source>Feedback</source>
-        <translation>Обратная связь</translation>
+        <translation>피드백</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="459"/>
         <source>Participation</source>
-        <translation>Участие</translation>
+        <translation>참가</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
         <location filename="../OptionsDialog.cpp" line="574"/>
         <source>Participate in %1 User Statistics</source>
-        <translation>Участвовать в пользовательской статистике %1</translation>
+        <translation>사용자 통계 참가 %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="491"/>
         <source>Categories</source>
-        <translation>Категории</translation>
+        <translation>카테고리</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="500"/>
         <source>Hardware, Application and OS Specification</source>
-        <translatorcomment>Application = gta5view
-</translatorcomment>
-        <translation>Железо, выпуск программы, тип ОС</translation>
+        <translation>하드웨어, 응용 프로그램 및 OS 사양</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="513"/>
         <source>System Language Configuration</source>
-        <translation>Языковые настройки системы</translation>
+        <translation>시스템 언어 설정</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="523"/>
         <source>Application Configuration</source>
-        <translation>Настройки программы</translation>
+        <translation>응용 프로그램 설정</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="530"/>
+        <source>Personal Usage Data</source>
+        <translation>개인 사용 데이터</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="540"/>
         <source>Other</source>
-        <translation>Другое</translation>
+        <translation>다른</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
         <location filename="../OptionsDialog.cpp" line="590"/>
         <location filename="../OptionsDialog.cpp" line="594"/>
         <source>Participation ID: %1</source>
-        <translation>Номер участника: %1</translation>
+        <translation>참여 아이디: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="567"/>
         <source>&amp;Copy</source>
-        <translation>&amp;Копировать</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="624"/>
-        <source>Language for Areas</source>
-        <translatorcomment>Язык для местоположений?
-</translatorcomment>
-        <translation>Язык перевода местоположений</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="646"/>
-        <source>Style</source>
-        <translation>Стиль</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="664"/>
-        <source>Style:</source>
-        <translation>Стиль:</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="689"/>
-        <source>Font</source>
-        <translation>Шрифт</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="695"/>
-        <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation>Всегда использовать шрифт сообщений (Windows 2003 и ранние)</translation>
+        <translation>복사(&amp;C)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="596"/>
         <source>Interface</source>
-        <translation>Интерфейс</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="530"/>
-        <source>Personal Usage Data</source>
-        <translation>Пользование программой</translation>
+        <translation>인터페이스</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="602"/>
         <source>Language for Interface</source>
-        <translation>Язык интерфейса</translation>
+        <translation>인터페이스 언어</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="611"/>
@@ -874,53 +845,80 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="202"/>
         <location filename="../OptionsDialog.cpp" line="251"/>
         <source>Current: %1</source>
-        <translation>Сейчас: %1</translation>
+        <translation>현재: %1</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="624"/>
+        <source>Language for Areas</source>
+        <translation>지역 언어</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="646"/>
+        <source>Style</source>
+        <translation>스타일</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="652"/>
         <source>Use Default Style (Restart)</source>
-        <translation>Использовать стандартный стиль (Перезапуск)</translation>
+        <translation>기본 스타일을 사용합니다 (다시 시작 필요)</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="664"/>
+        <source>Style:</source>
+        <translation>스타일:</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="689"/>
+        <source>Font</source>
+        <translation>폰트</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="695"/>
+        <source>Always use Message Font (Windows 2003 and earlier)</source>
+        <translation>항상 메시지 글꼴을 사용합니다. (Windows 2003 및 이전 버전)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="743"/>
         <source>Apply changes</source>
-        <translation>Применить изменения</translation>
+        <translation>변경 사항 적용</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="746"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
-        <translation>&amp;ОК</translation>
+        <translatorcomment>확인, 취소, 적용</translatorcomment>
+        <translation>확인(&amp;O)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="759"/>
         <source>Discard changes</source>
-        <translation>Отвергнуть изменения</translation>
+        <translation>변경 사항 무시</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="762"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
-        <translation>От&amp;мена</translation>
+        <translatorcomment>확인, 취소, 적용</translatorcomment>
+        <translation>취소(&amp;C)</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="154"/>
+        <source>%1 (Language priority)</source>
+        <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
+        <translation>%1 (우선 순위)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="154"/>
         <source>System</source>
         <comment>System in context of System default</comment>
-        <translation>Система</translation>
+        <translation>시스템</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="160"/>
         <source>%1 (Game language)</source>
         <comment>Next closest language compared to the Game settings</comment>
-        <translation>%1 (Язык игры)</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.cpp" line="164"/>
-        <location filename="../OptionsDialog.cpp" line="167"/>
-        <source>%1 (Closest to Interface)</source>
-        <comment>Next closest language compared to the Interface</comment>
-        <translation>%1 (Совпадает с интерфейсом)</translation>
+        <translatorcomment>게임 설정과 가장 가까운 언어</translatorcomment>
+        <translation>%1 (게임 언어)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="160"/>
@@ -928,34 +926,52 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="167"/>
         <source>Auto</source>
         <comment>Automatic language choice.</comment>
-        <translation>Автоматически</translation>
+        <translatorcomment>언어 자동 선택</translatorcomment>
+        <translation>자동</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="154"/>
-        <source>%1 (Language priority)</source>
-        <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
-        <translation>%1 (Приоритетный язык)</translation>
+        <location filename="../OptionsDialog.cpp" line="164"/>
+        <location filename="../OptionsDialog.cpp" line="167"/>
+        <source>%1 (Closest to Interface)</source>
+        <comment>Next closest language compared to the Interface</comment>
+        <translatorcomment>인터페이스와 가장 가까운 언어</translatorcomment>
+        <translation>%1 (인터페이스와 가까운 언어)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="462"/>
         <source>%1</source>
         <comment>%1</comment>
+        <translatorcomment>%1</translatorcomment>
         <translation>%1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="462"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
-        <translation>Другая папка будет загружена после перезапуска %1.</translation>
+        <translation>다시 시작한 후 새 사용자 지정 폴더가 초기화됩니다. %1.</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="472"/>
+        <source>No Profile</source>
+        <comment>No Profile, as default</comment>
+        <translatorcomment>프로필 없음 (기본값)</translatorcomment>
+        <translation>프로필 없음</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.cpp" line="480"/>
+        <location filename="../OptionsDialog.cpp" line="484"/>
+        <location filename="../OptionsDialog.cpp" line="486"/>
+        <source>Profile: %1</source>
+        <translation>프로필: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="575"/>
         <source>View %1 User Statistics Online</source>
-        <translation>Посмотреть пользовательскую статистику %1 онлайн</translation>
+        <translation>온라인 %1 사용자 통계 보기</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="594"/>
         <source>Not registered</source>
-        <translation>Не зарегистрирован</translation>
+        <translation>등록되지 않았습니다</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="612"/>
@@ -963,180 +979,167 @@ Y: %2</translation>
         <location filename="../OptionsDialog.cpp" line="641"/>
         <location filename="../OptionsDialog.cpp" line="642"/>
         <source>Yes</source>
-        <translation>Да</translation>
+        <translation>예</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="613"/>
         <location filename="../OptionsDialog.cpp" line="627"/>
         <source>No</source>
-        <translation>Нет</translation>
+        <translation>아니요</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="620"/>
         <location filename="../OptionsDialog.cpp" line="649"/>
         <source>OS defined</source>
-        <translation>Настройка от ОС</translation>
+        <translation>OS 정의</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.cpp" line="636"/>
         <location filename="../OptionsDialog.cpp" line="657"/>
         <source>Steam defined</source>
-        <translation>Настройка от Steam</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.cpp" line="472"/>
-        <source>No Profile</source>
-        <comment>No Profile, as default</comment>
-        <translation>Нет профиля</translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.cpp" line="480"/>
-        <location filename="../OptionsDialog.cpp" line="484"/>
-        <location filename="../OptionsDialog.cpp" line="486"/>
-        <source>Profile: %1</source>
-        <translation>Профиль: %1</translation>
+        <translation>스팀 정의</translation>
     </message>
 </context>
 <context>
     <name>PictureDialog</name>
+    <message>
+        <location filename="../PictureDialog.ui" line="14"/>
+        <source>Snapmatic Picture Viewer - %1</source>
+        <translation>스냅매틱 사진 뷰어 - %1</translation>
+    </message>
     <message>
         <location filename="../PictureDialog.ui" line="114"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
 &lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Заголовок: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Место: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Игроки: &lt;/span&gt;%4 (Банда %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Сделано: &lt;/span&gt;%8</translation>
-    </message>
-    <message>
-        <location filename="../PictureDialog.ui" line="177"/>
-        <source>&amp;Manage</source>
-        <translation>&amp;Управление</translation>
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;제목:: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;위치: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;플레이어: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot; font-weight:600;&quot;&gt;생성 날짜: &lt;/span&gt;%8</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="174"/>
         <source>Manage picture</source>
-        <translation>Настройки картинки</translation>
+        <translation>사진 관리</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="14"/>
-        <source>Snapmatic Picture Viewer - %1</source>
-        <translation>Просмотрщик фотографий Snapmatic - %1</translation>
+        <location filename="../PictureDialog.ui" line="177"/>
+        <source>&amp;Manage</source>
+        <translation>관리(&amp;M)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="196"/>
         <source>Close viewer</source>
-        <translation>Закрыть просмотрщик</translation>
+        <translation>뷰어 닫기</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="199"/>
         <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
-    </message>
-    <message>
-        <location filename="../PictureExport.cpp" line="96"/>
-        <location filename="../PictureExport.cpp" line="249"/>
-        <source>Export</source>
-        <translation>Экспортировать</translation>
+        <translation>닫기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="165"/>
         <location filename="../ProfileInterface.cpp" line="1609"/>
         <source>Export as &amp;Picture...</source>
-        <translation>Экспортировать как &amp;картинку...</translation>
+        <translation>사진으로 내보내기(&amp;P)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="166"/>
         <location filename="../ProfileInterface.cpp" line="1610"/>
         <source>Export as &amp;Snapmatic...</source>
-        <translation>Экспортировать как &amp;Snapmatic...</translation>
-    </message>
-    <message>
-        <location filename="../PictureDialog.cpp" line="169"/>
-        <location filename="../ProfileInterface.cpp" line="1604"/>
-        <source>&amp;Overwrite Image...</source>
-        <translation>&amp;Перезаписать картинку...</translation>
+        <translation>스낵매틱으로 내보내기(&amp;S)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="168"/>
         <location filename="../ProfileInterface.cpp" line="1603"/>
         <source>&amp;Edit Properties...</source>
-        <translation>&amp;Изменить свойства...</translation>
+        <translation>속성 편집(&amp;E)...</translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.cpp" line="169"/>
+        <location filename="../ProfileInterface.cpp" line="1604"/>
+        <source>&amp;Overwrite Image...</source>
+        <translation>이미지 덮어쓰기(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="171"/>
         <location filename="../ProfileInterface.cpp" line="1606"/>
         <source>Open &amp;Map Viewer...</source>
-        <translation>Открыть &amp;карту...</translation>
+        <translation>지도 뷰어 열기(&amp;M)...</translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.cpp" line="173"/>
+        <location filename="../ProfileInterface.cpp" line="1607"/>
+        <source>Open &amp;JSON Editor...</source>
+        <translation>JSON 편집기 열기(&amp;J)...</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="575"/>
         <source>Key 1 - Avatar Preview Mode
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
-        <translation>Клавиша 1 - Режим показа аватарки
-Клавиша 2 - Вкл./выкл. оверлей
-Стрелки - Навигация</translation>
+        <translation>숫자 1 - 아바타 미리보기 모드
+숫자 2 - 오버레이 전환
+화살표키 - 이동</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="636"/>
         <location filename="../PictureDialog.cpp" line="662"/>
         <source>Snapmatic Picture Viewer</source>
-        <translation>Просмотрщик фотографий Snapmatic</translation>
+        <translation>스낵매틱 사진 뷰어</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="636"/>
         <location filename="../PictureDialog.cpp" line="662"/>
         <source>Failed at %1</source>
-        <translation>Ошибка при %1</translation>
-    </message>
-    <message>
-        <location filename="../PictureDialog.cpp" line="661"/>
-        <location filename="../PictureDialog.cpp" line="774"/>
-        <source>No Crew</source>
-        <translation>Вне банды</translation>
+        <translation>%1에서 실패했습니다</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="661"/>
         <location filename="../PictureDialog.cpp" line="798"/>
         <location filename="../SnapmaticEditor.cpp" line="247"/>
         <source>No Players</source>
-        <translation>Игроков нет</translation>
+        <translation>플레이어 없음</translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.cpp" line="661"/>
+        <location filename="../PictureDialog.cpp" line="774"/>
+        <source>No Crew</source>
+        <translation>조직 없음</translation>
+    </message>
+    <message>
+        <location filename="../PictureDialog.cpp" line="661"/>
+        <source>Unknown Location</source>
+        <translation>알 수 없는 위치</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="732"/>
         <source>Avatar Preview Mode
 Press 1 for Default View</source>
-        <translation>Режим просмотра аватарок
-Нажмите 1 для стандартного просмотра</translation>
-    </message>
-    <message>
-        <location filename="../PictureDialog.cpp" line="661"/>
-        <source>Unknown Location</source>
-        <translation>Неизвестное место</translation>
-    </message>
-    <message>
-        <location filename="../PictureExport.cpp" line="100"/>
-        <source>Portable Network Graphics (*.png)</source>
-        <translation>Картинка Portable Network Graphics (*.png)</translation>
-    </message>
-    <message>
-        <location filename="../PictureExport.cpp" line="150"/>
-        <location filename="../PictureExport.cpp" line="285"/>
-        <source>Overwrite %1 with current Snapmatic picture?</source>
-        <translation>Перезаписать %1 текущей картинкой Snapmatic?</translation>
+        <translation>아바타 미리 보기 모드입니다
+돌아가려면 숫자 1을 누릅니다</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="95"/>
         <source>Export as Picture...</source>
-        <translation>Экспорт как картинку...</translation>
+        <translation>사진으로 내보내기...</translation>
+    </message>
+    <message>
+        <location filename="../PictureExport.cpp" line="96"/>
+        <location filename="../PictureExport.cpp" line="249"/>
+        <source>Export</source>
+        <translation>내보내기</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="99"/>
         <source>JPEG Graphics (*.jpg *.jpeg)</source>
-        <translation>Картинка JPEG (*.jpg *.jpeg)</translation>
+        <translation>JPEG Graphics (*.jpg *.jpeg)</translation>
+    </message>
+    <message>
+        <location filename="../PictureExport.cpp" line="100"/>
+        <source>Portable Network Graphics (*.png)</source>
+        <translation>Portable Network Graphics (*.png)</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="150"/>
@@ -1146,58 +1149,44 @@ Press 1 for Default View</source>
         <location filename="../PictureExport.cpp" line="211"/>
         <location filename="../PictureExport.cpp" line="218"/>
         <source>Export as Picture</source>
-        <translation>Экспорт как картинку</translation>
+        <translation>사진으로 내보내기</translation>
+    </message>
+    <message>
+        <location filename="../PictureExport.cpp" line="150"/>
+        <location filename="../PictureExport.cpp" line="285"/>
+        <source>Overwrite %1 with current Snapmatic picture?</source>
+        <translation>%1을 현재 스냅매틱 사진으로 덮어쓰시겠습니까?</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="202"/>
         <source>Failed to export the picture because the system occurred a write failure</source>
-        <translation>Не удалось экспортировать картинку из-за ошибки системы при записи</translation>
+        <translation>시스템에서 쓰기 오류가 발생하여 사진을 내보내지 못했습니다</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="205"/>
         <source>Failed to export the picture because the format detection failures</source>
-        <translation>Не удалось экспортировать картинку, потому что произошла ошибка при распозновании формата</translation>
+        <translation>확장자 감지에 실패하여 사진을 내보내지 못했습니다</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="208"/>
         <source>Failed to export the picture because the file can&apos;t be written</source>
-        <translation>Не удалось экспортировать картинку, так как файл не может быть записан</translation>
+        <translation>파일을 쓸 수 없으므로 사진을 내보내지 못했습니다</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="211"/>
         <source>Failed to export the picture because of an unknown reason</source>
-        <translation>Не удалось экспортировать картинку по неизвестной причине</translation>
-    </message>
-    <message>
-        <location filename="../PictureExport.cpp" line="296"/>
-        <location filename="../PictureExport.cpp" line="305"/>
-        <source>Failed to export current Snapmatic picture</source>
-        <translation>Не удалось экспортировать текущую картинку Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../PictureExport.cpp" line="248"/>
-        <source>Export as Snapmatic...</source>
-        <translation>Экспортировать как Snapmatic...</translation>
-    </message>
-    <message>
-        <location filename="../PictureExport.cpp" line="285"/>
-        <location filename="../PictureExport.cpp" line="296"/>
-        <location filename="../PictureExport.cpp" line="305"/>
-        <location filename="../PictureExport.cpp" line="310"/>
-        <location filename="../PictureExport.cpp" line="316"/>
-        <source>Export as Snapmatic</source>
-        <translation>Экспортировать как Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../PictureExport.cpp" line="310"/>
-        <source>Exported Snapmatic to &quot;%1&quot; because of using the .auto extension.</source>
-        <translation>Snapmatic был экспортирован как &quot;%1&quot; из-за расширеня файла.</translation>
+        <translation>알 수 없는 이유로 사진을 내보내지 못했습니다</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="218"/>
         <location filename="../PictureExport.cpp" line="316"/>
         <source>No valid file is selected</source>
-        <translation>Выбранный файл неверен</translation>
+        <translation>올바른 파일이 선택되지 않았습니다</translation>
+    </message>
+    <message>
+        <location filename="../PictureExport.cpp" line="248"/>
+        <source>Export as Snapmatic...</source>
+        <translation>스냅매틱으로 내보내기...</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="252"/>
@@ -1207,18 +1196,32 @@ Press 1 for Default View</source>
     <message>
         <location filename="../PictureExport.cpp" line="253"/>
         <source>GTA V Raw Export (*.auto)</source>
-        <translation>GTA V Экспорт Исходника (*.auto)</translation>
+        <translation>GTA V Raw Export (*.auto)</translation>
     </message>
     <message>
         <location filename="../PictureExport.cpp" line="254"/>
         <source>Snapmatic pictures (PGTA*)</source>
-        <translation>Картинки Snapmatic (PGTA*)</translation>
+        <translation>Snapmatic pictures (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="173"/>
-        <location filename="../ProfileInterface.cpp" line="1607"/>
-        <source>Open &amp;JSON Editor...</source>
-        <translation>Открыть &amp;редактор JSON...</translation>
+        <location filename="../PictureExport.cpp" line="285"/>
+        <location filename="../PictureExport.cpp" line="296"/>
+        <location filename="../PictureExport.cpp" line="305"/>
+        <location filename="../PictureExport.cpp" line="310"/>
+        <location filename="../PictureExport.cpp" line="316"/>
+        <source>Export as Snapmatic</source>
+        <translation>스냅매틱으로 내보내기</translation>
+    </message>
+    <message>
+        <location filename="../PictureExport.cpp" line="296"/>
+        <location filename="../PictureExport.cpp" line="305"/>
+        <source>Failed to export current Snapmatic picture</source>
+        <translation>현재 스냅매틱 사진을 내보내지 못했습니다</translation>
+    </message>
+    <message>
+        <location filename="../PictureExport.cpp" line="310"/>
+        <source>Exported Snapmatic to &quot;%1&quot; because of using the .auto extension.</source>
+        <translation>.auto 확장자를 사용하기 때문에 스냅매틱을 &quot;%1&quot;로 내보냈습니다.</translation>
     </message>
 </context>
 <context>
@@ -1226,53 +1229,53 @@ Press 1 for Default View</source>
     <message>
         <location filename="../PlayerListDialog.ui" line="14"/>
         <source>Edit Players...</source>
-        <translation>Изменить игроков...</translation>
+        <translation>플레이어 편집...</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.ui" line="24"/>
         <source>Available Players:</source>
-        <translation>Доступные игроки:</translation>
+        <translation>사용 가능한 플레이어:</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.ui" line="108"/>
         <source>Selected Players:</source>
-        <translation>Выбранные игроки:</translation>
+        <translation>선택된 플레이어:</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.ui" line="150"/>
         <source>&amp;Apply</source>
-        <translation>&amp;Применить</translation>
+        <translation>적용(&amp;A)</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.ui" line="163"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Отмена</translation>
+        <translation>취소(&amp;C)</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.cpp" line="151"/>
         <source>Add Players...</source>
-        <translation>Добавить игроков...</translation>
+        <translation>플레이어 추가...</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.cpp" line="151"/>
         <source>Failed to add more Players because the limit of Players are %1!</source>
-        <translation>Невозможно добавить больше игроков из-за ограничения в %1!</translation>
+        <translation>플레이어의 제한이 %1이므로 플레이어를 추가하지 못했습니다!</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.cpp" line="168"/>
         <location filename="../PlayerListDialog.cpp" line="191"/>
         <source>Add Player...</source>
-        <translation>Добавить игрока...</translation>
+        <translation>플레이어 추가...</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.cpp" line="168"/>
         <source>Enter Social Club Player ID</source>
-        <translation>Введите идентификатор игрока из Social Club</translation>
+        <translation>소셜 클럽 플레이어 아이디 입력</translation>
     </message>
     <message>
         <location filename="../PlayerListDialog.cpp" line="191"/>
         <source>Failed to add Player %1 because Player %1 is already added!</source>
-        <translation>Нельзя повторно добавить игрока %1, %1 уже добавлен!</translation>
+        <translation>%1 플레이어가 이미 추가되어 %1 플레이어를 추가하지 못했습니다!</translation>
     </message>
 </context>
 <context>
@@ -1280,12 +1283,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.ui" line="14"/>
         <source>Profile Interface</source>
-        <translation>Интерфейс профиля</translation>
+        <translation>프로필 인터페이스</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="55"/>
         <source>Loading file %1 of %2 files</source>
-        <translation>Загружается файл %1 из %2</translation>
+        <translation>%2 파일의 %1 파일을 불러오는 중입니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="172"/>
@@ -1295,39 +1298,29 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.ui" line="198"/>
         <source>Import file</source>
-        <translation>Импортировать файл</translation>
+        <translation>파일 가져오기</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="201"/>
         <source>&amp;Import...</source>
-        <translation>&amp;Импортировать...</translation>
+        <translation>가져오기(&amp;I)...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="217"/>
         <source>Close profile</source>
-        <translation>Закрыть профиль</translation>
+        <translation>프로필 닫기</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.ui" line="220"/>
         <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <translation>닫기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="185"/>
-        <source>Loading...</source>
-        <translation>Загрузка...</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="414"/>
-        <source>Snapmatic Loader</source>
-        <translation>Загрузчик Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="414"/>
-        <source>&lt;h4&gt;Following Snapmatic Pictures got repaired&lt;/h4&gt;%1</source>
-        <translatorcomment>Change wording if the %1 is not a multiline beginning at new line
-</translatorcomment>
-        <translation>&lt;h4&gt;Нижеследующие картинки Snapmatic были восстановлены&lt;/h4&gt;%1</translation>
+        <location filename="../ExportThread.cpp" line="97"/>
+        <location filename="../ExportThread.cpp" line="136"/>
+        <location filename="../ExportThread.cpp" line="157"/>
+        <source>Export file %1 of %2 files</source>
+        <translation>%2 파일 중 %1 파일을 내보냅니다</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="109"/>
@@ -1351,7 +1344,7 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="1208"/>
         <location filename="../ProfileInterface.cpp" line="1214"/>
         <source>Import...</source>
-        <translation>Импортировать...</translation>
+        <translation>가져오기...</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="110"/>
@@ -1364,19 +1357,15 @@ Press 1 for Default View</source>
         <location filename="../ImportDialog.cpp" line="778"/>
         <location filename="../ImportDialog.cpp" line="787"/>
         <source>Import</source>
-        <translation>Импортировать</translation>
+        <translation>가져오기</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="505"/>
-        <location filename="../UserInterface.cpp" line="461"/>
-        <source>Savegames files (SGTA*)</source>
-        <translation>Файлы сохранения (SGTA*)</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="506"/>
-        <location filename="../UserInterface.cpp" line="462"/>
-        <source>Snapmatic pictures (PGTA*)</source>
-        <translation>Картинка Snapmatic (PGTA*)</translation>
+        <location filename="../ImageEditorDialog.cpp" line="120"/>
+        <location filename="../ImportDialog.cpp" line="437"/>
+        <location filename="../ImportDialog.cpp" line="757"/>
+        <location filename="../ProfileInterface.cpp" line="507"/>
+        <source>All image files (%1)</source>
+        <translation>모든 이미지 파일 (%1)</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="121"/>
@@ -1385,59 +1374,7 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="508"/>
         <location filename="../UserInterface.cpp" line="463"/>
         <source>All files (**)</source>
-        <translation>Все файлы (**)</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="554"/>
-        <location filename="../ProfileInterface.cpp" line="571"/>
-        <source>Import file %1 of %2 files</source>
-        <translation>Импортируются файлы %1 из %2</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="587"/>
-        <source>Import failed with...
-
-%1</source>
-        <translation>Ошибка при импорте...
-
-%1</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="629"/>
-        <location filename="../UserInterface.cpp" line="503"/>
-        <source>Failed to read Snapmatic picture</source>
-        <translation>Не удалось загрузить картинку Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="664"/>
-        <location filename="../UserInterface.cpp" line="519"/>
-        <source>Failed to read Savegame file</source>
-        <translation>Не удалось загрузить файл сохранения</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="532"/>
-        <location filename="../ProfileInterface.cpp" line="923"/>
-        <location filename="../UserInterface.cpp" line="551"/>
-        <source>No valid file is selected</source>
-        <translation>Выбранный файл неверен</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="85"/>
-        <source>Enabled pictures: %1 of %2</source>
-        <translation>Включенные картинки: %1 из %2</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="503"/>
-        <source>Importable files (%1)</source>
-        <translation>Файлы для импорта (%1)</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.cpp" line="120"/>
-        <location filename="../ImportDialog.cpp" line="437"/>
-        <location filename="../ImportDialog.cpp" line="757"/>
-        <location filename="../ProfileInterface.cpp" line="507"/>
-        <source>All image files (%1)</source>
-        <translation>Все файлы изображений (%1)</translation>
+        <translation>모든 파일 (**)</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="141"/>
@@ -1445,7 +1382,7 @@ Press 1 for Default View</source>
         <location filename="../ImportDialog.cpp" line="778"/>
         <location filename="../ProfileInterface.cpp" line="769"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
-        <translation>Не удалось открыть %1, файл не может быть открыт</translation>
+        <translation>파일을 열 수 없으므로 %1을 가져올 수 없습니다</translation>
     </message>
     <message>
         <location filename="../ImageEditorDialog.cpp" line="150"/>
@@ -1453,84 +1390,188 @@ Press 1 for Default View</source>
         <location filename="../ImportDialog.cpp" line="787"/>
         <location filename="../ProfileInterface.cpp" line="779"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
-        <translation>Не получилось импортировать %1, файл не может быть правильно обработан</translation>
+        <translation>파일을 구문 분석할 수 없으므로 %1을 가져올 수 없습니다</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="85"/>
+        <source>Enabled pictures: %1 of %2</source>
+        <translation>활성화된 사진: %2의 %1</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="185"/>
+        <source>Loading...</source>
+        <translation>불러오는 중...</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="414"/>
+        <source>Snapmatic Loader</source>
+        <translation>스냅매틱 로더</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="414"/>
+        <source>&lt;h4&gt;Following Snapmatic Pictures got repaired&lt;/h4&gt;%1</source>
+        <translation>&lt;h4&gt;다음 스냅매틱 사진을 복구했습니다 &lt;/h4&gt;%1</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="503"/>
+        <source>Importable files (%1)</source>
+        <translation>가져올 수 있는 파일 (%1)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="504"/>
+        <location filename="../UserInterface.cpp" line="460"/>
+        <source>GTA V Export (*.g5e)</source>
+        <translation>GTA V로 내보내기 (*.g5e)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="505"/>
+        <location filename="../UserInterface.cpp" line="461"/>
+        <source>Savegames files (SGTA*)</source>
+        <translation>세이브 파일 (SGTA*)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="506"/>
+        <location filename="../UserInterface.cpp" line="462"/>
+        <source>Snapmatic pictures (PGTA*)</source>
+        <translation>스냅매틱 사진 (PGTA*)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="532"/>
+        <location filename="../ProfileInterface.cpp" line="923"/>
+        <location filename="../UserInterface.cpp" line="551"/>
+        <source>No valid file is selected</source>
+        <translation>올바른 파일이 선택되지 않았습니다</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="554"/>
+        <location filename="../ProfileInterface.cpp" line="571"/>
+        <source>Import file %1 of %2 files</source>
+        <translation>%2 파일 중 %1 파일을 가져옵니다</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="587"/>
+        <source>Import failed with...
+
+%1</source>
+        <translation>가져오기에 실패했습니다...
+
+%1</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="629"/>
+        <location filename="../UserInterface.cpp" line="503"/>
+        <source>Failed to read Snapmatic picture</source>
+        <translation>스냅매틱 사진을 읽지 못했습니다</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="664"/>
+        <location filename="../UserInterface.cpp" line="519"/>
+        <source>Failed to read Savegame file</source>
+        <translation>세이브 파일을 읽지 못했습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="918"/>
         <source>Can&apos;t import %1 because file format can&apos;t be detected</source>
-        <translation>Не получилось импортировать %1, не удалось определить формат файла</translation>
+        <translation>파일 형식을 검색할 수 없으므로 %1을 가져올 수 없습니다</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="977"/>
+        <source>Prepare Content for Import...</source>
+        <translation>가져올 컨텐츠를 준비합니다...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1083"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e</source>
-        <translation>Не удалось импортировать картинку Snapmatic, название не начинается с PGTA или не заканчивается с .g5e</translation>
+        <translation>스냅매틱 사진을 가져오지 못했습니다. 파일이 PGTA로 시작되거나 .g5e로 끝나지 않습니다</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1091"/>
+        <source>A Snapmatic picture already exists with the uid %1, you want assign your import a new uid and timestamp?</source>
+        <translation>uid %1이(가) 있는 스냅매틱 사진이 이미 있습니다. 가져오기를 새 uid 및 타임스탬프를 할당하시겠습니까?</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1171"/>
         <source>Failed to import the Snapmatic picture, can&apos;t copy the file into profile</source>
-        <translation>Не удалось импортировать картинку Snapmatic, не получилось скопировать файл в профиль</translation>
+        <translation>스냅매틱 사진을 가져오지 못했습니다. 파일을 프로파일에 복사할 수 없습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1208"/>
         <source>Failed to import the Savegame, can&apos;t copy the file into profile</source>
-        <translation>Не удалось импортировать сохранение, не получилось скопировать файл в профиль</translation>
+        <translation>게임 저장 파일을 가져오지 못했습니다. 파일을 프로필에 복사할 수 없습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1214"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
-        <translation>Не удалось импортировать сохранение, нет пустых ячеек под сохранения</translation>
+        <translation>게임 저장 파일을 가져오지 못했습니다. 게임 저장 슬롯이 남아 있지 않습니다</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1278"/>
+        <location filename="../ProfileInterface.cpp" line="1316"/>
+        <location filename="../ProfileInterface.cpp" line="1361"/>
+        <location filename="../ProfileInterface.cpp" line="1396"/>
+        <location filename="../ProfileInterface.cpp" line="1416"/>
+        <source>Export selected...</source>
+        <translation>내보내기를 선택했습니다...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1301"/>
         <location filename="../ProfileInterface.cpp" line="1319"/>
         <source>JPG pictures and GTA Snapmatic</source>
-        <translation>Картинки JPG и GTA Snapmatic</translation>
+        <translation>JPG 사진 및 GTA 스냅매틱</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1302"/>
         <location filename="../ProfileInterface.cpp" line="1324"/>
         <source>JPG pictures only</source>
-        <translation>Только картинки JPG</translation>
+        <translation>JPG 사진만</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1303"/>
         <location filename="../ProfileInterface.cpp" line="1328"/>
         <source>GTA Snapmatic only</source>
-        <translation>Только GTA Snapmatic</translation>
+        <translation>GTA 스냅매틱만</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1316"/>
+        <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
+        <translation>%1 스냅 사진 내보내기를 수행합니다%2 &lt;br&gt;&lt;br&gt;JPG 사진을 사용하면 이미지 뷰어 로 사진을 열 수 있습니다&lt;br&gt;GTA 스냅매틱을 사용하면 다음과 같이 사진을 게임으로 가져올 수 있습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1362"/>
         <source>Initialising export...</source>
-        <translation>Подготовка к экспорту...</translation>
+        <translation>내보내기를 초기화하는 중...</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1396"/>
+        <source>Export failed with...
+
+%1</source>
+        <translation>내보내지 못했습니다...
+
+%1</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1416"/>
         <location filename="../ProfileInterface.cpp" line="1458"/>
         <source>No Snapmatic pictures or Savegames files are selected</source>
-        <translation>Не выделены ни один Snapmatic или сохранение</translation>
+        <translation>스냅매틱 사진 또는 세이브 파일이 선택되지 않았습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1424"/>
         <location filename="../ProfileInterface.cpp" line="1452"/>
         <location filename="../ProfileInterface.cpp" line="1458"/>
         <source>Remove selected</source>
-        <translation>Снять выделение</translation>
+        <translation>선택한 항목 삭제</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1424"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
-        <translation>Точно ли хочешь удалить выбранные картинки Snapmatic и файлы сохранений?</translation>
+        <translation>선택한 스냅매틱 사진 및 세이브 파일을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="977"/>
-        <source>Prepare Content for Import...</source>
-        <translation>Подготовка данных к импорту...</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1961"/>
-        <location filename="../ProfileInterface.cpp" line="2026"/>
-        <source>Qualify as Avatar</source>
-        <translation>Пометить как Аватар</translation>
+        <location filename="../ProfileInterface.cpp" line="1452"/>
+        <source>Failed to remove all selected Snapmatic pictures and/or Savegame files</source>
+        <translation>선택한 모든 스냅매틱 사진 및 세이브 파일을 삭제하지 못했습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1524"/>
@@ -1540,27 +1581,7 @@ Press 1 for Default View</source>
         <location filename="../ProfileInterface.cpp" line="2146"/>
         <location filename="../ProfileInterface.cpp" line="2277"/>
         <source>No Snapmatic pictures are selected</source>
-        <translation>Не выделена ни одна картинка Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1972"/>
-        <location filename="../ProfileInterface.cpp" line="2075"/>
-        <location filename="../ProfileInterface.cpp" line="2206"/>
-        <location filename="../ProfileInterface.cpp" line="2312"/>
-        <source>Patch selected...</source>
-        <translation>Пропатчить выделенные...</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1973"/>
-        <location filename="../ProfileInterface.cpp" line="1992"/>
-        <location filename="../ProfileInterface.cpp" line="2076"/>
-        <location filename="../ProfileInterface.cpp" line="2095"/>
-        <location filename="../ProfileInterface.cpp" line="2207"/>
-        <location filename="../ProfileInterface.cpp" line="2226"/>
-        <location filename="../ProfileInterface.cpp" line="2313"/>
-        <location filename="../ProfileInterface.cpp" line="2332"/>
-        <source>Patch file %1 of %2 files</source>
-        <translation>Изменяется файл %1 из %2</translation>
+        <translation>스냅매틱 사진이 선택되지 않았습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1538"/>
@@ -1573,115 +1594,99 @@ Press 1 for Default View</source>
 
 %2</source>
         <comment>Action failed with...</comment>
-        <translation>%1 завершился с ошибкой...
+        <translatorcomment>작업 실패...</translatorcomment>
+        <translation>%1이(가) 실패했습니다.
 
 %2</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1091"/>
-        <source>A Snapmatic picture already exists with the uid %1, you want assign your import a new uid and timestamp?</source>
-        <translatorcomment>Можно использовать слово &quot;приписать&quot;</translatorcomment>
-        <translation></translation>
+        <location filename="../ProfileInterface.cpp" line="1961"/>
+        <location filename="../ProfileInterface.cpp" line="2026"/>
+        <source>Qualify as Avatar</source>
+        <translation>아바타 자격 부여</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1452"/>
-        <source>Failed to remove all selected Snapmatic pictures and/or Savegame files</source>
-        <translation>Не удалось удалить все выделенные картинки Snapmatic и/или сохранения</translation>
+        <location filename="../ProfileInterface.cpp" line="1972"/>
+        <location filename="../ProfileInterface.cpp" line="2075"/>
+        <location filename="../ProfileInterface.cpp" line="2206"/>
+        <location filename="../ProfileInterface.cpp" line="2312"/>
+        <source>Patch selected...</source>
+        <translation>패치가 선택됨...</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1973"/>
+        <location filename="../ProfileInterface.cpp" line="1992"/>
+        <location filename="../ProfileInterface.cpp" line="2076"/>
+        <location filename="../ProfileInterface.cpp" line="2095"/>
+        <location filename="../ProfileInterface.cpp" line="2207"/>
+        <location filename="../ProfileInterface.cpp" line="2226"/>
+        <location filename="../ProfileInterface.cpp" line="2313"/>
+        <location filename="../ProfileInterface.cpp" line="2332"/>
+        <source>Patch file %1 of %2 files</source>
+        <translation>%2 파일의 %1 패치 파일입니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2026"/>
         <source>Qualify</source>
         <comment>%1 failed with...</comment>
-        <translation>Помечание</translation>
+        <translatorcomment>%1이(가) 실패한 경우...</translatorcomment>
+        <translation>자격 부여</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2047"/>
         <location filename="../ProfileInterface.cpp" line="2125"/>
         <source>Change Players...</source>
-        <translation>Изменить игроков...</translation>
+        <translation>플레이어 변경...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2125"/>
         <source>Change Players</source>
         <comment>%1 failed with...</comment>
-        <translation>Измение игроков</translation>
+        <translatorcomment>%1이(가) 실패한 경우...</translatorcomment>
+        <translation>플레이어 변경</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2146"/>
         <location filename="../ProfileInterface.cpp" line="2183"/>
         <location filename="../ProfileInterface.cpp" line="2256"/>
         <source>Change Crew...</source>
-        <translation>Изменить банду...</translation>
+        <translation>조직 변경...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2183"/>
         <source>Failed to enter a valid Snapmatic Crew ID</source>
-        <translation>Введённый идентификатор банды не верен</translation>
+        <translation>올바른 스냅매틱 조직 아이디를 입력하지 못했습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2256"/>
         <source>Change Crew</source>
         <comment>%1 failed with...</comment>
-        <translation>Изменение банды</translation>
+        <translatorcomment>%1이(가) 실패한 경우...</translatorcomment>
+        <translation>조직 변경</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2277"/>
         <location filename="../ProfileInterface.cpp" line="2294"/>
         <location filename="../ProfileInterface.cpp" line="2359"/>
         <source>Change Title...</source>
-        <translation>Изменить заголовок...</translation>
+        <translation>제목 변경...</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2294"/>
         <source>Failed to enter a valid Snapmatic title</source>
-        <translation>Введённый заголовок не верен</translation>
+        <translation>올바른 스냅매틱 제목을 입력하지 못했습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2359"/>
         <source>Change Title</source>
         <comment>%1 failed with...</comment>
-        <translation>Изменение заголовка</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1316"/>
-        <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
-        <translation>%1Эскпортировать картинки Snapmatic%2&lt;br&gt;&lt;br&gt;Картинки JPG можно открыть любым просмотрщиком&lt;br&gt;Картинки формата GTA Snapmatic можно снова импортировать в игру&lt;br&gt;&lt;br&gt;Экспортировать как:</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1278"/>
-        <location filename="../ProfileInterface.cpp" line="1316"/>
-        <location filename="../ProfileInterface.cpp" line="1361"/>
-        <location filename="../ProfileInterface.cpp" line="1396"/>
-        <location filename="../ProfileInterface.cpp" line="1416"/>
-        <source>Export selected...</source>
-        <translation>Экпортировать выделенное...</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1396"/>
-        <source>Export failed with...
-
-%1</source>
-        <translation>Экспорт провалился на...
-
-%1</translation>
-    </message>
-    <message>
-        <location filename="../ExportThread.cpp" line="97"/>
-        <location filename="../ExportThread.cpp" line="136"/>
-        <location filename="../ExportThread.cpp" line="157"/>
-        <source>Export file %1 of %2 files</source>
-        <translation>Экспортируется файл %1 из %2</translation>
+        <translatorcomment>%1이(가) 실패한 경우...</translatorcomment>
+        <translation>제목 변경</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="459"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
-        <translation>Все файлы профиля (*.g5e SGTA* PGTA*)</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="504"/>
-        <location filename="../UserInterface.cpp" line="460"/>
-        <source>GTA V Export (*.g5e)</source>
-        <translation>GTA V Export (*.g5e)</translation>
+        <translation>모든 프로필 파일 (*.g5e SGTA* PGTA*)</translation>
     </message>
 </context>
 <context>
@@ -1689,17 +1694,17 @@ Press 1 for Default View</source>
     <message>
         <location filename="../main.cpp" line="115"/>
         <source>Font</source>
-        <translation>Шрифт</translation>
+        <translation>폰트</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="115"/>
         <source>Selected Font: %1</source>
-        <translation>Выбранный шрифт: %1</translation>
+        <translation>선택된 폰트: %1</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="142"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
-        <translation>&lt;h4&gt;Добро пожаловать в %1!&lt;/h4&gt;Хочешь изменить настройки %1 перед использованием?</translation>
+        <translation>&lt;h4&gt;%1에 오신 것을 환영합니다!&lt;/h4&gt;%1을 사용하기 전에 구성하시겠습니까?</translation>
     </message>
 </context>
 <context>
@@ -1708,27 +1713,27 @@ Press 1 for Default View</source>
         <location filename="../SavegameDialog.ui" line="14"/>
         <location filename="../SavegameDialog.cpp" line="84"/>
         <source>Savegame Viewer</source>
-        <translation>Просмотрщик сохранений</translation>
+        <translation>세이브 파일 보기</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="23"/>
         <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Сохранение&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
+        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;세이브 파일&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="70"/>
         <source>&amp;Export</source>
-        <translation>&amp;Экспорт</translation>
+        <translation>내보내기(&amp;E)</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="83"/>
         <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
+        <translation>닫기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.cpp" line="84"/>
         <source>Failed at %1</source>
-        <translation>Ошибка при %1</translation>
+        <translation>실패 %1</translation>
     </message>
 </context>
 <context>
@@ -1736,136 +1741,88 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SavegameWidget.ui" line="14"/>
         <source>Savegame Widget</source>
-        <translation>Виджет сохранений</translation>
+        <translation>세이브 파일 위젯</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.ui" line="67"/>
+        <source>SAVE %3 - %1&lt;br&gt;%2</source>
+        <translation>저장 %3 - %1&lt;br&gt;%2</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="83"/>
         <source>View savegame</source>
-        <translation>Просмотреть сохранение</translation>
+        <translation>세이브 파일 보기</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="86"/>
         <source>View</source>
-        <translation>Просмотр</translation>
+        <translation>보기</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.ui" line="99"/>
+        <source>Copy savegame</source>
+        <translation>세이브 파일 복사</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="102"/>
         <location filename="../SavegameCopy.cpp" line="53"/>
         <source>Export</source>
-        <translation>Экспорт</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.ui" line="121"/>
-        <source>Delete</source>
-        <translation>Удалить</translation>
+        <translation>내보내기</translation>
     </message>
     <message>
         <location filename="../SavegameWidget.ui" line="118"/>
         <source>Delete savegame</source>
-        <translation>Удалить сохранение</translation>
+        <translation>세이브 파일 삭제</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="64"/>
-        <source>Export Savegame...</source>
-        <translation>Экспортировать сохранение...</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.ui" line="67"/>
-        <source>SAVE %3 - %1&lt;br&gt;%2</source>
-        <translation>СОХРАНЕНИЕ %3 - %1&lt;br&gt;%2</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.cpp" line="96"/>
-        <location filename="../SavegameWidget.cpp" line="97"/>
-        <source>WRONG FORMAT</source>
-        <translation>НЕВЕРНЫЙ ФОРМАТ</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.cpp" line="67"/>
-        <location filename="../SavegameWidget.cpp" line="124"/>
-        <source>AUTOSAVE - %1
-%2</source>
-        <translation>АВТОСОХРАНЕНИЕ - %1
-%2</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.cpp" line="68"/>
-        <location filename="../SavegameWidget.cpp" line="125"/>
-        <source>SAVE %3 - %1
-%2</source>
-        <translation>СОХРАНЕНИЕ %3 - %1
-%2</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.cpp" line="118"/>
-        <source>UNKNOWN</source>
-        <translation>НЕИЗВЕСТНО</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.cpp" line="138"/>
-        <source>Are you sure to delete %1 from your savegames?</source>
-        <translation>Вы уверены, что хотите удалить сохранение %1?</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.cpp" line="138"/>
-        <location filename="../SavegameWidget.cpp" line="183"/>
-        <source>Delete Savegame</source>
-        <translation>Удалить сохранение</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.cpp" line="183"/>
-        <source>Failed at deleting %1 from your savegames</source>
-        <translation>Не удалось удалить сохранение %1</translation>
+        <location filename="../SavegameWidget.ui" line="121"/>
+        <source>Delete</source>
+        <translation>삭제</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1645"/>
         <source>&amp;View</source>
-        <translation>&amp;Просмотр</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1647"/>
-        <source>&amp;Remove</source>
-        <translation>&amp;Удалить</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1649"/>
-        <source>&amp;Select</source>
-        <translation>&amp;Выбрать</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1650"/>
-        <source>&amp;Deselect</source>
-        <translation>Сн&amp;ять выбор</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1653"/>
-        <source>Select &amp;All</source>
-        <translation>В&amp;ыбрать все</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1657"/>
-        <source>&amp;Deselect All</source>
-        <translation>Снять выбо&amp;р со всех</translation>
-    </message>
-    <message>
-        <location filename="../SavegameWidget.ui" line="99"/>
-        <source>Copy savegame</source>
-        <translation>Копировать сохранение</translation>
+        <translation>보기(&amp;V)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1646"/>
         <source>&amp;Export</source>
-        <translation>&amp;Экспортировать</translation>
+        <translation>내보내기(&amp;E)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1647"/>
+        <source>&amp;Remove</source>
+        <translation>삭제(&amp;R)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1649"/>
+        <source>&amp;Select</source>
+        <translation>선택(&amp;S)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1650"/>
+        <source>&amp;Deselect</source>
+        <translation>선택 해제(&amp;D)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1653"/>
+        <source>Select &amp;All</source>
+        <translation>모두 선택(&amp;A)</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1657"/>
+        <source>&amp;Deselect All</source>
+        <translation>모두 선택 해제(&amp;D)</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="56"/>
         <source>Savegame files (SGTA*)</source>
-        <translation>Файлы сохранений (SGTA*)</translation>
+        <translation>세이브 파일 (SGTA*)</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="57"/>
         <source>All files (**)</source>
-        <translation>Все файлы (**)</translation>
+        <translation>모든 파일 (**)</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="76"/>
@@ -1873,27 +1830,75 @@ Press 1 for Default View</source>
         <location filename="../SavegameCopy.cpp" line="93"/>
         <location filename="../SavegameCopy.cpp" line="99"/>
         <source>Export Savegame</source>
-        <translation>Экспортировать сохранение</translation>
+        <translation>세이브 파일 내보내기</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="76"/>
         <source>Overwrite %1 with current Savegame?</source>
-        <translation>Перезаписать %1 текущим сохранением?</translation>
+        <translation>%1을 현재 세이브 파일로 덮어쓰시겠습니까?</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="80"/>
         <source>Failed to overwrite %1 with current Savegame</source>
-        <translation>Не удалось переписать %1 текущим сохранением</translation>
+        <translation>%1을 현재 세이브 파일로 덮어쓰지 못했습니다</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="93"/>
         <source>Failed to export current Savegame</source>
-        <translation>Не удалось экспортировать текущее сохранение</translation>
+        <translation>현재 세이브 파일을 내보내지 못했습니다</translation>
     </message>
     <message>
         <location filename="../SavegameCopy.cpp" line="99"/>
         <source>No valid file is selected</source>
-        <translation>Выбранный файл неверен</translation>
+        <translation>올바른 파일이 선택되지 않았습니다</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="64"/>
+        <source>Export Savegame...</source>
+        <translation>세이브 파일 내보내기...</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="67"/>
+        <location filename="../SavegameWidget.cpp" line="124"/>
+        <source>AUTOSAVE - %1
+%2</source>
+        <translation>자동 저장 - %1
+%2</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="68"/>
+        <location filename="../SavegameWidget.cpp" line="125"/>
+        <source>SAVE %3 - %1
+%2</source>
+        <translation>저장 %3 - %1
+%2</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="96"/>
+        <location filename="../SavegameWidget.cpp" line="97"/>
+        <source>WRONG FORMAT</source>
+        <translation>잘못된 형식</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="118"/>
+        <source>UNKNOWN</source>
+        <translation>알 수 없음</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="138"/>
+        <location filename="../SavegameWidget.cpp" line="183"/>
+        <source>Delete Savegame</source>
+        <translation>세이브 파일 삭제</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="138"/>
+        <source>Are you sure to delete %1 from your savegames?</source>
+        <translation>%1을(를) 세이브 파일에서 삭제하시겠습니까?</translation>
+    </message>
+    <message>
+        <location filename="../SavegameWidget.cpp" line="183"/>
+        <source>Failed at deleting %1 from your savegames</source>
+        <translation>%1을(를) 세이브 파일에서 삭제하지 못했습니다</translation>
     </message>
 </context>
 <context>
@@ -1909,150 +1914,92 @@ Press 1 for Default View</source>
         <location filename="../SnapmaticEditor.cpp" line="334"/>
         <location filename="../SnapmaticWidget.cpp" line="434"/>
         <source>Snapmatic Properties</source>
-        <translation>Свойства Snapmatic</translation>
+        <translation>스냅매틱 속성</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="44"/>
         <source>Snapmatic Type</source>
-        <translation>Тип Snapmatic</translation>
+        <translation>스낵매틱 형식</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="50"/>
         <source>Editor</source>
-        <translation>Редактор</translation>
+        <translation>편집기</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="57"/>
         <source>Selfie</source>
-        <translation>Автопортрет</translation>
+        <translation>셀카</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="64"/>
         <source>Regular</source>
-        <translation>Обычный</translation>
+        <translation>일반</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="71"/>
         <source>Mugshot</source>
-        <translation>Под арестом</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.ui" line="94"/>
-        <source>Director</source>
-        <translation>Director</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.ui" line="104"/>
-        <source>Snapmatic Values</source>
-        <translation>Значения в Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.cpp" line="287"/>
-        <source>Crew: %1 (%2)</source>
-        <translation>Банда: %1 (%2)</translation>
+        <translation>머그샷</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="87"/>
         <source>Meme</source>
-        <translation>Meme</translation>
+        <translation>밈</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2289"/>
-        <location filename="../SnapmaticEditor.cpp" line="414"/>
-        <source>Snapmatic Title</source>
-        <translation>Заголовок Snapmatic</translation>
+        <location filename="../SnapmaticEditor.ui" line="94"/>
+        <source>Director</source>
+        <translation>감독</translation>
     </message>
     <message>
-        <location filename="../SnapmaticEditor.cpp" line="267"/>
-        <source>Title: %1 (%2)</source>
-        <translation>Заголовок: %1 (%2)</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.cpp" line="235"/>
-        <source>Players: %1 (%2)</source>
-        <comment>Multiple Player are inserted here</comment>
-        <translation>Игроки: %1 (%2)</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.cpp" line="239"/>
-        <source>Player: %1 (%2)</source>
-        <comment>One Player is inserted here</comment>
-        <translation>Игрок: %1 (%2)</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.cpp" line="271"/>
-        <location filename="../SnapmaticEditor.cpp" line="275"/>
-        <source>Appropriate: %1</source>
-        <translation>Подходит: %1</translation>
+        <location filename="../SnapmaticEditor.ui" line="104"/>
+        <source>Snapmatic Values</source>
+        <translation>스냅매틱 값</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="171"/>
         <source>Extras</source>
-        <translation>Дополнительно</translation>
+        <translation>엑스트라</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="177"/>
         <source>Qualify as Avatar automatically at apply</source>
-        <translation>Пометить как аватарку</translation>
+        <translation>적용 시 자동으로 아바타 자격을 부여합니다</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="190"/>
         <source>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</source>
-        <translation>C меткой аватара можно загрузить эту картинку Snapmatic в профиль на Social Club</translation>
+        <translation>이 스냅매틱을 소셜 클럽 프로필 사진으로 사용할 수 있습니다</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="240"/>
         <source>Apply changes</source>
-        <translation>Применить изменения</translation>
+        <translation>변경 사항 적용</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="243"/>
         <source>&amp;Apply</source>
-        <translation>&amp;Применить</translation>
+        <translation>적용(&amp;A)</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="256"/>
         <source>Discard changes</source>
-        <translation></translation>
+        <translation>변경 사항 무시</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="259"/>
         <source>&amp;Cancel</source>
-        <translation>&amp;Отмена</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.cpp" line="231"/>
-        <location filename="../SnapmaticEditor.cpp" line="266"/>
-        <location filename="../SnapmaticEditor.cpp" line="286"/>
-        <source>Edit</source>
-        <translation>Правка</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.cpp" line="271"/>
-        <source>Yes</source>
-        <comment>Yes, should work fine</comment>
-        <translation>Да</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticEditor.cpp" line="275"/>
-        <source>No</source>
-        <comment>No, could lead to issues</comment>
-        <translation>Нет</translation>
+        <translation>취소(&amp;C)</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="117"/>
         <source>&lt;h4&gt;Unsaved changes detected&lt;/h4&gt;You want to save the JSON content before you quit?</source>
-        <translation>&lt;h4&gt;Несохранённые изменения&lt;/h4&gt;Сохранить изменения в JSON перед выходом?</translation>
+        <translation>&lt; h4&gt;저장되지 않은 변경 내용이 감지되었습니다. &lt;/h4&gt;그만두기 전에 JSON 콘텐츠를 저장하겠습니까?</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="182"/>
         <source>Patching of Snapmatic Properties failed because of %1</source>
-        <translation>Не удалось изменить свойства Snapmatic из-за %1</translation>
-    </message>
-    <message>
-        <location filename="../JsonEditorDialog.cpp" line="217"/>
-        <source>Patching of Snapmatic Properties failed because of JSON Error</source>
-        <translation>Не удалось измененить свойства Snapmatic из-за ошибки JSON</translation>
+        <translation>%1로 인해 스냅매틱 속성을 패치하지 못했습니다</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="188"/>
@@ -2060,92 +2007,155 @@ Press 1 for Default View</source>
         <location filename="../SnapmaticEditor.cpp" line="334"/>
         <location filename="../SnapmaticWidget.cpp" line="434"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
-        <translation>Не удалось измененить свойства Snapmatic из-за проблемы ввода/вывода</translation>
+        <translation>I/O 오류로 인해 스냅매틱 속성을 패치하지 못했습니다</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2289"/>
-        <location filename="../SnapmaticEditor.cpp" line="414"/>
-        <source>New Snapmatic title:</source>
-        <translation>Новый заголовок Snapmatic:</translation>
+        <location filename="../JsonEditorDialog.cpp" line="217"/>
+        <source>Patching of Snapmatic Properties failed because of JSON Error</source>
+        <translation>JSON 오류로 인해 스냅매틱 속성을 패치하지 못했습니다</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2174"/>
         <location filename="../SnapmaticEditor.cpp" line="443"/>
         <source>Snapmatic Crew</source>
-        <translation>Банда на Snapmatic</translation>
+        <translation>조직 스냅매틱</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="2174"/>
         <location filename="../SnapmaticEditor.cpp" line="443"/>
         <source>New Snapmatic crew:</source>
-        <translation>Новая банда на Snapmatic:</translation>
+        <translation>새로운 조직 스냅매틱:</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="2289"/>
+        <location filename="../SnapmaticEditor.cpp" line="414"/>
+        <source>Snapmatic Title</source>
+        <translation>스냅매틱 제목</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="2289"/>
+        <location filename="../SnapmaticEditor.cpp" line="414"/>
+        <source>New Snapmatic title:</source>
+        <translation>새로운 스냅매틱 제목:</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="231"/>
+        <location filename="../SnapmaticEditor.cpp" line="266"/>
+        <location filename="../SnapmaticEditor.cpp" line="286"/>
+        <source>Edit</source>
+        <translation>편집</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="235"/>
+        <source>Players: %1 (%2)</source>
+        <comment>Multiple Player are inserted here</comment>
+        <translatorcomment>여기에 여러 플레이어가 추가됩니다.</translatorcomment>
+        <translation>플레이어: %1 (%2)</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="239"/>
+        <source>Player: %1 (%2)</source>
+        <comment>One Player is inserted here</comment>
+        <translatorcomment>여기에 플레이어 하나가 추가됩니다.</translatorcomment>
+        <translation>플레이어: %1 (%2)</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="267"/>
+        <source>Title: %1 (%2)</source>
+        <translation>제목: %1 (%2)</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="271"/>
+        <location filename="../SnapmaticEditor.cpp" line="275"/>
+        <source>Appropriate: %1</source>
+        <translation>변경: %1</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="271"/>
+        <source>Yes</source>
+        <comment>Yes, should work fine</comment>
+        <translatorcomment>네, 잘 될 거예요.</translatorcomment>
+        <translation>예</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="275"/>
+        <source>No</source>
+        <comment>No, could lead to issues</comment>
+        <translatorcomment>아니요, 문제가 발생할 수 있습니다.</translatorcomment>
+        <translation>아니요</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticEditor.cpp" line="287"/>
+        <source>Crew: %1 (%2)</source>
+        <translation>조직: %1 (%2)</translation>
     </message>
 </context>
 <context>
     <name>SnapmaticPicture</name>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="464"/>
-        <source>PHOTO - %1</source>
-        <translation>ФОТО - %1</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticPicture.cpp" line="690"/>
-        <source>open file %1</source>
-        <translation>Открыть файл %1</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticPicture.cpp" line="706"/>
-        <source>header not exists</source>
-        <translation>Отсутствует шапка (header)</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticPicture.cpp" line="710"/>
-        <source>header is malformed</source>
-        <translation>Шапка (header) повреждена</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticPicture.cpp" line="714"/>
-        <source>picture not exists (%1)</source>
-        <translation>Картинки не существует (%1)</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticPicture.cpp" line="718"/>
-        <source>JSON not exists (%1)</source>
-        <translation>JSON не существует (%1)</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticPicture.cpp" line="722"/>
-        <source>title not exists (%1)</source>
-        <translation>Заголовок отсутствует (%1)</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticPicture.cpp" line="726"/>
-        <source>description not exists (%1)</source>
-        <translation>Описание отсутствует (%1)</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticPicture.cpp" line="740"/>
-        <source>reading file %1 because of %2</source>
-        <comment>Example for %2: JSON is malformed error</comment>
-        <translation>Чтение из файла %1 из-за %2</translation>
-    </message>
-    <message>
         <location filename="../JsonEditorDialog.cpp" line="168"/>
         <location filename="../SnapmaticPicture.cpp" line="730"/>
         <source>JSON is incomplete and malformed</source>
-        <translation>JSON не полный и повреждён</translation>
+        <translation>JSON이 불안정하고 형식이 잘못되었습니다</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="172"/>
         <location filename="../SnapmaticPicture.cpp" line="734"/>
         <source>JSON is incomplete</source>
-        <translation>JSON частично отсутствует</translation>
+        <translation>JSON이 불안정합니다</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="176"/>
         <location filename="../SnapmaticPicture.cpp" line="738"/>
         <source>JSON is malformed</source>
-        <translation>JSON повреждён</translation>
+        <translation>잘못된 JSON 형식</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="464"/>
+        <source>PHOTO - %1</source>
+        <translation>사진 - %1</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="690"/>
+        <source>open file %1</source>
+        <translation>파일 열기 %1</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="706"/>
+        <source>header not exists</source>
+        <translation>헤더가 존재하지 않습니다</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="710"/>
+        <source>header is malformed</source>
+        <translation>헤더의 형식이 잘못되었습니다</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="714"/>
+        <source>picture not exists (%1)</source>
+        <translation>사진이 존재하지 않습니다. (%1)</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="718"/>
+        <source>JSON not exists (%1)</source>
+        <translation>JSON이 존재하지 않습니다. (%1)</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="722"/>
+        <source>title not exists (%1)</source>
+        <translation>제목이 존재하지 않습니다. (%1)</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="726"/>
+        <source>description not exists (%1)</source>
+        <translation>설명이 존재하지 않습니다. (%1)</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticPicture.cpp" line="740"/>
+        <source>reading file %1 because of %2</source>
+        <comment>Example for %2: JSON is malformed error</comment>
+        <translatorcomment>%2의 예: JSON이 잘못된 형식입니다</translatorcomment>
+        <translation>%2 때문에 %1 파일을 읽습니다</translation>
     </message>
 </context>
 <context>
@@ -2153,124 +2163,124 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticWidget.ui" line="14"/>
         <source>Snapmatic Widget</source>
-        <translation>Виджет Snapmatic</translation>
+        <translation>스냅매틱 위젯</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="85"/>
         <source>PHOTO - 00/00/00 00:00:00</source>
-        <translation>ФОТО - 00/00/00 00:00:00</translation>
+        <translation>사진 - 00/00/00 00:00:00</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="101"/>
         <source>View picture</source>
-        <translation>Просмотр картинки</translation>
+        <translation>사진 보기</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="104"/>
         <source>View</source>
-        <translation>Просмотр</translation>
+        <translation>보기</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.ui" line="120"/>
+        <source>Copy picture</source>
+        <translation>사진 복사</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="123"/>
         <source>Copy</source>
-        <translation>Копировать</translation>
+        <translation>복사</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.ui" line="136"/>
+        <source>Export picture</source>
+        <translation>사진 내보내기</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="139"/>
         <source>Export</source>
-        <translation>Экспорт</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.ui" line="155"/>
-        <source>Delete</source>
-        <translation>Удалить</translation>
+        <translation>내보내기</translation>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="152"/>
         <location filename="../SnapmaticWidget.cpp" line="171"/>
         <location filename="../SnapmaticWidget.cpp" line="197"/>
         <source>Delete picture</source>
-        <translation>Удалить картинку</translation>
+        <translation>사진 삭제</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="171"/>
-        <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
-        <translation>Уверены, что хотите удалить %1 из коллекции картинок Snapmatic?</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="197"/>
-        <source>Failed at deleting %1 from your Snapmatic pictures</source>
-        <translation>Не удалось удалить %1 из колелкции картинок Snapmatic</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="321"/>
-        <source>Failed to hide %1 In-game from your Snapmatic pictures</source>
-        <translation>Не удалось скрыть %1 из списка картинок Snapmatic в игре</translation>
-    </message>
-    <message>
-        <location filename="../SnapmaticWidget.cpp" line="329"/>
-        <source>Failed to show %1 In-game from your Snapmatic pictures</source>
-        <translation>Не удалось показать %1 в списке картинок Snapmatic в игре</translation>
+        <location filename="../SnapmaticWidget.ui" line="155"/>
+        <source>Delete</source>
+        <translation>삭제</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1594"/>
         <source>Edi&amp;t</source>
-        <translation>&amp;Правка</translation>
+        <translation>편집(&amp;T)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1597"/>
         <source>Show &amp;In-game</source>
-        <translation>Показывать в &amp;игре</translation>
+        <translation>인게임에서 보이기(&amp;I)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1601"/>
         <source>Hide &amp;In-game</source>
-        <translation>Ск&amp;рыть в игре</translation>
+        <translation>인게임에서 숨기기(&amp;I)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1608"/>
         <source>&amp;Export</source>
-        <translation>&amp;Экспорт</translation>
+        <translation>내보내기(&amp;E)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1611"/>
         <source>&amp;View</source>
-        <translation>По&amp;казать</translation>
+        <translation>보기(&amp;V)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1614"/>
         <source>&amp;Remove</source>
-        <translation>У&amp;далить</translation>
+        <translation>삭제(&amp;R)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1616"/>
         <source>&amp;Select</source>
-        <translation>&amp;Выделить</translation>
+        <translation>선택(&amp;S)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1617"/>
         <source>&amp;Deselect</source>
-        <translation>Сн&amp;ять выделение</translation>
+        <translation>선택 해제(&amp;D)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1620"/>
         <source>Select &amp;All</source>
-        <translation>В&amp;ыбрать все</translation>
+        <translation>모두 선택(&amp;A)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1624"/>
         <source>&amp;Deselect All</source>
-        <translation>Снять выбо&amp;р со всех</translation>
+        <translation>모두 선택 해제(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.ui" line="120"/>
-        <source>Copy picture</source>
-        <translation>Скопировать картинку</translation>
+        <location filename="../SnapmaticWidget.cpp" line="171"/>
+        <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
+        <translation>스냅매틱 사진에서 %1을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.ui" line="136"/>
-        <source>Export picture</source>
-        <translation>Экспорт картинки</translation>
+        <location filename="../SnapmaticWidget.cpp" line="197"/>
+        <source>Failed at deleting %1 from your Snapmatic pictures</source>
+        <translation>스냅매틱 사진에서 %1을 삭제하지 못했습니다</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="321"/>
+        <source>Failed to hide %1 In-game from your Snapmatic pictures</source>
+        <translation>인게임 스냅매틱 사진에서 %1 을 숨기지 못했습니다</translation>
+    </message>
+    <message>
+        <location filename="../SnapmaticWidget.cpp" line="329"/>
+        <source>Failed to show %1 In-game from your Snapmatic pictures</source>
+        <translation>인게임 스냅매틱 사진에서 %1 을 표시하지 못했습니다</translation>
     </message>
 </context>
 <context>
@@ -2278,30 +2288,36 @@ Press 1 for Default View</source>
     <message>
         <location filename="../main.cpp" line="171"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
-        <translation>Разрешишь нам собирать статистику о пользовании тобой %1? Это поможет нам в разработке.</translation>
+        <translation>개인 사용 데이터를 제출에 포함시켜 %1이(가) 개선되기를 원합니까?</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="172"/>
         <source>%1 User Statistics</source>
-        <translation>%1 Пользовательская статистика</translation>
+        <translation>%1 사용자 통계</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="176"/>
         <source>Yes, I want include personal usage data.</source>
-        <translation>Да, передавать данные о пользовании программой.</translation>
+        <translation>예, 개인 사용 데이터를 포함시키고 싶습니다.</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="185"/>
         <source>&amp;OK</source>
-        <translation>&amp;ОК</translation>
+        <translation>확인(&amp;O)</translation>
     </message>
 </context>
 <context>
     <name>UserInterface</name>
     <message>
+        <location filename="../UserInterface.ui" line="20"/>
+        <location filename="../UserInterface.cpp" line="61"/>
+        <source>%2 - %1</source>
+        <translation>%2 - %1</translation>
+    </message>
+    <message>
         <location filename="../UserInterface.ui" line="74"/>
         <source>Select profile</source>
-        <translation>Выбор профиля</translation>
+        <translation>프로필 선택</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="105"/>
@@ -2311,141 +2327,117 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="131"/>
         <source>Reload profile overview</source>
-        <translation>Перезагрузить обзор профилей</translation>
+        <translation>프로필 다시 불러오기</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="134"/>
+        <source>&amp;Reload</source>
+        <translation>새로고침(&amp;R)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="150"/>
         <source>Close %1</source>
         <extracomment>Close %1 &lt;- (gta5view/gta5sync) - %1 will be replaced automatically</extracomment>
-        <translation>Закрыть %1</translation>
+        <translatorcomment>닫기 %1 &lt;- (gta5view/gta5sync) - %1 자동으로 교체됩니다.</translatorcomment>
+        <translation>닫기 %1</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="153"/>
+        <source>&amp;Close</source>
+        <translation>닫기(&amp;C)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="179"/>
         <source>&amp;File</source>
-        <translation>&amp;Файл</translation>
+        <translation>파일(&amp;F)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="189"/>
         <source>&amp;Help</source>
-        <translation>&amp;Справка</translation>
+        <translation>도움말(&amp;H)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="195"/>
         <source>&amp;Edit</source>
-        <translation>&amp;Правка</translation>
+        <translation>편집(&amp;E)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="201"/>
         <source>&amp;Profile</source>
-        <translation>П&amp;рофиль</translation>
+        <translation>프로필(&amp;P)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="205"/>
+        <source>&amp;Selection visibility</source>
+        <translation>인게임 표시(&amp;S)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="212"/>
+        <source>Selection &amp;mass tools</source>
+        <translation>선택 작업(&amp;M)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="236"/>
+        <location filename="../UserInterface.cpp" line="59"/>
+        <location filename="../UserInterface.cpp" line="641"/>
+        <source>&amp;About %1</source>
+        <translation>%1 정보(&amp;A)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="244"/>
         <source>&amp;Exit</source>
-        <translation>В&amp;ыход</translation>
+        <translation>종료(&amp;E)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="247"/>
         <source>Exit</source>
-        <translation>Выход</translation>
+        <translation>종료</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="255"/>
         <source>Close &amp;Profile</source>
-        <translation>Закрыть п&amp;рофиль</translation>
+        <translation>프로필 닫기(&amp;P)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="263"/>
         <source>&amp;Settings</source>
-        <translation>&amp;Настройки</translation>
+        <translation>설정(&amp;S)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="271"/>
+        <source>Select &amp;All</source>
+        <translation>모두 선택(&amp;A)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="279"/>
+        <source>&amp;Deselect All</source>
+        <translation>모두 선택 해제(&amp;D)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="287"/>
+        <source>&amp;Export selected...</source>
+        <translation>선택 내보내기(&amp;E)...</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="295"/>
+        <source>&amp;Remove selected</source>
+        <translation>선택 삭제(&amp;R)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="303"/>
         <source>&amp;Import files...</source>
-        <translation>&amp;Импортировать файлы...</translation>
+        <translation>파일 불러오기(&amp;I)...</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="311"/>
+        <source>&amp;Open File...</source>
+        <translation>파일 열기(&amp;O)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
         <location filename="../UserInterface.cpp" line="247"/>
         <source>Select &amp;GTA V Folder...</source>
-        <translation>Выбрать &amp;папку GTA V...</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="330"/>
-        <source>Show In-gam&amp;e</source>
-        <translation>Показывать в и&amp;гре</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="338"/>
-        <source>Hi&amp;de In-game</source>
-        <translation>Скры&amp;ть в игре</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="370"/>
-        <source>Change &amp;Players...</source>
-        <translation>&amp;Изменить игрока...</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="346"/>
-        <source>Change &amp;Title...</source>
-        <translation>Изменить &amp;Заголовок...</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="354"/>
-        <source>Change &amp;Crew...</source>
-        <translation>Изменить &amp;банду...</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="362"/>
-        <source>&amp;Qualify as Avatar</source>
-        <translation>&amp;Пометить как Аватар</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="153"/>
-        <source>&amp;Close</source>
-        <translation>&amp;Закрыть</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="205"/>
-        <source>&amp;Selection visibility</source>
-        <translation>В&amp;идимость выделение</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="212"/>
-        <source>Selection &amp;mass tools</source>
-        <translation>Инструменты &amp;массовой выборки</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="271"/>
-        <source>Select &amp;All</source>
-        <translation>В&amp;ыбрать все</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="279"/>
-        <source>&amp;Deselect All</source>
-        <translation>Снять выбо&amp;р со всех</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="287"/>
-        <source>&amp;Export selected...</source>
-        <translation>&amp;Экпортировать выделенное...</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="295"/>
-        <source>&amp;Remove selected</source>
-        <translation>&amp;Удалить выделенное</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="311"/>
-        <source>&amp;Open File...</source>
-        <translation>&amp;Открыть файл...</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.cpp" line="63"/>
-        <location filename="../UserInterface.cpp" line="313"/>
-        <location filename="../UserInterface.cpp" line="655"/>
-        <source>Select Profile</source>
-        <translation>Выбор профиля</translation>
+        <translation>GTA V 폴더 선택(&amp;G)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
@@ -2453,25 +2445,63 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.cpp" line="188"/>
         <location filename="../UserInterface.cpp" line="608"/>
         <source>Select GTA V Folder...</source>
-        <translation>Выбрать папку GTA V...</translation>
+        <translation>GTA V 폴더 선택</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="20"/>
-        <location filename="../UserInterface.cpp" line="61"/>
-        <source>%2 - %1</source>
-        <translation>%2 - %1</translation>
+        <location filename="../UserInterface.ui" line="330"/>
+        <source>Show In-gam&amp;e</source>
+        <translation>인게임 보이기(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../UserInterface.ui" line="236"/>
-        <location filename="../UserInterface.cpp" line="59"/>
-        <location filename="../UserInterface.cpp" line="641"/>
-        <source>&amp;About %1</source>
-        <translation>&amp;О программе %1</translation>
+        <location filename="../UserInterface.ui" line="338"/>
+        <source>Hi&amp;de In-game</source>
+        <translation>인게임 숨기기(&amp;D)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="346"/>
+        <source>Change &amp;Title...</source>
+        <translation>제목 변경(&amp;T)...</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="354"/>
+        <source>Change &amp;Crew...</source>
+        <translation>&amp;조직 상징 변경(&amp;C)...</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="362"/>
+        <source>&amp;Qualify as Avatar</source>
+        <translation>아바타 자격 부여(&amp;Q)</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.ui" line="370"/>
+        <source>Change &amp;Players...</source>
+        <translation>플레이어 변경(&amp;P)...</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1524"/>
+        <location filename="../ProfileInterface.cpp" line="1538"/>
+        <location filename="../SnapmaticWidget.cpp" line="329"/>
+        <source>Show In-game</source>
+        <translation>인게임 보이기</translation>
+    </message>
+    <message>
+        <location filename="../ProfileInterface.cpp" line="1558"/>
+        <location filename="../ProfileInterface.cpp" line="1572"/>
+        <location filename="../SnapmaticWidget.cpp" line="321"/>
+        <source>Hide In-game</source>
+        <translation>인게임 숨기기</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="63"/>
+        <location filename="../UserInterface.cpp" line="313"/>
+        <location filename="../UserInterface.cpp" line="655"/>
+        <source>Select Profile</source>
+        <translation>프로필 선택</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="456"/>
         <source>Open File...</source>
-        <translation>Открыть файл...</translation>
+        <translation>파일 열기...</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="503"/>
@@ -2479,31 +2509,12 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.cpp" line="546"/>
         <location filename="../UserInterface.cpp" line="551"/>
         <source>Open File</source>
-        <translation>Открыть файл</translation>
+        <translation>파일 열기</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="546"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
-        <translation>Не удалось открыть %1 из-за неверного формата файла</translation>
-    </message>
-    <message>
-        <location filename="../UserInterface.ui" line="134"/>
-        <source>&amp;Reload</source>
-        <translation>Пере&amp;загрузить</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1524"/>
-        <location filename="../ProfileInterface.cpp" line="1538"/>
-        <location filename="../SnapmaticWidget.cpp" line="329"/>
-        <source>Show In-game</source>
-        <translation>Показывать в игре</translation>
-    </message>
-    <message>
-        <location filename="../ProfileInterface.cpp" line="1558"/>
-        <location filename="../ProfileInterface.cpp" line="1572"/>
-        <location filename="../SnapmaticWidget.cpp" line="321"/>
-        <source>Hide In-game</source>
-        <translation>Скрыть в игре</translation>
+        <translation>올바른 파일 형식이 아니므로 %1을 열 수 없습니다</translation>
     </message>
 </context>
 </TS>
