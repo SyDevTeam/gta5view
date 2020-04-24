@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2019 Syping
+* Copyright (C) 2017-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -374,7 +374,7 @@ void ImportDialog::cropPicture()
 #endif
     imageCropper.setBackgroundColor(Qt::black);
     imageCropper.setCroppingRectBorderColor(QColor(255, 255, 255, 127));
-    imageCropper.setImage(QPixmap::fromImage(workImage, Qt::AutoColor));
+    imageCropper.setImage(QPixmap::fromImage(origImage, Qt::AutoColor));
     imageCropper.setProportion(QSize(1, 1));
     imageCropper.setFixedSize(workImage.size());
     cropLayout.addWidget(&imageCropper);
@@ -575,6 +575,7 @@ QImage ImportDialog::image()
 
 void ImportDialog::setImage(QImage *image_)
 {
+    origImage = *image_;
     workImage = QImage();
     if (image_->width() == image_->height())
     {

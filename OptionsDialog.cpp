@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2018 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,6 @@
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
-#include <QDesktopWidget>
 #include <QJsonDocument>
 #include <QStyleFactory>
 #include <QApplication>
@@ -39,6 +38,12 @@
 #include <QDebug>
 #include <QList>
 #include <QDir>
+
+#if QT_VERSION >= 0x050000
+#include <QScreen>
+#else
+#include <QDesktopWidget>
+#endif
 
 #ifdef GTA5SYNC_TELEMETRY
 #include "TelemetryClass.h"
@@ -58,9 +63,16 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
+#if QT_VERSION >= 0x050000
+    qreal screenRatioPR = AppEnv::screenRatioPR();
+    QRect desktopResolution = QApplication::primaryScreen()->geometry();
+    int desktopSizeWidth = qRound((double)desktopResolution.width() * screenRatioPR);
+    int desktopSizeHeight = qRound((double)desktopResolution.height() * screenRatioPR);
+#else
     QRect desktopResolution = QApplication::desktop()->screenGeometry(this);
     int desktopSizeWidth = desktopResolution.width();
     int desktopSizeHeight = desktopResolution.height();
+#endif
     aspectRatio = Qt::KeepAspectRatio;
     defExportSize = QSize(960, 536);
     cusExportSize = defExportSize;

@@ -1,6 +1,7 @@
 /*****************************************************************************
 * ImageCropper Qt Widget for cropping images
 * Copyright (C) 2013 Dimka Novikov, to@dimkanovikov.pro
+* Copyright (C) 2020 Syping
 *
 * This library is free software; you can redistribute it and/or
 * modify it under the terms of the GNU Lesser General Public
@@ -17,6 +18,7 @@
 *****************************************************************************/
 
 #include "imagecropper.h"
+#include "AppEnv.h"
 
 #include <QMouseEvent>
 #include <QPainter>
@@ -112,16 +114,16 @@ const QPixmap ImageCropper::cropImage()
 	// Получим размер отображаемого изображения
 	QSize scaledImageSize =
 			pimpl->imageForCropping.scaled(
-				this->size(), Qt::KeepAspectRatio, Qt::FastTransformation
+                size(), Qt::KeepAspectRatio, Qt::SmoothTransformation
 				).size();
 	// Определим расстояние от левого и верхнего краёв
 	float leftDelta = 0;
 	float topDelta = 0;
 	const float HALF_COUNT = 2;
-	if (this->size().height() == scaledImageSize.height()) {
-		leftDelta = (this->width() - scaledImageSize.width()) / HALF_COUNT;
+    if (size().height() == scaledImageSize.height()) {
+        leftDelta = (width() - scaledImageSize.width()) / HALF_COUNT;
 	} else {
-		topDelta = (this->height() - scaledImageSize.height()) / HALF_COUNT;
+        topDelta = (height() - scaledImageSize.height()) / HALF_COUNT;
 	}
 	// Определим пропорцию области обрезки по отношению к исходному изображению
 	float xScale = (float)pimpl->imageForCropping.width()  / scaledImageSize.width();
@@ -145,39 +147,54 @@ const QPixmap ImageCropper::cropImage()
 
 void ImageCropper::paintEvent(QPaintEvent* _event)
 {
-	QWidget::paintEvent( _event );
+    QWidget::paintEvent(_event);
 	//
 	QPainter widgetPainter(this);
 	// Рисуем изображение по центру виджета
 	{
+#if QT_VERSION >= 0x050600
+        qreal screenRatioPR = AppEnv::screenRatioPR();
 		// ... подгоним изображение для отображения по размеру виджета
 		QPixmap scaledImage =
-				pimpl->imageForCropping.scaled(this->size(), Qt::KeepAspectRatio, Qt::FastTransformation);
+                pimpl->imageForCropping.scaled(qRound((double)width() * screenRatioPR), qRound((double)height() * screenRatioPR), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+        scaledImage.setDevicePixelRatio(screenRatioPR);
+#else
+        QPixmap scaledImage =
+                pimpl->imageForCropping.scaled(size(), Qt::KeepAspectRatio, Qt::SmoothTransformation);
+#endif
 		// ... заливаем фон
-		widgetPainter.fillRect( this->rect(), pimpl->backgroundColor );
+        widgetPainter.fillRect(rect(), pimpl->backgroundColor);
 		// ... рисуем изображение по центру виджета
-		if ( this->size().height() == scaledImage.height() ) {
-			widgetPainter.drawPixmap( ( this->width() - scaledImage.width() ) / 2, 0, scaledImage );
+#if QT_VERSION >= 0x050600
+        if (qRound((double)height() * screenRatioPR) == scaledImage.height()) {
+            widgetPainter.drawPixmap( ( qRound((double)width() * screenRatioPR) - scaledImage.width() ) / 2, 0, scaledImage );
 		} else {
-			widgetPainter.drawPixmap( 0, ( this->height() - scaledImage.height() ) / 2, scaledImage );
+            widgetPainter.drawPixmap( 0, ( qRound((double)height() * screenRatioPR) - scaledImage.height() ) / 2, scaledImage );
 		}
+#else
+        if (height() == scaledImage.height()) {
+            widgetPainter.drawPixmap( ( width()- scaledImage.width() ) / 2, 0, scaledImage );
+        } else {
+            widgetPainter.drawPixmap( 0, ( height() - scaledImage.height() ) / 2, scaledImage );
+        }
+#endif
 	}
 	// Рисуем область обрезки
 	{
 		// ... если это первое отображение после инициилизации, то центруем областо обрезки
 		if (pimpl->croppingRect.isNull()) {
-			const int width = WIDGET_MINIMUM_SIZE.width()/2;
-			const int height = WIDGET_MINIMUM_SIZE.height()/2;
-			pimpl->croppingRect.setSize(QSize(width, height));
-			float x = (this->width() - pimpl->croppingRect.width())/2;
-			float y = (this->height() - pimpl->croppingRect.height())/2;
+            const int cwidth = WIDGET_MINIMUM_SIZE.width()/2;
+            const int cheight = WIDGET_MINIMUM_SIZE.height()/2;
+            pimpl->croppingRect.setSize(QSize(cwidth, cheight));
+            float x = (width() - pimpl->croppingRect.width())/2;
+            float y = (height() - pimpl->croppingRect.height())/2;
 			pimpl->croppingRect.moveTo(x, y);
 		}
 
 		// ... рисуем затемненную область
 		QPainterPath p;
 		p.addRect(pimpl->croppingRect);
-		p.addRect(this->rect());
+        p.addRect(rect());
 		widgetPainter.setBrush(QBrush(QColor(0,0,0,120)));
 		widgetPainter.setPen(Qt::transparent);
 		widgetPainter.drawPath(p);

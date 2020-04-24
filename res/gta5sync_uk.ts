@@ -179,66 +179,47 @@ Pictures and Savegames</source>
 <context>
     <name>ImageEditorDialog</name>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="14"/>
-        <location filename="../ImportDialog.cpp" line="639"/>
+        <location filename="../ImportDialog.cpp" line="640"/>
         <source>Overwrite Image...</source>
         <translation>Перезаписати зображення...</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="59"/>
-        <source>Import picture</source>
-        <translation>Імпортувати зображення</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="62"/>
-        <source>&amp;Import...</source>
-        <translation>&amp;Імпорт...</translation>
-    </message>
-    <message>
-        <location filename="../ImageEditorDialog.ui" line="82"/>
-        <location filename="../ImportDialog.cpp" line="641"/>
+        <location filename="../ImportDialog.cpp" line="642"/>
         <source>Apply changes</source>
         <translation>Застосувати зміни</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="85"/>
-        <location filename="../ImportDialog.cpp" line="640"/>
+        <location filename="../ImportDialog.cpp" line="641"/>
         <source>&amp;Overwrite</source>
         <translation>&amp;Перезаписати</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="92"/>
-        <location filename="../ImportDialog.cpp" line="643"/>
+        <location filename="../ImportDialog.cpp" line="644"/>
         <source>Discard changes</source>
         <translation>Скасувати зміни</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.ui" line="95"/>
-        <location filename="../ImportDialog.cpp" line="642"/>
+        <location filename="../ImportDialog.cpp" line="643"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="193"/>
-        <location filename="../ImageEditorDialog.cpp" line="200"/>
-        <location filename="../PictureDialog.cpp" line="1006"/>
-        <location filename="../PictureDialog.cpp" line="1030"/>
-        <location filename="../SnapmaticWidget.cpp" line="376"/>
-        <location filename="../SnapmaticWidget.cpp" line="400"/>
+        <location filename="../PictureDialog.cpp" line="1005"/>
+        <location filename="../PictureDialog.cpp" line="1029"/>
+        <location filename="../SnapmaticWidget.cpp" line="375"/>
+        <location filename="../SnapmaticWidget.cpp" line="399"/>
         <source>Snapmatic Image Editor</source>
         <translation>Редактор Snapmatic зображень</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="193"/>
-        <location filename="../PictureDialog.cpp" line="1006"/>
-        <location filename="../SnapmaticWidget.cpp" line="376"/>
+        <location filename="../PictureDialog.cpp" line="1005"/>
+        <location filename="../SnapmaticWidget.cpp" line="375"/>
         <source>Patching of Snapmatic Image failed because of I/O Error</source>
         <translation>Виправлення Snapmatic зображення не вдалося через I/O Error</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="200"/>
-        <location filename="../PictureDialog.cpp" line="1030"/>
-        <location filename="../SnapmaticWidget.cpp" line="400"/>
+        <location filename="../PictureDialog.cpp" line="1029"/>
+        <location filename="../SnapmaticWidget.cpp" line="399"/>
         <source>Patching of Snapmatic Image failed because of Image Error</source>
         <translation>Виправлення Snapmatic зображення не вдалося через помилку картинки</translation>
     </message>
@@ -280,7 +261,7 @@ Pictures and Savegames</source>
         <location filename="../ImportDialog.ui" line="150"/>
         <location filename="../ImportDialog.cpp" line="87"/>
         <location filename="../ImportDialog.cpp" line="315"/>
-        <location filename="../ImportDialog.cpp" line="727"/>
+        <location filename="../ImportDialog.cpp" line="728"/>
         <source>Background Colour: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</source>
         <translation>Фоновий колір: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
@@ -299,7 +280,7 @@ Pictures and Savegames</source>
         <location filename="../ImportDialog.ui" line="203"/>
         <location filename="../ImportDialog.cpp" line="88"/>
         <location filename="../ImportDialog.cpp" line="323"/>
-        <location filename="../ImportDialog.cpp" line="807"/>
+        <location filename="../ImportDialog.cpp" line="808"/>
         <source>Background Image:</source>
         <translation>Фонове зображення:</translation>
     </message>
@@ -459,25 +440,25 @@ Pictures and Savegames</source>
         <translation>Зберегти параметри...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="674"/>
+        <location filename="../ImportDialog.cpp" line="675"/>
         <source>Snapmatic Avatar Zone</source>
         <translation>Зона Snapmatic Аватару</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="674"/>
+        <location filename="../ImportDialog.cpp" line="675"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
         <translation>Ви впевнені, що будете використовувати квадратне зображення поза зоною аватара?
 Якщо ви хочете використовувати його як Аватар, зображення буде відокремлено!</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="723"/>
+        <location filename="../ImportDialog.cpp" line="724"/>
         <source>Select Colour...</source>
         <translation>Вибір кольору...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="318"/>
-        <location filename="../ImportDialog.cpp" line="792"/>
+        <location filename="../ImportDialog.cpp" line="793"/>
         <source>Background Image: %1</source>
         <translation>Фонове зображення: %1</translation>
     </message>
@@ -488,7 +469,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation>Будь ласка, виберіть свій профіль налаштувань</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="792"/>
+        <location filename="../ImportDialog.cpp" line="793"/>
         <source>File</source>
         <comment>Background Image: File</comment>
         <translation>Файл</translation>
@@ -739,26 +720,26 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.ui" line="422"/>
-        <location filename="../OptionsDialog.cpp" line="612"/>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="627"/>
-        <location filename="../OptionsDialog.cpp" line="628"/>
-        <location filename="../OptionsDialog.cpp" line="641"/>
-        <location filename="../OptionsDialog.cpp" line="642"/>
+        <location filename="../OptionsDialog.cpp" line="624"/>
+        <location filename="../OptionsDialog.cpp" line="625"/>
+        <location filename="../OptionsDialog.cpp" line="639"/>
+        <location filename="../OptionsDialog.cpp" line="640"/>
+        <location filename="../OptionsDialog.cpp" line="653"/>
+        <location filename="../OptionsDialog.cpp" line="654"/>
         <source>Found: %1</source>
         <translation>Знайдено:%1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
         <location filename="../OptionsDialog.ui" line="429"/>
-        <location filename="../OptionsDialog.cpp" line="616"/>
-        <location filename="../OptionsDialog.cpp" line="620"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
         <location filename="../OptionsDialog.cpp" line="632"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="645"/>
-        <location filename="../OptionsDialog.cpp" line="649"/>
-        <location filename="../OptionsDialog.cpp" line="653"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
+        <location filename="../OptionsDialog.cpp" line="648"/>
         <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="661"/>
+        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="669"/>
         <source>Language: %1</source>
         <translation>Мова: %1</translation>
     </message>
@@ -780,7 +761,7 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
-        <location filename="../OptionsDialog.cpp" line="574"/>
+        <location filename="../OptionsDialog.cpp" line="586"/>
         <source>Participate in %1 User Statistics</source>
         <translation>Опитування %1 про устаткування ПК</translation>
     </message>
@@ -816,8 +797,8 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
-        <location filename="../OptionsDialog.cpp" line="590"/>
-        <location filename="../OptionsDialog.cpp" line="594"/>
+        <location filename="../OptionsDialog.cpp" line="602"/>
+        <location filename="../OptionsDialog.cpp" line="606"/>
         <source>Participation ID: %1</source>
         <translation>ID учасника : %1</translation>
     </message>
@@ -839,8 +820,8 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="611"/>
         <location filename="../OptionsDialog.ui" line="633"/>
-        <location filename="../OptionsDialog.cpp" line="202"/>
-        <location filename="../OptionsDialog.cpp" line="251"/>
+        <location filename="../OptionsDialog.cpp" line="214"/>
+        <location filename="../OptionsDialog.cpp" line="263"/>
         <source>Current: %1</source>
         <translation>Зараз: %1</translation>
     </message>
@@ -897,95 +878,95 @@ Y: %2</translation>
         <translation>&amp;Скасувати</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="154"/>
+        <location filename="../OptionsDialog.cpp" line="166"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation>Як у системи</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="160"/>
+        <location filename="../OptionsDialog.cpp" line="172"/>
         <source>%1 (Game language)</source>
         <comment>Next closest language compared to the Game settings</comment>
         <translation>%1 (Мова гри)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="164"/>
-        <location filename="../OptionsDialog.cpp" line="167"/>
+        <location filename="../OptionsDialog.cpp" line="176"/>
+        <location filename="../OptionsDialog.cpp" line="179"/>
         <source>%1 (Closest to Interface)</source>
         <comment>Next closest language compared to the Interface</comment>
         <translation>%1 (Співпадає з інтерфейсом)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="160"/>
-        <location filename="../OptionsDialog.cpp" line="164"/>
-        <location filename="../OptionsDialog.cpp" line="167"/>
+        <location filename="../OptionsDialog.cpp" line="172"/>
+        <location filename="../OptionsDialog.cpp" line="176"/>
+        <location filename="../OptionsDialog.cpp" line="179"/>
         <source>Auto</source>
         <comment>Automatic language choice.</comment>
         <translation>Автоматично</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="154"/>
+        <location filename="../OptionsDialog.cpp" line="166"/>
         <source>%1 (Language priority)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation>%1 (пріоритет мови)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="462"/>
+        <location filename="../OptionsDialog.cpp" line="474"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="462"/>
+        <location filename="../OptionsDialog.cpp" line="474"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>Нова користувацька папка буде ініціалізована після перезапуску %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="472"/>
+        <location filename="../OptionsDialog.cpp" line="484"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Жодного</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="480"/>
-        <location filename="../OptionsDialog.cpp" line="484"/>
-        <location filename="../OptionsDialog.cpp" line="486"/>
+        <location filename="../OptionsDialog.cpp" line="492"/>
+        <location filename="../OptionsDialog.cpp" line="496"/>
+        <location filename="../OptionsDialog.cpp" line="498"/>
         <source>Profile: %1</source>
         <translation>Профіль: %1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="575"/>
+        <location filename="../OptionsDialog.cpp" line="587"/>
         <source>View %1 User Statistics Online</source>
         <translation>Переглянути користувацьку статистику %1 онлайн</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="594"/>
+        <location filename="../OptionsDialog.cpp" line="606"/>
         <source>Not registered</source>
         <translation>Не зареєстрований</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="612"/>
-        <location filename="../OptionsDialog.cpp" line="628"/>
-        <location filename="../OptionsDialog.cpp" line="641"/>
-        <location filename="../OptionsDialog.cpp" line="642"/>
+        <location filename="../OptionsDialog.cpp" line="624"/>
+        <location filename="../OptionsDialog.cpp" line="640"/>
+        <location filename="../OptionsDialog.cpp" line="653"/>
+        <location filename="../OptionsDialog.cpp" line="654"/>
         <source>Yes</source>
         <translation>Так</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="627"/>
+        <location filename="../OptionsDialog.cpp" line="625"/>
+        <location filename="../OptionsDialog.cpp" line="639"/>
         <source>No</source>
         <translation>Ні</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="620"/>
-        <location filename="../OptionsDialog.cpp" line="649"/>
+        <location filename="../OptionsDialog.cpp" line="632"/>
+        <location filename="../OptionsDialog.cpp" line="661"/>
         <source>OS defined</source>
         <translation>Визначається ОС</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="648"/>
+        <location filename="../OptionsDialog.cpp" line="669"/>
         <source>Steam defined</source>
         <translation>Визначається Steam</translation>
     </message>
@@ -1029,43 +1010,43 @@ Y: %2</translation>
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="165"/>
+        <location filename="../PictureDialog.cpp" line="164"/>
         <location filename="../ProfileInterface.cpp" line="1609"/>
         <source>Export as &amp;Picture...</source>
         <translation>Експортувати як &amp;зображення...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="166"/>
+        <location filename="../PictureDialog.cpp" line="165"/>
         <location filename="../ProfileInterface.cpp" line="1610"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation>Експортувати як &amp;Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="168"/>
+        <location filename="../PictureDialog.cpp" line="167"/>
         <location filename="../ProfileInterface.cpp" line="1603"/>
         <source>&amp;Edit Properties...</source>
         <translation>&amp;Змінити властивості...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="169"/>
+        <location filename="../PictureDialog.cpp" line="168"/>
         <location filename="../ProfileInterface.cpp" line="1604"/>
         <source>&amp;Overwrite Image...</source>
         <translation>&amp;Перезаписати зображення...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="171"/>
+        <location filename="../PictureDialog.cpp" line="170"/>
         <location filename="../ProfileInterface.cpp" line="1606"/>
         <source>Open &amp;Map Viewer...</source>
         <translation>Відкрити &amp;карту...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="173"/>
+        <location filename="../PictureDialog.cpp" line="172"/>
         <location filename="../ProfileInterface.cpp" line="1607"/>
         <source>Open &amp;JSON Editor...</source>
         <translation>Відкрити редактор &amp;JSON...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="575"/>
+        <location filename="../PictureDialog.cpp" line="574"/>
         <source>Key 1 - Avatar Preview Mode
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
@@ -1074,142 +1055,142 @@ Arrow Keys - Navigate</source>
 Стрілки - Навігація</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="636"/>
-        <location filename="../PictureDialog.cpp" line="662"/>
+        <location filename="../PictureDialog.cpp" line="635"/>
+        <location filename="../PictureDialog.cpp" line="661"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Переглядач фотографій Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="636"/>
-        <location filename="../PictureDialog.cpp" line="662"/>
+        <location filename="../PictureDialog.cpp" line="635"/>
+        <location filename="../PictureDialog.cpp" line="661"/>
         <source>Failed at %1</source>
         <translation>Помилка на%1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="661"/>
-        <location filename="../PictureDialog.cpp" line="798"/>
+        <location filename="../PictureDialog.cpp" line="660"/>
+        <location filename="../PictureDialog.cpp" line="797"/>
         <location filename="../SnapmaticEditor.cpp" line="247"/>
         <source>No Players</source>
         <translation>Гравців немає</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="661"/>
-        <location filename="../PictureDialog.cpp" line="774"/>
+        <location filename="../PictureDialog.cpp" line="660"/>
+        <location filename="../PictureDialog.cpp" line="773"/>
         <source>No Crew</source>
         <translation>Банди немає</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="661"/>
+        <location filename="../PictureDialog.cpp" line="660"/>
         <source>Unknown Location</source>
         <translation>Невідома локація</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="732"/>
+        <location filename="../PictureDialog.cpp" line="731"/>
         <source>Avatar Preview Mode
 Press 1 for Default View</source>
         <translation>Режим для аватарок
 Натисніть 1 для стандартного перегляду</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="95"/>
+        <location filename="../PictureExport.cpp" line="99"/>
         <source>Export as Picture...</source>
         <translation>Експортувати як зображення...</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="96"/>
-        <location filename="../PictureExport.cpp" line="249"/>
+        <location filename="../PictureExport.cpp" line="100"/>
+        <location filename="../PictureExport.cpp" line="262"/>
         <source>Export</source>
         <translation>Експорт</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="99"/>
+        <location filename="../PictureExport.cpp" line="103"/>
         <source>JPEG Graphics (*.jpg *.jpeg)</source>
         <translation>JPEG Graphics (*.jpg *.jpeg)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="100"/>
+        <location filename="../PictureExport.cpp" line="104"/>
         <source>Portable Network Graphics (*.png)</source>
         <translation>Portable Network Graphics (*.png)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="150"/>
-        <location filename="../PictureExport.cpp" line="202"/>
-        <location filename="../PictureExport.cpp" line="205"/>
-        <location filename="../PictureExport.cpp" line="208"/>
-        <location filename="../PictureExport.cpp" line="211"/>
+        <location filename="../PictureExport.cpp" line="154"/>
+        <location filename="../PictureExport.cpp" line="215"/>
         <location filename="../PictureExport.cpp" line="218"/>
+        <location filename="../PictureExport.cpp" line="221"/>
+        <location filename="../PictureExport.cpp" line="224"/>
+        <location filename="../PictureExport.cpp" line="231"/>
         <source>Export as Picture</source>
         <translation>Експортувати як зображення</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="150"/>
-        <location filename="../PictureExport.cpp" line="285"/>
+        <location filename="../PictureExport.cpp" line="154"/>
+        <location filename="../PictureExport.cpp" line="298"/>
         <source>Overwrite %1 with current Snapmatic picture?</source>
         <translation>Перезаписати %1 поточним Snapmatic зображенням?</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="202"/>
+        <location filename="../PictureExport.cpp" line="215"/>
         <source>Failed to export the picture because the system occurred a write failure</source>
         <translation>Не вдалося експортувати зображення, оскільки в системі виникла помилка запису</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="205"/>
+        <location filename="../PictureExport.cpp" line="218"/>
         <source>Failed to export the picture because the format detection failures</source>
         <translation>Не вдалося експортувати зображення через помилки виявлення формату</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="208"/>
+        <location filename="../PictureExport.cpp" line="221"/>
         <source>Failed to export the picture because the file can&apos;t be written</source>
         <translation>Не вдалося експортувати зображення, оскільки файл не може бути записаний</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="211"/>
+        <location filename="../PictureExport.cpp" line="224"/>
         <source>Failed to export the picture because of an unknown reason</source>
         <translation>Не вдалося експортувати зображення через невідому причину</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="218"/>
-        <location filename="../PictureExport.cpp" line="316"/>
+        <location filename="../PictureExport.cpp" line="231"/>
+        <location filename="../PictureExport.cpp" line="329"/>
         <source>No valid file is selected</source>
         <translation>Вибрано невірний файл</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="248"/>
+        <location filename="../PictureExport.cpp" line="261"/>
         <source>Export as Snapmatic...</source>
         <translation>Експортувати як Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="252"/>
+        <location filename="../PictureExport.cpp" line="265"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="253"/>
+        <location filename="../PictureExport.cpp" line="266"/>
         <source>GTA V Raw Export (*.auto)</source>
         <translation>GTA V RAW-експорт (*.auto)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="254"/>
+        <location filename="../PictureExport.cpp" line="267"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Snapmatic картинки (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="285"/>
-        <location filename="../PictureExport.cpp" line="296"/>
-        <location filename="../PictureExport.cpp" line="305"/>
-        <location filename="../PictureExport.cpp" line="310"/>
-        <location filename="../PictureExport.cpp" line="316"/>
+        <location filename="../PictureExport.cpp" line="298"/>
+        <location filename="../PictureExport.cpp" line="309"/>
+        <location filename="../PictureExport.cpp" line="318"/>
+        <location filename="../PictureExport.cpp" line="323"/>
+        <location filename="../PictureExport.cpp" line="329"/>
         <source>Export as Snapmatic</source>
         <translation>Експортувати як Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="296"/>
-        <location filename="../PictureExport.cpp" line="305"/>
+        <location filename="../PictureExport.cpp" line="309"/>
+        <location filename="../PictureExport.cpp" line="318"/>
         <source>Failed to export current Snapmatic picture</source>
         <translation>Не вдалося експортувати поточну фотографію Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureExport.cpp" line="310"/>
+        <location filename="../PictureExport.cpp" line="323"/>
         <source>Exported Snapmatic to &quot;%1&quot; because of using the .auto extension.</source>
         <translation>Експортується Snapmatic до &quot;%1&quot; через використання .auto розширення.</translation>
     </message>
@@ -1306,16 +1287,15 @@ Press 1 for Default View</source>
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../ExportThread.cpp" line="97"/>
-        <location filename="../ExportThread.cpp" line="136"/>
-        <location filename="../ExportThread.cpp" line="157"/>
+        <location filename="../ExportThread.cpp" line="102"/>
+        <location filename="../ExportThread.cpp" line="150"/>
+        <location filename="../ExportThread.cpp" line="171"/>
         <source>Export file %1 of %2 files</source>
         <translation>Експортується файл %1 з %2 файлів</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="109"/>
         <location filename="../ImportDialog.cpp" line="426"/>
-        <location filename="../ImportDialog.cpp" line="746"/>
+        <location filename="../ImportDialog.cpp" line="747"/>
         <location filename="../ProfileInterface.cpp" line="487"/>
         <location filename="../ProfileInterface.cpp" line="488"/>
         <location filename="../ProfileInterface.cpp" line="532"/>
@@ -1337,47 +1317,40 @@ Press 1 for Default View</source>
         <translation>Імпортування...</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="110"/>
-        <location filename="../ImageEditorDialog.cpp" line="141"/>
-        <location filename="../ImageEditorDialog.cpp" line="150"/>
         <location filename="../ImportDialog.cpp" line="427"/>
         <location filename="../ImportDialog.cpp" line="458"/>
         <location filename="../ImportDialog.cpp" line="467"/>
-        <location filename="../ImportDialog.cpp" line="747"/>
-        <location filename="../ImportDialog.cpp" line="778"/>
-        <location filename="../ImportDialog.cpp" line="787"/>
+        <location filename="../ImportDialog.cpp" line="748"/>
+        <location filename="../ImportDialog.cpp" line="779"/>
+        <location filename="../ImportDialog.cpp" line="788"/>
         <source>Import</source>
         <translation>Імпорт</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="120"/>
         <location filename="../ImportDialog.cpp" line="437"/>
-        <location filename="../ImportDialog.cpp" line="757"/>
+        <location filename="../ImportDialog.cpp" line="758"/>
         <location filename="../ProfileInterface.cpp" line="507"/>
         <source>All image files (%1)</source>
         <translation>Файли зображень (%1)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="121"/>
         <location filename="../ImportDialog.cpp" line="438"/>
-        <location filename="../ImportDialog.cpp" line="758"/>
+        <location filename="../ImportDialog.cpp" line="759"/>
         <location filename="../ProfileInterface.cpp" line="508"/>
         <location filename="../UserInterface.cpp" line="463"/>
         <source>All files (**)</source>
         <translation>Усі файли (**)</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="141"/>
         <location filename="../ImportDialog.cpp" line="458"/>
-        <location filename="../ImportDialog.cpp" line="778"/>
+        <location filename="../ImportDialog.cpp" line="779"/>
         <location filename="../ProfileInterface.cpp" line="769"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
         <translation>Неможливо імпортувати %1, оскільки файл не може бути відкритий</translation>
     </message>
     <message>
-        <location filename="../ImageEditorDialog.cpp" line="150"/>
         <location filename="../ImportDialog.cpp" line="467"/>
-        <location filename="../ImportDialog.cpp" line="787"/>
+        <location filename="../ImportDialog.cpp" line="788"/>
         <location filename="../ProfileInterface.cpp" line="779"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
         <translation>Неможливо імпортувати %1, оскільки файл неможливо розібрати правильно</translation>
@@ -1895,9 +1868,9 @@ Press 1 for Default View</source>
         <location filename="../JsonEditorDialog.cpp" line="182"/>
         <location filename="../JsonEditorDialog.cpp" line="188"/>
         <location filename="../JsonEditorDialog.cpp" line="217"/>
-        <location filename="../PictureDialog.cpp" line="921"/>
+        <location filename="../PictureDialog.cpp" line="920"/>
         <location filename="../SnapmaticEditor.cpp" line="334"/>
-        <location filename="../SnapmaticWidget.cpp" line="434"/>
+        <location filename="../SnapmaticWidget.cpp" line="433"/>
         <source>Snapmatic Properties</source>
         <translation>Властивості Snapmatic</translation>
     </message>
@@ -1988,9 +1961,9 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="188"/>
-        <location filename="../PictureDialog.cpp" line="921"/>
+        <location filename="../PictureDialog.cpp" line="920"/>
         <location filename="../SnapmaticEditor.cpp" line="334"/>
-        <location filename="../SnapmaticWidget.cpp" line="434"/>
+        <location filename="../SnapmaticWidget.cpp" line="433"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>
         <translation>Змінити властивості Snapmatic не вдалося через I/O Помилку</translation>
     </message>
@@ -2182,8 +2155,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../SnapmaticWidget.ui" line="152"/>
-        <location filename="../SnapmaticWidget.cpp" line="171"/>
-        <location filename="../SnapmaticWidget.cpp" line="197"/>
+        <location filename="../SnapmaticWidget.cpp" line="170"/>
+        <location filename="../SnapmaticWidget.cpp" line="196"/>
         <source>Delete picture</source>
         <translation>Видалити фото</translation>
     </message>
@@ -2243,22 +2216,22 @@ Press 1 for Default View</source>
         <translation>&amp;Зняти виділення усіх</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="171"/>
+        <location filename="../SnapmaticWidget.cpp" line="170"/>
         <source>Are you sure to delete %1 from your Snapmatic pictures?</source>
         <translation>Ви дійсно бажаєте видалити %1 з ваших Snapmatic фотографій?</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="197"/>
+        <location filename="../SnapmaticWidget.cpp" line="196"/>
         <source>Failed at deleting %1 from your Snapmatic pictures</source>
         <translation>Не вдалося видалити%1 з ваших Snapmatic фотографій</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="321"/>
+        <location filename="../SnapmaticWidget.cpp" line="320"/>
         <source>Failed to hide %1 In-game from your Snapmatic pictures</source>
         <translation>Не вдалося сховати %1 Snapmatic у грі</translation>
     </message>
     <message>
-        <location filename="../SnapmaticWidget.cpp" line="329"/>
+        <location filename="../SnapmaticWidget.cpp" line="328"/>
         <source>Failed to show %1 In-game from your Snapmatic pictures</source>
         <translation>Не вдалося показати %1 Snapmatic у грі</translation>
     </message>
@@ -2421,7 +2394,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="720"/>
+        <location filename="../OptionsDialog.cpp" line="732"/>
         <location filename="../UserInterface.cpp" line="188"/>
         <location filename="../UserInterface.cpp" line="608"/>
         <source>Select GTA V Folder...</source>
@@ -2460,14 +2433,14 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="1524"/>
         <location filename="../ProfileInterface.cpp" line="1538"/>
-        <location filename="../SnapmaticWidget.cpp" line="329"/>
+        <location filename="../SnapmaticWidget.cpp" line="328"/>
         <source>Show In-game</source>
         <translation>Показати у грі</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1558"/>
         <location filename="../ProfileInterface.cpp" line="1572"/>
-        <location filename="../SnapmaticWidget.cpp" line="321"/>
+        <location filename="../SnapmaticWidget.cpp" line="320"/>
         <source>Hide In-game</source>
         <translation>Сховати у грі</translation>
     </message>

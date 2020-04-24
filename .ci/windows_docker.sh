@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_IMAGE=sypingauto/gta5view-build:1.7-static
+DOCKER_IMAGE=sypingauto/gta5view-build:1.8-static
 PROJECT_DIR_DOCKER=/gta5view
 
 cd ${PROJECT_DIR} && \
@@ -17,5 +17,9 @@ export GTA5VIEW_EXECUTABLE=gta5view-${EXECUTABLE_VERSION}${EXECUTABLE_ARCH}.exe 
 if [ "${PACKAGE_CODE}" == "gta5-mods" ]; then
 	${PROJECT_DIR}/.ci/dropbox_uploader.sh mkdir gta5-mods/${PACKAGE_VERSION}
 	${PROJECT_DIR}/.ci/dropbox_uploader.sh upload ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} gta5-mods/${PACKAGE_VERSION}/${GTA5VIEW_EXECUTABLE} && \
+	rm -rf ${GTA5VIEW_EXECUTABLE}
+elif [ "${PACKAGE_CODE}" == "gtainside" ]; then
+	${PROJECT_DIR}/.ci/dropbox_uploader.sh mkdir gtainside/${PACKAGE_VERSION}
+	${PROJECT_DIR}/.ci/dropbox_uploader.sh upload ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} gtainside/${PACKAGE_VERSION}/${GTA5VIEW_EXECUTABLE} && \
 	rm -rf ${GTA5VIEW_EXECUTABLE}
 fi

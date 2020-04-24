@@ -1,6 +1,6 @@
 #/*****************************************************************************
 #* gta5view Grand Theft Auto V Profile Viewer
-#* Copyright (C) 2015-2019 Syping
+#* Copyright (C) 2015-2020 Syping
 #*
 #* This program is free software: you can redistribute it and/or modify
 #* it under the terms of the GNU General Public License as published by
@@ -37,7 +37,6 @@ SOURCES += main.cpp \
     ExportThread.cpp \
     GlobalString.cpp \
     IconLoader.cpp \
-    ImageEditorDialog.cpp \
     ImportDialog.cpp \
     JsonEditorDialog.cpp \
     MapLocationDialog.cpp \
@@ -79,7 +78,6 @@ HEADERS  += \
     ExportThread.h \
     GlobalString.h \
     IconLoader.h \
-    ImageEditorDialog.h \
     ImportDialog.h \
     JsonEditorDialog.h \
     MapLocationDialog.h \
@@ -117,7 +115,6 @@ HEADERS  += \
 FORMS    += \
     AboutDialog.ui \
     ExportDialog.ui \
-    ImageEditorDialog.ui \
     ImportDialog.ui \
     JsonEditorDialog.ui \
     MapLocationDialog.ui \

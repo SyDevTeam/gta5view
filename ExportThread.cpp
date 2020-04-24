@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -22,13 +22,18 @@
 #include "ProfileWidget.h"
 #include "ExportThread.h"
 #include "SavegameData.h"
+#include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
-#include <QDesktopWidget>
 #include <QApplication>
 #include <QFileInfo>
-#include <QDebug>
 #include <QFile>
+
+#if QT_VERSION >= 0x050000
+#include <QScreen>
+#else
+#include <QDesktopWidget>
+#endif
 
 ExportThread::ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, int exportCount, QObject *parent) : QThread(parent),
     profileMap(profileMap), exportDirectory(exportDirectory), pictureCopyEnabled(pictureCopyEnabled), pictureExportEnabled(pictureExportEnabled), exportCount(exportCount)
@@ -101,8 +106,17 @@ void ExportThread::run()
                     QImage exportPicture = picture->getImage();
                     if (sizeMode == "Desktop")
                     {
-                        QRect desktopResolution = qApp->desktop()->screenGeometry();
-                        exportPicture = exportPicture.scaled(desktopResolution.width(), desktopResolution.height(), aspectRatio, Qt::SmoothTransformation);
+#if QT_VERSION >= 0x050000
+                        qreal screenRatioPR = AppEnv::screenRatioPR();
+                        QRect desktopResolution = QApplication::primaryScreen()->geometry();
+                        int desktopSizeWidth = qRound((double)desktopResolution.width() * screenRatioPR);
+                        int desktopSizeHeight = qRound((double)desktopResolution.height() * screenRatioPR);
+#else
+                        QRect desktopResolution = QApplication::desktop()->screenGeometry();
+                        int desktopSizeWidth = desktopResolution.width();
+                        int desktopSizeHeight = desktopResolution.height();
+#endif
+                        exportPicture = exportPicture.scaled(desktopSizeWidth, desktopSizeHeight, aspectRatio, Qt::SmoothTransformation);
                     }
                     else if (sizeMode == "Custom")
                     {

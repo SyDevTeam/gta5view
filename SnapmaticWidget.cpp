@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2019 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 
 #include "SnapmaticWidget.h"
 #include "ui_SnapmaticWidget.h"
-#include "ImageEditorDialog.h"
 #include "MapLocationDialog.h"
 #include "JsonEditorDialog.h"
 #include "SnapmaticPicture.h"

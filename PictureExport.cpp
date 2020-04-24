@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,6 +17,7 @@
 *****************************************************************************/
 
 #include "config.h"
+#include "AppEnv.h"
 #include "PictureExport.h"
 #include "PictureDialog.h"
 #include "StandardPaths.h"
@@ -32,6 +33,9 @@
 
 #if QT_VERSION >= 0x050000
 #include <QSaveFile>
+#include <QScreen>
+#else
+#include <QDesktopWidget>
 #endif
 
 PictureExport::PictureExport()
@@ -157,8 +161,17 @@ fileDialogPreSave: //Work?
             QImage exportPicture = picture->getImage();
             if (sizeMode == "Desktop")
             {
+#if QT_VERSION >= 0x050000
+                qreal screenRatioPR = AppEnv::screenRatioPR();
+                QRect desktopResolution = QApplication::primaryScreen()->geometry();
+                int desktopSizeWidth = qRound((double)desktopResolution.width() * screenRatioPR);
+                int desktopSizeHeight = qRound((double)desktopResolution.height() * screenRatioPR);
+#else
                 QRect desktopResolution = QApplication::desktop()->screenGeometry();
-                exportPicture = exportPicture.scaled(desktopResolution.width(), desktopResolution.height(), aspectRatio, Qt::SmoothTransformation);
+                int desktopSizeWidth = desktopResolution.width();
+                int desktopSizeHeight = desktopResolution.height();
+#endif
+                exportPicture = exportPicture.scaled(desktopSizeWidth, desktopSizeHeight, aspectRatio, Qt::SmoothTransformation);
             }
             else if (sizeMode == "Custom")
             {
