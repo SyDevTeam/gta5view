@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Cleanup previous Drone build
+if [ -d "assets" ]; then
+	rm -rf assets
+fi
+if [ -d "build" ]; then
+	rm -rf build
+fi
+
 # Decrypt Telemetry Authenticator
 rm -rf tmext/TelemetryClassAuthenticator.cpp && \
 openssl aes-256-cbc -k ${TCA_PASS} -in .drone/TelemetryClassAuthenticator.cpp.enc -out tmext/TelemetryClassAuthenticator.cpp -d -pbkdf2
