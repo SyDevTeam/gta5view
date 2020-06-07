@@ -14,8 +14,6 @@ steps:
       from_secret: tca_pass
   commands:
     - .drone/drone.sh
-
-steps:
 - name: Windows Portable
   image: sypingauto/gta5view-build:1.8-static
   environment:
