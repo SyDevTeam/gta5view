@@ -1,0 +1,27 @@
+kind: pipeline
+type: docker
+  
+environment:
+  BUILD_TYPE: "RC"
+
+steps:
+- name: Windows Installer
+  image: sypingauto/gta5view-build:1.8-shared
+  environment:
+    BUILD_SCRIPT: "wininstall_build.sh"
+    QT_SELECT: "qt5-x86_64-w64-mingw32"
+    TCA_PASS:
+      from_secret: tca_pass
+  commands:
+    - .drone/drone.sh
+
+steps:
+- name: Windows Portable
+  image: sypingauto/gta5view-build:1.8-static
+  environment:
+    BUILD_SCRIPT: "windows_build.sh"
+    QT_SELECT: "qt5-x86_64-w64-mingw32"
+    TCA_PASS:
+      from_secret: tca_pass
+  commands:
+    - .drone/drone.sh

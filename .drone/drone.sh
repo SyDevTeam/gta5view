@@ -2,10 +2,10 @@
 
 # Decrypt Telemetry Authenticator
 rm -rf tmext/TelemetryClassAuthenticator.cpp && \
-openssl aes-256-cbc -k ${tca_pass} -in .gitlab/TelemetryClassAuthenticator.cpp.enc -out tmext/TelemetryClassAuthenticator.cpp -d
+openssl aes-256-cbc -k ${TCA_PASS} -in .drone/TelemetryClassAuthenticator.cpp.enc -out tmext/TelemetryClassAuthenticator.cpp -d -pbkdf2
 
 # Check if build is not tagged
-if [ "${CI_COMMIT_TAG}" == "" ]; then
+if [ "${DRONE_TAG}" == "" ]; then
 	export EXECUTABLE_TAG=-$(git rev-parse --short HEAD)
 else
 	export EXECUTABLE_TAG=
@@ -13,7 +13,7 @@ fi
 
 # Check if package code is not set
 if [ "${PACKAGE_CODE}" == "" ]; then
-	export PACKAGE_CODE=GitLab
+	export PACKAGE_CODE=Drone
 fi
 
 # Init Application Commit Hash
