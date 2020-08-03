@@ -20,6 +20,7 @@
 #include "imagecropper.h"
 #include "AppEnv.h"
 
+#include <QPainterPath>
 #include <QMouseEvent>
 #include <QPainter>
 
