@@ -1862,13 +1862,17 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
 void ProfileInterface::hoverProfileWidgetCheck()
 {
     ProfileWidget *pWidget = nullptr;
-    for (ProfileWidget *widget : widgets.keys())
+    QMap<ProfileWidget*, QString>::const_iterator it = widgets.constBegin();
+    QMap<ProfileWidget*, QString>::const_iterator end = widgets.constEnd();
+    while (it != end)
     {
+        ProfileWidget *widget = it.key();
         if (widget->underMouse())
         {
             pWidget = widget;
             break;
         }
+        it++;
     }
     if (pWidget != nullptr)
     {
