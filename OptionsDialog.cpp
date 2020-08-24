@@ -362,6 +362,8 @@ void OptionsDialog::applySettings()
 #if QT_VERSION >= 0x050200
     settings->setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
 #endif
+#else
+    settings->setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
 #endif
     settings->endGroup();
 
@@ -722,8 +724,9 @@ void OptionsDialog::setupSnapmaticPictureViewer()
     ui->gbSnapmaticPictureViewer->setVisible(false);
 #endif
 #else
-    ui->cbSnapmaticNavigationBar->setVisible(false);
-    ui->gbSnapmaticPictureViewer->setVisible(false);
+    settings->beginGroup("Interface");
+    ui->cbSnapmaticNavigationBar->setChecked(settings->value("NavigationBar", true).toBool());
+    settings->endGroup();
 #endif
 }
 

@@ -215,6 +215,15 @@ PictureDialog::~PictureDialog()
         delete layout()->menuBar();
     }
 #endif
+#else
+    if (naviEnabled)
+    {
+        for (QObject *obj : layout()->menuBar()->children())
+        {
+            delete obj;
+        }
+        delete layout()->menuBar();
+    }
 #endif
     for (QObject *obj : manageMenu->children())
     {
@@ -247,6 +256,15 @@ void PictureDialog::addPreviousNextButtons()
 
     naviEnabled = true;
 #endif
+#else
+    QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
+    uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
+    uiToolbar->setObjectName("uiToolbar");
+    uiToolbar->addAction(QIcon(":/img/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
+    uiToolbar->addAction(QIcon(":/img/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
+    layout()->setMenuBar(uiToolbar);
+
+    naviEnabled = true;
 #endif
 }
 
