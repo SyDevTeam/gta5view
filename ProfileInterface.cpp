@@ -1781,11 +1781,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
             return true;
         }
     }
-#ifdef GTA5SYNC_WIN
-    else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::WindowActivate)
-#else
     else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease)
-#endif
     {
         if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
         {
