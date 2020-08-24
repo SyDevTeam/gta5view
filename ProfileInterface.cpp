@@ -1626,7 +1626,7 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
     contextMenuOpened = true;
     contextMenu.exec(ev->globalPos());
     contextMenuOpened = false;
-    hoverProfileWidgetCheck();
+    QTimer::singleShot(0, this, SLOT(hoverProfileWidgetCheck()));
 }
 
 void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
@@ -1659,7 +1659,7 @@ void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
     contextMenuOpened = true;
     contextMenu.exec(ev->globalPos());
     contextMenuOpened = false;
-    hoverProfileWidgetCheck();
+    QTimer::singleShot(0, this, SLOT(hoverProfileWidgetCheck()));
 }
 
 void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
@@ -1690,6 +1690,7 @@ void ProfileInterface::retranslateUi()
 
 bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
 {
+    qDebug() << "event filter" << event;
     if (event->type() == QEvent::KeyPress)
     {
         if (isProfileLoaded)
@@ -1780,19 +1781,27 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
             return true;
         }
     }
+#ifdef GTA5SYNC_WIN
     else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease || event->type() == QEvent::WindowActivate)
+#else
+    else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease)
+#endif
     {
         if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
         {
             ProfileWidget *pWidget = nullptr;
-            for (ProfileWidget *widget : widgets.keys())
+            QMap<ProfileWidget*, QString>::const_iterator it = widgets.constBegin();
+            QMap<ProfileWidget*, QString>::const_iterator end = widgets.constEnd();
+            while (it != end)
             {
+                ProfileWidget *widget = it.key();
                 QPoint mousePos = widget->mapFromGlobal(QCursor::pos());
                 if (widget->rect().contains(mousePos))
                 {
                     pWidget = widget;
                     break;
                 }
+                it++;
             }
             if (pWidget != nullptr)
             {
@@ -1826,7 +1835,7 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
     }
     else if (event->type() == QEvent::WindowDeactivate && isProfileLoaded)
     {
-        if (previousWidget != nullptr)
+        if (previousWidget != nullptr && watched == previousWidget)
         {
             previousWidget->setStyleSheet(QLatin1String(""));
             previousWidget = nullptr;
