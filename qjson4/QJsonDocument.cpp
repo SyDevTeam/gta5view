@@ -199,7 +199,7 @@ QString QJsonDocument::escapeString(const QString &s) const {
 //------------------------------------------------------------------------------
 // Name: toJson
 //------------------------------------------------------------------------------
-QString QJsonDocument::toJson(const QJsonValue &v, JsonFormat format, int intend) const {
+QString QJsonDocument::toJson(const QJsonValue &v, JsonFormat format, int indent) const {
 
     QString b;
     QTextStream ss(&b, QIODevice::WriteOnly | QIODevice::Text);
@@ -234,17 +234,17 @@ QString QJsonDocument::toJson(const QJsonValue &v, JsonFormat format, int intend
             QJsonArray::const_iterator it = a.begin();
             QJsonArray::const_iterator e  = a.end();
 
-            if (!compact) ss << QByteArray(4*intend, ' ');
-            ss << toJson(*it++, format, intend+1);
+            if (!compact) ss << QByteArray(4*indent, ' ');
+            ss << toJson(*it++, format, indent+1);
 
             for(;it != e; ++it) {
                 ss << (compact ? "," : ",\n");
-                if (!compact) ss << QByteArray(4*intend, ' ');
-                ss << toJson(*it, format, intend+1);
+                if (!compact) ss << QByteArray(4*indent, ' ');
+                ss << toJson(*it, format, indent+1);
             }
         }
-        intend--;
-        ss << (compact ? "]" : QString("\n%1]").arg(QString(4*intend, ' ')));
+        indent--;
+        ss << (compact ? "]" : QString("\n%1]").arg(QString(4*indent, ' ')));
     }
         break;
     case QJsonValue::Object:
@@ -255,17 +255,17 @@ QString QJsonDocument::toJson(const QJsonValue &v, JsonFormat format, int intend
             QJsonObject::const_iterator it = o.begin();
             QJsonObject::const_iterator e  = o.end();
 
-            if (!compact) ss << QByteArray(4*intend, ' ');
-            ss << '"' << escapeString(it.key()) << (compact ? "\":" : "\": ") << toJson(it.value(), format, intend+1);
+            if (!compact) ss << QByteArray(4*indent, ' ');
+            ss << '"' << escapeString(it.key()) << (compact ? "\":" : "\": ") << toJson(it.value(), format, indent+1);
             ++it;
             for(;it != e; ++it) {
                 ss << (compact ? "," : ",\n");
-                if (!compact) ss << QByteArray(4*intend, ' ');
-                ss << '"' << escapeString(it.key()) << (compact ? "\":" : "\": ") << toJson(it.value(), format, intend+1);
+                if (!compact) ss << QByteArray(4*indent, ' ');
+                ss << '"' << escapeString(it.key()) << (compact ? "\":" : "\": ") << toJson(it.value(), format, indent+1);
             }
         }
-        intend--;
-        ss << (compact ? "}" : QString("\n%1}").arg(QString(4*intend, ' ')));
+        indent--;
+        ss << (compact ? "}" : QString("\n%1}").arg(QString(4*indent, ' ')));
     }
         break;
     case QJsonValue::Undefined:
