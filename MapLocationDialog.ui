@@ -25,6 +25,11 @@
   <property name="windowTitle">
    <string>Snapmatic Map Viewer</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QDialog#MapLocationDialog {
+    background-color: transparent;
+}</string>
+  </property>
   <layout class="QVBoxLayout" name="vlMapPreview">
    <property name="spacing">
     <number>0</number>

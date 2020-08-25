@@ -39,6 +39,7 @@ public:
     ~MapLocationDialog();
 
 protected:
+    void paintEvent(QPaintEvent *ev);
     void mouseMoveEvent(QMouseEvent *ev);
     void mouseReleaseEvent(QMouseEvent *ev);
 

@@ -1690,7 +1690,6 @@ void ProfileInterface::retranslateUi()
 
 bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
 {
-    qDebug() << "event filter" << event;
     if (event->type() == QEvent::KeyPress)
     {
         if (isProfileLoaded)

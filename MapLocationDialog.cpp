@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2019 Syping
+* Copyright (C) 2017-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -60,40 +60,10 @@ MapLocationDialog::~MapLocationDialog()
 
 void MapLocationDialog::drawPointOnMap(double xpos_d, double ypos_d)
 {
-    qreal screenRatio = AppEnv::screenRatio();
-    qreal screenRatioPR = AppEnv::screenRatioPR();
-    int pointMakerSize = 8 * screenRatio * screenRatioPR;
-    QPixmap pointMakerPixmap = IconLoader::loadingPointmakerIcon().pixmap(QSize(pointMakerSize, pointMakerSize));
-    QSize mapPixelSize = QSize(width() * screenRatioPR, height() * screenRatioPR);
-
-    int pointMakerHalfSize = pointMakerSize / 2;
-    long xpos_ms = qRound(xpos_d);
-    long ypos_ms = qRound(ypos_d);
-    double xpos_ma = xpos_ms + 4000;
-    double ypos_ma = ypos_ms + 4000;
-    double xrat = (double)mapPixelSize.width() / 10000;
-    double yrat = (double)mapPixelSize.height() / 12000;
-    long xpos_mp =  qRound(xpos_ma * xrat);
-    long ypos_mp =  qRound(ypos_ma * yrat);
-    long xpos_pr = xpos_mp - pointMakerHalfSize;
-    long ypos_pr = ypos_mp + pointMakerHalfSize;
-
-    QPixmap mapPixmap(mapPixelSize);
-    QPainter mapPainter(&mapPixmap);
-    mapPainter.drawPixmap(0, 0, mapPixelSize.width(), mapPixelSize.height(), QPixmap(":/img/mappreview.jpg").scaled(mapPixelSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-    mapPainter.drawPixmap(xpos_pr, mapPixelSize.height() - ypos_pr, pointMakerSize, pointMakerSize, pointMakerPixmap);
-    mapPainter.end();
-#if QT_VERSION >= 0x050600
-    mapPixmap.setDevicePixelRatio(screenRatioPR);
-#endif
-
-    QPalette backgroundPalette;
-    backgroundPalette.setBrush(backgroundRole(), QBrush(mapPixmap));
-    setPalette(backgroundPalette);
-
+    ui->labPos->setText(tr("X: %1\nY: %2", "X and Y position").arg(QString::number(xpos_d), QString::number(ypos_d)));
     xpos_new = xpos_d;
     ypos_new = ypos_d;
-    ui->labPos->setText(tr("X: %1\nY: %2", "X and Y position").arg(QString::number(xpos_d), QString::number(ypos_d)));
+    repaint();
 }
 
 void MapLocationDialog::on_cmdChange_clicked()
@@ -137,6 +107,43 @@ void MapLocationDialog::updatePosFromEvent(int x, int y)
     double xpos_fp = xpos_rv - 4000;
     double ypos_fp = ypos_rv - 4000;
     drawPointOnMap(xpos_fp, ypos_fp);
+}
+
+void MapLocationDialog::paintEvent(QPaintEvent *ev)
+{
+    QPainter painter(this);
+    qreal screenRatio = AppEnv::screenRatio();
+    qreal screenRatioPR = AppEnv::screenRatioPR();
+
+    // Paint Map
+    QSize mapPixelSize = QSize(width() * screenRatioPR, height() * screenRatioPR);
+    painter.drawPixmap(0, 0, width(), height(), QPixmap(":/img/mappreview.jpg").scaled(mapPixelSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+
+    // Paint Marker
+    int pointMarkerSize = 8 * screenRatio;
+    int pointMarkerHalfSize = pointMarkerSize / 2;
+    long xpos_ms = qRound(xpos_new);
+    long ypos_ms = qRound(ypos_new);
+    double xpos_ma = xpos_ms + 4000;
+    double ypos_ma = ypos_ms + 4000;
+    double xrat = (double)width() / 10000;
+    double yrat = (double)height() / 12000;
+    long xpos_mp = qRound(xpos_ma * xrat);
+    long ypos_mp = qRound(ypos_ma * yrat);
+    long xpos_pr;
+    long ypos_pr;
+    if (screenRatioPR != 1) {
+        xpos_pr = xpos_mp - pointMarkerHalfSize + screenRatioPR;
+        ypos_pr = ypos_mp + pointMarkerHalfSize - screenRatioPR;
+    }
+    else {
+        xpos_pr = xpos_mp - pointMarkerHalfSize;
+        ypos_pr = ypos_mp + pointMarkerHalfSize;
+    }
+    QPixmap mapMarkerPixmap = IconLoader::loadingPointmakerIcon().pixmap(QSize(pointMarkerSize, pointMarkerSize));
+    painter.drawPixmap(xpos_pr, height() - ypos_pr, pointMarkerSize, pointMarkerSize, mapMarkerPixmap);
+
+    QDialog::paintEvent(ev);
 }
 
 void MapLocationDialog::mouseMoveEvent(QMouseEvent *ev)
