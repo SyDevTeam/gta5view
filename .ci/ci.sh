@@ -12,7 +12,6 @@ export EXECUTABLE_VERSION=${PACKAGE_VERSION}${PACKAGE_BUILD}${EXECUTABLE_TAG}
 export APPLICATION_MAJOR_VERSION=$(cut -d. -f1 <<< $APPLICATION_VERSION)
 export APPLICATION_MINOR_VERSION=$(cut -d. -f2 <<< $APPLICATION_VERSION)
 export APPLICATION_PATCH_VERSION=$(cut -d. -f3 <<< $APPLICATION_VERSION)
-export APPLICATION_BUILD_YEAR=$(date "+%Y")
 
 if [ "${PACKAGE_BUILD}" == "" ]; then
    export PACKAGE_BUILD=1
@@ -29,6 +28,10 @@ cat ".ci/app.rc" | sed \
    -e "s/STR_BUILD_VER/$APPLICATION_BUILD_STR_VERSION/g" \
    -e "s/STR_BUILD_VER/$APPLICATION_BUILD_STR_VERSION/g" \
    > "res/app.rc"
+
+cat ".ci/gta5view.desktop" | sed \
+   -e "s/PKGAPP_VER/$PACKAGE_VERSION/g" \
+   > "res/gta5view.desktop"
 
 if [ "${BUILD_TYPE}" == "ALPHA" ]; then
    export QMAKE_BUILD_TYPE="DEFINES+=GTA5SYNC_BUILDTYPE_ALPHA"
