@@ -244,26 +244,30 @@ void PictureDialog::closeEvent(QCloseEvent *ev)
 
 void PictureDialog::addPreviousNextButtons()
 {
-    // Windows Vista additions
 #ifdef GTA5SYNC_WIN
 #if QT_VERSION >= 0x050200
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
     uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-    uiToolbar->setObjectName("uiToolbar");
+    uiToolbar->setObjectName("UiToolbar");
     uiToolbar->addAction(QIcon(":/img/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
     uiToolbar->addAction(QIcon(":/img/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
     layout()->setMenuBar(uiToolbar);
-
     naviEnabled = true;
 #endif
 #else
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
+#if QT_VERSION < 0x050600
+    qreal screenRatio = AppEnv::screenRatio();
+    if (screenRatio != 1) {
+        QSize iconSize = uiToolbar->iconSize();
+        uiToolbar->setIconSize(QSize(iconSize.width() * screenRatio, iconSize.height() * screenRatio));
+    }
+#endif
     uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-    uiToolbar->setObjectName("uiToolbar");
+    uiToolbar->setObjectName("UiToolbar");
     uiToolbar->addAction(QIcon(":/img/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
     uiToolbar->addAction(QIcon(":/img/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
     layout()->setMenuBar(uiToolbar);
-
     naviEnabled = true;
 #endif
 }
