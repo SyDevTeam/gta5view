@@ -433,8 +433,8 @@ QString SnapmaticPicture::getSnapmaticHeaderString(const QByteArray &snapmaticHe
 QString SnapmaticPicture::getSnapmaticJSONString(const QByteArray &jsonBytes)
 {
     QByteArray jsonUsefulBytes = jsonBytes;
-    jsonUsefulBytes.replace('\x00', QString());
-    jsonUsefulBytes.replace('\x0c', QString());
+    jsonUsefulBytes.replace('\x00', "");
+    jsonUsefulBytes.replace('\x0c', "");
     return QString::fromUtf8(jsonUsefulBytes.trimmed());
 }
 

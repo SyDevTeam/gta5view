@@ -264,7 +264,11 @@ void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
 #if QT_VERSION >= 0x050600
+#if QT_VERSION >= 0x050F00
+        std::sort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#else
         qSort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#endif
 #else
         qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
 #endif
@@ -284,7 +288,11 @@ void ProfileInterface::insertSavegameIPI(QWidget *widget)
         QString widgetKey = widgets[proWidget];
         QStringList widgetsKeyList = widgets.values();
         QStringList savegameKeyList = widgetsKeyList.filter("SGD", Qt::CaseSensitive);
+#if QT_VERSION >= 0x050F00
+        std::sort(savegameKeyList.begin(), savegameKeyList.end());
+#else
         qSort(savegameKeyList.begin(), savegameKeyList.end());
+#endif
         int sgdIndex = savegameKeyList.indexOf(QRegExp(widgetKey));
         ui->vlSavegame->insertWidget(sgdIndex, proWidget);
 
@@ -303,7 +311,11 @@ void ProfileInterface::dialogNextPictureRequested(QWidget *dialog)
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
 #if QT_VERSION >= 0x050600
+#if QT_VERSION >= 0x050F00
+        std::sort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#else
         qSort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#endif
 #else
         qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
 #endif
@@ -338,7 +350,11 @@ void ProfileInterface::dialogPreviousPictureRequested(QWidget *dialog)
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
 #if QT_VERSION >= 0x050600
+#if QT_VERSION >= 0x050F00
+        std::sort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#else
         qSort(pictureKeyList.rbegin(), pictureKeyList.rend());
+#endif
 #else
         qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
 #endif
@@ -369,7 +385,12 @@ void ProfileInterface::sortingProfileInterface()
     ui->vlSnapmatic->setEnabled(false);
 
     QStringList widgetsKeyList = widgets.values();
+
+#if QT_VERSION >= 0x050F00
+    std::sort(widgetsKeyList.begin(), widgetsKeyList.end());
+#else
     qSort(widgetsKeyList.begin(), widgetsKeyList.end());
+#endif
 
     for (QString widgetKey : widgetsKeyList)
     {

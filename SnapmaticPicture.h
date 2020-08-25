@@ -120,7 +120,7 @@ public:
     bool setVisible() { return setPictureVisible(); } // Please use setPictureVisible instead
 
     // PREDEFINED PROPERTIES
-    QSize getSnapmaticResolution();
+    static QSize getSnapmaticResolution();
 
     // SNAPMATIC DEFAULTS
     bool isSnapmaticDefaultsEnforced();
