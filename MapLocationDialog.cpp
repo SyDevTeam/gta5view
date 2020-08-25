@@ -133,8 +133,13 @@ void MapLocationDialog::paintEvent(QPaintEvent *ev)
     long xpos_pr;
     long ypos_pr;
     if (screenRatioPR != 1) {
+#ifdef GTA5SYNC_WIN
+        xpos_pr = xpos_mp - pointMarkerHalfSize;
+        ypos_pr = ypos_mp + pointMarkerHalfSize;
+#else
         xpos_pr = xpos_mp - pointMarkerHalfSize + screenRatioPR;
         ypos_pr = ypos_mp + pointMarkerHalfSize - screenRatioPR;
+#endif
     }
     else {
         xpos_pr = xpos_mp - pointMarkerHalfSize;
