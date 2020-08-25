@@ -136,24 +136,33 @@ OptionsDialog::~OptionsDialog()
 
 void OptionsDialog::setupTreeWidget()
 {
-    for (QString playerIDStr : profileDB->getPlayers())
-    {
-        bool ok;
-        int playerID = playerIDStr.toInt(&ok);
-        if (ok)
+    const QStringList players = profileDB->getPlayers();
+    if (players.length() != 0) {
+        QStringList::const_iterator it = players.constBegin();
+        QStringList::const_iterator end = players.constEnd();
+        while (it != end)
         {
-            QString playerName = profileDB->getPlayerName(playerID);
+            bool ok;
+            int playerID = it->toInt(&ok);
+            if (ok)
+            {
+                QString playerName = profileDB->getPlayerName(playerID);
 
-            QStringList playerTreeViewList;
-            playerTreeViewList += playerIDStr;
-            playerTreeViewList += playerName;
+                QStringList playerTreeViewList;
+                playerTreeViewList += *it;
+                playerTreeViewList += playerName;
 
-            QTreeWidgetItem *playerItem = new QTreeWidgetItem(playerTreeViewList);
-            ui->twPlayers->addTopLevelItem(playerItem);
-            playerItems += playerItem;
+                QTreeWidgetItem *playerItem = new QTreeWidgetItem(playerTreeViewList);
+                ui->twPlayers->addTopLevelItem(playerItem);
+                playerItems += playerItem;
+            }
+            it++;
         }
+        ui->twPlayers->sortItems(1, Qt::AscendingOrder);
     }
-    ui->twPlayers->sortItems(1, Qt::AscendingOrder);
+    else {
+        ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabPlayers));
+    }
 }
 
 void OptionsDialog::setupLanguageBox()
