@@ -70,6 +70,11 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
 
 #if QT_VERSION >= 0x050200
     ui->txtJSON->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
+#else
+    QFont jsonFont = ui->txtJSON->font();
+    jsonFont.setStyleHint(QFont::Monospace);
+    jsonFont.setFixedPitch(true);
+    ui->txtJSON->setFont(jsonFont);
 #endif
     QFontMetrics fontMetrics(ui->txtJSON->font());
     ui->txtJSON->setTabStopWidth(fontMetrics.width("    "));
