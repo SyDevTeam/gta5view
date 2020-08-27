@@ -24,21 +24,19 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 
 #### Build gta5view for Debian/Ubuntu
 
-    sudo apt-get install git gcc g++ libqt5svg5-dev qtbase5-dev qttranslations5-l10n qt5-qmake make
+    sudo apt-get install cmake git gcc g++ libqt5svg5-dev qtbase5-dev qttranslations5-l10n make
     git clone https://gitlab.com/Syping/gta5view && cd gta5view
     mkdir -p build && cd build
-    ../configure --prefix=/opt/gta5view
-    make depend
+    cmake ../
     make -j $(nproc --all)
     sudo make install
 
 #### Build gta5view for Fedora
 
-    sudo dnf install git gcc gcc-c++ qt5-qtbase-devel qt5-qtsvg-devel qt5-qttranslations make
+    sudo dnf install cmake git gcc gcc-c++ qt5-qtbase-devel qt5-qtsvg-devel qt5-qttranslations make
     git clone https://gitlab.com/Syping/gta5view && cd gta5view
     mkdir -p build && cd build
-    ../configure --prefix=/opt/gta5view
-    make depend
+    cmake ../
     make -j $(nproc --all)
     sudo make install
 

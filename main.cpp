@@ -74,7 +74,9 @@ int main(int argc, char *argv[])
     a.setApplicationVersion(GTA5SYNC_APPVER);
     a.setQuitOnLastWindowClosed(false);
 
+#ifdef GTA5SYNC_QMAKE
     QResource::registerResource(":/global/global.rcc");
+#endif
 
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Startup");

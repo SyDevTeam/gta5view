@@ -13,104 +13,139 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Qt5 COMPONENTS Network Svg Widgets REQUIRED)
 
-add_executable(gta5view
-    config.h
+set(GTA5VIEW_SOURCES
     main.cpp
     AboutDialog.cpp
-    AboutDialog.h
-    AboutDialog.ui
     AppEnv.cpp
-    AppEnv.h
     CrewDatabase.cpp
-    CrewDatabase.h
     DatabaseThread.cpp
-    DatabaseThread.h
     ExportDialog.cpp
-    ExportDialog.h
     ExportThread.cpp
-    ExportThread.h
     GlobalString.cpp
-    GlobalString.h
     IconLoader.cpp
-    IconLoader.h
     ImportDialog.cpp
-    ImportDialog.h
-    ImportDialog.ui
     JsonEditorDialog.cpp
-    JsonEditorDialog.h
-    JsonEditorDialog.ui
     MapLocationDialog.cpp
-    MapLocationDialog.h
-    MapLocationDialog.ui
     OptionsDialog.cpp
-    OptionsDialog.h
-    OptionsDialog.ui
     PictureDialog.cpp
-    PictureDialog.h
-    PictureDialog.ui
     PictureExport.cpp
-    PictureExport.h
     PictureWidget.cpp
-    PictureWidget.h
     PlayerListDialog.cpp
-    PlayerListDialog.h
-    PlayerListDialog.ui
     ProfileDatabase.cpp
-    ProfileDatabase.h
     ProfileInterface.cpp
-    ProfileInterface.h
-    ProfileInterface.ui
     ProfileLoader.cpp
-    ProfileLoader.h
     ProfileWidget.cpp
-    ProfileWidget.h
     SavegameCopy.cpp
-    SavegameCopy.h
     SavegameData.cpp
-    SavegameData.h
     SavegameDialog.cpp
-    SavegameDialog.h
-    SavegameDialog.ui
     SavegameWidget.cpp
-    SavegameWidget.h
-    SavegameWidget.ui
     SidebarGenerator.cpp
-    SidebarGenerator.h
     SnapmaticEditor.cpp
-    SnapmaticEditor.h
-    SnapmaticEditor.ui
     SnapmaticPicture.cpp
-    SnapmaticPicture.h
     SnapmaticWidget.cpp
-    SnapmaticWidget.h
-    SnapmaticWidget.ui
     StandardPaths.cpp
-    StandardPaths.h
     StringParser.cpp
-    StringParser.h
     TranslationClass.cpp
-    TranslationClass.h
     UserInterface.cpp
-    UserInterface.h
-    UserInterface.ui
     anpro/imagecropper.cpp
-    anpro/imagecropper.h
     pcg/pcg_basic.c
-    pcg/pcg_basic.h
-    res/tr_g5p.qrc
-    res/app.qrc
     uimod/JSHighlighter.cpp
-    uimod/JSHighlighter.h
     uimod/UiModLabel.cpp
-    uimod/UiModLabel.h
     uimod/UiModWidget.cpp
+)
+
+set(GTA5VIEW_HEADERS
+    config.h
+    AboutDialog.h
+    AppEnv.h
+    CrewDatabase.h
+    DatabaseThread.h
+    ExportDialog.h
+    ExportThread.h
+    GlobalString.h
+    IconLoader.h
+    ImportDialog.h
+    JsonEditorDialog.h
+    MapLocationDialog.h
+    OptionsDialog.h
+    PictureDialog.h
+    PictureExport.h
+    PictureWidget.h
+    PlayerListDialog.h
+    ProfileDatabase.h
+    ProfileInterface.h
+    ProfileLoader.h
+    ProfileWidget.h
+    SavegameCopy.h
+    SavegameData.h
+    SavegameDialog.h
+    SavegameWidget.h
+    SidebarGenerator.h
+    SnapmaticEditor.h
+    SnapmaticPicture.h
+    SnapmaticWidget.h
+    StandardPaths.h
+    StringParser.h
+    TranslationClass.h
+    UserInterface.h
+    anpro/imagecropper.h
+    pcg/pcg_basic.h
+    uimod/JSHighlighter.h
+    uimod/UiModLabel.h
     uimod/UiModWidget.h
+)
+
+set(GTA5VIEW_INCLUDEDIR
+    anpro
+    pcg
+    uimod
+)
+
+set(GTA5VIEW_FORMS
+    AboutDialog.ui
+    ExportDialog.ui
+    ImportDialog.ui
+    JsonEditorDialog.ui
+    MapLocationDialog.ui
+    OptionsDialog.ui
+    PictureDialog.ui
+    PlayerListDialog.ui
+    ProfileInterface.ui
+    SavegameDialog.ui
+    SavegameWidget.ui
+    SnapmaticEditor.ui
+    SnapmaticWidget.ui
+    UserInterface.ui
+)
+
+set(GTA5VIEW_DEFINES
+    -DGTA5SYNC_CMAKE
+    -DGTA5SYNC_PROJECT
+    -DGTA5SYNC_NOASSIST
+)
+
+set(GTA5VIEW_RESOURCES
+    res/tr_g5p.qrc
+    res/app_cmake.qrc
+    res/global.qrc
+)
+
+set_property(SOURCE res/global.qrc PROPERTY AUTORCC_OPTIONS "-threshold;0;-compress;9")
+
+add_executable(gta5view
+    ${GTA5VIEW_SOURCES}
+    ${GTA5VIEW_FORMS}
+    ${GTA5VIEW_RESOURCES}
 )
 
 if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.16.0")
     target_precompile_headers(gta5view PRIVATE config.h)
 endif()
 
-target_include_directories(gta5view PRIVATE anpro pcg uimod)
+target_compile_definitions(gta5view PRIVATE ${GTA5VIEW_DEFINES})
+target_include_directories(gta5view PRIVATE ${GTA5VIEW_INCLUDEDIR})
 target_link_libraries(gta5view PRIVATE Qt5::Network Qt5::Svg Qt5::Widgets)
-target_compile_definitions(gta5view PRIVATE -DGTA5SYNC_PROJECT -DGTA5SYNC_NOASSIST)
+
+install(TARGETS gta5view DESTINATION bin)
+install(FILES res/gta5view.desktop DESTINATION share/applications)
+install(FILES res/gta5view.png DESTINATION share/pixmaps)

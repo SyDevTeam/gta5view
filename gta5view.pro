@@ -140,7 +140,7 @@ TRANSLATIONS += \
 
 RESOURCES += \
     res/tr_g5p.qrc \
-    res/app.qrc
+    res/app_qmake.qrc
 
 DISTFILES += res/app.rc \
     res/gta5view.desktop \
@@ -160,6 +160,7 @@ INCLUDEPATH += ./anpro ./pcg ./tmext ./uimod
 
 # GTA5SYNC/GTA5VIEW ONLY
 
+DEFINES += GTA5SYNC_QMAKE # We using qmake do we?
 DEFINES += GTA5SYNC_PROJECT # Enable exclusive gta5sync/gta5view functions
 DEFINES += GTA5SYNC_NOASSIST # Not assisting at proper usage of SnapmaticPicture class
 

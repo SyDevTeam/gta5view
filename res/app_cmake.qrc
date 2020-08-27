@@ -1,0 +1,31 @@
+<RCC>
+    <qresource prefix="/img">
+        <file>5sync-48.png</file>
+        <file>5sync-16.png</file>
+        <file>5sync-24.png</file>
+        <file>5sync-32.png</file>
+        <file>5sync-40.png</file>
+        <file>5sync-64.png</file>
+        <file>5sync-96.png</file>
+        <file>5sync-128.png</file>
+        <file>5sync-256.png</file>
+        <file>add.svgz</file>
+        <file>avatararea.png</file>
+        <file>avatarareaimport.png</file>
+        <file>back.svgz</file>
+        <file>empty1x16.png</file>
+        <file>mappreview.jpg</file>
+        <file>next.svgz</file>
+        <file>pointmaker-8.png</file>
+        <file>pointmaker-16.png</file>
+        <file>pointmaker-24.png</file>
+        <file>pointmaker-32.png</file>
+        <file>savegame.svgz</file>
+        <file>watermark_1b.png</file>
+        <file>watermark_2b.png</file>
+        <file>watermark_2r.png</file>
+    </qresource>
+    <qresource prefix="/template">
+        <file>template.g5e</file>
+    </qresource>
+</RCC>
