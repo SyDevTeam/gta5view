@@ -155,6 +155,7 @@ DISTFILES += \
     res/gta5view-512.png \
     res/app.rc \
     res/de.syping.gta5view.desktop \
+    res/de.syping.gta5view.png \
     res/gta5sync_de.ts \
     res/gta5sync_en_US.ts \
     res/gta5sync_fr.ts \
@@ -227,7 +228,7 @@ isEmpty(GTA5SYNC_PREFIX): GTA5SYNC_PREFIX = /usr/local
 appfiles.path = $$GTA5SYNC_PREFIX/share/applications
 appfiles.files = $$PWD/res/de.syping.gta5view.desktop
 pixmaps.path = $$GTA5SYNC_PREFIX/share/pixmaps
-pixmaps.files = $$PWD/res/gta5view.png
+pixmaps.files = $$PWD/res/de.syping.gta5view.png
 target.path = $$GTA5SYNC_PREFIX/bin
 INSTALLS += target pixmaps appfiles
 

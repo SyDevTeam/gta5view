@@ -5,7 +5,7 @@ cd ${PROJECT_DIR} && \
 echo "gta5view build version is ${APPLICATION_VERSION}" && \
 mkdir -p build && \
 mkdir -p assets && \
-chmod -x res/gta5sync_*.qm res/*.desktop res/gta5view*.png && \
+chmod -x res/gta5sync_*.qm res/*.desktop res/*gta5view*.png && \
 cd build && \
 mkdir -p qt4 && \
 cd qt4 && \
