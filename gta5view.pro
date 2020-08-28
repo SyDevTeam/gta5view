@@ -142,7 +142,18 @@ RESOURCES += \
     res/tr_g5p.qrc \
     res/app_qmake.qrc
 
-DISTFILES += res/app.rc \
+DISTFILES += \
+    res/gta5view-16.png \
+    res/gta5view-24.png \
+    res/gta5view-32.png \
+    res/gta5view-40.png \
+    res/gta5view-48.png \
+    res/gta5view-64.png \
+    res/gta5view-96.png \
+    res/gta5view-128.png \
+    res/gta5view-256.png \
+    res/gta5view-512.png \
+    res/app.rc \
     res/de.syping.gta5view.desktop \
     res/gta5sync_de.ts \
     res/gta5sync_en_US.ts \
