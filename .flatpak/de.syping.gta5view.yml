@@ -1,0 +1,21 @@
+app-id: de.syping.gta5view
+runtime: org.kde.Platform
+runtime-version: '5.14'
+sdk: org.kde.Sdk
+command: gta5view
+finish-args:
+  - "--share=network"
+  - "--share=ipc"
+  - "--socket=x11"
+  - "--socket=wayland"
+  - "--filesystem=host"
+  - "--device=dri"
+modules:
+  - name: gta5view
+    buildsystem: cmake-ninja
+    config-opts:
+      - -DFLATPAK_BUILD=ON
+    sources:
+      - branch: 1.8.x
+        type: git
+        url: https://gitlab.com/Syping/gta5view.git

@@ -157,7 +157,7 @@ else()
     )
 endif()
 
-option(QCONF_BUILD "System installation intended QCONF build" OFF)
+option(QCONF_BUILD "System installation intended Qconf build" OFF)
 
 if(QCONF_BUILD)
     list(APPEND GTA5VIEW_DEFINES
@@ -167,6 +167,15 @@ else()
     list(APPEND GTA5VIEW_RESOURCES
         res/tr_g5p.qrc
         res/tr_qt5.qrc
+    )
+endif()
+
+option(FLATPAK_BUILD "Flatpak modifications and identifications" OFF)
+
+if(FLATPAK_BUILD)
+    list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_BUILDTYPE=\"Flatpak\""
+        -DGTA5SYNC_FLATPAK
     )
 endif()
 
@@ -190,7 +199,7 @@ target_include_directories(gta5view PRIVATE ${GTA5VIEW_INCLUDEDIR})
 target_link_libraries(gta5view PRIVATE Qt5::Network Qt5::Svg Qt5::Widgets)
 
 install(TARGETS gta5view DESTINATION bin)
-install(FILES res/gta5view.desktop DESTINATION share/applications)
+install(FILES res/de.syping.gta5view.desktop DESTINATION share/applications)
 install(FILES res/gta5view.png DESTINATION share/pixmaps)
 
 if(QCONF_BUILD)
