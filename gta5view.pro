@@ -143,7 +143,7 @@ RESOURCES += \
     res/app_qmake.qrc
 
 DISTFILES += res/app.rc \
-    res/gta5view.desktop \
+    res/de.syping.gta5view.desktop \
     res/gta5sync_de.ts \
     res/gta5sync_en_US.ts \
     res/gta5sync_fr.ts \
@@ -214,7 +214,7 @@ QMAKE_EXTRA_TARGETS += depend
 isEmpty(GTA5SYNC_PREFIX): GTA5SYNC_PREFIX = /usr/local
 
 appfiles.path = $$GTA5SYNC_PREFIX/share/applications
-appfiles.files = $$PWD/res/gta5view.desktop
+appfiles.files = $$PWD/res/de.syping.gta5view.desktop
 pixmaps.path = $$GTA5SYNC_PREFIX/share/pixmaps
 pixmaps.files = $$PWD/res/gta5view.png
 target.path = $$GTA5SYNC_PREFIX/bin

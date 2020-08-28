@@ -29,9 +29,9 @@ cat ".ci/app.rc" | sed \
    -e "s/STR_BUILD_VER/$APPLICATION_BUILD_STR_VERSION/g" \
    > "res/app.rc"
 
-cat ".ci/gta5view.desktop" | sed \
-   -e "s/PKGAPP_VER/$PACKAGE_VERSION/g" \
-   > "res/gta5view.desktop"
+# cat ".ci/gta5view.desktop" | sed \
+#    -e "s/PKGAPP_VER/$PACKAGE_VERSION/g" \
+#    > "res/gta5view.desktop"
 
 if [ "${BUILD_TYPE}" == "ALPHA" ]; then
    export QMAKE_BUILD_TYPE="DEFINES+=GTA5SYNC_BUILDTYPE_ALPHA"
