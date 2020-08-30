@@ -1640,17 +1640,17 @@ Press 1 for Default View</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="115"/>
+        <location filename="../main.cpp" line="117"/>
         <source>Font</source>
         <translation>字體</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="115"/>
+        <location filename="../main.cpp" line="117"/>
         <source>Selected Font: %1</source>
         <translation>選擇的字體: %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="142"/>
+        <location filename="../main.cpp" line="144"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;歡迎使用 %1!&lt;/h4&gt; 你想在開始前先設定 %1 嗎?</translation>
     </message>
@@ -2229,22 +2229,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="171"/>
+        <location filename="../main.cpp" line="173"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation>你希望通過收集資料來幫助改善 %1 嗎?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="172"/>
+        <location filename="../main.cpp" line="174"/>
         <source>%1 User Statistics</source>
         <translation>%1 使用者統計</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="176"/>
+        <location filename="../main.cpp" line="178"/>
         <source>Yes, I want include personal usage data.</source>
         <translation>是的，我想幫忙.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="185"/>
+        <location filename="../main.cpp" line="187"/>
         <source>&amp;OK</source>
         <translation>確定(&amp;O)</translation>
     </message>

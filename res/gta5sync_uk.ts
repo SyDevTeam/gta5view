@@ -1650,17 +1650,17 @@ Press 1 for Default View</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="115"/>
+        <location filename="../main.cpp" line="117"/>
         <source>Font</source>
         <translation>Шрифт</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="115"/>
+        <location filename="../main.cpp" line="117"/>
         <source>Selected Font: %1</source>
         <translation>Вибраний шрифт:%1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="142"/>
+        <location filename="../main.cpp" line="144"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;Ласкаво просимо до %1!&lt;/h4&gt;Ви хочете налаштувати %1 перед використанням?</translation>
     </message>
@@ -2239,22 +2239,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="171"/>
+        <location filename="../main.cpp" line="173"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation>Ви хочете допомогти %1  покращитись у майбутньому, включивши дані особистого користування?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="172"/>
+        <location filename="../main.cpp" line="174"/>
         <source>%1 User Statistics</source>
         <translation>%1 Статистика користувачів</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="176"/>
+        <location filename="../main.cpp" line="178"/>
         <source>Yes, I want include personal usage data.</source>
         <translation>Так, я хочу включити дані особистого користування.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="185"/>
+        <location filename="../main.cpp" line="187"/>
         <source>&amp;OK</source>
         <translatorcomment>&amp;OK</translatorcomment>
         <translation>&amp;OK</translation>

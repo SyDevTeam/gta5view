@@ -1646,17 +1646,17 @@ Appuyer sur 1 pour le mode par défaut</translation>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="115"/>
+        <location filename="../main.cpp" line="117"/>
         <source>Font</source>
         <translation>Police</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="115"/>
+        <location filename="../main.cpp" line="117"/>
         <source>Selected Font: %1</source>
         <translation>Police sélectionnée : %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="142"/>
+        <location filename="../main.cpp" line="144"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;Bienvenue sur %1!&lt;/h4&gt;Voulez-vous configurer %1 avant de l&apos;utiliser t?</translation>
     </message>
@@ -2237,22 +2237,22 @@ Appuyer sur 1 pour le mode par défaut</translation>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="171"/>
+        <location filename="../main.cpp" line="173"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation>Voulez-vous aider au développement de %1 en transmettant vos données d&apos;utilisation ?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="172"/>
+        <location filename="../main.cpp" line="174"/>
         <source>%1 User Statistics</source>
         <translation>Statistiques utilisateurs %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="176"/>
+        <location filename="../main.cpp" line="178"/>
         <source>Yes, I want include personal usage data.</source>
         <translation>Oui, je veux partager mes données d&apos;utilisation.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="185"/>
+        <location filename="../main.cpp" line="187"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
