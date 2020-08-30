@@ -129,7 +129,6 @@ set(GTA5VIEW_RESOURCES
     res/app_cmake.qrc
     res/global.qrc
 )
-
 set_property(SOURCE res/global.qrc PROPERTY AUTORCC_OPTIONS "-threshold;0;-compress;9")
 
 if(Qt5LinguistTools_FOUND)
@@ -158,7 +157,6 @@ else()
 endif()
 
 option(QCONF_BUILD "System installation intended Qconf build" OFF)
-
 if(QCONF_BUILD)
     list(APPEND GTA5VIEW_DEFINES
         -DGTA5SYNC_QCONF
@@ -171,11 +169,94 @@ else()
 endif()
 
 option(FLATPAK_BUILD "Flatpak modifications and identifications" OFF)
-
 if(FLATPAK_BUILD)
     list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_BUILDCODE=\"Flatpak\""
         "-DGTA5SYNC_BUILDTYPE=\"Flatpak\""
         -DGTA5SYNC_FLATPAK
+    )
+endif()
+
+option(WITH_TELEMETRY "Hardware survey and basic telemetry system" OFF)
+if(WITH_TELEMETRY)
+    list(APPEND GTA5VIEW_HEADERS
+        TelemetryClass.h
+        tmext/TelemetryClassAuthenticator.h
+    )
+    list(APPEND GTA5VIEW_SOURCES
+        TelemetryClass.cpp
+        tmext/TelemetryClassAuthenticator.cpp
+    )
+    list(APPEND GTA5VIEW_INCLUDEDIR
+        tmext
+    )
+    list(APPEND GTA5VIEW_DEFINES
+        -DGTA5SYNC_TELEMETRY
+    )
+    if(TELEMETRY_AUTHID AND TELEMETRY_AUTHPW AND TELEMETRY_PUSHURL AND TELEMETRY_REGURL)
+        list(APPEND GTA5VIEW_DEFINES
+            "-DGTA5SYNC_TELEMETRY_AUTHID=\"${TELEMETRY_AUTHID}\""
+            "-DGTA5SYNC_TELEMETRY_AUTHPW=\"${TELEMETRY_AUTHPW}\""
+            "-DGTA5SYNC_TELEMETRY_PUSHURL=\"${TELEMETRY_PUSHURL}\""
+            "-DGTA5SYNC_TELEMETRY_REGURL=\"${TELEMETRY_REGURL}\""
+        )
+    endif()
+    if(TELEMETRY_WEBURL)
+        list(APPEND GTA5VIEW_DEFINES
+            "-DGTA5SYNC_TELEMETRY_WEBURL=\"${TELEMETRY_WEBURL}\""
+        )
+    endif()
+endif()
+
+if(GTA5VIEW_APPVER)
+    list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_APPVER=\"${GTA5VIEW_APPVER}\""
+    )
+endif()
+if(GTA5VIEW_BUILDCODE)
+    list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_BUILDCODE=\"${GTA5VIEW_BUILDCODE}\""
+    )
+endif()
+if(GTA5VIEW_BUILDTYPE)
+    list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_BUILDTYPE=\"${GTA5VIEW_BUILDTYPE}\""
+    )
+else()
+    if(GTA5VIEW_BUILDTYPE_ALPHA)
+        list(APPEND GTA5VIEW_DEFINES
+            -DGTA5SYNC_BUILDTYPE_ALPHA
+        )
+    endif()
+    if(GTA5VIEW_BUILDTYPE_BETA)
+        list(APPEND GTA5VIEW_DEFINES
+            -DGTA5SYNC_BUILDTYPE_BETA
+        )
+    endif()
+    if(GTA5VIEW_BUILDTYPE_DEV)
+        list(APPEND GTA5VIEW_DEFINES
+            -DGTA5SYNC_BUILDTYPE_DEV
+        )
+    endif()
+    if(GTA5VIEW_BUILDTYPE_DAILY)
+        list(APPEND GTA5VIEW_DEFINES
+            -DGTA5SYNC_BUILDTYPE_DAILY
+        )
+    endif()
+    if(GTA5VIEW_BUILDTYPE_RC)
+        list(APPEND GTA5VIEW_DEFINES
+            -DGTA5SYNC_BUILDTYPE_RC
+        )
+    endif()
+    if(GTA5VIEW_BUILDTYPE_REL)
+        list(APPEND GTA5VIEW_DEFINES
+            -DGTA5SYNC_BUILDTYPE_REL
+        )
+    endif()
+endif()
+if(GTA5VIEW_COMMIT)
+    list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_COMMIT=\"${GTA5VIEW_COMMIT}\""
     )
 endif()
 
@@ -210,7 +291,6 @@ install(FILES res/gta5view-128.png DESTINATION share/icons/hicolor/128x128/apps 
 install(FILES res/gta5view-256.png DESTINATION share/icons/hicolor/256x256/apps RENAME de.syping.gta5view.png)
 install(FILES res/gta5view-512.png DESTINATION share/icons/hicolor/512x512/apps RENAME de.syping.gta5view.png)
 install(FILES res/de.syping.gta5view.png DESTINATION share/pixmaps)
-
 if(QCONF_BUILD)
     install(FILES ${GTA5VIEW_TRANSLATIONS} DESTINATION share/gta5view/translations)
 endif()
