@@ -16,7 +16,7 @@
 #* along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #*****************************************************************************/
 
-QT       += core gui network svg
+QT += core gui network svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: QT += winextras
@@ -69,7 +69,7 @@ SOURCES += main.cpp \
     uimod/UiModLabel.cpp \
     uimod/UiModWidget.cpp
 
-HEADERS  += \
+HEADERS += \
     AboutDialog.h \
     AppEnv.h \
     CrewDatabase.h \
@@ -112,7 +112,7 @@ HEADERS  += \
     uimod/UiModLabel.h \
     uimod/UiModWidget.h
 
-FORMS    += \
+FORMS += \
     AboutDialog.ui \
     ExportDialog.ui \
     ImportDialog.ui \
@@ -139,8 +139,8 @@ TRANSLATIONS += \
     res/gta5sync_zh_TW.ts
 
 RESOURCES += \
-    res/tr_g5p.qrc \
-    res/app_qmake.qrc
+    res/app.qrc \
+    res/tr_g5p.qrc
 
 DISTFILES += \
     res/gta5view-16.png \
@@ -217,9 +217,11 @@ isEqual(QT_MAJOR_VERSION, 5): GTA5SYNC_RCC = $$[QT_HOST_BINS]/rcc
 
 # RESOURCE COMPILATION
 
-depend.depends += $$PWD/res/global.qrc
-depend.commands += $$GTA5SYNC_RCC -binary -threshold 0 -compress 9 $$PWD/res/global.qrc -o $$PWD/res/global.rcc
-QMAKE_EXTRA_TARGETS += depend
+system($$GTA5SYNC_RCC -threshold 0 -compress 9 $$PWD/res/global.qrc -o $$OUT_PWD/qrc_global.cpp) {
+    SOURCES += $$OUT_PWD/qrc_global.cpp
+} else {
+    message("Failed to generate qrc_global.cpp")
+}
 
 # PROJECT INSTALLATION
 
@@ -252,4 +254,10 @@ contains(DEFINES, GTA5SYNC_QCONF){
         tmext/TelemetryClassAuthenticator.cpp
     HEADERS -= TelemetryClass.h \
         tmext/TelemetryClassAuthenticator.h
+}
+
+# CMAKE BASED STUFF
+
+unix: greaterThan(QT_MAJOR_VERSION, 4) {
+    message("Building non-Windows gta5view with QMake is deprecated, please use CMake instead!")
 }

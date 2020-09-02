@@ -126,7 +126,7 @@ set(GTA5VIEW_DEFINES
 )
 
 set(GTA5VIEW_RESOURCES
-    res/app_cmake.qrc
+    res/app.qrc
     res/global.qrc
 )
 set_property(SOURCE res/global.qrc PROPERTY AUTORCC_OPTIONS "-threshold;0;-compress;9")

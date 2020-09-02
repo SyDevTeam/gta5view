@@ -31,6 +31,5 @@ checkinstall -D --default --nodoc --install=no --pkgname=gta5view-qt5 --pkgversi
 cd .. && \
 cd qt4 && \
 qmake -qt=4 GTA5SYNC_PREFIX=/usr QMAKE_CXXFLAGS+=-std=gnu++11 ${QMAKE_FLAGS_QT4} ${QMAKE_BUILD_TYPE} "DEFINES+=GTA5SYNC_BUILDCODE=\\\\\\\"${PACKAGE_CODE}\\\\\\\"" "DEFINES+=GTA5SYNC_APPVER=\\\\\\\"${APPLICATION_VERSION}\\\\\\\"" DEFINES+=GTA5SYNC_QCONF ../../gta5view.pro && \
-make depend && \
 make -j 4 && \
 checkinstall -D --default --nodoc --install=no --pkgname=gta5view-qt4 --pkgversion=${PACKAGE_VERSION} --pkgrelease=${PACKAGE_BUILD} --pkggroup=utility --maintainer="Syping \<dpkg@syping.de\>" --requires=libqtcore4,libqtgui4,libqt4-network,libqt4-svg,qtcore4-l10n --conflicts=gta5view,gta5view-qt5 --replaces=gta5view,gta5view-qt5 --pakdir=${PROJECT_DIR}/assets
