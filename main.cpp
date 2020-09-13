@@ -59,6 +59,10 @@
 #include <iostream>
 #endif
 
+#ifdef GTA5SYNC_MOTD
+#include "MessageThread.h"
+#endif
+
 #ifdef GTA5SYNC_TELEMETRY
 #include "TelemetryClass.h"
 #endif
@@ -258,9 +262,7 @@ int main(int argc, char *argv[])
         bool readOk = picture.readingPictureFromFile(arg1);
         picDialog.setWindowIcon(IconLoader::loadingAppIcon());
         picDialog.setSnapmaticPicture(&picture, readOk);
-#ifndef Q_OS_LINUX
         picDialog.setWindowFlags(picDialog.windowFlags()^Qt::Dialog^Qt::Window);
-#endif
 
         int crewID = picture.getSnapmaticProperties().crewID;
         if (crewID != 0) { crewDB.addCrew(crewID); }
@@ -305,7 +307,26 @@ int main(int argc, char *argv[])
     QObject::connect(&threadDB, SIGNAL(finished()), &a, SLOT(quit()));
     threadDB.start();
 
+#ifdef GTA5SYNC_MOTD
+    uint cacheId;
+    {
+        QSettings messageSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+        messageSettings.beginGroup("Messages");
+        cacheId = messageSettings.value("CacheId", 0).toUInt();
+        messageSettings.endGroup();
+    }
+    MessageThread threadMessage(cacheId);
+    QObject::connect(&threadMessage, SIGNAL(finished()), &threadDB, SLOT(terminateThread()));
+    threadMessage.start();
+#endif
+
+#ifdef GTA5SYNC_MOTD
+    UserInterface uiWindow(&profileDB, &crewDB, &threadDB, &threadMessage);
+    QObject::connect(&threadMessage, SIGNAL(messagesArrived(QJsonObject)), &uiWindow, SLOT(messagesArrived(QJsonObject)));
+    QObject::connect(&threadMessage, SIGNAL(updateCacheId(uint)), &uiWindow, SLOT(updateCacheId(uint)));
+#else
     UserInterface uiWindow(&profileDB, &crewDB, &threadDB);
+#endif
     uiWindow.setWindowIcon(IconLoader::loadingAppIcon());
     uiWindow.setupDirEnv();
 #ifdef Q_OS_ANDROID

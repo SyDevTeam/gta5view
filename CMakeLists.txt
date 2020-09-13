@@ -177,6 +177,24 @@ if(FLATPAK_BUILD)
     )
 endif()
 
+option(WITH_MOTD "Developer message system directed to users" OFF)
+if(WITH_MOTD)
+    list(APPEND GTA5VIEW_HEADERS
+        MessageThread.h
+    )
+    list(APPEND GTA5VIEW_SOURCES
+        MessageThread.cpp
+    )
+    list(APPEND GTA5VIEW_DEFINES
+        -DGTA5SYNC_MOTD
+    )
+    if(MOTD_WEBURL)
+        list(APPEND GTA5VIEW_DEFINES
+            "-DGTA5SYNC_MOTD_WEBURL=\"${MOTD_WEBURL}\""
+        )
+    endif()
+endif()
+
 option(WITH_TELEMETRY "Hardware survey and basic telemetry system" OFF)
 if(WITH_TELEMETRY)
     list(APPEND GTA5VIEW_HEADERS

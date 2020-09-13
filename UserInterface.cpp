@@ -40,14 +40,21 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QFileInfo>
+#include <QTimer>
 #include <QDebug>
 #include <QFile>
 #include <QDir>
 #include <QMap>
 
+#ifdef GTA5SYNC_MOTD
+UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, MessageThread *threadMessage, QWidget *parent) :
+    QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB), threadMessage(threadMessage),
+    ui(new Ui::UserInterface)
+#else
 UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
     QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
     ui(new Ui::UserInterface)
+#endif
 {
     ui->setupUi(this);
     contentMode = 0;
@@ -328,7 +335,11 @@ void UserInterface::closeProfile_p()
 void UserInterface::closeEvent(QCloseEvent *ev)
 {
     Q_UNUSED(ev)
+#ifdef GTA5SYNC_MOTD
+    threadMessage->terminateThread();
+#else
     threadDB->terminateThread();
+#endif
 }
 
 UserInterface::~UserInterface()
@@ -602,6 +613,119 @@ void UserInterface::settingsApplied(int _contentMode, bool languageChanged)
         profileUI->settingsApplied(contentMode, languageChanged);
     }
 }
+
+#ifdef GTA5SYNC_MOTD
+void UserInterface::messagesArrived(const QJsonObject &object)
+{
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Messages");
+    QJsonObject::const_iterator it = object.constBegin();
+    QJsonObject::const_iterator end = object.constEnd();
+    QStringList messages;
+    while (it != end) {
+        const QString key = it.key();
+        const QJsonValue value = it.value();
+        bool uintOk;
+        uint messageId = key.toUInt(&uintOk);
+        if (uintOk && value.isString()) {
+            const QString valueStr = value.toString();
+            settings.setValue(QString::number(messageId), valueStr);
+            messages << valueStr;
+        }
+        it++;
+    }
+    settings.endGroup();
+    if (!messages.isEmpty())
+        showMessages(messages);
+}
+
+void UserInterface::showMessages(const QStringList messages)
+{
+    QDialog *messageDialog = new QDialog(this);
+    messageDialog->setWindowTitle(tr("%1 - Messages").arg(GTA5SYNC_APPSTR));
+    messageDialog->setWindowFlags(messageDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+    QVBoxLayout *messageLayout = new QVBoxLayout;
+    messageDialog->setLayout(messageLayout);
+    QStackedWidget *stackWidget = new QStackedWidget(messageDialog);
+    for (const QString message : messages) {
+        QLabel *messageLabel = new QLabel(messageDialog);
+        messageLabel->setText(message);
+        messageLabel->setWordWrap(true);
+        stackWidget->addWidget(messageLabel);
+    }
+    messageLayout->addWidget(stackWidget);
+    QHBoxLayout *buttonLayout = new QHBoxLayout;
+    QPushButton *backButton = new QPushButton(messageDialog);
+    QPushButton *nextButton = new QPushButton(messageDialog);
+    if (QIcon::hasThemeIcon("go-previous") && QIcon::hasThemeIcon("go-next") && QIcon::hasThemeIcon("list-add")) {
+        backButton->setIcon(QIcon::fromTheme("go-previous"));
+        nextButton->setIcon(QIcon::fromTheme("go-next"));
+    }
+    else {
+        backButton->setIcon(QIcon(":/img/back.svgz"));
+        nextButton->setIcon(QIcon(":/img/next.svgz"));
+    }
+    backButton->setEnabled(false);
+    if (stackWidget->count() <= 1) {
+        nextButton->setEnabled(false);
+    }
+    buttonLayout->addWidget(backButton);
+    buttonLayout->addWidget(nextButton);
+    buttonLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+    QPushButton *closeButton = new QPushButton(messageDialog);
+    closeButton->setText(tr("&Close"));
+    if (QIcon::hasThemeIcon("dialog-close")) {
+        closeButton->setIcon(QIcon::fromTheme("dialog-close"));
+    }
+    else if (QIcon::hasThemeIcon("gtk-close")) {
+        closeButton->setIcon(QIcon::fromTheme("gtk-close"));
+    }
+    buttonLayout->addWidget(closeButton);
+    messageLayout->addLayout(buttonLayout);
+    QObject::connect(backButton, &QPushButton::clicked, [stackWidget,backButton,nextButton,closeButton]() {
+        int index = stackWidget->currentIndex();
+        if (index > 0) {
+            index--;
+            stackWidget->setCurrentIndex(index);
+            nextButton->setEnabled(true);
+            if (index > 0) {
+                backButton->setEnabled(true);
+            }
+            else {
+                backButton->setEnabled(false);
+                closeButton->setFocus();
+            }
+        }
+    });
+    QObject::connect(nextButton, &QPushButton::clicked, [stackWidget,backButton,nextButton,closeButton]() {
+        int index = stackWidget->currentIndex();
+        if (index < stackWidget->count()-1) {
+            index++;
+            stackWidget->setCurrentIndex(index);
+            backButton->setEnabled(true);
+            if (index < stackWidget->count()-1) {
+                nextButton->setEnabled(true);
+            }
+            else {
+                nextButton->setEnabled(false);
+                closeButton->setFocus();
+            }
+        }
+    });
+    QObject::connect(closeButton, &QPushButton::clicked, messageDialog, &QDialog::accept);
+    QObject::connect(messageDialog, &QDialog::finished, messageDialog, &QDialog::deleteLater);
+    QTimer::singleShot(0, closeButton, SLOT(setFocus()));
+    messageDialog->show();
+}
+
+void UserInterface::updateCacheId(uint cacheId)
+{
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Messages");
+    settings.setValue("CacheId", cacheId);
+    settings.endGroup();
+}
+#endif
 
 void UserInterface::on_actionSelect_GTA_Folder_triggered()
 {

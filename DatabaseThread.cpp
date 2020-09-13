@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -48,11 +48,8 @@ void DatabaseThread::run()
 
     while (threadRunning)
     {
-        if (threadRunning)
-        {
-            QTimer::singleShot(300000, &threadLoop, SLOT(quit()));
-            threadLoop.exec();
-        }
+        QTimer::singleShot(300000, &threadLoop, SLOT(quit()));
+        threadLoop.exec();
     }
 }
 

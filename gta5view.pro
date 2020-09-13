@@ -40,6 +40,7 @@ SOURCES += main.cpp \
     ImportDialog.cpp \
     JsonEditorDialog.cpp \
     MapLocationDialog.cpp \
+    MessageThread.cpp \
     OptionsDialog.cpp \
     PictureDialog.cpp \
     PictureExport.cpp \
@@ -81,6 +82,7 @@ HEADERS += \
     ImportDialog.h \
     JsonEditorDialog.h \
     MapLocationDialog.h \
+    MessageThread.h \
     OptionsDialog.h \
     PictureDialog.h \
     PictureExport.h \
@@ -236,10 +238,10 @@ INSTALLS += target pixmaps appfiles
 
 # QCONF BASED BUILD STUFF
 
-contains(DEFINES, GTA5SYNC_QCONF){
+contains(DEFINES, GTA5SYNC_QCONF) {
     isEqual(QT_MAJOR_VERSION, 4): RESOURCES -= res/tr_qt4.qrc
     isEqual(QT_MAJOR_VERSION, 5): RESOURCES -= res/tr_qt5.qrc
-    !contains(DEFINES, GTA5SYNC_QCONF_IN){
+    !contains(DEFINES, GTA5SYNC_QCONF_IN) {
         RESOURCES -= res/tr_g5p.qrc
         langfiles.path = $$GTA5SYNC_PREFIX/share/gta5view/translations
         langfiles.files = $$PWD/res/gta5sync_en_US.qm $$PWD/res/gta5sync_de.qm $$PWD/res/gta5sync_fr.qm $$PWD/res/gta5sync_ko.qm $$PWD/res/gta5sync_ru.qm $$PWD/res/gta5sync_uk.qm $$PWD/res/gta5sync_zh_TW.qm $$PWD/res/qtbase_en_GB.qm
@@ -249,11 +251,23 @@ contains(DEFINES, GTA5SYNC_QCONF){
 
 # TELEMETRY BASED STUFF
 
-!contains(DEFINES, GTA5SYNC_TELEMETRY){
+!contains(DEFINES, GTA5SYNC_TELEMETRY) {
     SOURCES -= TelemetryClass.cpp \
         tmext/TelemetryClassAuthenticator.cpp
     HEADERS -= TelemetryClass.h \
         tmext/TelemetryClassAuthenticator.h
+}
+
+!contains(DEFINES, GTA5SYNC_MOTD) {
+    SOURCES -= MessageThread.cpp
+    HEADERS -= MessageThread.h
+} else {
+    lessThan(QT_MAJOR_VERSION, 5) {
+        SOURCES -= MessageThread.cpp
+        HEADERS -= MessageThread.h
+        DEFINES -= GTA5SYNC_MOTD
+        message("Messages require Qt5 or newer!")
+    }
 }
 
 # CMAKE BASED STUFF

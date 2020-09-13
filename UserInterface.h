@@ -31,6 +31,10 @@
 #include <QString>
 #include <QMap>
 
+#ifdef GTA5SYNC_MOTD
+#include "MessageThread.h"
+#endif
+
 namespace Ui {
 class UserInterface;
 }
@@ -39,7 +43,11 @@ class UserInterface : public QMainWindow
 {
     Q_OBJECT
 public:
+#ifdef GTA5SYNC_MOTD
+    explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, MessageThread *messageThread, QWidget *parent = 0);
+#else
     explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
+#endif
     void setupDirEnv();
     ~UserInterface();
 
@@ -67,6 +75,11 @@ private slots:
     void on_actionSet_Crew_triggered();
     void on_actionSet_Title_triggered();
     void settingsApplied(int contentMode, bool languageChanged);
+#ifdef GTA5SYNC_MOTD
+    void messagesArrived(const QJsonObject &object);
+    void showMessages(const QStringList messages);
+    void updateCacheId(uint cacheId);
+#endif
 
 protected:
     void closeEvent(QCloseEvent *ev);
@@ -75,6 +88,9 @@ private:
     ProfileDatabase *profileDB;
     CrewDatabase *crewDB;
     DatabaseThread *threadDB;
+#ifdef GTA5SYNC_MOTD
+    MessageThread *threadMessage;
+#endif
     Ui::UserInterface *ui;
     ProfileInterface *profileUI;
     QList<QPushButton*> profileBtns;
