@@ -16,10 +16,24 @@ find_package(Qt5 COMPONENTS LinguistTools QUIET)
 
 if(WIN32)
     find_package(Qt5 COMPONENTS WinExtras REQUIRED)
-    list(APPEND GTA5VIEW_EXTRALIBS
+    list(APPEND GTA5VIEW_LIBS
         Qt5::WinExtras
     )
+    list(APPEND GTA5VIEW_DEFINES
+        -DUNICODE
+        -D_UNICODE
+        -DWIN32
+    )
+    list(APPEND GTA5VIEW_RESOURCES
+        res/app.rc
+    )
 endif()
+
+list(APPEND GTA5VIEW_DEFINES
+    -DGTA5SYNC_CMAKE
+    -DGTA5SYNC_PROJECT
+    -DSNAPMATIC_NODEFAULT
+)
 
 set(GTA5VIEW_SOURCES
     main.cpp
@@ -126,13 +140,7 @@ set(GTA5VIEW_FORMS
     UserInterface.ui
 )
 
-set(GTA5VIEW_DEFINES
-    -DGTA5SYNC_CMAKE
-    -DGTA5SYNC_PROJECT
-    -DSNAPMATIC_NODEFAULT
-)
-
-set(GTA5VIEW_RESOURCES
+list(APPEND GTA5VIEW_RESOURCES
     res/app.qrc
     res/global.qrc
 )
@@ -232,7 +240,7 @@ if(WITH_TELEMETRY)
         )
     endif()
     if(WIN32)
-        list(APPEND GTA5VIEW_EXTRALIBS
+        list(APPEND GTA5VIEW_LIBS
             d3d9
         )
     endif()
@@ -290,6 +298,22 @@ if(GTA5VIEW_COMMIT)
     )
 endif()
 
+if(GTA5VIEW_INLANG)
+    list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_INLANG=\"${GTA5VIEW_INLANG}\""
+    )
+endif()
+if(GTA5VIEW_LANG)
+    list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_LANG=\"${GTA5VIEW_LANG}\""
+    )
+endif()
+if(GTA5VIEW_PLUG)
+    list(APPEND GTA5VIEW_DEFINES
+        "-DGTA5SYNC_PLUG=\"${GTA5VIEW_PLUG}\""
+    )
+endif()
+
 add_executable(gta5view
     WIN32 MACOSX_BUNDLE
     ${GTA5VIEW_HEADERS}
@@ -312,7 +336,7 @@ endif()
 
 target_compile_definitions(gta5view PRIVATE ${GTA5VIEW_DEFINES})
 target_include_directories(gta5view PRIVATE ${GTA5VIEW_INCLUDEDIR})
-target_link_libraries(gta5view PRIVATE Qt5::Network Qt5::Svg Qt5::Widgets ${GTA5VIEW_EXTRALIBS})
+target_link_libraries(gta5view PRIVATE Qt5::Network Qt5::Svg Qt5::Widgets ${GTA5VIEW_LIBS})
 
 install(TARGETS gta5view DESTINATION bin)
 install(FILES res/de.syping.gta5view.desktop DESTINATION share/applications)

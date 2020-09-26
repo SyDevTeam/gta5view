@@ -107,18 +107,16 @@
 #define GTA5SYNC_INLANG ":/tr"
 #endif
 #endif
-#endif
-
+#else
 #ifndef GTA5SYNC_SHARE
 #define GTA5SYNC_SHARE "RUNDIR:"
 #endif
-
 #ifndef GTA5SYNC_LANG
 #define GTA5SYNC_LANG "SHAREDDIR:SEPARATOR:lang"
 #endif
-
 #ifndef GTA5SYNC_PLUG
 #define GTA5SYNC_PLUG "RUNDIR:SEPARATOR:plugins"
+#endif
 #endif
 
 #ifndef GTA5SYNC_COMPILER

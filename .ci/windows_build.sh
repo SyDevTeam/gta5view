@@ -12,7 +12,14 @@ mkdir -p assets && \
 
 # Starting build
 cd build && \
-qmake-static ${QMAKE_FLAGS_QT5} ${QMAKE_BUILD_TYPE} "DEFINES+=GTA5SYNC_BUILDCODE=\\\\\\\"${PACKAGE_CODE}\\\\\\\"" "DEFINES+=GTA5SYNC_APPVER=\\\\\\\"${APPLICATION_VERSION}\\\\\\\"" "DEFINES+=GTA5SYNC_COMMIT=\\\\\\\"${APPLICATION_COMMIT}\\\\\\\"" DEFINES+=GTA5SYNC_TELEMETRY "DEFINES+=GTA5SYNC_TELEMETRY_WEBURL=\\\\\\\"https://dev.syping.de/gta5view-userstats/\\\\\\\"" ../gta5view.pro && \
+mingw64-qt-cmake \
+   ${CMAKE_BUILD_TYPE} \
+   "-DGTA5VIEW_BUILDCODE=${PACKAGE_CODE}" \
+   "-DGTA5VIEW_APPVER=${APPLICATION_VERSION}" \
+   "-DGTA5VIEW_COMMIT=${APPLICATION_COMMIT}" \
+   "-DWITH_TELEMETRY=ON" \
+   "-DTELEMETRY_WEBURL=https://dev.syping.de/gta5view-userstats/" \
+   .. && \
 make -j 4 && \
-cp -Rf release/*.exe ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} && \
+cp -Rf *.exe ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} && \
 cd ${PROJECT_DIR}/assets

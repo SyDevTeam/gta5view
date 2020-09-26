@@ -25,7 +25,16 @@ mkdir -p /usr/share/gta5view && \
 
 # Starting build
 cd qt5 && \
-cmake -DCMAKE_INSTALL_PREFIX=/usr ${CMAKE_BUILD_TYPE} "-DGTA5VIEW_BUILDCODE=${PACKAGE_CODE}" "-DGTA5VIEW_APPVER=${APPLICATION_VERSION}" "-DGTA5VIEW_COMMIT=${APPLICATION_COMMIT}" -DQCONF_BUILD=ON -DWITH_TELEMETRY=ON "-DTELEMETRY_WEBURL=https://dev.syping.de/gta5view-userstats/" ../../ && \
+cmake \
+   "-DCMAKE_INSTALL_PREFIX=/usr" \
+   ${CMAKE_BUILD_TYPE} \
+   "-DGTA5VIEW_BUILDCODE=${PACKAGE_CODE}" \
+   "-DGTA5VIEW_APPVER=${APPLICATION_VERSION}" \
+   "-DGTA5VIEW_COMMIT=${APPLICATION_COMMIT}" \
+   "-DWITH_TELEMETRY=ON" \
+   "-DTELEMETRY_WEBURL=https://dev.syping.de/gta5view-userstats/" \
+   "-DQCONF_BUILD=ON" \
+   ../../ && \
 make -j 4 && \
 checkinstall -D --default --nodoc --install=no --pkgname=gta5view-qt5 --pkgversion=${PACKAGE_VERSION} --pkgrelease=${PACKAGE_BUILD} --pkggroup=utility --maintainer="Syping \<dpkg@syping.de\>" --requires=libqt5core5a,libqt5gui5,libqt5network5,libqt5svg5,libqt5widgets5,qttranslations5-l10n --conflicts=gta5view,gta5view-qt4 --replaces=gta5view,gta5view-qt4 --pakdir=${PROJECT_DIR}/assets && \
 cd .. && \
