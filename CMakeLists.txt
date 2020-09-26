@@ -14,6 +14,13 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(Qt5 COMPONENTS Network Svg Widgets REQUIRED)
 find_package(Qt5 COMPONENTS LinguistTools QUIET)
 
+if(WIN32)
+    find_package(Qt5 COMPONENTS WinExtras REQUIRED)
+    list(APPEND GTA5VIEW_EXTRALIBS
+        Qt5::WinExtras
+    )
+endif()
+
 set(GTA5VIEW_SOURCES
     main.cpp
     AboutDialog.cpp
@@ -122,7 +129,7 @@ set(GTA5VIEW_FORMS
 set(GTA5VIEW_DEFINES
     -DGTA5SYNC_CMAKE
     -DGTA5SYNC_PROJECT
-    -DGTA5SYNC_NOASSIST
+    -DSNAPMATIC_NODEFAULT
 )
 
 set(GTA5VIEW_RESOURCES
@@ -224,6 +231,11 @@ if(WITH_TELEMETRY)
             "-DGTA5SYNC_TELEMETRY_WEBURL=\"${TELEMETRY_WEBURL}\""
         )
     endif()
+    if(WIN32)
+        list(APPEND GTA5VIEW_EXTRALIBS
+            d3d9
+        )
+    endif()
 endif()
 
 if(GTA5VIEW_APPVER)
@@ -279,6 +291,7 @@ if(GTA5VIEW_COMMIT)
 endif()
 
 add_executable(gta5view
+    WIN32 MACOSX_BUNDLE
     ${GTA5VIEW_HEADERS}
     ${GTA5VIEW_SOURCES}
     ${GTA5VIEW_FORMS}
@@ -293,9 +306,13 @@ if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.16.0")
     target_precompile_headers(gta5view PRIVATE config.h)
 endif()
 
+if(Qt5Core_VERSION VERSION_GREATER_EQUAL "5.14.0")
+    qt5_import_plugins(gta5view INCLUDE Qt5::QSvgPlugin)
+endif()
+
 target_compile_definitions(gta5view PRIVATE ${GTA5VIEW_DEFINES})
 target_include_directories(gta5view PRIVATE ${GTA5VIEW_INCLUDEDIR})
-target_link_libraries(gta5view PRIVATE Qt5::Network Qt5::Svg Qt5::Widgets)
+target_link_libraries(gta5view PRIVATE Qt5::Network Qt5::Svg Qt5::Widgets ${GTA5VIEW_EXTRALIBS})
 
 install(TARGETS gta5view DESTINATION bin)
 install(FILES res/de.syping.gta5view.desktop DESTINATION share/applications)

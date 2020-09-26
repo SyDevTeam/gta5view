@@ -33,7 +33,7 @@
 #include "AppEnv.h"
 #include "config.h"
 
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
 #include <QtWinExtras/QtWin>
 #include <QtWinExtras/QWinEvent>
@@ -207,7 +207,7 @@ void PictureDialog::setupPictureDialog()
 
 PictureDialog::~PictureDialog()
 {
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
     if (naviEnabled)
     {
@@ -247,7 +247,7 @@ void PictureDialog::closeEvent(QCloseEvent *ev)
 
 void PictureDialog::addPreviousNextButtons()
 {
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
     uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
@@ -275,120 +275,6 @@ void PictureDialog::addPreviousNextButtons()
 #endif
 }
 
-#ifdef GTA5SYNC_WIN
-#if QT_VERSION >= 0x050200
-#ifdef GTA5SYNC_APV
-bool PictureDialog::nativeEvent(const QByteArray &eventType, void *message, long *result)
-{
-    *result = 0;
-    MSG *msg = static_cast<MSG*>(message);
-    LRESULT lRet = 0;
-
-    if (naviEnabled && QtWin::isCompositionEnabled())
-    {
-        if (msg->message == WM_NCCALCSIZE && msg->wParam == TRUE)
-        {
-            NCCALCSIZE_PARAMS *pncsp = reinterpret_cast<NCCALCSIZE_PARAMS*>(msg->lParam);
-
-            int sideBorderSize = ((frameSize().width() - size().width()) / 2);
-#ifdef GTA5SYNC_APV_SIDE
-            int buttomBorderSize = sideBorderSize;
-#else
-            int buttomBorderSize = (frameSize().height() - size().height());
-#endif
-            pncsp->rgrc[0].left += sideBorderSize;
-            pncsp->rgrc[0].right -= sideBorderSize;
-            pncsp->rgrc[0].bottom -= buttomBorderSize;
-        }
-        else if (msg->message == WM_NCHITTEST)
-        {
-            int CLOSE_BUTTON_ID = 20;
-            lRet = HitTestNCA(msg->hwnd, msg->lParam);
-            DwmDefWindowProc(msg->hwnd, msg->message, msg->wParam, msg->lParam, &lRet);
-            *result = lRet;
-            if (lRet != CLOSE_BUTTON_ID) { return QWidget::nativeEvent(eventType, message, result); }
-        }
-        else
-        {
-            return QWidget::nativeEvent(eventType, message, result);
-        }
-    }
-    else
-    {
-        return QWidget::nativeEvent(eventType, message, result);
-    }
-    return true;
-}
-
-LRESULT PictureDialog::HitTestNCA(HWND hWnd, LPARAM lParam)
-{
-    int LEFTEXTENDWIDTH = 0;
-    int RIGHTEXTENDWIDTH = 0;
-    int BOTTOMEXTENDWIDTH = 0;
-    int TOPEXTENDWIDTH = layout()->menuBar()->height();
-
-    POINT ptMouse = {(int)(short)LOWORD(lParam), (int)(short)HIWORD(lParam)};
-
-    RECT rcWindow;
-    GetWindowRect(hWnd, &rcWindow);
-
-    RECT rcFrame = {};
-    AdjustWindowRectEx(&rcFrame, WS_OVERLAPPEDWINDOW & ~WS_CAPTION, FALSE, NULL);
-
-    USHORT uRow = 1;
-    USHORT uCol = 1;
-    bool fOnResizeBorder = false;
-
-    if (ptMouse.y >= rcWindow.top && ptMouse.y < rcWindow.top + TOPEXTENDWIDTH)
-    {
-        fOnResizeBorder = (ptMouse.y < (rcWindow.top - rcFrame.top));
-        uRow = 0;
-    }
-    else if (ptMouse.y < rcWindow.bottom && ptMouse.y >= rcWindow.bottom - BOTTOMEXTENDWIDTH)
-    {
-        uRow = 2;
-    }
-
-    if (ptMouse.x >= rcWindow.left && ptMouse.x < rcWindow.left + LEFTEXTENDWIDTH)
-    {
-        uCol = 0;
-    }
-    else if (ptMouse.x < rcWindow.right && ptMouse.x >= rcWindow.right - RIGHTEXTENDWIDTH)
-    {
-        uCol = 2;
-    }
-
-    LRESULT hitTests[3][3] =
-    {
-        { HTTOPLEFT,    fOnResizeBorder ? HTTOP : HTCAPTION,    HTTOPRIGHT },
-        { HTLEFT,       HTNOWHERE,     HTRIGHT },
-        { HTBOTTOMLEFT, HTBOTTOM, HTBOTTOMRIGHT },
-    };
-
-    return hitTests[uRow][uCol];
-}
-
-void PictureDialog::resizeEvent(QResizeEvent *event)
-{
-    Q_UNUSED(event)
-    //    int newDialogHeight = (ui->labPicture->pixmap()->height() / AppEnv::screenRatioPR());
-    //    newDialogHeight = newDialogHeight + ui->jsonFrame->height();
-    //    if (naviEnabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
-    //    int buttomBorderSize = (frameSize().height() - size().height());
-    //    int sideBorderSize = ((frameSize().width() - size().width()) / 2);
-    //    int brokenDialogHeight = newDialogHeight + (buttomBorderSize - sideBorderSize);
-    //    if (event->size().height() == brokenDialogHeight)
-    //    {
-    //        qDebug() << "BROKEN 1";
-    //        setGeometry(geometry().x(), geometry().y(), width(), newDialogHeight);
-    //        qDebug() << "BROKEN 2";
-    //        event->ignore();
-    //    }
-}
-#endif
-#endif
-#endif
-
 void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
 {
     Q_UNUSED(newLabelSize)
@@ -409,7 +295,7 @@ void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
 
 void PictureDialog::styliseDialog()
 {
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
     if (QtWin::isCompositionEnabled())
     {
@@ -431,7 +317,7 @@ void PictureDialog::styliseDialog()
 
 bool PictureDialog::event(QEvent *event)
 {
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
     if (naviEnabled)
     {
@@ -516,7 +402,7 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 break;
             }
         }
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
         if (obj != ui->labPicture && naviEnabled)
         {
@@ -812,7 +698,7 @@ QString PictureDialog::generatePlayersString()
     QString plyrsStr;
     if (playersList.length() >= 1)
     {
-        for (const QString player : playersList)
+        for (const QString &player : playersList)
         {
             const QString playerName = profileDB->getPlayerName(player);
             if (player != playerName) {
@@ -863,9 +749,9 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         PictureWidget *pictureWidget = new PictureWidget(this); // Work!
         pictureWidget->setObjectName("PictureWidget");
 #if QT_VERSION >= 0x050600
-        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::WindowStaysOnTopHint^Qt::MaximizeUsingFullscreenGeometryHint);
+        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::MaximizeUsingFullscreenGeometryHint);
 #else
-        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::WindowStaysOnTopHint);
+        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint);
 #endif
         pictureWidget->setWindowTitle(windowTitle());
         pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color: black;}");
@@ -879,7 +765,7 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 
         pictureWidget->move(desktopRect.x(), desktopRect.y());
         pictureWidget->resize(desktopRect.width(), desktopRect.height());
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
         QtWin::markFullscreenWindow(pictureWidget, true);
 #endif

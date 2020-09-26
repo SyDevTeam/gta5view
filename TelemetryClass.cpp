@@ -41,7 +41,7 @@
 #define GTA5SYNC_TELEMETRY_WEBURL ""
 #endif
 
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #include "windows.h"
 #include "intrin.h"
 #include "d3d9.h"
@@ -228,7 +228,7 @@ QJsonDocument TelemetryClass::getSystemHardware()
 {
     QJsonDocument jsonDocument;
     QJsonObject jsonObject;
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
     {
         int CPUInfo[4] = {-1};
         unsigned nExIds, ic = 0;

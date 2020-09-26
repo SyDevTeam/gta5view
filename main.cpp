@@ -54,7 +54,7 @@
 #include <QFont>
 #include <QFile>
 
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #include "windows.h"
 #include <iostream>
 #endif
@@ -101,25 +101,12 @@ int main(int argc, char *argv[])
         }
     }
 
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050400
     bool alwaysUseMessageFont = settings.value("AlwaysUseMessageFont", false).toBool();
     if (QSysInfo::windowsVersion() >= 0x0080 || alwaysUseMessageFont)
     {
-        // Get Windows Font
-        NONCLIENTMETRICS ncm;
-        ncm.cbSize = sizeof(ncm);
-        SystemParametersInfo(SPI_GETNONCLIENTMETRICS, ncm.cbSize, &ncm, 0);
-        LOGFONTW uiFont = ncm.lfMessageFont;
-        QString uiFontStr(QString::fromStdWString(std::wstring(uiFont.lfFaceName)));
-
-#ifdef GTA5SYNC_DEBUG
-        qDebug() << QApplication::tr("Font") << QApplication::tr("Selected Font: %1").arg(uiFontStr);
-#endif
-
-        // Set Application Font
-        QFont appFont(uiFontStr, 9);
-        a.setFont(appFont);
+        a.setFont(QApplication::font("QMenu"));
     }
 #endif
 #endif

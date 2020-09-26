@@ -121,10 +121,6 @@
 #define GTA5SYNC_PLUG "RUNDIR:SEPARATOR:plugins"
 #endif
 
-#ifdef GTA5SYNC_WINRT
-#undef GTA5SYNC_WIN
-#endif
-
 #ifndef GTA5SYNC_COMPILER
 #ifdef __clang__
 #ifndef Q_OS_MAC

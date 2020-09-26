@@ -1325,7 +1325,7 @@ void ProfileInterface::exportSelected()
 
                 QString ExportPreSpan;
                 QString ExportPostSpan;
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
                 ExportPreSpan = "<span style=\"color: #003399; font-size: 12pt\">";
                 ExportPostSpan = "</span>";
 #else

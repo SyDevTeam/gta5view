@@ -175,15 +175,12 @@ INCLUDEPATH += ./anpro ./pcg ./tmext ./uimod
 
 DEFINES += GTA5SYNC_QMAKE # We using qmake do we?
 DEFINES += GTA5SYNC_PROJECT # Enable exclusive gta5sync/gta5view functions
-DEFINES += GTA5SYNC_NOASSIST # Not assisting at proper usage of SnapmaticPicture class
+DEFINES += SNAPMATIC_NODEFAULT # Not assisting at proper usage of SnapmaticPicture class
 
 # WINDOWS ONLY
 
-win32: DEFINES += GTA5SYNC_WIN
 win32: RC_FILE += res/app.rc
-win32: LIBS += -luser32
 win32: CONFIG -= embed_manifest_exe
-contains(DEFINES, GTA5SYNC_APV): greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: LIBS += -ldwmapi
 contains(DEFINES, GTA5SYNC_TELEMETRY): win32: LIBS += -ld3d9 # Required for getting information about GPU
 
 # MAC OS X ONLY
@@ -272,6 +269,6 @@ contains(DEFINES, GTA5SYNC_QCONF) {
 
 # CMAKE BASED STUFF
 
-unix: greaterThan(QT_MAJOR_VERSION, 4) {
-    message("Building non-Windows gta5view with QMake is deprecated, please use CMake instead!")
+greaterThan(QT_MAJOR_VERSION, 4) {
+    message("Building gta5view with QMake is deprecated, please use CMake instead!")
 }

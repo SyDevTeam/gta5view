@@ -106,7 +106,7 @@ void SnapmaticPicture::reset()
     jsonStr = QString();
 
     // SNAPMATIC DEFAULTS
-#ifdef GTA5SYNC_NOASSIST
+#ifdef SNAPMATIC_NODEFAULT
     careSnapDefault = false;
 #else
     careSnapDefault = true;

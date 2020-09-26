@@ -29,14 +29,6 @@
 #include <QEvent>
 #include <QMenu>
 
-#ifdef GTA5SYNC_WIN
-#if QT_VERSION >= 0x050200
-#ifdef GTA5SYNC_APV
-#include <dwmapi.h>
-#endif
-#endif
-#endif
-
 namespace Ui {
 class PictureDialog;
 }
@@ -98,15 +90,6 @@ protected:
     bool eventFilter(QObject *obj, QEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
     bool event(QEvent *event);
-#ifdef GTA5SYNC_WIN
-#if QT_VERSION >= 0x050200
-#ifdef GTA5SYNC_APV
-    bool nativeEvent(const QByteArray &eventType, void *message, long *result);
-    LRESULT HitTestNCA(HWND hWnd, LPARAM lParam);
-    void resizeEvent(QResizeEvent *event);
-#endif
-#endif
-#endif
 
 private:
     QString generateCrewString();
@@ -136,7 +119,7 @@ private:
     int avatarLocY;
     int avatarSize;
     QMenu *manageMenu;
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
     QPoint dragPosition;
     bool dragStart;

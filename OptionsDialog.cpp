@@ -174,7 +174,7 @@ void OptionsDialog::setupLanguageBox()
 
     QString cbSysStr = tr("%1 (Language priority)", "First language a person can talk with a different person/application. \"Native\" or \"Not Native\".").arg(tr("System",
                                                                                                                                                                   "System in context of System default"));
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
     QString cbAutoStr;
     if (AppEnv::getGameLanguage(AppEnv::getGameVersion()) != GameLanguage::Undefined)
     {
@@ -301,7 +301,7 @@ void OptionsDialog::setupInterfaceSettings()
     settings->beginGroup("Startup");
     bool alwaysUseMessageFont = settings->value("AlwaysUseMessageFont", false).toBool();
     ui->cbAlwaysUseMessageFont->setChecked(alwaysUseMessageFont);
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
     if (QSysInfo::windowsVersion() >= 0x0080)
     {
         ui->gbFont->setVisible(false);
@@ -367,7 +367,7 @@ void OptionsDialog::applySettings()
     settings->setValue("Language", ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()));
     settings->setValue("AreaLanguage", ui->cbAreaLanguage->itemData(ui->cbAreaLanguage->currentIndex()));
 #endif
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
     settings->setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
 #endif
@@ -626,7 +626,7 @@ void OptionsDialog::setupWindowsGameSettings()
 {
 #ifdef GTA5SYNC_GAME
     GameVersion gameVersion = AppEnv::getGameVersion();
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
     if (gameVersion != GameVersion::NoVersion)
     {
         if (gameVersion == GameVersion::SocialClubVersion)
@@ -723,7 +723,7 @@ void OptionsDialog::setupCustomGTAFolder()
 
 void OptionsDialog::setupSnapmaticPictureViewer()
 {
-#ifdef GTA5SYNC_WIN
+#ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
     settings->beginGroup("Interface");
     ui->cbSnapmaticNavigationBar->setChecked(settings->value("NavigationBar", true).toBool());
