@@ -21,5 +21,6 @@ mingw64-qt-cmake \
    "-DTELEMETRY_WEBURL=https://dev.syping.de/gta5view-userstats/" \
    .. && \
 make -j 4 && \
+x86_64-w64-mingw32-strip -s gta5view.exe && \
 cp -Rf *.exe ${PROJECT_DIR}/assets/${GTA5VIEW_EXECUTABLE} && \
 cd ${PROJECT_DIR}/assets
