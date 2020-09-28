@@ -80,7 +80,11 @@ void UiModWidget::paintEvent(QPaintEvent *paintEvent)
 {
     Q_UNUSED(paintEvent)
     QStyleOption opt;
+#if QT_VERSION <= 0x060000
+    opt.initFrom(this);
+#else
     opt.init(this);
+#endif
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }

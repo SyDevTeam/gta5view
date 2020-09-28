@@ -62,7 +62,9 @@ void DatabaseThread::scanCrewReference(const QStringList &crewList, const int &r
             QNetworkAccessManager *netManager = new QNetworkAccessManager();
             QNetworkRequest netRequest(AppEnv::getCrewFetchingUrl(crewID));
 #if QT_VERSION >= 0x050600
+#if QT_VERSION < 0x060000
             netRequest.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 #endif
             netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
             netRequest.setRawHeader("Accept", "text/html");
@@ -135,7 +137,9 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
                 QNetworkAccessManager *netManager = new QNetworkAccessManager();
                 QNetworkRequest netRequest(AppEnv::getPlayerFetchingUrl(crewID, currentPage));
 #if QT_VERSION >= 0x050600
+#if QT_VERSION < 0x060000
                 netRequest.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+#endif
 #endif
                 netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
                 netRequest.setRawHeader("Accept", "application/json");

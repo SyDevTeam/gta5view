@@ -31,7 +31,6 @@
 #include "IconLoader.h"
 #include "AppEnv.h"
 #include "config.h"
-#include <QDesktopWidget>
 #include <QStringBuilder>
 #include <QSignalMapper>
 #include <QStyleFactory>
@@ -54,6 +53,10 @@
 #include <QFont>
 #include <QFile>
 
+#if QT_VERSION < 0x060000
+#include <QDesktopWidget>
+#endif
+
 #ifdef Q_OS_WIN
 #include "windows.h"
 #include <iostream>
@@ -70,8 +73,10 @@
 int main(int argc, char *argv[])
 {
 #if QT_VERSION >= 0x050600
+#if QT_VERSION < 0x060000
     QApplication::setAttribute(Qt::AA_EnableHighDpiScaling, true);
     QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
+#endif
 #endif
     QApplication a(argc, argv);
     a.setApplicationName(GTA5SYNC_APPSTR);

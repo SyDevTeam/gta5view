@@ -23,7 +23,6 @@
 #include "StringParser.h"
 #include "AppEnv.h"
 #include "config.h"
-#include <QStringListIterator>
 #include <QStringBuilder>
 #include <QTextDocument>
 #include <QInputDialog>
@@ -438,7 +437,7 @@ void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
         }
         if (crewList.contains(QString::number(crewID)))
         {
-            indexNum = crewList.indexOf(QRegExp(QString::number(crewID)));
+            indexNum = crewList.indexOf(QString::number(crewID));
         }
         QString newCrew = QInputDialog::getItem(this, tr("Snapmatic Crew"), tr("New Snapmatic crew:"), itemList, indexNum, true, &ok, windowFlags());
         if (ok && !newCrew.isEmpty())

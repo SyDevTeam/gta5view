@@ -33,6 +33,10 @@
 #include "AppEnv.h"
 #include "config.h"
 
+#if QT_VERSION < 0x060000
+#include <QDesktopWidget>
+#endif
+
 #ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
 #include <QtWinExtras/QtWin>
@@ -41,7 +45,6 @@
 #endif
 
 #include <QStringBuilder>
-#include <QDesktopWidget>
 #include <QJsonDocument>
 #include <QApplication>
 #include <QFontMetrics>
@@ -81,7 +84,11 @@
 #define picPath picture->getPictureFilePath()
 #define picTitl StringParser::escapeString(picture->getPictureTitle())
 #define plyrsList picture->getSnapmaticProperties().playersList
+#if QT_VERSION >= 0x060000
+#define created QLocale().toString(picture->getSnapmaticProperties().createdDateTime, QLocale::ShortFormat)
+#else
 #define created picture->getSnapmaticProperties().createdDateTime.toString(Qt::DefaultLocaleShortDate)
+#endif
 
 PictureDialog::PictureDialog(ProfileDatabase *profileDB, CrewDatabase *crewDB, QWidget *parent) :
     QDialog(parent), profileDB(profileDB), crewDB(crewDB),
@@ -745,7 +752,11 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 {
     if (button == Qt::LeftButton)
     {
+#if QT_VERSION >= 0x060000
+        QRect desktopRect = QApplication::screenAt(pos())->geometry();
+#else
         QRect desktopRect = QApplication::desktop()->screenGeometry(this);
+#endif
         PictureWidget *pictureWidget = new PictureWidget(this); // Work!
         pictureWidget->setObjectName("PictureWidget");
 #if QT_VERSION >= 0x050600

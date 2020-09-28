@@ -20,7 +20,6 @@
 #include "StringParser.h"
 #include "SavegameData.h"
 #include <QStringBuilder>
-#include <QTextCodec>
 #include <QByteArray>
 #include <QDebug>
 #include <QFile>

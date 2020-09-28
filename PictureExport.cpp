@@ -23,19 +23,19 @@
 #include "StandardPaths.h"
 #include "SidebarGenerator.h"
 #include <QStringBuilder>
-#include <QDesktopWidget>
 #include <QApplication>
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSettings>
-#include <QRegExp>
 #include <QDebug>
+
+#if QT_VERSION < 0x050000
+#include <QDesktopWidget>
+#endif
 
 #if QT_VERSION >= 0x050000
 #include <QSaveFile>
 #include <QScreen>
-#else
-#include <QDesktopWidget>
 #endif
 
 PictureExport::PictureExport()

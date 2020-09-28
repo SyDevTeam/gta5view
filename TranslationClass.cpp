@@ -63,7 +63,11 @@ void TranslationClass::loadTranslation(QApplication *app)
         {
             app->installTranslator(&inQtTranslator);
         }
+#if QT_VERSION <= 0x060000
+        QLocale::setDefault(QLocale(currentLanguage));
+#else
         QLocale::setDefault(currentLanguage);
+#endif
         isLangLoaded = true;
         return;
     }
@@ -147,7 +151,11 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
+#if QT_VERSION <= 0x060000
+            QLocale::setDefault(QLocale(currentLanguage));
+#else
             QLocale::setDefault(currentLanguage);
+#endif
             isLangLoaded = true;
         }
     }
@@ -176,7 +184,11 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
+#if QT_VERSION <= 0x060000
+            QLocale::setDefault(QLocale(currentLanguage));
+#else
             QLocale::setDefault(currentLanguage);
+#endif
             isLangLoaded = true;
         }
         else
@@ -195,7 +207,11 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
+#if QT_VERSION <= 0x060000
+            QLocale::setDefault(QLocale(currentLanguage));
+#else
             QLocale::setDefault(currentLanguage);
+#endif
             isLangLoaded = true;
         }
     }
@@ -219,7 +235,11 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
+#if QT_VERSION <= 0x060000
+            QLocale::setDefault(QLocale(currentLanguage));
+#else
             QLocale::setDefault(currentLanguage);
+#endif
             isLangLoaded = true;
         }
         else if (!trLoadSuccess)
@@ -236,7 +256,11 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
+#if QT_VERSION <= 0x060000
+            QLocale::setDefault(QLocale(currentLanguage));
+#else
             QLocale::setDefault(currentLanguage);
+#endif
             isLangLoaded = true;
         }
     }

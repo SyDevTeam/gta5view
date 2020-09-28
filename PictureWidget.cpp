@@ -19,13 +19,16 @@
 #include "PictureDialog.h"
 #include "PictureWidget.h"
 #include "UiModLabel.h"
-#include <QDesktopWidget>
 #include <QApplication>
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QPixmap>
 #include <QEvent>
 #include <QDebug>
+
+#if QT_VERSION < 0x060000
+#include <QDesktopWidget>
+#endif
 
 PictureWidget::PictureWidget(QWidget *parent) : QDialog(parent)
 {
@@ -98,12 +101,21 @@ void PictureWidget::setImage(QImage image_)
 
 void PictureWidget::updateWindowSize(int screenID)
 {
+#if QT_VERSION >= 0x060000
+    Q_UNUSED(screenID)
+    QRect desktopRect = QApplication::screenAt(pos())->geometry();
+    move(desktopRect.x(), desktopRect.y());
+    resize(desktopRect.width(), desktopRect.height());
+    showFullScreen();
+    pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(desktopRect.width(), desktopRect.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+#else
     if (screenID == QApplication::desktop()->screenNumber(this))
     {
         QRect desktopRect = QApplication::desktop()->screenGeometry(this);
-        this->move(desktopRect.x(), desktopRect.y());
-        this->resize(desktopRect.width(), desktopRect.height());
-        this->showFullScreen();
+        move(desktopRect.x(), desktopRect.y());
+        resize(desktopRect.width(), desktopRect.height());
+        showFullScreen();
         pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(desktopRect.width(), desktopRect.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
     }
+#endif
 }

@@ -19,7 +19,6 @@
 #include "StringParser.h"
 #include <QTextDocument>
 #include <QLibraryInfo>
-#include <QTextCodec>
 #include <QByteArray>
 #include <QFileInfo>
 #include <QString>

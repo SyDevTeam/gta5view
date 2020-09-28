@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,9 +24,14 @@
 #include <QTextDocument>
 #include <QTextFormat>
 #include <QStringList>
-#include <QRegExp>
 #include <QVector>
 #include <QHash>
+
+#if QT_VERSION >= 0x050000
+#include <QRegularExpression>
+#else
+#include <QRegExp>
+#endif
 
 class QTextDocument;
 
@@ -37,7 +42,11 @@ class JSHighlighter : public QSyntaxHighlighter
 public:
     struct HighlightingRule
     {
+#if QT_VERSION >= 0x050000
+        QRegularExpression pattern;
+#else
         QRegExp pattern;
+#endif
         QTextCharFormat format;
     };
     QVector<HighlightingRule> highlightingRules;

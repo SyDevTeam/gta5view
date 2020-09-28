@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,7 +17,6 @@
 *****************************************************************************/
 
 #include "JSHighlighter.h"
-#include <QRegExp>
 
 JSHighlighter::JSHighlighter(QTextDocument *parent) :
     QSyntaxHighlighter(parent)
@@ -31,34 +30,61 @@ JSHighlighter::JSHighlighter(QTextDocument *parent) :
     keywordPatterns << "\\btrue\\b" << "\\bfalse\\b";
     for (QString pattern : keywordPatterns)
     {
+#if QT_VERSION >= 0x050000
+        rule.pattern = QRegularExpression(pattern);
+#else
         rule.pattern = QRegExp(pattern);
+#endif
         rule.format = keywordFormat;
         highlightingRules.append(rule);
     }
 
     QBrush doubleBrush(QColor::fromRgb(66, 137, 244));
     doubleFormat.setForeground(doubleBrush);
+#if QT_VERSION >= 0x050000
+    rule.pattern = QRegularExpression("[+-]?\\d*\\.?\\d+");
+#else
     rule.pattern = QRegExp("[+-]?\\d*\\.?\\d+");
+#endif
     rule.format = doubleFormat;
     highlightingRules.append(rule);
 
     QBrush quotationBrush(QColor::fromRgb(66, 244, 104));
     quotationFormat.setForeground(quotationBrush);
+#if QT_VERSION >= 0x050000
+    rule.pattern = QRegularExpression("\"[^\"]*\"");
+#else
     rule.pattern = QRegExp("\"[^\"]*\"");
+#endif
     rule.format = quotationFormat;
     highlightingRules.append(rule);
 
     QBrush objectBrush(QColor::fromRgb(255, 80, 80));
     objectFormat.setForeground(objectBrush);
+#if QT_VERSION >= 0x050000
+    rule.pattern = QRegularExpression("\"[^\"]*\"(?=:)");
+#else
     rule.pattern = QRegExp("\"[^\"]*\"(?=:)");
+#endif
     rule.format = objectFormat;
     highlightingRules.append(rule);
 }
 
 void JSHighlighter::highlightBlock(const QString &text)
 {
-    for (HighlightingRule rule : highlightingRules)
+#if QT_VERSION >= 0x050000
+    for (const HighlightingRule &rule : qAsConst(highlightingRules))
+#else
+    for (const HighlightingRule &rule : highlightingRules)
+#endif
     {
+#if QT_VERSION >= 0x050000
+        QRegularExpressionMatchIterator matchIterator = rule.pattern.globalMatch(text);
+        while (matchIterator.hasNext()) {
+            QRegularExpressionMatch match = matchIterator.next();
+            setFormat(match.capturedStart(), match.capturedLength(), rule.format);
+        }
+#else
         QRegExp expression(rule.pattern);
         int index = expression.indexIn(text);
         while (index >= 0)
@@ -67,6 +93,7 @@ void JSHighlighter::highlightBlock(const QString &text)
             setFormat(index, length, rule.format);
             index = expression.indexIn(text, index + length);
         }
+#endif
     }
     setCurrentBlockState(0);
 }

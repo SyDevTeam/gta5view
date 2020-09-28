@@ -22,13 +22,17 @@
 #include "StandardPaths.h"
 #include <QtGlobal>
 #include <QStringBuilder>
-#include <QDesktopWidget>
 #include <QApplication>
 #include <QSettings>
 #include <QScreen>
 #include <QDebug>
 #include <QRect>
 #include <QDir>
+
+#if QT_VERSION < 0x050000
+#include <QDesktopWidget>
+#endif
+
 #include <iostream>
 using namespace std;
 
