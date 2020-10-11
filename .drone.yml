@@ -2,7 +2,7 @@ kind: pipeline
 type: docker
   
 environment:
-  BUILD_TYPE: "RC"
+  BUILD_TYPE: "REL"
 
 steps:
 - name: Windows Installer
@@ -14,6 +14,9 @@ steps:
       from_secret: tca_pass
   commands:
     - .drone/drone.sh
+  volumes:
+    - name: gta5view
+      path: /srv/gta5view
 - name: Windows Portable
   image: sypingauto/gta5view-build:1.8-static
   environment:
@@ -23,3 +26,11 @@ steps:
       from_secret: tca_pass
   commands:
     - .drone/drone.sh
+  volumes:
+    - name: gta5view
+      path: /srv/gta5view
+
+volumes:
+- name: gta5view
+  host:
+    path: /srv/gta5view

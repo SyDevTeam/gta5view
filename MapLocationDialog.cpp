@@ -95,6 +95,21 @@ void MapLocationDialog::on_cmdDone_clicked()
     changeMode = false;
 }
 
+#if QT_VERSION >= 0x060000
+void MapLocationDialog::updatePosFromEvent(double x, double y)
+{
+    QSize mapPixelSize = size();
+    double xpos_ad = x;
+    double ypos_ad = mapPixelSize.height() - y;
+    double xrat = 10000 / (double)mapPixelSize.width();
+    double yrat = 12000 / (double)mapPixelSize.height();
+    double xpos_rv = xrat * xpos_ad;
+    double ypos_rv = yrat * ypos_ad;
+    double xpos_fp = xpos_rv - 4000;
+    double ypos_fp = ypos_rv - 4000;
+    drawPointOnMap(xpos_fp, ypos_fp);
+}
+#else
 void MapLocationDialog::updatePosFromEvent(int x, int y)
 {
     QSize mapPixelSize = size();
@@ -108,6 +123,7 @@ void MapLocationDialog::updatePosFromEvent(int x, int y)
     double ypos_fp = ypos_rv - 4000;
     drawPointOnMap(xpos_fp, ypos_fp);
 }
+#endif
 
 void MapLocationDialog::paintEvent(QPaintEvent *ev)
 {
@@ -156,7 +172,11 @@ void MapLocationDialog::mouseMoveEvent(QMouseEvent *ev)
     if (!changeMode) { ev->ignore(); }
     else if (ev->buttons() & Qt::LeftButton)
     {
+#if QT_VERSION >= 0x060000
+        updatePosFromEvent(ev->position().x(), ev->position().y());
+#else
         updatePosFromEvent(ev->x(), ev->y());
+#endif
         ev->accept();
     }
     else
@@ -170,7 +190,11 @@ void MapLocationDialog::mouseReleaseEvent(QMouseEvent *ev)
     if (!changeMode) { ev->ignore(); }
     else if (ev->button() == Qt::LeftButton)
     {
+#if QT_VERSION >= 0x060000
+        updatePosFromEvent(ev->position().x(), ev->position().y());
+#else
         updatePosFromEvent(ev->x(), ev->y());
+#endif
         ev->accept();
     }
     else

@@ -1428,6 +1428,7 @@ QString SnapmaticPicture::parseTitleString(const QByteArray &commitBytes, int ma
 #if QT_VERSION >= 0x060000
     QStringDecoder strDecoder = QStringDecoder(QStringDecoder::Utf16LE);
     QString retStr = strDecoder(commitBytes);
+    retStr = retStr.trimmed();
 #else
     QString retStr = QTextCodec::codecForName("UTF-16LE")->toUnicode(commitBytes).trimmed();
 #endif

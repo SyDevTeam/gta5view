@@ -25,4 +25,3 @@ x86_64-w64-mingw32-strip -s gta5view.exe && \
 cd ${PROJECT_DIR}/assets && \
 makensis -NOCD ${PROJECT_DIR}/.ci/gta5view.nsi && \
 mv -f gta5view_setup.exe gta5view-${EXECUTABLE_VERSION}_setup.exe
- 

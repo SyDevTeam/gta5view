@@ -4,7 +4,7 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 - View Snapmatics with the ability to disable them in-game
 - Edit Snapmatic pictures and properties in multiple ways
 - Import/Export Snapmatics, Savegames and pictures
-- Let choose between multiple Social Club accounts as GTA V profiles IDs
+- Choose between multiple Social Club accounts as GTA V profiles IDs
 
 #### Screenshots
 ![Snapmatic Picture Viewer](res/src/picture.png)  

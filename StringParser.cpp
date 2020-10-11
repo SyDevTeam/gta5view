@@ -48,12 +48,16 @@ QString StringParser::escapeString(const QString &toEscape)
 QString StringParser::convertBuildedString(const QString &buildedStr)
 {
     QString outputStr = buildedStr;
-    QByteArray sharePath = GTA5SYNC_SHARE;
-    outputStr.replace("APPNAME:", GTA5SYNC_APPSTR);
-    outputStr.replace("SHAREDDIR:", QString::fromUtf8(sharePath));
-    outputStr.replace("RUNDIR:", QFileInfo(qApp->applicationFilePath()).absoluteDir().absolutePath());
+    outputStr.replace("APPNAME:", QString::fromUtf8(GTA5SYNC_APPSTR));
+    outputStr.replace("SHAREDDIR:", QString::fromUtf8(GTA5SYNC_SHARE));
+    outputStr.replace("RUNDIR:", QFileInfo(QApplication::applicationFilePath()).canonicalPath());
+#if QT_VERSION >= 0x060000
+    outputStr.replace("QCONFLANG:", QLibraryInfo::path(QLibraryInfo::TranslationsPath));
+    outputStr.replace("QCONFPLUG:", QLibraryInfo::path(QLibraryInfo::PluginsPath));
+#else
     outputStr.replace("QCONFLANG:", QLibraryInfo::location(QLibraryInfo::TranslationsPath));
     outputStr.replace("QCONFPLUG:", QLibraryInfo::location(QLibraryInfo::PluginsPath));
+#endif
     outputStr.replace("SEPARATOR:", QDir::separator());
     return outputStr;
 }

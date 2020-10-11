@@ -48,7 +48,11 @@ private slots:
     void on_cmdApply_clicked();
     void on_cmdChange_clicked();
     void on_cmdRevert_clicked();
+#if QT_VERSION >= 0x060000
+    void updatePosFromEvent(double x, double y);
+#else
     void updatePosFromEvent(int x, int y);
+#endif
     void on_cmdClose_clicked();
 
 private:

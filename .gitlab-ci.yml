@@ -2,7 +2,7 @@ stages:
   - build
   
 variables:
-  BUILD_TYPE: "RC"
+  BUILD_TYPE: "REL"
 
 Windows Installer:
   stage: build

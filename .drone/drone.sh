@@ -27,6 +27,7 @@ fi
 # Init Application Commit Hash
 export APPLICATION_COMMIT=$(git rev-parse --short HEAD)
 
-# Start CI script and copying assets into base directory
+# Start CI script and copying assets into gta5view directory
 .ci/ci.sh && \
-cp -Rf assets/* ./
+mkdir -p /srv/gta5view/${APPLICATION_COMMIT} && \
+cp -Rf assets/* /srv/gta5view/${APPLICATION_COMMIT}/
