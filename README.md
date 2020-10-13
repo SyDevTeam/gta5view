@@ -23,7 +23,16 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 
 #### Build gta5view for Debian/Ubuntu
 
-    sudo apt-get install cmake git gcc g++ libqt5svg5-dev qtbase5-dev qttranslations5-l10n make
+    sudo apt-get install cmake git gcc g++ libqt5svg5-dev make qtbase5-dev qttranslations5-l10n
+    git clone https://gitlab.com/Syping/gta5view && cd gta5view
+    mkdir -p build && cd build
+    cmake ../
+    make -j $(nproc --all)
+    sudo make install
+
+#### Build gta5view for Arch/Manjaro
+
+    sudo pacman -S cmake gcc git make qt5-base qt5-svg qt5-tools qt5-translations
     git clone https://gitlab.com/Syping/gta5view && cd gta5view
     mkdir -p build && cd build
     cmake ../
@@ -32,18 +41,12 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 
 #### Build gta5view for Fedora
 
-    sudo dnf install cmake git gcc gcc-c++ qt5-qtbase-devel qt5-qtsvg-devel qt5-qttranslations make
+    sudo dnf install cmake git gcc gcc-c++ make qt5-qtbase-devel qt5-qtsvg-devel qt5-qttranslations
     git clone https://gitlab.com/Syping/gta5view && cd gta5view
     mkdir -p build && cd build
     cmake ../
     make -j $(nproc --all)
     sudo make install
-
-#### Build gta5view for Windows (Beginner)
-
-Download the [Qt Framework](https://www.qt.io/) and install the MinGW version.  
-Download the Source Code over the Repository or with your Git client.  
-Open the gta5view.pro Project file with Qt Creator and build it over Qt Creator.
 
 #### Download Binary Releases
 
