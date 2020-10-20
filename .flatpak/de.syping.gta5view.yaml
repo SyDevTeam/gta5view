@@ -6,15 +6,15 @@ command: gta5view
 finish-args:
   - --share=network
   - --share=ipc
-  - --socket=x11
+  - --socket=fallback-x11
   - --socket=wayland
-  - --filesystem=host
   - --device=dri
 modules:
   - name: gta5view
     buildsystem: cmake-ninja
     config-opts:
       - -DFLATPAK_BUILD=ON
+      - -DQCONF_BUILD=ON
     sources:
       - type: dir
         path: ../

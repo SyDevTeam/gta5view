@@ -340,6 +340,7 @@ target_link_libraries(gta5view PRIVATE Qt5::Network Qt5::Svg Qt5::Widgets ${GTA5
 
 install(TARGETS gta5view DESTINATION bin)
 install(FILES res/de.syping.gta5view.desktop DESTINATION share/applications)
+install(FILES res/de.syping.gta5view.metainfo.xml DESTINATION share/metainfo)
 install(FILES res/gta5view-16.png DESTINATION share/icons/hicolor/16x16/apps RENAME de.syping.gta5view.png)
 install(FILES res/gta5view-24.png DESTINATION share/icons/hicolor/24x24/apps RENAME de.syping.gta5view.png)
 install(FILES res/gta5view-32.png DESTINATION share/icons/hicolor/32x32/apps RENAME de.syping.gta5view.png)
