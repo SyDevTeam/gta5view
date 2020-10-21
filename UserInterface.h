@@ -48,7 +48,7 @@ public:
 #else
     explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
 #endif
-    void setupDirEnv();
+    void setupDirEnv(bool showFolderDialog = true);
     ~UserInterface();
 
 private slots:

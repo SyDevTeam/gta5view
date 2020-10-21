@@ -47,7 +47,9 @@ PictureWidget::PictureWidget(QWidget *parent) : QDialog(parent)
 
     QObject::connect(pictureLabel, SIGNAL(mouseDoubleClicked(Qt::MouseButton)), this, SLOT(pictureDoubleClicked(Qt::MouseButton)));
     QObject::connect(pictureLabel, SIGNAL(customContextMenuRequested(QPoint)), parent, SLOT(exportCustomContextMenuRequested(QPoint)));
+#if QT_VERSION < 0x060000
     QObject::connect(QApplication::desktop(), SIGNAL(resized(int)), this, SLOT(updateWindowSize(int)));
+#endif
 
     setLayout(widgetLayout);
 }

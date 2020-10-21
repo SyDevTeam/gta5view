@@ -133,7 +133,7 @@ int main(int argc, char *argv[])
     {
         if (isFirstStart)
         {
-            QMessageBox::StandardButton button = QMessageBox::information(a.desktop(), QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER), QApplication::tr("<h4>Welcome to %1!</h4>You want to configure %1 before you start using it?").arg(GTA5SYNC_APPSTR), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
+            QMessageBox::StandardButton button = QMessageBox::information(nullptr, QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER), QApplication::tr("<h4>Welcome to %1!</h4>You want to configure %1 before you start using it?").arg(GTA5SYNC_APPSTR), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
             if (button == QMessageBox::Yes)
             {
                 ProfileDatabase profileDB;
@@ -320,7 +320,11 @@ int main(int argc, char *argv[])
     UserInterface uiWindow(&profileDB, &crewDB, &threadDB);
 #endif
     uiWindow.setWindowIcon(IconLoader::loadingAppIcon());
+#ifdef GTA5SYNC_FLATPAK
+    uiWindow.setupDirEnv(false);
+#else
     uiWindow.setupDirEnv();
+#endif
 #ifdef Q_OS_ANDROID
     uiWindow.showMaximized();
 #else

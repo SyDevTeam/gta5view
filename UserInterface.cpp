@@ -179,7 +179,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->vlUserInterface->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 }
 
-void UserInterface::setupDirEnv()
+void UserInterface::setupDirEnv(bool showFolderDialog)
 {
     // settings init
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
@@ -192,20 +192,23 @@ void UserInterface::setupDirEnv()
     }
     else
     {
-        GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-        if (QFileInfo(GTAV_Folder).exists())
+        if (showFolderDialog)
         {
-            folderExists = true;
-            QDir::setCurrent(GTAV_Folder);
-            AppEnv::setGameFolder(GTAV_Folder);
-
-            // First time folder selection save
-            settings.beginGroup("dir");
-            if (settings.value("dir", "").toString().isEmpty())
+            GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+            if (QFileInfo(GTAV_Folder).exists())
             {
-                settings.setValue("dir", GTAV_Folder);
+                folderExists = true;
+                QDir::setCurrent(GTAV_Folder);
+                AppEnv::setGameFolder(GTAV_Folder);
+
+                // First time folder selection save
+                settings.beginGroup("dir");
+                if (settings.value("dir", "").toString().isEmpty())
+                {
+                    settings.setValue("dir", GTAV_Folder);
+                }
+                settings.endGroup();
             }
-            settings.endGroup();
         }
     }
 
