@@ -217,6 +217,10 @@ isEqual(QT_MAJOR_VERSION, 5): RESOURCES += res/tr_qt5.qrc
 
 greaterThan(QT_MAJOR_VERSION, 4): GTA5SYNC_RCC = $$[QT_HOST_BINS]/rcc
 
+# QT6 ONLY STUFF
+
+isEqual(QT_MAJOR_VERSION, 6): RESOURCES += res/tr_qt6.qrc
+
 # RESOURCE COMPILATION
 
 system($$GTA5SYNC_RCC -threshold 0 -compress 9 $$PWD/res/global.qrc -o $$OUT_PWD/qrc_global.cpp) {
@@ -241,6 +245,7 @@ INSTALLS += target pixmaps appfiles
 contains(DEFINES, GTA5SYNC_QCONF) {
     isEqual(QT_MAJOR_VERSION, 4): RESOURCES -= res/tr_qt4.qrc
     isEqual(QT_MAJOR_VERSION, 5): RESOURCES -= res/tr_qt5.qrc
+    isEqual(QT_MAJOR_VERSION, 6): RESOURCES -= res/tr_qt6.qrc
     !contains(DEFINES, GTA5SYNC_QCONF_IN) {
         RESOURCES -= res/tr_g5p.qrc
         langfiles.path = $$GTA5SYNC_PREFIX/share/gta5view/translations

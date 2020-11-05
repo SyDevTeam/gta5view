@@ -11,13 +11,20 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt5 COMPONENTS Network Svg Widgets REQUIRED)
-find_package(Qt5 COMPONENTS LinguistTools QUIET)
+option(QT6_BUILD "Build gta5view with Qt6" OFF)
+if(QT6_BUILD)
+    set(QT_VERSION_MAJOR 6)
+else()
+    set(QT_VERSION_MAJOR 5)
+endif()
+
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Svg Widgets REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS LinguistTools QUIET)
 
 if(WIN32)
-    find_package(Qt5 COMPONENTS WinExtras REQUIRED)
+    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS WinExtras REQUIRED)
     list(APPEND GTA5VIEW_LIBS
-        Qt5::WinExtras
+        Qt${QT_VERSION_MAJOR}::WinExtras
     )
     list(APPEND GTA5VIEW_DEFINES
         -DUNICODE
@@ -179,7 +186,7 @@ if(QCONF_BUILD)
 else()
     list(APPEND GTA5VIEW_RESOURCES
         res/tr_g5p.qrc
-        res/tr_qt5.qrc
+        res/tr_qt${QT_VERSION_MAJOR}.qrc
     )
 endif()
 
@@ -194,6 +201,7 @@ endif()
 
 option(WITH_MOTD "Developer message system directed to users" OFF)
 if(WITH_MOTD)
+    set(MOTD_WEBURL "" CACHE STRING "Messages WebURL")
     list(APPEND GTA5VIEW_HEADERS
         MessageThread.h
     )
@@ -212,6 +220,11 @@ endif()
 
 option(WITH_TELEMETRY "Hardware survey and basic telemetry system" OFF)
 if(WITH_TELEMETRY)
+    set(TELEMETRY_AUTHID "" CACHE STRING "Telemetry AuthID")
+    set(TELEMETRY_AUTHPW "" CACHE STRING "Telemetry AuthPW")
+    set(TELEMETRY_PUSHURL "" CACHE STRING "Telemetry PushURL")
+    set(TELEMETRY_REGURL "" CACHE STRING "Telemetry RegURL")
+    set(TELEMETRY_WEBURL "" CACHE STRING "Telemetry WebURL")
     list(APPEND GTA5VIEW_HEADERS
         TelemetryClass.h
         tmext/TelemetryClassAuthenticator.h
@@ -332,11 +345,13 @@ endif()
 
 if(Qt5Core_VERSION VERSION_GREATER_EQUAL "5.14.0")
     qt5_import_plugins(gta5view INCLUDE Qt5::QSvgPlugin)
+elseif(Qt6Core_VERSION VERSION_GREATER_EQUAL "6.0")
+    qt6_import_plugins(gta5view INCLUDE Qt6::QSvgPlugin)
 endif()
 
 target_compile_definitions(gta5view PRIVATE ${GTA5VIEW_DEFINES})
 target_include_directories(gta5view PRIVATE ${GTA5VIEW_INCLUDEDIR})
-target_link_libraries(gta5view PRIVATE Qt5::Network Qt5::Svg Qt5::Widgets ${GTA5VIEW_LIBS})
+target_link_libraries(gta5view PRIVATE Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Widgets ${GTA5VIEW_LIBS})
 
 install(TARGETS gta5view DESTINATION bin)
 install(FILES res/de.syping.gta5view.desktop DESTINATION share/applications)

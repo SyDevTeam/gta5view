@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/tr">
+        <file>qtbase_en_GB.qm</file>
+        <file>qt6/qtbase_de.qm</file>
+        <file>qt6/qtbase_fr.qm</file>
+        <file>qt6/qtbase_ko.qm</file>
+        <file>qt6/qtbase_ru.qm</file>
+        <file>qt6/qtbase_uk.qm</file>
+        <file>qt6/qtbase_zh_TW.qm</file>
+    </qresource>
+</RCC>
