@@ -41,10 +41,10 @@ void ProfileLoader::run()
     profileDir.setPath(profileFolder);
 
     // Seek pictures and savegames
-    profileDir.setNameFilters(QStringList("SGTA*"));
+    profileDir.setNameFilters(QStringList("SGTA5*"));
     QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
     QStringList BackupFiles = SavegameFiles.filter(".bak", Qt::CaseInsensitive);
-    profileDir.setNameFilters(QStringList("PGTA*"));
+    profileDir.setNameFilters(QStringList("PGTA5*"));
     QStringList SnapmaticPics = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
     BackupFiles += SnapmaticPics.filter(".bak", Qt::CaseInsensitive);
 

@@ -61,6 +61,7 @@
 #include <QUrl>
 #include <QDir>
 
+#include <cstdint>
 #include <random>
 #include <ctime>
 
@@ -760,7 +761,11 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     }
                     spJson.createdDateTime = importDateTime;
 #if QT_VERSION >= 0x060000
-                    spJson.createdTimestamp = QString::number(spJson.createdDateTime.toSecsSinceEpoch()).toUInt();
+                    quint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
+                    if (timestamp > UINT32_MAX) {
+                        timestamp = UINT32_MAX;
+                    }
+                    spJson.createdTimestamp = (quint32)timestamp;
 #else
                     spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
 #endif
@@ -818,7 +823,11 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                             }
                             spJson.createdDateTime = importDateTime;
 #if QT_VERSION >= 0x060000
-                            spJson.createdTimestamp = QString::number(spJson.createdDateTime.toSecsSinceEpoch()).toUInt();
+                            quint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
+                            if (timestamp > UINT32_MAX) {
+                                timestamp = UINT32_MAX;
+                            }
+                            spJson.createdTimestamp = (quint32)timestamp;
 #else
                             spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
 #endif
@@ -1067,7 +1076,11 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
                 }
                 spJson.createdDateTime = importDateTime;
 #if QT_VERSION >= 0x060000
-                spJson.createdTimestamp = QString::number(spJson.createdDateTime.toSecsSinceEpoch()).toUInt();
+                quint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
+                if (timestamp > UINT32_MAX) {
+                    timestamp = UINT32_MAX;
+                }
+                spJson.createdTimestamp = (quint32)timestamp;
 #else
                 spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
 #endif
@@ -1115,7 +1128,11 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
                 snapmaticProperties.uid = getRandomUid();
                 snapmaticProperties.createdDateTime = QDateTime::currentDateTime();
 #if QT_VERSION >= 0x060000
-                snapmaticProperties.createdTimestamp = QString::number(snapmaticProperties.createdDateTime.toSecsSinceEpoch()).toUInt();
+                quint64 timestamp = snapmaticProperties.createdDateTime.toSecsSinceEpoch();
+                if (timestamp > UINT32_MAX) {
+                    timestamp = UINT32_MAX;
+                }
+                snapmaticProperties.createdTimestamp = (quint32)timestamp;
 #else
                 snapmaticProperties.createdTimestamp = snapmaticProperties.createdDateTime.toTime_t();
 #endif
@@ -1156,7 +1173,11 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
             snapmaticProperties.uid = getRandomUid();
             snapmaticProperties.createdDateTime = QDateTime::currentDateTime();
 #if QT_VERSION >= 0x060000
-            snapmaticProperties.createdTimestamp = QString::number(snapmaticProperties.createdDateTime.toSecsSinceEpoch()).toUInt();
+            quint64 timestamp = snapmaticProperties.createdDateTime.toSecsSinceEpoch();
+            if (timestamp > UINT32_MAX) {
+                timestamp = UINT32_MAX;
+            }
+            snapmaticProperties.createdTimestamp = (quint32)timestamp;
 #else
             snapmaticProperties.createdTimestamp = snapmaticProperties.createdDateTime.toTime_t();
 #endif

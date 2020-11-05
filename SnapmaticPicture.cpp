@@ -998,7 +998,7 @@ void SnapmaticPicture::parseJsonContent()
         QDateTime createdTimestamp;
         localProperties.createdTimestamp = jsonMap["creat"].toUInt(&timestampOk);
 #if QT_VERSION >= 0x060000
-        createdTimestamp.setSecsSinceEpoch(QString::number(localProperties.createdTimestamp).toLongLong());
+        createdTimestamp.setSecsSinceEpoch(localProperties.createdTimestamp);
 #else
         createdTimestamp.setTime_t(localProperties.createdTimestamp);
 #endif
@@ -1280,9 +1280,25 @@ void SnapmaticPicture::setPicFilePath(const QString &picFilePath_)
 
 bool SnapmaticPicture::deletePicFile()
 {
-    if (!QFile::exists(picFilePath)) return true;
-    if (QFile::remove(picFilePath)) return true;
-    return false;
+    bool success = false;
+    if (!QFile::exists(picFilePath))
+    {
+        success = true;
+    }
+    else if (QFile::remove(picFilePath))
+    {
+        success = true;
+    }
+    if (isHidden())
+    {
+        const QString picBakPath = QString(picFilePath).remove(picFilePath.length() - 7, 7) % ".bak";
+        if (QFile::exists(picBakPath)) QFile::remove(picBakPath);
+    }
+    else {
+        const QString picBakPath = picFilePath % ".bak";
+        if (QFile::exists(picBakPath)) QFile::remove(picBakPath);
+    }
+    return success;
 }
 
 // VISIBILITY
