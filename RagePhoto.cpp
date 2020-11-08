@@ -20,7 +20,6 @@
 #include <QJsonDocument>
 #include <QTextCodec>
 #include <QBuffer>
-#include <QDebug>
 #include <QFile>
 
 RagePhoto::RagePhoto(const QByteArray &data) : p_fileData(data)
@@ -232,7 +231,7 @@ bool RagePhoto::load()
     }
     else if (format == PhotoFormat::G5EX) {
         char formatHeader[4];
-        qint64 size = dataBuffer.read(formatHeader, 4);
+        size = dataBuffer.read(formatHeader, 4);
         if (size != 4)
             return false;
         quint32 format = charToUInt32LE(formatHeader);
@@ -436,4 +435,20 @@ quint32 RagePhoto::charToUInt32BE(char *x)
 quint32 RagePhoto::charToUInt32LE(char *x)
 {
     return (((unsigned char)x[3] << 24) | ((unsigned char)x[2] << 16) | ((unsigned char)x[1] << 8) | ((unsigned char)x[0]));
+}
+
+void RagePhoto::uInt32ToCharBE(quint32 *x, char *y)
+{
+    y[0] = (*x >> 24) & 0xFF;
+    y[1] = (*x >> 16) & 0xFF;
+    y[2] = (*x >> 8) & 0xFF;
+    y[3] = (*x) & 0xFF;
+}
+
+void RagePhoto::uInt32ToCharLE(quint32 *x, char *y)
+{
+    y[0] = (*x) & 0xFF;
+    y[1] = (*x >> 8) & 0xFF;
+    y[2] = (*x >> 16) & 0xFF;
+    y[3] = (*x >> 24) & 0xFF;
 }

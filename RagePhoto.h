@@ -58,6 +58,8 @@ public:
 private:
     inline quint32 charToUInt32BE(char *x);
     inline quint32 charToUInt32LE(char *x);
+    inline void uInt32ToCharBE(quint32 *x, char *y);
+    inline void uInt32ToCharLE(quint32 *x, char *y);
     QJsonObject p_jsonObject;
     QByteArray p_fileData;
     QByteArray p_photoData;
