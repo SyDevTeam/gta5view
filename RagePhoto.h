@@ -27,10 +27,18 @@ class RagePhoto : public QObject
 {
     Q_OBJECT
 public:
+    enum ExportFormat {
+        G5E2P = 0x01000032U,
+        G5E2S = 0x02000032U,
+        G5E3P = 0x01000033U,
+        G5E3S = 0x02000033U,
+    };
     enum PhotoFormat {
+        G5EX = 0x45354700U,
         GTA5 = 0x01000000U,
         RDR2 = 0x04000000U,
     };
+    explicit RagePhoto(const QByteArray &data);
     explicit RagePhoto(const QString &filePath = QString());
     explicit RagePhoto(QIODevice *device);
     bool isLoaded();
@@ -48,8 +56,10 @@ public:
     static RagePhoto* loadFile(const QString &filePath);
 
 private:
-    inline quint32 charToUInt32(char *x);
+    inline quint32 charToUInt32BE(char *x);
+    inline quint32 charToUInt32LE(char *x);
     QJsonObject p_jsonObject;
+    QByteArray p_fileData;
     QByteArray p_photoData;
     QIODevice *p_ioDevice;
     QString p_descriptionString;
@@ -58,7 +68,7 @@ private:
     QString p_titleString;
     quint32 p_descOffset;
     quint32 p_endOfFile;
-    quint32 p_headerCRC;
+    quint32 p_headerSum;
     quint32 p_jpegBuffer;
     quint32 p_jsonOffset;
     quint32 p_photoSize;
