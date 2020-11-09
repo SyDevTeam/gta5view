@@ -28,6 +28,7 @@ class RagePhoto : public QObject
     Q_OBJECT
 public:
     enum class ExportFormat : quint32 {
+        G5E1P = 0x454C0010U,
         G5E2P = 0x01000032U,
         G5E2S = 0x02000032U,
         G5E3P = 0x01000033U,

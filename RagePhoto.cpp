@@ -357,7 +357,27 @@ bool RagePhoto::load()
         }
         else if (format == static_cast<quint32>(ExportFormat::G5E2P)) {
             p_photoFormat = PhotoFormat::G5EX;
-            p_fileData = dataBuffer.readAll();
+            p_fileData = qUncompress(dataBuffer.readAll());
+            p_inputMode = 0;
+            return load();
+        }
+        else if (format == static_cast<quint32>(ExportFormat::G5E1P)) {
+            size = dataBuffer.skip(1);
+            if (size != 1)
+                return false;
+
+            char length[1];
+            size = dataBuffer.read(length, 1);
+            if (size != 1)
+                return false;
+            int i_length = QByteArray::number((int)length[0], 16).toInt() + 6;
+
+            size = dataBuffer.skip(i_length);
+            if (size != i_length)
+                return false;
+
+            p_photoFormat = PhotoFormat::G5EX;
+            p_fileData = qUncompress(dataBuffer.readAll());
             p_inputMode = 0;
             return load();
         }
