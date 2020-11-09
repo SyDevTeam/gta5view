@@ -65,6 +65,8 @@ public:
     quint32 photoBuffer();
     quint32 photoSize();
     PhotoFormat photoFormat();
+    QByteArray save(PhotoFormat photoFormat);
+    void save(QIODevice *ioDevice, PhotoFormat photoFormat);
     static RagePhoto* loadFile(const QString &filePath);
 
 private:
@@ -83,11 +85,14 @@ private:
     QString p_photoString;
     QString p_titleString;
     quint32 p_descOffset;
+    quint32 p_descSize;
     quint32 p_endOfFile;
     quint32 p_headerSum;
     quint32 p_jpegBuffer;
     quint32 p_jsonOffset;
+    quint32 p_jsonSize;
     quint32 p_titlOffset;
+    quint32 p_titlSize;
     bool p_isLoaded;
     int p_inputMode;
 };
