@@ -62,6 +62,7 @@ public:
     const QString photoString();
     const QString title();
     quint32 photoBuffer();
+    quint32 photoSize();
     PhotoFormat photoFormat();
     static RagePhoto* loadFile(const QString &filePath);
 
@@ -85,7 +86,6 @@ private:
     quint32 p_headerSum;
     quint32 p_jpegBuffer;
     quint32 p_jsonOffset;
-    quint32 p_photoSize;
     quint32 p_titlOffset;
     bool p_isLoaded;
     int p_inputMode;

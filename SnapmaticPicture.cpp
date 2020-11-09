@@ -112,11 +112,8 @@ bool SnapmaticPicture::preloadFile()
     return ok;
 }
 
-bool SnapmaticPicture::readingPicture(bool writeEnabled_, bool cacheEnabled_, bool fastLoad, bool lowRamMode_)
+bool SnapmaticPicture::readingPicture(bool cacheEnabled_)
 {
-    Q_UNUSED(fastLoad)
-    Q_UNUSED(lowRamMode_)
-    Q_UNUSED(writeEnabled_)
     // Start opening file
     // lastStep is like currentStep
 
@@ -166,12 +163,12 @@ void SnapmaticPicture::updateStrings()
     picExportFileName = exportStr % "_" % cmpPicTitl;
 }
 
-bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool writeEnabled_, bool cacheEnabled_, bool fastLoad, bool lowRamMode_)
+bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool cacheEnabled_)
 {
     if (!fileName.isEmpty())
     {
         picFilePath = fileName;
-        return readingPicture(writeEnabled_, cacheEnabled_, fastLoad, lowRamMode_);
+        return readingPicture(cacheEnabled_);
     }
     else
     {
@@ -219,6 +216,11 @@ bool SnapmaticPicture::setPictureTitl(const QString &newTitle_)
     ragePhoto.setTitle(newTitle_);
     // SAVE HERE
     return false;
+}
+
+int SnapmaticPicture::getContentMaxLength()
+{
+    return ragePhoto.photoBuffer();
 }
 
 QString SnapmaticPicture::getExportPictureFileName()

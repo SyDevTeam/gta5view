@@ -58,8 +58,8 @@ public:
     ~SnapmaticPicture();
     void reset();
     bool preloadFile();
-    bool readingPictureFromFile(const QString &fileName, bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
-    bool readingPicture(bool writeEnabled = true, bool cacheEnabled = false, bool fastLoad = true, bool lowRamMode = false);
+    bool readingPictureFromFile(const QString &fileName, bool cacheEnabled = false);
+    bool readingPicture(bool cacheEnabled = false);
     bool isPicOk(); // Please use isPictureOk instead
     void clearCache();
     QImage getImage(bool fastLoad = false);
@@ -73,6 +73,7 @@ public:
     QString getExportPictureFileName();
     QString getOriginalPictureFileName();
     QString getOriginalPictureFilePath();
+    int getContentMaxLength();
     bool setImage(const QImage &picture);
     bool setPictureTitl(const QString &newTitle); // Please use setPictureTitle instead
     bool setPictureStream(const QByteArray &streamArray);

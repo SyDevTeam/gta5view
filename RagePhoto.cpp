@@ -135,13 +135,13 @@ bool RagePhoto::load()
         size = dataBuffer.read(photoSize, 4);
         if (size != 4)
             return false;
-        p_photoSize = charToUInt32LE(photoSize);
+        quint32 t_photoSize = charToUInt32LE(photoSize);
 
-        char photoData[p_photoSize];
-        size = dataBuffer.read(photoData, p_photoSize);
-        if (size != p_photoSize)
+        char photoData[t_photoSize];
+        size = dataBuffer.read(photoData, t_photoSize);
+        if (size != t_photoSize)
             return false;
-        p_photoData = QByteArray(photoData, p_photoSize);
+        p_photoData = QByteArray(photoData, t_photoSize);
 
         dataBuffer.seek(p_jsonOffset + 264);
         char jsonMarker[4];
@@ -279,7 +279,6 @@ bool RagePhoto::load()
                 return false;
             QByteArray t_photoData = QByteArray::fromRawData(compressedPhoto, i_photoSize);
             p_photoData = qUncompress(t_photoData);
-            p_photoSize = p_photoData.size();
 
             char jsonOffset[4];
             size = dataBuffer.read(jsonOffset, 4);
@@ -419,7 +418,8 @@ bool RagePhoto::setJsonData(const QByteArray &data)
 
 bool RagePhoto::setPhotoData(const QByteArray &data)
 {
-    if ((quint32)data.size() > p_photoSize)
+    quint32 size = data.size();
+    if (size > p_jpegBuffer)
         return false;
     p_photoData = data;
     return true;
@@ -427,7 +427,7 @@ bool RagePhoto::setPhotoData(const QByteArray &data)
 
 bool RagePhoto::setPhotoData(const char *data, int size)
 {
-    if ((quint32)size > p_photoSize)
+    if ((quint32)size > p_jpegBuffer)
         return false;
     p_photoData = QByteArray(data, size);
     return true;
@@ -476,6 +476,11 @@ const QString RagePhoto::title()
 quint32 RagePhoto::photoBuffer()
 {
     return p_jpegBuffer;
+}
+
+quint32 RagePhoto::photoSize()
+{
+    return p_photoData.size();
 }
 
 RagePhoto::PhotoFormat RagePhoto::photoFormat()

@@ -76,7 +76,7 @@ void ProfileLoader::run()
         emit loadingProgress(curFile, maximumV);
         QString picturePath = profileFolder % "/" % SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
-        if (picture->readingPicture(true, true, true))
+        if (picture->readingPicture(true))
         {
             if (picture->isFormatSwitched())
             {

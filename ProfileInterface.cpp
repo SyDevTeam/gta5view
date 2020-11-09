@@ -607,7 +607,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
         if ((selectedFileName.left(4) == "PGTA" && !selectedFileName.contains('.')) || selectedFileName.right(4) == ".g5e")
         {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
-            if (picture->readingPicture(true, true, true))
+            if (picture->readingPicture(true))
             {
                 bool success = importSnapmaticPicture(picture, notMultiple);
                 if (!success) delete picture;
@@ -678,7 +678,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
         else if (isSupportedImageFile(selectedFileName))
         {
             SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
-            if (picture->readingPicture(true, false, true, false))
+            if (picture->readingPicture(false))
             {
                 if (!notMultiple)
                 {
@@ -1048,7 +1048,7 @@ bool ProfileInterface::importRemote(QUrl remoteUrl)
 bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateTime)
 {
     SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
-    if (picture->readingPicture(true, false, true, false))
+    if (picture->readingPicture(false))
     {
         bool success = false;
         ImportDialog *importDialog = new ImportDialog(profileName, this);
