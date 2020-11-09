@@ -401,6 +401,12 @@ void RagePhoto::setFilePath(const QString &filePath)
     p_inputMode = 1;
 }
 
+void RagePhoto::setIODevice(QIODevice *ioDevice)
+{
+    p_ioDevice = ioDevice;
+    p_inputMode = 2;
+}
+
 bool RagePhoto::setJsonData(const QByteArray &data)
 {
     QJsonDocument t_jsonDocument = QJsonDocument::fromJson(data);

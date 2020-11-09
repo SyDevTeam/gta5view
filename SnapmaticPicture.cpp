@@ -50,7 +50,6 @@
 SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : QObject(parent), picFilePath(fileName)
 {
     reset();
-    ragePhoto.setFilePath(fileName);
 }
 
 SnapmaticPicture::~SnapmaticPicture()
@@ -93,7 +92,10 @@ bool SnapmaticPicture::preloadFile()
         return false;
     }
 
+    ragePhoto.setIODevice(picFile);
     bool ok = ragePhoto.load();
+    picFile->close();
+    delete picFile;
     if (!ok)
         return false;
 

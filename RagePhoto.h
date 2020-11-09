@@ -42,13 +42,14 @@ public:
     };
     explicit RagePhoto(const QByteArray &data);
     explicit RagePhoto(const QString &filePath = QString());
-    explicit RagePhoto(QIODevice *device);
+    explicit RagePhoto(QIODevice *ioDevice);
     bool isLoaded();
     bool load();
     void clear();
     void setDescription(const QString &description);
     void setFileData(const QByteArray &data);
     void setFilePath(const QString &filePath);
+    void setIODevice(QIODevice *ioDevice);
     bool setJsonData(const QByteArray &data);
     bool setPhotoData(const QByteArray &data);
     bool setPhotoData(const char *data, int size);
