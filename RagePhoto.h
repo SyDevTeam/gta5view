@@ -27,16 +27,18 @@ class RagePhoto : public QObject
 {
     Q_OBJECT
 public:
-    enum ExportFormat {
+    enum class ExportFormat : quint32 {
         G5E2P = 0x01000032U,
         G5E2S = 0x02000032U,
         G5E3P = 0x01000033U,
         G5E3S = 0x02000033U,
+        Undefined = 0,
     };
-    enum PhotoFormat {
+    enum class PhotoFormat : quint32 {
         G5EX = 0x45354700U,
         GTA5 = 0x01000000U,
         RDR2 = 0x04000000U,
+        Undefined = 0,
     };
     explicit RagePhoto(const QByteArray &data);
     explicit RagePhoto(const QString &filePath = QString());
@@ -45,14 +47,21 @@ public:
     bool load();
     void clear();
     void setDescription(const QString &description);
+    void setFileData(const QByteArray &data);
     void setFilePath(const QString &filePath);
-    void setPhotoData(const QByteArray &data);
-    void setPhotoData(const char *data, int size);
+    bool setJsonData(const QByteArray &data);
+    bool setPhotoData(const QByteArray &data);
+    bool setPhotoData(const char *data, int size);
+    void setPhotoFormat(PhotoFormat photoFormat);
     void setTitle(const QString &title);
+    const QJsonObject jsonObject();
+    const QByteArray jsonData();
     const QByteArray photoData();
     const QString description();
     const QString photoString();
     const QString title();
+    quint32 photoBuffer();
+    PhotoFormat photoFormat();
     static RagePhoto* loadFile(const QString &filePath);
 
 private:
@@ -60,8 +69,10 @@ private:
     inline quint32 charToUInt32LE(char *x);
     inline void uInt32ToCharBE(quint32 *x, char *y);
     inline void uInt32ToCharLE(quint32 *x, char *y);
+    PhotoFormat p_photoFormat;
     QJsonObject p_jsonObject;
     QByteArray p_fileData;
+    QByteArray p_jsonData;
     QByteArray p_photoData;
     QIODevice *p_ioDevice;
     QString p_descriptionString;

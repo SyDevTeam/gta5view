@@ -50,6 +50,7 @@ SOURCES += main.cpp \
     ProfileInterface.cpp \
     ProfileLoader.cpp \
     ProfileWidget.cpp \
+    RagePhoto.cpp \
     SavegameCopy.cpp \
     SavegameData.cpp \
     SavegameDialog.cpp \
@@ -92,6 +93,7 @@ HEADERS += \
     ProfileInterface.h \
     ProfileLoader.h \
     ProfileWidget.h \
+    RagePhoto.h \
     SavegameCopy.h \
     SavegameData.h \
     SavegameDialog.h \

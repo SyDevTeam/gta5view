@@ -19,6 +19,7 @@
 #ifndef SNAPMATICPICTURE_H
 #define SNAPMATICPICTURE_H
 
+#include "RagePhoto.h"
 #include <QStringList>
 #include <QDateTime>
 #include <QObject>
@@ -65,16 +66,13 @@ public:
     QByteArray getPictureStream();
     QString getLastStep(bool readable = true);
     QString getPictureStr();
-    QString getPictureHead();
     QString getPictureTitl();
-    QString getPictureDesc();
     QString getPictureSortStr();
     QString getPictureFileName();
     QString getPictureFilePath();
     QString getExportPictureFileName();
     QString getOriginalPictureFileName();
     QString getOriginalPictureFilePath();
-    int getContentMaxLength();
     bool setImage(const QImage &picture);
     bool setPictureTitl(const QString &newTitle); // Please use setPictureTitle instead
     bool setPictureStream(const QByteArray &streamArray);
@@ -106,7 +104,6 @@ public:
     QString getPictureJson() { return getJsonStr(); }
     QString getPictureTitle() { return getPictureTitl(); }
     QString getPictureString() { return getPictureStr(); }
-    QString getPictureDescription() { return getPictureDesc(); }
     bool setJsonString(const QString &jsonString, bool updateProperties = false) { return setJsonStr(jsonString, updateProperties); } // Please use setPictureJson instead
     bool setPictureJson(const QString &json, bool updateProperties = false) { return setJsonStr(json, updateProperties); }
     bool setPictureTitle(const QString &title) { return setPictureTitl(title); }
@@ -122,10 +119,6 @@ public:
     // PREDEFINED PROPERTIES
     static QSize getSnapmaticResolution();
 
-    // SNAPMATIC DEFAULTS
-    bool isSnapmaticDefaultsEnforced();
-    void setSnapmaticDefaultsEnforced(bool enforced);
-
     // SNAPMATIC FORMAT
     SnapmaticFormat getSnapmaticFormat();
     void setSnapmaticFormat(SnapmaticFormat format);
@@ -140,42 +133,27 @@ public:
     static QString convertLogStringForDraw(const QString &inputStr);
 
 private:
-    QString getSnapmaticHeaderString(const QByteArray &snapmaticHeader);
-    QString getSnapmaticJSONString(const QByteArray &jsonBytes);
-    QString getSnapmaticTIDEString(const QByteArray &tideBytes);
     QImage cachePicture;
     QString picExportFileName;
     QString picFileName;
     QString picFilePath;
-    QString pictureHead;
     QString pictureStr;
     QString lastStep;
     QString sortStr;
-    QString titlStr;
-    QString descStr;
     bool picOk;
-    bool lowRamMode;
-    bool writeEnabled;
     bool cacheEnabled;
-    bool isLoadedInRAM;
-    bool isCustomFormat;
     bool isFormatSwitch;
-    bool isModernFormat;
-    bool careSnapDefault;
-    int jpegRawContentSize;
-    int jpegRawContentSizeE;
-
-    // PICTURE STREAM
-    QByteArray rawPicContent;
 
     // JSON
     void parseJsonContent();
     bool jsonOk;
-    QString jsonStr;
     SnapmaticProperties localProperties;
 
     // VERIFY CONTENT
     static bool verifyTitleChar(const QChar &titleChar);
+
+    // RAGEPHOTO
+    RagePhoto ragePhoto;
 
 signals:
     void customSignal(QString signal);

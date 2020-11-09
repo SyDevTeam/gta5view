@@ -24,20 +24,23 @@
 
 RagePhoto::RagePhoto(const QByteArray &data) : p_fileData(data)
 {
-    p_inputMode = 0;
+    p_photoFormat = PhotoFormat::Undefined;
     p_isLoaded = false;
+    p_inputMode = 0;
 }
 
 RagePhoto::RagePhoto(const QString &filePath) : p_filePath(filePath)
 {
-    p_inputMode = 1;
+    p_photoFormat = PhotoFormat::Undefined;
     p_isLoaded = false;
+    p_inputMode = 1;
 }
 
 RagePhoto::RagePhoto(QIODevice *ioDevice) : p_ioDevice(ioDevice)
 {
-    p_inputMode = 2;
+    p_photoFormat = PhotoFormat::Undefined;
     p_isLoaded = false;
+    p_inputMode = 2;
 }
 
 bool RagePhoto::isLoaded()
@@ -74,7 +77,7 @@ bool RagePhoto::load()
         return false;
     quint32 format = charToUInt32LE(formatHeader);
 
-    if (format == PhotoFormat::GTA5) {
+    if (format == static_cast<quint32>(PhotoFormat::GTA5)) {
         char photoHeader[256];
         size = dataBuffer.read(photoHeader, 256);
         if (size != 256)
@@ -138,7 +141,7 @@ bool RagePhoto::load()
         size = dataBuffer.read(photoData, p_photoSize);
         if (size != p_photoSize)
             return false;
-        p_photoData = QByteArray::fromRawData(photoData, p_photoSize);
+        p_photoData = QByteArray(photoData, p_photoSize);
 
         dataBuffer.seek(p_jsonOffset + 264);
         char jsonMarker[4];
@@ -158,13 +161,12 @@ bool RagePhoto::load()
         size = dataBuffer.read(jsonBytes, i_jsonSize);
         if (size != i_jsonSize)
             return false;
-        QByteArray t_jsonBytes;
         for (quint32 i = 0; i != i_jsonSize; i++) {
             if (jsonBytes[i] == '\x00')
                 break;
-            t_jsonBytes += jsonBytes[i];
+            p_jsonData += jsonBytes[i];
         }
-        QJsonDocument t_jsonDocument = QJsonDocument::fromJson(t_jsonBytes);
+        QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_jsonData);
         if (t_jsonDocument.isNull())
             return false;
         p_jsonObject = t_jsonDocument.object();
@@ -225,17 +227,20 @@ bool RagePhoto::load()
         if (strncmp(jendMarker, "JEND", 4) != 0)
             return false;
 
+        if (p_photoFormat != PhotoFormat::G5EX)
+            p_photoFormat = PhotoFormat::GTA5;
+
         p_fileData.clear();
         p_isLoaded = true;
         return true;
     }
-    else if (format == PhotoFormat::G5EX) {
+    else if (format == static_cast<quint32>(PhotoFormat::G5EX)) {
         char formatHeader[4];
         size = dataBuffer.read(formatHeader, 4);
         if (size != 4)
             return false;
         quint32 format = charToUInt32LE(formatHeader);
-        if (format == ExportFormat::G5E3P) {
+        if (format == static_cast<quint32>(ExportFormat::G5E3P)) {
             char photoHeaderSize[4];
             size = dataBuffer.peek(photoHeaderSize, 4);
             if (size != 4)
@@ -293,8 +298,8 @@ bool RagePhoto::load()
             if (size != i_jsonSize)
                 return false;
             QByteArray t_jsonBytes = QByteArray::fromRawData(compressedJson, i_jsonSize);
-            t_jsonBytes = qUncompress(t_jsonBytes);
-            QJsonDocument t_jsonDocument = QJsonDocument::fromJson(t_jsonBytes);
+            p_jsonData = qUncompress(t_jsonBytes);
+            QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_jsonData);
             if (t_jsonDocument.isNull())
                 return false;
             p_jsonObject = t_jsonDocument.object();
@@ -345,11 +350,14 @@ bool RagePhoto::load()
                 return false;
             p_endOfFile = charToUInt32LE(endOfFile);
 
+            p_photoFormat = PhotoFormat::G5EX;
+
             p_fileData.clear();
             p_isLoaded = true;
             return true;
         }
-        else if (format == ExportFormat::G5E2P) {
+        else if (format == static_cast<quint32>(ExportFormat::G5E2P)) {
+            p_photoFormat = PhotoFormat::G5EX;
             p_fileData = dataBuffer.readAll();
             p_inputMode = 0;
             return load();
@@ -365,8 +373,10 @@ bool RagePhoto::load()
 
 void RagePhoto::clear()
 {
+    p_photoFormat = PhotoFormat::Undefined;
     p_jsonObject = QJsonObject();
     p_descriptionString.clear();
+    p_jsonData.clear();
     p_photoData.clear();
     p_photoString.clear();
     p_titleString.clear();
@@ -379,25 +389,62 @@ void RagePhoto::setDescription(const QString &description)
     p_descriptionString = description;
 }
 
-void RagePhoto::setFilePath(const QString &filePath)
+void RagePhoto::setFileData(const QByteArray &data)
 {
-    p_filePath = filePath;
+    p_fileData = data;
     p_inputMode = 0;
 }
 
-void RagePhoto::setPhotoData(const QByteArray &data)
+void RagePhoto::setFilePath(const QString &filePath)
 {
-    p_photoData = data;
+    p_filePath = filePath;
+    p_inputMode = 1;
 }
 
-void RagePhoto::setPhotoData(const char *data, int size)
+bool RagePhoto::setJsonData(const QByteArray &data)
 {
-    p_photoData = QByteArray::fromRawData(data, size);
+    QJsonDocument t_jsonDocument = QJsonDocument::fromJson(data);
+    if (t_jsonDocument.isNull())
+        return false;
+    p_jsonObject = t_jsonDocument.object();
+    p_jsonData = data;
+    return true;
+}
+
+bool RagePhoto::setPhotoData(const QByteArray &data)
+{
+    if ((quint32)data.size() > p_photoSize)
+        return false;
+    p_photoData = data;
+    return true;
+}
+
+bool RagePhoto::setPhotoData(const char *data, int size)
+{
+    if ((quint32)size > p_photoSize)
+        return false;
+    p_photoData = QByteArray(data, size);
+    return true;
+}
+
+void RagePhoto::setPhotoFormat(PhotoFormat photoFormat)
+{
+    p_photoFormat = photoFormat;
 }
 
 void RagePhoto::setTitle(const QString &title)
 {
     p_titleString = title;
+}
+
+const QByteArray RagePhoto::jsonData()
+{
+    return p_jsonData;
+}
+
+const QJsonObject RagePhoto::jsonObject()
+{
+    return p_jsonObject;
 }
 
 const QByteArray RagePhoto::photoData()
@@ -418,6 +465,16 @@ const QString RagePhoto::photoString()
 const QString RagePhoto::title()
 {
     return p_titleString;
+}
+
+quint32 RagePhoto::photoBuffer()
+{
+    return p_jpegBuffer;
+}
+
+RagePhoto::PhotoFormat RagePhoto::photoFormat()
+{
+    return p_photoFormat;
 }
 
 RagePhoto* RagePhoto::loadFile(const QString &filePath)
