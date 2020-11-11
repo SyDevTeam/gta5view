@@ -22,6 +22,13 @@
 #include <QBuffer>
 #include <QFile>
 
+RagePhoto::RagePhoto()
+{
+    p_photoFormat = PhotoFormat::Undefined;
+    p_isLoaded = false;
+    p_inputMode = -1;
+}
+
 RagePhoto::RagePhoto(const QByteArray &data) : p_fileData(data)
 {
     p_photoFormat = PhotoFormat::Undefined;
@@ -50,6 +57,9 @@ bool RagePhoto::isLoaded()
 
 bool RagePhoto::load()
 {
+    if (p_inputMode == -1)
+        return false;
+
     if (p_isLoaded)
         clear();
 
@@ -71,11 +81,11 @@ bool RagePhoto::load()
     QBuffer dataBuffer(&p_fileData);
     dataBuffer.open(QIODevice::ReadOnly);
 
-    char formatHeader[4];
-    qint64 size = dataBuffer.read(formatHeader, 4);
+    char uInt32Buffer[4];
+    qint64 size = dataBuffer.read(uInt32Buffer, 4);
     if (size != 4)
         return false;
-    quint32 format = charToUInt32LE(formatHeader);
+    quint32 format = charToUInt32LE(uInt32Buffer);
 
     if (format == static_cast<quint32>(PhotoFormat::GTA5)) {
         char photoHeader[256];
@@ -88,54 +98,47 @@ bool RagePhoto::load()
             p_photoString += photoChar;
         }
 
-        char checksum[4];
-        size = dataBuffer.read(checksum, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_headerSum = charToUInt32LE(checksum);
+        p_headerSum = charToUInt32LE(uInt32Buffer);
 
-        char endOfFile[4];
-        size = dataBuffer.read(endOfFile, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_endOfFile = charToUInt32LE(endOfFile);
+        p_endOfFile = charToUInt32LE(uInt32Buffer);
 
-        char jsonOffset[4];
-        size = dataBuffer.read(jsonOffset, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_jsonOffset = charToUInt32LE(jsonOffset);
+        p_jsonOffset = charToUInt32LE(uInt32Buffer);
 
-        char titleOffset[4];
-        size = dataBuffer.read(titleOffset, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_titlOffset = charToUInt32LE(titleOffset);
+        p_titlOffset = charToUInt32LE(uInt32Buffer);
 
-        char descOffset[4];
-        size = dataBuffer.read(descOffset, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_descOffset = charToUInt32LE(descOffset);
+        p_descOffset = charToUInt32LE(uInt32Buffer);
 
-        char jpegMarker[4];
-        size = dataBuffer.read(jpegMarker, 4);
+        char markerBuffer[4];
+        size = dataBuffer.read(markerBuffer, 4);
         if (size != 4)
             return false;
-        if (strncmp(jpegMarker, "JPEG", 4) != 0)
+        if (strncmp(markerBuffer, "JPEG", 4) != 0)
             return false;
 
-        char jpegBuffer[4];
-        size = dataBuffer.read(jpegBuffer, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_jpegBuffer = charToUInt32LE(jpegBuffer);
+        p_photoBuffer = charToUInt32LE(uInt32Buffer);
 
-        char photoSize[4];
-        size = dataBuffer.read(photoSize, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        quint32 t_photoSize = charToUInt32LE(photoSize);
+        quint32 t_photoSize = charToUInt32LE(uInt32Buffer);
 
         char photoData[t_photoSize];
         size = dataBuffer.read(photoData, t_photoSize);
@@ -144,24 +147,22 @@ bool RagePhoto::load()
         p_photoData = QByteArray(photoData, t_photoSize);
 
         dataBuffer.seek(p_jsonOffset + 264);
-        char jsonMarker[4];
-        size = dataBuffer.read(jsonMarker, 4);
+        size = dataBuffer.read(markerBuffer, 4);
         if (size != 4)
             return false;
-        if (strncmp(jsonMarker, "JSON", 4) != 0)
+        if (strncmp(markerBuffer, "JSON", 4) != 0)
             return false;
 
-        char jsonSize[4];
-        size = dataBuffer.read(jsonSize, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_jsonSize = charToUInt32LE(jsonSize);
+        p_jsonBuffer = charToUInt32LE(uInt32Buffer);
 
-        char jsonBytes[p_jsonSize];
-        size = dataBuffer.read(jsonBytes, p_jsonSize);
-        if (size != p_jsonSize)
+        char jsonBytes[p_jsonBuffer];
+        size = dataBuffer.read(jsonBytes, p_jsonBuffer);
+        if (size != p_jsonBuffer)
             return false;
-        for (quint32 i = 0; i != p_jsonSize; i++) {
+        for (quint32 i = 0; i != p_jsonBuffer; i++) {
             if (jsonBytes[i] == '\x00')
                 break;
             p_jsonData += jsonBytes[i];
@@ -172,59 +173,54 @@ bool RagePhoto::load()
         p_jsonObject = t_jsonDocument.object();
 
         dataBuffer.seek(p_titlOffset + 264);
-        char titlMarker[4];
-        size = dataBuffer.read(titlMarker, 4);
+        size = dataBuffer.read(markerBuffer, 4);
         if (size != 4)
             return false;
-        if (strncmp(titlMarker, "TITL", 4) != 0)
+        if (strncmp(markerBuffer, "TITL", 4) != 0)
             return false;
 
-        char titlSize[4];
-        size = dataBuffer.read(titlSize, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_titlSize = charToUInt32LE(titlSize);
+        p_titlBuffer = charToUInt32LE(uInt32Buffer);
 
-        char titlBytes[p_titlSize];
-        size = dataBuffer.read(titlBytes, p_titlSize);
-        if (size != p_titlSize)
+        char titlBytes[p_titlBuffer];
+        size = dataBuffer.read(titlBytes, p_titlBuffer);
+        if (size != p_titlBuffer)
             return false;
-        for (const QChar &titlChar : QString::fromUtf8(titlBytes, p_titlSize)) {
+        for (const QChar &titlChar : QString::fromUtf8(titlBytes, p_titlBuffer)) {
             if (titlChar.isNull())
                 break;
             p_titleString += titlChar;
         }
 
         dataBuffer.seek(p_descOffset + 264);
-        char descMarker[4];
-        size = dataBuffer.read(descMarker, 4);
+        size = dataBuffer.read(markerBuffer, 4);
         if (size != 4)
             return false;
-        if (strncmp(descMarker, "DESC", 4) != 0)
+        if (strncmp(markerBuffer, "DESC", 4) != 0)
             return false;
 
-        char descSize[4];
-        size = dataBuffer.read(descSize, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        p_descSize = charToUInt32LE(descSize);
+        p_descBuffer = charToUInt32LE(uInt32Buffer);
 
-        char descBytes[p_descSize];
-        size = dataBuffer.read(descBytes, p_descSize);
-        if (size != p_descSize)
+        char descBytes[p_descBuffer];
+        size = dataBuffer.read(descBytes, p_descBuffer);
+        if (size != p_descBuffer)
             return false;
-        for (const QChar &descChar : QString::fromUtf8(descBytes, p_descSize)) {
+        for (const QChar &descChar : QString::fromUtf8(descBytes, p_descBuffer)) {
             if (descChar.isNull())
                 break;
             p_descriptionString += descChar;
         }
 
         dataBuffer.seek(p_endOfFile + 260);
-        char jendMarker[4];
-        size = dataBuffer.read(jendMarker, 4);
+        size = dataBuffer.read(markerBuffer, 4);
         if (size != 4)
             return false;
-        if (strncmp(jendMarker, "JEND", 4) != 0)
+        if (strncmp(markerBuffer, "JEND", 4) != 0)
             return false;
 
         if (p_photoFormat != PhotoFormat::G5EX)
@@ -235,119 +231,126 @@ bool RagePhoto::load()
         return true;
     }
     else if (format == static_cast<quint32>(PhotoFormat::G5EX)) {
-        char formatHeader[4];
-        size = dataBuffer.read(formatHeader, 4);
+        size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
             return false;
-        quint32 format = charToUInt32LE(formatHeader);
+        format = charToUInt32LE(uInt32Buffer);
         if (format == static_cast<quint32>(ExportFormat::G5E3P)) {
-            char photoHeaderSize[4];
-            size = dataBuffer.peek(photoHeaderSize, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            quint32 i_photoHeaderSize = charToUInt32BE(photoHeaderSize) + 4;
+            quint32 compressedSize = charToUInt32LE(uInt32Buffer);
 
-            char compressedPhotoHeader[i_photoHeaderSize];
-            size = dataBuffer.read(compressedPhotoHeader, i_photoHeaderSize);
-            if (size != i_photoHeaderSize)
+            char compressedPhotoHeader[compressedSize];
+            size = dataBuffer.read(compressedPhotoHeader, compressedSize);
+            if (size != compressedSize)
                 return false;
-            QByteArray t_photoHeaderBytes = QByteArray::fromRawData(compressedPhotoHeader, i_photoHeaderSize);
-            t_photoHeaderBytes = qUncompress(t_photoHeaderBytes);
-            p_photoString = QString::fromUtf8(t_photoHeaderBytes);
+            QByteArray t_photoHeader = QByteArray::fromRawData(compressedPhotoHeader, compressedSize);
+            t_photoHeader = qUncompress(t_photoHeader);
+            if (t_photoHeader.isEmpty())
+                return false;
+            p_photoString = QString::fromUtf8(t_photoHeader);
 
-            char checksum[4];
-            size = dataBuffer.read(checksum, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_headerSum = charToUInt32LE(checksum);
+            p_headerSum = charToUInt32LE(uInt32Buffer);
 
-            char jpegBuffer[4];
-            size = dataBuffer.read(jpegBuffer, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_jpegBuffer = charToUInt32LE(jpegBuffer);
+            p_photoBuffer = charToUInt32LE(uInt32Buffer);
 
-            char photoSize[4];
-            size = dataBuffer.peek(photoSize, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            quint32 i_photoSize = charToUInt32BE(photoSize) + 4;
+            compressedSize = charToUInt32LE(uInt32Buffer);
 
-            char compressedPhoto[i_photoSize];
-            size = dataBuffer.read(compressedPhoto, i_photoSize);
-            if (size != i_photoSize)
+            char compressedPhoto[compressedSize];
+            size = dataBuffer.read(compressedPhoto, compressedSize);
+            if (size != compressedSize)
                 return false;
-            QByteArray t_photoData = QByteArray::fromRawData(compressedPhoto, i_photoSize);
+            QByteArray t_photoData = QByteArray::fromRawData(compressedPhoto, compressedSize);
             p_photoData = qUncompress(t_photoData);
 
-            char jsonOffset[4];
-            size = dataBuffer.read(jsonOffset, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_jsonOffset = charToUInt32LE(jsonOffset);
+            p_jsonOffset = charToUInt32LE(uInt32Buffer);
 
-            char jsonSize[4];
-            size = dataBuffer.peek(jsonSize, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_jsonSize = charToUInt32BE(jsonSize) + 4;
+            p_jsonBuffer = charToUInt32LE(uInt32Buffer);
 
-            char compressedJson[p_jsonSize];
-            size = dataBuffer.read(compressedJson, p_jsonSize);
-            if (size != p_jsonSize)
+            size = dataBuffer.read(uInt32Buffer, 4);
+            if (size != 4)
                 return false;
-            QByteArray t_jsonBytes = QByteArray::fromRawData(compressedJson, p_jsonSize);
+            compressedSize = charToUInt32LE(uInt32Buffer);
+
+            char compressedJson[compressedSize];
+            size = dataBuffer.read(compressedJson, compressedSize);
+            if (size != compressedSize)
+                return false;
+            QByteArray t_jsonBytes = QByteArray::fromRawData(compressedJson, compressedSize);
             p_jsonData = qUncompress(t_jsonBytes);
+            if (p_jsonData.isEmpty())
+                return false;
             QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_jsonData);
             if (t_jsonDocument.isNull())
                 return false;
             p_jsonObject = t_jsonDocument.object();
 
-            char titleOffset[4];
-            size = dataBuffer.read(titleOffset, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_titlOffset = charToUInt32LE(titleOffset);
+            p_titlOffset = charToUInt32LE(uInt32Buffer);
 
-            char titlSize[4];
-            size = dataBuffer.peek(titlSize, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_titlSize = charToUInt32BE(titlSize) + 4;
+            p_titlBuffer = charToUInt32LE(uInt32Buffer);
 
-            char compressedTitl[p_titlSize];
-            size = dataBuffer.read(compressedTitl, p_titlSize);
-            if (size != p_titlSize)
+            size = dataBuffer.read(uInt32Buffer, 4);
+            if (size != 4)
                 return false;
-            QByteArray t_titlBytes = QByteArray::fromRawData(compressedTitl, p_titlSize);
+            compressedSize = charToUInt32LE(uInt32Buffer);
+
+            char compressedTitl[compressedSize];
+            size = dataBuffer.read(compressedTitl, compressedSize);
+            if (size != compressedSize)
+                return false;
+            QByteArray t_titlBytes = QByteArray::fromRawData(compressedTitl, compressedSize);
             t_titlBytes = qUncompress(t_titlBytes);
             p_titleString = QString::fromUtf8(t_titlBytes);
 
-            char descOffset[4];
-            size = dataBuffer.read(descOffset, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_descOffset = charToUInt32LE(descOffset);
+            p_descOffset = charToUInt32LE(uInt32Buffer);
 
-            char descSize[4];
-            size = dataBuffer.peek(descSize, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_descSize = charToUInt32BE(descSize) + 4;
+            p_descBuffer = charToUInt32LE(uInt32Buffer);
 
-            char compressedDesc[p_descSize];
-            size = dataBuffer.read(compressedDesc, p_descSize);
-            if (size != p_descSize)
+            size = dataBuffer.read(uInt32Buffer, 4);
+            if (size != 4)
                 return false;
-            QByteArray t_descBytes = QByteArray::fromRawData(compressedDesc, p_descSize);
+            compressedSize = charToUInt32LE(uInt32Buffer);
+
+            char compressedDesc[compressedSize];
+            size = dataBuffer.read(compressedDesc, compressedSize);
+            if (size != compressedSize)
+                return false;
+            QByteArray t_descBytes = QByteArray::fromRawData(compressedDesc, compressedSize);
             t_descBytes = qUncompress(t_descBytes);
             p_descriptionString = QString::fromUtf8(t_descBytes);
 
-            char endOfFile[4];
-            size = dataBuffer.read(endOfFile, 4);
+            size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
                 return false;
-            p_endOfFile = charToUInt32LE(endOfFile);
+            p_endOfFile = charToUInt32LE(uInt32Buffer);
 
             p_photoFormat = PhotoFormat::G5EX;
 
@@ -358,6 +361,8 @@ bool RagePhoto::load()
         else if (format == static_cast<quint32>(ExportFormat::G5E2P)) {
             p_photoFormat = PhotoFormat::G5EX;
             p_fileData = qUncompress(dataBuffer.readAll());
+            if (p_fileData.isEmpty())
+                return false;
             p_inputMode = 0;
             return load();
         }
@@ -378,6 +383,8 @@ bool RagePhoto::load()
 
             p_photoFormat = PhotoFormat::G5EX;
             p_fileData = qUncompress(dataBuffer.readAll());
+            if (p_fileData.isEmpty())
+                return false;
             p_inputMode = 0;
             return load();
         }
@@ -431,15 +438,15 @@ bool RagePhoto::setJsonData(const QByteArray &data)
     QJsonDocument t_jsonDocument = QJsonDocument::fromJson(data);
     if (t_jsonDocument.isNull())
         return false;
+    p_jsonData = t_jsonDocument.toJson(QJsonDocument::Compact);
     p_jsonObject = t_jsonDocument.object();
-    p_jsonData = data;
     return true;
 }
 
 bool RagePhoto::setPhotoData(const QByteArray &data)
 {
     quint32 size = data.size();
-    if (size > p_jpegBuffer)
+    if (size > p_photoBuffer)
         return false;
     p_photoData = data;
     return true;
@@ -447,7 +454,7 @@ bool RagePhoto::setPhotoData(const QByteArray &data)
 
 bool RagePhoto::setPhotoData(const char *data, int size)
 {
-    if ((quint32)size > p_jpegBuffer)
+    if ((quint32)size > p_photoBuffer)
         return false;
     p_photoData = QByteArray(data, size);
     return true;
@@ -463,9 +470,17 @@ void RagePhoto::setTitle(const QString &title)
     p_titleString = title;
 }
 
-const QByteArray RagePhoto::jsonData()
+const QByteArray RagePhoto::jsonData(JsonFormat jsonFormat)
 {
-    return p_jsonData;
+    if (jsonFormat == JsonFormat::Compact) {
+        return QJsonDocument(p_jsonObject).toJson(QJsonDocument::Compact);
+    }
+    else if (jsonFormat == JsonFormat::Indented) {
+        return QJsonDocument(p_jsonObject).toJson(QJsonDocument::Indented);
+    }
+    else {
+        return p_jsonData;
+    }
 }
 
 const QJsonObject RagePhoto::jsonObject()
@@ -495,7 +510,7 @@ const QString RagePhoto::title()
 
 quint32 RagePhoto::photoBuffer()
 {
-    return p_jpegBuffer;
+    return p_photoBuffer;
 }
 
 quint32 RagePhoto::photoSize()
@@ -519,11 +534,79 @@ QByteArray RagePhoto::save(PhotoFormat photoFormat)
 
 void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
 {
-    if (photoFormat == PhotoFormat::GTA5) {
-        char formatHeader[4];
-        quint32 format = (quint32)PhotoFormat::GTA5;
-        uInt32ToCharLE(&format, formatHeader);
-        ioDevice->write(formatHeader, 4);
+    if (photoFormat == PhotoFormat::G5EX) {
+        char uInt32Buffer[4];
+        quint32 format = static_cast<quint32>(PhotoFormat::G5EX);
+        uInt32ToCharLE(&format, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+        format = static_cast<quint32>(ExportFormat::G5E3P);
+        uInt32ToCharLE(&format, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        QByteArray compressedData = qCompress(p_photoString.toUtf8(), 9);
+        quint32 compressedSize = compressedData.size();
+        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+        ioDevice->write(compressedData);
+
+        uInt32ToCharLE(&p_headerSum, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        uInt32ToCharLE(&p_photoBuffer, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        compressedData = qCompress(p_photoData, 9);
+        compressedSize = compressedData.size();
+        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+        ioDevice->write(compressedData);
+
+        uInt32ToCharLE(&p_jsonOffset, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        uInt32ToCharLE(&p_jsonBuffer, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        compressedData = qCompress(p_jsonData, 9);
+        compressedSize = compressedData.size();
+        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+        ioDevice->write(compressedData);
+
+        uInt32ToCharLE(&p_titlOffset, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        uInt32ToCharLE(&p_titlBuffer, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        compressedData = qCompress(p_titleString.toUtf8(), 9);
+        compressedSize = compressedData.size();
+        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+        ioDevice->write(compressedData);
+
+        uInt32ToCharLE(&p_descOffset, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        uInt32ToCharLE(&p_descBuffer, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        compressedData = qCompress(p_descriptionString.toUtf8(), 9);
+        compressedSize = compressedData.size();
+        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+        ioDevice->write(compressedData);
+
+        uInt32ToCharLE(&p_endOfFile, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
+
+        ioDevice->aboutToClose();
+    }
+    else if (photoFormat == PhotoFormat::GTA5) {
+        char uInt32Buffer[4];
+        quint32 format = static_cast<quint32>(PhotoFormat::GTA5);
+        uInt32ToCharLE(&format, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
         QByteArray photoHeader = QTextCodec::codecForName("UTF-16LE")->fromUnicode(p_photoString);
         if (photoHeader.left(2) == "\xFF\xFE") {
@@ -539,85 +622,75 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
             ioDevice->write("\x00", 1);
         }
 
-        char checksum[4];
-        uInt32ToCharLE(&p_headerSum, checksum);
-        ioDevice->write(checksum, 4);
+        uInt32ToCharLE(&p_headerSum, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
-        char endOfFile[4];
-        uInt32ToCharLE(&p_endOfFile, endOfFile);
-        ioDevice->write(endOfFile, 4);
+        uInt32ToCharLE(&p_endOfFile, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
-        char jsonOffset[4];
-        uInt32ToCharLE(&p_jsonOffset, jsonOffset);
-        ioDevice->write(jsonOffset, 4);
+        uInt32ToCharLE(&p_jsonOffset, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
-        char titlOffset[4];
-        uInt32ToCharLE(&p_titlOffset, titlOffset);
-        ioDevice->write(titlOffset, 4);
+        uInt32ToCharLE(&p_titlOffset, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
-        char descOffset[4];
-        uInt32ToCharLE(&p_descOffset, descOffset);
-        ioDevice->write(descOffset, 4);
+        uInt32ToCharLE(&p_descOffset, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
-        ioDevice->write("JPEG");
+        ioDevice->write("JPEG", 4);
 
-        char jpegBuffer[4];
-        uInt32ToCharLE(&p_jpegBuffer, jpegBuffer);
-        ioDevice->write(jpegBuffer, 4);
+        uInt32ToCharLE(&p_photoBuffer, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
         quint32 t_photoSize = p_photoData.size();
-        char photoSize[4];
-        uInt32ToCharLE(&t_photoSize, photoSize);
-        ioDevice->write(photoSize, 4);
+        uInt32ToCharLE(&t_photoSize, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
         ioDevice->write(p_photoData);
-        for (qint64 size = t_photoSize; size < p_jpegBuffer; size++) {
+        for (qint64 size = t_photoSize; size < p_photoBuffer; size++) {
             ioDevice->write("\x00", 1);
         }
 
         ioDevice->seek(p_jsonOffset + 264);
-        ioDevice->write("JSON");
+        ioDevice->write("JSON", 4);
 
-        char jsonSize[4];
-        uInt32ToCharLE(&p_jsonSize, jsonSize);
-        ioDevice->write(jsonSize, 4);
+        uInt32ToCharLE(&p_jsonBuffer, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
         qint64 dataSize = p_jsonData.size();
         ioDevice->write(p_jsonData);
-        for (qint64 size = dataSize; size < p_jsonSize; size++) {
+        for (qint64 size = dataSize; size < p_jsonBuffer; size++) {
             ioDevice->write("\x00", 1);
         }
 
         ioDevice->seek(p_titlOffset + 264);
-        ioDevice->write("TITL");
+        ioDevice->write("TITL", 4);
 
-        char titlSize[4];
-        uInt32ToCharLE(&p_titlSize, titlSize);
-        ioDevice->write(titlSize, 4);
+        uInt32ToCharLE(&p_titlBuffer, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
         QByteArray data = p_titleString.toUtf8();
         dataSize = data.size();
         ioDevice->write(data);
-        for (qint64 size = dataSize; size < p_titlSize; size++) {
+        for (qint64 size = dataSize; size < p_titlBuffer; size++) {
             ioDevice->write("\x00", 1);
         }
 
         ioDevice->seek(p_descOffset + 264);
-        ioDevice->write("DESC");
+        ioDevice->write("DESC", 4);
 
-        char descSize[4];
-        uInt32ToCharLE(&p_descSize, descSize);
-        ioDevice->write(descSize, 4);
+        uInt32ToCharLE(&p_descBuffer, uInt32Buffer);
+        ioDevice->write(uInt32Buffer, 4);
 
         data = p_descriptionString.toUtf8();
         dataSize = data.size();
         ioDevice->write(data);
-        for (qint64 size = dataSize; size < p_descSize; size++) {
+        for (qint64 size = dataSize; size < p_descBuffer; size++) {
             ioDevice->write("\x00", 1);
         }
 
         ioDevice->seek(p_endOfFile + 260);
-        ioDevice->write("JEND");
+        ioDevice->write("JEND", 4);
         ioDevice->aboutToClose();
     }
 }

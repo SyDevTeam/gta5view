@@ -27,6 +27,11 @@ class RagePhoto : public QObject
 {
     Q_OBJECT
 public:
+    enum class JsonFormat : quint8 {
+        Original = 0,
+        Compact = 1,
+        Indented = 2,
+    };
     enum class ExportFormat : quint32 {
         G5E1P = 0x454C0010U,
         G5E2P = 0x01000032U,
@@ -41,8 +46,9 @@ public:
         RDR2 = 0x04000000U,
         Undefined = 0,
     };
+    explicit RagePhoto();
     explicit RagePhoto(const QByteArray &data);
-    explicit RagePhoto(const QString &filePath = QString());
+    explicit RagePhoto(const QString &filePath);
     explicit RagePhoto(QIODevice *ioDevice);
     bool isLoaded();
     bool load();
@@ -57,7 +63,7 @@ public:
     void setPhotoFormat(PhotoFormat photoFormat);
     void setTitle(const QString &title);
     const QJsonObject jsonObject();
-    const QByteArray jsonData();
+    const QByteArray jsonData(JsonFormat jsonFormat = JsonFormat::Original);
     const QByteArray photoData();
     const QString description();
     const QString photoString();
@@ -84,15 +90,15 @@ private:
     QString p_filePath;
     QString p_photoString;
     QString p_titleString;
+    quint32 p_descBuffer;
     quint32 p_descOffset;
-    quint32 p_descSize;
     quint32 p_endOfFile;
     quint32 p_headerSum;
-    quint32 p_jpegBuffer;
+    quint32 p_jsonBuffer;
     quint32 p_jsonOffset;
-    quint32 p_jsonSize;
+    quint32 p_photoBuffer;
+    quint32 p_titlBuffer;
     quint32 p_titlOffset;
-    quint32 p_titlSize;
     bool p_isLoaded;
     int p_inputMode;
 };

@@ -188,9 +188,8 @@ bool SnapmaticPicture::setImage(const QImage &picture)
         picStreamT.open(QIODevice::WriteOnly);
         saveSuccess = picture.save(&picStreamT, "JPEG", comLvl);
         picStreamT.close();
-        if (saveSuccess)
-        {
-            if ((quint32)picByteArrayT.length() > jpegPicStreamLength) {
+        if (saveSuccess) {
+            if (static_cast<quint32>(picByteArrayT.length()) > jpegPicStreamLength) {
                 comLvl--;
                 saveSuccess = false;
             }
@@ -207,15 +206,27 @@ bool SnapmaticPicture::setImage(const QImage &picture)
 bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean method
 {
     bool success = ragePhoto.setPhotoData(streamArray);
-    // SAVE HERE
-    return false;
+    if (success) {
+        if (cacheEnabled) {
+            QImage replacedPicture;
+            replacedPicture.loadFromData(streamArray);
+            cachePicture = replacedPicture;
+        }
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 bool SnapmaticPicture::setPictureTitl(const QString &newTitle_)
 {
-    ragePhoto.setTitle(newTitle_);
-    // SAVE HERE
-    return false;
+    QString newTitle = newTitle_;
+    if (newTitle.length() > 39) {
+        newTitle = newTitle.left(39);
+    }
+    ragePhoto.setTitle(newTitle);
+    return true;
 }
 
 int SnapmaticPicture::getContentMaxLength()
@@ -591,7 +602,6 @@ bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties properties)
 bool SnapmaticPicture::setJsonStr(const QString &newJsonStr, bool updateProperties)
 {
     if (ragePhoto.setJsonData(newJsonStr.toUtf8())) {
-        // SAVE HERE
         if (updateProperties)
             parseJsonContent();
         return true;
@@ -605,129 +615,88 @@ bool SnapmaticPicture::setJsonStr(const QString &newJsonStr, bool updateProperti
 
 bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat format_)
 {
-    //    // Keep current format when Auto_Format is used
-    //    SnapmaticFormat format = format_;
-    //    if (format_ == SnapmaticFormat::Auto_Format)
-    //    {
-    //        if (ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
-    //        {
-    //            format = SnapmaticFormat::G5E_Format;
-    //        }
-    //        else
-    //        {
-    //            format = SnapmaticFormat::PGTA_Format;
-    //        }
-    //    }
+    // Keep current format when Auto_Format is used
+    SnapmaticFormat format = format_;
+    if (format_ == SnapmaticFormat::Auto_Format)
+    {
+        if (ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
+        {
+            format = SnapmaticFormat::G5E_Format;
+        }
+        else
+        {
+            format = SnapmaticFormat::PGTA_Format;
+        }
+    }
 
-    //    bool saveSuccess = false;
-    //    bool writeFailure = false;
-    //#if QT_VERSION >= 0x050000
-    //    QSaveFile *picFile = new QSaveFile(fileName);
-    //#else
-    //    QFile *picFile = new QFile(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
-    //#endif
-    //    if (picFile->open(QIODevice::WriteOnly))
-    //    {
-    //        if (format == SnapmaticFormat::G5E_Format)
-    //        {
-    //            // Modern compressed export (v2)
-    //            QByteArray g5eHeader;
-    //            g5eHeader.reserve(10);
-    //            g5eHeader += '\x00'; // First Null Byte
-    //            g5eHeader += QByteArray("G5E"); // GTA 5 Export
-    //            g5eHeader += '\x32'; g5eHeader += '\x00'; // 2 byte GTA 5 Export Version
-    //            g5eHeader += '\x00'; g5eHeader += '\x01'; // 2 byte GTA 5 Export Type
-    //            if (picFile->write(g5eHeader) == -1) { writeFailure = true; }
-    //            if (!lowRamMode)
-    //            {
-    //                if (picFile->write(qCompress(rawPicContent, 9)) == -1) { writeFailure = true; } // Compressed Snapmatic
-    //            }
-    //            else
-    //            {
-    //                if (picFile->write(rawPicContent) == -1) { writeFailure = true; }
-    //            }
-    //#if QT_VERSION >= 0x050000
-    //            if (writeFailure) { picFile->cancelWriting(); }
-    //            else { saveSuccess = picFile->commit(); }
-    //#else
-    //            if (!writeFailure) { saveSuccess = true; }
-    //            picFile->close();
-    //#endif
-    //            delete picFile;
-    //        }
-    //        else if (format == SnapmaticFormat::JPEG_Format)
-    //        {
-    //            // JPEG export
-    //            QBuffer snapmaticStream(&rawPicContent);
-    //            snapmaticStream.open(QIODevice::ReadOnly);
-    //            if (snapmaticStream.seek(jpegStreamEditorBegin))
-    //            {
-    //                QByteArray jpegRawContent = snapmaticStream.read(jpegPicStreamLength);
-    //                if (jpegRawContentSizeE != 0)
-    //                {
-    //                    jpegRawContent = jpegRawContent.left(jpegRawContentSizeE);
-    //                }
-    //                if (picFile->write(jpegRawContent) == -1) { writeFailure = true; }
-    //#if QT_VERSION >= 0x050000
-    //                if (writeFailure) { picFile->cancelWriting(); }
-    //                else { saveSuccess = picFile->commit(); }
-    //#else
-    //                if (!writeFailure) { saveSuccess = true; }
-    //                picFile->close();
-    //#endif
-    //            }
-    //            delete picFile;
-    //        }
-    //        else
-    //        {
-    //            // Classic straight export
-    //            if (!lowRamMode)
-    //            {
-    //                if (picFile->write(rawPicContent) == -1) { writeFailure = true; }
-    //            }
-    //            else
-    //            {
-    //                if (picFile->write(qUncompress(rawPicContent)) == -1) { writeFailure = true; }
-    //            }
-    //#if QT_VERSION >= 0x050000
-    //            if (writeFailure) { picFile->cancelWriting(); }
-    //            else { saveSuccess = picFile->commit(); }
-    //#else
-    //            if (!writeFailure) { saveSuccess = true; }
-    //            picFile->close();
-    //#endif
-    //            delete picFile;
-    //        }
-    //#if QT_VERSION <= 0x050000
-    //        if (saveSuccess)
-    //        {
-    //            bool tempBakCreated = false;
-    //            if (QFile::exists(fileName))
-    //            {
-    //                if (!QFile::rename(fileName, fileName % ".tmp"))
-    //                {
-    //                    QFile::remove(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
-    //                    return false;
-    //                }
-    //                tempBakCreated = true;
-    //            }
-    //            if (!QFile::rename(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp", fileName))
-    //            {
-    //                QFile::remove(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
-    //                if (tempBakCreated) { QFile::rename(fileName % ".tmp", fileName); }
-    //                return false;
-    //            }
-    //            if (tempBakCreated) { QFile::remove(fileName % ".tmp"); }
-    //        }
-    //#endif
-    //        return saveSuccess;
-    //    }
-    //    else
-    //    {
-    //        delete picFile;
-    //        return saveSuccess;
-    //    }
-    return false;
+    bool saveSuccess = false;
+#if QT_VERSION >= 0x050000
+    QSaveFile *picFile = new QSaveFile(fileName);
+#else
+    QFile *picFile = new QFile(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
+#endif
+    if (picFile->open(QIODevice::WriteOnly))
+    {
+        if (format == SnapmaticFormat::G5E_Format)
+        {
+            ragePhoto.save(picFile, RagePhoto::PhotoFormat::G5EX);
+#if QT_VERSION >= 0x050000
+            saveSuccess = picFile->commit();
+#else
+            saveSuccess = true;
+            picFile->close();
+#endif
+            delete picFile;
+        }
+        else if (format == SnapmaticFormat::JPEG_Format)
+        {
+            picFile->write(ragePhoto.photoData());
+#if QT_VERSION >= 0x050000
+            saveSuccess = picFile->commit();
+#else
+            saveSuccess = true;
+            picFile->close();
+#endif
+            delete picFile;
+        }
+        else
+        {
+            ragePhoto.save(picFile, RagePhoto::PhotoFormat::GTA5);
+#if QT_VERSION >= 0x050000
+            saveSuccess = picFile->commit();
+#else
+            saveSuccess = true;
+            picFile->close();
+#endif
+            delete picFile;
+        }
+#if QT_VERSION <= 0x050000
+        if (saveSuccess) {
+            bool tempBakCreated = false;
+            if (QFile::exists(fileName)) {
+                if (!QFile::rename(fileName, fileName % ".tmp")) {
+                    QFile::remove(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
+                    return false;
+                }
+                tempBakCreated = true;
+            }
+            if (!QFile::rename(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp", fileName)) {
+                QFile::remove(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
+                if (tempBakCreated)
+                    QFile::rename(fileName % ".tmp", fileName);
+                return false;
+            }
+            if (tempBakCreated)
+                QFile::remove(fileName % ".tmp");
+        }
+#endif
+        return saveSuccess;
+    }
+    else
+    {
+        delete picFile;
+        return saveSuccess;
+    }
 }
 
 void SnapmaticPicture::setPicFileName(const QString &picFileName_)
