@@ -369,7 +369,12 @@ bool RagePhoto::load()
             return load();
         }
         else if (format == static_cast<quint32>(ExportFormat::G5E1P)) {
+#if QT_VERSION >= 0x050A00
             size = dataBuffer.skip(1);
+#else
+            QByteArray skipData = dataBuffer.read(1);
+            size = skipData.size();
+#endif
             if (size != 1)
                 return false;
 
@@ -379,7 +384,12 @@ bool RagePhoto::load()
                 return false;
             int i_length = QByteArray::number((int)length[0], 16).toInt() + 6;
 
+#if QT_VERSION >= 0x050A00
             size = dataBuffer.skip(i_length);
+#else
+            skipData = dataBuffer.read(i_length);
+            size = skipData.size();
+#endif
             if (size != i_length)
                 return false;
 
