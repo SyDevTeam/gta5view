@@ -466,7 +466,7 @@ bool RagePhoto::setPhotoData(const QByteArray &data)
 
 bool RagePhoto::setPhotoData(const char *data, int size)
 {
-    if ((quint32)size > p_photoBuffer)
+    if (static_cast<quint32>(size) > p_photoBuffer)
         return false;
     p_photoData = QByteArray(data, size);
     return true;
@@ -721,12 +721,18 @@ RagePhoto* RagePhoto::loadFile(const QString &filePath)
 
 quint32 RagePhoto::charToUInt32BE(char *x)
 {
-    return (((unsigned char)x[0] << 24) | ((unsigned char)x[1] << 16) | ((unsigned char)x[2] << 8) | ((unsigned char)x[3]));
+    return (static_cast<unsigned char>(x[0]) << 24 |
+            static_cast<unsigned char>(x[1]) << 16 |
+            static_cast<unsigned char>(x[2]) << 8 |
+            static_cast<unsigned char>(x[3]));
 }
 
 quint32 RagePhoto::charToUInt32LE(char *x)
 {
-    return (((unsigned char)x[3] << 24) | ((unsigned char)x[2] << 16) | ((unsigned char)x[1] << 8) | ((unsigned char)x[0]));
+    return (static_cast<unsigned char>(x[3]) << 24 |
+            static_cast<unsigned char>(x[2]) << 16 |
+            static_cast<unsigned char>(x[1]) << 8 |
+            static_cast<unsigned char>(x[0]));
 }
 
 void RagePhoto::uInt32ToCharBE(quint32 *x, char *y)

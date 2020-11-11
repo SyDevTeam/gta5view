@@ -82,7 +82,6 @@ bool SnapmaticPicture::preloadFile()
     QFile *picFile = new QFile(picFilePath);
     picFileName = QFileInfo(picFilePath).fileName();
 
-    bool g5eMode = false;
     isFormatSwitch = false;
 
     if (!picFile->open(QFile::ReadOnly))
@@ -103,10 +102,6 @@ bool SnapmaticPicture::preloadFile()
     {
         if (ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
             isFormatSwitch = true;
-    }
-    else
-    {
-        g5eMode = true;
     }
     emit preloaded();
     return ok;
