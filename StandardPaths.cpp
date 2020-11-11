@@ -48,7 +48,9 @@ QString StandardPaths::cacheLocation()
 
 QString StandardPaths::dataLocation()
 {
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x060000
+    return QStandardPaths::writableLocation(QStandardPaths::AppLocalDataLocation);
+#elif QT_VERSION >= 0x050000
     return QStandardPaths::writableLocation(QStandardPaths::DataLocation);
 #else
     return QDesktopServices::storageLocation(QDesktopServices::DataLocation);

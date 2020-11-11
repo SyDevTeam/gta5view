@@ -18,9 +18,11 @@
 
 #include "RagePhoto.h"
 #include <QJsonDocument>
-#include <QTextCodec>
 #include <QBuffer>
 #include <QFile>
+#if QT_VERSION < 0x060000
+#include <QTextCodec>
+#endif
 
 RagePhoto::RagePhoto()
 {
@@ -92,7 +94,7 @@ bool RagePhoto::load()
         size = dataBuffer.read(photoHeader, 256);
         if (size != 256)
             return false;
-        for (const QChar &photoChar : QTextCodec::codecForName("UTF-16LE")->toUnicode(photoHeader, 256)) {
+        for (const QChar &photoChar : utf16LEToString(photoHeader, 256)) {
             if (photoChar.isNull())
                 break;
             p_photoString += photoChar;
@@ -608,7 +610,7 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
         uInt32ToCharLE(&format, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        QByteArray photoHeader = QTextCodec::codecForName("UTF-16LE")->fromUnicode(p_photoString);
+        QByteArray photoHeader = stringToUtf16LE(p_photoString);
         if (photoHeader.left(2) == "\xFF\xFE") {
             photoHeader.remove(0, 2);
         }
@@ -726,4 +728,34 @@ void RagePhoto::uInt32ToCharLE(quint32 *x, char *y)
     y[1] = (*x >> 8) & 0xFF;
     y[2] = (*x >> 16) & 0xFF;
     y[3] = (*x >> 24) & 0xFF;
+}
+
+QByteArray RagePhoto::stringToUtf16LE(const QString &string)
+{
+#if QT_VERSION >= 0x060000
+    QStringEncoder stringEncoder = QStringEncoder(QStringEncoder::Utf16LE);
+    return stringEncoder(string);
+#else
+    return QTextCodec::codecForName("UTF-16LE")->fromUnicode(string);
+#endif
+}
+
+QString RagePhoto::utf16LEToString(const QByteArray &data)
+{
+#if QT_VERSION >= 0x060000
+    QStringDecoder stringDecoder = QStringDecoder(QStringDecoder::Utf16LE);
+    return stringDecoder(data);
+#else
+    return QTextCodec::codecForName("UTF-16LE")->toUnicode(data);
+#endif
+}
+
+QString RagePhoto::utf16LEToString(const char *data, int size)
+{
+#if QT_VERSION >= 0x060000
+    QStringDecoder stringDecoder = QStringDecoder(QStringDecoder::Utf16LE);
+    return stringDecoder(QByteArray::fromRawData(data, size));
+#else
+    return QTextCodec::codecForName("UTF-16LE")->toUnicode(data, size);
+#endif
 }
