@@ -612,7 +612,9 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
         uInt32ToCharLE(&p_endOfFile, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
+#if QT_VERSION >= 0x050000
         ioDevice->aboutToClose();
+#endif
     }
     else if (photoFormat == PhotoFormat::GTA5) {
         char uInt32Buffer[4];
@@ -703,7 +705,10 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
 
         ioDevice->seek(p_endOfFile + 260);
         ioDevice->write("JEND", 4);
+
+#if QT_VERSION >= 0x050000
         ioDevice->aboutToClose();
+#endif
     }
 }
 
