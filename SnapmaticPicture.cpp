@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5spv Grand Theft Auto Snapmatic Picture Viewer
-* Copyright (C) 2016-2018 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -59,7 +59,7 @@ SnapmaticPicture::~SnapmaticPicture()
 void SnapmaticPicture::reset()
 {
     // INIT PIC
-    ragePhoto.clear();
+    p_ragePhoto.clear();
     cachePicture = QImage();
     picExportFileName = QString();
     pictureStr = QString();
@@ -91,8 +91,8 @@ bool SnapmaticPicture::preloadFile()
         return false;
     }
 
-    ragePhoto.setIODevice(picFile);
-    bool ok = ragePhoto.load();
+    p_ragePhoto.setIODevice(picFile);
+    bool ok = p_ragePhoto.load();
     picFile->close();
     delete picFile;
     if (!ok)
@@ -100,7 +100,7 @@ bool SnapmaticPicture::preloadFile()
 
     if (picFilePath.right(4) != QLatin1String(".g5e"))
     {
-        if (ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
+        if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
             isFormatSwitch = true;
     }
     emit preloaded();
@@ -116,17 +116,17 @@ bool SnapmaticPicture::readingPicture(bool cacheEnabled_)
     cacheEnabled = cacheEnabled_;
 
     bool ok = true;
-    if (!ragePhoto.isLoaded())
+    if (!p_ragePhoto.isLoaded())
         ok = preloadFile();
 
     if (!ok)
         return false;
 
-    if (cacheEnabled) picOk = cachePicture.loadFromData(ragePhoto.photoData(), "JPEG");
+    if (cacheEnabled) picOk = cachePicture.loadFromData(p_ragePhoto.photoData(), "JPEG");
     if (!cacheEnabled)
     {
         QImage tempPicture;
-        picOk = tempPicture.loadFromData(ragePhoto.photoData(), "JPEG");
+        picOk = tempPicture.loadFromData(p_ragePhoto.photoData(), "JPEG");
     }
 
     parseJsonContent(); // JSON parsing is own function
@@ -138,7 +138,7 @@ bool SnapmaticPicture::readingPicture(bool cacheEnabled_)
 
 void SnapmaticPicture::updateStrings()
 {
-    QString cmpPicTitl = ragePhoto.title();
+    QString cmpPicTitl = p_ragePhoto.title();
     cmpPicTitl.replace('\"', "''");
     cmpPicTitl.replace(' ', '_');
     cmpPicTitl.replace(':', '-');
@@ -173,7 +173,7 @@ bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool cach
 
 bool SnapmaticPicture::setImage(const QImage &picture)
 {
-    quint32 jpegPicStreamLength = ragePhoto.photoBuffer();
+    quint32 jpegPicStreamLength = p_ragePhoto.photoBuffer();
     QByteArray picByteArray;
     int comLvl = 100;
     bool saveSuccess = false;
@@ -200,7 +200,7 @@ bool SnapmaticPicture::setImage(const QImage &picture)
 
 bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean method
 {
-    bool success = ragePhoto.setPhotoData(streamArray);
+    bool success = p_ragePhoto.setPhotoData(streamArray);
     if (success) {
         if (cacheEnabled) {
             QImage replacedPicture;
@@ -220,13 +220,13 @@ bool SnapmaticPicture::setPictureTitl(const QString &newTitle_)
     if (newTitle.length() > 39) {
         newTitle = newTitle.left(39);
     }
-    ragePhoto.setTitle(newTitle);
+    p_ragePhoto.setTitle(newTitle);
     return true;
 }
 
 int SnapmaticPicture::getContentMaxLength()
 {
-    return ragePhoto.photoBuffer();
+    return p_ragePhoto.photoBuffer();
 }
 
 QString SnapmaticPicture::getExportPictureFileName()
@@ -279,7 +279,7 @@ QString SnapmaticPicture::getPictureSortStr()
 
 QString SnapmaticPicture::getPictureTitl()
 {
-    return ragePhoto.title();
+    return p_ragePhoto.title();
 }
 
 QString SnapmaticPicture::getPictureStr()
@@ -294,8 +294,6 @@ QString SnapmaticPicture::getLastStep(bool readable)
         QStringList lastStepList = lastStep.split(";/");
         if (lastStepList.length() < 2) { return lastStep; }
         bool intOk;
-        //int stepNumber = lastStepList.at(0).toInt(&intOk);
-        //if (!intOk) { return lastStep; }
         QStringList descStepList = lastStepList.at(1).split(",");
         if (descStepList.length() < 1) { return lastStep; }
         int argsCount = descStepList.at(0).toInt(&intOk);
@@ -313,7 +311,6 @@ QString SnapmaticPicture::getLastStep(bool readable)
         {
             QString currentAction = descStepList.at(1);
             QString actionFile = descStepList.at(2);
-            //QString actionStep = descStepList.at(3);
             QString actionError = descStepList.at(4);
             QString actionError2;
             if (argsCount == 4) { actionError2 = descStepList.at(5); }
@@ -381,14 +378,14 @@ QImage SnapmaticPicture::getImage(bool fastLoad)
     }
     else
     {
-        return QImage::fromData(ragePhoto.photoData(), "JPEG");
+        return QImage::fromData(p_ragePhoto.photoData(), "JPEG");
     }
     return QImage();
 }
 
 QByteArray SnapmaticPicture::getPictureStream()
 {
-    return ragePhoto.photoData();
+    return p_ragePhoto.photoData();
 }
 
 bool SnapmaticPicture::isPicOk()
@@ -421,7 +418,7 @@ bool SnapmaticPicture::isJsonOk()
 
 QString SnapmaticPicture::getJsonStr()
 {
-    return QString::fromUtf8(ragePhoto.jsonData());
+    return QString::fromUtf8(p_ragePhoto.jsonData());
 }
 
 SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
@@ -431,7 +428,7 @@ SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
 
 void SnapmaticPicture::parseJsonContent()
 {
-    QJsonObject jsonObject = ragePhoto.jsonObject();
+    QJsonObject jsonObject = p_ragePhoto.jsonObject();
     QVariantMap jsonMap = jsonObject.toVariantMap();
 
     bool jsonIncomplete = false;
@@ -565,7 +562,7 @@ void SnapmaticPicture::parseJsonContent()
 
 bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties properties)
 {
-    QJsonObject jsonObject = ragePhoto.jsonObject();
+    QJsonObject jsonObject = p_ragePhoto.jsonObject();
 
     QJsonObject locObject;
     locObject["x"] = properties.location.x;
@@ -596,7 +593,7 @@ bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties properties)
 
 bool SnapmaticPicture::setJsonStr(const QString &newJsonStr, bool updateProperties)
 {
-    if (ragePhoto.setJsonData(newJsonStr.toUtf8())) {
+    if (p_ragePhoto.setJsonData(newJsonStr.toUtf8())) {
         if (updateProperties)
             parseJsonContent();
         return true;
@@ -614,7 +611,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
     SnapmaticFormat format = format_;
     if (format_ == SnapmaticFormat::Auto_Format)
     {
-        if (ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
+        if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
         {
             format = SnapmaticFormat::G5E_Format;
         }
@@ -634,7 +631,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
     {
         if (format == SnapmaticFormat::G5E_Format)
         {
-            ragePhoto.save(picFile, RagePhoto::PhotoFormat::G5EX);
+            p_ragePhoto.save(picFile, RagePhoto::PhotoFormat::G5EX);
 #if QT_VERSION >= 0x050000
             saveSuccess = picFile->commit();
 #else
@@ -645,7 +642,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
         }
         else if (format == SnapmaticFormat::JPEG_Format)
         {
-            picFile->write(ragePhoto.photoData());
+            picFile->write(p_ragePhoto.photoData());
 #if QT_VERSION >= 0x050000
             saveSuccess = picFile->commit();
 #else
@@ -656,7 +653,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
         }
         else
         {
-            ragePhoto.save(picFile, RagePhoto::PhotoFormat::GTA5);
+            p_ragePhoto.save(picFile, RagePhoto::PhotoFormat::GTA5);
 #if QT_VERSION >= 0x050000
             saveSuccess = picFile->commit();
 #else
@@ -749,7 +746,7 @@ bool SnapmaticPicture::isVisible()
 
 bool SnapmaticPicture::setPictureHidden()
 {
-    if (ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
+    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
     {
         return false;
     }
@@ -768,7 +765,7 @@ bool SnapmaticPicture::setPictureHidden()
 
 bool SnapmaticPicture::setPictureVisible()
 {
-    if (ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
+    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
     {
         return false;
     }
@@ -796,7 +793,7 @@ QSize SnapmaticPicture::getSnapmaticResolution()
 
 SnapmaticFormat SnapmaticPicture::getSnapmaticFormat()
 {
-    if (ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
+    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
     {
         return SnapmaticFormat::G5E_Format;
     }
@@ -807,12 +804,12 @@ void SnapmaticPicture::setSnapmaticFormat(SnapmaticFormat format)
 {
     if (format == SnapmaticFormat::G5E_Format)
     {
-        ragePhoto.setPhotoFormat(RagePhoto::PhotoFormat::G5EX);
+        p_ragePhoto.setPhotoFormat(RagePhoto::PhotoFormat::G5EX);
         return;
     }
     else if (format == SnapmaticFormat::PGTA_Format)
     {
-        ragePhoto.setPhotoFormat(RagePhoto::PhotoFormat::GTA5);
+        p_ragePhoto.setPhotoFormat(RagePhoto::PhotoFormat::GTA5);
         return;
     }
     qDebug() << "setSnapmaticFormat: Invalid SnapmaticFormat defined, valid SnapmaticFormats are G5E_Format and PGTA_Format";
@@ -876,4 +873,11 @@ QString SnapmaticPicture::convertLogStringForDraw(const QString &inputStr)
 {
     QString outputStr = inputStr;
     return outputStr.replace("&c;",",").replace("&u;", "&");
+}
+
+// RAGEPHOTO
+
+RagePhoto* SnapmaticPicture::ragePhoto()
+{
+    return &p_ragePhoto;
 }

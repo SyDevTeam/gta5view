@@ -58,6 +58,7 @@ public:
     void setFilePath(const QString &filePath);
     void setIODevice(QIODevice *ioDevice);
     bool setJsonData(const QByteArray &data);
+    bool setPhotoBuffer(quint32 size, bool moveOffsets = true);
     bool setPhotoData(const QByteArray &data);
     bool setPhotoData(const char *data, int size);
     void setPhotoFormat(PhotoFormat photoFormat);

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5spv Grand Theft Auto Snapmatic Picture Viewer
-* Copyright (C) 2016-2018 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -133,6 +133,9 @@ public:
     static QString convertDrawStringForLog(const QString &inputStr);
     static QString convertLogStringForDraw(const QString &inputStr);
 
+    // RAGEPHOTO
+    RagePhoto* ragePhoto();
+
 private:
     QImage cachePicture;
     QString picExportFileName;
@@ -154,7 +157,7 @@ private:
     static bool verifyTitleChar(const QChar &titleChar);
 
     // RAGEPHOTO
-    RagePhoto ragePhoto;
+    RagePhoto p_ragePhoto;
 
 signals:
     void customSignal(QString signal);

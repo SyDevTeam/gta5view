@@ -455,6 +455,20 @@ bool RagePhoto::setJsonData(const QByteArray &data)
     return true;
 }
 
+bool RagePhoto::setPhotoBuffer(quint32 size, bool moveOffsets)
+{
+    if (size < static_cast<quint32>(p_photoData.size()))
+        return false;
+    p_photoBuffer = size;
+    if (moveOffsets) {
+        p_jsonOffset = size + 28;
+        p_titlOffset = p_jsonOffset + p_jsonBuffer + 8;
+        p_descOffset = p_titlOffset + p_titlBuffer + 8;
+        p_endOfFile = p_descOffset + p_descBuffer + 12;
+    }
+    return true;
+}
+
 bool RagePhoto::setPhotoData(const QByteArray &data)
 {
     quint32 size = data.size();
