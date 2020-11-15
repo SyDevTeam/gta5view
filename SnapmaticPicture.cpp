@@ -192,6 +192,7 @@ bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
                 }
                 else {
                     p_ragePhoto.setPhotoBuffer(size, true);
+                    picByteArray = picByteArrayT;
                 }
             }
             else {
