@@ -171,7 +171,7 @@ bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool cach
     }
 }
 
-bool SnapmaticPicture::setImage(const QImage &picture)
+bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
 {
     quint32 jpegPicStreamLength = p_ragePhoto.photoBuffer();
     QByteArray picByteArray;
@@ -184,9 +184,15 @@ bool SnapmaticPicture::setImage(const QImage &picture)
         saveSuccess = picture.save(&picStreamT, "JPEG", comLvl);
         picStreamT.close();
         if (saveSuccess) {
-            if (static_cast<quint32>(picByteArrayT.length()) > jpegPicStreamLength) {
-                comLvl--;
-                saveSuccess = false;
+            quint32 size = picByteArrayT.length();
+            if (size > jpegPicStreamLength) {
+                if (!eXtendMode) {
+                    comLvl--;
+                    saveSuccess = false;
+                }
+                else {
+                    p_ragePhoto.setPhotoBuffer(size, true);
+                }
             }
             else {
                 picByteArray = picByteArrayT;

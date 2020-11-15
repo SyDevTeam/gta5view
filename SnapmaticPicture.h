@@ -74,7 +74,7 @@ public:
     QString getOriginalPictureFileName();
     QString getOriginalPictureFilePath();
     int getContentMaxLength();
-    bool setImage(const QImage &picture);
+    bool setImage(const QImage &picture, bool eXtendMode = false);
     bool setPictureTitl(const QString &newTitle); // Please use setPictureTitle instead
     bool setPictureStream(const QByteArray &streamArray);
     void updateStrings();
