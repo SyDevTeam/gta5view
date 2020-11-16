@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>516</width>
-    <height>512</height>
+    <height>677</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -296,6 +296,63 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gbAdvanced">
+        <property name="title">
+         <string>Advanced</string>
+        </property>
+        <layout class="QVBoxLayout" name="vlAdvanced">
+         <item>
+          <layout class="QHBoxLayout" name="hlResolution">
+           <item>
+            <widget class="QLabel" name="labResolution">
+             <property name="text">
+              <string>Resolution:</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cbResolution">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Snapmatic resolution</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="hlExpert">
+           <item>
+            <widget class="QCheckBox" name="cbUnlimited">
+             <property name="toolTip">
+              <string>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</string>
+             </property>
+             <property name="text">
+              <string>Unlimited Buffer</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbImportAsIs">
+             <property name="toolTip">
+              <string>Import as-is, don't change the picture at all, guarantee to break Snapmatic unless you know what you doing</string>
+             </property>
+             <property name="text">
+              <string>Import as-is</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+        </layout>
+       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="hlButtons">

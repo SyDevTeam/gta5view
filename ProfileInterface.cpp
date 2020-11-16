@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2019 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -805,7 +805,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     importDialog->exec();
                     if (importDialog->isImportAgreed())
                     {
-                        if (picture->setImage(importDialog->image()))
+                        if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer()))
                         {
                             SnapmaticProperties spJson = picture->getSnapmaticProperties();
                             spJson.uid = getRandomUid();
@@ -1058,7 +1058,7 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
         importDialog->exec();
         if (importDialog->isImportAgreed())
         {
-            if (picture->setImage(importDialog->image()))
+            if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer()))
             {
                 SnapmaticProperties spJson = picture->getSnapmaticProperties();
                 spJson.uid = getRandomUid();

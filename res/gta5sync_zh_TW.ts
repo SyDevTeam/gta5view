@@ -175,27 +175,27 @@ Pictures and Savegames</source>
 <context>
     <name>ImageEditorDialog</name>
     <message>
-        <location filename="../ImportDialog.cpp" line="640"/>
+        <location filename="../ImportDialog.cpp" line="685"/>
         <source>Overwrite Image...</source>
         <translation>修改圖片...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="642"/>
+        <location filename="../ImportDialog.cpp" line="687"/>
         <source>Apply changes</source>
         <translation>套用變更</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="641"/>
+        <location filename="../ImportDialog.cpp" line="686"/>
         <source>&amp;Overwrite</source>
         <translation>修改(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="644"/>
+        <location filename="../ImportDialog.cpp" line="689"/>
         <source>Discard changes</source>
         <translation>捨棄變更</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="643"/>
+        <location filename="../ImportDialog.cpp" line="688"/>
         <source>&amp;Close</source>
         <translation>關閉(&amp;C)</translation>
     </message>
@@ -255,9 +255,9 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="150"/>
-        <location filename="../ImportDialog.cpp" line="87"/>
-        <location filename="../ImportDialog.cpp" line="315"/>
-        <location filename="../ImportDialog.cpp" line="728"/>
+        <location filename="../ImportDialog.cpp" line="86"/>
+        <location filename="../ImportDialog.cpp" line="351"/>
+        <location filename="../ImportDialog.cpp" line="777"/>
         <source>Background Colour: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</source>
         <translation>背景顏色: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
@@ -274,9 +274,9 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="203"/>
-        <location filename="../ImportDialog.cpp" line="88"/>
-        <location filename="../ImportDialog.cpp" line="323"/>
-        <location filename="../ImportDialog.cpp" line="808"/>
+        <location filename="../ImportDialog.cpp" line="87"/>
+        <location filename="../ImportDialog.cpp" line="357"/>
+        <location filename="../ImportDialog.cpp" line="857"/>
         <source>Background Image:</source>
         <translation>背景圖片:</translation>
     </message>
@@ -301,170 +301,207 @@ Pictures and Savegames</source>
         <translation>強制在大頭貼區域使用顏色</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="305"/>
+        <location filename="../ImportDialog.ui" line="303"/>
+        <source>Advanced</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="311"/>
+        <source>Resolution:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="324"/>
+        <source>Snapmatic resolution</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="335"/>
+        <source>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="338"/>
+        <source>Unlimited Buffer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="345"/>
+        <source>Import as-is, don&apos;t change the picture at all, guarantee to break Snapmatic unless you know what you doing</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="348"/>
+        <source>Import as-is</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="362"/>
         <source>Import options</source>
         <translation>匯入選項</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="308"/>
+        <location filename="../ImportDialog.ui" line="365"/>
         <source>&amp;Options</source>
         <translation>選項(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="337"/>
+        <location filename="../ImportDialog.ui" line="394"/>
         <source>Import picture</source>
         <translation>匯入圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="340"/>
+        <location filename="../ImportDialog.ui" line="397"/>
         <source>&amp;OK</source>
         <translation>確定(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="353"/>
+        <location filename="../ImportDialog.ui" line="410"/>
         <source>Discard picture</source>
         <translation>捨棄圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="356"/>
+        <location filename="../ImportDialog.ui" line="413"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="120"/>
+        <location filename="../ImportDialog.cpp" line="126"/>
         <source>&amp;Import new Picture...</source>
         <translation>匯入新圖片(&amp;I)...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="121"/>
+        <location filename="../ImportDialog.cpp" line="127"/>
         <source>&amp;Crop Picture...</source>
         <translation>裁剪圖片(&amp;C)...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="123"/>
+        <location filename="../ImportDialog.cpp" line="129"/>
         <source>&amp;Load Settings...</source>
         <translation>載入設定(&amp;L)...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="124"/>
+        <location filename="../ImportDialog.cpp" line="130"/>
         <source>&amp;Save Settings...</source>
         <translation>儲存設定(&amp;S)...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="198"/>
+        <location filename="../ImportDialog.cpp" line="195"/>
         <location filename="../ProfileInterface.cpp" line="721"/>
         <source>Custom Avatar</source>
         <comment>Custom Avatar Description in SC, don&apos;t use Special Character!</comment>
         <translation>自訂大頭貼</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="225"/>
+        <location filename="../ImportDialog.cpp" line="218"/>
         <location filename="../ProfileInterface.cpp" line="740"/>
         <source>Custom Picture</source>
         <comment>Custom Picture Description in SC, don&apos;t use Special Character!</comment>
         <translation>自訂圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="318"/>
+        <location filename="../ImportDialog.cpp" line="353"/>
         <source>Storage</source>
         <comment>Background Image: Storage</comment>
         <translation>儲存</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="355"/>
+        <location filename="../ImportDialog.cpp" line="398"/>
         <source>Crop Picture...</source>
         <translation>裁剪圖片...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="397"/>
+        <location filename="../ImportDialog.cpp" line="440"/>
         <source>&amp;Crop</source>
         <translation>裁剪(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="398"/>
+        <location filename="../ImportDialog.cpp" line="441"/>
         <source>Crop Picture</source>
         <translation>裁剪圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="485"/>
-        <location filename="../ImportDialog.cpp" line="533"/>
+        <location filename="../ImportDialog.cpp" line="528"/>
+        <location filename="../ImportDialog.cpp" line="576"/>
         <source>Please import a new picture first</source>
         <translation>請先匯入新圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="490"/>
-        <location filename="../ImportDialog.cpp" line="500"/>
+        <location filename="../ImportDialog.cpp" line="533"/>
+        <location filename="../ImportDialog.cpp" line="543"/>
         <source>Default</source>
         <comment>Default as Default Profile</comment>
         <translation>預設</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="491"/>
-        <location filename="../ImportDialog.cpp" line="492"/>
-        <location filename="../ImportDialog.cpp" line="493"/>
-        <location filename="../ImportDialog.cpp" line="494"/>
-        <location filename="../ImportDialog.cpp" line="495"/>
-        <location filename="../ImportDialog.cpp" line="504"/>
-        <location filename="../ImportDialog.cpp" line="508"/>
-        <location filename="../ImportDialog.cpp" line="512"/>
-        <location filename="../ImportDialog.cpp" line="516"/>
-        <location filename="../ImportDialog.cpp" line="520"/>
+        <location filename="../ImportDialog.cpp" line="534"/>
+        <location filename="../ImportDialog.cpp" line="535"/>
+        <location filename="../ImportDialog.cpp" line="536"/>
+        <location filename="../ImportDialog.cpp" line="537"/>
         <location filename="../ImportDialog.cpp" line="538"/>
-        <location filename="../ImportDialog.cpp" line="539"/>
-        <location filename="../ImportDialog.cpp" line="540"/>
-        <location filename="../ImportDialog.cpp" line="541"/>
-        <location filename="../ImportDialog.cpp" line="542"/>
         <location filename="../ImportDialog.cpp" line="547"/>
         <location filename="../ImportDialog.cpp" line="551"/>
         <location filename="../ImportDialog.cpp" line="555"/>
         <location filename="../ImportDialog.cpp" line="559"/>
         <location filename="../ImportDialog.cpp" line="563"/>
+        <location filename="../ImportDialog.cpp" line="581"/>
+        <location filename="../ImportDialog.cpp" line="582"/>
+        <location filename="../ImportDialog.cpp" line="583"/>
+        <location filename="../ImportDialog.cpp" line="584"/>
+        <location filename="../ImportDialog.cpp" line="585"/>
+        <location filename="../ImportDialog.cpp" line="590"/>
+        <location filename="../ImportDialog.cpp" line="594"/>
+        <location filename="../ImportDialog.cpp" line="598"/>
+        <location filename="../ImportDialog.cpp" line="602"/>
+        <location filename="../ImportDialog.cpp" line="606"/>
         <source>Profile %1</source>
         <comment>Profile %1 as Profile 1</comment>
         <translation>設定檔 %1</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="485"/>
-        <location filename="../ImportDialog.cpp" line="496"/>
+        <location filename="../ImportDialog.cpp" line="528"/>
+        <location filename="../ImportDialog.cpp" line="539"/>
         <source>Load Settings...</source>
         <translation>載入設定...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="533"/>
-        <location filename="../ImportDialog.cpp" line="543"/>
+        <location filename="../ImportDialog.cpp" line="576"/>
+        <location filename="../ImportDialog.cpp" line="586"/>
         <source>Save Settings...</source>
         <translation>儲存設定...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="675"/>
+        <location filename="../ImportDialog.cpp" line="727"/>
+        <location filename="../ImportDialog.cpp" line="909"/>
         <source>Snapmatic Avatar Zone</source>
         <translation>Snapmatic 大頭貼區域</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="675"/>
+        <location filename="../ImportDialog.cpp" line="727"/>
+        <location filename="../ImportDialog.cpp" line="909"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
         <translation>你確定要在大頭貼區域以外的地方使用方形圖片嗎? 作為大頭貼的圖片將被分離!</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="724"/>
+        <location filename="../ImportDialog.cpp" line="773"/>
         <source>Select Colour...</source>
         <translation>選擇顏色...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="318"/>
-        <location filename="../ImportDialog.cpp" line="793"/>
+        <location filename="../ImportDialog.cpp" line="353"/>
+        <location filename="../ImportDialog.cpp" line="842"/>
         <source>Background Image: %1</source>
         <translation>背景圖片: %1</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="496"/>
-        <location filename="../ImportDialog.cpp" line="543"/>
+        <location filename="../ImportDialog.cpp" line="539"/>
+        <location filename="../ImportDialog.cpp" line="586"/>
         <source>Please select your settings profile</source>
         <translation>請選擇設定檔</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="793"/>
+        <location filename="../ImportDialog.cpp" line="842"/>
         <source>File</source>
         <comment>Background Image: File</comment>
         <translation>文件</translation>
@@ -1288,8 +1325,8 @@ Press 1 for Default View</source>
         <translation>匯出檔案中 %1 共 %2 個檔案</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="426"/>
-        <location filename="../ImportDialog.cpp" line="747"/>
+        <location filename="../ImportDialog.cpp" line="469"/>
+        <location filename="../ImportDialog.cpp" line="796"/>
         <location filename="../ProfileInterface.cpp" line="496"/>
         <location filename="../ProfileInterface.cpp" line="497"/>
         <location filename="../ProfileInterface.cpp" line="541"/>
@@ -1311,40 +1348,40 @@ Press 1 for Default View</source>
         <translation>匯入...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="427"/>
-        <location filename="../ImportDialog.cpp" line="458"/>
-        <location filename="../ImportDialog.cpp" line="467"/>
-        <location filename="../ImportDialog.cpp" line="748"/>
-        <location filename="../ImportDialog.cpp" line="779"/>
-        <location filename="../ImportDialog.cpp" line="788"/>
+        <location filename="../ImportDialog.cpp" line="470"/>
+        <location filename="../ImportDialog.cpp" line="501"/>
+        <location filename="../ImportDialog.cpp" line="510"/>
+        <location filename="../ImportDialog.cpp" line="797"/>
+        <location filename="../ImportDialog.cpp" line="828"/>
+        <location filename="../ImportDialog.cpp" line="837"/>
         <source>Import</source>
         <translation>匯入</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="437"/>
-        <location filename="../ImportDialog.cpp" line="758"/>
+        <location filename="../ImportDialog.cpp" line="480"/>
+        <location filename="../ImportDialog.cpp" line="807"/>
         <location filename="../ProfileInterface.cpp" line="516"/>
         <source>All image files (%1)</source>
         <translation>所有圖片 (%1)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="438"/>
-        <location filename="../ImportDialog.cpp" line="759"/>
+        <location filename="../ImportDialog.cpp" line="481"/>
+        <location filename="../ImportDialog.cpp" line="808"/>
         <location filename="../ProfileInterface.cpp" line="517"/>
         <location filename="../UserInterface.cpp" line="477"/>
         <source>All files (**)</source>
         <translation>所有檔案 (**)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="458"/>
-        <location filename="../ImportDialog.cpp" line="779"/>
+        <location filename="../ImportDialog.cpp" line="501"/>
+        <location filename="../ImportDialog.cpp" line="828"/>
         <location filename="../ProfileInterface.cpp" line="786"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
         <translation>無法匯入 %1，因為檔案無法開啟</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="467"/>
-        <location filename="../ImportDialog.cpp" line="788"/>
+        <location filename="../ImportDialog.cpp" line="510"/>
+        <location filename="../ImportDialog.cpp" line="837"/>
         <location filename="../ProfileInterface.cpp" line="796"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
         <translation>無法匯入 %1，因為檔案無法正確解析</translation>
@@ -2036,24 +2073,24 @@ Press 1 for Default View</source>
     <name>SnapmaticPicture</name>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="177"/>
-        <location filename="../SnapmaticPicture.cpp" line="354"/>
+        <location filename="../SnapmaticPicture.cpp" line="353"/>
         <source>JSON is incomplete and malformed</source>
         <translation>JSON 不完整和異常</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="181"/>
-        <location filename="../SnapmaticPicture.cpp" line="358"/>
+        <location filename="../SnapmaticPicture.cpp" line="357"/>
         <source>JSON is incomplete</source>
         <translation>JSON 不完整</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="185"/>
-        <location filename="../SnapmaticPicture.cpp" line="362"/>
+        <location filename="../SnapmaticPicture.cpp" line="361"/>
         <source>JSON is malformed</source>
         <translation>JSON 異常</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="159"/>
+        <location filename="../SnapmaticPicture.cpp" line="154"/>
         <source>PHOTO - %1</source>
         <translation>照片 - %1</translation>
     </message>
@@ -2063,37 +2100,37 @@ Press 1 for Default View</source>
         <translation>開啟檔案 - %1</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="330"/>
+        <location filename="../SnapmaticPicture.cpp" line="329"/>
         <source>header not exists</source>
         <translation>標頭不存在</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="334"/>
+        <location filename="../SnapmaticPicture.cpp" line="333"/>
         <source>header is malformed</source>
         <translation>標頭異常</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="338"/>
+        <location filename="../SnapmaticPicture.cpp" line="337"/>
         <source>picture not exists (%1)</source>
         <translation>圖片不存在 (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="342"/>
+        <location filename="../SnapmaticPicture.cpp" line="341"/>
         <source>JSON not exists (%1)</source>
         <translation>JSON 不存在 (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="346"/>
+        <location filename="../SnapmaticPicture.cpp" line="345"/>
         <source>title not exists (%1)</source>
         <translation>標題不存在 (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="350"/>
+        <location filename="../SnapmaticPicture.cpp" line="349"/>
         <source>description not exists (%1)</source>
         <translation>描述不存在 (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="364"/>
+        <location filename="../SnapmaticPicture.cpp" line="363"/>
         <source>reading file %1 because of %2</source>
         <comment>Example for %2: JSON is malformed error</comment>
         <translation>讀取檔案 %1 失敗，因為 %2</translation>

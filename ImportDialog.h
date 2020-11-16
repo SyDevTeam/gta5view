@@ -39,10 +39,12 @@ public:
     void lockSettings(bool lock);
     void enableOverwriteMode();
     bool isImportAgreed();
+    bool isUnlimitedBuffer();
     bool areSettingsLocked();
 
 private slots:
     void processImage();
+    void reworkImage();
     void cropPicture();
     void importNewPicture();
     void loadImportSettings();
@@ -58,6 +60,8 @@ private slots:
     void on_cbStretch_toggled(bool checked);
     void on_cbForceAvatarColour_toggled(bool checked);
     void on_cbWatermark_toggled(bool checked);
+    void on_cbImportAsIs_toggled(bool checked);
+    void on_cbResolution_currentIndexChanged(int index);
 
 private:
     QString profileName;
@@ -70,7 +74,8 @@ private:
     QImage origImage;
     QImage newImage;
     QColor selectedColour;
-    QMenu *optionsMenu;
+    QMenu optionsMenu;
+    QSize snapmaticResolution;
     bool insideAvatarZone;
     bool watermarkPicture;
     bool watermarkAvatar;

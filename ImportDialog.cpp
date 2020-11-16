@@ -16,10 +16,11 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#include "ImportDialog.h"
 #include "ui_ImportDialog.h"
+#include "SnapmaticPicture.h"
 #include "SidebarGenerator.h"
 #include "StandardPaths.h"
+#include "ImportDialog.h"
 #include "imagecropper.h"
 #include "AppEnv.h"
 #include "config.h"
@@ -39,8 +40,6 @@
 #include <QRgb>
 
 // IMAGES VALUES
-#define snapmaticResolutionW 960
-#define snapmaticResolutionH 536
 #define snapmaticAvatarResolution 470
 #define snapmaticAvatarPlacementW 145
 #define snapmaticAvatarPlacementH 66
@@ -88,6 +87,14 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     ui->labBackgroundImage->setText(tr("Background Image:"));
     ui->cmdBackgroundWipe->setVisible(false);
 
+    // Snapmatic Resolution
+    snapmaticResolution = SnapmaticPicture::getSnapmaticResolution();
+    ui->cbResolution->addItem("GTA V", snapmaticResolution);
+    ui->cbResolution->addItem("FiveM", QSize(1920, 1072));
+    ui->cbResolution->addItem("1280x720", QSize(1280, 720));
+    ui->cbResolution->addItem("1920x1080", QSize(1920, 1080));
+    ui->cbResolution->addItem("2560x1440", QSize(2560, 1440));
+
     // Set Import Settings
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Import");
@@ -116,13 +123,12 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
 #endif
 
     // Options menu
-    optionsMenu = new QMenu(this);
-    optionsMenu->addAction(tr("&Import new Picture..."), this, SLOT(importNewPicture()));
-    optionsMenu->addAction(tr("&Crop Picture..."), this, SLOT(cropPicture()));
-    optionsMenu->addSeparator();
-    optionsMenu->addAction(tr("&Load Settings..."), this, SLOT(loadImportSettings()));
-    optionsMenu->addAction(tr("&Save Settings..."), this, SLOT(saveImportSettings()));
-    ui->cmdOptions->setMenu(optionsMenu);
+    optionsMenu.addAction(tr("&Import new Picture..."), this, SLOT(importNewPicture()));
+    optionsMenu.addAction(tr("&Crop Picture..."), this, SLOT(cropPicture()));
+    optionsMenu.addSeparator();
+    optionsMenu.addAction(tr("&Load Settings..."), this, SLOT(loadImportSettings()));
+    optionsMenu.addAction(tr("&Save Settings..."), this, SLOT(saveImportSettings()));
+    ui->cmdOptions->setMenu(&optionsMenu);
 
     setMaximumSize(sizeHint());
     setMinimumSize(sizeHint());
@@ -131,97 +137,84 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
 
 ImportDialog::~ImportDialog()
 {
-    delete optionsMenu;
     delete ui;
 }
 
 void ImportDialog::processImage()
 {
-    if (workImage.isNull()) return;
+    if (workImage.isNull())
+        return;
+
     QImage snapmaticImage = workImage;
-    QPixmap snapmaticPixmap(snapmaticResolutionW, snapmaticResolutionH);
+    QPixmap snapmaticPixmap(snapmaticResolution);
     snapmaticPixmap.fill(selectedColour);
     QPainter snapmaticPainter(&snapmaticPixmap);
     qreal screenRatioPR = AppEnv::screenRatioPR();
-    if (!backImage.isNull())
-    {
-        if (!ui->cbStretch->isChecked())
-        {
+    if (!backImage.isNull()) {
+        if (!ui->cbStretch->isChecked()) {
             int diffWidth = 0;
             int diffHeight = 0;
-            if (backImage.width() != snapmaticResolutionW)
-            {
-                diffWidth = snapmaticResolutionW - backImage.width();
+            if (backImage.width() != snapmaticResolution.width()) {
+                diffWidth = snapmaticResolution.width() - backImage.width();
                 diffWidth = diffWidth / 2;
             }
-            else if (backImage.height() != snapmaticResolutionH)
-            {
-                diffHeight = snapmaticResolutionH - backImage.height();
+            else if (backImage.height() != snapmaticResolution.height()) {
+                diffHeight = snapmaticResolution.height() - backImage.height();
                 diffHeight = diffHeight / 2;
             }
             snapmaticPainter.drawImage(0 + diffWidth, 0 + diffHeight, backImage);
         }
-        else
-        {
-            snapmaticPainter.drawImage(0, 0, QImage(backImage).scaled(snapmaticResolutionW, snapmaticResolutionH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+        else {
+            snapmaticPainter.drawImage(0, 0, QImage(backImage).scaled(snapmaticResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
         }
-        if (ui->cbAvatar->isChecked() && ui->cbForceAvatarColour->isChecked())
-        {
+        if (ui->cbAvatar->isChecked() && ui->cbForceAvatarColour->isChecked()) {
             snapmaticPainter.fillRect(snapmaticAvatarPlacementW, snapmaticAvatarPlacementH, snapmaticAvatarResolution, snapmaticAvatarResolution, selectedColour);
         }
     }
-    if (insideAvatarZone)
-    {
+    if (insideAvatarZone) {
         // Avatar mode
         int diffWidth = 0;
         int diffHeight = 0;
-        if (!ui->cbIgnore->isChecked())
-        {
+        if (!ui->cbIgnore->isChecked()) {
             snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-            if (snapmaticImage.width() > snapmaticImage.height())
-            {
+            if (snapmaticImage.width() > snapmaticImage.height()) {
                 diffHeight = snapmaticAvatarResolution - snapmaticImage.height();
                 diffHeight = diffHeight / 2;
             }
-            else if (snapmaticImage.width() < snapmaticImage.height())
-            {
+            else if (snapmaticImage.width() < snapmaticImage.height()) {
                 diffWidth = snapmaticAvatarResolution - snapmaticImage.width();
                 diffWidth = diffWidth / 2;
             }
         }
-        else
-        {
+        else {
             snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         }
         snapmaticPainter.drawImage(snapmaticAvatarPlacementW + diffWidth, snapmaticAvatarPlacementH + diffHeight, snapmaticImage);
-        if (ui->cbWatermark->isChecked()) { processWatermark(&snapmaticPainter); }
+        if (ui->cbWatermark->isChecked())
+            processWatermark(&snapmaticPainter);
         imageTitle = tr("Custom Avatar", "Custom Avatar Description in SC, don't use Special Character!");
     }
-    else
-    {
+    else {
         // Picture mode
         int diffWidth = 0;
         int diffHeight = 0;
-        if (!ui->cbIgnore->isChecked())
-        {
-            snapmaticImage = snapmaticImage.scaled(snapmaticResolutionW, snapmaticResolutionH, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-            if (snapmaticImage.width() != snapmaticResolutionW)
-            {
-                diffWidth = snapmaticResolutionW - snapmaticImage.width();
+        if (!ui->cbIgnore->isChecked()) {
+            snapmaticImage = snapmaticImage.scaled(snapmaticResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            if (snapmaticImage.width() != snapmaticResolution.width()) {
+                diffWidth = snapmaticResolution.width() - snapmaticImage.width();
                 diffWidth = diffWidth / 2;
             }
-            else if (snapmaticImage.height() != snapmaticResolutionH)
-            {
-                diffHeight = snapmaticResolutionH - snapmaticImage.height();
+            else if (snapmaticImage.height() != snapmaticResolution.height()) {
+                diffHeight = snapmaticResolution.height() - snapmaticImage.height();
                 diffHeight = diffHeight / 2;
             }
         }
-        else
-        {
-            snapmaticImage = snapmaticImage.scaled(snapmaticResolutionW, snapmaticResolutionH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        else {
+            snapmaticImage = snapmaticImage.scaled(snapmaticResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         }
         snapmaticPainter.drawImage(0 + diffWidth, 0 + diffHeight, snapmaticImage);
-        if (ui->cbWatermark->isChecked()) { processWatermark(&snapmaticPainter); }
+        if (ui->cbWatermark->isChecked())
+            processWatermark(&snapmaticPainter);
         imageTitle = tr("Custom Picture", "Custom Picture Description in SC, don't use Special Character!");
     }
     snapmaticPainter.end();
@@ -230,6 +223,43 @@ void ImportDialog::processImage()
     snapmaticPixmap.setDevicePixelRatio(screenRatioPR);
 #endif
     ui->labPicture->setPixmap(snapmaticPixmap.scaled(snapmaticResolutionLW * screenRatioPR, snapmaticResolutionLH * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+}
+
+void ImportDialog::reworkImage()
+{
+    workImage = QImage();
+    if (origImage.width() == origImage.height()) {
+        if (ui->cbResolution->currentIndex() == 0) {
+            insideAvatarZone = true;
+            ui->cbAvatar->setChecked(true);
+        }
+        else {
+            insideAvatarZone = false;
+            ui->cbAvatar->setChecked(false);
+        }
+        if (origImage.height() > snapmaticResolution.height()) {
+            workImage = origImage.scaled(snapmaticResolution.height(), snapmaticResolution.height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        }
+        else {
+            workImage = origImage;
+        }
+    }
+    else if (origImage.width() > snapmaticResolution.width() && origImage.width() > origImage.height()) {
+        insideAvatarZone = false;
+        ui->cbAvatar->setChecked(false);
+        workImage = origImage.scaledToWidth(snapmaticResolution.width(), Qt::SmoothTransformation);
+    }
+    else if (origImage.height() > snapmaticResolution.height() && origImage.height() > origImage.width()) {
+        insideAvatarZone = false;
+        ui->cbAvatar->setChecked(false);
+        workImage = origImage.scaledToHeight(snapmaticResolution.height(), Qt::SmoothTransformation);
+    }
+    else {
+        insideAvatarZone = false;
+        ui->cbAvatar->setChecked(false);
+        workImage = origImage;
+    }
+    processImage();
 }
 
 void ImportDialog::processWatermark(QPainter *snapmaticPainter)
@@ -277,21 +307,21 @@ void ImportDialog::processSettings(QString settingsProfile, bool setDefault)
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     settings.beginGroup("Import");
-    if (setDefault)
-    {
+    if (setDefault) {
         settings.setValue("Profile", settingsProfile);
     }
-    if (settingsProfile == "Default")
-    {
+    if (settingsProfile == "Default") {
         watermarkAvatar = true;
         watermarkPicture = false;
         selectedColour = QColor::fromRgb(0, 0, 0, 255);
         backImage = QImage();
         ui->cbStretch->setChecked(false);
         ui->cbForceAvatarColour->setChecked(false);
+        ui->cbUnlimited->setChecked(false);
+        ui->cbImportAsIs->setChecked(false);
+        ui->cbResolution->setCurrentIndex(0);
     }
-    else
-    {
+    else {
         settings.beginGroup(settingsProfile);
         watermarkAvatar = settings.value("WatermarkAvatar", true).toBool();
         watermarkPicture = settings.value("WatermarkPicture", false).toBool();
@@ -299,27 +329,31 @@ void ImportDialog::processSettings(QString settingsProfile, bool setDefault)
         selectedColour = qvariant_cast<QColor>(settings.value("SelectedColour", QColor::fromRgb(0, 0, 0, 255)));
         ui->cbStretch->setChecked(settings.value("BackgroundStretch", false).toBool());
         ui->cbForceAvatarColour->setChecked(settings.value("ForceAvatarColour", false).toBool());
+        ui->cbUnlimited->setChecked(settings.value("UnlimitedBuffer", false).toBool());
+        ui->cbImportAsIs->setChecked(settings.value("ImportAsIs", false).toBool());
+        const QVariant data = settings.value("Resolution", SnapmaticPicture::getSnapmaticResolution());
+        if (data.type() == QVariant::Size) {
+            int index = ui->cbResolution->findData(data);
+            if (index != -1) {
+                ui->cbResolution->setCurrentIndex(index);
+            }
+        }
         settings.endGroup();
     }
-    if (!workImage.isNull())
-    {
-        if (ui->cbAvatar->isChecked())
-        {
+    if (!workImage.isNull()) {
+        if (ui->cbAvatar->isChecked()) {
             ui->cbWatermark->setChecked(watermarkAvatar);
         }
-        else
-        {
+        else {
             ui->cbWatermark->setChecked(watermarkPicture);
         }
     }
     ui->labColour->setText(tr("Background Colour: <span style=\"color: %1\">%1</span>").arg(selectedColour.name()));
-    if (!backImage.isNull())
-    {
+    if (!backImage.isNull()) {
         ui->labBackgroundImage->setText(tr("Background Image: %1").arg(tr("Storage", "Background Image: Storage")));
         ui->cmdBackgroundWipe->setVisible(true);
     }
-    else
-    {
+    else {
         ui->labBackgroundImage->setText(tr("Background Image:"));
         ui->cmdBackgroundWipe->setVisible(false);
     }
@@ -337,6 +371,15 @@ void ImportDialog::saveSettings(QString settingsProfile)
     settings.setValue("SelectedColour", selectedColour);
     settings.setValue("BackgroundStretch", ui->cbStretch->isChecked());
     settings.setValue("ForceAvatarColour", ui->cbForceAvatarColour->isChecked());
+    const QVariant data = ui->cbResolution->currentData();
+    if (data.type() == QVariant::Size) {
+        settings.setValue("Resolution", ui->cbResolution->currentData());
+    }
+    else {
+        settings.setValue("Resolution", SnapmaticPicture::getSnapmaticResolution());
+    }
+    settings.setValue("UnlimitedBuffer", ui->cbUnlimited->isChecked());
+    settings.setValue("ImportAsIs", ui->cbImportAsIs->isChecked());
     settings.endGroup();
     settings.setValue("Profile", settingsProfile);
     settings.endGroup();
@@ -488,11 +531,11 @@ void ImportDialog::loadImportSettings()
     bool ok;
     QStringList profileList;
     profileList << tr("Default", "Default as Default Profile")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("1")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("2")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("3")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("4")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("5");
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("1")
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("2")
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("3")
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("4")
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("5");
     QString sProfile = QInputDialog::getItem(this, tr("Load Settings..."), tr("Please select your settings profile"), profileList, 0, false, &ok, windowFlags());
     if (ok)
     {
@@ -536,10 +579,10 @@ void ImportDialog::saveImportSettings()
     bool ok;
     QStringList profileList;
     profileList << tr("Profile %1", "Profile %1 as Profile 1").arg("1")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("2")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("3")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("4")
-             << tr("Profile %1", "Profile %1 as Profile 1").arg("5");
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("2")
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("3")
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("4")
+                << tr("Profile %1", "Profile %1 as Profile 1").arg("5");
     QString sProfile = QInputDialog::getItem(this, tr("Save Settings..."), tr("Please select your settings profile"), profileList, 0, false, &ok, windowFlags());
     if (ok)
     {
@@ -570,44 +613,49 @@ void ImportDialog::saveImportSettings()
 
 QImage ImportDialog::image()
 {
-    return newImage;
+    if (ui->cbImportAsIs->isChecked()) {
+        return origImage;
+    }
+    else {
+        return newImage;
+    }
 }
 
 void ImportDialog::setImage(QImage *image_)
 {
     origImage = *image_;
     workImage = QImage();
-    if (image_->width() == image_->height())
-    {
-        insideAvatarZone = true;
-        ui->cbAvatar->setChecked(true);
-        if (image_->height() > snapmaticResolutionH)
-        {
-            workImage = image_->scaled(snapmaticResolutionH, snapmaticResolutionH, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    if (image_->width() == image_->height()) {
+        if (ui->cbResolution->currentIndex() == 0) {
+            insideAvatarZone = true;
+            ui->cbAvatar->setChecked(true);
+        }
+        else {
+            insideAvatarZone = false;
+            ui->cbAvatar->setChecked(false);
+        }
+        if (image_->height() > snapmaticResolution.height()) {
+            workImage = image_->scaled(snapmaticResolution.height(), snapmaticResolution.height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
             delete image_;
         }
-        else
-        {
+        else {
             workImage = *image_;
             delete image_;
         }
     }
-    else if (image_->width() > snapmaticResolutionW && image_->width() > image_->height())
-    {
+    else if (image_->width() > snapmaticResolution.width() && image_->width() > image_->height()) {
         insideAvatarZone = false;
         ui->cbAvatar->setChecked(false);
-        workImage = image_->scaledToWidth(snapmaticResolutionW, Qt::SmoothTransformation);
+        workImage = image_->scaledToWidth(snapmaticResolution.width(), Qt::SmoothTransformation);
         delete image_;
     }
-    else if (image_->height() > snapmaticResolutionH && image_->height() > image_->width())
-    {
+    else if (image_->height() > snapmaticResolution.height() && image_->height() > image_->width()) {
         insideAvatarZone = false;
         ui->cbAvatar->setChecked(false);
-        workImage = image_->scaledToHeight(snapmaticResolutionH, Qt::SmoothTransformation);
+        workImage = image_->scaledToHeight(snapmaticResolution.height(), Qt::SmoothTransformation);
         delete image_;
     }
-    else
-    {
+    else {
         insideAvatarZone = false;
         ui->cbAvatar->setChecked(false);
         workImage = *image_;
@@ -619,18 +667,15 @@ void ImportDialog::setImage(QImage *image_)
 
 void ImportDialog::lockSettings(bool lock)
 {
-    ui->cbAvatar->setDisabled(lock);
-    ui->cbForceAvatarColour->setDisabled(lock);
-    ui->cbIgnore->setDisabled(lock);
-    ui->cbStretch->setDisabled(lock);
-    ui->cbWatermark->setDisabled(lock);
-    ui->cmdBackgroundChange->setDisabled(lock);
-    ui->cmdBackgroundWipe->setDisabled(lock);
-    ui->cmdColourChange->setDisabled(lock);
-    ui->labBackgroundImage->setDisabled(lock);
-    ui->labColour->setDisabled(lock);
-    ui->gbSettings->setDisabled(lock);
-    ui->gbBackground->setDisabled(lock);
+    ui->gbAdvanced->setDisabled(lock);
+    if (ui->cbImportAsIs->isChecked()) {
+        ui->gbBackground->setDisabled(true);
+        ui->gbSettings->setDisabled(true);
+    }
+    else {
+        ui->gbBackground->setDisabled(lock);
+        ui->gbSettings->setDisabled(lock);
+    }
     ui->cmdOK->setDisabled(lock);
     settingsLocked = lock;
 }
@@ -652,6 +697,11 @@ bool ImportDialog::isImportAgreed()
     return importAgreed;
 }
 
+bool ImportDialog::isUnlimitedBuffer()
+{
+    return ui->cbUnlimited->isChecked();
+}
+
 bool ImportDialog::areSettingsLocked()
 {
     return settingsLocked;
@@ -670,10 +720,11 @@ void ImportDialog::on_cbIgnore_toggled(bool checked)
 
 void ImportDialog::on_cbAvatar_toggled(bool checked)
 {
-    if (!workImage.isNull() && workImage.width() == workImage.height() && !checked)
-    {
-        if (QMessageBox::No == QMessageBox::warning(this, tr("Snapmatic Avatar Zone"), tr("Are you sure to use a square image outside of the Avatar Zone?\nWhen you want to use it as Avatar the image will be detached!"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
-        {
+    if (ui->cbResolution->currentIndex() != 0)
+        return;
+
+    if (!workImage.isNull() && workImage.width() == workImage.height() && !checked) {
+        if (QMessageBox::No == QMessageBox::warning(this, tr("Snapmatic Avatar Zone"), tr("Are you sure to use a square image outside of the Avatar Zone?\nWhen you want to use it as Avatar the image will be detached!"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
             ui->cbAvatar->setChecked(true);
             insideAvatarZone = true;
             return;
@@ -681,12 +732,10 @@ void ImportDialog::on_cbAvatar_toggled(bool checked)
     }
     insideAvatarZone = ui->cbAvatar->isChecked();
     watermarkBlock = true;
-    if (insideAvatarZone)
-    {
+    if (insideAvatarZone) {
         ui->cbWatermark->setChecked(watermarkAvatar);
     }
-    else
-    {
+    else {
         ui->cbWatermark->setChecked(watermarkPicture);
     }
     watermarkBlock = false;
@@ -788,7 +837,7 @@ fileDialogPreOpen:
                 QMessageBox::warning(this, QApplication::translate("ProfileInterface", "Import"), QApplication::translate("ProfileInterface", "Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
                 goto fileDialogPreOpen;
             }
-            backImage = importImage.scaled(snapmaticResolutionW, snapmaticResolutionH, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+            backImage = importImage.scaled(snapmaticResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
             backgroundPath = selectedFile;
             ui->labBackgroundImage->setText(tr("Background Image: %1").arg(tr("File", "Background Image: File")));
             ui->cmdBackgroundWipe->setVisible(true);
@@ -826,14 +875,50 @@ void ImportDialog::on_cbWatermark_toggled(bool checked)
 {
     if (!watermarkBlock)
     {
-        if (insideAvatarZone)
-        {
+        if (insideAvatarZone) {
             watermarkAvatar = checked;
         }
-        else
-        {
+        else {
             watermarkPicture = checked;
         }
         processImage();
+    }
+}
+
+void ImportDialog::on_cbImportAsIs_toggled(bool checked)
+{
+    ui->cbResolution->setDisabled(checked);
+    ui->labResolution->setDisabled(checked);
+    ui->gbBackground->setDisabled(checked);
+    ui->gbSettings->setDisabled(checked);
+}
+
+void ImportDialog::on_cbResolution_currentIndexChanged(int index)
+{
+    Q_UNUSED(index)
+    const QVariant data = ui->cbResolution->currentData();
+    if (data.type() == QVariant::Size) {
+        const QSize dataSize = data.toSize();
+        if (dataSize == SnapmaticPicture::getSnapmaticResolution()) {
+            ui->cbAvatar->setEnabled(true);
+            snapmaticResolution = dataSize;
+            reworkImage();
+        }
+        else {
+            if (!workImage.isNull() && workImage.width() == workImage.height() && ui->cbAvatar->isChecked()) {
+                if (QMessageBox::No == QMessageBox::warning(this, tr("Snapmatic Avatar Zone"), tr("Are you sure to use a square image outside of the Avatar Zone?\nWhen you want to use it as Avatar the image will be detached!"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
+                    ui->cbResolution->setCurrentIndex(0);
+                    ui->cbAvatar->setChecked(true);
+                    insideAvatarZone = true;
+                    return;
+                }
+            }
+            ui->cbAvatar->setChecked(false);
+            ui->cbAvatar->setDisabled(true);
+            insideAvatarZone = false;
+            ui->cbWatermark->setChecked(watermarkPicture);
+            snapmaticResolution = dataSize;
+            reworkImage();
+        }
     }
 }
