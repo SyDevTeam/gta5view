@@ -371,9 +371,13 @@ void ImportDialog::saveSettings(QString settingsProfile)
     settings.setValue("SelectedColour", selectedColour);
     settings.setValue("BackgroundStretch", ui->cbStretch->isChecked());
     settings.setValue("ForceAvatarColour", ui->cbForceAvatarColour->isChecked());
+#if QT_VERSION >= 0x050000
     const QVariant data = ui->cbResolution->currentData();
+#else
+    const QVariant data = ui->cbResolution->itemData(ui->cbResolution->currentIndex());
+#endif
     if (data.type() == QVariant::Size) {
-        settings.setValue("Resolution", ui->cbResolution->currentData());
+        settings.setValue("Resolution", data);
     }
     else {
         settings.setValue("Resolution", SnapmaticPicture::getSnapmaticResolution());
@@ -896,7 +900,11 @@ void ImportDialog::on_cbImportAsIs_toggled(bool checked)
 void ImportDialog::on_cbResolution_currentIndexChanged(int index)
 {
     Q_UNUSED(index)
+#if QT_VERSION >= 0x050000
     const QVariant data = ui->cbResolution->currentData();
+#else
+    const QVariant data = ui->cbResolution->itemData(ui->cbResolution->currentIndex());
+#endif
     if (data.type() == QVariant::Size) {
         const QSize dataSize = data.toSize();
         if (dataSize == SnapmaticPicture::getSnapmaticResolution()) {

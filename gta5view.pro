@@ -208,12 +208,12 @@ isEqual(QT_MAJOR_VERSION, 4): SOURCES += qjson4/QJsonArray.cpp \
     qjson4/QJsonValueRef.cpp \
     qjson4/QJsonParser.cpp
 
-isEqual(QT_MAJOR_VERSION, 4): RESOURCES += res/tr_qt4.qrc
+isEqual(QT_MAJOR_VERSION, 4): RESOURCES += res/qt4/tr_qt.qrc
 isEqual(QT_MAJOR_VERSION, 4): GTA5SYNC_RCC = $$[QT_INSTALL_BINS]/rcc
 
 # QT5 ONLY STUFF
 
-isEqual(QT_MAJOR_VERSION, 5): RESOURCES += res/tr_qt5.qrc
+isEqual(QT_MAJOR_VERSION, 5): RESOURCES += res/qt5/tr_qt.qrc
 
 # QT5+ ONLY STUFF
 
@@ -221,7 +221,7 @@ greaterThan(QT_MAJOR_VERSION, 4): GTA5SYNC_RCC = $$[QT_HOST_BINS]/rcc
 
 # QT6 ONLY STUFF
 
-isEqual(QT_MAJOR_VERSION, 6): RESOURCES += res/tr_qt6.qrc
+isEqual(QT_MAJOR_VERSION, 6): RESOURCES += res/qt6/tr_qt.qrc
 
 # RESOURCE COMPILATION
 
@@ -245,9 +245,9 @@ INSTALLS += target pixmaps appfiles
 # QCONF BASED BUILD STUFF
 
 contains(DEFINES, GTA5SYNC_QCONF) {
-    isEqual(QT_MAJOR_VERSION, 4): RESOURCES -= res/tr_qt4.qrc
-    isEqual(QT_MAJOR_VERSION, 5): RESOURCES -= res/tr_qt5.qrc
-    isEqual(QT_MAJOR_VERSION, 6): RESOURCES -= res/tr_qt6.qrc
+    isEqual(QT_MAJOR_VERSION, 4): RESOURCES -= res/qt4/tr_qt.qrc
+    isEqual(QT_MAJOR_VERSION, 5): RESOURCES -= res/qt5/tr_qt.qrc
+    isEqual(QT_MAJOR_VERSION, 6): RESOURCES -= res/qt6/tr_qt.qrc
     !contains(DEFINES, GTA5SYNC_QCONF_IN) {
         RESOURCES -= res/tr_g5p.qrc
         langfiles.path = $$GTA5SYNC_PREFIX/share/gta5view/translations

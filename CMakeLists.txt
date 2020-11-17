@@ -164,7 +164,7 @@ if(Qt5LinguistTools_FOUND)
         res/gta5sync_ru.ts
         res/gta5sync_uk.ts
         res/gta5sync_zh_TW.ts
-        res/qtbase_en_GB.ts
+        res/qt5/qtbase_en_GB.ts
     )
     add_custom_target(translations DEPENDS ${GTA5VIEW_TRANSLATIONS})
 else()
@@ -176,7 +176,7 @@ else()
         res/gta5sync_ru.qm
         res/gta5sync_uk.qm
         res/gta5sync_zh_TW.qm
-        res/qtbase_en_GB.qm
+        res/qt5/qtbase_en_GB.qm
     )
 endif()
 
@@ -188,7 +188,7 @@ if(QCONF_BUILD)
 else()
     list(APPEND GTA5VIEW_RESOURCES
         res/tr_g5p.qrc
-        res/tr_qt${QT_VERSION_MAJOR}.qrc
+        res/qt${QT_VERSION_MAJOR}/tr_qt.qrc
     )
 endif()
 
