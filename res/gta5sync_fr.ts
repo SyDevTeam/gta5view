@@ -754,26 +754,26 @@ Y : %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.ui" line="422"/>
-        <location filename="../OptionsDialog.cpp" line="635"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="650"/>
-        <location filename="../OptionsDialog.cpp" line="651"/>
-        <location filename="../OptionsDialog.cpp" line="664"/>
-        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="629"/>
+        <location filename="../OptionsDialog.cpp" line="643"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
+        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="658"/>
         <source>Found: %1</source>
         <translation>Trouvé : %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
         <location filename="../OptionsDialog.ui" line="429"/>
-        <location filename="../OptionsDialog.cpp" line="639"/>
-        <location filename="../OptionsDialog.cpp" line="643"/>
-        <location filename="../OptionsDialog.cpp" line="655"/>
-        <location filename="../OptionsDialog.cpp" line="659"/>
-        <location filename="../OptionsDialog.cpp" line="668"/>
-        <location filename="../OptionsDialog.cpp" line="672"/>
-        <location filename="../OptionsDialog.cpp" line="676"/>
-        <location filename="../OptionsDialog.cpp" line="680"/>
+        <location filename="../OptionsDialog.cpp" line="632"/>
+        <location filename="../OptionsDialog.cpp" line="636"/>
+        <location filename="../OptionsDialog.cpp" line="648"/>
+        <location filename="../OptionsDialog.cpp" line="652"/>
+        <location filename="../OptionsDialog.cpp" line="661"/>
+        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="669"/>
+        <location filename="../OptionsDialog.cpp" line="673"/>
         <source>Language: %1</source>
         <translation>Langue : %1</translation>
     </message>
@@ -794,7 +794,7 @@ Y : %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
-        <location filename="../OptionsDialog.cpp" line="597"/>
+        <location filename="../OptionsDialog.cpp" line="590"/>
         <source>Participate in %1 User Statistics</source>
         <translation>Participer aux statistiques d&apos;usage %1</translation>
     </message>
@@ -825,8 +825,8 @@ Y : %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="606"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
         <source>Participation ID: %1</source>
         <translation>ID de participation : %1</translation>
     </message>
@@ -856,9 +856,8 @@ Y : %2</translation>
         <translation>Police</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="695"/>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation>Toujours utiliser la police Message (Windows 2003 et précédent)</translation>
+        <translation type="vanished">Toujours utiliser la police Message (Windows 2003 et précédent)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="596"/>
@@ -889,23 +888,33 @@ Y : %2</translation>
         <translation>Utiliser le Style par Défaut (rédémarrage requis)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="743"/>
+        <location filename="../OptionsDialog.ui" line="695"/>
+        <source>Use Default Font (Restart)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="707"/>
+        <source>Font:</source>
+        <translation>Police:</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="770"/>
         <source>Apply changes</source>
         <translation>Appliquer les changements</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="746"/>
+        <location filename="../OptionsDialog.ui" line="773"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="759"/>
+        <location filename="../OptionsDialog.ui" line="786"/>
         <source>Discard changes</source>
         <translation>Annuler les changements</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="762"/>
+        <location filename="../OptionsDialog.ui" line="789"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;Annuler</translation>
@@ -944,62 +953,62 @@ Y : %2</translation>
         <translation>%1 (Priorité de la langue)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="485"/>
+        <location filename="../OptionsDialog.cpp" line="478"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="485"/>
+        <location filename="../OptionsDialog.cpp" line="478"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>Le nouveau Dossier personnalisé sera initialisé au redémarrage de %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="598"/>
+        <location filename="../OptionsDialog.cpp" line="591"/>
         <source>View %1 User Statistics Online</source>
         <translation>Voir les statistiques d&apos;usage %1 en ligne</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
         <source>Not registered</source>
         <translation>Pas enregistré</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="635"/>
-        <location filename="../OptionsDialog.cpp" line="651"/>
-        <location filename="../OptionsDialog.cpp" line="664"/>
-        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
+        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="658"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="650"/>
+        <location filename="../OptionsDialog.cpp" line="629"/>
+        <location filename="../OptionsDialog.cpp" line="643"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="643"/>
-        <location filename="../OptionsDialog.cpp" line="672"/>
+        <location filename="../OptionsDialog.cpp" line="636"/>
+        <location filename="../OptionsDialog.cpp" line="665"/>
         <source>OS defined</source>
         <translation>Défini par le système d&apos;exploitation</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="659"/>
-        <location filename="../OptionsDialog.cpp" line="680"/>
+        <location filename="../OptionsDialog.cpp" line="652"/>
+        <location filename="../OptionsDialog.cpp" line="673"/>
         <source>Steam defined</source>
         <translation>Défini par Steam</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="495"/>
+        <location filename="../OptionsDialog.cpp" line="488"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Aucun profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="503"/>
-        <location filename="../OptionsDialog.cpp" line="507"/>
-        <location filename="../OptionsDialog.cpp" line="509"/>
+        <location filename="../OptionsDialog.cpp" line="496"/>
+        <location filename="../OptionsDialog.cpp" line="500"/>
+        <location filename="../OptionsDialog.cpp" line="502"/>
         <source>Profile: %1</source>
         <translation>Profil : %1</translation>
     </message>
@@ -1691,7 +1700,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation type="vanished">Police sélectionnée : %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="136"/>
+        <location filename="../main.cpp" line="137"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;Bienvenue sur %1!&lt;/h4&gt;Voulez-vous configurer %1 avant de l&apos;utiliser t?</translation>
     </message>
@@ -2272,22 +2281,22 @@ Appuyer sur 1 pour le mode par défaut</translation>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="165"/>
+        <location filename="../main.cpp" line="166"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation>Voulez-vous aider au développement de %1 en transmettant vos données d&apos;utilisation ?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="166"/>
+        <location filename="../main.cpp" line="167"/>
         <source>%1 User Statistics</source>
         <translation>Statistiques utilisateurs %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="170"/>
+        <location filename="../main.cpp" line="171"/>
         <source>Yes, I want include personal usage data.</source>
         <translation>Oui, je veux partager mes données d&apos;utilisation.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="179"/>
+        <location filename="../main.cpp" line="180"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
@@ -2404,7 +2413,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="744"/>
+        <location filename="../OptionsDialog.cpp" line="737"/>
         <location filename="../UserInterface.cpp" line="197"/>
         <location filename="../UserInterface.cpp" line="735"/>
         <source>Select GTA V Folder...</source>

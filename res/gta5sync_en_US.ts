@@ -742,26 +742,26 @@ Y: %2</source>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.ui" line="422"/>
-        <location filename="../OptionsDialog.cpp" line="635"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="650"/>
-        <location filename="../OptionsDialog.cpp" line="651"/>
-        <location filename="../OptionsDialog.cpp" line="664"/>
-        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="629"/>
+        <location filename="../OptionsDialog.cpp" line="643"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
+        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="658"/>
         <source>Found: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
         <location filename="../OptionsDialog.ui" line="429"/>
-        <location filename="../OptionsDialog.cpp" line="639"/>
-        <location filename="../OptionsDialog.cpp" line="643"/>
-        <location filename="../OptionsDialog.cpp" line="655"/>
-        <location filename="../OptionsDialog.cpp" line="659"/>
-        <location filename="../OptionsDialog.cpp" line="668"/>
-        <location filename="../OptionsDialog.cpp" line="672"/>
-        <location filename="../OptionsDialog.cpp" line="676"/>
-        <location filename="../OptionsDialog.cpp" line="680"/>
+        <location filename="../OptionsDialog.cpp" line="632"/>
+        <location filename="../OptionsDialog.cpp" line="636"/>
+        <location filename="../OptionsDialog.cpp" line="648"/>
+        <location filename="../OptionsDialog.cpp" line="652"/>
+        <location filename="../OptionsDialog.cpp" line="661"/>
+        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="669"/>
+        <location filename="../OptionsDialog.cpp" line="673"/>
         <source>Language: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -777,7 +777,7 @@ Y: %2</source>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
-        <location filename="../OptionsDialog.cpp" line="597"/>
+        <location filename="../OptionsDialog.cpp" line="590"/>
         <source>Participate in %1 User Statistics</source>
         <translation type="unfinished"></translation>
     </message>
@@ -798,8 +798,8 @@ Y: %2</source>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="606"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
         <source>Participation ID: %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -826,11 +826,6 @@ Y: %2</source>
     <message>
         <location filename="../OptionsDialog.ui" line="689"/>
         <source>Font</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../OptionsDialog.ui" line="695"/>
-        <source>Always use Message Font (Windows 2003 and earlier)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -877,23 +872,33 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="743"/>
+        <location filename="../OptionsDialog.ui" line="695"/>
+        <source>Use Default Font (Restart)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="707"/>
+        <source>Font:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="770"/>
         <source>Apply changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="746"/>
+        <location filename="../OptionsDialog.ui" line="773"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="759"/>
+        <location filename="../OptionsDialog.ui" line="786"/>
         <source>Discard changes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="762"/>
+        <location filename="../OptionsDialog.ui" line="789"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation type="unfinished"></translation>
@@ -932,62 +937,62 @@ Y: %2</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="485"/>
+        <location filename="../OptionsDialog.cpp" line="478"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="485"/>
+        <location filename="../OptionsDialog.cpp" line="478"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>The new Custom Folder will initialize after you restart %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="495"/>
+        <location filename="../OptionsDialog.cpp" line="488"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="503"/>
-        <location filename="../OptionsDialog.cpp" line="507"/>
-        <location filename="../OptionsDialog.cpp" line="509"/>
+        <location filename="../OptionsDialog.cpp" line="496"/>
+        <location filename="../OptionsDialog.cpp" line="500"/>
+        <location filename="../OptionsDialog.cpp" line="502"/>
         <source>Profile: %1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="598"/>
+        <location filename="../OptionsDialog.cpp" line="591"/>
         <source>View %1 User Statistics Online</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
         <source>Not registered</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="635"/>
-        <location filename="../OptionsDialog.cpp" line="651"/>
-        <location filename="../OptionsDialog.cpp" line="664"/>
-        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
+        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="658"/>
         <source>Yes</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="650"/>
+        <location filename="../OptionsDialog.cpp" line="629"/>
+        <location filename="../OptionsDialog.cpp" line="643"/>
         <source>No</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="643"/>
-        <location filename="../OptionsDialog.cpp" line="672"/>
+        <location filename="../OptionsDialog.cpp" line="636"/>
+        <location filename="../OptionsDialog.cpp" line="665"/>
         <source>OS defined</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="659"/>
-        <location filename="../OptionsDialog.cpp" line="680"/>
+        <location filename="../OptionsDialog.cpp" line="652"/>
+        <location filename="../OptionsDialog.cpp" line="673"/>
         <source>Steam defined</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1659,7 +1664,7 @@ Press 1 for Default View</source>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="136"/>
+        <location filename="../main.cpp" line="137"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2236,22 +2241,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="165"/>
+        <location filename="../main.cpp" line="166"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="166"/>
+        <location filename="../main.cpp" line="167"/>
         <source>%1 User Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="170"/>
+        <location filename="../main.cpp" line="171"/>
         <source>Yes, I want include personal usage data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="179"/>
+        <location filename="../main.cpp" line="180"/>
         <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2386,7 +2391,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="744"/>
+        <location filename="../OptionsDialog.cpp" line="737"/>
         <location filename="../UserInterface.cpp" line="197"/>
         <location filename="../UserInterface.cpp" line="735"/>
         <source>Select GTA V Folder...</source>

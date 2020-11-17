@@ -299,31 +299,16 @@ void OptionsDialog::setupRadioButtons()
 void OptionsDialog::setupInterfaceSettings()
 {
     settings->beginGroup("Startup");
-    bool alwaysUseMessageFont = settings->value("AlwaysUseMessageFont", false).toBool();
-    ui->cbAlwaysUseMessageFont->setChecked(alwaysUseMessageFont);
-#ifdef Q_OS_WIN
-    if (QSysInfo::windowsVersion() >= 0x0080)
-    {
-        ui->gbFont->setVisible(false);
-        ui->cbAlwaysUseMessageFont->setVisible(false);
-    }
-#else
-    ui->gbFont->setVisible(false);
-    ui->cbAlwaysUseMessageFont->setVisible(false);
-#endif
-    QString currentStyle = QApplication::style()->objectName();
-    QString appStyle = settings->value("AppStyle", currentStyle).toString();
+    const QString currentStyle = QApplication::style()->objectName();
+    const QString appStyle = settings->value("AppStyle", currentStyle).toString();
     bool customStyle = settings->value("CustomStyle", false).toBool();
     const QStringList availableStyles = QStyleFactory::keys();
     ui->cbStyleList->addItems(availableStyles);
-    if (availableStyles.contains(appStyle, Qt::CaseInsensitive))
-    {
+    if (availableStyles.contains(appStyle, Qt::CaseInsensitive)) {
         // use 'for' for select to be sure it's case insensitive
         int currentIndex = 0;
-        for (QString currentStyleFF : availableStyles)
-        {
-            if (currentStyleFF.toLower() == appStyle.toLower())
-            {
+        for (const QString &currentStyleFF : availableStyles) {
+            if (currentStyleFF.toLower() == appStyle.toLower()) {
                 ui->cbStyleList->setCurrentIndex(currentIndex);
             }
             currentIndex++;
@@ -331,23 +316,24 @@ void OptionsDialog::setupInterfaceSettings()
     }
     else
     {
-        if (availableStyles.contains(currentStyle, Qt::CaseInsensitive))
-        {
+        if (availableStyles.contains(currentStyle, Qt::CaseInsensitive)) {
             int currentIndex = 0;
-            for (QString currentStyleFF : availableStyles)
-            {
-                if (currentStyleFF.toLower() == currentStyle.toLower())
-                {
+            for (const QString &currentStyleFF : availableStyles) {
+                if (currentStyleFF.toLower() == currentStyle.toLower()) {
                     ui->cbStyleList->setCurrentIndex(currentIndex);
                 }
                 currentIndex++;
             }
         }
     }
-    if (customStyle)
-    {
-        ui->cbDefaultStyle->setChecked(false);
-    }
+    ui->cbDefaultStyle->setChecked(!customStyle);
+    ui->cbStyleList->setEnabled(customStyle);
+    const QFont currentFont = QApplication::font();
+    const QFont appFont = qvariant_cast<QFont>(settings->value("AppFont", currentFont));
+    bool customFont = settings->value("CustomFont", false).toBool();
+    ui->cbDefaultFont->setChecked(!customFont);
+    ui->cbFont->setEnabled(customFont);
+    ui->cbFont->setCurrentFont(appFont);
     settings->endGroup();
 }
 
@@ -426,18 +412,25 @@ void OptionsDialog::applySettings()
 
     bool defaultStyle = ui->cbDefaultStyle->isChecked();
     settings->beginGroup("Startup");
-    if (!defaultStyle)
-    {
+    if (!defaultStyle) {
         QString newStyle = ui->cbStyleList->currentText();
         settings->setValue("CustomStyle", true);
         settings->setValue("AppStyle", newStyle);
         QApplication::setStyle(QStyleFactory::create(newStyle));
     }
-    else
-    {
+    else {
         settings->setValue("CustomStyle", false);
     }
-    settings->setValue("AlwaysUseMessageFont", ui->cbAlwaysUseMessageFont->isChecked());
+    bool defaultFont = ui->cbDefaultFont->isChecked();
+    if (!defaultFont) {
+        QFont newFont = ui->cbFont->currentFont();
+        settings->setValue("CustomFont", true);
+        settings->setValue("AppFont", newFont);
+        QApplication::setFont(newFont);
+    }
+    else {
+        settings->setValue("CustomFont", false);
+    }
     settings->endGroup();
 
 #ifdef GTA5SYNC_TELEMETRY
@@ -751,6 +744,11 @@ void OptionsDialog::on_cmdExploreFolder_clicked()
 void OptionsDialog::on_cbDefaultStyle_toggled(bool checked)
 {
     ui->cbStyleList->setDisabled(checked);
+}
+
+void OptionsDialog::on_cbDefaultFont_toggled(bool checked)
+{
+    ui->cbFont->setDisabled(checked);
 }
 
 void OptionsDialog::on_cmdCopyStatsID_clicked()

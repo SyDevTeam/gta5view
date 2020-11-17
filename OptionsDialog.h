@@ -47,6 +47,7 @@ private slots:
     void on_cbIgnoreAspectRatio_toggled(bool checked);
     void on_cmdExploreFolder_clicked();
     void on_cbDefaultStyle_toggled(bool checked);
+    void on_cbDefaultFont_toggled(bool checked);
     void on_cmdCopyStatsID_clicked();
 
 signals:

@@ -96,25 +96,26 @@ int main(int argc, char *argv[])
 
     bool isFirstStart = settings.value("IsFirstStart", true).toBool();
     bool customStyle = settings.value("CustomStyle", false).toBool();
-    QString appStyle = settings.value("AppStyle", "Default").toString();
-
-    if (customStyle)
-    {
-        if (QStyleFactory::keys().contains(appStyle, Qt::CaseInsensitive))
-        {
+    if (customStyle) {
+        const QString appStyle = settings.value("AppStyle", "Default").toString();
+        if (QStyleFactory::keys().contains(appStyle, Qt::CaseInsensitive)) {
             a.setStyle(QStyleFactory::create(appStyle));
         }
     }
 
 #ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050400
-    bool alwaysUseMessageFont = settings.value("AlwaysUseMessageFont", false).toBool();
-    if (QSysInfo::windowsVersion() >= 0x0080 || alwaysUseMessageFont)
-    {
+    if (QSysInfo::windowsVersion() >= 0x0080) {
         a.setFont(QApplication::font("QMenu"));
     }
 #endif
 #endif
+
+    bool customFont = settings.value("CustomFont", false).toBool();
+    if (customFont) {
+        const QFont appFont = qvariant_cast<QFont>(settings.value("AppFont", a.font()));
+        a.setFont(appFont);
+    }
 
     QStringList applicationArgs = a.arguments();
     QString selectedAction;

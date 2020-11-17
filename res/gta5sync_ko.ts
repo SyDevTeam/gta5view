@@ -761,26 +761,26 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.ui" line="422"/>
-        <location filename="../OptionsDialog.cpp" line="635"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="650"/>
-        <location filename="../OptionsDialog.cpp" line="651"/>
-        <location filename="../OptionsDialog.cpp" line="664"/>
-        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="629"/>
+        <location filename="../OptionsDialog.cpp" line="643"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
+        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="658"/>
         <source>Found: %1</source>
         <translation>찾음: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
         <location filename="../OptionsDialog.ui" line="429"/>
-        <location filename="../OptionsDialog.cpp" line="639"/>
-        <location filename="../OptionsDialog.cpp" line="643"/>
-        <location filename="../OptionsDialog.cpp" line="655"/>
-        <location filename="../OptionsDialog.cpp" line="659"/>
-        <location filename="../OptionsDialog.cpp" line="668"/>
-        <location filename="../OptionsDialog.cpp" line="672"/>
-        <location filename="../OptionsDialog.cpp" line="676"/>
-        <location filename="../OptionsDialog.cpp" line="680"/>
+        <location filename="../OptionsDialog.cpp" line="632"/>
+        <location filename="../OptionsDialog.cpp" line="636"/>
+        <location filename="../OptionsDialog.cpp" line="648"/>
+        <location filename="../OptionsDialog.cpp" line="652"/>
+        <location filename="../OptionsDialog.cpp" line="661"/>
+        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="669"/>
+        <location filename="../OptionsDialog.cpp" line="673"/>
         <source>Language: %1</source>
         <translation>언어: %1</translation>
     </message>
@@ -801,7 +801,7 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
-        <location filename="../OptionsDialog.cpp" line="597"/>
+        <location filename="../OptionsDialog.cpp" line="590"/>
         <source>Participate in %1 User Statistics</source>
         <translation>사용자 통계 참가 %1</translation>
     </message>
@@ -837,8 +837,8 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="606"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
         <source>Participation ID: %1</source>
         <translation>참여 아이디: %1</translation>
     </message>
@@ -878,7 +878,7 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="652"/>
         <source>Use Default Style (Restart)</source>
-        <translation>기본 스타일을 사용합니다.(다시 시작 필요)</translation>
+        <translation>기본 스타일을 사용합니다 (재시작 필요)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="664"/>
@@ -892,28 +892,37 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="695"/>
-        <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation>항상 메시지 글꼴을 사용합니다.(Windows 2003 및 이전 버전)</translation>
+        <source>Use Default Font (Restart)</source>
+        <translation>기본 폰트 사용 (재시작 필요)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="743"/>
+        <location filename="../OptionsDialog.ui" line="707"/>
+        <source>Font:</source>
+        <translation>폰트:</translation>
+    </message>
+    <message>
+        <source>Always use Message Font (Windows 2003 and earlier)</source>
+        <translation type="vanished">항상 메시지 글꼴을 사용합니다.(Windows 2003 및 이전 버전)</translation>
+    </message>
+    <message>
+        <location filename="../OptionsDialog.ui" line="770"/>
         <source>Apply changes</source>
         <translation>변경 사항 적용</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="746"/>
+        <location filename="../OptionsDialog.ui" line="773"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translatorcomment>확인, 취소, 적용</translatorcomment>
         <translation>확인(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="759"/>
+        <location filename="../OptionsDialog.ui" line="786"/>
         <source>Discard changes</source>
         <translation>변경 사항 취소</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="762"/>
+        <location filename="../OptionsDialog.ui" line="789"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translatorcomment>확인, 취소, 적용</translatorcomment>
@@ -956,64 +965,64 @@ Y: %2</translation>
         <translation>%1 (인터페이스와 가까운 언어)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="485"/>
+        <location filename="../OptionsDialog.cpp" line="478"/>
         <source>%1</source>
         <comment>%1</comment>
         <translatorcomment>%1</translatorcomment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="485"/>
+        <location filename="../OptionsDialog.cpp" line="478"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>다시 시작한 후 새 사용자 지정 폴더가 초기화됩니다. %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="495"/>
+        <location filename="../OptionsDialog.cpp" line="488"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translatorcomment>프로필 없음 (기본값)</translatorcomment>
         <translation>프로필 없음</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="503"/>
-        <location filename="../OptionsDialog.cpp" line="507"/>
-        <location filename="../OptionsDialog.cpp" line="509"/>
+        <location filename="../OptionsDialog.cpp" line="496"/>
+        <location filename="../OptionsDialog.cpp" line="500"/>
+        <location filename="../OptionsDialog.cpp" line="502"/>
         <source>Profile: %1</source>
         <translation>프로필: %1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="598"/>
+        <location filename="../OptionsDialog.cpp" line="591"/>
         <source>View %1 User Statistics Online</source>
         <translation>온라인 %1 사용자 통계 보기</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
         <source>Not registered</source>
         <translation>등록되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="635"/>
-        <location filename="../OptionsDialog.cpp" line="651"/>
-        <location filename="../OptionsDialog.cpp" line="664"/>
-        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
+        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="658"/>
         <source>Yes</source>
         <translation>예</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="650"/>
+        <location filename="../OptionsDialog.cpp" line="629"/>
+        <location filename="../OptionsDialog.cpp" line="643"/>
         <source>No</source>
         <translation>아니요</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="643"/>
-        <location filename="../OptionsDialog.cpp" line="672"/>
+        <location filename="../OptionsDialog.cpp" line="636"/>
+        <location filename="../OptionsDialog.cpp" line="665"/>
         <source>OS defined</source>
         <translation>OS 정의</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="659"/>
-        <location filename="../OptionsDialog.cpp" line="680"/>
+        <location filename="../OptionsDialog.cpp" line="652"/>
+        <location filename="../OptionsDialog.cpp" line="673"/>
         <source>Steam defined</source>
         <translation>스팀 정의</translation>
     </message>
@@ -1710,7 +1719,7 @@ Press 1 for Default View</source>
         <translation type="vanished">선택된 폰트: %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="136"/>
+        <location filename="../main.cpp" line="137"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
         <translation>&lt;h4&gt;%1에 오신 것을 환영합니다!&lt;/h4&gt;%1을 사용하기 전에 설정 창을 여시겠습니까?</translation>
     </message>
@@ -2294,22 +2303,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="165"/>
+        <location filename="../main.cpp" line="166"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation>개인 사용 데이터를 제출에 포함시켜 %1이(가) 개선되기를 원합니까?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="166"/>
+        <location filename="../main.cpp" line="167"/>
         <source>%1 User Statistics</source>
         <translation>%1 사용자 통계</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="170"/>
+        <location filename="../main.cpp" line="171"/>
         <source>Yes, I want include personal usage data.</source>
         <translation>예, 개인 사용 데이터를 포함시키고 싶습니다.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="179"/>
+        <location filename="../main.cpp" line="180"/>
         <source>&amp;OK</source>
         <translation>확인(&amp;O)</translation>
     </message>
@@ -2450,7 +2459,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="744"/>
+        <location filename="../OptionsDialog.cpp" line="737"/>
         <location filename="../UserInterface.cpp" line="197"/>
         <location filename="../UserInterface.cpp" line="735"/>
         <source>Select GTA V Folder...</source>
