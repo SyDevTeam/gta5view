@@ -285,7 +285,7 @@ Snapmatic Bilder und Spielständen</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="345"/>
-        <source>Import as-is, don&apos;t change the picture at all, guarantee to break Snapmatic unless you know what you doing</source>
+        <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
         <translation>Importiere das Bild ohne Veränderungen, Snapmatic wird garantiert beschädigt wenn du nicht weißt was du tust</translation>
     </message>
     <message>
@@ -332,7 +332,7 @@ Snapmatic Bilder und Spielständen</translation>
     <message>
         <location filename="../ImportDialog.ui" line="348"/>
         <source>Import as-is</source>
-        <translation>Importiere ohne Änderungen</translation>
+        <translation>Importiere unverändert</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="362"/>
@@ -1681,14 +1681,6 @@ Drücke 1 für Standardmodus</translation>
 </context>
 <context>
     <name>QApplication</name>
-    <message>
-        <source>Font</source>
-        <translation type="vanished">Schrift</translation>
-    </message>
-    <message>
-        <source>Selected Font: %1</source>
-        <translation type="vanished">Ausgewähle Schrift: %1</translation>
-    </message>
     <message>
         <location filename="../main.cpp" line="136"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>

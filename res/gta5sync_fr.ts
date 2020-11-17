@@ -284,11 +284,6 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <translation>Supprimer l&apos;image de fond</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="345"/>
-        <source>Import as-is, don&apos;t change the picture at all, guarantee to break Snapmatic unless you know what you doing</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="../ImportDialog.cpp" line="353"/>
         <location filename="../ImportDialog.cpp" line="842"/>
         <source>Background Image: %1</source>
@@ -327,6 +322,11 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.ui" line="338"/>
         <source>Unlimited Buffer</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="345"/>
+        <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

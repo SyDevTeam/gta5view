@@ -328,7 +328,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="345"/>
-        <source>Import as-is, don&apos;t change the picture at all, guarantee to break Snapmatic unless you know what you doing</source>
+        <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -342,7 +342,7 @@
            <item>
             <widget class="QCheckBox" name="cbImportAsIs">
              <property name="toolTip">
-              <string>Import as-is, don't change the picture at all, guarantee to break Snapmatic unless you know what you doing</string>
+              <string>Import as-is, don't change the picture at all, guaranteed to break Snapmatic unless you know what you doing</string>
              </property>
              <property name="text">
               <string>Import as-is</string>
