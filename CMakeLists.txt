@@ -176,7 +176,7 @@ else()
         res/gta5sync_ru.qm
         res/gta5sync_uk.qm
         res/gta5sync_zh_TW.qm
-        res/qt5/qtbase_en_GB.qm
+        res/qt${QT_VERSION_MAJOR}/qtbase_en_GB.qm
     )
 endif()
 

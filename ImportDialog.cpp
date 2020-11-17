@@ -332,7 +332,12 @@ void ImportDialog::processSettings(QString settingsProfile, bool setDefault)
         ui->cbUnlimited->setChecked(settings.value("UnlimitedBuffer", false).toBool());
         ui->cbImportAsIs->setChecked(settings.value("ImportAsIs", false).toBool());
         const QVariant data = settings.value("Resolution", SnapmaticPicture::getSnapmaticResolution());
-        if (data.type() == QVariant::Size) {
+#if QT_VERSION >= 0x060000
+        if (data.typeId() == QMetaType::QSize)
+#else
+        if (data.type() == QVariant::Size)
+#endif
+        {
             int index = ui->cbResolution->findData(data);
             if (index != -1) {
                 ui->cbResolution->setCurrentIndex(index);
@@ -376,7 +381,12 @@ void ImportDialog::saveSettings(QString settingsProfile)
 #else
     const QVariant data = ui->cbResolution->itemData(ui->cbResolution->currentIndex());
 #endif
-    if (data.type() == QVariant::Size) {
+#if QT_VERSION >= 0x060000
+    if (data.typeId() == QMetaType::QSize)
+#else
+    if (data.type() == QVariant::Size)
+#endif
+    {
         settings.setValue("Resolution", data);
     }
     else {
@@ -905,7 +915,12 @@ void ImportDialog::on_cbResolution_currentIndexChanged(int index)
 #else
     const QVariant data = ui->cbResolution->itemData(ui->cbResolution->currentIndex());
 #endif
-    if (data.type() == QVariant::Size) {
+#if QT_VERSION >= 0x060000
+    if (data.typeId() == QMetaType::QSize)
+#else
+    if (data.type() == QVariant::Size)
+#endif
+    {
         const QSize dataSize = data.toSize();
         if (dataSize == SnapmaticPicture::getSnapmaticResolution()) {
             ui->cbAvatar->setEnabled(true);
