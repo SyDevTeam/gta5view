@@ -898,7 +898,7 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="698"/>
         <source>Use Default Font (Restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Использовать стандартный шрифт (Перезапуск)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="713"/>
