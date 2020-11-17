@@ -289,8 +289,8 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="345"/>
-        <source>Import as-is, don&apos;t change the picture at all, guarantee to break Snapmatic unless you know what you doing</source>
-        <translation type="unfinished"></translation>
+        <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
+        <translation>Импортировать как есть, не меняя картинку. Обязательно поломает Snapmatic, если не знаешь, что делаешь</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="353"/>
@@ -313,32 +313,32 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="303"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Расширенное</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="311"/>
         <source>Resolution:</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешение:</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="324"/>
         <source>Snapmatic resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Разрешение Snapmatic</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="335"/>
         <source>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Не сжимать, а увеличить буфер. Улучшит качество картинки, но может поломать Snapmatic</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="338"/>
         <source>Unlimited Buffer</source>
-        <translation type="unfinished"></translation>
+        <translation>Неограниченный буфер</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="348"/>
         <source>Import as-is</source>
-        <translation type="unfinished"></translation>
+        <translation>Импортировать как есть</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="362"/>
@@ -1696,14 +1696,6 @@ Press 1 for Default View</source>
 </context>
 <context>
     <name>QApplication</name>
-    <message>
-        <source>Font</source>
-        <translation type="vanished">Шрифт</translation>
-    </message>
-    <message>
-        <source>Selected Font: %1</source>
-        <translation type="vanished">Выбранный шрифт: %1</translation>
-    </message>
     <message>
         <location filename="../main.cpp" line="136"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
