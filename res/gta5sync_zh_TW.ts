@@ -884,7 +884,7 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="695"/>
         <source>Use Default Font (Restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>使用預設字體 (需重新啟動)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="707"/>
