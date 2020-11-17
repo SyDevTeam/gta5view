@@ -303,37 +303,37 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="303"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>進階</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="311"/>
         <source>Resolution:</source>
-        <translation type="unfinished"></translation>
+        <translation>解析度:</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="324"/>
         <source>Snapmatic resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Snapmatic 解析度</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="335"/>
         <source>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</source>
-        <translation type="unfinished"></translation>
+        <translation>避免壓縮來提高圖片品質，但可能會破壞 Snapmatic 運作</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="338"/>
         <source>Unlimited Buffer</source>
-        <translation type="unfinished"></translation>
+        <translation>無限緩衝</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="345"/>
-        <source>Import as-is, don&apos;t change the picture at all, guarantee to break Snapmatic unless you know what you doing</source>
-        <translation type="unfinished"></translation>
+        <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
+        <translation>除非你知道自己在幹什麼，否則修改圖片將使 Snapmatic 故障</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="348"/>
         <source>Import as-is</source>
-        <translation type="unfinished"></translation>
+        <translation>照原樣匯入</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="362"/>
@@ -1676,14 +1676,6 @@ Press 1 for Default View</source>
 </context>
 <context>
     <name>QApplication</name>
-    <message>
-        <source>Font</source>
-        <translation type="vanished">字體</translation>
-    </message>
-    <message>
-        <source>Selected Font: %1</source>
-        <translation type="vanished">選擇的字體: %1</translation>
-    </message>
     <message>
         <location filename="../main.cpp" line="136"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
