@@ -29,6 +29,7 @@
 #include <QApplication>
 #include <QJsonObject>
 #include <QFileDialog>
+#include <QFontDialog>
 #include <QMessageBox>
 #include <QStringList>
 #include <QClipboard>
@@ -744,11 +745,14 @@ void OptionsDialog::on_cmdExploreFolder_clicked()
 void OptionsDialog::on_cbDefaultStyle_toggled(bool checked)
 {
     ui->cbStyleList->setDisabled(checked);
+    ui->labStyle->setDisabled(checked);
 }
 
 void OptionsDialog::on_cbDefaultFont_toggled(bool checked)
 {
     ui->cbFont->setDisabled(checked);
+    ui->cmdFont->setDisabled(checked);
+    ui->labFont->setDisabled(checked);
 }
 
 void OptionsDialog::on_cmdCopyStatsID_clicked()
@@ -756,4 +760,19 @@ void OptionsDialog::on_cmdCopyStatsID_clicked()
 #ifdef GTA5SYNC_TELEMETRY
     QApplication::clipboard()->setText(Telemetry->getRegisteredID());
 #endif
+}
+
+void OptionsDialog::on_cbFont_currentFontChanged(const QFont &font)
+{
+    ui->cbFont->setFont(font);
+}
+
+void OptionsDialog::on_cmdFont_clicked()
+{
+    bool ok;
+    const QFont font = QFontDialog::getFont(&ok, ui->cbFont->currentFont(), this);
+    if (ok) {
+        ui->cbFont->setCurrentFont(font);
+        ui->cbFont->setFont(font);
+    }
 }

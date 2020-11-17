@@ -20,7 +20,7 @@
    <item>
     <widget class="QTabWidget" name="tabWidget">
      <property name="currentIndex">
-      <number>5</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tabProfile">
       <attribute name="title">
@@ -660,6 +660,9 @@
            <layout class="QHBoxLayout" name="hlStyle">
             <item>
              <widget class="QLabel" name="labStyle">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Style:</string>
               </property>
@@ -703,6 +706,9 @@
            <layout class="QHBoxLayout" name="hlFont">
             <item>
              <widget class="QLabel" name="labFont">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
               <property name="text">
                <string>Font:</string>
               </property>
@@ -718,6 +724,16 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="cmdFont">
+              <property name="enabled">
+               <bool>false</bool>
+              </property>
+              <property name="text">
+               <string notr="true">...</string>
               </property>
              </widget>
             </item>

@@ -272,10 +272,8 @@ Pictures and Savegames</source>
         <translation>Выберите цвет фона</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="177"/>
-        <location filename="../ImportDialog.ui" line="230"/>
         <source>...</source>
-        <translation>...</translation>
+        <translation type="vanished">...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="227"/>
@@ -299,11 +297,10 @@ Pictures and Savegames</source>
         <translation>Фоновая картинка: %1</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="240"/>
         <source>X</source>
         <translatorcomment>latin X
 </translatorcomment>
-        <translation>X</translation>
+        <translation type="vanished">X</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="268"/>
@@ -761,26 +758,26 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.ui" line="422"/>
-        <location filename="../OptionsDialog.cpp" line="628"/>
         <location filename="../OptionsDialog.cpp" line="629"/>
-        <location filename="../OptionsDialog.cpp" line="643"/>
+        <location filename="../OptionsDialog.cpp" line="630"/>
         <location filename="../OptionsDialog.cpp" line="644"/>
-        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="645"/>
         <location filename="../OptionsDialog.cpp" line="658"/>
+        <location filename="../OptionsDialog.cpp" line="659"/>
         <source>Found: %1</source>
         <translation>Найдено: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
         <location filename="../OptionsDialog.ui" line="429"/>
-        <location filename="../OptionsDialog.cpp" line="632"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="648"/>
-        <location filename="../OptionsDialog.cpp" line="652"/>
-        <location filename="../OptionsDialog.cpp" line="661"/>
-        <location filename="../OptionsDialog.cpp" line="665"/>
-        <location filename="../OptionsDialog.cpp" line="669"/>
-        <location filename="../OptionsDialog.cpp" line="673"/>
+        <location filename="../OptionsDialog.cpp" line="633"/>
+        <location filename="../OptionsDialog.cpp" line="637"/>
+        <location filename="../OptionsDialog.cpp" line="649"/>
+        <location filename="../OptionsDialog.cpp" line="653"/>
+        <location filename="../OptionsDialog.cpp" line="662"/>
+        <location filename="../OptionsDialog.cpp" line="666"/>
+        <location filename="../OptionsDialog.cpp" line="670"/>
+        <location filename="../OptionsDialog.cpp" line="674"/>
         <source>Language: %1</source>
         <translation>Язык: %1</translation>
     </message>
@@ -801,7 +798,7 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
-        <location filename="../OptionsDialog.cpp" line="590"/>
+        <location filename="../OptionsDialog.cpp" line="591"/>
         <source>Participate in %1 User Statistics</source>
         <translation>Участвовать в пользовательской статистике %1</translation>
     </message>
@@ -834,8 +831,8 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
-        <location filename="../OptionsDialog.cpp" line="606"/>
-        <location filename="../OptionsDialog.cpp" line="610"/>
+        <location filename="../OptionsDialog.cpp" line="607"/>
+        <location filename="../OptionsDialog.cpp" line="611"/>
         <source>Participation ID: %1</source>
         <translation>Номер участника: %1</translation>
     </message>
@@ -857,12 +854,12 @@ Y: %2</translation>
         <translation>Стиль</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="664"/>
+        <location filename="../OptionsDialog.ui" line="667"/>
         <source>Style:</source>
         <translation>Стиль:</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="689"/>
+        <location filename="../OptionsDialog.ui" line="692"/>
         <source>Font</source>
         <translation>Шрифт</translation>
     </message>
@@ -888,8 +885,8 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="611"/>
         <location filename="../OptionsDialog.ui" line="633"/>
-        <location filename="../OptionsDialog.cpp" line="223"/>
-        <location filename="../OptionsDialog.cpp" line="272"/>
+        <location filename="../OptionsDialog.cpp" line="224"/>
+        <location filename="../OptionsDialog.cpp" line="273"/>
         <source>Current: %1</source>
         <translation>Сейчас: %1</translation>
     </message>
@@ -899,127 +896,127 @@ Y: %2</translation>
         <translation>Использовать стандартный стиль (Перезапуск)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="695"/>
+        <location filename="../OptionsDialog.ui" line="698"/>
         <source>Use Default Font (Restart)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="707"/>
+        <location filename="../OptionsDialog.ui" line="713"/>
         <source>Font:</source>
         <translation>Шрифт:</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="770"/>
+        <location filename="../OptionsDialog.ui" line="786"/>
         <source>Apply changes</source>
         <translation>Применить изменения</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="773"/>
+        <location filename="../OptionsDialog.ui" line="789"/>
         <source>&amp;OK</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>&amp;ОК</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="786"/>
+        <location filename="../OptionsDialog.ui" line="802"/>
         <source>Discard changes</source>
         <translation>Отвергнуть изменения</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.ui" line="789"/>
+        <location filename="../OptionsDialog.ui" line="805"/>
         <source>&amp;Cancel</source>
         <extracomment>OK, Cancel, Apply</extracomment>
         <translation>От&amp;мена</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="175"/>
+        <location filename="../OptionsDialog.cpp" line="176"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation>Система</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="181"/>
+        <location filename="../OptionsDialog.cpp" line="182"/>
         <source>%1 (Game language)</source>
         <comment>Next closest language compared to the Game settings</comment>
         <translation>%1 (Язык игры)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="185"/>
-        <location filename="../OptionsDialog.cpp" line="188"/>
+        <location filename="../OptionsDialog.cpp" line="186"/>
+        <location filename="../OptionsDialog.cpp" line="189"/>
         <source>%1 (Closest to Interface)</source>
         <comment>Next closest language compared to the Interface</comment>
         <translation>%1 (Совпадает с интерфейсом)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="181"/>
-        <location filename="../OptionsDialog.cpp" line="185"/>
-        <location filename="../OptionsDialog.cpp" line="188"/>
+        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="186"/>
+        <location filename="../OptionsDialog.cpp" line="189"/>
         <source>Auto</source>
         <comment>Automatic language choice.</comment>
         <translation>Автоматически</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="175"/>
+        <location filename="../OptionsDialog.cpp" line="176"/>
         <source>%1 (Language priority)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation>%1 (Приоритетный язык)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="478"/>
+        <location filename="../OptionsDialog.cpp" line="479"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="478"/>
+        <location filename="../OptionsDialog.cpp" line="479"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>Другая папка будет загружена после перезапуска %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="591"/>
+        <location filename="../OptionsDialog.cpp" line="592"/>
         <source>View %1 User Statistics Online</source>
         <translation>Посмотреть пользовательскую статистику %1 онлайн</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="610"/>
+        <location filename="../OptionsDialog.cpp" line="611"/>
         <source>Not registered</source>
         <translation>Не зарегистрирован</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="628"/>
-        <location filename="../OptionsDialog.cpp" line="644"/>
-        <location filename="../OptionsDialog.cpp" line="657"/>
+        <location filename="../OptionsDialog.cpp" line="629"/>
+        <location filename="../OptionsDialog.cpp" line="645"/>
         <location filename="../OptionsDialog.cpp" line="658"/>
+        <location filename="../OptionsDialog.cpp" line="659"/>
         <source>Yes</source>
         <translation>Да</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="629"/>
-        <location filename="../OptionsDialog.cpp" line="643"/>
+        <location filename="../OptionsDialog.cpp" line="630"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
         <source>No</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="665"/>
+        <location filename="../OptionsDialog.cpp" line="637"/>
+        <location filename="../OptionsDialog.cpp" line="666"/>
         <source>OS defined</source>
         <translation>Настройка от ОС</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="652"/>
-        <location filename="../OptionsDialog.cpp" line="673"/>
+        <location filename="../OptionsDialog.cpp" line="653"/>
+        <location filename="../OptionsDialog.cpp" line="674"/>
         <source>Steam defined</source>
         <translation>Настройка от Steam</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="488"/>
+        <location filename="../OptionsDialog.cpp" line="489"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Нет профиля</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="496"/>
-        <location filename="../OptionsDialog.cpp" line="500"/>
-        <location filename="../OptionsDialog.cpp" line="502"/>
+        <location filename="../OptionsDialog.cpp" line="497"/>
+        <location filename="../OptionsDialog.cpp" line="501"/>
+        <location filename="../OptionsDialog.cpp" line="503"/>
         <source>Profile: %1</source>
         <translation>Профиль: %1</translation>
     </message>
@@ -2459,7 +2456,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="737"/>
+        <location filename="../OptionsDialog.cpp" line="738"/>
         <location filename="../UserInterface.cpp" line="197"/>
         <location filename="../UserInterface.cpp" line="735"/>
         <source>Select GTA V Folder...</source>

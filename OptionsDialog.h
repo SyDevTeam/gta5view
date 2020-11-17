@@ -49,6 +49,8 @@ private slots:
     void on_cbDefaultStyle_toggled(bool checked);
     void on_cbDefaultFont_toggled(bool checked);
     void on_cmdCopyStatsID_clicked();
+    void on_cbFont_currentFontChanged(const QFont &font);
+    void on_cmdFont_clicked();
 
 signals:
     void settingsApplied(int contentMode, bool languageChanged);
