@@ -176,27 +176,27 @@ Pictures and Savegames</source>
 <context>
     <name>ImageEditorDialog</name>
     <message>
-        <location filename="../ImportDialog.cpp" line="699"/>
+        <location filename="../ImportDialog.cpp" line="693"/>
         <source>Overwrite Image...</source>
         <translation>이미지 덮어쓰기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="701"/>
+        <location filename="../ImportDialog.cpp" line="695"/>
         <source>Apply changes</source>
         <translation>변경 사항 적용</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="700"/>
+        <location filename="../ImportDialog.cpp" line="694"/>
         <source>&amp;Overwrite</source>
         <translation>덮어쓰기(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="703"/>
+        <location filename="../ImportDialog.cpp" line="697"/>
         <source>Discard changes</source>
         <translation>변경 사항 무시</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="702"/>
+        <location filename="../ImportDialog.cpp" line="696"/>
         <source>&amp;Close</source>
         <translation>닫기(&amp;C)</translation>
     </message>
@@ -257,8 +257,8 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="150"/>
         <location filename="../ImportDialog.cpp" line="86"/>
-        <location filename="../ImportDialog.cpp" line="356"/>
-        <location filename="../ImportDialog.cpp" line="791"/>
+        <location filename="../ImportDialog.cpp" line="350"/>
+        <location filename="../ImportDialog.cpp" line="785"/>
         <source>Background Colour: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</source>
         <translation>배경 색상: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
@@ -274,8 +274,8 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="203"/>
         <location filename="../ImportDialog.cpp" line="87"/>
-        <location filename="../ImportDialog.cpp" line="362"/>
-        <location filename="../ImportDialog.cpp" line="871"/>
+        <location filename="../ImportDialog.cpp" line="356"/>
+        <location filename="../ImportDialog.cpp" line="865"/>
         <source>Background Image:</source>
         <translation>배경 이미지:</translation>
     </message>
@@ -400,112 +400,112 @@ Pictures and Savegames</source>
         <translation>사용자 지정 사진</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="358"/>
-        <location filename="../ImportDialog.cpp" line="856"/>
+        <location filename="../ImportDialog.cpp" line="352"/>
+        <location filename="../ImportDialog.cpp" line="850"/>
         <source>Background Image: %1</source>
         <translation>배경 이미지: %1</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="358"/>
+        <location filename="../ImportDialog.cpp" line="352"/>
         <source>Storage</source>
         <comment>Background Image: Storage</comment>
         <translatorcomment>배경 이미지: 저장됨</translatorcomment>
         <translation>저장됨</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="412"/>
+        <location filename="../ImportDialog.cpp" line="406"/>
         <source>Crop Picture...</source>
         <translation>사진 자르기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="454"/>
+        <location filename="../ImportDialog.cpp" line="448"/>
         <source>&amp;Crop</source>
         <translation>자르기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="455"/>
+        <location filename="../ImportDialog.cpp" line="449"/>
         <source>Crop Picture</source>
         <translation>사진 자르기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="542"/>
-        <location filename="../ImportDialog.cpp" line="553"/>
+        <location filename="../ImportDialog.cpp" line="536"/>
+        <location filename="../ImportDialog.cpp" line="547"/>
         <source>Load Settings...</source>
         <translation>설정 불러오기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="542"/>
-        <location filename="../ImportDialog.cpp" line="590"/>
+        <location filename="../ImportDialog.cpp" line="536"/>
+        <location filename="../ImportDialog.cpp" line="584"/>
         <source>Please import a new picture first</source>
         <translation>먼저 새 이미지를 가져오세요</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="547"/>
-        <location filename="../ImportDialog.cpp" line="557"/>
+        <location filename="../ImportDialog.cpp" line="541"/>
+        <location filename="../ImportDialog.cpp" line="551"/>
         <source>Default</source>
         <comment>Default as Default Profile</comment>
         <translatorcomment>기본 프로필로 기본 설정</translatorcomment>
         <translation>기본</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="548"/>
-        <location filename="../ImportDialog.cpp" line="549"/>
-        <location filename="../ImportDialog.cpp" line="550"/>
-        <location filename="../ImportDialog.cpp" line="551"/>
-        <location filename="../ImportDialog.cpp" line="552"/>
-        <location filename="../ImportDialog.cpp" line="561"/>
-        <location filename="../ImportDialog.cpp" line="565"/>
-        <location filename="../ImportDialog.cpp" line="569"/>
-        <location filename="../ImportDialog.cpp" line="573"/>
-        <location filename="../ImportDialog.cpp" line="577"/>
-        <location filename="../ImportDialog.cpp" line="595"/>
-        <location filename="../ImportDialog.cpp" line="596"/>
-        <location filename="../ImportDialog.cpp" line="597"/>
+        <location filename="../ImportDialog.cpp" line="542"/>
+        <location filename="../ImportDialog.cpp" line="543"/>
+        <location filename="../ImportDialog.cpp" line="544"/>
+        <location filename="../ImportDialog.cpp" line="545"/>
+        <location filename="../ImportDialog.cpp" line="546"/>
+        <location filename="../ImportDialog.cpp" line="555"/>
+        <location filename="../ImportDialog.cpp" line="559"/>
+        <location filename="../ImportDialog.cpp" line="563"/>
+        <location filename="../ImportDialog.cpp" line="567"/>
+        <location filename="../ImportDialog.cpp" line="571"/>
+        <location filename="../ImportDialog.cpp" line="589"/>
+        <location filename="../ImportDialog.cpp" line="590"/>
+        <location filename="../ImportDialog.cpp" line="591"/>
+        <location filename="../ImportDialog.cpp" line="592"/>
+        <location filename="../ImportDialog.cpp" line="593"/>
         <location filename="../ImportDialog.cpp" line="598"/>
-        <location filename="../ImportDialog.cpp" line="599"/>
-        <location filename="../ImportDialog.cpp" line="604"/>
-        <location filename="../ImportDialog.cpp" line="608"/>
-        <location filename="../ImportDialog.cpp" line="612"/>
-        <location filename="../ImportDialog.cpp" line="616"/>
-        <location filename="../ImportDialog.cpp" line="620"/>
+        <location filename="../ImportDialog.cpp" line="602"/>
+        <location filename="../ImportDialog.cpp" line="606"/>
+        <location filename="../ImportDialog.cpp" line="610"/>
+        <location filename="../ImportDialog.cpp" line="614"/>
         <source>Profile %1</source>
         <comment>Profile %1 as Profile 1</comment>
         <translatorcomment>%1을 프로필 1로 지정합니다.</translatorcomment>
         <translation>프로필 %1</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="553"/>
-        <location filename="../ImportDialog.cpp" line="600"/>
+        <location filename="../ImportDialog.cpp" line="547"/>
+        <location filename="../ImportDialog.cpp" line="594"/>
         <source>Please select your settings profile</source>
         <translation>설정 프로필을 선택하세요</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="590"/>
-        <location filename="../ImportDialog.cpp" line="600"/>
+        <location filename="../ImportDialog.cpp" line="584"/>
+        <location filename="../ImportDialog.cpp" line="594"/>
         <source>Save Settings...</source>
         <translation>설정 저장</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="741"/>
-        <location filename="../ImportDialog.cpp" line="932"/>
+        <location filename="../ImportDialog.cpp" line="735"/>
+        <location filename="../ImportDialog.cpp" line="926"/>
         <source>Snapmatic Avatar Zone</source>
         <translation>스냅매틱 아바타 영역</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="741"/>
-        <location filename="../ImportDialog.cpp" line="932"/>
+        <location filename="../ImportDialog.cpp" line="735"/>
+        <location filename="../ImportDialog.cpp" line="926"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
         <translation>아바타 구역 밖에서 네모난 이미지를 정말 사용합니까?
 아바타로 사용하려는 경우 이미지가 분리됩니다!</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="787"/>
+        <location filename="../ImportDialog.cpp" line="781"/>
         <source>Select Colour...</source>
         <translation>색상 선택</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="856"/>
+        <location filename="../ImportDialog.cpp" line="850"/>
         <source>File</source>
         <comment>Background Image: File</comment>
         <translatorcomment>배경 이미지: 파일</translatorcomment>
@@ -1347,8 +1347,8 @@ Press 1 for Default View</source>
         <translation>%2 파일 중 %1 파일을 내보냅니다.</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="483"/>
-        <location filename="../ImportDialog.cpp" line="810"/>
+        <location filename="../ImportDialog.cpp" line="477"/>
+        <location filename="../ImportDialog.cpp" line="804"/>
         <location filename="../ProfileInterface.cpp" line="496"/>
         <location filename="../ProfileInterface.cpp" line="497"/>
         <location filename="../ProfileInterface.cpp" line="541"/>
@@ -1370,40 +1370,40 @@ Press 1 for Default View</source>
         <translation>가져오기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="484"/>
-        <location filename="../ImportDialog.cpp" line="515"/>
-        <location filename="../ImportDialog.cpp" line="524"/>
-        <location filename="../ImportDialog.cpp" line="811"/>
-        <location filename="../ImportDialog.cpp" line="842"/>
-        <location filename="../ImportDialog.cpp" line="851"/>
+        <location filename="../ImportDialog.cpp" line="478"/>
+        <location filename="../ImportDialog.cpp" line="509"/>
+        <location filename="../ImportDialog.cpp" line="518"/>
+        <location filename="../ImportDialog.cpp" line="805"/>
+        <location filename="../ImportDialog.cpp" line="836"/>
+        <location filename="../ImportDialog.cpp" line="845"/>
         <source>Import</source>
         <translation>가져오기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="494"/>
-        <location filename="../ImportDialog.cpp" line="821"/>
+        <location filename="../ImportDialog.cpp" line="488"/>
+        <location filename="../ImportDialog.cpp" line="815"/>
         <location filename="../ProfileInterface.cpp" line="516"/>
         <source>All image files (%1)</source>
         <translation>모든 이미지 파일 (%1)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="495"/>
-        <location filename="../ImportDialog.cpp" line="822"/>
+        <location filename="../ImportDialog.cpp" line="489"/>
+        <location filename="../ImportDialog.cpp" line="816"/>
         <location filename="../ProfileInterface.cpp" line="517"/>
         <location filename="../UserInterface.cpp" line="477"/>
         <source>All files (**)</source>
         <translation>모든 파일 (**)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="515"/>
-        <location filename="../ImportDialog.cpp" line="842"/>
+        <location filename="../ImportDialog.cpp" line="509"/>
+        <location filename="../ImportDialog.cpp" line="836"/>
         <location filename="../ProfileInterface.cpp" line="786"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
         <translation>파일을 열 수 없으므로 %1을 가져올 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.cpp" line="524"/>
-        <location filename="../ImportDialog.cpp" line="851"/>
+        <location filename="../ImportDialog.cpp" line="518"/>
+        <location filename="../ImportDialog.cpp" line="845"/>
         <location filename="../ProfileInterface.cpp" line="796"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
         <translation>파일을 구문 분석할 수 없으므로 %1을 가져올 수 없습니다.</translation>

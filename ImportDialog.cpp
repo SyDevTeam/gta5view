@@ -266,41 +266,35 @@ void ImportDialog::processWatermark(QPainter *snapmaticPainter)
 {
     bool blackWatermark = false;
     bool redWatermark = false;
-    if (selectedColour.red() > 127)
-    {
-        if (selectedColour.green() > 127 || selectedColour.blue() > 127)
-        {
+    if (selectedColour.red() > 127) {
+        if (selectedColour.green() > 127 || selectedColour.blue() > 127) {
             redWatermark = true;
         }
     }
-    else
-    {
+    else {
         redWatermark = true;
     }
-    if (selectedColour.lightness() > 127)
-    {
+    if (selectedColour.lightness() > 127) {
         blackWatermark = true;
     }
     // draw watermark
-    if (redWatermark)
-    {
-        snapmaticPainter->drawImage(0, 0, QImage(":/img/watermark_2r.png"));
+    if (redWatermark) {
+        const QImage viewWatermark = QImage(":/img/watermark_2r.png");
+        snapmaticPainter->drawImage(snapmaticResolution.width() - viewWatermark.width(), 0, viewWatermark);
     }
     else
     {
         QImage viewWatermark = QImage(":/img/watermark_2b.png");
-        if (!blackWatermark)
-        {
+        if (!blackWatermark) {
             viewWatermark.invertPixels(QImage::InvertRgb);
         }
-        snapmaticPainter->drawImage(0, 0, viewWatermark);
+        snapmaticPainter->drawImage(snapmaticResolution.width() - viewWatermark.width(), 0, viewWatermark);
     }
     QImage textWatermark = QImage(":/img/watermark_1b.png");
-    if (!blackWatermark)
-    {
+    if (!blackWatermark) {
         textWatermark.invertPixels(QImage::InvertRgb);
     }
-    snapmaticPainter->drawImage(0, 0, textWatermark);
+    snapmaticPainter->drawImage(snapmaticResolution.width() - textWatermark.width(), 0, textWatermark);
 }
 
 void ImportDialog::processSettings(QString settingsProfile, bool setDefault)
