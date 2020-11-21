@@ -3,6 +3,7 @@ Type=Application
 Name=gta5view
 Comment=Open and edit GTA V profiles
 Comment[de]=GTA V Profile öffnen und bearbeiten
+Comment[ru]=Просмотрщик и редактор профилей GTA V
 Categories=Qt;Utility;FileTools
 Exec=gta5view
 Icon=de.syping.gta5view
