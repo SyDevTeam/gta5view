@@ -206,14 +206,16 @@ void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePa
     sgdWidget->installEventFilter(this);
     widgets[sgdWidget] = "SGD" % QFileInfo(savegamePath).fileName();
     savegames += savegame;
-    if (selectedWidgts != 0 || contentMode == 2) { sgdWidget->setSelectionMode(true); }
+    if (selectedWidgts != 0 || contentMode == 2)
+        sgdWidget->setSelectionMode(true);
     QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(savegameDeleted_event()));
     QObject::connect(sgdWidget, SIGNAL(widgetSelected()), this, SLOT(profileWidgetSelected()));
     QObject::connect(sgdWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
     QObject::connect(sgdWidget, SIGNAL(allWidgetsSelected()), this, SLOT(selectAllWidgets()));
     QObject::connect(sgdWidget, SIGNAL(allWidgetsDeselected()), this, SLOT(deselectAllWidgets()));
     QObject::connect(sgdWidget, SIGNAL(contextMenuTriggered(QContextMenuEvent*)), this, SLOT(contextMenuTriggeredSGD(QContextMenuEvent*)));
-    if (inserted) { insertSavegameIPI(sgdWidget); }
+    if (inserted)
+        insertSavegameIPI(sgdWidget);
 }
 
 void ProfileInterface::pictureLoaded_event(SnapmaticPicture *picture)
@@ -236,7 +238,8 @@ void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, bool inserted)
     picWidget->installEventFilter(this);
     widgets[picWidget] = "PIC" % picture->getPictureSortStr();
     pictures += picture;
-    if (selectedWidgts != 0 || contentMode == 2) { picWidget->setSelectionMode(true); }
+    if (selectedWidgts != 0 || contentMode == 2)
+        picWidget->setSelectionMode(true);
     QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(pictureDeleted_event()));
     QObject::connect(picWidget, SIGNAL(widgetSelected()), this, SLOT(profileWidgetSelected()));
     QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
@@ -245,7 +248,8 @@ void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, bool inserted)
     QObject::connect(picWidget, SIGNAL(nextPictureRequested(QWidget*)), this, SLOT(dialogNextPictureRequested(QWidget*)));
     QObject::connect(picWidget, SIGNAL(previousPictureRequested(QWidget*)), this, SLOT(dialogPreviousPictureRequested(QWidget*)));
     QObject::connect(picWidget, SIGNAL(contextMenuTriggered(QContextMenuEvent*)), this, SLOT(contextMenuTriggeredPIC(QContextMenuEvent*)));
-    if (inserted) { insertSnapmaticIPI(picWidget); }
+    if (inserted)
+        insertSnapmaticIPI(picWidget);
 }
 
 void ProfileInterface::loadingProgress(int value, int maximum)
@@ -1508,6 +1512,26 @@ void ProfileInterface::deleteSelected()
     }
 }
 
+void ProfileInterface::massToolQualify()
+{
+    massTool(MassTool::Qualify);
+}
+
+void ProfileInterface::massToolPlayers()
+{
+    massTool(MassTool::Players);
+}
+
+void ProfileInterface::massToolCrew()
+{
+    massTool(MassTool::Crew);
+}
+
+void ProfileInterface::massToolTitle()
+{
+    massTool(MassTool::Title);
+}
+
 void ProfileInterface::importFiles()
 {
     on_cmdImport_clicked();
@@ -1630,85 +1654,146 @@ int ProfileInterface::selectedWidgets()
 void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
 {
     SnapmaticWidget *picWidget = qobject_cast<SnapmaticWidget*>(sender());
-    if (picWidget != previousWidget)
-    {
-        if (previousWidget != nullptr)
-        {
+    if (picWidget != previousWidget) {
+        if (previousWidget != nullptr) {
             previousWidget->setStyleSheet(QLatin1String(""));
         }
         picWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
         previousWidget = picWidget;
     }
     QMenu contextMenu(picWidget);
-    QMenu editMenu(SnapmaticWidget::tr("Edi&t"), picWidget);
-    if (picWidget->isHidden())
-    {
-        editMenu.addAction(SnapmaticWidget::tr("Show &In-game"), picWidget, SLOT(makePictureVisibleSlot()));
+    const int selectedCount = selectedWidgets();
+    if (contentMode < 20 || selectedCount <= 1) {
+        QMenu editMenu(SnapmaticWidget::tr("Edi&t"), picWidget);
+        if (picWidget->isHidden()) {
+            editMenu.addAction(SnapmaticWidget::tr("Show &In-game"), picWidget, SLOT(makePictureVisibleSlot()));
+        }
+        else {
+            editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), picWidget, SLOT(makePictureHiddenSlot()));
+        }
+        editMenu.addAction(PictureDialog::tr("&Edit Properties..."), picWidget, SLOT(editSnapmaticProperties()));
+        editMenu.addAction(PictureDialog::tr("&Overwrite Image..."), picWidget, SLOT(editSnapmaticImage()));
+        editMenu.addSeparator();
+        editMenu.addAction(PictureDialog::tr("Open &Map Viewer..."), picWidget, SLOT(openMapViewer()));
+        editMenu.addAction(PictureDialog::tr("Open &JSON Editor..."), picWidget, SLOT(editSnapmaticRawJson()));
+        QMenu exportMenu(SnapmaticWidget::tr("&Export"), this);
+        exportMenu.addAction(PictureDialog::tr("Export as &Picture..."), picWidget, SLOT(on_cmdExport_clicked()));
+        exportMenu.addAction(PictureDialog::tr("Export as &Snapmatic..."), picWidget, SLOT(on_cmdCopy_clicked()));
+        contextMenu.addAction(SnapmaticWidget::tr("&View"), picWidget, SLOT(on_cmdView_clicked()));
+        contextMenu.addMenu(&editMenu);
+        contextMenu.addMenu(&exportMenu);
+        contextMenu.addAction(SnapmaticWidget::tr("&Remove"), picWidget, SLOT(on_cmdDelete_clicked()));
+        contextMenu.addSeparator();
+        if (!picWidget->isSelected())
+            contextMenu.addAction(SnapmaticWidget::tr("&Select"), picWidget, SLOT(pictureSelected()));
+        else {
+            contextMenu.addAction(SnapmaticWidget::tr("&Deselect"), picWidget, SLOT(pictureSelected()));
+        }
+        if (selectedCount != widgets.count()) {
+            contextMenu.addAction(SnapmaticWidget::tr("Select &All"), picWidget, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
+        }
+        if (selectedCount != 0) {
+            contextMenu.addAction(SnapmaticWidget::tr("&Deselect All"), picWidget, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        }
+        contextMenuOpened = true;
+        contextMenu.exec(ev->globalPos());
+        contextMenuOpened = false;
+        QTimer::singleShot(0, this, SLOT(hoverProfileWidgetCheck()));
     }
-    else
-    {
-        editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), picWidget, SLOT(makePictureHiddenSlot()));
+    else {
+        QMenu editMenu(SnapmaticWidget::tr("Edi&t"), picWidget);
+        editMenu.addAction(QApplication::translate("UserInterface", "&Qualify as Avatar"), this, SLOT(massToolQualify()), QKeySequence::fromString("Shift+Q"));
+        editMenu.addAction(QApplication::translate("UserInterface", "Change &Players..."), this, SLOT(massToolPlayers()), QKeySequence::fromString("Shift+P"));
+        editMenu.addAction(QApplication::translate("UserInterface", "Change &Crew..."), this, SLOT(massToolCrew()), QKeySequence::fromString("Shift+C"));
+        editMenu.addAction(QApplication::translate("UserInterface", "Change &Title..."), this, SLOT(massToolTitle()), QKeySequence::fromString("Shift+T"));
+        editMenu.addSeparator();
+        editMenu.addAction(SnapmaticWidget::tr("Show &In-game"), this, SLOT(enableSelected()), QKeySequence::fromString("Shift+E"));
+        editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), this, SLOT(disableSelected()), QKeySequence::fromString("Shift+D"));
+        contextMenu.addMenu(&editMenu);
+        contextMenu.addAction(SnapmaticWidget::tr("&Export"), this, SLOT(exportSelected()));
+        contextMenu.addAction(SnapmaticWidget::tr("&Remove"), this, SLOT(deleteSelected()));
+        contextMenu.addSeparator();
+        if (!picWidget->isSelected())
+            contextMenu.addAction(SnapmaticWidget::tr("&Select"), picWidget, SLOT(pictureSelected()));
+        else {
+            contextMenu.addAction(SnapmaticWidget::tr("&Deselect"), picWidget, SLOT(pictureSelected()));
+        }
+        if (selectedCount != widgets.count()) {
+            contextMenu.addAction(SnapmaticWidget::tr("Select &All"), picWidget, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
+        }
+        if (selectedCount != 0) {
+            contextMenu.addAction(SnapmaticWidget::tr("&Deselect All"), picWidget, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        }
+        contextMenuOpened = true;
+        contextMenu.exec(ev->globalPos());
+        contextMenuOpened = false;
+        QTimer::singleShot(0, this, SLOT(hoverProfileWidgetCheck()));
     }
-    editMenu.addAction(PictureDialog::tr("&Edit Properties..."), picWidget, SLOT(editSnapmaticProperties()));
-    editMenu.addAction(PictureDialog::tr("&Overwrite Image..."), picWidget, SLOT(editSnapmaticImage()));
-    editMenu.addSeparator();
-    editMenu.addAction(PictureDialog::tr("Open &Map Viewer..."), picWidget, SLOT(openMapViewer()));
-    editMenu.addAction(PictureDialog::tr("Open &JSON Editor..."), picWidget, SLOT(editSnapmaticRawJson()));
-    QMenu exportMenu(SnapmaticWidget::tr("&Export"), this);
-    exportMenu.addAction(PictureDialog::tr("Export as &Picture..."), picWidget, SLOT(on_cmdExport_clicked()));
-    exportMenu.addAction(PictureDialog::tr("Export as &Snapmatic..."), picWidget, SLOT(on_cmdCopy_clicked()));
-    contextMenu.addAction(SnapmaticWidget::tr("&View"), picWidget, SLOT(on_cmdView_clicked()));
-    contextMenu.addMenu(&editMenu);
-    contextMenu.addMenu(&exportMenu);
-    contextMenu.addAction(SnapmaticWidget::tr("&Remove"), picWidget, SLOT(on_cmdDelete_clicked()));
-    contextMenu.addSeparator();
-    if (!picWidget->isSelected()) { contextMenu.addAction(SnapmaticWidget::tr("&Select"), picWidget, SLOT(pictureSelected())); }
-    if (picWidget->isSelected()) { contextMenu.addAction(SnapmaticWidget::tr("&Deselect"), picWidget, SLOT(pictureSelected())); }
-    if (selectedWidgets() != widgets.count())
-    {
-        contextMenu.addAction(SnapmaticWidget::tr("Select &All"), picWidget, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
-    }
-    if (selectedWidgets() != 0)
-    {
-        contextMenu.addAction(SnapmaticWidget::tr("&Deselect All"), picWidget, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
-    }
-    contextMenuOpened = true;
-    contextMenu.exec(ev->globalPos());
-    contextMenuOpened = false;
-    QTimer::singleShot(0, this, SLOT(hoverProfileWidgetCheck()));
 }
 
 void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
 {
     SavegameWidget *sgdWidget = qobject_cast<SavegameWidget*>(sender());
-    if (sgdWidget != previousWidget)
-    {
-        if (previousWidget != nullptr)
-        {
+    if (sgdWidget != previousWidget) {
+        if (previousWidget != nullptr) {
             previousWidget->setStyleSheet(QLatin1String(""));
         }
         sgdWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color:palette(highlight)}QLabel#labSavegameStr{color:palette(highlighted-text)}"));
         previousWidget = sgdWidget;
     }
     QMenu contextMenu(sgdWidget);
-    contextMenu.addAction(SavegameWidget::tr("&View"), sgdWidget, SLOT(on_cmdView_clicked()));
-    contextMenu.addAction(SavegameWidget::tr("&Export"), sgdWidget, SLOT(on_cmdCopy_clicked()));
-    contextMenu.addAction(SavegameWidget::tr("&Remove"), sgdWidget, SLOT(on_cmdDelete_clicked()));
-    contextMenu.addSeparator();
-    if (!sgdWidget->isSelected()) { contextMenu.addAction(SavegameWidget::tr("&Select"), sgdWidget, SLOT(savegameSelected())); }
-    if (sgdWidget->isSelected()) { contextMenu.addAction(SavegameWidget::tr("&Deselect"), sgdWidget, SLOT(savegameSelected())); }
-    if (selectedWidgets() != widgets.count())
-    {
-        contextMenu.addAction(SavegameWidget::tr("Select &All"), sgdWidget, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
+    const int selectedCount = selectedWidgets();
+    if (contentMode < 20 || selectedCount <= 1) {
+        contextMenu.addAction(SavegameWidget::tr("&View"), sgdWidget, SLOT(on_cmdView_clicked()));
+        contextMenu.addAction(SavegameWidget::tr("&Export"), sgdWidget, SLOT(on_cmdCopy_clicked()));
+        contextMenu.addAction(SavegameWidget::tr("&Remove"), sgdWidget, SLOT(on_cmdDelete_clicked()));
+        contextMenu.addSeparator();
+        if (!sgdWidget->isSelected()) {
+            contextMenu.addAction(SavegameWidget::tr("&Select"), sgdWidget, SLOT(savegameSelected()));
+        }
+        else {
+            contextMenu.addAction(SavegameWidget::tr("&Deselect"), sgdWidget, SLOT(savegameSelected()));
+        }
+        if (selectedCount != widgets.count()) {
+            contextMenu.addAction(SavegameWidget::tr("Select &All"), sgdWidget, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
+        }
+        if (selectedCount != 0) {
+            contextMenu.addAction(SavegameWidget::tr("&Deselect All"), sgdWidget, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        }
+        contextMenuOpened = true;
+        contextMenu.exec(ev->globalPos());
+        contextMenuOpened = false;
+        QTimer::singleShot(0, this, SLOT(hoverProfileWidgetCheck()));
     }
-    if (selectedWidgets() != 0)
-    {
-        contextMenu.addAction(SavegameWidget::tr("&Deselect All"), sgdWidget, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+    else {
+        QMenu editMenu(SnapmaticWidget::tr("Edi&t"), sgdWidget);
+        editMenu.addAction(QApplication::translate("UserInterface", "&Qualify as Avatar"), this, SLOT(massToolQualify()), QKeySequence::fromString("Shift+Q"));
+        editMenu.addAction(QApplication::translate("UserInterface", "Change &Players..."), this, SLOT(massToolPlayers()), QKeySequence::fromString("Shift+P"));
+        editMenu.addAction(QApplication::translate("UserInterface", "Change &Crew..."), this, SLOT(massToolCrew()), QKeySequence::fromString("Shift+C"));
+        editMenu.addAction(QApplication::translate("UserInterface", "Change &Title..."), this, SLOT(massToolTitle()), QKeySequence::fromString("Shift+T"));
+        editMenu.addSeparator();
+        editMenu.addAction(SnapmaticWidget::tr("Show &In-game"), this, SLOT(enableSelected()), QKeySequence::fromString("Shift+E"));
+        editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), this, SLOT(disableSelected()), QKeySequence::fromString("Shift+D"));
+        contextMenu.addMenu(&editMenu);
+        contextMenu.addAction(SavegameWidget::tr("&Export"), this, SLOT(exportSelected()));
+        contextMenu.addAction(SavegameWidget::tr("&Remove"), this, SLOT(deleteSelected()));
+        contextMenu.addSeparator();
+        if (!sgdWidget->isSelected())
+            contextMenu.addAction(SavegameWidget::tr("&Select"), sgdWidget, SLOT(savegameSelected()));
+        else {
+            contextMenu.addAction(SavegameWidget::tr("&Deselect"), sgdWidget, SLOT(savegameSelected()));
+        }
+        if (selectedCount != widgets.count()) {
+            contextMenu.addAction(SavegameWidget::tr("Select &All"), sgdWidget, SLOT(selectAllWidgets()), QKeySequence::fromString("Ctrl+A"));
+        }
+        if (selectedCount != 0) {
+            contextMenu.addAction(SavegameWidget::tr("&Deselect All"), sgdWidget, SLOT(deselectAllWidgets()), QKeySequence::fromString("Ctrl+D"));
+        }
+        contextMenuOpened = true;
+        contextMenu.exec(ev->globalPos());
+        contextMenuOpened = false;
+        QTimer::singleShot(0, this, SLOT(hoverProfileWidgetCheck()));
     }
-    contextMenuOpened = true;
-    contextMenu.exec(ev->globalPos());
-    contextMenuOpened = false;
-    QTimer::singleShot(0, this, SLOT(hoverProfileWidgetCheck()));
 }
 
 void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)

@@ -52,8 +52,6 @@ public:
     void settingsApplied(int contentMode, bool languageChanged);
     void setupProfileInterface();
     void massTool(MassTool tool);
-    void disableSelected();
-    void enableSelected();
     int selectedWidgets();
     void retranslateUi();
     ~ProfileInterface();
@@ -64,6 +62,8 @@ public slots:
     void hoverProfileWidgetCheck();
     void selectAllWidgets();
     void deselectAllWidgets();
+    void disableSelected();
+    void enableSelected();
     void exportSelected();
     void deleteSelected();
     void updatePalette();
@@ -81,6 +81,10 @@ private slots:
     void profileLoaded_p();
     void profileWidgetSelected();
     void profileWidgetDeselected();
+    void massToolQualify();
+    void massToolPlayers();
+    void massToolCrew();
+    void massToolTitle();
     void dialogNextPictureRequested(QWidget *dialog);
     void dialogPreviousPictureRequested(QWidget *dialog);
     void on_saProfileContent_dropped(const QMimeData *mimeData);

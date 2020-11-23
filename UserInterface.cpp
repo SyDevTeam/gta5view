@@ -67,7 +67,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->cmdClose->setToolTip(ui->cmdClose->toolTip().arg(GTA5SYNC_APPSTR));
     defaultWindowTitle = tr("%2 - %1").arg("%1", GTA5SYNC_APPSTR);
 
-    this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
+    setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     QString appVersion = GTA5SYNC_APPVER;
 #ifndef GTA5SYNC_BUILDTYPE_REL
 #ifdef GTA5SYNC_COMMIT
@@ -218,7 +218,7 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
 
     bool contentModeOk;
     contentMode = settings.value("ContentMode", 0).toInt(&contentModeOk);
-    if (contentMode != 0 && contentMode != 1 && contentMode != 2)
+    if (contentMode != 0 && contentMode != 1 && contentMode != 2 && contentMode != 10 && contentMode != 11 && contentMode != 20 && contentMode != 21)
     {
         contentMode = 0;
     }
@@ -311,7 +311,7 @@ void UserInterface::openProfile(const QString &profileName_)
     profileUI->setupProfileInterface();
     QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));
     QObject::connect(profileUI, SIGNAL(profileLoaded()), this, SLOT(profileLoaded()));
-    this->setWindowTitle(defaultWindowTitle.arg(profileName));
+    setWindowTitle(defaultWindowTitle.arg(profileName));
 }
 
 void UserInterface::closeProfile()
@@ -320,7 +320,7 @@ void UserInterface::closeProfile()
     {
         closeProfile_p();
     }
-    this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
+    setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
 }
 
 void UserInterface::closeProfile_p()
@@ -361,7 +361,7 @@ UserInterface::~UserInterface()
 
 void UserInterface::on_actionExit_triggered()
 {
-    this->close();
+    close();
 }
 
 void UserInterface::on_actionSelect_profile_triggered()
@@ -573,7 +573,8 @@ void UserInterface::openSnapmaticFile(SnapmaticPicture *picture)
     picDialog.setModal(true);
 
     int crewID = picture->getSnapmaticProperties().crewID;
-    if (crewID != 0) { crewDB->addCrew(crewID); }
+    if (crewID != 0)
+        crewDB->addCrew(crewID);
 
     QObject::connect(threadDB, SIGNAL(crewNameUpdated()), &picDialog, SLOT(crewNameUpdated()));
     QObject::connect(threadDB, SIGNAL(playerNameUpdated()), &picDialog, SLOT(playerNameUpdated()));
@@ -775,11 +776,11 @@ void UserInterface::retranslateUi()
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
     if (profileOpen)
     {
-        this->setWindowTitle(defaultWindowTitle.arg(profileName));
+        setWindowTitle(defaultWindowTitle.arg(profileName));
     }
     else
     {
-        this->setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
+        setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     }
 }
 

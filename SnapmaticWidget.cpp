@@ -216,7 +216,8 @@ void SnapmaticWidget::mouseReleaseEvent(QMouseEvent *ev)
     }
     else
     {
-        if (getContentMode() == 0 && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
+        const int contentMode = getContentMode();
+        if ((contentMode == 0 || contentMode == 10 || contentMode == 20) && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
         {
             if (ev->modifiers().testFlag(Qt::ShiftModifier))
             {
@@ -227,7 +228,7 @@ void SnapmaticWidget::mouseReleaseEvent(QMouseEvent *ev)
                 on_cmdView_clicked();
             }
         }
-        else if (!ui->cbSelected->isVisible() && getContentMode() == 1 && ev->button() == Qt::LeftButton && ev->modifiers().testFlag(Qt::ShiftModifier))
+        else if (!ui->cbSelected->isVisible() && (contentMode == 1 || contentMode == 11 || contentMode == 21) && ev->button() == Qt::LeftButton && ev->modifiers().testFlag(Qt::ShiftModifier))
         {
             ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
         }
@@ -238,7 +239,8 @@ void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 {
     ProfileWidget::mouseDoubleClickEvent(ev);
 
-    if (!ui->cbSelected->isVisible() && getContentMode() == 1 && ev->button() == Qt::LeftButton)
+    const int contentMode = getContentMode();
+    if (!ui->cbSelected->isVisible() && (contentMode == 1 || contentMode == 11 || contentMode == 21) && ev->button() == Qt::LeftButton)
     {
         on_cmdView_clicked();
     }
