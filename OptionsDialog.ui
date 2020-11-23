@@ -34,9 +34,9 @@
          </property>
          <layout class="QVBoxLayout" name="vlProfileContentMode">
           <item>
-           <widget class="QRadioButton" name="rbOpenWithSC">
+           <widget class="QRadioButton" name="rbModern">
             <property name="text">
-             <string>Open with Singleclick</string>
+             <string notr="true">%1 1.9+</string>
             </property>
             <property name="checked">
              <bool>true</bool>
@@ -44,16 +44,16 @@
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="rbOpenWithDC">
+           <widget class="QRadioButton" name="rbClassic">
             <property name="text">
-             <string>Open with Doubleclick</string>
+             <string notr="true">%1 1.0-1.8</string>
             </property>
            </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="rbSelectWithSC">
+           <widget class="QCheckBox" name="cbDoubleclick">
             <property name="text">
-             <string>Select with Singleclick</string>
+             <string>Open with Doubleclick</string>
             </property>
            </widget>
           </item>

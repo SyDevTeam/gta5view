@@ -66,6 +66,7 @@ public slots:
     void enableSelected();
     void exportSelected();
     void deleteSelected();
+    void deleteSelectedR();
     void updatePalette();
     void importFiles();
 
@@ -128,6 +129,7 @@ private:
     void savegameLoaded(SavegameData *savegame, QString savegamePath, bool inserted);
     void savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteEmited = false);
     void pictureDeleted(SnapmaticWidget *picWidget, bool isRemoteEmited = false);
+    void deleteSelectedL(bool isRemoteEmited = false);
     void insertSnapmaticIPI(QWidget *widget);
     void insertSavegameIPI(QWidget *widget);
     void sortingProfileInterface();

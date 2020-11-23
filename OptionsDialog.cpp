@@ -124,6 +124,8 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     resize(435 * screenRatio, 405 * screenRatio);
 #endif
 
+    ui->rbModern->setText(ui->rbModern->text().arg(GTA5SYNC_APPSTR));
+    ui->rbClassic->setText(ui->rbClassic->text().arg(GTA5SYNC_APPSTR));
     setWindowTitle(windowTitle().arg(GTA5SYNC_APPSTR));
 }
 
@@ -285,14 +287,19 @@ void OptionsDialog::setupRadioButtons()
         switch (contentMode)
         {
         case 0:
-            ui->rbOpenWithSC->setChecked(true);
+        case 20:
+            ui->rbModern->setChecked(true);
             break;
         case 1:
-            ui->rbOpenWithDC->setChecked(true);
-            break;
         case 2:
-            ui->rbSelectWithSC->setChecked(true);
+        case 21:
+            ui->rbModern->setChecked(true);
+            ui->cbDoubleclick->setChecked(true);
             break;
+        case 10:
+            ui->rbClassic->setChecked(true);
+        case 11:
+            ui->cbDoubleclick->setChecked(true);
         }
     }
 }
@@ -364,18 +371,18 @@ void OptionsDialog::applySettings()
     settings->endGroup();
 
     settings->beginGroup("Profile");
-    int newContentMode = 0;
-    if (ui->rbOpenWithSC->isChecked())
+    int newContentMode = 20;
+    if (ui->rbModern->isChecked())
     {
-        newContentMode = 0;
+        newContentMode = 20;
     }
-    else if (ui->rbOpenWithDC->isChecked())
+    else if (ui->rbClassic->isChecked())
     {
-        newContentMode = 1;
+        newContentMode = 10;
     }
-    else if (ui->rbSelectWithSC->isChecked())
+    if (ui->cbDoubleclick->isChecked())
     {
-        newContentMode = 2;
+        newContentMode++;
     }
     settings->setValue("ContentMode", newContentMode);
 #if QT_VERSION >= 0x050000

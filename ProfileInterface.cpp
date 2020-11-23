@@ -1470,7 +1470,7 @@ void ProfileInterface::exportSelected()
     }
 }
 
-void ProfileInterface::deleteSelected()
+void ProfileInterface::deleteSelectedL(bool isRemoteEmited)
 {
     if (selectedWidgts != 0)
     {
@@ -1485,7 +1485,7 @@ void ProfileInterface::deleteSelected()
                         SnapmaticWidget *picWidget = qobject_cast<SnapmaticWidget*>(widget);
                         if (picWidget->getPicture()->deletePictureFile())
                         {
-                            pictureDeleted(picWidget);
+                            pictureDeleted(picWidget, isRemoteEmited);
                         }
                     }
                     else if (widget->getWidgetType() == "SavegameWidget")
@@ -1495,7 +1495,7 @@ void ProfileInterface::deleteSelected()
                         QString fileName = savegame->getSavegameFileName();
                         if (!QFile::exists(fileName) || QFile::remove(fileName))
                         {
-                            savegameDeleted(sgdWidget);
+                            savegameDeleted(sgdWidget, isRemoteEmited);
                         }
                     }
                 }
@@ -1510,6 +1510,16 @@ void ProfileInterface::deleteSelected()
     {
         QMessageBox::information(this, tr("Remove selected"), tr("No Snapmatic pictures or Savegames files are selected"));
     }
+}
+
+void ProfileInterface::deleteSelected()
+{
+    deleteSelectedL(false);
+}
+
+void ProfileInterface::deleteSelectedR()
+{
+    deleteSelectedL(true);
 }
 
 void ProfileInterface::massToolQualify()
@@ -1710,8 +1720,8 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
         editMenu.addAction(SnapmaticWidget::tr("Show &In-game"), this, SLOT(enableSelected()), QKeySequence::fromString("Shift+E"));
         editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), this, SLOT(disableSelected()), QKeySequence::fromString("Shift+D"));
         contextMenu.addMenu(&editMenu);
-        contextMenu.addAction(SnapmaticWidget::tr("&Export"), this, SLOT(exportSelected()));
-        contextMenu.addAction(SnapmaticWidget::tr("&Remove"), this, SLOT(deleteSelected()));
+        contextMenu.addAction(SavegameWidget::tr("&Export"), this, SLOT(exportSelected()), QKeySequence::fromString("Ctrl+E"));
+        contextMenu.addAction(SavegameWidget::tr("&Remove"), this, SLOT(deleteSelectedR()), QKeySequence::fromString("Ctrl+Del"));
         contextMenu.addSeparator();
         if (!picWidget->isSelected())
             contextMenu.addAction(SnapmaticWidget::tr("&Select"), picWidget, SLOT(pictureSelected()));
@@ -1775,8 +1785,8 @@ void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
         editMenu.addAction(SnapmaticWidget::tr("Show &In-game"), this, SLOT(enableSelected()), QKeySequence::fromString("Shift+E"));
         editMenu.addAction(SnapmaticWidget::tr("Hide &In-game"), this, SLOT(disableSelected()), QKeySequence::fromString("Shift+D"));
         contextMenu.addMenu(&editMenu);
-        contextMenu.addAction(SavegameWidget::tr("&Export"), this, SLOT(exportSelected()));
-        contextMenu.addAction(SavegameWidget::tr("&Remove"), this, SLOT(deleteSelected()));
+        contextMenu.addAction(SavegameWidget::tr("&Export"), this, SLOT(exportSelected()), QKeySequence::fromString("Ctrl+E"));
+        contextMenu.addAction(SavegameWidget::tr("&Remove"), this, SLOT(deleteSelectedR()), QKeySequence::fromString("Ctrl+Del"));
         contextMenu.addSeparator();
         if (!sgdWidget->isSelected())
             contextMenu.addAction(SavegameWidget::tr("&Select"), sgdWidget, SLOT(savegameSelected()));

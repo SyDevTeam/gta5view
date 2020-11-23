@@ -186,17 +186,13 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
 
     bool folderExists;
     GTAV_Folder = AppEnv::getGameFolder(&folderExists);
-    if (folderExists)
-    {
+    if (folderExists) {
         QDir::setCurrent(GTAV_Folder);
     }
-    else
-    {
-        if (showFolderDialog)
-        {
+    else {
+        if (showFolderDialog) {
             GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-            if (QFileInfo(GTAV_Folder).exists())
-            {
+            if (QFileInfo(GTAV_Folder).exists()) {
                 folderExists = true;
                 QDir::setCurrent(GTAV_Folder);
                 AppEnv::setGameFolder(GTAV_Folder);
@@ -216,15 +212,15 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
     settings.beginGroup("Profile");
     QString defaultProfile = settings.value("Default", "").toString();
 
-    bool contentModeOk;
-    contentMode = settings.value("ContentMode", 0).toInt(&contentModeOk);
-    if (contentMode != 0 && contentMode != 1 && contentMode != 2 && contentMode != 10 && contentMode != 11 && contentMode != 20 && contentMode != 21)
-    {
-        contentMode = 0;
+    contentMode = settings.value("ContentMode", 0).toInt();
+    if (contentMode == 1) {
+        contentMode = 21;
+    }
+    else if (contentMode != 10 && contentMode != 11 && contentMode != 20 && contentMode != 21) {
+        contentMode = 20;
     }
 
-    if (folderExists)
-    {
+    if (folderExists) {
         QDir GTAV_ProfilesDir;
         GTAV_ProfilesFolder = GTAV_Folder % "/Profiles";
         GTAV_ProfilesDir.setPath(GTAV_ProfilesFolder);
@@ -232,17 +228,14 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
         GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
         setupProfileUi();
 
-        if (GTAV_Profiles.length() == 1)
-        {
+        if (GTAV_Profiles.length() == 1) {
             openProfile(GTAV_Profiles.at(0));
         }
-        else if(GTAV_Profiles.contains(defaultProfile))
-        {
+        else if(GTAV_Profiles.contains(defaultProfile)) {
             openProfile(defaultProfile);
         }
     }
-    else
-    {
+    else {
         GTAV_Profiles = QStringList();
         setupProfileUi();
     }
