@@ -31,9 +31,9 @@
 #include "config.h"
 #include <QStringBuilder>
 #include <QMessageBox>
+#include <QPainter>
 #include <QPixmap>
 #include <QTimer>
-#include <QDebug>
 #include <QMenu>
 #include <QFile>
 
@@ -76,19 +76,32 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
     QObject::connect(picture, SIGNAL(updated()), this, SLOT(snapmaticUpdated()));
     QObject::connect(picture, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
 
-    qreal screenRatio = AppEnv::screenRatio();
-    qreal screenRatioPR = AppEnv::screenRatioPR();
+    const qreal screenRatio = AppEnv::screenRatio();
+    const qreal screenRatioPR = AppEnv::screenRatioPR();
+    const QSize renderResolution(48 * screenRatio * screenRatioPR, 27 * screenRatio * screenRatioPR);
     ui->labPicture->setFixedSize(48 * screenRatio, 27 * screenRatio);
-
     ui->labPicture->setScaledContents(true);
 
-    QPixmap SnapmaticPixmap = QPixmap::fromImage(picture->getImage().scaled(ui->labPicture->width() * screenRatioPR, ui->labPicture->height() * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
+    QPixmap renderPixmap(renderResolution);
+    renderPixmap.fill(Qt::transparent);
+    QPainter renderPainter(&renderPixmap);
+    const QImage renderImage = picture->getImage().scaled(renderResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    if (renderImage.width() < renderResolution.width()) {
+        renderPainter.drawImage((renderResolution.width() - renderImage.width()) / 2, 0, renderImage, Qt::AutoColor);
+    }
+    else if (renderImage.height() < renderResolution.height()) {
+        renderPainter.drawImage(0, (renderResolution.height() - renderImage.height()) / 2, renderImage, Qt::AutoColor);
+    }
+    else {
+        renderPainter.drawImage(0, 0, renderImage, Qt::AutoColor);
+    }
+    renderPainter.end();
 #if QT_VERSION >= 0x050600
-    SnapmaticPixmap.setDevicePixelRatio(screenRatioPR);
+    renderPixmap.setDevicePixelRatio(screenRatioPR);
 #endif
 
     ui->labPicStr->setText(smpic->getPictureStr() % "\n" % smpic->getPictureTitl());
-    ui->labPicture->setPixmap(SnapmaticPixmap);
+    ui->labPicture->setPixmap(renderPixmap);
 
     picture->clearCache();
 

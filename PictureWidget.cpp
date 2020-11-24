@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -19,13 +19,12 @@
 #include "PictureDialog.h"
 #include "PictureWidget.h"
 #include "UiModLabel.h"
+#include "AppEnv.h"
 #include <QApplication>
 #include <QHBoxLayout>
 #include <QKeyEvent>
 #include <QPixmap>
 #include <QEvent>
-#include <QDebug>
-
 #if QT_VERSION < 0x060000
 #include <QDesktopWidget>
 #endif
@@ -63,12 +62,10 @@ PictureWidget::~PictureWidget()
 
 bool PictureWidget::eventFilter(QObject *obj, QEvent *ev)
 {
-    if (obj == this)
-    {
-        if (ev->type() == QEvent::KeyPress)
-        {
+    if (obj == this) {
+        if (ev->type() == QEvent::KeyPress) {
             QKeyEvent *keyEvent = (QKeyEvent*)ev;
-            switch (keyEvent->key()){
+            switch (keyEvent->key()) {
             case Qt::Key_Left:
                 emit previousPictureRequested();
                 break;
@@ -83,36 +80,49 @@ bool PictureWidget::eventFilter(QObject *obj, QEvent *ev)
 
 void PictureWidget::pictureDoubleClicked(Qt::MouseButton button)
 {
-    if (button == Qt::LeftButton)
-    {
+    if (button == Qt::LeftButton) {
         close();
     }
 }
 
 void PictureWidget::setImage(QImage image_, QRect rec)
 {
+    const qreal screenRatioPR = AppEnv::screenRatioPR();
     image = image_;
-    pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(rec.width(), rec.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+    QPixmap pixmap = QPixmap::fromImage(image.scaled(rec.width() * screenRatioPR, rec.height() * screenRatioPR, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+#if QT_VERSION >= 0x050600
+    pixmap.setDevicePixelRatio(AppEnv::screenRatioPR());
+#endif
+    pictureLabel->setPixmap(pixmap);
 }
 
 void PictureWidget::setImage(QImage image_)
 {
+    const qreal screenRatioPR = AppEnv::screenRatioPR();
     image = image_;
-    pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(geometry().width(), geometry().height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+    QPixmap pixmap = QPixmap::fromImage(image.scaled(geometry().width() * screenRatioPR, geometry().height() * screenRatioPR, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+#if QT_VERSION >= 0x050600
+    pixmap.setDevicePixelRatio(screenRatioPR);
+#endif
+    pictureLabel->setPixmap(pixmap);
 }
 
 void PictureWidget::updateWindowSize(int screenID)
 {
 #if QT_VERSION >= 0x060000
     Q_UNUSED(screenID)
+    const qreal screenRatioPR = AppEnv::screenRatioPR();
     QRect desktopRect = QApplication::screenAt(pos())->geometry();
     move(desktopRect.x(), desktopRect.y());
     resize(desktopRect.width(), desktopRect.height());
     showFullScreen();
-    pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(desktopRect.width(), desktopRect.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
+    QPixmap pixmap = QPixmap::fromImage(image.scaled(geometry().width() * screenRatioPR, geometry().height() * screenRatioPR, Qt::KeepAspectRatio, Qt::SmoothTransformation));
+#if QT_VERSION >= 0x050600
+    pixmap.setDevicePixelRatio(screenRatioPR);
+#endif
+    pictureLabel->setPixmap(pixmap);
 #else
-    if (screenID == QApplication::desktop()->screenNumber(this))
-    {
+    if (screenID == QApplication::desktop()->screenNumber(this)) {
         QRect desktopRect = QApplication::desktop()->screenGeometry(this);
         move(desktopRect.x(), desktopRect.y());
         resize(desktopRect.width(), desktopRect.height());

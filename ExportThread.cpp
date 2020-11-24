@@ -49,7 +49,7 @@ void ExportThread::run()
     // Quality Settings
     settings.beginGroup("Pictures");
     int defaultQuality = 100;
-    QSize defExportSize = QSize(960, 536);
+    QSize defExportSize = SnapmaticPicture::getSnapmaticResolution();
     int customQuality = settings.value("CustomQuality", defaultQuality).toInt();
     if (customQuality < 1 || customQuality > 100)
     {

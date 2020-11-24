@@ -376,15 +376,12 @@ QString SnapmaticPicture::getLastStep(bool readable)
 
 }
 
-QImage SnapmaticPicture::getImage(bool fastLoad)
+QImage SnapmaticPicture::getImage()
 {
-    Q_UNUSED(fastLoad)
-    if (cacheEnabled)
-    {
+    if (cacheEnabled) {
         return cachePicture;
     }
-    else
-    {
+    else {
         return QImage::fromData(p_ragePhoto.photoData(), "JPEG");
     }
     return QImage();

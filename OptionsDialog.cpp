@@ -75,7 +75,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     int desktopSizeHeight = desktopResolution.height();
 #endif
     aspectRatio = Qt::KeepAspectRatio;
-    defExportSize = QSize(960, 536);
+    defExportSize = SnapmaticPicture::getSnapmaticResolution();
     cusExportSize = defExportSize;
     defaultQuality = 100;
     customQuality = 100;
@@ -298,6 +298,9 @@ void OptionsDialog::setupRadioButtons()
             break;
         case 10:
             ui->rbClassic->setChecked(true);
+#if QT_VERSION >= 0x050800
+            Q_FALLTHROUGH();
+#endif
         case 11:
             ui->cbDoubleclick->setChecked(true);
         }

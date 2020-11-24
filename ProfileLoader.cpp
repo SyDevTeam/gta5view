@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2020 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -30,7 +30,6 @@
 
 ProfileLoader::ProfileLoader(QString profileFolder, CrewDatabase *crewDB, QObject *parent) : QThread(parent), profileFolder(profileFolder), crewDB(crewDB)
 {
-
 }
 
 void ProfileLoader::run()
@@ -50,8 +49,7 @@ void ProfileLoader::run()
 
     SavegameFiles.removeDuplicates();
     SnapmaticPics.removeDuplicates();
-    for (QString BackupFile : BackupFiles)
-    {
+    for (const QString &BackupFile : BackupFiles) {
         SavegameFiles.removeAll(BackupFile);
         SnapmaticPics.removeAll(BackupFile);
     }
@@ -60,36 +58,29 @@ void ProfileLoader::run()
 
     // Loading pictures and savegames
     emit loadingProgress(curFile, maximumV);
-    for (QString SavegameFile : SavegameFiles)
-    {
+    for (const QString &SavegameFile : SavegameFiles) {
         emit loadingProgress(curFile, maximumV);
-        QString sgdPath = profileFolder % "/" % SavegameFile;
+        const QString sgdPath = profileFolder % "/" % SavegameFile;
         SavegameData *savegame = new SavegameData(sgdPath);
-        if (savegame->readingSavegame())
-        {
+        if (savegame->readingSavegame()) {
             emit savegameLoaded(savegame, sgdPath);
         }
         curFile++;
     }
-    for (QString SnapmaticPic : SnapmaticPics)
-    {
+    for (const QString &SnapmaticPic : SnapmaticPics) {
         emit loadingProgress(curFile, maximumV);
-        QString picturePath = profileFolder % "/" % SnapmaticPic;
+        const QString picturePath = profileFolder % "/" % SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
-        if (picture->readingPicture(true))
-        {
-            if (picture->isFormatSwitched())
-            {
+        if (picture->readingPicture(true)) {
+            if (picture->isFormatSwitched()) {
                 picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
-                if (picture->exportPicture(picturePath, SnapmaticFormat::PGTA_Format))
-                {
+                if (picture->exportPicture(picturePath, SnapmaticFormat::PGTA_Format)) {
                     emit pictureFixed(picture);
                 }
             }
             emit pictureLoaded(picture);
             int crewNumber = picture->getSnapmaticProperties().crewID;
-            if (!crewList.contains(crewNumber))
-            {
+            if (!crewList.contains(crewNumber)) {
                 crewList += crewNumber;
             }
         }
@@ -98,8 +89,7 @@ void ProfileLoader::run()
 
     // adding found crews
     crewDB->setAddingCrews(true);
-    for (int crewID : crewList)
-    {
+    for (int crewID : crewList) {
         crewDB->addCrew(crewID);
     }
     crewDB->setAddingCrews(false);
@@ -107,10 +97,9 @@ void ProfileLoader::run()
 
 void ProfileLoader::preloaded()
 {
-
 }
 
 void ProfileLoader::loaded()
 {
-
 }
+

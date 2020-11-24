@@ -285,11 +285,7 @@ void PictureDialog::addPreviousNextButtons()
 void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
 {
     Q_UNUSED(newLabelSize)
-#if QT_VERSION >= 0x050F00
-    int newDialogHeight = SnapmaticPicture::getSnapmaticResolution().height();
-#else
-    int newDialogHeight = (ui->labPicture->pixmap()->height() / AppEnv::screenRatioPR());
-#endif
+    int newDialogHeight = SnapmaticPicture::getSnapmaticResolution().height() * AppEnv::screenRatio();
     newDialogHeight = newDialogHeight + ui->jsonFrame->height();
     if (naviEnabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
     setMaximumSize(width(), newDialogHeight);
@@ -304,19 +300,17 @@ void PictureDialog::styliseDialog()
 {
 #ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
-    if (QtWin::isCompositionEnabled())
-    {
+    if (QtWin::isCompositionEnabled()) {
         QPalette palette;
         QtWin::extendFrameIntoClientArea(this, 0, qRound(layout()->menuBar()->height() * AppEnv::screenRatioPR()), 0, 0);
-        ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
-        setStyleSheet("PictureDialog { background: transparent; }");
+        ui->jsonFrame->setStyleSheet(QString("QFrame{background:%1;}").arg(palette.window().color().name()));
+        setStyleSheet("PictureDialog{background:transparent;}");
     }
-    else
-    {
+    else {
         QPalette palette;
         QtWin::resetExtendedFrame(this);
-        ui->jsonFrame->setStyleSheet(QString("QFrame { background: %1; }").arg(palette.window().color().name()));
-        setStyleSheet(QString("PictureDialog { background: %1; }").arg(QtWin::realColorizationColor().name()));
+        ui->jsonFrame->setStyleSheet(QString("QFrame{background:%1;}").arg(palette.window().color().name()));
+        setStyleSheet(QString("PictureDialog{background:%1;}").arg(QtWin::realColorizationColor().name()));
     }
 #endif
 #endif
@@ -326,10 +320,8 @@ bool PictureDialog::event(QEvent *event)
 {
 #ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
-    if (naviEnabled)
-    {
-        if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange)
-        {
+    if (naviEnabled) {
+        if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange) {
             styliseDialog();
         }
     }
@@ -543,8 +535,7 @@ void PictureDialog::renderOverlayPicture()
 
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool _indexed, int _index)
 {
-    if (smpic != nullptr)
-    {
+    if (smpic != nullptr) {
         QObject::disconnect(smpic, SIGNAL(updated()), this, SLOT(updated()));
         QObject::disconnect(smpic, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
     }
@@ -552,35 +543,29 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
     indexed = _indexed;
     index = _index;
     smpic = picture;
-    if (!readOk)
-    {
+    if (!readOk) {
         QMessageBox::warning(this, tr("Snapmatic Picture Viewer"), tr("Failed at %1").arg(picture->getLastStep()));
         return;
     }
-    if (picture->isPicOk())
-    {
+    if (picture->isPicOk()) {
         snapmaticPicture = picture->getImage();
         renderPicture();
         ui->cmdManage->setEnabled(true);
     }
-    if (picture->isJsonOk())
-    {
+    if (picture->isJsonOk()) {
         crewStr = crewDB->getCrewName(crewID);
-        if (globalMap.contains(picArea))
-        {
-            picAreaStr = globalMap[picArea];
+        if (globalMap.contains(picArea)) {
+            picAreaStr = globalMap.value(picArea);
         }
-        else
-        {
+        else {
             picAreaStr = picArea;
         }
         setWindowTitle(windowTitleStr.arg(picTitl));
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
     }
-    else
-    {
+    else {
         ui->labJSON->setText(jsonDrawString.arg("0", "0", "0", tr("No Players"), tr("No Crew"), tr("Unknown Location")));
-        QMessageBox::warning(this,tr("Snapmatic Picture Viewer"),tr("Failed at %1").arg(picture->getLastStep()));
+        // QMessageBox::warning(this, tr("Snapmatic Picture Viewer"), tr("Failed at %1").arg(picture->getLastStep()));
     }
     QObject::connect(smpic, SIGNAL(updated()), this, SLOT(updated()));
     QObject::connect(smpic, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
@@ -609,57 +594,39 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture)
 
 void PictureDialog::renderPicture()
 {
-    qreal screenRatio = AppEnv::screenRatio();
-    qreal screenRatioPR = AppEnv::screenRatioPR();
-    if (!previewMode)
-    {
-        if (overlayEnabled)
-        {
-            QSize snapmaticResolution = SnapmaticPicture::getSnapmaticResolution();
-            QPixmap shownImagePixmap(snapmaticResolution.width() * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR);
-            shownImagePixmap.fill(Qt::transparent);
-            QPainter shownImagePainter(&shownImagePixmap);
-            shownImagePainter.drawImage(0, 0, snapmaticPicture.scaled(snapmaticResolution.width() * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-            shownImagePainter.drawImage(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, overlayTempImage);
-            shownImagePainter.end();
-#if QT_VERSION >= 0x050600
-            shownImagePixmap.setDevicePixelRatio(screenRatioPR);
-#endif
-            ui->labPicture->setPixmap(shownImagePixmap);
-        }
-        else
-        {
-            QSize snapmaticResolution = SnapmaticPicture::getSnapmaticResolution();
-            QPixmap shownImagePixmap(snapmaticResolution.width() * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR);
-            shownImagePixmap.fill(Qt::transparent);
-            QPainter shownImagePainter(&shownImagePixmap);
-            shownImagePainter.drawImage(0, 0, snapmaticPicture.scaled(snapmaticResolution.width() * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-            shownImagePainter.end();
-#if QT_VERSION >= 0x050600
-            shownImagePixmap.setDevicePixelRatio(screenRatioPR);
-#endif
-            ui->labPicture->setPixmap(shownImagePixmap);
-        }
+    const qreal screenRatio = AppEnv::screenRatio();
+    const qreal screenRatioPR = AppEnv::screenRatioPR();
+    const QSize snapmaticResolution(SnapmaticPicture::getSnapmaticResolution());
+    const QSize renderResolution(snapmaticResolution.width() * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR);
+    QPixmap shownImagePixmap(renderResolution);
+    shownImagePixmap.fill(Qt::black);
+    QPainter shownImagePainter(&shownImagePixmap);
+    const QImage renderImage = snapmaticPicture.scaled(renderResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    if (renderImage.width() < renderResolution.width()) {
+        shownImagePainter.drawImage((renderResolution.width() - renderImage.width()) / 2, 0, renderImage, Qt::AutoColor);
     }
-    else
-    {
-        // Generating Avatar Preview
-        QSize snapmaticResolution = SnapmaticPicture::getSnapmaticResolution();
-        QPixmap avatarPixmap(snapmaticResolution.width() * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR);
-        QPainter snapPainter(&avatarPixmap);
-        QFont snapPainterFont;
-        snapPainterFont.setPixelSize(12 * screenRatio * screenRatioPR);
-        snapPainter.drawImage(0, 0, snapmaticPicture.scaled(snapmaticResolution.width() * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
-        snapPainter.drawImage(0, 0, avatarAreaPicture);
-        snapPainter.setPen(QColor::fromRgb(255, 255, 255, 255));
-        snapPainter.setFont(snapPainterFont);
-        snapPainter.drawText(QRect(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, 140 * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR), Qt::AlignLeft | Qt::TextWordWrap, tr("Avatar Preview Mode\nPress 1 for Default View"));
-        snapPainter.end();
-#if QT_VERSION >= 0x050600
-        avatarPixmap.setDevicePixelRatio(screenRatioPR);
-#endif
-        ui->labPicture->setPixmap(avatarPixmap);
+    else if (renderImage.height() < renderResolution.height()) {
+        shownImagePainter.drawImage(0, (renderResolution.height() - renderImage.height()) / 2, renderImage, Qt::AutoColor);
     }
+    else {
+        shownImagePainter.drawImage(0, 0, renderImage, Qt::AutoColor);
+    }
+    if (previewMode) {
+        QFont shownImagePainterFont;
+        shownImagePainterFont.setPixelSize(12 * screenRatio * screenRatioPR);
+        shownImagePainter.drawImage(0, 0, avatarAreaPicture);
+        shownImagePainter.setPen(QColor::fromRgb(255, 255, 255, 255));
+        shownImagePainter.setFont(shownImagePainterFont);
+        shownImagePainter.drawText(QRect(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, 140 * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR), Qt::AlignLeft | Qt::TextWordWrap, tr("Avatar Preview Mode\nPress 1 for Default View"));
+    }
+    else if (overlayEnabled) {
+        shownImagePainter.drawImage(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, overlayTempImage, Qt::AutoColor);
+    }
+    shownImagePainter.end();
+#if QT_VERSION >= 0x050600
+    shownImagePixmap.setDevicePixelRatio(screenRatioPR);
+#endif
+    ui->labPicture->setPixmap(shownImagePixmap);
 }
 
 void PictureDialog::crewNameUpdated()
@@ -703,10 +670,8 @@ QString PictureDialog::generatePlayersString()
     SnapmaticPicture *picture = smpic; // used by macro
     const QStringList playersList = plyrsList; // save operation time
     QString plyrsStr;
-    if (playersList.length() >= 1)
-    {
-        for (const QString &player : playersList)
-        {
+    if (playersList.length() >= 1) {
+        for (const QString &player : playersList) {
             const QString playerName = profileDB->getPlayerName(player);
             if (player != playerName) {
                 plyrsStr += ", <a href=\"https://socialclub.rockstargames.com/member/" % playerName % "/" % player % "\">" % playerName % "</a>";
@@ -717,8 +682,7 @@ QString PictureDialog::generatePlayersString()
         }
         plyrsStr.remove(0, 2);
     }
-    else
-    {
+    else {
         plyrsStr = tr("No Players");
     }
     return plyrsStr;
@@ -726,32 +690,27 @@ QString PictureDialog::generatePlayersString()
 
 void PictureDialog::exportSnapmaticPicture()
 {
-    if (rqFullscreen && fullscreenWidget != nullptr)
-    {
+    if (rqFullscreen && fullscreenWidget != nullptr) {
         PictureExport::exportAsPicture(fullscreenWidget, smpic);
     }
-    else
-    {
+    else {
         PictureExport::exportAsPicture(this, smpic);
     }
 }
 
 void PictureDialog::copySnapmaticPicture()
 {
-    if (rqFullscreen && fullscreenWidget != nullptr)
-    {
+    if (rqFullscreen && fullscreenWidget != nullptr) {
         PictureExport::exportAsSnapmatic(fullscreenWidget, smpic);
     }
-    else
-    {
+    else {
         PictureExport::exportAsSnapmatic(this, smpic);
     }
 }
 
 void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 {
-    if (button == Qt::LeftButton)
-    {
+    if (button == Qt::LeftButton) {
 #if QT_VERSION >= 0x060000
         QRect desktopRect = QApplication::screenAt(pos())->geometry();
 #else
@@ -765,8 +724,8 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint);
 #endif
         pictureWidget->setWindowTitle(windowTitle());
-        pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color: black;}");
-        pictureWidget->setImage(snapmaticPicture, desktopRect);
+        pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color:black;}");
+        pictureWidget->setImage(smpic->getImage(), desktopRect);
         pictureWidget->setModal(true);
 
         fullscreenWidget = pictureWidget;

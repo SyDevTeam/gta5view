@@ -62,7 +62,7 @@ public:
     bool readingPicture(bool cacheEnabled = false);
     bool isPicOk(); // Please use isPictureOk instead
     void clearCache();
-    QImage getImage(bool fastLoad = false);
+    QImage getImage();
     QByteArray getPictureStream();
     QString getLastStep(bool readable = true);
     QString getPictureStr();

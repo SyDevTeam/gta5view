@@ -262,8 +262,7 @@ void ProfileInterface::loadingProgress(int value, int maximum)
 void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 {
     ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(widget);
-    if (widgets.contains(proWidget))
-    {
+    if (widgets.contains(proWidget)) {
         QString widgetKey = widgets[proWidget];
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
@@ -283,8 +282,7 @@ void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 void ProfileInterface::insertSavegameIPI(QWidget *widget)
 {
     ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(widget);
-    if (widgets.contains(proWidget))
-    {
+    if (widgets.contains(proWidget)) {
         QString widgetKey = widgets[proWidget];
         QStringList widgetsKeyList = widgets.values();
         QStringList savegameKeyList = widgetsKeyList.filter("SGD", Qt::CaseSensitive);
@@ -305,8 +303,7 @@ void ProfileInterface::dialogNextPictureRequested(QWidget *dialog)
 {
     PictureDialog *picDialog = qobject_cast<PictureDialog*>(dialog);
     ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(sender());
-    if (widgets.contains(proWidget))
-    {
+    if (widgets.contains(proWidget)) {
         QString widgetKey = widgets[proWidget];
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
@@ -1358,10 +1355,10 @@ void ProfileInterface::exportSelected()
                 QString ExportPreSpan;
                 QString ExportPostSpan;
 #ifdef Q_OS_WIN
-                ExportPreSpan = "<span style=\"color: #003399; font-size: 12pt\">";
+                ExportPreSpan = "<span style=\"color:#003399;font-size:12pt\">";
                 ExportPostSpan = "</span>";
 #else
-                ExportPreSpan = "<span style=\"font-weight: bold\">";
+                ExportPreSpan = "<span style=\"font-weight:bold\">";
                 ExportPostSpan = "</span>";
 #endif
 

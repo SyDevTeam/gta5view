@@ -40,7 +40,6 @@
 
 PictureExport::PictureExport()
 {
-
 }
 
 void PictureExport::exportAsPicture(QWidget *parent, SnapmaticPicture *picture)
@@ -51,30 +50,25 @@ void PictureExport::exportAsPicture(QWidget *parent, SnapmaticPicture *picture)
     // Quality Settings
     settings.beginGroup("Pictures");
     int defaultQuality = 100;
-    QSize defExportSize = QSize(960, 536);
+    QSize defExportSize = SnapmaticPicture::getSnapmaticResolution();
     int customQuality = settings.value("CustomQuality", defaultQuality).toInt();
-    if (customQuality < 1 || customQuality > 100)
-    {
+    if (customQuality < 1 || customQuality > 100) {
         customQuality = 100;
     }
     bool useCustomQuality = settings.value("CustomQualityEnabled", false).toBool();
 
     // Size Settings
     QSize cusExportSize = settings.value("CustomSize", defExportSize).toSize();
-    if (cusExportSize.width() > 3840)
-    {
+    if (cusExportSize.width() > 3840) {
         cusExportSize.setWidth(3840);
     }
-    else if (cusExportSize.height() > 2160)
-    {
+    else if (cusExportSize.height() > 2160) {
         cusExportSize.setHeight(2160);
     }
-    if (cusExportSize.width() < 1)
-    {
+    if (cusExportSize.width() < 1) {
         cusExportSize.setWidth(1);
     }
-    else if (cusExportSize.height() < 1)
-    {
+    else if (cusExportSize.height() < 1) {
         cusExportSize.setHeight(1);
     }
     QString sizeMode = settings.value("ExportSizeMode", "Default").toString();
@@ -113,54 +107,42 @@ fileDialogPreSave: //Work?
     QString newPictureFileName = getPictureFileName(picture) % defaultExportFormat;
     fileDialog.selectFile(newPictureFileName);
 
-    if (fileDialog.exec())
-    {
+    if (fileDialog.exec()) {
         QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
+        if (selectedFiles.length() == 1) {
             QString saveFileFormat;
             QString selectedFile = selectedFiles.at(0);
 
-            if (selectedFile.right(4) == ".jpg")
-            {
+            if (selectedFile.right(4) == ".jpg") {
                 saveFileFormat = "JPEG";
             }
-            else if (selectedFile.right(4) == ".jpeg")
-            {
+            else if (selectedFile.right(4) == ".jpeg") {
                 saveFileFormat = "JPEG";
             }
-            else if (selectedFile.right(4) == ".png")
-            {
+            else if (selectedFile.right(4) == ".png") {
                 saveFileFormat = "PNG";
             }
-            else if (selectedFile.right(7) == ".suffix")
-            {
-                if (fileDialog.selectedNameFilter() == "JPEG picture (*.jpg)")
-                {
+            else if (selectedFile.right(7) == ".suffix") {
+                if (fileDialog.selectedNameFilter() == "JPEG picture (*.jpg)") {
                     selectedFile.replace(".suffix", ".jpg");
                 }
-                else if (fileDialog.selectedNameFilter() == "Portable Network Graphics (*.png)")
-                {
+                else if (fileDialog.selectedNameFilter() == "Portable Network Graphics (*.png)") {
                     selectedFile.replace(".suffix", ".png");
                 }
-                else
-                {
+                else {
                     selectedFile.replace(".suffix", ".jpg");
                 }
             }
 
-            if (QFile::exists(selectedFile))
-            {
-                if (QMessageBox::No == QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-                {
+            if (QFile::exists(selectedFile)) {
+                if (QMessageBox::No == QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes)) {
                     goto fileDialogPreSave; //Work?
                 }
             }
 
             // Scale Picture
             QImage exportPicture = picture->getImage();
-            if (sizeMode == "Desktop")
-            {
+            if (sizeMode == "Desktop") {
 #if QT_VERSION >= 0x050000
                 qreal screenRatioPR = AppEnv::screenRatioPR();
                 QRect desktopResolution = QApplication::primaryScreen()->geometry();
@@ -173,8 +155,7 @@ fileDialogPreSave: //Work?
 #endif
                 exportPicture = exportPicture.scaled(desktopSizeWidth, desktopSizeHeight, aspectRatio, Qt::SmoothTransformation);
             }
-            else if (sizeMode == "Custom")
-            {
+            else if (sizeMode == "Custom") {
                 exportPicture = exportPicture.scaled(cusExportSize, aspectRatio, Qt::SmoothTransformation);
             }
 
@@ -185,32 +166,26 @@ fileDialogPreSave: //Work?
 #else
             QFile *picFile = new QFile(selectedFile);
 #endif
-            if (picFile->open(QIODevice::WriteOnly))
-            {
+            if (picFile->open(QIODevice::WriteOnly)) {
                 isSaved = exportPicture.save(picFile, saveFileFormat.toStdString().c_str(), useCustomQuality ? customQuality : defaultQuality);
 #if QT_VERSION >= 0x050000
-                if (isSaved)
-                {
+                if (isSaved) {
                     isSaved = picFile->commit();
                 }
-                else
-                {
+                else {
                     errorId = 1;
                 }
 #else
                 picFile->close();
 #endif
             }
-            else
-            {
+            else {
                 errorId = 2;
             }
             delete picFile;
 
-            if (!isSaved)
-            {
-                switch (errorId)
-                {
+            if (!isSaved) {
+                switch (errorId) {
                 case 0:
                     QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("Failed to export the picture because the system occurred a write failure"));
                     break;
@@ -226,8 +201,7 @@ fileDialogPreSave: //Work?
                 goto fileDialogPreSave; //Work?
             }
         }
-        else
-        {
+        else {
             QMessageBox::warning(parent, PictureDialog::tr("Export as Picture"), PictureDialog::tr("No valid file is selected"));
             goto fileDialogPreSave; //Work?
         }
@@ -263,7 +237,9 @@ fileDialogPreSave: //Work?
 
     QStringList filters;
     filters << PictureDialog::tr("GTA V Export (*.g5e)");
+#ifndef GTA5SYNC_FLATPAK
     filters << PictureDialog::tr("GTA V Raw Export (*.auto)");
+#endif
     filters << PictureDialog::tr("Snapmatic pictures (PGTA*)");
     fileDialog.setNameFilters(filters);
 
@@ -274,58 +250,48 @@ fileDialogPreSave: //Work?
     fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geometry", "").toByteArray());
     fileDialog.selectFile(QString(picture->getExportPictureFileName() % ".g5e"));
 
-    if (fileDialog.exec())
-    {
+    if (fileDialog.exec()) {
         QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
+        if (selectedFiles.length() == 1) {
             QString selectedFile = selectedFiles.at(0);
             bool isAutoExt = false;
-            if (selectedFile.right(5) == ".auto")
-            {
+#ifndef GTA5SYNC_FLATPAK
+            if (selectedFile.right(5) == ".auto") {
                 isAutoExt = true;
                 QString dirPath = QFileInfo(selectedFile).dir().path();
                 QString stockFileName = sgdFileInfo.fileName();
                 selectedFile = dirPath % "/" % stockFileName;
             }
-            else if (selectedFile.right(4) == ".rem")
-            {
+#endif
+            if (selectedFile.right(4) == ".rem") {
                 selectedFile.remove(selectedFile.length() - 4, 4);
             }
 
-            if (QFile::exists(selectedFile))
-            {
-                if (QMessageBox::No == QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-                {
+            if (QFile::exists(selectedFile)) {
+                if (QMessageBox::No == QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Overwrite %1 with current Snapmatic picture?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes)) {
                     goto fileDialogPreSave; //Work?
                 }
             }
 
-            if (selectedFile.right(4) == ".g5e")
-            {
+            if (selectedFile.right(4) == ".g5e") {
                 bool isExported = picture->exportPicture(selectedFile, SnapmaticFormat::G5E_Format);
-                if (!isExported)
-                {
+                if (!isExported) {
                     QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));
                     goto fileDialogPreSave; //Work?
                 }
             }
-            else
-            {
+            else {
                 bool isCopied = picture->exportPicture(selectedFile, SnapmaticFormat::PGTA_Format);
-                if (!isCopied)
-                {
+                if (!isCopied) {
                     QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));
                     goto fileDialogPreSave; //Work?
                 }
-                else
-                {
+                else {
                     if (isAutoExt) QMessageBox::information(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Exported Snapmatic to \"%1\" because of using the .auto extension.").arg(selectedFile));
                 }
             }
         }
-        else
-        {
+        else {
             QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("No valid file is selected"));
             goto fileDialogPreSave; //Work?
         }
