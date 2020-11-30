@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -28,30 +28,30 @@ Running with Qt %6&lt;br/&gt;
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="48"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="50"/>
+        <location filename="../AboutDialog.cpp" line="51"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation>Syping,g5e://about?U3lwaW5n:R2l0TGFiOiA8YSBocmVmPSJodHRwczovL2dpdGxhYi5jb20vU3lwaW5nIj5TeXBpbmc8L2E+PGJyLz5HaXRIdWI6IDxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9TeXBpbmciPlN5cGluZzwvYT48YnIvPlNvY2lhbCBDbHViOiA8YSBocmVmPSJodHRwczovL3NvY2lhbGNsdWIucm9ja3N0YXJnYW1lcy5jb20vbWVtYmVyL1N5cGluZy80NjMwMzA1NiI+U3lwaW5nPC9hPg==</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="70"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="76"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
@@ -985,10 +985,10 @@ Y: %2</source>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="114"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Created: &lt;/span&gt;%8</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -1656,7 +1656,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="23"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

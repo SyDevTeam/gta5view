@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -20,7 +20,7 @@ Built with Qt %5&lt;br/&gt;
 Running with Qt %6&lt;br/&gt;
 &lt;br/&gt;
 %7</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -37,31 +37,31 @@ Qt로 실행 %6&lt;br/&gt;
         <translation>닫기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="48"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>번역 %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="50"/>
+        <location filename="../AboutDialog.cpp" line="51"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
-        <translation>&lt;a href=&quot;https://steamcommunity.com/id/BLACKPINK-/&quot;&gt;앙시모사우루스&lt;/a&gt;</translation>
+        <translation>앙시모사우루스,https://steamcommunity.com/profiles/76561198166105984/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="70"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>이 프로그램은 GTA 5 스냅매틱을 수정하고 보기 위한 프로젝트입니다.&lt;br/&gt;
 이미지 뷰어 및 세이브 파일 관리 지원</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="76"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>저작권 &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1는 &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt; 에 따라 라이센스가 부여됩니다</translation>
     </message>
@@ -269,7 +269,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="203"/>
@@ -291,7 +291,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">X</translation>
+        <translation type="obsolete">X</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="268"/>
@@ -631,7 +631,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Open with Singleclick</source>
-        <translation type="vanished">한 번 클릭으로 열기</translation>
+        <translation type="obsolete">한 번 클릭으로 열기</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="56"/>
@@ -640,7 +640,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Select with Singleclick</source>
-        <translation type="vanished">한 번 클릭으로 선택</translation>
+        <translation type="obsolete">한 번 클릭으로 선택</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="66"/>
@@ -897,7 +897,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation type="vanished">항상 메시지 글꼴을 사용합니다.(Windows 2003 및 이전 버전)</translation>
+        <translation type="obsolete">항상 메시지 글꼴을 사용합니다.(Windows 2003 및 이전 버전)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="786"/>
@@ -1031,14 +1031,14 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="114"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;제목: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;위치: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;플레이어: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;생성 날짜: &lt;/span&gt;%8</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Created: &lt;/span&gt;%8</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;제목: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;위치: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;플레이어: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;생성 날짜: &lt;/span&gt;%8</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="174"/>
@@ -1705,11 +1705,11 @@ Press 1 for Default View</source>
     <name>QApplication</name>
     <message>
         <source>Font</source>
-        <translation type="vanished">폰트</translation>
+        <translation type="obsolete">폰트</translation>
     </message>
     <message>
         <source>Selected Font: %1</source>
-        <translation type="vanished">선택된 폰트: %1</translation>
+        <translation type="obsolete">선택된 폰트: %1</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="137"/>
@@ -1727,8 +1727,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="23"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;세이브 파일&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;세이브 파일&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="70"/>

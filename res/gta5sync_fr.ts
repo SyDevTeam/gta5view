@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -20,7 +20,7 @@ Built with Qt %5&lt;br/&gt;
 Running with Qt %6&lt;br/&gt;
 &lt;br/&gt;
 %7</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -37,31 +37,32 @@ Fonctionne avec Qt %6&lt;br/&gt;
         <translation>&amp;Fermer</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="48"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Traduit par %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="50"/>
+        <location filename="../AboutDialog.cpp" line="51"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
-        <translation>Ganjalo,https://github.com/Ganjalo/</translation>
+        <translation>Ganjalo,https://github.com/Ganjalo/
+XeriosG,g5e://about?WGVyaW9zRw:RGlzY29yZDogWGVyaW9zRyM1MzIxPGJyLz5TdGVhbTogPGEgaHJlZj0iaHR0cHM6Ly9zdGVhbWNvbW11bml0eS5jb20vcHJvZmlsZXMvNzY1NjExOTg0MjU2NjU3MjQvIj5YZXJpb3NHPC9hPg</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="70"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Un outil pour gérer les photos Snapmatic&lt;br/&gt;
 et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="76"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
@@ -269,7 +270,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="227"/>
@@ -289,47 +290,47 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">X</translation>
+        <translation type="obsolete">X</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="268"/>
         <source>Force Colour in Avatar Zone</source>
-        <translation>Forcer la couleur dans la Zone d&apos;Avatar</translation>
+        <translation>Forcer la couleur dans la zone d&apos;avatar</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="303"/>
         <source>Advanced</source>
-        <translation type="unfinished"></translation>
+        <translation>Avancé</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="311"/>
         <source>Resolution:</source>
-        <translation type="unfinished"></translation>
+        <translation>Résolution:</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="324"/>
         <source>Snapmatic resolution</source>
-        <translation type="unfinished"></translation>
+        <translation>Résolution Snapmatic</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="335"/>
         <source>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</source>
-        <translation type="unfinished"></translation>
+        <translation>Éviter la compression et étendre la mémoire tampon à la place, améliore la qualité de l&apos;image mais peut casser Snapmatic</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="338"/>
         <source>Unlimited Buffer</source>
-        <translation type="unfinished"></translation>
+        <translation>Mémoire tampon illimitée</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="345"/>
         <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer tel quel,ne changez pas du tout l&apos;image, garantie de casser Snapmatic à moins que vous ne sachiez ce que vous faites</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="348"/>
         <source>Import as-is</source>
-        <translation type="unfinished"></translation>
+        <translation>Importer tel quel</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="362"/>
@@ -359,7 +360,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.ui" line="413"/>
         <source>&amp;Cancel</source>
-        <translation>A&amp;nnuler</translation>
+        <translation>&amp;Annuler</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="203"/>
@@ -492,7 +493,7 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
         <location filename="../ImportDialog.cpp" line="735"/>
         <location filename="../ImportDialog.cpp" line="926"/>
         <source>Snapmatic Avatar Zone</source>
-        <translation>Zone d&apos;Avatar Snapmatic</translation>
+        <translation>Zone d&apos;avatar Snapmatic</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="781"/>
@@ -544,7 +545,7 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
     <message>
         <location filename="../MapLocationDialog.ui" line="26"/>
         <source>Snapmatic Map Viewer</source>
-        <translation>Visionneuse de Carte Snapmatic</translation>
+        <translation>Visionneuse de carte Snapmatic</translation>
     </message>
     <message>
         <location filename="../MapLocationDialog.ui" line="143"/>
@@ -624,7 +625,7 @@ Y : %2</translation>
     </message>
     <message>
         <source>Open with Singleclick</source>
-        <translation type="vanished">Ouvrir avec un clic</translation>
+        <translation type="obsolete">Ouvrir avec un clic</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="56"/>
@@ -633,7 +634,7 @@ Y : %2</translation>
     </message>
     <message>
         <source>Select with Singleclick</source>
-        <translation type="vanished">Sélectionner avec un clic</translation>
+        <translation type="obsolete">Sélectionner avec un clic</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="66"/>
@@ -852,7 +853,7 @@ Y : %2</translation>
     </message>
     <message>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation type="vanished">Toujours utiliser la police Message (Windows 2003 et précédent)</translation>
+        <translation type="obsolete">Toujours utiliser la police Message (Windows 2003 et précédent)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="596"/>
@@ -880,17 +881,17 @@ Y : %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="652"/>
         <source>Use Default Style (Restart)</source>
-        <translation>Utiliser le Style par Défaut (rédémarrage requis)</translation>
+        <translation>Utiliser le style par défaut (redémarrage requis)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="698"/>
         <source>Use Default Font (Restart)</source>
-        <translation type="unfinished"></translation>
+        <translation>Utiliser la police par défaut (redémarrage requis)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="713"/>
         <source>Font:</source>
-        <translation type="unfinished">Police :</translation>
+        <translation>Police :</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="786"/>
@@ -1017,14 +1018,14 @@ Y : %2</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="114"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Titre : &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Emplacement : &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Joueurs : &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Créé le : &lt;/span&gt;%8</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Created: &lt;/span&gt;%8</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;Titre : &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Emplacement : &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Joueurs : &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Créé le : &lt;/span&gt;%8</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="174"/>
@@ -1686,11 +1687,11 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <name>QApplication</name>
     <message>
         <source>Font</source>
-        <translation type="vanished">Police</translation>
+        <translation type="obsolete">Police</translation>
     </message>
     <message>
         <source>Selected Font: %1</source>
-        <translation type="vanished">Police sélectionnée : %1</translation>
+        <translation type="obsolete">Police sélectionnée : %1</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="137"/>
@@ -1708,8 +1709,8 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="23"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Sauvegarde&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;Sauvegarde&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="70"/>
@@ -2012,7 +2013,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../SnapmaticEditor.ui" line="243"/>
         <source>&amp;Apply</source>
-        <translation>A&amp;ppliquer</translation>
+        <translation>&amp;Appliquer</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="256"/>

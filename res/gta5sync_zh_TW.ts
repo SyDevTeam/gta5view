@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -20,7 +20,7 @@ Built with Qt %5&lt;br/&gt;
 Running with Qt %6&lt;br/&gt;
 &lt;br/&gt;
 %7</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -37,30 +37,30 @@ Running with Qt %6&lt;br/&gt;
         <translation>關閉(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="48"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>繁體中文化: %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="50"/>
+        <location filename="../AboutDialog.cpp" line="51"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation>Ray,https://steamcommunity.com/profiles/76561198282701714/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="70"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>一個 Grand Theft Auto V Snapmatic 圖片、遊戲存檔檢視專案</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="76"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>版權 &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 使用 &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt; 授權條款發布</translation>
     </message>
@@ -268,7 +268,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="203"/>
@@ -290,7 +290,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">X</translation>
+        <translation type="obsolete">X</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="268"/>
@@ -622,7 +622,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Open with Singleclick</source>
-        <translation type="vanished">點一次開啟</translation>
+        <translation type="obsolete">點一次開啟</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="56"/>
@@ -631,7 +631,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Select with Singleclick</source>
-        <translation type="vanished">點一次選取</translation>
+        <translation type="obsolete">點一次選取</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="66"/>
@@ -888,7 +888,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation type="vanished">總是使用訊息字體 (Windows 2003 和更早版本)</translation>
+        <translation type="obsolete">總是使用訊息字體 (Windows 2003 和更早版本)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="786"/>
@@ -1015,14 +1015,14 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="114"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;標題: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;地點: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;玩家: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;建立於: &lt;/span&gt;%8</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Created: &lt;/span&gt;%8</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;標題: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;地點: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;玩家: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;建立於: &lt;/span&gt;%8</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="174"/>
@@ -1694,8 +1694,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="23"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;遊戲存檔&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;遊戲存檔&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="70"/>

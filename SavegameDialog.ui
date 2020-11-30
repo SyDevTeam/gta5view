@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>105</height>
+    <height>112</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,7 +20,7 @@
    <item>
     <widget class="QLabel" name="labSavegameText">
      <property name="text">
-      <string>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</string>
+      <string>&lt;span style=&quot;font-weight:600&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>

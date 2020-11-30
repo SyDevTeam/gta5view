@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -20,7 +20,7 @@ Built with Qt %5&lt;br/&gt;
 Running with Qt %6&lt;br/&gt;
 &lt;br/&gt;
 %7</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -37,31 +37,31 @@ Running with Qt %6&lt;br/&gt;
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="48"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Перевёл %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="50"/>
+        <location filename="../AboutDialog.cpp" line="51"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation>VADemon,https://github.com/VADemon/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="70"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Проект для просмотра Grand Theft Auto V Snapmatic&lt;br/&gt;
 картинок и сохранений</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="76"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 под лицензией &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
@@ -273,7 +273,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="227"/>
@@ -300,7 +300,7 @@ Pictures and Savegames</source>
         <source>X</source>
         <translatorcomment>latin X
 </translatorcomment>
-        <translation type="vanished">X</translation>
+        <translation type="obsolete">X</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="268"/>
@@ -621,7 +621,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Open with Singleclick</source>
-        <translation type="vanished">Открывать одним щелчком</translation>
+        <translation type="obsolete">Открывать одним щелчком</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="56"/>
@@ -630,7 +630,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Select with Singleclick</source>
-        <translation type="vanished">Выбирать одним щелчком</translation>
+        <translation type="obsolete">Выбирать одним щелчком</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="66"/>
@@ -863,7 +863,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation type="vanished">Всегда использовать шрифт сообщений (Windows 2003 и ранние)</translation>
+        <translation type="obsolete">Всегда использовать шрифт сообщений (Windows 2003 и ранние)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="596"/>
@@ -1023,14 +1023,14 @@ Y: %2</translation>
     <name>PictureDialog</name>
     <message>
         <location filename="../PictureDialog.ui" line="114"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Заголовок: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Место: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Игроки: &lt;/span&gt;%4 (Банда %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Сделано: &lt;/span&gt;%8</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Created: &lt;/span&gt;%8</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;Заголовок: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Место: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Игроки: &lt;/span&gt;%4 (Банда %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Сделано: &lt;/span&gt;%8</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="177"/>
@@ -1714,8 +1714,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="23"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Сохранение&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;Сохранение&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="70"/>

@@ -15,8 +15,8 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
 
     # Note: Install Docker Community Edition and Git before continuing
     git clone https://gitlab.com/Syping/gta5view && cd gta5view
-    docker pull sypingauto/gta5view-build:1.8-static
-    docker run --rm -v ${PWD}:/gta5view -it sypingauto/gta5view-build:1.8-static
+    docker pull sypingauto/gta5view-build:1.9-static
+    docker run --rm -v ${PWD}:/gta5view -it sypingauto/gta5view-build:1.9-static
     cd /gta5view && mkdir -p build && cd build
     mingw64-qt-cmake ../
     make -j $(nproc --all)
@@ -47,7 +47,3 @@ Grand Theft Auto V Savegame and Snapmatic viewer/editor
     cmake ../
     make -j $(nproc --all)
     sudo make install
-
-#### Download Binary Releases
-
-Go to [gta5view release](https://github.com/SyDevTeam/gta5view/releases) and download the .exe file for Windows, .deb file for Debian/Ubuntu and .dmg file for OS X.

@@ -46,7 +46,6 @@ private:
 
 private slots:
     void pictureDoubleClicked(Qt::MouseButton button);
-    void updateWindowSize(int screenID);
 
 signals:
     void nextPictureRequested();

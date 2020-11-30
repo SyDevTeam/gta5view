@@ -32,45 +32,42 @@ AboutDialog::AboutDialog(QWidget *parent) :
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
 
     // Build Strings
-    QString appVersion = qApp->applicationVersion();
+    const QString appVersion = QApplication::applicationVersion();
     QString buildType = tr(GTA5SYNC_BUILDTYPE);
     buildType.replace("_", " ");
-    QString projectBuild = AppEnv::getBuildDateTime();
-    QString buildStr = GTA5SYNC_BUILDSTRING;
+    const QString projectBuild = AppEnv::getBuildDateTime();
+    const QString buildStr = GTA5SYNC_BUILDSTRING;
 #ifndef GTA5SYNC_BUILDTYPE_REL
 #ifdef GTA5SYNC_COMMIT
-    if (!appVersion.contains("-")) { appVersion = appVersion % "-" % GTA5SYNC_COMMIT; }
+    if (!appVersion.contains("-"))
+        appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
 #endif
 
     // Translator Comments
     //: Translated by translator, example Translated by Syping
-    QString translatedByStr = tr("Translated by %1");
+    const QString translatedByStr = tr("Translated by %1");
     //: Insert your name here and profile here in following scheme, First Translator,First Profile\\nSecond Translator\\nThird Translator,Second Profile
-    QString translatorVal = tr("TRANSLATOR");
+    const QString translatorVal = tr("TRANSLATOR");
     QStringList translatorContent;
-    if (translatorVal != "TRANSLATOR")
-    {
+    if (translatorVal != "TRANSLATOR") {
         const QStringList translatorList = translatorVal.split('\n');
-        for (const QString &translatorStr : translatorList)
-        {
+        for (const QString &translatorStr : translatorList) {
             QStringList translatorStrList = translatorStr.split(',');
-            QString translatorName = translatorStrList.at(0);
+            const QString translatorName = translatorStrList.at(0);
             translatorStrList.removeFirst();
             QString translatorProfile = translatorStrList.join(QString());
-            if (!translatorProfile.isEmpty())
-            {
+            if (!translatorProfile.isEmpty()) {
                 translatorContent += QString("<a href=\"%1\">%2</a>").arg(translatorProfile, translatorName);
             }
-            else
-            {
+            else {
                 translatorContent += translatorName;
             }
         }
     }
 
     // Project Description
-    QString projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
+    const QString projectDes = tr("A project for viewing Grand Theft Auto V Snapmatic<br/>\nPictures and Savegames");
 
     // Copyright Description
     QString copyrightDes1 = tr("Copyright &copy; <a href=\"%1\">%2</a> %3");
@@ -78,40 +75,34 @@ AboutDialog::AboutDialog(QWidget *parent) :
     QString copyrightDes2 = tr("%1 is licensed under <a href=\"https://www.gnu.org/licenses/gpl-3.0.html#content\">GNU GPLv3</a>");
     copyrightDes2 = copyrightDes2.arg(GTA5SYNC_APPSTR);
     QString copyrightDesA;
-    if (!translatorContent.isEmpty())
-    {
+    if (!translatorContent.isEmpty()) {
         copyrightDesA = copyrightDes1 % "<br/>" % translatedByStr.arg(translatorContent.join(", ")) % "<br/>" % copyrightDes2;
     }
-    else
-    {
+    else {
         copyrightDesA = copyrightDes1 % "<br/>" % copyrightDes2;
     }
 
     // Setup User Interface
     ui->setupUi(this);
     aboutStr = ui->labAbout->text();
-    titleStr = this->windowTitle();
+    titleStr = windowTitle();
     ui->labAbout->setText(aboutStr.arg(GTA5SYNC_APPSTR, projectDes, appVersion % " (" % buildType % ")", projectBuild, buildStr, qVersion(), copyrightDesA));
-    this->setWindowTitle(titleStr.arg(GTA5SYNC_APPSTR));
+    setWindowTitle(titleStr.arg(GTA5SYNC_APPSTR));
 
     // Set Icon for Close Button
-    if (QIcon::hasThemeIcon("dialog-close"))
-    {
+    if (QIcon::hasThemeIcon("dialog-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
-    else if (QIcon::hasThemeIcon("gtk-close"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
     }
 
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
-    if (!translatorContent.isEmpty())
-    {
+    if (!translatorContent.isEmpty()) {
         resize(375 * screenRatio, 270 * screenRatio);
     }
-    else
-    {
+    else {
         resize(375 * screenRatio, 260 * screenRatio);
     }
 }
@@ -123,13 +114,11 @@ AboutDialog::~AboutDialog()
 
 void AboutDialog::on_labAbout_linkActivated(const QString &link)
 {
-    if (link.left(12) == "g5e://about?")
-    {
+    if (link.left(12) == "g5e://about?") {
         QStringList aboutStrList = QString(link).remove(0, 12).split(":");
         QMessageBox::information(this, QString::fromUtf8(QByteArray::fromBase64(aboutStrList.at(0).toUtf8())), QString::fromUtf8(QByteArray::fromBase64(aboutStrList.at(1).toUtf8())));
     }
-    else
-    {
+    else {
         QDesktopServices::openUrl(QUrl(link));
     }
 }

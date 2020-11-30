@@ -3,12 +3,12 @@ sudo: required
 
 language: cpp
 
-service:
+services:
   - docker
   
 env:
   global:
-    - BUILD_TYPE=DEV
+    - BUILD_TYPE=REL
 
 matrix:
   include:
@@ -37,6 +37,7 @@ matrix:
     - QT_SELECT=qt5-x86_64-w64-mingw32
     - RELEASE_LABEL="Windows 64-Bit Installer"
   - os: osx
+    osx_image: xcode10.3
     env:
         - BUILD_SCRIPT=osx_ci.sh
         - RELEASE_LABEL="Mac OS X 64-Bit Disk Image"

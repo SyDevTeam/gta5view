@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -20,7 +20,7 @@ Built with Qt %5&lt;br/&gt;
 Running with Qt %6&lt;br/&gt;
 &lt;br/&gt;
 %7</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -37,34 +37,34 @@ Running with Qt %6&lt;br/&gt;
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="48"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Переклад %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="50"/>
+        <location filename="../AboutDialog.cpp" line="51"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translatorcomment>PROFessoR &apos;AppleSOft&apos;,https://steamcommunity.com/id/AppleSOft
 VenJam1n,https://socialclub.rockstargames.com/member/--VenJam1n--
 twitter,https://twitter.com/_VenJam1n</translatorcomment>
-        <translation>VenJam1n,g5e://about?VmVuSmFtMW4=:U3RlYW06IDxhIGhyZWY9Imh0dHBzOi8vc3RlYW1jb21tdW5pdHkuY29tL3Byb2ZpbGVzLzc2NTYxMTk3OTg0NjM1ODE2LyI+UFJPRmVzc29SICdBcHBsZVNPZnQnPC9hPjxici8+U29jaWFsIENsdWI6IDxhIGhyZWY9Imh0dHBzOi8vc29jaWFsY2x1Yi5yb2Nrc3RhcmdhbWVzLmNvbS9tZW1iZXIvLS1WZW5KYW0xbi0tLzU2Mzc1NjkiPlZlbkphbTFuPC9hPjxici8+VHdpdHRlcjogPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9fVmVuSmFtMW4iPlZlbkphbTFuPC9hPg==</translation>
+        <translation>VenJam1n,g5e://about?VmVuSmFtMW4:U3RlYW06IDxhIGhyZWY9Imh0dHBzOi8vc3RlYW1jb21tdW5pdHkuY29tL3Byb2ZpbGVzLzc2NTYxMTk3OTg0NjM1ODE2LyI+UFJPRmVzc29SICdBcHBsZVNPZnQnPC9hPjxici8+U29jaWFsIENsdWI6IDxhIGhyZWY9Imh0dHBzOi8vc29jaWFsY2x1Yi5yb2Nrc3RhcmdhbWVzLmNvbS9tZW1iZXIvLS1WZW5KYW0xbi0tLzU2Mzc1NjkiPlZlbkphbTFuPC9hPjxici8+VHdpdHRlcjogPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9fVmVuSmFtMW4iPlZlbkphbTFuPC9hPg</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="70"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Проект для перегляду Grand Theft Auto V Snapmatic&lt;br/&gt;
 зображень та сейвів</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="76"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>Авторське право &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 ліцензовано під &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
@@ -272,7 +272,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="203"/>
@@ -294,7 +294,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">Х</translation>
+        <translation type="obsolete">Х</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="268"/>
@@ -627,7 +627,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Open with Singleclick</source>
-        <translation type="vanished">Відкривати одиночним кліком</translation>
+        <translation type="obsolete">Відкривати одиночним кліком</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="56"/>
@@ -636,7 +636,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Select with Singleclick</source>
-        <translation type="vanished">Обирати одиночним кліком</translation>
+        <translation type="obsolete">Обирати одиночним кліком</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="66"/>
@@ -894,7 +894,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation type="vanished">Завжди використовуйте шрифт повідомлень (Windows 2003 і раніше)</translation>
+        <translation type="obsolete">Завжди використовуйте шрифт повідомлень (Windows 2003 і раніше)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="786"/>
@@ -1021,14 +1021,14 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="114"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Назва: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Розташування: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Гравці: &lt;/span&gt;%4 (Банда %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Створено: &lt;/span&gt;%8</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Created: &lt;/span&gt;%8</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;Назва: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Розташування: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Гравці: &lt;/span&gt;%4 (Банда %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Створено: &lt;/span&gt;%8</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="174"/>
@@ -1690,11 +1690,11 @@ Press 1 for Default View</source>
     <name>QApplication</name>
     <message>
         <source>Font</source>
-        <translation type="vanished">Шрифт</translation>
+        <translation type="obsolete">Шрифт</translation>
     </message>
     <message>
         <source>Selected Font: %1</source>
-        <translation type="vanished">Вибраний шрифт:%1</translation>
+        <translation type="obsolete">Вибраний шрифт:%1</translation>
     </message>
     <message>
         <location filename="../main.cpp" line="137"/>
@@ -1712,8 +1712,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="23"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Ігрове збереження&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;Ігрове збереження&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="70"/>
@@ -1932,7 +1932,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticEditor.ui" line="57"/>
         <source>Selfie</source>
-        <translation>Селфі</translation>
+        <translation>Автопортрет</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="64"/>
@@ -1942,7 +1942,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../SnapmaticEditor.ui" line="71"/>
         <source>Mugshot</source>
-        <translation>Автопортрет</translation>
+        <translation>Кухоль постріл</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="87"/>

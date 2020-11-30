@@ -25,9 +25,6 @@
 #include <QKeyEvent>
 #include <QPixmap>
 #include <QEvent>
-#if QT_VERSION < 0x060000
-#include <QDesktopWidget>
-#endif
 
 PictureWidget::PictureWidget(QWidget *parent) : QDialog(parent)
 {
@@ -46,9 +43,6 @@ PictureWidget::PictureWidget(QWidget *parent) : QDialog(parent)
 
     QObject::connect(pictureLabel, SIGNAL(mouseDoubleClicked(Qt::MouseButton)), this, SLOT(pictureDoubleClicked(Qt::MouseButton)));
     QObject::connect(pictureLabel, SIGNAL(customContextMenuRequested(QPoint)), parent, SLOT(exportCustomContextMenuRequested(QPoint)));
-#if QT_VERSION < 0x060000
-    QObject::connect(QApplication::desktop(), SIGNAL(resized(int)), this, SLOT(updateWindowSize(int)));
-#endif
 
     setLayout(widgetLayout);
 }
@@ -105,29 +99,4 @@ void PictureWidget::setImage(QImage image_)
     pixmap.setDevicePixelRatio(screenRatioPR);
 #endif
     pictureLabel->setPixmap(pixmap);
-}
-
-void PictureWidget::updateWindowSize(int screenID)
-{
-#if QT_VERSION >= 0x060000
-    Q_UNUSED(screenID)
-    const qreal screenRatioPR = AppEnv::screenRatioPR();
-    QRect desktopRect = QApplication::screenAt(pos())->geometry();
-    move(desktopRect.x(), desktopRect.y());
-    resize(desktopRect.width(), desktopRect.height());
-    showFullScreen();
-    QPixmap pixmap = QPixmap::fromImage(image.scaled(geometry().width() * screenRatioPR, geometry().height() * screenRatioPR, Qt::KeepAspectRatio, Qt::SmoothTransformation));
-#if QT_VERSION >= 0x050600
-    pixmap.setDevicePixelRatio(screenRatioPR);
-#endif
-    pictureLabel->setPixmap(pixmap);
-#else
-    if (screenID == QApplication::desktop()->screenNumber(this)) {
-        QRect desktopRect = QApplication::desktop()->screenGeometry(this);
-        move(desktopRect.x(), desktopRect.y());
-        resize(desktopRect.width(), desktopRect.height());
-        showFullScreen();
-        pictureLabel->setPixmap(QPixmap::fromImage(image.scaled(desktopRect.width(), desktopRect.height(), Qt::KeepAspectRatio, Qt::SmoothTransformation)));
-    }
-#endif
 }

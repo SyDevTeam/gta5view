@@ -10,7 +10,7 @@
     </message>
     <message>
         <location filename="../AboutDialog.ui" line="29"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -20,7 +20,7 @@ Built with Qt %5&lt;br/&gt;
 Running with Qt %6&lt;br/&gt;
 &lt;br/&gt;
 %7</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;%1&lt;/span&gt;&lt;br/&gt;
 &lt;br/&gt;
 %2&lt;br/&gt;
 &lt;br/&gt;
@@ -37,31 +37,31 @@ Läuft auf Qt %6&lt;br/&gt;
         <translation>S&amp;chließen</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="48"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Übersetzt von %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="50"/>
+        <location filename="../AboutDialog.cpp" line="51"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
-        <translation>Syping,g5e://about?U3lwaW5n:R2l0TGFiOiA8YSBocmVmPSJodHRwczovL2dpdGxhYi5jb20vU3lwaW5nIj5TeXBpbmc8L2E+PGJyLz5HaXRIdWI6IDxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9TeXBpbmciPlN5cGluZzwvYT48YnIvPlNvY2lhbCBDbHViOiA8YSBocmVmPSJodHRwczovL3NvY2lhbGNsdWIucm9ja3N0YXJnYW1lcy5jb20vbWVtYmVyL1N5cGluZy80NjMwMzA1NiI+U3lwaW5nPC9hPg==</translation>
+        <translation>Syping,g5e://about?U3lwaW5n:R2l0TGFiOiA8YSBocmVmPSJodHRwczovL2dpdGxhYi5jb20vU3lwaW5nIj5TeXBpbmc8L2E+PGJyLz5HaXRIdWI6IDxhIGhyZWY9Imh0dHBzOi8vZ2l0aHViLmNvbS9TeXBpbmciPlN5cGluZzwvYT48YnIvPlNvY2lhbCBDbHViOiA8YSBocmVmPSJodHRwczovL3NvY2lhbGNsdWIucm9ja3N0YXJnYW1lcy5jb20vbWVtYmVyL1N5cGluZy80NjMwMzA1NiI+U3lwaW5nPC9hPg</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="70"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Ein Projekt zum ansehen von Grand Theft Auto V&lt;br/&gt;
 Snapmatic Bilder und Spielständen</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="76"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="78"/>
+        <location filename="../AboutDialog.cpp" line="75"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 ist lizenziert unter &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
@@ -269,7 +269,7 @@ Snapmatic Bilder und Spielständen</translation>
     </message>
     <message>
         <source>...</source>
-        <translation type="vanished">...</translation>
+        <translation type="obsolete">...</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="227"/>
@@ -294,7 +294,7 @@ Snapmatic Bilder und Spielständen</translation>
     </message>
     <message>
         <source>X</source>
-        <translation type="vanished">X</translation>
+        <translation type="obsolete">X</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="268"/>
@@ -614,7 +614,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Open with Singleclick</source>
-        <translation type="vanished">Ein Klick zum öffnen</translation>
+        <translation type="obsolete">Ein Klick zum öffnen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="56"/>
@@ -623,7 +623,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Select with Singleclick</source>
-        <translation type="vanished">Ein Klick zum auswählen</translation>
+        <translation type="obsolete">Ein Klick zum auswählen</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="66"/>
@@ -857,7 +857,7 @@ Y: %2</translation>
     </message>
     <message>
         <source>Always use Message Font (Windows 2003 and earlier)</source>
-        <translation type="vanished">Immer Nachrichtenschrift nutzen (Windows 2003 und früher)</translation>
+        <translation type="obsolete">Immer Nachrichtenschrift nutzen (Windows 2003 und früher)</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="596"/>
@@ -1017,14 +1017,14 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="114"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Created: &lt;/span&gt;%8</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Titel: &lt;/span&gt;%6&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Standort: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Spieler: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
-&lt;span style=&quot; font-weight:600;&quot;&gt;Erstellt: &lt;/span&gt;%8</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Created: &lt;/span&gt;%8</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;Titel: &lt;/span&gt;%6&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Standort: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Spieler: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
+&lt;span style=&quot;font-weight:600&quot;&gt;Erstellt: &lt;/span&gt;%8</translation>
     </message>
     <message>
         <location filename="../PictureDialog.ui" line="174"/>
@@ -1699,8 +1699,8 @@ Drücke 1 für Standardmodus</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="23"/>
-        <source>&lt;span style=&quot; font-weight:600;&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
-        <translation>&lt;span style=&quot; font-weight:600;&quot;&gt;Spielstand&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
+        <source>&lt;span style=&quot;font-weight:600&quot;&gt;Savegame&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</source>
+        <translation>&lt;span style=&quot;font-weight:600&quot;&gt;Spielstand&lt;/span&gt;&lt;br&gt;&lt;br&gt;%1</translation>
     </message>
     <message>
         <location filename="../SavegameDialog.ui" line="70"/>
@@ -1929,7 +1929,7 @@ Drücke 1 für Standardmodus</translation>
     <message>
         <location filename="../SnapmaticEditor.ui" line="71"/>
         <source>Mugshot</source>
-        <translation>Fahndungsfoto</translation>
+        <translation>Polizeifoto</translation>
     </message>
     <message>
         <location filename="../SnapmaticEditor.ui" line="94"/>
