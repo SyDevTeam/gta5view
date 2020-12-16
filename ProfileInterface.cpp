@@ -1670,7 +1670,7 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
     }
     QMenu contextMenu(picWidget);
     const int selectedCount = selectedWidgets();
-    if (contentMode < 20 || selectedCount <= 1) {
+    if (contentMode < 20 || selectedCount == 0) {
         QMenu editMenu(SnapmaticWidget::tr("Edi&t"), picWidget);
         if (picWidget->isHidden()) {
             editMenu.addAction(SnapmaticWidget::tr("Show &In-game"), picWidget, SLOT(makePictureVisibleSlot()));
@@ -1750,7 +1750,7 @@ void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
     }
     QMenu contextMenu(sgdWidget);
     const int selectedCount = selectedWidgets();
-    if (contentMode < 20 || selectedCount <= 1) {
+    if (contentMode < 20 || selectedCount == 0) {
         contextMenu.addAction(SavegameWidget::tr("&View"), sgdWidget, SLOT(on_cmdView_clicked()));
         contextMenu.addAction(SavegameWidget::tr("&Export"), sgdWidget, SLOT(on_cmdCopy_clicked()));
         contextMenu.addAction(SavegameWidget::tr("&Remove"), sgdWidget, SLOT(on_cmdDelete_clicked()));

@@ -44,7 +44,7 @@
 #endif
 
 #ifndef GTA5SYNC_APPVER
-#define GTA5SYNC_APPVER "1.9.0"
+#define GTA5SYNC_APPVER "1.9.1"
 #endif
 
 #if __cplusplus

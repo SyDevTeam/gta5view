@@ -4,8 +4,8 @@ IDI_ICON1 ICON DISCARDABLE "5sync.ico"
 CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "gta5view.exe.manifest"
 #include <windows.h>
 VS_VERSION_INFO     VERSIONINFO
-FILEVERSION         1, 9, 0, 0
-PRODUCTVERSION      1, 9, 0, 0
+FILEVERSION         1, 9, 1, 0
+PRODUCTVERSION      1, 9, 1, 0
 FILEFLAGSMASK       0x3fL
 FILEFLAGS           0
 FILEOS              VOS_NT_WINDOWS32
@@ -22,12 +22,12 @@ BEGIN
         BEGIN
             VALUE   "CompanyName",      "Syping"
             VALUE   "FileDescription",  "gta5view"
-            VALUE   "FileVersion",      "1.9.0"
+            VALUE   "FileVersion",      "1.9.1"
             VALUE   "InternalName",     "gta5view"
             VALUE   "LegalCopyright",   "Copyright © 2016-2020 Syping"
             VALUE   "OriginalFilename", "gta5view.exe"
             VALUE   "ProductName",      "gta5view"
-            VALUE   "ProductVersion",   "1.9.0"
+            VALUE   "ProductVersion",   "1.9.1"
         END
     END
 END
