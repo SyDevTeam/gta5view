@@ -63,7 +63,7 @@ void TranslationClass::loadTranslation(QApplication *app)
         {
             app->installTranslator(&inQtTranslator);
         }
-#if QT_VERSION <= 0x060000
+#if QT_VERSION >= 0x060000
         QLocale::setDefault(QLocale(currentLanguage));
 #else
         QLocale::setDefault(currentLanguage);
@@ -151,7 +151,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-#if QT_VERSION <= 0x060000
+#if QT_VERSION >= 0x060000
             QLocale::setDefault(QLocale(currentLanguage));
 #else
             QLocale::setDefault(currentLanguage);
@@ -184,7 +184,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-#if QT_VERSION <= 0x060000
+#if QT_VERSION >= 0x060000
             QLocale::setDefault(QLocale(currentLanguage));
 #else
             QLocale::setDefault(currentLanguage);
@@ -207,7 +207,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-#if QT_VERSION <= 0x060000
+#if QT_VERSION >= 0x060000
             QLocale::setDefault(QLocale(currentLanguage));
 #else
             QLocale::setDefault(currentLanguage);
@@ -235,7 +235,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-#if QT_VERSION <= 0x060000
+#if QT_VERSION >= 0x060000
             QLocale::setDefault(QLocale(currentLanguage));
 #else
             QLocale::setDefault(currentLanguage);
@@ -256,7 +256,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             {
                 app->installTranslator(&inQtTranslator);
             }
-#if QT_VERSION <= 0x060000
+#if QT_VERSION >= 0x060000
             QLocale::setDefault(QLocale(currentLanguage));
 #else
             QLocale::setDefault(currentLanguage);

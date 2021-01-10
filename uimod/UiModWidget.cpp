@@ -46,26 +46,21 @@ void UiModWidget::setImageDropEnabled(bool enabled)
 
 void UiModWidget::dragEnterEvent(QDragEnterEvent *dragEnterEvent)
 {
-    if (filesDropEnabled && dragEnterEvent->mimeData()->hasUrls())
-    {
-        QStringList pathList;
+    if (filesDropEnabled && dragEnterEvent->mimeData()->hasUrls()) {
+        QVector<QString> pathList;
         const QList<QUrl> urlList = dragEnterEvent->mimeData()->urls();
 
-        for (const QUrl &currentUrl : urlList)
-        {
-            if (currentUrl.isLocalFile())
-            {
+        for (const QUrl &currentUrl : urlList) {
+            if (currentUrl.isLocalFile()) {
                 pathList.append(currentUrl.toLocalFile());
             }
         }
 
-        if (!pathList.isEmpty())
-        {
+        if (!pathList.isEmpty()) {
             dragEnterEvent->acceptProposedAction();
         }
     }
-    else if (imageDropEnabled && dragEnterEvent->mimeData()->hasImage())
-    {
+    else if (imageDropEnabled && dragEnterEvent->mimeData()->hasImage()) {
         dragEnterEvent->acceptProposedAction();
     }
 }
@@ -80,11 +75,7 @@ void UiModWidget::paintEvent(QPaintEvent *paintEvent)
 {
     Q_UNUSED(paintEvent)
     QStyleOption opt;
-#if QT_VERSION <= 0x060000
     opt.initFrom(this);
-#else
-    opt.init(this);
-#endif
     QPainter p(this);
     style()->drawPrimitive(QStyle::PE_Widget, &opt, &p, this);
 }
