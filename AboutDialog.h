@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@ class AboutDialog;
 class AboutDialog : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit AboutDialog(QWidget *parent = 0);
     ~AboutDialog();

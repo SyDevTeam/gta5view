@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2019 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -33,15 +33,13 @@ AboutDialog::AboutDialog(QWidget *parent) :
 
     // Build Strings
     const QString appVersion = QApplication::applicationVersion();
-    QString buildType = tr(GTA5SYNC_BUILDTYPE);
-    buildType.replace("_", " ");
+    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
+    const QString buildType = tr(literalBuildType);
     const QString projectBuild = AppEnv::getBuildDateTime();
     const QString buildStr = GTA5SYNC_BUILDSTRING;
-#ifndef GTA5SYNC_BUILDTYPE_REL
 #ifdef GTA5SYNC_COMMIT
-    if (!appVersion.contains("-"))
+    if (literalBuildType == REL_BUILDTYPE && !appVersion.contains("-"))
         appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
-#endif
 #endif
 
     // Translator Comments

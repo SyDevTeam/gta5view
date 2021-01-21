@@ -37,67 +37,68 @@ Fonctionne avec Qt %6&lt;br/&gt;
         <translation>&amp;Fermer</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="49"/>
+        <location filename="../AboutDialog.cpp" line="47"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Traduit par %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="51"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation>Ganjalo,https://github.com/Ganjalo/
 XeriosG,g5e://about?WGVyaW9zRw:RGlzY29yZDogWGVyaW9zRyM1MzIxPGJyLz5TdGVhbTogPGEgaHJlZj0iaHR0cHM6Ly9zdGVhbWNvbW11bml0eS5jb20vcHJvZmlsZXMvNzY1NjExOTg0MjU2NjU3MjQvIj5YZXJpb3NHPC9hPg</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="70"/>
+        <location filename="../AboutDialog.cpp" line="68"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Un outil pour gérer les photos Snapmatic&lt;br/&gt;
 et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="71"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="75"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 est distribué sous license &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../config.h" line="53"/>
+        <location filename="../config.h" line="24"/>
         <source>Release</source>
         <translation>Release</translation>
     </message>
     <message>
-        <location filename="../config.h" line="59"/>
+        <location filename="../config.h" line="25"/>
         <source>Release Candidate</source>
         <translation>Release Candidate</translation>
     </message>
     <message>
-        <location filename="../config.h" line="65"/>
+        <location filename="../config.h" line="29"/>
         <source>Daily Build</source>
         <translation>Daily Build</translation>
     </message>
     <message>
-        <location filename="../config.h" line="71"/>
+        <location filename="../config.h" line="28"/>
         <source>Developer</source>
         <translation>Developer</translation>
     </message>
     <message>
-        <location filename="../config.h" line="77"/>
+        <location filename="../config.h" line="26"/>
         <source>Beta</source>
         <translation>Beta</translation>
     </message>
     <message>
-        <location filename="../config.h" line="83"/>
+        <location filename="../config.h" line="27"/>
         <source>Alpha</source>
         <translation>Alpha</translation>
     </message>
     <message>
-        <location filename="../config.h" line="88"/>
+        <location filename="../config.h" line="30"/>
+        <location filename="../config.h" line="59"/>
         <source>Custom</source>
         <translation>Personnalisé</translation>
     </message>
@@ -305,7 +306,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.ui" line="311"/>
         <source>Resolution:</source>
-        <translation>Résolution:</translation>
+        <translation>Résolution :</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="324"/>

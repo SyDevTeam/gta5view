@@ -11,13 +11,12 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-option(QT6_BUILD "Build gta5view with Qt6" OFF)
-if(QT6_BUILD)
-    set(QT_VERSION_MAJOR 6)
+set(FORCE_QT_VERSION "" CACHE STRING "Force Qt Version")
+if(FORCE_QT_VERSION)
+    set(QT_VERSION_MAJOR ${FORCE_QT_VERSION})
 else()
-    set(QT_VERSION_MAJOR 5)
+    find_package(QT NAMES Qt6 Qt5 COMPONENTS Core REQUIRED)
 endif()
-
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Svg Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS LinguistTools QUIET)
 
@@ -192,11 +191,9 @@ else()
     )
 endif()
 
-option(FLATPAK_BUILD "Flatpak modifications and identifications" OFF)
+option(FLATPAK_BUILD "Flatpak modifications and optimisations" OFF)
 if(FLATPAK_BUILD)
     list(APPEND GTA5VIEW_DEFINES
-        "-DGTA5SYNC_BUILDCODE=\"Flatpak\""
-        "-DGTA5SYNC_BUILDTYPE=\"Flatpak\""
         -DGTA5SYNC_FLATPAK
     )
 endif()
@@ -275,37 +272,6 @@ if(GTA5VIEW_BUILDTYPE)
     list(APPEND GTA5VIEW_DEFINES
         "-DGTA5SYNC_BUILDTYPE=\"${GTA5VIEW_BUILDTYPE}\""
     )
-else()
-    if(GTA5VIEW_BUILDTYPE_ALPHA)
-        list(APPEND GTA5VIEW_DEFINES
-            -DGTA5SYNC_BUILDTYPE_ALPHA
-        )
-    endif()
-    if(GTA5VIEW_BUILDTYPE_BETA)
-        list(APPEND GTA5VIEW_DEFINES
-            -DGTA5SYNC_BUILDTYPE_BETA
-        )
-    endif()
-    if(GTA5VIEW_BUILDTYPE_DEV)
-        list(APPEND GTA5VIEW_DEFINES
-            -DGTA5SYNC_BUILDTYPE_DEV
-        )
-    endif()
-    if(GTA5VIEW_BUILDTYPE_DAILY)
-        list(APPEND GTA5VIEW_DEFINES
-            -DGTA5SYNC_BUILDTYPE_DAILY
-        )
-    endif()
-    if(GTA5VIEW_BUILDTYPE_RC)
-        list(APPEND GTA5VIEW_DEFINES
-            -DGTA5SYNC_BUILDTYPE_RC
-        )
-    endif()
-    if(GTA5VIEW_BUILDTYPE_REL)
-        list(APPEND GTA5VIEW_DEFINES
-            -DGTA5SYNC_BUILDTYPE_REL
-        )
-    endif()
 endif()
 if(GTA5VIEW_COMMIT)
     list(APPEND GTA5VIEW_DEFINES
@@ -347,8 +313,6 @@ endif()
 
 if(Qt5Core_VERSION VERSION_GREATER_EQUAL "5.14.0")
     qt5_import_plugins(gta5view INCLUDE Qt5::QSvgPlugin)
-elseif(Qt6Core_VERSION VERSION_GREATER_EQUAL "6.0")
-    qt6_import_plugins(gta5view INCLUDE Qt6::QSvgPlugin)
 endif()
 
 target_compile_definitions(gta5view PRIVATE ${GTA5VIEW_DEFINES})

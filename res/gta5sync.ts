@@ -28,65 +28,66 @@ Running with Qt %6&lt;br/&gt;
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="49"/>
+        <location filename="../AboutDialog.cpp" line="47"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="51"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="70"/>
+        <location filename="../AboutDialog.cpp" line="68"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="71"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="75"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="53"/>
+        <location filename="../config.h" line="24"/>
         <source>Release</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="59"/>
+        <location filename="../config.h" line="25"/>
         <source>Release Candidate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="65"/>
+        <location filename="../config.h" line="29"/>
         <source>Daily Build</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="71"/>
+        <location filename="../config.h" line="28"/>
         <source>Developer</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="77"/>
+        <location filename="../config.h" line="26"/>
         <source>Beta</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="83"/>
+        <location filename="../config.h" line="27"/>
         <source>Alpha</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../config.h" line="88"/>
+        <location filename="../config.h" line="30"/>
+        <location filename="../config.h" line="59"/>
         <source>Custom</source>
         <translation type="unfinished"></translation>
     </message>

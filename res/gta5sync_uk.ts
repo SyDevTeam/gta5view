@@ -37,13 +37,13 @@ Running with Qt %6&lt;br/&gt;
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="49"/>
+        <location filename="../AboutDialog.cpp" line="47"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>Переклад %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="51"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translatorcomment>PROFessoR &apos;AppleSOft&apos;,https://steamcommunity.com/id/AppleSOft
@@ -52,54 +52,55 @@ twitter,https://twitter.com/_VenJam1n</translatorcomment>
         <translation>VenJam1n,g5e://about?VmVuSmFtMW4:U3RlYW06IDxhIGhyZWY9Imh0dHBzOi8vc3RlYW1jb21tdW5pdHkuY29tL3Byb2ZpbGVzLzc2NTYxMTk3OTg0NjM1ODE2LyI+UFJPRmVzc29SICdBcHBsZVNPZnQnPC9hPjxici8+U29jaWFsIENsdWI6IDxhIGhyZWY9Imh0dHBzOi8vc29jaWFsY2x1Yi5yb2Nrc3RhcmdhbWVzLmNvbS9tZW1iZXIvLS1WZW5KYW0xbi0tLzU2Mzc1NjkiPlZlbkphbTFuPC9hPjxici8+VHdpdHRlcjogPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9fVmVuSmFtMW4iPlZlbkphbTFuPC9hPg</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="70"/>
+        <location filename="../AboutDialog.cpp" line="68"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>Проект для перегляду Grand Theft Auto V Snapmatic&lt;br/&gt;
 зображень та сейвів</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="71"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>Авторське право &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="75"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 ліцензовано під &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../config.h" line="53"/>
+        <location filename="../config.h" line="24"/>
         <source>Release</source>
         <translation>Реліз</translation>
     </message>
     <message>
-        <location filename="../config.h" line="59"/>
+        <location filename="../config.h" line="25"/>
         <source>Release Candidate</source>
         <translation>Реліз-Кандидат</translation>
     </message>
     <message>
-        <location filename="../config.h" line="65"/>
+        <location filename="../config.h" line="29"/>
         <source>Daily Build</source>
         <translation>Щоденна Збірка</translation>
     </message>
     <message>
-        <location filename="../config.h" line="71"/>
+        <location filename="../config.h" line="28"/>
         <source>Developer</source>
         <translation>Розробник</translation>
     </message>
     <message>
-        <location filename="../config.h" line="77"/>
+        <location filename="../config.h" line="26"/>
         <source>Beta</source>
         <translation>Бета</translation>
     </message>
     <message>
-        <location filename="../config.h" line="83"/>
+        <location filename="../config.h" line="27"/>
         <source>Alpha</source>
         <translation>Альфа</translation>
     </message>
     <message>
-        <location filename="../config.h" line="88"/>
+        <location filename="../config.h" line="30"/>
+        <location filename="../config.h" line="59"/>
         <source>Custom</source>
         <translation>Custom</translation>
     </message>

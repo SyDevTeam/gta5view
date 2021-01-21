@@ -37,65 +37,66 @@ Running with Qt %6&lt;br/&gt;
         <translation>關閉(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="49"/>
+        <location filename="../AboutDialog.cpp" line="47"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>繁體中文化: %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="51"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation>Ray,https://steamcommunity.com/profiles/76561198282701714/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="70"/>
+        <location filename="../AboutDialog.cpp" line="68"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>一個 Grand Theft Auto V Snapmatic 圖片、遊戲存檔檢視專案</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="71"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>版權 &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="75"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1 使用 &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt; 授權條款發布</translation>
     </message>
     <message>
-        <location filename="../config.h" line="53"/>
+        <location filename="../config.h" line="24"/>
         <source>Release</source>
         <translation>正式版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="59"/>
+        <location filename="../config.h" line="25"/>
         <source>Release Candidate</source>
         <translation>最終測試版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="65"/>
+        <location filename="../config.h" line="29"/>
         <source>Daily Build</source>
         <translation>每日建置版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="71"/>
+        <location filename="../config.h" line="28"/>
         <source>Developer</source>
         <translation>開發版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="77"/>
+        <location filename="../config.h" line="26"/>
         <source>Beta</source>
         <translation>Beta 版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="83"/>
+        <location filename="../config.h" line="27"/>
         <source>Alpha</source>
         <translation>Alpha 版本</translation>
     </message>
     <message>
-        <location filename="../config.h" line="88"/>
+        <location filename="../config.h" line="30"/>
+        <location filename="../config.h" line="59"/>
         <source>Custom</source>
         <translation>自訂</translation>
     </message>

@@ -37,66 +37,67 @@ Qt로 실행 %6&lt;br/&gt;
         <translation>닫기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="49"/>
+        <location filename="../AboutDialog.cpp" line="47"/>
         <source>Translated by %1</source>
         <extracomment>Translated by translator, example Translated by Syping</extracomment>
         <translation>번역 %1</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="51"/>
+        <location filename="../AboutDialog.cpp" line="49"/>
         <source>TRANSLATOR</source>
         <extracomment>Insert your name here and profile here in following scheme, First Translator,First Profile\nSecond Translator\nThird Translator,Second Profile</extracomment>
         <translation>앙시모사우루스,https://steamcommunity.com/profiles/76561198166105984/</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="70"/>
+        <location filename="../AboutDialog.cpp" line="68"/>
         <source>A project for viewing Grand Theft Auto V Snapmatic&lt;br/&gt;
 Pictures and Savegames</source>
         <translation>이 프로그램은 GTA 5 스냅매틱을 수정하고 보기 위한 프로젝트입니다.&lt;br/&gt;
 이미지 뷰어 및 세이브 파일 관리 지원</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="73"/>
+        <location filename="../AboutDialog.cpp" line="71"/>
         <source>Copyright &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</source>
         <translation>저작권 &amp;copy; &lt;a href=&quot;%1&quot;&gt;%2&lt;/a&gt; %3</translation>
     </message>
     <message>
-        <location filename="../AboutDialog.cpp" line="75"/>
+        <location filename="../AboutDialog.cpp" line="73"/>
         <source>%1 is licensed under &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt;</source>
         <translation>%1는 &lt;a href=&quot;https://www.gnu.org/licenses/gpl-3.0.html#content&quot;&gt;GNU GPLv3&lt;/a&gt; 에 따라 라이센스가 부여됩니다</translation>
     </message>
     <message>
-        <location filename="../config.h" line="53"/>
+        <location filename="../config.h" line="24"/>
         <source>Release</source>
         <translation>릴리즈</translation>
     </message>
     <message>
-        <location filename="../config.h" line="59"/>
+        <location filename="../config.h" line="25"/>
         <source>Release Candidate</source>
         <translation>릴리즈 후보</translation>
     </message>
     <message>
-        <location filename="../config.h" line="65"/>
+        <location filename="../config.h" line="29"/>
         <source>Daily Build</source>
         <translation>일일 빌드</translation>
     </message>
     <message>
-        <location filename="../config.h" line="71"/>
+        <location filename="../config.h" line="28"/>
         <source>Developer</source>
         <translation>개발자</translation>
     </message>
     <message>
-        <location filename="../config.h" line="77"/>
+        <location filename="../config.h" line="26"/>
         <source>Beta</source>
         <translation>베타</translation>
     </message>
     <message>
-        <location filename="../config.h" line="83"/>
+        <location filename="../config.h" line="27"/>
         <source>Alpha</source>
         <translation>알파</translation>
     </message>
     <message>
-        <location filename="../config.h" line="88"/>
+        <location filename="../config.h" line="30"/>
+        <location filename="../config.h" line="59"/>
         <source>Custom</source>
         <translation>사용자 지정</translation>
     </message>

@@ -21,6 +21,13 @@
 
 #if __cplusplus
 #include <QString>
+#define REL_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Release")
+#define RC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Release Candidate")
+#define BETA_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Beta")
+#define ALPHA_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Alpha")
+#define DEV_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Developer")
+#define DAILY_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Daily Build")
+#define CUSTOM_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Custom")
 #endif
 
 #ifndef GTA5SYNC_APPVENDOR
@@ -48,42 +55,6 @@
 #endif
 
 #if __cplusplus
-#ifdef GTA5SYNC_BUILDTYPE_REL
-#ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Release")
-#endif
-#endif
-
-#ifdef GTA5SYNC_BUILDTYPE_RC
-#ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Release Candidate")
-#endif
-#endif
-
-#ifdef GTA5SYNC_BUILDTYPE_DAILY
-#ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Daily Build")
-#endif
-#endif
-
-#ifdef GTA5SYNC_BUILDTYPE_DEV
-#ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Developer")
-#endif
-#endif
-
-#ifdef GTA5SYNC_BUILDTYPE_BETA
-#ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Beta")
-#endif
-#endif
-
-#ifdef GTA5SYNC_BUILDTYPE_ALPHA
-#ifndef GTA5SYNC_BUILDTYPE
-#define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Alpha")
-#endif
-#endif
-
 #ifndef GTA5SYNC_BUILDTYPE
 #define GTA5SYNC_BUILDTYPE QT_TRANSLATE_NOOP("AboutDialog", "Custom")
 #endif

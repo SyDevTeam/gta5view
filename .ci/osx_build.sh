@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Creating folders
 cd ${PROJECT_DIR} && \
