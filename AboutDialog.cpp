@@ -32,7 +32,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
 
     // Build Strings
-    const QString appVersion = QApplication::applicationVersion();
+    QString appVersion = QApplication::applicationVersion();
     const char* literalBuildType = GTA5SYNC_BUILDTYPE;
     const QString buildType = tr(literalBuildType);
     const QString projectBuild = AppEnv::getBuildDateTime();
