@@ -292,7 +292,11 @@ void TranslationClass::loadTranslation(QApplication *app)
         {
             app->installTranslator(&inQtTranslator);
         }
+#if QT_VERSION >= 0x060000
+        QLocale::setDefault(QLocale(currentLanguage));
+#else
         QLocale::setDefault(currentLanguage);
+#endif
         isLangLoaded = true;
     }
 #endif
@@ -304,8 +308,7 @@ QStringList TranslationClass::listTranslations(const QString &langPath)
     langDir.setNameFilters(QStringList("gta5sync_*.qm"));
     langDir.setPath(langPath);
     QStringList availableLanguages;
-    for (QString lang : langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort))
-    {
+    for (const QString &lang : langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort)) {
         availableLanguages << QString(lang).remove("gta5sync_").remove(".qm");
     }
     return availableLanguages;
@@ -317,8 +320,7 @@ QStringList TranslationClass::listAreaTranslations()
     langDir.setNameFilters(QStringList("global.*.ini"));
     langDir.setPath(":/global");
     QStringList availableLanguages;
-    for (QString lang : langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort))
-    {
+    for (const QString &lang : langDir.entryList(QDir::Files | QDir::NoDotAndDotDot, QDir::NoSort)) {
         availableLanguages << QString(lang).remove("global.").remove(".ini");
     }
     return availableLanguages;

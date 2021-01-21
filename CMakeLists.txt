@@ -148,6 +148,16 @@ set(GTA5VIEW_FORMS
     UserInterface.ui
 )
 
+set(GTA5VIEW_TRANSLATIONS
+    res/gta5sync_de.ts
+    res/gta5sync_en_US.ts
+    res/gta5sync_fr.ts
+    res/gta5sync_ko.ts
+    res/gta5sync_ru.ts
+    res/gta5sync_uk.ts
+    res/gta5sync_zh_TW.ts
+)
+
 list(APPEND GTA5VIEW_RESOURCES
     res/app.qrc
     res/global.qrc
@@ -155,19 +165,19 @@ list(APPEND GTA5VIEW_RESOURCES
 set_property(SOURCE res/global.qrc PROPERTY AUTORCC_OPTIONS "-threshold;0;-compress;9")
 
 if(Qt5LinguistTools_FOUND)
-    qt5_add_translation(GTA5VIEW_TRANSLATIONS
-        res/gta5sync_de.ts
-        res/gta5sync_en_US.ts
-        res/gta5sync_fr.ts
-        res/gta5sync_ko.ts
-        res/gta5sync_ru.ts
-        res/gta5sync_uk.ts
-        res/gta5sync_zh_TW.ts
+    qt5_add_translation(GTA5VIEW_QMFILES
+        ${GTA5VIEW_TRANSLATIONS}
         res/qt5/qtbase_en_GB.ts
     )
-    add_custom_target(translations DEPENDS ${GTA5VIEW_TRANSLATIONS})
+    set(LINGUIST_FOUND TRUE)
+elseif(Qt6LinguistTools_FOUND)
+    qt6_add_translation(GTA5VIEW_QMFILES
+        ${GTA5VIEW_TRANSLATIONS}
+        res/qt6/qtbase_en_GB.ts
+    )
+    set(LINGUIST_FOUND TRUE)
 else()
-    set(GTA5VIEW_TRANSLATIONS
+    set(GTA5VIEW_QMFILES
         res/gta5sync_de.qm
         res/gta5sync_en_US.qm
         res/gta5sync_fr.qm
@@ -303,7 +313,8 @@ add_executable(gta5view
     ${GTA5VIEW_RESOURCES}
 )
 
-if(Qt5LinguistTools_FOUND AND QCONF_BUILD)
+if(LINGUIST_FOUND AND QCONF_BUILD)
+    add_custom_target(translations DEPENDS ${GTA5VIEW_QMFILES})
     add_dependencies(gta5view translations)
 endif()
 
@@ -333,5 +344,5 @@ install(FILES res/gta5view-256.png DESTINATION share/icons/hicolor/256x256/apps 
 install(FILES res/gta5view-512.png DESTINATION share/icons/hicolor/512x512/apps RENAME de.syping.gta5view.png)
 install(FILES res/de.syping.gta5view.png DESTINATION share/pixmaps)
 if(QCONF_BUILD)
-    install(FILES ${GTA5VIEW_TRANSLATIONS} DESTINATION share/gta5view/translations)
+    install(FILES ${GTA5VIEW_QMFILES} DESTINATION share/gta5view/translations)
 endif()
