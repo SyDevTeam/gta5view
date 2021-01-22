@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Prepare environment variable
 export GTA5VIEW_EXECUTABLE=gta5view-${EXECUTABLE_VERSION}${EXECUTABLE_ARCH}.exe && \
@@ -13,7 +13,7 @@ mkdir -p assets && \
 # Starting build
 cd build && \
 mingw64-qt-cmake \
-   ${CMAKE_BUILD_TYPE} \
+   "${CMAKE_BUILD_TYPE}" \
    "-DGTA5VIEW_BUILDCODE=${PACKAGE_CODE}" \
    "-DGTA5VIEW_APPVER=${APPLICATION_VERSION}" \
    "-DGTA5VIEW_COMMIT=${APPLICATION_COMMIT}" \

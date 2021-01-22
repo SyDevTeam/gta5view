@@ -15,7 +15,7 @@ matrix:
   - env:
     - BUILD_SCRIPT=debian_docker.sh
     - RELEASE_LABEL="Debian 64-Bit Package"
-    - DEBIAN_VERSION=stretch
+    - DEBIAN_VERSION=buster
     - DOCKER_USER=amd64
     - APT_INSTALL=clang
   - env:
