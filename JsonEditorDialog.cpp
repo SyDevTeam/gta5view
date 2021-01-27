@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2018 Syping
+* Copyright (C) 2017-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -212,7 +212,11 @@ bool JsonEditorDialog::saveJsonContent()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "JSONEdited";
                 jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                 jsonDocument.setObject(jsonObject);
                 Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
             }

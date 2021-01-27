@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -148,12 +148,10 @@ void PictureDialog::setupPictureDialog()
     // Avatar area
     qreal screenRatio = AppEnv::screenRatio();
     qreal screenRatioPR = AppEnv::screenRatioPR();
-    if (screenRatio != 1 || screenRatioPR != 1)
-    {
+    if (screenRatio != 1 || screenRatioPR != 1) {
         avatarAreaPicture = QImage(":/img/avatararea.png").scaledToHeight(snapmaticResolution.height() * screenRatio * screenRatioPR, Qt::FastTransformation);
     }
-    else
-    {
+    else {
         avatarAreaPicture = QImage(":/img/avatararea.png");
     }
     avatarLocX = 145;
@@ -189,17 +187,14 @@ void PictureDialog::setupPictureDialog()
     connect(ui->labJSON, SIGNAL(resized(QSize)), this, SLOT(adaptNewDialogSize(QSize)));
 
     // Set Icon for Close Button
-    if (QIcon::hasThemeIcon("dialog-close"))
-    {
+    if (QIcon::hasThemeIcon("dialog-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
-    else if (QIcon::hasThemeIcon("gtk-close"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
     }
 
     installEventFilter(this);
-    installEventFilter(ui->labPicture);
 
     // DPI calculation
     ui->hlButtons->setSpacing(6 * screenRatio);
@@ -214,32 +209,6 @@ void PictureDialog::setupPictureDialog()
 
 PictureDialog::~PictureDialog()
 {
-#ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050200
-    if (naviEnabled)
-    {
-        for (QObject *obj : layout()->menuBar()->children())
-        {
-            delete obj;
-        }
-        delete layout()->menuBar();
-    }
-#endif
-#else
-    if (naviEnabled)
-    {
-        for (QObject *obj : layout()->menuBar()->children())
-        {
-            delete obj;
-        }
-        delete layout()->menuBar();
-    }
-#endif
-    for (QObject *obj : manageMenu->children())
-    {
-        delete obj;
-    }
-    delete manageMenu;
     delete ui;
 }
 
@@ -247,9 +216,7 @@ void PictureDialog::closeEvent(QCloseEvent *ev)
 {
     Q_UNUSED(ev)
     if (primaryWindow)
-    {
         emit endDatabaseThread();
-    }
 }
 
 void PictureDialog::addPreviousNextButtons()
@@ -343,12 +310,10 @@ void PictureDialog::previousPictureRequestedSlot()
 bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
 {
     bool returnValue = false;
-    if (obj == this || obj == ui->labPicture)
-    {
-        if (ev->type() == QEvent::KeyPress)
-        {
+    if (obj == this || obj == ui->labPicture) {
+        if (ev->type() == QEvent::KeyPress) {
             QKeyEvent *keyEvent = dynamic_cast<QKeyEvent*>(ev);
-            switch (keyEvent->key()){
+            switch (keyEvent->key()) {
             case Qt::Key_Left:
                 emit previousPictureRequested();
                 returnValue = true;
@@ -358,25 +323,21 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 returnValue = true;
                 break;
             case Qt::Key_1:
-                if (previewMode)
-                {
+                if (previewMode) {
                     previewMode = false;
                     renderPicture();
                 }
-                else
-                {
+                else {
                     previewMode = true;
                     renderPicture();
                 }
                 break;
             case Qt::Key_2:
-                if (overlayEnabled)
-                {
+                if (overlayEnabled) {
                     overlayEnabled = false;
                     if (!previewMode) renderPicture();
                 }
-                else
-                {
+                else {
                     overlayEnabled = true;
                     if (!previewMode) renderPicture();
                 }
@@ -403,38 +364,28 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
         }
 #ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
-        if (obj != ui->labPicture && naviEnabled)
-        {
-            if (ev->type() == QEvent::MouseButtonPress)
-            {
+        if (obj != ui->labPicture && naviEnabled) {
+            if (ev->type() == QEvent::MouseButtonPress) {
                 QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(ev);
-                if (mouseEvent->pos().y() <= layout()->menuBar()->height())
-                {
-                    if (mouseEvent->button() == Qt::LeftButton)
-                    {
+                if (mouseEvent->pos().y() <= layout()->menuBar()->height()) {
+                    if (mouseEvent->button() == Qt::LeftButton) {
                         dragPosition = mouseEvent->pos();
                         dragStart = true;
                     }
                 }
             }
-            if (ev->type() == QEvent::MouseButtonRelease)
-            {
+            if (ev->type() == QEvent::MouseButtonRelease) {
                 QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(ev);
-                if (mouseEvent->pos().y() <= layout()->menuBar()->height())
-                {
-                    if (mouseEvent->button() == Qt::LeftButton)
-                    {
+                if (mouseEvent->pos().y() <= layout()->menuBar()->height()) {
+                    if (mouseEvent->button() == Qt::LeftButton) {
                         dragStart = false;
                     }
                 }
             }
-            if (ev->type() == QEvent::MouseMove && dragStart)
-            {
+            if (ev->type() == QEvent::MouseMove && dragStart) {
                 QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(ev);
-                if (mouseEvent->pos().y() <= layout()->menuBar()->height())
-                {
-                    if (mouseEvent->buttons() & Qt::LeftButton)
-                    {
+                if (mouseEvent->pos().y() <= layout()->menuBar()->height()) {
+                    if (mouseEvent->buttons() & Qt::LeftButton) {
                         QPoint diff = mouseEvent->pos() - dragPosition;
                         move(QPoint(pos() + diff));
                         updateGeometry();
@@ -493,14 +444,12 @@ void PictureDialog::renderOverlayPicture()
     QRect overlaySpace = fontMetrics.boundingRect(preferedRect, Qt::AlignLeft | Qt::AlignTop | Qt::TextDontClip | Qt::TextWordWrap, overlayText);
 
     int hOverlay = Qt::AlignTop;
-    if (overlaySpace.height() < 74 * screenRatio * screenRatioPR)
-    {
+    if (overlaySpace.height() < 74 * screenRatio * screenRatioPR) {
         hOverlay = Qt::AlignVCenter;
         preferedRect.setHeight(71 * screenRatio * screenRatioPR);
         overlaySpace.setHeight(80 * screenRatio * screenRatioPR);
     }
-    else
-    {
+    else {
         overlaySpace.setHeight(overlaySpace.height() + 6 * screenRatio * screenRatioPR);
     }
 
@@ -513,12 +462,10 @@ void PictureDialog::renderOverlayPicture()
     overlayPainter.drawText(preferedRect, Qt::AlignLeft | hOverlay | Qt::TextDontClip | Qt::TextWordWrap, overlayText);
     overlayPainter.end();
 
-    if (overlaySpace.width() < 194 * screenRatio * screenRatioPR)
-    {
+    if (overlaySpace.width() < 194 * screenRatio * screenRatioPR) {
         overlaySpace.setWidth(200 * screenRatio * screenRatioPR);
     }
-    else
-    {
+    else {
         overlaySpace.setWidth(overlaySpace.width() + 6 * screenRatio * screenRatioPR);
     }
 
@@ -633,8 +580,7 @@ void PictureDialog::crewNameUpdated()
 {
     SnapmaticPicture *picture = smpic; // used by macro
     QString crewIDStr = crewID;
-    if (crewIDStr == crewStr)
-    {
+    if (crewIDStr == crewStr) {
         crewStr = crewDB->getCrewName(crewIDStr);
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
     }
@@ -643,8 +589,7 @@ void PictureDialog::crewNameUpdated()
 void PictureDialog::playerNameUpdated()
 {
     SnapmaticPicture *picture = smpic; // used by macro
-    if (plyrsList.count() >= 1)
-    {
+    if (plyrsList.count() >= 1) {
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
     }
 }
@@ -653,8 +598,7 @@ QString PictureDialog::generateCrewString()
 {
     SnapmaticPicture *picture = smpic; // used by macro
     const QString crewIDStr = crewID; // save operation time
-    if (crewIDStr != "0" && !crewIDStr.isEmpty())
-    {
+    if (crewIDStr != "0" && !crewIDStr.isEmpty()) {
         if (crewIDStr != crewStr) {
             return QString("<a href=\"https://socialclub.rockstargames.com/crew/" % QString(crewStr).replace(" ", "_") % "/" % crewIDStr % "\">" % crewStr % "</a>");
         }
@@ -769,12 +713,10 @@ void PictureDialog::openPreviewMap()
 {
     SnapmaticPicture *picture = smpic;
     MapLocationDialog *mapLocDialog;
-    if (rqFullscreen && fullscreenWidget != nullptr)
-    {
+    if (rqFullscreen && fullscreenWidget != nullptr) {
         mapLocDialog = new MapLocationDialog(picture->getSnapmaticProperties().location.x, picture->getSnapmaticProperties().location.y, fullscreenWidget);
     }
-    else
-    {
+    else {
         mapLocDialog = new MapLocationDialog(picture->getSnapmaticProperties().location.x, picture->getSnapmaticProperties().location.y, this);
     }
     mapLocDialog->setWindowIcon(windowIcon());
@@ -785,8 +727,7 @@ void PictureDialog::openPreviewMap()
     mapLocDialog->showMaximized();
 #endif
     mapLocDialog->exec();
-    if (mapLocDialog->propUpdated())
-    {
+    if (mapLocDialog->propUpdated()) {
         // Update Snapmatic Properties
         SnapmaticProperties localSpJson = picture->getSnapmaticProperties();
         localSpJson.location.x = mapLocDialog->getXpos();
@@ -797,33 +738,33 @@ void PictureDialog::openPreviewMap()
         QString currentFilePath = picture->getPictureFilePath();
         QString originalFilePath = picture->getOriginalPictureFilePath();
         QString backupFileName = originalFilePath % ".bak";
-        if (!QFile::exists(backupFileName))
-        {
+        if (!QFile::exists(backupFileName)) {
             QFile::copy(currentFilePath, backupFileName);
         }
         SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
         picture->setSnapmaticProperties(localSpJson);
-        if (!picture->exportPicture(currentFilePath))
-        {
+        if (!picture->exportPicture(currentFilePath)) {
             QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of I/O Error"));
             picture->setSnapmaticProperties(fallbackProperties);
         }
-        else
-        {
+        else {
             updated();
 #ifdef GTA5SYNC_TELEMETRY
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "LocationEdited";
                 jsonObject["ExtraFlags"] = "Viewer";
                 jsonObject["EditedSize"] = QString::number(picture->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                 jsonDocument.setObject(jsonObject);
                 Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
             }
@@ -837,12 +778,10 @@ void PictureDialog::editSnapmaticProperties()
 {
     SnapmaticPicture *picture = smpic;
     SnapmaticEditor *snapmaticEditor;
-    if (rqFullscreen && fullscreenWidget != nullptr)
-    {
+    if (rqFullscreen && fullscreenWidget != nullptr) {
         snapmaticEditor = new SnapmaticEditor(crewDB, profileDB, fullscreenWidget);
     }
-    else
-    {
+    else {
         snapmaticEditor = new SnapmaticEditor(crewDB, profileDB, this);
     }
     snapmaticEditor->setWindowIcon(windowIcon());
@@ -861,12 +800,10 @@ void PictureDialog::editSnapmaticImage()
 {
     QImage *currentImage = new QImage(smpic->getImage());
     ImportDialog *importDialog;
-    if (rqFullscreen && fullscreenWidget != nullptr)
-    {
+    if (rqFullscreen && fullscreenWidget != nullptr) {
         importDialog = new ImportDialog(profileName, fullscreenWidget);
     }
-    else
-    {
+    else {
         importDialog = new ImportDialog(profileName, this);
     }
     importDialog->setWindowIcon(windowIcon());
@@ -874,21 +811,17 @@ void PictureDialog::editSnapmaticImage()
     importDialog->enableOverwriteMode();
     importDialog->setModal(true);
     importDialog->exec();
-    if (importDialog->isImportAgreed())
-    {
+    if (importDialog->isImportAgreed()) {
         const QByteArray previousPicture = smpic->getPictureStream();
         bool success = smpic->setImage(importDialog->image());
-        if (success)
-        {
+        if (success) {
             QString currentFilePath = smpic->getPictureFilePath();
             QString originalFilePath = smpic->getOriginalPictureFilePath();
             QString backupFileName = originalFilePath % ".bak";
-            if (!QFile::exists(backupFileName))
-            {
+            if (!QFile::exists(backupFileName)) {
                 QFile::copy(currentFilePath, backupFileName);
             }
-            if (!smpic->exportPicture(currentFilePath))
-            {
+            if (!smpic->exportPicture(currentFilePath)) {
                 smpic->setPictureStream(previousPicture);
                 QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of I/O Error"));
                 return;
@@ -899,21 +832,23 @@ void PictureDialog::editSnapmaticImage()
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "ImageEdited";
                 jsonObject["ExtraFlags"] = "Viewer";
                 jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                 jsonDocument.setObject(jsonObject);
                 Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
             }
 #endif
         }
-        else
-        {
+        else {
             QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of Image Error"));
             return;
         }
@@ -925,12 +860,10 @@ void PictureDialog::editSnapmaticRawJson()
 {
     SnapmaticPicture *picture = smpic;
     JsonEditorDialog *jsonEditor;
-    if (rqFullscreen && fullscreenWidget != nullptr)
-    {
+    if (rqFullscreen && fullscreenWidget != nullptr) {
         jsonEditor = new JsonEditorDialog(picture, fullscreenWidget);
     }
-    else
-    {
+    else {
         jsonEditor = new JsonEditorDialog(picture, this);
     }
     jsonEditor->setWindowIcon(windowIcon());
@@ -948,12 +881,10 @@ void PictureDialog::updated()
 {
     SnapmaticPicture *picture = smpic; // used by macro
     crewStr = crewDB->getCrewName(crewID);
-    if (globalMap.contains(picArea))
-    {
+    if (globalMap.contains(picArea)) {
         picAreaStr = globalMap[picArea];
     }
-    else
-    {
+    else {
         picAreaStr = picArea;
     }
     setWindowTitle(windowTitleStr.arg(picTitl));
@@ -963,8 +894,7 @@ void PictureDialog::updated()
 void PictureDialog::customSignal(QString signal)
 {
     SnapmaticPicture *picture = smpic; // used by macro
-    if (signal == "PictureUpdated")
-    {
+    if (signal == "PictureUpdated") {
         snapmaticPicture = picture->getImage();
         renderPicture();
     }

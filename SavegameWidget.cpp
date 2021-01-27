@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2018 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -152,7 +152,11 @@ void SavegameWidget::on_cmdDelete_clicked()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "DeleteSuccess";
                 jsonObject["ExtraFlags"] = "Savegame";
+#if QT_VERSION >= 0x060000
+                jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                 jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                 jsonDocument.setObject(jsonObject);
                 Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
             }
@@ -171,7 +175,11 @@ void SavegameWidget::on_cmdDelete_clicked()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "DeleteSuccess";
                 jsonObject["ExtraFlags"] = "Savegame";
+#if QT_VERSION >= 0x060000
+                jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                 jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                 jsonDocument.setObject(jsonObject);
                 Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
             }

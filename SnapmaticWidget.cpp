@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -197,7 +197,11 @@ bool SnapmaticWidget::deletePicture()
                 jsonObject["Type"] = "DeleteSuccess";
                 jsonObject["ExtraFlags"] = "Snapmatic";
                 jsonObject["DeletedSize"] = QString::number(smpic->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                 jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                 jsonDocument.setObject(jsonObject);
                 Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
             }
@@ -403,7 +407,11 @@ void SnapmaticWidget::editSnapmaticImage()
                 jsonObject["Type"] = "ImageEdited";
                 jsonObject["ExtraFlags"] = "Interface";
                 jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                 jsonDocument.setObject(jsonObject);
                 Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
             }
@@ -462,7 +470,11 @@ void SnapmaticWidget::openMapViewer()
                 jsonObject["Type"] = "LocationEdited";
                 jsonObject["ExtraFlags"] = "Interface";
                 jsonObject["EditedSize"] = QString::number(picture->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                 jsonDocument.setObject(jsonObject);
                 Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
             }

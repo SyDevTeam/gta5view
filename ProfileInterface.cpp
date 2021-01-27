@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -625,7 +625,11 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
                         jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                         jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                         jsonObject["ImportType"] = "Snapmatic";
                         jsonDocument.setObject(jsonObject);
                         Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
@@ -660,7 +664,11 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
+#if QT_VERSION >= 0x060000
+                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                         jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                         jsonObject["ImportType"] = "Savegame";
                         jsonDocument.setObject(jsonObject);
                         Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
@@ -851,7 +859,11 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                                     jsonObject["Type"] = "ImportSuccess";
                                     jsonObject["ExtraFlag"] = "Dialog";
                                     jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                                    jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                                     jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                                     jsonObject["ImportType"] = "Image";
                                     jsonDocument.setObject(jsonObject);
                                     Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
@@ -898,7 +910,11 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
                         jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+#if QT_VERSION >= 0x060000
+                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                         jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                         jsonObject["ImportType"] = "Snapmatic";
                         jsonDocument.setObject(jsonObject);
                         Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
@@ -924,7 +940,11 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
+#if QT_VERSION >= 0x060000
+                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
                         jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
                         jsonObject["ImportType"] = "Savegame";
                         jsonDocument.setObject(jsonObject);
                         Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
