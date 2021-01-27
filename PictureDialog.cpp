@@ -199,7 +199,7 @@ void PictureDialog::setupPictureDialog()
     }
 
     installEventFilter(this);
-    installEventFilter(ui->labPicture);
+    // installEventFilter(ui->labPicture);
 
     // DPI calculation
     ui->hlButtons->setSpacing(6 * screenRatio);
@@ -214,32 +214,32 @@ void PictureDialog::setupPictureDialog()
 
 PictureDialog::~PictureDialog()
 {
-#ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050200
-    if (naviEnabled)
-    {
-        for (QObject *obj : layout()->menuBar()->children())
-        {
-            delete obj;
-        }
-        delete layout()->menuBar();
-    }
-#endif
-#else
-    if (naviEnabled)
-    {
-        for (QObject *obj : layout()->menuBar()->children())
-        {
-            delete obj;
-        }
-        delete layout()->menuBar();
-    }
-#endif
-    for (QObject *obj : manageMenu->children())
-    {
-        delete obj;
-    }
-    delete manageMenu;
+//#ifdef Q_OS_WIN
+//#if QT_VERSION >= 0x050200
+//  if (naviEnabled)
+//  {
+//      for (QObject *obj : layout()->menuBar()->children())
+//      {
+//          delete obj;
+//      }
+//      delete layout()->menuBar();
+//  }
+//#endif
+//#else
+//  if (naviEnabled)
+//  {
+//     for (QObject *obj : layout()->menuBar()->children())
+//      {
+//          delete obj;
+//      }
+//      delete layout()->menuBar();
+//  }
+//#endif
+//  for (QObject *obj : manageMenu->children())
+//  {
+//      delete obj;
+//  }
+//  delete manageMenu;
     delete ui;
 }
 
