@@ -34,6 +34,16 @@ if(WIN32)
         res/app.rc
     )
 endif()
+if(APPLE)
+    list(APPEND GTA5VIEW_RESOURCES
+        res/5sync.icns
+    )
+    set(MACOSX_BUNDLE_BUNDLE_NAME gta5view)
+    set(MACOSX_BUNDLE_BUNDLE_VERSION 1.10.0)
+    set(MACOSX_BUNDLE_ICON_FILE 5sync.icns)
+    set(MACOSX_BUNDLE_GUI_IDENTIFIER de.syping.gta5view)
+    set_source_files_properties(res/5sync.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+endif()
 
 list(APPEND GTA5VIEW_DEFINES
     -DGTA5SYNC_CMAKE
