@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@
 
 GlobalString::GlobalString()
 {
-
 }
 
 QMap<QString, QString> GlobalString::getGlobalMap()
@@ -39,8 +38,7 @@ QMap<QString, QString> GlobalString::getGlobalMap()
     globalFile.setIniCodec("UTF-8");
 #endif
     globalFile.beginGroup("Global");
-    for (const QString &globalStr : globalFile.childKeys())
-    {
+    for (const QString &globalStr : globalFile.childKeys()) {
         globalMap[globalStr] = globalFile.value(globalStr, globalStr).toString();
     }
     globalFile.endGroup();
@@ -56,9 +54,9 @@ QString GlobalString::getString(QString valueStr, bool *ok)
 #endif
     globalFile.beginGroup("Global");
     QStringList globalStrList = globalFile.childKeys();
-    if (globalStrList.contains(valueStr))
-    {
-        if (ok != nullptr) *ok = true;
+    if (globalStrList.contains(valueStr)) {
+        if (ok != nullptr)
+            *ok = true;
         globalString = globalFile.value(valueStr, valueStr).toString();
     }
     globalFile.endGroup();
@@ -69,8 +67,7 @@ QString GlobalString::getLanguageFile()
 {
     QString language = getLanguage();
     QString languageFile = ":/global/global." % language % ".ini";
-    if (!QFileInfo(languageFile).exists())
-    {
+    if (!QFileInfo::exists(languageFile)) {
         languageFile = ":/global/global.en.ini";
     }
     return languageFile;

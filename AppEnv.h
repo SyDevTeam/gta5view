@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2018 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -23,7 +23,7 @@
 #include <QUrl>
 
 enum class GameVersion : int { NoVersion = 0, SocialClubVersion = 1, SteamVersion = 2, BothVersions = 3 };
-enum class GameLanguage : int { Undefined = 0, English = 1, French = 2, Italian = 3, German = 4, Spanish = 5, Mexican = 6, Brasilian = 7, Russian = 8, Polish = 9, Japanese = 10, SChinese = 11, TChinese = 12, Koreana = 13 };
+enum class GameLanguage : int { Undefined = 0, English = 1, French = 2, Italian = 3, German = 4, Spanish = 5, Mexican = 6, Brasilian = 7, Russian = 8, Polish = 9, Japanese = 10, SChinese = 11, TChinese = 12, Korean = 13 };
 
 class AppEnv
 {

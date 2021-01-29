@@ -1640,14 +1640,6 @@ Press 1 for Default View</source>
     </message>
 </context>
 <context>
-    <name>QApplication</name>
-    <message>
-        <location filename="../main.cpp" line="137"/>
-        <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SavegameDialog</name>
     <message>
         <location filename="../SavegameDialog.ui" line="14"/>
@@ -2237,22 +2229,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="166"/>
+        <location filename="../main.cpp" line="147"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="167"/>
+        <location filename="../main.cpp" line="148"/>
         <source>%1 User Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="171"/>
+        <location filename="../main.cpp" line="152"/>
         <source>Yes, I want include personal usage data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="180"/>
+        <location filename="../main.cpp" line="161"/>
         <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2019 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -94,7 +94,6 @@ int main(int argc, char *argv[])
     settings.sync();
 #endif
 
-    bool isFirstStart = settings.value("IsFirstStart", true).toBool();
     bool customStyle = settings.value("CustomStyle", false).toBool();
     if (customStyle) {
         const QString appStyle = settings.value("AppStyle", "Default").toString();
@@ -130,28 +129,10 @@ int main(int argc, char *argv[])
     Telemetry->work();
 #endif
 
-    if (!applicationArgs.contains("--skip-firststart"))
-    {
-        if (isFirstStart)
-        {
-            QMessageBox::StandardButton button = QMessageBox::information(nullptr, QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER), QApplication::tr("<h4>Welcome to %1!</h4>You want to configure %1 before you start using it?").arg(GTA5SYNC_APPSTR), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-            if (button == QMessageBox::Yes)
-            {
-                ProfileDatabase profileDB;
-                OptionsDialog optionsDialog(&profileDB);
-                optionsDialog.setWindowIcon(IconLoader::loadingAppIcon());
-                optionsDialog.show();
-                optionsDialog.exec();
-            }
-            settings.setValue("IsFirstStart", false);
-        }
-    }
-
 #ifdef GTA5SYNC_TELEMETRY
     bool telemetryWindowLaunched = settings.value("PersonalUsageDataWindowLaunched", false).toBool();
     bool pushUsageData = settings.value("PushUsageData", false).toBool();
-    if (!telemetryWindowLaunched && !pushUsageData)
-    {
+    if (!telemetryWindowLaunched && !pushUsageData) {
         QDialog *telemetryDialog = new QDialog();
         telemetryDialog->setObjectName(QStringLiteral("TelemetryDialog"));
         telemetryDialog->setWindowTitle(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
@@ -183,8 +164,7 @@ int main(int argc, char *argv[])
         telemetryDialog->setFixedSize(telemetryDialog->sizeHint());
         telemetryDialog->exec();
         QObject::disconnect(telemetryButton, SIGNAL(clicked(bool)), telemetryDialog, SLOT(close()));
-        if (telemetryCheckBox->isChecked())
-        {
+        if (telemetryCheckBox->isChecked()) {
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
             telemetrySettings.setValue("PushUsageData", true);
@@ -200,43 +180,35 @@ int main(int argc, char *argv[])
 #endif
     settings.endGroup();
 
-    for (QString currentArg : applicationArgs)
-    {
+    for (const QString &currentArg : applicationArgs) {
         QString reworkedArg;
-        if (currentArg.left(9) == "-showpic=" && selectedAction == "")
-        {
-            reworkedArg = currentArg.remove(0,9);
+        if (currentArg.left(9) == "-showpic=" && selectedAction == "") {
+            reworkedArg = QString(currentArg).remove(0,9);
             arg1 = reworkedArg;
             selectedAction = "showpic";
         }
-        else if (currentArg.left(9) == "-showsgd=" && selectedAction == "")
-        {
-            reworkedArg = currentArg.remove(0,9);
+        else if (currentArg.left(9) == "-showsgd=" && selectedAction == "") {
+            reworkedArg = QString(currentArg).remove(0,9);
             arg1 = reworkedArg;
             selectedAction = "showsgd";
         }
-        else if (selectedAction == "")
-        {
+        else if (selectedAction == "") {
             QFile argumentFile(currentArg);
             QFileInfo argumentFileInfo(argumentFile);
-            if (argumentFile.exists())
-            {
+            if (argumentFile.exists()) {
                 QString argumentFileName = argumentFileInfo.fileName();
                 QString argumentFileType = argumentFileName.left(4);
                 QString argumentFileExt = argumentFileName.right(4);
 
-                if (argumentFileType == "PGTA" || argumentFileExt == ".g5e")
-                {
+                if (argumentFileType == "PGTA" || argumentFileExt == ".g5e") {
                     arg1 = currentArg;
                     selectedAction = "showpic";
                 }
-                else if (argumentFileType == "SGTA")
-                {
+                else if (argumentFileType == "SGTA") {
                     arg1 = currentArg;
                     selectedAction = "showsgd";
                 }
-                else if (argumentFileType == "MISR")
-                {
+                else if (argumentFileType == "MISR") {
                     arg1 = currentArg;
                     selectedAction = "showsgd";
                 }
@@ -244,8 +216,7 @@ int main(int argc, char *argv[])
         }
     }
 
-    if (selectedAction == "showpic")
-    {
+    if (selectedAction == "showpic") {
         CrewDatabase crewDB;
         ProfileDatabase profileDB;
         DatabaseThread threadDB(&crewDB);
@@ -258,8 +229,10 @@ int main(int argc, char *argv[])
         picDialog.setWindowFlags(picDialog.windowFlags()^Qt::Dialog^Qt::Window);
 
         int crewID = picture.getSnapmaticProperties().crewID;
-        if (crewID != 0) { crewDB.addCrew(crewID); }
-        if (!readOk) { return 1; }
+        if (crewID != 0)
+            crewDB.addCrew(crewID);
+        if (!readOk)
+            return 1;
 
         QObject::connect(&threadDB, SIGNAL(crewNameFound(int, QString)), &crewDB, SLOT(setCrewName(int, QString)));
         QObject::connect(&threadDB, SIGNAL(crewNameUpdated()), &picDialog, SLOT(crewNameUpdated()));
@@ -273,8 +246,7 @@ int main(int argc, char *argv[])
 
         return a.exec();
     }
-    else if (selectedAction == "showsgd")
-    {
+    else if (selectedAction == "showsgd") {
         SavegameDialog savegameDialog;
         SavegameData savegame;
 
@@ -283,7 +255,8 @@ int main(int argc, char *argv[])
         savegameDialog.setSavegameData(&savegame, arg1, readOk);
         savegameDialog.setWindowFlags(savegameDialog.windowFlags()^Qt::Dialog^Qt::Window);
 
-        if (!readOk) { return 1; }
+        if (!readOk)
+            return 1;
 
         a.setQuitOnLastWindowClosed(true);
         savegameDialog.show();

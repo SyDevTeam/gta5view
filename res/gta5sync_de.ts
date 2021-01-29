@@ -1685,9 +1685,8 @@ Drücke 1 für Standardmodus</translation>
 <context>
     <name>QApplication</name>
     <message>
-        <location filename="../main.cpp" line="137"/>
         <source>&lt;h4&gt;Welcome to %1!&lt;/h4&gt;You want to configure %1 before you start using it?</source>
-        <translation>&lt;h4&gt;Willkommen zu %1!&lt;/h4&gt;Möchtest du %1 einstellen bevor du es nutzt?</translation>
+        <translation type="vanished">&lt;h4&gt;Willkommen zu %1!&lt;/h4&gt;Möchtest du %1 einstellen bevor du es nutzt?</translation>
     </message>
 </context>
 <context>
@@ -2282,22 +2281,22 @@ Drücke 1 für Standardmodus</translation>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="167"/>
+        <location filename="../main.cpp" line="148"/>
         <source>%1 User Statistics</source>
         <translation>%1 Benutzerstatistik</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="166"/>
+        <location filename="../main.cpp" line="147"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation>Sollen bei Einreichungen Persönliche Nutzungsdaten einbezogen werden um %1 in der Zukunft zu unterstützen?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="171"/>
+        <location filename="../main.cpp" line="152"/>
         <source>Yes, I want include personal usage data.</source>
         <translation>Ja, ich möchte Persönliche Nutzungsdaten einbeziehen.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="180"/>
+        <location filename="../main.cpp" line="161"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>

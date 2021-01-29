@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -48,19 +48,20 @@ void TranslationClass::initUserLanguage()
 
 void TranslationClass::loadTranslation(QApplication *app)
 {
-    if (isLangLoaded) { unloadTranslation(app); }
-    else { currentLangIndex = 0; }
-    QString exLangPath = AppEnv::getExLangFolder();
-    QString inLangPath = AppEnv::getInLangFolder();
-    if (userLanguage == "en" || userLanguage == "en_GB")
-    {
+    if (isLangLoaded) {
+        unloadTranslation(app);
+    }
+    else {
+        currentLangIndex = 0;
+    }
+    const QString exLangPath = AppEnv::getExLangFolder();
+    const QString inLangPath = AppEnv::getInLangFolder();
+    if (userLanguage == "en" || userLanguage == "en_GB") {
         currentLanguage = "en_GB";
-        if (loadQtTranslation_p(exLangPath, &exQtTranslator))
-        {
+        if (loadQtTranslation_p(exLangPath, &exQtTranslator)) {
             app->installTranslator(&exQtTranslator);
         }
-        else if (loadQtTranslation_p(inLangPath, &inQtTranslator))
-        {
+        else if (loadQtTranslation_p(inLangPath, &inQtTranslator)) {
             app->installTranslator(&inQtTranslator);
         }
 #if QT_VERSION >= 0x060000
@@ -77,33 +78,28 @@ void TranslationClass::loadTranslation(QApplication *app)
     bool externalEnglishMode = false;
     bool loadInternalLang = false;
     bool trLoadSuccess = false;
-    if (isUserLanguageSystem_p())
-    {
+    if (isUserLanguageSystem_p()) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadExSystemLanguage";
 #endif
         trLoadSuccess = loadSystemTranslation_p(exLangPath, &exAppTranslator);
     }
-    else
-    {
+    else {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadExUserLanguage";
 #endif
         trLoadSuccess = loadUserTranslation_p(exLangPath, &exAppTranslator);
-        if (!trLoadSuccess)
-        {
+        if (!trLoadSuccess) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "loadInUserLanguage";
 #endif
             trLoadSuccess = loadUserTranslation_p(inLangPath, &inAppTranslator);
-            if (!trLoadSuccess)
-            {
+            if (!trLoadSuccess) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "loadUserLanguageFailed";
 #endif
             }
-            else
-            {
+            else {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "loadUserLanguageSuccess";
 #endif
@@ -111,18 +107,16 @@ void TranslationClass::loadTranslation(QApplication *app)
                 isLangLoaded = true;
             }
         }
-        else
-        {
+        else {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "loadUserLanguageSuccess";
 #endif
             isLangLoaded = true;
         }
     }
-    if (trLoadSuccess)
-    {
-        if (currentLangIndex != 0 || isEnglishMode) // Don't install the language until we know we not have a better language for the user
-        {
+    if (trLoadSuccess) {
+        // Don't install the language until we know we not have a better language for the user
+        if (currentLangIndex != 0 || isEnglishMode) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "externalLanguageReady" << currentLanguage;
 #endif
@@ -130,25 +124,20 @@ void TranslationClass::loadTranslation(QApplication *app)
             externalLanguageStr = currentLanguage;
             externalLanguageReady = true;
         }
-        else
-        {
+        else {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "installTranslation";
 #endif
-            if (loadInternalLang)
-            {
+            if (loadInternalLang) {
                 app->installTranslator(&inAppTranslator);
             }
-            else
-            {
+            else {
                 app->installTranslator(&exAppTranslator);
             }
-            if (loadQtTranslation_p(exLangPath, &exQtTranslator))
-            {
+            if (loadQtTranslation_p(exLangPath, &exQtTranslator)) {
                 app->installTranslator(&exQtTranslator);
             }
-            else if (loadQtTranslation_p(inLangPath, &inQtTranslator))
-            {
+            else if (loadQtTranslation_p(inLangPath, &inQtTranslator)) {
                 app->installTranslator(&inQtTranslator);
             }
 #if QT_VERSION >= 0x060000
@@ -159,8 +148,7 @@ void TranslationClass::loadTranslation(QApplication *app)
             isLangLoaded = true;
         }
     }
-    if (externalLanguageReady)
-    {
+    if (externalLanguageReady) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadInSystemLanguage";
 #endif
@@ -170,18 +158,15 @@ void TranslationClass::loadTranslation(QApplication *app)
         qDebug() << "externalLangIndex" << externalLangIndex << "internalLangIndex" << currentLangIndex;
         qDebug() << "externalEnglishMode" << externalEnglishMode << "internalEnglishMode" << isEnglishMode;
 #endif
-        if ((trLoadSuccess && externalLangIndex > currentLangIndex) || (trLoadSuccess && externalEnglishMode && !isEnglishMode))
-        {
+        if ((trLoadSuccess && externalLangIndex > currentLangIndex) || (trLoadSuccess && externalEnglishMode && !isEnglishMode)) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "installInternalTranslation";
 #endif
             app->installTranslator(&inAppTranslator);
-            if (loadQtTranslation_p(exLangPath, &exQtTranslator))
-            {
+            if (loadQtTranslation_p(exLangPath, &exQtTranslator)) {
                 app->installTranslator(&exQtTranslator);
             }
-            else if (loadQtTranslation_p(inLangPath, &inQtTranslator))
-            {
+            else if (loadQtTranslation_p(inLangPath, &inQtTranslator)) {
                 app->installTranslator(&inQtTranslator);
             }
 #if QT_VERSION >= 0x060000
@@ -191,20 +176,17 @@ void TranslationClass::loadTranslation(QApplication *app)
 #endif
             isLangLoaded = true;
         }
-        else
-        {
+        else {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "installExternalTranslation";
 #endif
             isEnglishMode = externalEnglishMode;
             currentLanguage = externalLanguageStr;
             app->installTranslator(&exAppTranslator);
-            if (loadQtTranslation_p(exLangPath, &exQtTranslator))
-            {
+            if (loadQtTranslation_p(exLangPath, &exQtTranslator)) {
                 app->installTranslator(&exQtTranslator);
             }
-            else if (loadQtTranslation_p(inLangPath, &inQtTranslator))
-            {
+            else if (loadQtTranslation_p(inLangPath, &inQtTranslator)) {
                 app->installTranslator(&inQtTranslator);
             }
 #if QT_VERSION >= 0x060000
@@ -215,24 +197,20 @@ void TranslationClass::loadTranslation(QApplication *app)
             isLangLoaded = true;
         }
     }
-    else if (!isLangLoaded)
-    {
+    else if (!isLangLoaded) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadInSystemLanguage";
 #endif
         trLoadSuccess = loadSystemTranslation_p(inLangPath, &inAppTranslator);
-        if (trLoadSuccess)
-        {
+        if (trLoadSuccess) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "installInternalTranslation";
 #endif
             app->installTranslator(&inAppTranslator);
-            if (loadQtTranslation_p(exLangPath, &exQtTranslator))
-            {
+            if (loadQtTranslation_p(exLangPath, &exQtTranslator)) {
                 app->installTranslator(&exQtTranslator);
             }
-            else if (loadQtTranslation_p(inLangPath, &inQtTranslator))
-            {
+            else if (loadQtTranslation_p(inLangPath, &inQtTranslator)) {
                 app->installTranslator(&inQtTranslator);
             }
 #if QT_VERSION >= 0x060000
@@ -242,18 +220,15 @@ void TranslationClass::loadTranslation(QApplication *app)
 #endif
             isLangLoaded = true;
         }
-        else if (!trLoadSuccess)
-        {
+        else if (!trLoadSuccess) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "fallbackToDefaultApplicationLanguage";
 #endif
             currentLanguage = "en_GB";
-            if (loadQtTranslation_p(exLangPath, &exQtTranslator))
-            {
+            if (loadQtTranslation_p(exLangPath, &exQtTranslator)) {
                 app->installTranslator(&exQtTranslator);
             }
-            else if (loadQtTranslation_p(inLangPath, &inQtTranslator))
-            {
+            else if (loadQtTranslation_p(inLangPath, &inQtTranslator)) {
                 app->installTranslator(&inQtTranslator);
             }
 #if QT_VERSION >= 0x060000
@@ -266,30 +241,24 @@ void TranslationClass::loadTranslation(QApplication *app)
     }
 #else // New qconf loading method
     bool trLoadSuccess;
-    if (isUserLanguageSystem_p())
-    {
+    if (isUserLanguageSystem_p()) {
         trLoadSuccess = loadSystemTranslation_p(inLangPath, &inAppTranslator);
     }
-    else
-    {
+    else {
         trLoadSuccess = loadUserTranslation_p(inLangPath, &inAppTranslator);
     }
-    if (!trLoadSuccess && !isUserLanguageSystem_p())
-    {
+    if (!trLoadSuccess && !isUserLanguageSystem_p()) {
         trLoadSuccess = loadSystemTranslation_p(inLangPath, &inAppTranslator);
     }
-    if (trLoadSuccess)
-    {
+    if (trLoadSuccess) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "installTranslation" << currentLanguage;
 #endif
         app->installTranslator(&inAppTranslator);
-        if (loadQtTranslation_p(exLangPath, &exQtTranslator))
-        {
+        if (loadQtTranslation_p(exLangPath, &exQtTranslator)) {
             app->installTranslator(&exQtTranslator);
         }
-        else if (loadQtTranslation_p(inLangPath, &inQtTranslator))
-        {
+        else if (loadQtTranslation_p(inLangPath, &inQtTranslator)) {
             app->installTranslator(&inQtTranslator);
         }
 #if QT_VERSION >= 0x060000
@@ -332,21 +301,17 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
     qDebug() << "loadSystemTranslation_p";
 #endif
     int currentLangCounter = 0;
-    for (QString languageName : QLocale::system().uiLanguages())
-    {
+    for (const QString &languageName : QLocale::system().uiLanguages()) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadLanguage" << languageName;
 #endif
-        QStringList langList = QString(languageName).replace("-","_").split("_");
-        if (langList.length() == 2)
-        {
+        const QStringList langList = QString(languageName).replace("-","_").split("_");
+        if (langList.length() == 2) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "loadLanguageFile" << QString(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm");
 #endif
-            if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm"))
-            {
-                if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm"))
-                {
+            if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm")) {
+                if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                     qDebug() << "loadLanguageFileSuccess" << QString(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm");
 #endif
@@ -359,10 +324,8 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "loadLanguageFile" << QString(langPath % "/gta5sync_" % langList.at(0) % ".qm");
 #endif
-            if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % ".qm"))
-            {
-                if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % ".qm"))
-                {
+            if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % ".qm")) {
+                if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                     qDebug() << "loadLanguageFileSuccess" << QString(langPath % "/gta5sync_" % langList.at(0) % ".qm");
 #endif
@@ -371,8 +334,7 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
                     currentLangIndex = currentLangCounter;
                     return true;
                 }
-                else if (langList.at(0) == "en")
-                {
+                else if (langList.at(0) == "en") {
 #ifdef GTA5SYNC_DEBUG
                     qDebug() << "languageEnglishMode index" << currentLangCounter;
 #endif
@@ -382,8 +344,7 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
                     return true;
                 }
             }
-            else if (langList.at(0) == "en")
-            {
+            else if (langList.at(0) == "en") {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "languageEnglishMode index" << currentLangCounter;
 #endif
@@ -393,15 +354,12 @@ bool TranslationClass::loadSystemTranslation_p(const QString &langPath, QTransla
                 return true;
             }
         }
-        else if (langList.length() == 1)
-        {
+        else if (langList.length() == 1) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "loadLanguageFile" << QString(langPath % "/gta5sync_" % langList.at(0) % ".qm");
 #endif
-            if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % ".qm"))
-            {
-                if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % ".qm"))
-                {
+            if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % ".qm")) {
+                if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                     qDebug() << "loadLanguageFileSuccess" << QString(langPath % "/gta5sync_" % langList.at(0) % ".qm");
 #endif
@@ -425,17 +383,14 @@ bool TranslationClass::loadUserTranslation_p(const QString &langPath, QTranslato
 #ifdef GTA5SYNC_DEBUG
     qDebug() << "loadUserTranslation_p";
 #endif
-    QString languageName = userLanguage;
-    QStringList langList = QString(languageName).replace("-","_").split("_");
-    if (langList.length() == 2)
-    {
+    const QString languageName = userLanguage;
+    const QStringList langList = QString(languageName).replace("-","_").split("_");
+    if (langList.length() == 2) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadLanguageFile" << QString(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm");
 #endif
-        if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm"))
-        {
-            if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm"))
-            {
+        if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm")) {
+            if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "loadLanguageFileSuccess" << QString(langPath % "/gta5sync_" % langList.at(0) % "_" % langList.at(1) % ".qm");
 #endif
@@ -446,10 +401,8 @@ bool TranslationClass::loadUserTranslation_p(const QString &langPath, QTranslato
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadLanguageFile" << QString(langPath % "/gta5sync_" % langList.at(0) % ".qm");
 #endif
-        if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % ".qm"))
-        {
-            if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % ".qm"))
-            {
+        if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % ".qm")) {
+            if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "loadLanguageFileSuccess" << QString(langPath % "/gta5sync_" % langList.at(0) % ".qm");
 #endif
@@ -458,15 +411,12 @@ bool TranslationClass::loadUserTranslation_p(const QString &langPath, QTranslato
             }
         }
     }
-    else if (langList.length() == 1)
-    {
+    else if (langList.length() == 1) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadLanguageFile" << QString(langPath % "/gta5sync_" % langList.at(0) % ".qm");
 #endif
-        if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % ".qm"))
-        {
-            if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % ".qm"))
-            {
+        if (QFile::exists(langPath % "/gta5sync_" % langList.at(0) % ".qm")) {
+            if (appTranslator->load(langPath % "/gta5sync_" % langList.at(0) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "loadLanguageFileSuccess" << QString(langPath % "/gta5sync_" % langList.at(0) % ".qm");
 #endif
@@ -483,17 +433,14 @@ bool TranslationClass::loadQtTranslation_p(const QString &langPath, QTranslator 
 #ifdef GTA5SYNC_DEBUG
     qDebug() << "loadQtTranslation_p" << currentLanguage;
 #endif
-    QString languageName = currentLanguage;
-    QStringList langList = QString(languageName).replace("-","_").split("_");
-    if (langList.length() == 2)
-    {
+    const QString languageName = currentLanguage;
+    const QStringList langList = QString(languageName).replace("-","_").split("_");
+    if (langList.length() == 2) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadLanguageFile" << QString(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % "_" % langList.at(1) % ".qm");
 #endif
-        if (QFile::exists(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % "_" % langList.at(1) % ".qm"))
-        {
-            if (qtTranslator->load(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % "_" % langList.at(1) % ".qm"))
-            {
+        if (QFile::exists(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % "_" % langList.at(1) % ".qm")) {
+            if (qtTranslator->load(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % "_" % langList.at(1) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "loadLanguageFileSuccess" << QString(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % "_" % langList.at(1) % ".qm");
 #endif
@@ -503,10 +450,8 @@ bool TranslationClass::loadQtTranslation_p(const QString &langPath, QTranslator 
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadLanguageFile" << QString(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm");
 #endif
-        if (QFile::exists(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm"))
-        {
-            if (qtTranslator->load(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm"))
-            {
+        if (QFile::exists(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm")) {
+            if (qtTranslator->load(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "loadLanguageFileSuccess" << QString(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm");
 #endif
@@ -514,15 +459,12 @@ bool TranslationClass::loadQtTranslation_p(const QString &langPath, QTranslator 
             }
         }
     }
-    else if (langList.length() == 1)
-    {
+    else if (langList.length() == 1) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "loadLanguageFile" << QString(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm");
 #endif
-        if (QFile::exists(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm"))
-        {
-            if (qtTranslator->load(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm"))
-            {
+        if (QFile::exists(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm")) {
+            if (qtTranslator->load(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm")) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "loadLanguageFileSuccess" << QString(langPath % QDir::separator() % QtBaseTranslationFormat % langList.at(0) % ".qm");
 #endif
@@ -541,49 +483,44 @@ bool TranslationClass::isUserLanguageSystem_p()
 QString TranslationClass::getCurrentAreaLanguage()
 {
     const QStringList areaTranslations = listAreaTranslations();
-    if (userAreaLanguage == "Auto" || userAreaLanguage.trimmed().isEmpty())
-    {
-        GameLanguage gameLanguage = AppEnv::getGameLanguage(AppEnv::getGameVersion());
-        if (gameLanguage == GameLanguage::Undefined)
-        {
+    if (userAreaLanguage == "Auto" || userAreaLanguage.trimmed().isEmpty()) {
+        const GameLanguage gameLanguage = AppEnv::getGameLanguage(AppEnv::getGameVersion());
+        if (gameLanguage == GameLanguage::Undefined) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "autoAreaLanguageModeInterface";
 #endif
             QString langCode = QString(currentLanguage).replace("-", "_");
-            if (areaTranslations.contains(langCode))
-            {
+            if (areaTranslations.contains(langCode)) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "autoAreaLanguageSelected" << langCode;
 #endif
                 return langCode;
             }
-            else if (langCode.contains("_"))
-            {
+            else if (langCode.contains("_")) {
                 langCode = langCode.split("_").at(0);
-                if (!areaTranslations.contains(langCode)) goto outputDefaultLanguage;
+                if (!areaTranslations.contains(langCode))
+                    goto outputDefaultLanguage;
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "autoAreaLanguageSelected" << langCode;
 #endif
                 return langCode;
             }
         }
-        else
-        {
+        else {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "autoAreaLanguageModeGame";
 #endif
             QString langCode = AppEnv::gameLanguageToString(gameLanguage).replace("-", "_");
-            if (areaTranslations.contains(langCode))
-            {
+            if (areaTranslations.contains(langCode)) {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "autoAreaLanguageSelected" << langCode;
 #endif
                 return langCode;
             }
-            else if (langCode.contains("_"))
-            {
+            else if (langCode.contains("_")) {
                 langCode = langCode.split("_").at(0);
-                if (!areaTranslations.contains(langCode)) goto outputDefaultLanguage;
+                if (!areaTranslations.contains(langCode))
+                    goto outputDefaultLanguage;
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "autoAreaLanguageSelected" << langCode;
 #endif
@@ -591,17 +528,16 @@ QString TranslationClass::getCurrentAreaLanguage()
             }
         }
     }
-    else if (areaTranslations.contains(userAreaLanguage))
-    {
+    else if (areaTranslations.contains(userAreaLanguage)) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "userAreaLanguageSelected" << userAreaLanguage;
 #endif
         return userAreaLanguage;
     }
-    else if (userAreaLanguage.contains("_"))
-    {
-        QString langCode = QString(userAreaLanguage).replace("-", "_").split("_").at(0);
-        if (!areaTranslations.contains(langCode)) goto outputDefaultLanguage;
+    else if (userAreaLanguage.contains("_")) {
+        const QString langCode = QString(userAreaLanguage).replace("-", "_").split("_").at(0);
+        if (!areaTranslations.contains(langCode))
+            goto outputDefaultLanguage;
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "userAreaLanguageSelected" << langCode;
 #endif
@@ -626,8 +562,7 @@ bool TranslationClass::isLanguageLoaded()
 
 void TranslationClass::unloadTranslation(QApplication *app)
 {
-    if (isLangLoaded)
-    {
+    if (isLangLoaded) {
 #ifndef GTA5SYNC_QCONF
         app->removeTranslator(&exAppTranslator);
         app->removeTranslator(&exQtTranslator);
@@ -650,30 +585,21 @@ void TranslationClass::unloadTranslation(QApplication *app)
 
 QString TranslationClass::getCountryCode(QLocale::Country country)
 {
-    QList<QLocale> locales = QLocale::matchingLocales(QLocale::AnyLanguage,
-                                                      QLocale::AnyScript,
-                                                      country);
-    if (locales.isEmpty()) return QString();
-    QStringList localeStrList = locales.at(0).name().split("_");
-    if (localeStrList.length() >= 2)
-    {
-        return localeStrList.at(1).toLower();
+    const QList<QLocale> locales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, country);
+    if (!locales.isEmpty()) {
+        const QStringList localeStrList = locales.at(0).name().split("_");
+        if (localeStrList.length() >= 2) {
+            return localeStrList.at(1).toLower();
+        }
     }
-    else
-    {
-        return QString();
-    }
+    return QString();
 }
 
 QString TranslationClass::getCountryCode(QLocale locale)
 {
     QStringList localeStrList = locale.name().split("_");
-    if (localeStrList.length() >= 2)
-    {
+    if (localeStrList.length() >= 2) {
         return localeStrList.at(1).toLower();
     }
-    else
-    {
-        return QString();
-    }
+    return QString();
 }

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -33,12 +33,8 @@
 #include <QDesktopWidget>
 #endif
 
-#include <iostream>
-using namespace std;
-
 AppEnv::AppEnv()
 {
-
 }
 
 // Build Stuff
@@ -59,12 +55,11 @@ QString AppEnv::getGameFolder(bool *ok)
 {
     QDir dir;
     QString GTAV_FOLDER = QString::fromUtf8(qgetenv("GTAV_FOLDER"));
-    if (GTAV_FOLDER != "")
-    {
+    if (GTAV_FOLDER != "") {
         dir.setPath(GTAV_FOLDER);
-        if (dir.exists())
-        {
-            if (ok != NULL) *ok = true;
+        if (dir.exists()) {
+            if (ok != NULL)
+                *ok = true;
             qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
             return dir.absolutePath();
         }
@@ -79,46 +74,44 @@ QString AppEnv::getGameFolder(bool *ok)
     GTAV_returnFolder = settings.value("dir", GTAV_defaultFolder).toString();
     settings.endGroup();
 
-    if (forceDir)
-    {
+    if (forceDir) {
         dir.setPath(GTAV_returnFolder);
-        if (dir.exists())
-        {
-            if (ok != 0) *ok = true;
+        if (dir.exists()) {
+            if (ok != 0)
+                *ok = true;
             qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
             return dir.absolutePath();
         }
     }
 
     dir.setPath(GTAV_defaultFolder);
-    if (dir.exists())
-    {
-        if (ok != 0) *ok = true;
+    if (dir.exists()) {
+        if (ok != 0)
+            *ok = true;
         qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return dir.absolutePath();
     }
 
-    if (!forceDir)
-    {
+    if (!forceDir) {
         dir.setPath(GTAV_returnFolder);
-        if (dir.exists())
-        {
-            if (ok != 0) *ok = true;
+        if (dir.exists()) {
+            if (ok != 0)
+                *ok = true;
             qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
             return dir.absolutePath();
         }
     }
 
-    if (ok != 0) *ok = false;
-    return "";
+    if (ok != 0)
+        *ok = false;
+    return QString();
 }
 
 bool AppEnv::setGameFolder(QString gameFolder)
 {
     QDir dir;
     dir.setPath(gameFolder);
-    if (dir.exists())
-    {
+    if (dir.exists()) {
         qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return true;
     }
@@ -160,24 +153,19 @@ QByteArray AppEnv::getUserAgent()
 #ifdef Q_OS_WIN
     QString kernelVersion = QSysInfo::kernelVersion();
     const QStringList &kernelVersionList = kernelVersion.split(".");
-    if (kernelVersionList.length() > 2)
-    {
+    if (kernelVersionList.length() > 2) {
         kernelVersion = kernelVersionList.at(0) % "." % kernelVersionList.at(1);
     }
     QString runArch = QSysInfo::buildCpuArchitecture();
-    if (runArch == "x86_64")
-    {
+    if (runArch == "x86_64") {
         runArch = "Win64; x64";
     }
-    else if (runArch == "i686")
-    {
+    else if (runArch == "i686") {
         const QString &curArch = QSysInfo::currentCpuArchitecture();
-        if (curArch == "x86_64")
-        {
+        if (curArch == "x86_64") {
             runArch = "WOW64";
         }
-        else if (curArch == "i686")
-        {
+        else if (curArch == "i686") {
             runArch = "Win32; x86";
         }
     }
@@ -189,11 +177,6 @@ QByteArray AppEnv::getUserAgent()
     return QString("Mozilla/5.0 %1/%2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
 #endif
 }
-
-// QUrl AppEnv::getCrewFetchingUrl(QString crewID)
-// {
-//     return QUrl(QString("https://socialclub.rockstargames.com/reference/crewfeed/%1").arg(crewID));
-// }
 
 QUrl AppEnv::getCrewFetchingUrl(QString crewID)
 {
@@ -223,8 +206,7 @@ GameVersion AppEnv::getGameVersion()
     QString installFolderSc = registrySettingsSc.value("InstallFolder", "").toString();
     QDir installFolderScDir(installFolderSc);
     bool scVersionInstalled = false;
-    if (!installFolderSc.isEmpty() && installFolderScDir.exists())
-    {
+    if (!installFolderSc.isEmpty() && installFolderScDir.exists()) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "gameVersionFoundSocialClubVersion";
 #endif
@@ -233,34 +215,28 @@ GameVersion AppEnv::getGameVersion()
 
     QSettings registrySettingsSteam(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\GTAV").arg(argumentValue), QSettings::NativeFormat);
     QString installFolderSteam = registrySettingsSteam.value("installfoldersteam", "").toString();
-    if (installFolderSteam.right(5) == "\\GTAV")
-    {
+    if (installFolderSteam.right(5) == "\\GTAV") {
         installFolderSteam = installFolderSteam.remove(installFolderSteam.length() - 5, 5);
     }
     QDir installFolderSteamDir(installFolderSteam);
     bool steamVersionInstalled = false;
-    if (!installFolderSteam.isEmpty() && installFolderSteamDir.exists())
-    {
+    if (!installFolderSteam.isEmpty() && installFolderSteamDir.exists()) {
 #ifdef GTA5SYNC_DEBUG
         qDebug() << "gameVersionFoundSteamVersion";
 #endif
         steamVersionInstalled = true;
     }
 
-    if (scVersionInstalled && steamVersionInstalled)
-    {
+    if (scVersionInstalled && steamVersionInstalled) {
         return GameVersion::BothVersions;
     }
-    else if (scVersionInstalled)
-    {
+    else if (scVersionInstalled) {
         return GameVersion::SocialClubVersion;
     }
-    else if (steamVersionInstalled)
-    {
+    else if (steamVersionInstalled) {
         return GameVersion::SteamVersion;
     }
-    else
-    {
+    else {
         return GameVersion::NoVersion;
     }
 #else
@@ -270,8 +246,7 @@ GameVersion AppEnv::getGameVersion()
 
 GameLanguage AppEnv::getGameLanguage(GameVersion gameVersion)
 {
-    if (gameVersion == GameVersion::SocialClubVersion)
-    {
+    if (gameVersion == GameVersion::SocialClubVersion) {
 #ifdef Q_OS_WIN
         QString argumentValue;
 #ifdef _WIN64
@@ -284,8 +259,7 @@ GameLanguage AppEnv::getGameLanguage(GameVersion gameVersion)
         return GameLanguage::Undefined;
 #endif
     }
-    else if (gameVersion == GameVersion::SteamVersion)
-    {
+    else if (gameVersion == GameVersion::SteamVersion) {
 #ifdef Q_OS_WIN
         QString argumentValue;
 #ifdef _WIN64
@@ -298,128 +272,81 @@ GameLanguage AppEnv::getGameLanguage(GameVersion gameVersion)
         return GameLanguage::Undefined;
 #endif
     }
-    else
-    {
-        return GameLanguage::Undefined;
-    }
+    return GameLanguage::Undefined;
 }
 
 GameLanguage AppEnv::gameLanguageFromString(QString gameLanguage)
 {
-    if (gameLanguage == "en-US")
-    {
+    if (gameLanguage == "en-US") {
         return GameLanguage::English;
     }
-    else if (gameLanguage == "fr-FR")
-    {
+    else if (gameLanguage == "fr-FR") {
         return GameLanguage::French;
     }
-    else if (gameLanguage == "it-IT")
-    {
+    else if (gameLanguage == "it-IT") {
         return GameLanguage::Italian;
     }
-    else if (gameLanguage == "de-DE")
-    {
+    else if (gameLanguage == "de-DE") {
         return GameLanguage::German;
     }
-    else if (gameLanguage == "es-ES")
-    {
+    else if (gameLanguage == "es-ES") {
         return GameLanguage::Spanish;
     }
-    else if (gameLanguage == "es-MX")
-    {
+    else if (gameLanguage == "es-MX") {
         return GameLanguage::Mexican;
     }
-    else if (gameLanguage == "pt-BR")
-    {
+    else if (gameLanguage == "pt-BR") {
         return GameLanguage::Brasilian;
     }
-    else if (gameLanguage == "ru-RU")
-    {
+    else if (gameLanguage == "ru-RU") {
         return GameLanguage::Russian;
     }
-    else if (gameLanguage == "pl-PL")
-    {
+    else if (gameLanguage == "pl-PL") {
         return GameLanguage::Polish;
     }
-    else if (gameLanguage == "ja-JP")
-    {
+    else if (gameLanguage == "ja-JP") {
         return GameLanguage::Japanese;
     }
-    else if (gameLanguage == "zh-CHS")
-    {
+    else if (gameLanguage == "zh-CHS") {
         return GameLanguage::SChinese;
     }
-    else if (gameLanguage == "zh-CHT")
-    {
+    else if (gameLanguage == "zh-CHT") {
         return GameLanguage::TChinese;
     }
-    else if (gameLanguage == "ko-KR")
-    {
-        return GameLanguage::Koreana;
+    else if (gameLanguage == "ko-KR") {
+        return GameLanguage::Korean;
     }
-    else
-    {
-        return GameLanguage::Undefined;
-    }
+    return GameLanguage::Undefined;
 }
 
 QString AppEnv::gameLanguageToString(GameLanguage gameLanguage)
 {
-    if (gameLanguage == GameLanguage::English)
-    {
+    switch (gameLanguage) {
+    case GameLanguage::English:
         return "en-US";
-    }
-    else if (gameLanguage == GameLanguage::French)
-    {
+    case GameLanguage::French:
         return "fr-FR";
-    }
-    else if (gameLanguage == GameLanguage::Italian)
-    {
+    case GameLanguage::Italian:
         return "it-IT";
-    }
-    else if (gameLanguage == GameLanguage::German)
-    {
+    case GameLanguage::German:
         return "de-DE";
-    }
-    else if (gameLanguage == GameLanguage::Spanish)
-    {
+    case GameLanguage::Spanish:
         return "es-ES";
-    }
-    else if (gameLanguage == GameLanguage::Mexican)
-    {
+    case GameLanguage::Mexican:
         return "es-MX";
-    }
-    else if (gameLanguage == GameLanguage::Brasilian)
-    {
+    case GameLanguage::Brasilian:
         return "pt-BR";
-    }
-    else if (gameLanguage == GameLanguage::Russian)
-    {
-        return "ru-RU";
-    }
-    else if (gameLanguage == GameLanguage::Polish)
-    {
+    case GameLanguage::Polish:
         return "pl-PL";
-    }
-    else if (gameLanguage == GameLanguage::Japanese)
-    {
+    case GameLanguage::Japanese:
         return "ja-JP";
-    }
-    else if (gameLanguage == GameLanguage::SChinese)
-    {
+    case GameLanguage::SChinese:
         return "zh-CHS";
-    }
-    else if (gameLanguage == GameLanguage::TChinese)
-    {
+    case GameLanguage::TChinese:
         return "zh-CHT";
-    }
-    else if (gameLanguage == GameLanguage::Koreana)
-    {
+    case GameLanguage::Korean:
         return "ko-KR";
-    }
-    else
-    {
+    default:
         return "Undefinied";
     }
 }
@@ -428,67 +355,55 @@ bool AppEnv::setGameLanguage(GameVersion gameVersion, GameLanguage gameLanguage)
 {
     bool socialClubVersion = false;
     bool steamVersion = false;
-    if (gameVersion == GameVersion::SocialClubVersion)
-    {
+    if (gameVersion == GameVersion::SocialClubVersion) {
         socialClubVersion = true;
     }
-    else if (gameVersion == GameVersion::SteamVersion)
-    {
+    else if (gameVersion == GameVersion::SteamVersion) {
         steamVersion = true;
     }
-    else if (gameVersion == GameVersion::BothVersions)
-    {
+    else if (gameVersion == GameVersion::BothVersions) {
         socialClubVersion = true;
         steamVersion = true;
     }
-    else
-    {
+    else {
         return false;
     }
-    if (socialClubVersion)
-    {
+    if (socialClubVersion) {
 #ifdef Q_OS_WIN
         QString argumentValue;
 #ifdef _WIN64
         argumentValue = "\\WOW6432Node";
 #endif
         QSettings registrySettingsSc(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V").arg(argumentValue), QSettings::NativeFormat);
-        if (gameLanguage != GameLanguage::Undefined)
-        {
+        if (gameLanguage != GameLanguage::Undefined) {
             registrySettingsSc.setValue("Language", gameLanguageToString(gameLanguage));
         }
-        else
-        {
+        else {
             registrySettingsSc.remove("Language");
         }
         registrySettingsSc.sync();
-        if (registrySettingsSc.status() != QSettings::NoError)
-        {
+        if (registrySettingsSc.status() != QSettings::NoError) {
             return false;
         }
 #else
         Q_UNUSED(gameLanguage)
 #endif
     }
-    if (steamVersion)
-    {
+    if (steamVersion) {
 #ifdef Q_OS_WIN
         QString argumentValue;
 #ifdef _WIN64
         argumentValue = "\\WOW6432Node";
 #endif
         QSettings registrySettingsSteam(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V Steam").arg(argumentValue), QSettings::NativeFormat);
-        if (gameLanguage != GameLanguage::Undefined)
-        {
+        if (gameLanguage != GameLanguage::Undefined) {
             registrySettingsSteam.setValue("Language", gameLanguageToString(gameLanguage));
         }
-        else
-        {
+        else {
             registrySettingsSteam.remove("Language");
         }
         registrySettingsSteam.sync();
-        if (registrySettingsSteam.status() != QSettings::NoError)
-        {
+        if (registrySettingsSteam.status() != QSettings::NoError) {
             return false;
         }
 #else

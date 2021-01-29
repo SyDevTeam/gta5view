@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -46,8 +46,7 @@ void DatabaseThread::run()
 
     QObject::connect(this, SIGNAL(threadTerminated()), &threadLoop, SLOT(quit()));
 
-    while (threadRunning)
-    {
+    while (threadRunning) {
         QTimer::singleShot(300000, &threadLoop, SLOT(quit()));
         threadLoop.exec();
     }
@@ -55,10 +54,8 @@ void DatabaseThread::run()
 
 void DatabaseThread::scanCrewReference(const QStringList &crewList, const int &requestDelay)
 {
-    for (QString crewID : crewList)
-    {
-        if (threadRunning && crewID != QLatin1String("0"))
-        {
+    for (const QString &crewID : crewList) {
+        if (threadRunning && crewID != QLatin1String("0")) {
             QNetworkAccessManager *netManager = new QNetworkAccessManager();
             QNetworkRequest netRequest(AppEnv::getCrewFetchingUrl(crewID));
 #if QT_VERSION >= 0x050600
@@ -76,40 +73,36 @@ void DatabaseThread::scanCrewReference(const QStringList &crewList, const int &r
 
             QEventLoop *downloadLoop = new QEventLoop();
             QObject::connect(netReply, SIGNAL(finished()), downloadLoop, SLOT(quit()));
-            if (!continueLastCrew) { QObject::connect(this, SIGNAL(threadTerminated()), downloadLoop, SLOT(quit())); }
+            if (!continueLastCrew)
+                QObject::connect(this, SIGNAL(threadTerminated()), downloadLoop, SLOT(quit()));
             QTimer::singleShot(30000, downloadLoop, SLOT(quit()));
             downloadLoop->exec();
             downloadLoop->disconnect();
             delete downloadLoop;
 
-            if (netReply->isFinished())
-            {
+            if (netReply->isFinished()) {
                 QString crewName;
                 QByteArray crewHtml = netReply->readAll();
                 QStringList crewHtmlSplit1 = QString::fromUtf8(crewHtml).split("<title>Rockstar Games Social Club - Crew : ");
-                if (crewHtmlSplit1.length() >= 2)
-                {
+                if (crewHtmlSplit1.length() >= 2) {
                     QStringList crewHtmlSplit2 = QString(crewHtmlSplit1.at(1)).split("</title>");
-                    if (crewHtmlSplit2.length() >= 1)
-                    {
+                    if (crewHtmlSplit2.length() >= 1) {
                         crewName = crewHtmlSplit2.at(0);
                     }
                 }
-                if (!crewName.isEmpty())
-                {
+                if (!crewName.isEmpty()) {
                     emit crewNameFound(crewID.toInt(), crewName);
                 }
             }
-            else
-            {
+            else {
                 netReply->abort();
             }
 
-            if (threadRunning)
-            {
+            if (threadRunning) {
                 QEventLoop *waitingLoop = new QEventLoop();
                 QTimer::singleShot(requestDelay, waitingLoop, SLOT(quit()));
-                if (!continueLastCrew) { QObject::connect(this, SIGNAL(threadTerminated()), waitingLoop, SLOT(quit())); }
+                if (!continueLastCrew)
+                    QObject::connect(this, SIGNAL(threadTerminated()), waitingLoop, SLOT(quit()));
                 waitingLoop->exec();
                 waitingLoop->disconnect();
                 delete waitingLoop;
@@ -123,17 +116,14 @@ void DatabaseThread::scanCrewReference(const QStringList &crewList, const int &r
 
 void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int &maxPages, const int &requestDelay)
 {
-    for (QString crewID : crewList)
-    {
-        if (threadRunning && crewID != QLatin1String("0"))
-        {
+    for (const QString &crewID : crewList) {
+        if (threadRunning && crewID != QLatin1String("0")) {
             int currentFail = 0;
             int currentPage = 0;
             int foundPlayers = 0;
             int totalPlayers = 1000;
 
-            while(foundPlayers < totalPlayers && currentPage < maxPages && (continueLastCrew ? true : threadRunning))
-            {
+            while(foundPlayers < totalPlayers && currentPage < maxPages && (continueLastCrew ? true : threadRunning)) {
                 QNetworkAccessManager *netManager = new QNetworkAccessManager();
                 QNetworkRequest netRequest(AppEnv::getPlayerFetchingUrl(crewID, currentPage));
 #if QT_VERSION >= 0x050600
@@ -151,14 +141,14 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
 
                 QEventLoop *downloadLoop = new QEventLoop();
                 QObject::connect(netReply, SIGNAL(finished()), downloadLoop, SLOT(quit()));
-                if (!continueLastCrew) { QObject::connect(this, SIGNAL(threadTerminated()), downloadLoop, SLOT(quit())); }
+                if (!continueLastCrew)
+                    QObject::connect(this, SIGNAL(threadTerminated()), downloadLoop, SLOT(quit()));
                 QTimer::singleShot(30000, downloadLoop, SLOT(quit()));
                 downloadLoop->exec();
                 downloadLoop->disconnect();
                 delete downloadLoop;
 
-                if (netReply->isFinished())
-                {
+                if (netReply->isFinished()) {
                     QByteArray crewJson = netReply->readAll();
                     QJsonDocument crewDocument = QJsonDocument::fromJson(crewJson);
                     QJsonObject crewObject = crewDocument.object();
@@ -166,32 +156,25 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
 
                     if (crewMap.contains("Total")) { totalPlayers = crewMap["Total"].toInt(); }
 
-                    if (crewMap.contains("Members"))
-                    {
+                    if (crewMap.contains("Members")) {
                         const QList<QVariant> memberList = crewMap["Members"].toList();
-                        for (QVariant memberVariant : memberList)
-                        {
+                        for (const QVariant &memberVariant : memberList) {
                             QMap<QString, QVariant> memberMap = memberVariant.toMap();
-                            if (memberMap.contains("RockstarId") && memberMap.contains("Name"))
-                            {
+                            if (memberMap.contains("RockstarId") && memberMap.contains("Name")) {
                                 int RockstarId = memberMap["RockstarId"].toInt();
                                 QString memberName = memberMap["Name"].toString();
-                                if (!memberName.isEmpty() && RockstarId != 0)
-                                {
+                                if (!memberName.isEmpty() && RockstarId != 0) {
                                     foundPlayers++;
                                     emit playerNameFound(RockstarId, memberName);
                                 }
                             }
                         }
                     }
-
                     currentPage++;
                 }
-                else
-                {
+                else {
                     currentFail++;
-                    if (currentFail == maxLoadFails)
-                    {
+                    if (currentFail == maxLoadFails) {
                         currentFail = 0;
                         currentPage++;
                     }
@@ -200,8 +183,7 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
                 delete netReply;
                 delete netManager;
 
-                if (foundPlayers < totalPlayers && currentPage < maxPages && (continueLastCrew ? true : threadRunning))
-                {
+                if (foundPlayers < totalPlayers && currentPage < maxPages && (continueLastCrew ? true : threadRunning)) {
                     QEventLoop *waitingLoop = new QEventLoop();
                     QTimer::singleShot(requestDelay, waitingLoop, SLOT(quit()));
                     if (!continueLastCrew) { QObject::connect(this, SIGNAL(threadTerminated()), waitingLoop, SLOT(quit())); }
@@ -216,10 +198,8 @@ void DatabaseThread::scanCrewMembersList(const QStringList &crewList, const int 
 
 void DatabaseThread::deleteCompatibleCrews(QStringList *crewList)
 {
-    for (QString crewNID : *crewList)
-    {
-        if (crewDB->isCompatibleCrew(crewNID))
-        {
+    for (const QString &crewNID : *crewList) {
+        if (crewDB->isCompatibleCrew(crewNID)) {
             crewList->removeAll(crewNID);
         }
     }
@@ -228,10 +208,8 @@ void DatabaseThread::deleteCompatibleCrews(QStringList *crewList)
 QStringList DatabaseThread::deleteCompatibleCrews(const QStringList &crewList)
 {
     QStringList crewListR = crewList;
-    for (QString crewNID : crewListR)
-    {
-        if (crewDB->isCompatibleCrew(crewNID))
-        {
+    for (const QString &crewNID : crewListR) {
+        if (crewDB->isCompatibleCrew(crewNID)) {
             crewListR.removeAll(crewNID);
         }
     }
