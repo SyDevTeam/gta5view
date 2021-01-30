@@ -44,6 +44,10 @@
 #endif
 #endif
 
+#ifdef Q_OS_MAC
+#include <QStyleFactory>
+#endif
+
 #include <QStringBuilder>
 #include <QJsonDocument>
 #include <QApplication>
@@ -63,6 +67,7 @@
 #include <QPicture>
 #include <QBitmap>
 #include <QBuffer>
+#include <QTimer>
 #include <QImage>
 #include <QDebug>
 #include <QList>
@@ -143,7 +148,7 @@ void PictureDialog::setupPictureDialog()
     crewStr = "";
 
     // Get Snapmatic Resolution
-    QSize snapmaticResolution = SnapmaticPicture::getSnapmaticResolution();
+    const QSize snapmaticResolution = SnapmaticPicture::getSnapmaticResolution();
 
     // Avatar area
     qreal screenRatio = AppEnv::screenRatio();
@@ -183,9 +188,6 @@ void PictureDialog::setupPictureDialog()
     // Global map
     globalMap = GlobalString::getGlobalMap();
 
-    // Event connects
-    connect(ui->labJSON, SIGNAL(resized(QSize)), this, SLOT(adaptNewDialogSize(QSize)));
-
     // Set Icon for Close Button
     if (QIcon::hasThemeIcon("dialog-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
@@ -203,8 +205,9 @@ void PictureDialog::setupPictureDialog()
     ui->jsonLayout->setContentsMargins(4 * screenRatio, 10 * screenRatio, 4 * screenRatio, 4 * screenRatio);
 
     // Pre-adapt window for DPI
-    setFixedWidth(snapmaticResolution.width() * screenRatio);
-    setFixedHeight(snapmaticResolution.height() * screenRatio);
+    const QSize windowSize(snapmaticResolution.width() * screenRatio, snapmaticResolution.height() * screenRatio);
+    setMinimumSize(windowSize);
+    setMaximumSize(windowSize);
 }
 
 PictureDialog::~PictureDialog()
@@ -221,17 +224,6 @@ void PictureDialog::closeEvent(QCloseEvent *ev)
 
 void PictureDialog::addPreviousNextButtons()
 {
-#ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050200
-    QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
-    uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
-    uiToolbar->setObjectName("UiToolbar");
-    uiToolbar->addAction(QIcon(":/img/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
-    uiToolbar->addAction(QIcon(":/img/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
-    layout()->setMenuBar(uiToolbar);
-    naviEnabled = true;
-#endif
-#else
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
 #if QT_VERSION < 0x050600
     qreal screenRatio = AppEnv::screenRatio();
@@ -244,23 +236,23 @@ void PictureDialog::addPreviousNextButtons()
     uiToolbar->setObjectName("UiToolbar");
     uiToolbar->addAction(QIcon(":/img/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
     uiToolbar->addAction(QIcon(":/img/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
+#ifdef Q_OS_MAC
+#if QT_VERSION >= 0x050000
+    uiToolbar->setStyle(QStyleFactory::create("Fusion"));
+#endif
+#endif
     layout()->setMenuBar(uiToolbar);
     naviEnabled = true;
-#endif
 }
 
-void PictureDialog::adaptNewDialogSize(QSize newLabelSize)
+void PictureDialog::adaptDialogSize()
 {
-    Q_UNUSED(newLabelSize)
-    int newDialogHeight = SnapmaticPicture::getSnapmaticResolution().height() * AppEnv::screenRatio();
-    newDialogHeight = newDialogHeight + ui->jsonFrame->height();
-    if (naviEnabled) newDialogHeight = newDialogHeight + layout()->menuBar()->height();
-    setMaximumSize(width(), newDialogHeight);
-    setMinimumSize(width(), newDialogHeight);
-    setFixedHeight(newDialogHeight);
-    ui->labPicture->updateGeometry();
-    ui->jsonFrame->updateGeometry();
-    updateGeometry();
+    int newDialogHeight = (SnapmaticPicture::getSnapmaticResolution().height() * AppEnv::screenRatio()) + ui->jsonFrame->heightForWidth(width());
+    if (naviEnabled)
+        newDialogHeight = newDialogHeight + layout()->menuBar()->height();
+    const QSize windowSize(width(), newDialogHeight);
+    setMinimumSize(windowSize);
+    setMaximumSize(windowSize);
 }
 
 void PictureDialog::styliseDialog()
@@ -509,10 +501,11 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         }
         setWindowTitle(windowTitleStr.arg(picTitl));
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
+        QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
     }
     else {
         ui->labJSON->setText(jsonDrawString.arg("0", "0", "0", tr("No Players"), tr("No Crew"), tr("Unknown Location")));
-        // QMessageBox::warning(this, tr("Snapmatic Picture Viewer"), tr("Failed at %1").arg(picture->getLastStep()));
+        QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
     }
     QObject::connect(smpic, SIGNAL(updated()), this, SLOT(updated()));
     QObject::connect(smpic, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
@@ -583,6 +576,7 @@ void PictureDialog::crewNameUpdated()
     if (crewIDStr == crewStr) {
         crewStr = crewDB->getCrewName(crewIDStr);
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
+        QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
     }
 }
 
@@ -591,6 +585,7 @@ void PictureDialog::playerNameUpdated()
     SnapmaticPicture *picture = smpic; // used by macro
     if (plyrsList.count() >= 1) {
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
+        QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
     }
 }
 
@@ -889,6 +884,7 @@ void PictureDialog::updated()
     }
     setWindowTitle(windowTitleStr.arg(picTitl));
     ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
+    QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
 }
 
 void PictureDialog::customSignal(QString signal)

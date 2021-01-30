@@ -181,8 +181,8 @@ Pictures and Savegames</source>
 <context>
     <name>ImageEditorDialog</name>
     <message>
-        <location filename="../PictureDialog.cpp" line="826"/>
-        <location filename="../PictureDialog.cpp" line="852"/>
+        <location filename="../PictureDialog.cpp" line="821"/>
+        <location filename="../PictureDialog.cpp" line="847"/>
         <location filename="../SnapmaticWidget.cpp" line="394"/>
         <location filename="../SnapmaticWidget.cpp" line="422"/>
         <source>Snapmatic Image Editor</source>
@@ -214,13 +214,13 @@ Pictures and Savegames</source>
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="826"/>
+        <location filename="../PictureDialog.cpp" line="821"/>
         <location filename="../SnapmaticWidget.cpp" line="394"/>
         <source>Patching of Snapmatic Image failed because of I/O Error</source>
         <translation>Не удалось изменить картинку Snapmatic из-за ошибки ввода-вывода</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="852"/>
+        <location filename="../PictureDialog.cpp" line="847"/>
         <location filename="../SnapmaticWidget.cpp" line="422"/>
         <source>Patching of Snapmatic Image failed because of Image Error</source>
         <translation>Не удалось изменить картинку Snapmatic из-за ошибки Image Error</translation>
@@ -1023,7 +1023,7 @@ Y: %2</translation>
 <context>
     <name>PictureDialog</name>
     <message>
-        <location filename="../PictureDialog.ui" line="114"/>
+        <location filename="../PictureDialog.ui" line="101"/>
         <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
@@ -1034,12 +1034,12 @@ Y: %2</translation>
 &lt;span style=&quot;font-weight:600&quot;&gt;Сделано: &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="177"/>
+        <location filename="../PictureDialog.ui" line="164"/>
         <source>&amp;Manage</source>
         <translation>&amp;Управление</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="174"/>
+        <location filename="../PictureDialog.ui" line="161"/>
         <source>Manage picture</source>
         <translation>Настройки картинки</translation>
     </message>
@@ -1049,12 +1049,12 @@ Y: %2</translation>
         <translation>Просмотрщик фотографий Snapmatic - %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="196"/>
+        <location filename="../PictureDialog.ui" line="183"/>
         <source>Close viewer</source>
         <translation>Закрыть просмотрщик</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="199"/>
+        <location filename="../PictureDialog.ui" line="186"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
     </message>
@@ -1065,37 +1065,37 @@ Y: %2</translation>
         <translation>Экспортировать</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="172"/>
+        <location filename="../PictureDialog.cpp" line="177"/>
         <location filename="../ProfileInterface.cpp" line="1707"/>
         <source>Export as &amp;Picture...</source>
         <translation>Экспортировать как &amp;картинку...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="173"/>
+        <location filename="../PictureDialog.cpp" line="178"/>
         <location filename="../ProfileInterface.cpp" line="1708"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation>Экспортировать как &amp;Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="176"/>
+        <location filename="../PictureDialog.cpp" line="181"/>
         <location filename="../ProfileInterface.cpp" line="1702"/>
         <source>&amp;Overwrite Image...</source>
         <translation>&amp;Перезаписать картинку...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="175"/>
+        <location filename="../PictureDialog.cpp" line="180"/>
         <location filename="../ProfileInterface.cpp" line="1701"/>
         <source>&amp;Edit Properties...</source>
         <translation>&amp;Изменить свойства...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="178"/>
+        <location filename="../PictureDialog.cpp" line="183"/>
         <location filename="../ProfileInterface.cpp" line="1704"/>
         <source>Open &amp;Map Viewer...</source>
         <translation>Открыть &amp;карту...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="439"/>
+        <location filename="../PictureDialog.cpp" line="431"/>
         <source>Key 1 - Avatar Preview Mode
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
@@ -1104,37 +1104,37 @@ Arrow Keys - Navigate</source>
 Стрелки - Навигация</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="494"/>
+        <location filename="../PictureDialog.cpp" line="486"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Просмотрщик фотографий Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="494"/>
+        <location filename="../PictureDialog.cpp" line="486"/>
         <source>Failed at %1</source>
         <translation>Ошибка при %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
-        <location filename="../PictureDialog.cpp" line="609"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
+        <location filename="../PictureDialog.cpp" line="604"/>
         <source>No Crew</source>
         <translation>Вне банды</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
-        <location filename="../PictureDialog.cpp" line="630"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
+        <location filename="../PictureDialog.cpp" line="625"/>
         <location filename="../SnapmaticEditor.cpp" line="246"/>
         <source>No Players</source>
         <translation>Игроков нет</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="567"/>
+        <location filename="../PictureDialog.cpp" line="560"/>
         <source>Avatar Preview Mode
 Press 1 for Default View</source>
         <translation>Режим просмотра аватарок
 Нажмите 1 для стандартного просмотра</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
         <source>Unknown Location</source>
         <translation>Неизвестное место</translation>
     </message>
@@ -1236,7 +1236,7 @@ Press 1 for Default View</source>
         <translation>Картинки Snapmatic (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="180"/>
+        <location filename="../PictureDialog.cpp" line="185"/>
         <location filename="../ProfileInterface.cpp" line="1705"/>
         <source>Open &amp;JSON Editor...</source>
         <translation>Открыть &amp;редактор JSON...</translation>
@@ -1915,7 +1915,7 @@ Press 1 for Default View</source>
         <location filename="../JsonEditorDialog.cpp" line="191"/>
         <location filename="../JsonEditorDialog.cpp" line="197"/>
         <location filename="../JsonEditorDialog.cpp" line="230"/>
-        <location filename="../PictureDialog.cpp" line="747"/>
+        <location filename="../PictureDialog.cpp" line="742"/>
         <location filename="../SnapmaticEditor.cpp" line="333"/>
         <location filename="../SnapmaticWidget.cpp" line="456"/>
         <source>Snapmatic Properties</source>
@@ -2066,7 +2066,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="197"/>
-        <location filename="../PictureDialog.cpp" line="747"/>
+        <location filename="../PictureDialog.cpp" line="742"/>
         <location filename="../SnapmaticEditor.cpp" line="333"/>
         <location filename="../SnapmaticWidget.cpp" line="456"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>

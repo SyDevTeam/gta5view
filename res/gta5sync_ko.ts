@@ -202,21 +202,21 @@ Pictures and Savegames</source>
         <translation>닫기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="826"/>
-        <location filename="../PictureDialog.cpp" line="852"/>
+        <location filename="../PictureDialog.cpp" line="821"/>
+        <location filename="../PictureDialog.cpp" line="847"/>
         <location filename="../SnapmaticWidget.cpp" line="394"/>
         <location filename="../SnapmaticWidget.cpp" line="422"/>
         <source>Snapmatic Image Editor</source>
         <translation>스냅매틱 이미지 편집기</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="826"/>
+        <location filename="../PictureDialog.cpp" line="821"/>
         <location filename="../SnapmaticWidget.cpp" line="394"/>
         <source>Patching of Snapmatic Image failed because of I/O Error</source>
         <translation>I/O 오류로 인해 스냅매틱 이미지를 패치하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="852"/>
+        <location filename="../PictureDialog.cpp" line="847"/>
         <location filename="../SnapmaticWidget.cpp" line="422"/>
         <source>Patching of Snapmatic Image failed because of Image Error</source>
         <translation>이미지 오류로 인해 스냅매틱 이미지를 패치하지 못했습니다.</translation>
@@ -1031,7 +1031,7 @@ Y: %2</translation>
         <translation>스냅매틱 이미지 뷰어 - %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="114"/>
+        <location filename="../PictureDialog.ui" line="101"/>
         <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
@@ -1042,63 +1042,63 @@ Y: %2</translation>
 &lt;span style=&quot;font-weight:600&quot;&gt;생성 날짜: &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="174"/>
+        <location filename="../PictureDialog.ui" line="161"/>
         <source>Manage picture</source>
         <translation>이미지 관리</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="177"/>
+        <location filename="../PictureDialog.ui" line="164"/>
         <source>&amp;Manage</source>
         <translation>관리(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="196"/>
+        <location filename="../PictureDialog.ui" line="183"/>
         <source>Close viewer</source>
         <translation>뷰어 닫기</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="199"/>
+        <location filename="../PictureDialog.ui" line="186"/>
         <source>&amp;Close</source>
         <translation>닫기(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="172"/>
+        <location filename="../PictureDialog.cpp" line="177"/>
         <location filename="../ProfileInterface.cpp" line="1707"/>
         <source>Export as &amp;Picture...</source>
         <translation>내 PC에 이미지로 내보내기(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="173"/>
+        <location filename="../PictureDialog.cpp" line="178"/>
         <location filename="../ProfileInterface.cpp" line="1708"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation>내 PC에 스냅매틱으로 내보내기(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="175"/>
+        <location filename="../PictureDialog.cpp" line="180"/>
         <location filename="../ProfileInterface.cpp" line="1701"/>
         <source>&amp;Edit Properties...</source>
         <translation>속성 편집(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="176"/>
+        <location filename="../PictureDialog.cpp" line="181"/>
         <location filename="../ProfileInterface.cpp" line="1702"/>
         <source>&amp;Overwrite Image...</source>
         <translation>이미지 덮어쓰기(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="178"/>
+        <location filename="../PictureDialog.cpp" line="183"/>
         <location filename="../ProfileInterface.cpp" line="1704"/>
         <source>Open &amp;Map Viewer...</source>
         <translation>지도 뷰어 열기(&amp;M)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="180"/>
+        <location filename="../PictureDialog.cpp" line="185"/>
         <location filename="../ProfileInterface.cpp" line="1705"/>
         <source>Open &amp;JSON Editor...</source>
         <translation>JSON 편집기 열기(&amp;J)</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="439"/>
+        <location filename="../PictureDialog.cpp" line="431"/>
         <source>Key 1 - Avatar Preview Mode
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
@@ -1107,35 +1107,35 @@ Arrow Keys - Navigate</source>
 화살표키 - 이동</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="494"/>
+        <location filename="../PictureDialog.cpp" line="486"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>스냅매틱 이미지 뷰어</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="494"/>
+        <location filename="../PictureDialog.cpp" line="486"/>
         <source>Failed at %1</source>
         <translation>%1에서 실패했습니다.</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
-        <location filename="../PictureDialog.cpp" line="630"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
+        <location filename="../PictureDialog.cpp" line="625"/>
         <location filename="../SnapmaticEditor.cpp" line="246"/>
         <source>No Players</source>
         <translation>플레이어 없음</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
-        <location filename="../PictureDialog.cpp" line="609"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
+        <location filename="../PictureDialog.cpp" line="604"/>
         <source>No Crew</source>
         <translation>조직 없음</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
         <source>Unknown Location</source>
         <translation>알 수 없는 위치</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="567"/>
+        <location filename="../PictureDialog.cpp" line="560"/>
         <source>Avatar Preview Mode
 Press 1 for Default View</source>
         <translation>아바타 미리 보기 모드입니다.
@@ -1928,7 +1928,7 @@ Press 1 for Default View</source>
         <location filename="../JsonEditorDialog.cpp" line="191"/>
         <location filename="../JsonEditorDialog.cpp" line="197"/>
         <location filename="../JsonEditorDialog.cpp" line="230"/>
-        <location filename="../PictureDialog.cpp" line="747"/>
+        <location filename="../PictureDialog.cpp" line="742"/>
         <location filename="../SnapmaticEditor.cpp" line="333"/>
         <location filename="../SnapmaticWidget.cpp" line="456"/>
         <source>Snapmatic Properties</source>
@@ -2021,7 +2021,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="197"/>
-        <location filename="../PictureDialog.cpp" line="747"/>
+        <location filename="../PictureDialog.cpp" line="742"/>
         <location filename="../SnapmaticEditor.cpp" line="333"/>
         <location filename="../SnapmaticWidget.cpp" line="456"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>

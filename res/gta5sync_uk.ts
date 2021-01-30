@@ -205,21 +205,21 @@ Pictures and Savegames</source>
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="826"/>
-        <location filename="../PictureDialog.cpp" line="852"/>
+        <location filename="../PictureDialog.cpp" line="821"/>
+        <location filename="../PictureDialog.cpp" line="847"/>
         <location filename="../SnapmaticWidget.cpp" line="394"/>
         <location filename="../SnapmaticWidget.cpp" line="422"/>
         <source>Snapmatic Image Editor</source>
         <translation>Редактор Snapmatic зображень</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="826"/>
+        <location filename="../PictureDialog.cpp" line="821"/>
         <location filename="../SnapmaticWidget.cpp" line="394"/>
         <source>Patching of Snapmatic Image failed because of I/O Error</source>
         <translation>Виправлення Snapmatic зображення не вдалося через I/O Error</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="852"/>
+        <location filename="../PictureDialog.cpp" line="847"/>
         <location filename="../SnapmaticWidget.cpp" line="422"/>
         <source>Patching of Snapmatic Image failed because of Image Error</source>
         <translation>Виправлення Snapmatic зображення не вдалося через помилку картинки</translation>
@@ -1021,7 +1021,7 @@ Y: %2</translation>
         <translation>Переглядач зображень Snapmatic - %1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="114"/>
+        <location filename="../PictureDialog.ui" line="101"/>
         <source>&lt;span style=&quot;font-weight:600&quot;&gt;Title: &lt;/span&gt;%6&lt;br/&gt;
 &lt;span style=&quot;font-weight:600&quot;&gt;Location: &lt;/span&gt;%7 (%1, %2, %3)&lt;br/&gt;
 &lt;span style=&quot;font-weight:600&quot;&gt;Players: &lt;/span&gt;%4 (Crew %5)&lt;br/&gt;
@@ -1032,63 +1032,63 @@ Y: %2</translation>
 &lt;span style=&quot;font-weight:600&quot;&gt;Створено: &lt;/span&gt;%8</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="174"/>
+        <location filename="../PictureDialog.ui" line="161"/>
         <source>Manage picture</source>
         <translation>Керування зображенням</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="177"/>
+        <location filename="../PictureDialog.ui" line="164"/>
         <source>&amp;Manage</source>
         <translation>&amp;Керувати</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="196"/>
+        <location filename="../PictureDialog.ui" line="183"/>
         <source>Close viewer</source>
         <translation>Закрити переглядач</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.ui" line="199"/>
+        <location filename="../PictureDialog.ui" line="186"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрити</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="172"/>
+        <location filename="../PictureDialog.cpp" line="177"/>
         <location filename="../ProfileInterface.cpp" line="1707"/>
         <source>Export as &amp;Picture...</source>
         <translation>Експортувати як &amp;зображення...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="173"/>
+        <location filename="../PictureDialog.cpp" line="178"/>
         <location filename="../ProfileInterface.cpp" line="1708"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation>Експортувати як &amp;Snapmatic...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="175"/>
+        <location filename="../PictureDialog.cpp" line="180"/>
         <location filename="../ProfileInterface.cpp" line="1701"/>
         <source>&amp;Edit Properties...</source>
         <translation>&amp;Змінити властивості...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="176"/>
+        <location filename="../PictureDialog.cpp" line="181"/>
         <location filename="../ProfileInterface.cpp" line="1702"/>
         <source>&amp;Overwrite Image...</source>
         <translation>&amp;Перезаписати зображення...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="178"/>
+        <location filename="../PictureDialog.cpp" line="183"/>
         <location filename="../ProfileInterface.cpp" line="1704"/>
         <source>Open &amp;Map Viewer...</source>
         <translation>Відкрити &amp;карту...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="180"/>
+        <location filename="../PictureDialog.cpp" line="185"/>
         <location filename="../ProfileInterface.cpp" line="1705"/>
         <source>Open &amp;JSON Editor...</source>
         <translation>Відкрити редактор &amp;JSON...</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="439"/>
+        <location filename="../PictureDialog.cpp" line="431"/>
         <source>Key 1 - Avatar Preview Mode
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
@@ -1097,35 +1097,35 @@ Arrow Keys - Navigate</source>
 Стрілки - Навігація</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="494"/>
+        <location filename="../PictureDialog.cpp" line="486"/>
         <source>Snapmatic Picture Viewer</source>
         <translation>Переглядач фотографій Snapmatic</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="494"/>
+        <location filename="../PictureDialog.cpp" line="486"/>
         <source>Failed at %1</source>
         <translation>Помилка на%1</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
-        <location filename="../PictureDialog.cpp" line="630"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
+        <location filename="../PictureDialog.cpp" line="625"/>
         <location filename="../SnapmaticEditor.cpp" line="246"/>
         <source>No Players</source>
         <translation>Гравців немає</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
-        <location filename="../PictureDialog.cpp" line="609"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
+        <location filename="../PictureDialog.cpp" line="604"/>
         <source>No Crew</source>
         <translation>Банди немає</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="514"/>
+        <location filename="../PictureDialog.cpp" line="507"/>
         <source>Unknown Location</source>
         <translation>Невідома локація</translation>
     </message>
     <message>
-        <location filename="../PictureDialog.cpp" line="567"/>
+        <location filename="../PictureDialog.cpp" line="560"/>
         <source>Avatar Preview Mode
 Press 1 for Default View</source>
         <translation>Режим для аватарок
@@ -1913,7 +1913,7 @@ Press 1 for Default View</source>
         <location filename="../JsonEditorDialog.cpp" line="191"/>
         <location filename="../JsonEditorDialog.cpp" line="197"/>
         <location filename="../JsonEditorDialog.cpp" line="230"/>
-        <location filename="../PictureDialog.cpp" line="747"/>
+        <location filename="../PictureDialog.cpp" line="742"/>
         <location filename="../SnapmaticEditor.cpp" line="333"/>
         <location filename="../SnapmaticWidget.cpp" line="456"/>
         <source>Snapmatic Properties</source>
@@ -2006,7 +2006,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="197"/>
-        <location filename="../PictureDialog.cpp" line="747"/>
+        <location filename="../PictureDialog.cpp" line="742"/>
         <location filename="../SnapmaticEditor.cpp" line="333"/>
         <location filename="../SnapmaticWidget.cpp" line="456"/>
         <source>Patching of Snapmatic Properties failed because of I/O Error</source>

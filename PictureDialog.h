@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -54,11 +54,11 @@ public:
     ~PictureDialog();
 
 public slots:
+    void adaptDialogSize();
     void crewNameUpdated();
     void playerNameUpdated();
     void dialogNextPictureRequested();
     void dialogPreviousPictureRequested();
-    void adaptNewDialogSize(QSize newLabelSize);
     void exportCustomContextMenuRequested(const QPoint &pos);
 
 private slots:
