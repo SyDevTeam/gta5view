@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -63,22 +63,18 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     selectedColour = QColor::fromRgb(0, 0, 0, 255);
 
     // Set Icon for OK Button
-    if (QIcon::hasThemeIcon("dialog-ok"))
-    {
+    if (QIcon::hasThemeIcon("dialog-ok")) {
         ui->cmdOK->setIcon(QIcon::fromTheme("dialog-ok"));
     }
-    else if (QIcon::hasThemeIcon("gtk-ok"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-ok")) {
         ui->cmdOK->setIcon(QIcon::fromTheme("gtk-ok"));
     }
 
     // Set Icon for Cancel Button
-    if (QIcon::hasThemeIcon("dialog-cancel"))
-    {
+    if (QIcon::hasThemeIcon("dialog-cancel")) {
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
-    else if (QIcon::hasThemeIcon("gtk-cancel"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-cancel")) {
         ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
     }
 
@@ -112,12 +108,10 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
 #ifndef Q_OS_MAC
     ui->vlButtom->setContentsMargins(9 * screenRatio, 6 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 #else
-    if (QApplication::style()->objectName() == "macintosh")
-    {
+    if (QApplication::style()->objectName() == "macintosh") {
         ui->vlButtom->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
     }
-    else
-    {
+    else {
         ui->vlButtom->setContentsMargins(9 * screenRatio, 6 * screenRatio, 9 * screenRatio, 9 * screenRatio);
     }
 #endif
@@ -130,9 +124,9 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     optionsMenu.addAction(tr("&Save Settings..."), this, SLOT(saveImportSettings()));
     ui->cmdOptions->setMenu(&optionsMenu);
 
-    setMaximumSize(sizeHint());
-    setMinimumSize(sizeHint());
-    setFixedSize(sizeHint());
+    const QSize windowSize = sizeHint();
+    setMinimumSize(windowSize);
+    setMaximumSize(windowSize);
 }
 
 ImportDialog::~ImportDialog()
@@ -175,7 +169,33 @@ void ImportDialog::processImage()
         // Avatar mode
         int diffWidth = 0;
         int diffHeight = 0;
-        if (!ui->cbIgnore->isChecked()) {
+        if (ui->cbIgnore->isChecked()) {
+            snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        }
+        else if (ui->cbBorderless->isChecked()) {
+            snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+            if (snapmaticImage.width() > snapmaticAvatarResolution) {
+                int diffWidth = snapmaticImage.width() - snapmaticAvatarResolution;
+                diffWidth = diffWidth / 2;
+                QImage croppedImage(snapmaticAvatarResolution, snapmaticAvatarResolution, QImage::Format_ARGB32);
+                croppedImage.fill(Qt::transparent);
+                QPainter croppedPainter(&croppedImage);
+                croppedPainter.drawImage(0 - diffWidth, 0, snapmaticImage);
+                croppedPainter.end();
+                snapmaticImage = croppedImage;
+            }
+            else if (snapmaticImage.height() > snapmaticAvatarResolution) {
+                int diffHeight = snapmaticImage.height() - snapmaticAvatarResolution;
+                diffHeight = diffHeight / 2;
+                QImage croppedImage(snapmaticAvatarResolution, snapmaticAvatarResolution, QImage::Format_ARGB32);
+                croppedImage.fill(Qt::transparent);
+                QPainter croppedPainter(&croppedImage);
+                croppedPainter.drawImage(0, 0 - diffHeight, snapmaticImage);
+                croppedPainter.end();
+                snapmaticImage = croppedImage;
+            }
+        }
+        else {
             snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
             if (snapmaticImage.width() > snapmaticImage.height()) {
                 diffHeight = snapmaticAvatarResolution - snapmaticImage.height();
@@ -186,9 +206,6 @@ void ImportDialog::processImage()
                 diffWidth = diffWidth / 2;
             }
         }
-        else {
-            snapmaticImage = snapmaticImage.scaled(snapmaticAvatarResolution, snapmaticAvatarResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
-        }
         snapmaticPainter.drawImage(snapmaticAvatarPlacementW + diffWidth, snapmaticAvatarPlacementH + diffHeight, snapmaticImage);
         if (ui->cbWatermark->isChecked())
             processWatermark(&snapmaticPainter);
@@ -198,7 +215,33 @@ void ImportDialog::processImage()
         // Picture mode
         int diffWidth = 0;
         int diffHeight = 0;
-        if (!ui->cbIgnore->isChecked()) {
+        if (ui->cbIgnore->isChecked()) {
+            snapmaticImage = snapmaticImage.scaled(snapmaticResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+        }
+        else if (ui->cbBorderless->isChecked()) {
+            snapmaticImage = snapmaticImage.scaled(snapmaticResolution, Qt::KeepAspectRatioByExpanding, Qt::SmoothTransformation);
+            if (snapmaticImage.width() > snapmaticResolution.width()) {
+                int diffWidth = snapmaticImage.width() - snapmaticResolution.width();
+                diffWidth = diffWidth / 2;
+                QImage croppedImage(snapmaticResolution, QImage::Format_ARGB32);
+                croppedImage.fill(Qt::transparent);
+                QPainter croppedPainter(&croppedImage);
+                croppedPainter.drawImage(0 - diffWidth, 0, snapmaticImage);
+                croppedPainter.end();
+                snapmaticImage = croppedImage;
+            }
+            else if (snapmaticImage.height() > snapmaticResolution.height()) {
+                int diffHeight = snapmaticImage.height() - snapmaticResolution.height();
+                diffHeight = diffHeight / 2;
+                QImage croppedImage(snapmaticResolution, QImage::Format_ARGB32);
+                croppedImage.fill(Qt::transparent);
+                QPainter croppedPainter(&croppedImage);
+                croppedPainter.drawImage(0, 0 - diffHeight, snapmaticImage);
+                croppedPainter.end();
+                snapmaticImage = croppedImage;
+            }
+        }
+        else {
             snapmaticImage = snapmaticImage.scaled(snapmaticResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
             if (snapmaticImage.width() != snapmaticResolution.width()) {
                 diffWidth = snapmaticResolution.width() - snapmaticImage.width();
@@ -208,9 +251,6 @@ void ImportDialog::processImage()
                 diffHeight = snapmaticResolution.height() - snapmaticImage.height();
                 diffHeight = diffHeight / 2;
             }
-        }
-        else {
-            snapmaticImage = snapmaticImage.scaled(snapmaticResolution, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
         }
         snapmaticPainter.drawImage(0 + diffWidth, 0 + diffHeight, snapmaticImage);
         if (ui->cbWatermark->isChecked())
@@ -309,6 +349,7 @@ void ImportDialog::processSettings(QString settingsProfile, bool setDefault)
         watermarkPicture = false;
         selectedColour = QColor::fromRgb(0, 0, 0, 255);
         backImage = QImage();
+        ui->cbBorderless->setChecked(false);
         ui->cbStretch->setChecked(false);
         ui->cbForceAvatarColour->setChecked(false);
         ui->cbUnlimited->setChecked(false);
@@ -321,6 +362,7 @@ void ImportDialog::processSettings(QString settingsProfile, bool setDefault)
         watermarkPicture = settings.value("WatermarkPicture", false).toBool();
         backImage = qvariant_cast<QImage>(settings.value("BackgroundImage", QImage()));
         selectedColour = qvariant_cast<QColor>(settings.value("SelectedColour", QColor::fromRgb(0, 0, 0, 255)));
+        ui->cbBorderless->setChecked(settings.value("BorderlessImage", false).toBool());
         ui->cbStretch->setChecked(settings.value("BackgroundStretch", false).toBool());
         ui->cbForceAvatarColour->setChecked(settings.value("ForceAvatarColour", false).toBool());
         ui->cbUnlimited->setChecked(settings.value("UnlimitedBuffer", false).toBool());
@@ -368,6 +410,7 @@ void ImportDialog::saveSettings(QString settingsProfile)
     settings.setValue("WatermarkPicture", watermarkPicture);
     settings.setValue("BackgroundImage", backImage);
     settings.setValue("SelectedColour", selectedColour);
+    settings.setValue("BorderlessImage", ui->cbBorderless->isChecked());
     settings.setValue("BackgroundStretch", ui->cbStretch->isChecked());
     settings.setValue("ForceAvatarColour", ui->cbForceAvatarColour->isChecked());
 #if QT_VERSION >= 0x050000
@@ -453,8 +496,7 @@ void ImportDialog::cropPicture()
 
     cropDialog.show();
     cropDialog.setFixedSize(cropDialog.sizeHint());
-    if (cropDialog.exec() == QDialog::Accepted)
-    {
+    if (cropDialog.exec() == QDialog::Accepted) {
         QImage *croppedImage = new QImage(imageCropper.cropImage().toImage());
         setImage(croppedImage);
     }
@@ -479,8 +521,7 @@ fileDialogPreOpen: //Work?
 
     // Getting readable Image formats
     QString imageFormatsStr = " ";
-    for (QByteArray imageFormat : QImageReader::supportedImageFormats())
-    {
+    for (const QByteArray &imageFormat : QImageReader::supportedImageFormats()) {
         imageFormatsStr += QString("*.") % QString::fromUtf8(imageFormat).toLower() % " ";
     }
 
@@ -495,17 +536,14 @@ fileDialogPreOpen: //Work?
     fileDialog.setDirectory(settings.value(profileName % "+Directory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value(profileName % "+Geometry", "").toByteArray());
 
-    if (fileDialog.exec())
-    {
+    if (fileDialog.exec()) {
         QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
+        if (selectedFiles.length() == 1) {
             QString selectedFile = selectedFiles.at(0);
             QString selectedFileName = QFileInfo(selectedFile).fileName();
 
             QFile snapmaticFile(selectedFile);
-            if (!snapmaticFile.open(QFile::ReadOnly))
-            {
+            if (!snapmaticFile.open(QFile::ReadOnly)) {
                 QMessageBox::warning(this, QApplication::translate("ProfileInterface", "Import"), QApplication::translate("ProfileInterface", "Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
                 goto fileDialogPreOpen;
             }
@@ -513,8 +551,7 @@ fileDialogPreOpen: //Work?
             QImageReader snapmaticImageReader;
             snapmaticImageReader.setDecideFormatFromContent(true);
             snapmaticImageReader.setDevice(&snapmaticFile);
-            if (!snapmaticImageReader.read(importImage))
-            {
+            if (!snapmaticImageReader.read(importImage)) {
                 QMessageBox::warning(this, QApplication::translate("ProfileInterface", "Import"), QApplication::translate("ProfileInterface", "Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
                 delete importImage;
                 goto fileDialogPreOpen;
@@ -531,8 +568,7 @@ fileDialogPreOpen: //Work?
 
 void ImportDialog::loadImportSettings()
 {
-    if (settingsLocked)
-    {
+    if (settingsLocked) {
         QMessageBox::information(this, tr("Load Settings..."), tr("Please import a new picture first"));
         return;
     }
@@ -545,31 +581,25 @@ void ImportDialog::loadImportSettings()
                 << tr("Profile %1", "Profile %1 as Profile 1").arg("4")
                 << tr("Profile %1", "Profile %1 as Profile 1").arg("5");
     QString sProfile = QInputDialog::getItem(this, tr("Load Settings..."), tr("Please select your settings profile"), profileList, 0, false, &ok, windowFlags());
-    if (ok)
-    {
+    if (ok) {
         QString pProfile;
-        if (sProfile == tr("Default", "Default as Default Profile"))
-        {
+        if (sProfile == tr("Default", "Default as Default Profile")) {
             pProfile = "Default";
         }
-        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("1"))
-        {
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("1")) {
             pProfile = "Profile 1";
         }
-        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("2"))
-        {
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("2")) {
             pProfile = "Profile 2";
         }
-        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("3"))
-        {
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("3")) {
             pProfile = "Profile 3";
         }
         else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("4"))
         {
             pProfile = "Profile 4";
         }
-        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("5"))
-        {
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("5")) {
             pProfile = "Profile 5";
         }
         processSettings(pProfile, true);
@@ -579,8 +609,7 @@ void ImportDialog::loadImportSettings()
 
 void ImportDialog::saveImportSettings()
 {
-    if (settingsLocked)
-    {
+    if (settingsLocked) {
         QMessageBox::information(this, tr("Save Settings..."), tr("Please import a new picture first"));
         return;
     }
@@ -592,27 +621,21 @@ void ImportDialog::saveImportSettings()
                 << tr("Profile %1", "Profile %1 as Profile 1").arg("4")
                 << tr("Profile %1", "Profile %1 as Profile 1").arg("5");
     QString sProfile = QInputDialog::getItem(this, tr("Save Settings..."), tr("Please select your settings profile"), profileList, 0, false, &ok, windowFlags());
-    if (ok)
-    {
+    if (ok) {
         QString pProfile;
-        if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("1"))
-        {
+        if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("1")) {
             pProfile = "Profile 1";
         }
-        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("2"))
-        {
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("2")) {
             pProfile = "Profile 2";
         }
-        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("3"))
-        {
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("3")) {
             pProfile = "Profile 3";
         }
-        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("4"))
-        {
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("4")) {
             pProfile = "Profile 4";
         }
-        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("5"))
-        {
+        else if (sProfile == tr("Profile %1", "Profile %1 as Profile 1").arg("5")) {
             pProfile = "Profile 5";
         }
         saveSettings(pProfile);
@@ -717,12 +740,17 @@ bool ImportDialog::areSettingsLocked()
 
 QString ImportDialog::getImageTitle()
 {
-    return imageTitle;
+    if (ui->cbImportAsIs->isChecked()) {
+        return tr("Custom Picture", "Custom Picture Description in SC, don't use Special Character!");
+    }
+    else {
+        return imageTitle;
+    }
 }
 
 void ImportDialog::on_cbIgnore_toggled(bool checked)
 {
-    Q_UNUSED(checked)
+    ui->cbBorderless->setDisabled(checked);
     processImage();
 }
 
@@ -763,11 +791,9 @@ void ImportDialog::on_cmdOK_clicked()
 
 void ImportDialog::on_labPicture_labelPainted()
 {
-    if (insideAvatarZone)
-    {
+    if (insideAvatarZone) {
         QImage avatarAreaFinalImage(avatarAreaImage);
-        if (selectedColour.lightness() > 127)
-        {
+        if (selectedColour.lightness() > 127) {
             avatarAreaFinalImage.setColor(1, qRgb(0, 0, 0));
         }
         QPainter labelPainter(ui->labPicture);
@@ -779,8 +805,7 @@ void ImportDialog::on_labPicture_labelPainted()
 void ImportDialog::on_cmdColourChange_clicked()
 {
     QColor newSelectedColour = QColorDialog::getColor(selectedColour, this, tr("Select Colour..."));
-    if (newSelectedColour.isValid())
-    {
+    if (newSelectedColour.isValid()) {
         selectedColour = newSelectedColour;
         ui->labColour->setText(tr("Background Colour: <span style=\"color: %1\">%1</span>").arg(selectedColour.name()));
         processImage();
@@ -806,8 +831,7 @@ fileDialogPreOpen:
 
     // Getting readable Image formats
     QString imageFormatsStr = " ";
-    for (QByteArray imageFormat : QImageReader::supportedImageFormats())
-    {
+    for (const QByteArray &imageFormat : QImageReader::supportedImageFormats()) {
         imageFormatsStr += QString("*.") % QString::fromUtf8(imageFormat).toLower() % " ";
     }
 
@@ -822,17 +846,14 @@ fileDialogPreOpen:
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value("Geometry", "").toByteArray());
 
-    if (fileDialog.exec())
-    {
+    if (fileDialog.exec()) {
         QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
+        if (selectedFiles.length() == 1) {
             QString selectedFile = selectedFiles.at(0);
             QString selectedFileName = QFileInfo(selectedFile).fileName();
 
             QFile snapmaticFile(selectedFile);
-            if (!snapmaticFile.open(QFile::ReadOnly))
-            {
+            if (!snapmaticFile.open(QFile::ReadOnly)) {
                 QMessageBox::warning(this, QApplication::translate("ProfileInterface", "Import"), QApplication::translate("ProfileInterface", "Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
                 goto fileDialogPreOpen;
             }
@@ -840,8 +861,7 @@ fileDialogPreOpen:
             QImageReader snapmaticImageReader;
             snapmaticImageReader.setDecideFormatFromContent(true);
             snapmaticImageReader.setDevice(&snapmaticFile);
-            if (!snapmaticImageReader.read(&importImage))
-            {
+            if (!snapmaticImageReader.read(&importImage)) {
                 QMessageBox::warning(this, QApplication::translate("ProfileInterface", "Import"), QApplication::translate("ProfileInterface", "Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
                 goto fileDialogPreOpen;
             }
@@ -881,8 +901,7 @@ void ImportDialog::on_cbForceAvatarColour_toggled(bool checked)
 
 void ImportDialog::on_cbWatermark_toggled(bool checked)
 {
-    if (!watermarkBlock)
-    {
+    if (!watermarkBlock) {
         if (insideAvatarZone) {
             watermarkAvatar = checked;
         }
@@ -891,6 +910,12 @@ void ImportDialog::on_cbWatermark_toggled(bool checked)
         }
         processImage();
     }
+}
+
+void ImportDialog::on_cbBorderless_toggled(bool checked)
+{
+    ui->cbIgnore->setDisabled(checked);
+    processImage();
 }
 
 void ImportDialog::on_cbImportAsIs_toggled(bool checked)

@@ -67,9 +67,14 @@ QString GlobalString::getLanguageFile()
 {
     QString language = getLanguage();
     QString languageFile = ":/global/global." % language % ".ini";
-    if (!QFileInfo::exists(languageFile)) {
+#if QT_VERSION >= 0x050200
+    if (!QFileInfo::exists(languageFile))
         languageFile = ":/global/global.en.ini";
-    }
+#else
+    if (!QFileInfo(languageFile).exists())
+        languageFile = ":/global/global.en.ini";
+#endif
+
     return languageFile;
 }
 

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -60,6 +60,7 @@ private slots:
     void on_cbStretch_toggled(bool checked);
     void on_cbForceAvatarColour_toggled(bool checked);
     void on_cbWatermark_toggled(bool checked);
+    void on_cbBorderless_toggled(bool checked);
     void on_cbImportAsIs_toggled(bool checked);
     void on_cbResolution_currentIndexChanged(int index);
 

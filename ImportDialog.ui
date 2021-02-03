@@ -88,12 +88,6 @@
           <layout class="QHBoxLayout" name="hlCheckboxesTop">
            <item>
             <widget class="QCheckBox" name="cbAvatar">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
              <property name="text">
               <string>Avatar</string>
              </property>
@@ -101,12 +95,6 @@
            </item>
            <item>
             <widget class="QCheckBox" name="cbIgnore">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
              <property name="text">
               <string>Ignore Aspect Ratio</string>
              </property>
@@ -118,14 +106,15 @@
           <layout class="QHBoxLayout" name="hlCheckboxesButtom">
            <item>
             <widget class="QCheckBox" name="cbWatermark">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
              <property name="text">
               <string>Watermark</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QCheckBox" name="cbBorderless">
+             <property name="text">
+              <string>Force Borderless</string>
              </property>
             </widget>
            </item>
