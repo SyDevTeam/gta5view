@@ -19,7 +19,7 @@
 QT += core gui network svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: QT += winextras
+greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: LIBS += -ldwmapi
 
 DEPLOYMENT.display_name = gta5view
 TARGET = gta5view
@@ -186,7 +186,7 @@ win32: CONFIG -= embed_manifest_exe
 contains(DEFINES, GTA5SYNC_TELEMETRY): win32: LIBS += -ld3d9 # Required for getting information about GPU
 
 # MAC OS X ONLY
-macx: ICON = res/5sync.icns
+macx: ICON = res/gta5view.icns
 
 # QT4 ONLY STUFF
 

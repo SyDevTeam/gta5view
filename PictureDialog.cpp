@@ -38,10 +38,7 @@
 #endif
 
 #ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050200
-#include <QtWinExtras/QtWin>
-#include <QtWinExtras/QWinEvent>
-#endif
+#include "dwmapi.h"
 #endif
 
 #ifdef Q_OS_MAC
@@ -258,36 +255,55 @@ void PictureDialog::adaptDialogSize()
 void PictureDialog::styliseDialog()
 {
 #ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050200
-    if (QtWin::isCompositionEnabled()) {
-        QPalette palette;
-        QtWin::extendFrameIntoClientArea(this, 0, qRound(layout()->menuBar()->height() * AppEnv::screenRatioPR()), 0, 0);
-        ui->jsonFrame->setStyleSheet(QString("QFrame{background:%1;}").arg(palette.window().color().name()));
-        setStyleSheet("PictureDialog{background:transparent;}");
+    BOOL isEnabled;
+    DwmIsCompositionEnabled(&isEnabled);
+    if (isEnabled == TRUE) {
+        MARGINS margins = {0, 0, qRound(layout()->menuBar()->height() * AppEnv::screenRatioPR()), 0};
+        HRESULT hr = S_OK;
+        hr = DwmExtendFrameIntoClientArea(reinterpret_cast<HWND>(winId()), &margins);
+        if (SUCCEEDED(hr)) {
+            setStyleSheet("PictureDialog{background:transparent}");
+        }
     }
     else {
-        QPalette palette;
-        QtWin::resetExtendedFrame(this);
-        ui->jsonFrame->setStyleSheet(QString("QFrame{background:%1;}").arg(palette.window().color().name()));
-        setStyleSheet(QString("PictureDialog{background:%1;}").arg(QtWin::realColorizationColor().name()));
+        MARGINS margins = {0, 0, 0, 0};
+        DwmExtendFrameIntoClientArea(reinterpret_cast<HWND>(winId()), &margins);
+        bool colorOk = false;
+        QSettings dwmRegistry("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\DWM", QSettings::NativeFormat);
+        QRgb color = dwmRegistry.value("ColorizationColor").toUInt(&colorOk);
+        if (colorOk) {
+            setStyleSheet(QString("PictureDialog{background:%1}").arg(QColor::fromRgba(color).name()));
+        }
+        else {
+            HRESULT hr = S_OK;
+            BOOL isOpaqueBlend;
+            DWORD colorization;
+            hr = DwmGetColorizationColor(&colorization, &isOpaqueBlend);
+            if (SUCCEEDED(hr) && isOpaqueBlend == FALSE) {
+                color = colorization;
+                setStyleSheet(QString("PictureDialog{background:%1}").arg(QColor::fromRgba(color).name()));
+            }
+            else {
+                setStyleSheet("PictureDialog{background:palette(window)}");
+            }
+        }
     }
-#endif
+    ui->jsonFrame->setStyleSheet("QFrame{background:palette(window)}");
 #endif
 }
 
-bool PictureDialog::event(QEvent *event)
-{
 #ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050200
-    if (naviEnabled) {
-        if (event->type() == QWinEvent::CompositionChange || event->type() == QWinEvent::ColorizationChange) {
-            styliseDialog();
-        }
+#if QT_VERSION >= 0x050000
+bool PictureDialog::nativeEvent(const QByteArray &eventType, void *message, long *result)
+{
+    MSG *msg = reinterpret_cast<MSG*>(message);
+    if (msg->message == WM_DWMCOMPOSITIONCHANGED || msg->message == WM_DWMCOLORIZATIONCOLORCHANGED) {
+        styliseDialog();
     }
-#endif
-#endif
-    return QDialog::event(event);
+    return QWidget::nativeEvent(eventType, message, result);
 }
+#endif
+#endif
 
 void PictureDialog::nextPictureRequestedSlot()
 {
@@ -355,7 +371,7 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
             }
         }
 #ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050200
+#if QT_VERSION >= 0x050000
         if (obj != ui->labPicture && naviEnabled) {
             if (ev->type() == QEvent::MouseButtonPress) {
                 QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(ev);
@@ -674,11 +690,6 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 
         pictureWidget->move(desktopRect.x(), desktopRect.y());
         pictureWidget->resize(desktopRect.width(), desktopRect.height());
-#ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050200
-        QtWin::markFullscreenWindow(pictureWidget, true);
-#endif
-#endif
         pictureWidget->showFullScreen();
         pictureWidget->setFocus();
         pictureWidget->raise();

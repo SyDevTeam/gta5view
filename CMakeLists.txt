@@ -21,9 +21,8 @@ find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Svg Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS LinguistTools QUIET)
 
 if(WIN32)
-    find_package(Qt${QT_VERSION_MAJOR} COMPONENTS WinExtras REQUIRED)
     list(APPEND GTA5VIEW_LIBS
-        Qt${QT_VERSION_MAJOR}::WinExtras
+        dwmapi
     )
     list(APPEND GTA5VIEW_DEFINES
         -DUNICODE
@@ -40,9 +39,9 @@ if(APPLE)
     )
     set(MACOSX_BUNDLE_BUNDLE_NAME gta5view)
     set(MACOSX_BUNDLE_BUNDLE_VERSION 1.10.0)
-    set(MACOSX_BUNDLE_ICON_FILE 5sync.icns)
+    set(MACOSX_BUNDLE_ICON_FILE gta5view.icns)
     set(MACOSX_BUNDLE_GUI_IDENTIFIER de.syping.gta5view)
-    set_source_files_properties(res/5sync.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
+    set_source_files_properties(res/gta5view.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
 endif()
 
 list(APPEND GTA5VIEW_DEFINES
