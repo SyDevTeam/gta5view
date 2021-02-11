@@ -35,7 +35,7 @@ if(WIN32)
 endif()
 if(APPLE)
     list(APPEND GTA5VIEW_RESOURCES
-        res/5sync.icns
+        res/gta5view.icns
     )
     set(MACOSX_BUNDLE_BUNDLE_NAME gta5view)
     set(MACOSX_BUNDLE_BUNDLE_VERSION 1.10.0)
