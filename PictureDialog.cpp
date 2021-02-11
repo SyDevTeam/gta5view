@@ -38,7 +38,9 @@
 #endif
 
 #ifdef Q_OS_WIN
+#if QT_VERSION >= 0x050000
 #include "dwmapi.h"
+#endif
 #endif
 
 #ifdef Q_OS_MAC
@@ -293,11 +295,20 @@ void PictureDialog::styliseDialog()
 }
 
 #ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x060000
+bool PictureDialog::nativeEvent(const QByteArray &eventType, void *message, qintptr *result)
+{
+    MSG *msg = reinterpret_cast<MSG*>(message);
+    if (msg->message == 0x031e || msg->message == 0x0320) {
+        styliseDialog();
+    }
+    return QWidget::nativeEvent(eventType, message, result);
+}
+#elif QT_VERSION >= 0x050000
 bool PictureDialog::nativeEvent(const QByteArray &eventType, void *message, long *result)
 {
     MSG *msg = reinterpret_cast<MSG*>(message);
-    if (msg->message == WM_DWMCOMPOSITIONCHANGED || msg->message == WM_DWMCOLORIZATIONCOLORCHANGED) {
+    if (msg->message == 0x031e || msg->message == 0x0320) {
         styliseDialog();
     }
     return QWidget::nativeEvent(eventType, message, result);

@@ -90,7 +90,9 @@ protected:
     bool eventFilter(QObject *obj, QEvent *ev);
     void mousePressEvent(QMouseEvent *ev);
 #ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050000
+#if QT_VERSION >= 0x060000
+    bool nativeEvent(const QByteArray &eventType, void *message, qintptr *result);
+#elif QT_VERSION >= 0x050000
     bool nativeEvent(const QByteArray &eventType, void *message, long *result);
 #endif
 #endif

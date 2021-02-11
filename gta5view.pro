@@ -19,7 +19,7 @@
 QT += core gui network svg
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
-greaterThan(QT_MAJOR_VERSION, 4): greaterThan(QT_MINOR_VERSION, 1): win32: LIBS += -ldwmapi
+greaterThan(QT_MAJOR_VERSION, 4): win32: LIBS += -ldwmapi
 
 DEPLOYMENT.display_name = gta5view
 TARGET = gta5view
