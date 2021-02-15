@@ -177,7 +177,6 @@ INCLUDEPATH += ./anpro ./pcg ./tmext ./uimod
 
 DEFINES += GTA5SYNC_QMAKE # We using qmake do we?
 DEFINES += GTA5SYNC_PROJECT # Enable exclusive gta5sync/gta5view functions
-DEFINES += SNAPMATIC_NODEFAULT # Not assisting at proper usage of SnapmaticPicture class
 
 # WINDOWS ONLY
 

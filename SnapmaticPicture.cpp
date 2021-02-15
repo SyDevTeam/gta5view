@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5spv Grand Theft Auto Snapmatic Picture Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -84,8 +84,7 @@ bool SnapmaticPicture::preloadFile()
 
     isFormatSwitch = false;
 
-    if (!picFile->open(QFile::ReadOnly))
-    {
+    if (!picFile->open(QFile::ReadOnly)) {
         lastStep = "1;/1,OpenFile," % convertDrawStringForLog(picFilePath);
         delete picFile;
         return false;
@@ -98,8 +97,7 @@ bool SnapmaticPicture::preloadFile()
     if (!ok)
         return false;
 
-    if (picFilePath.right(4) != QLatin1String(".g5e"))
-    {
+    if (picFilePath.right(4) != QLatin1String(".g5e")) {
         if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
             isFormatSwitch = true;
     }
@@ -122,9 +120,9 @@ bool SnapmaticPicture::readingPicture(bool cacheEnabled_)
     if (!ok)
         return false;
 
-    if (cacheEnabled) picOk = cachePicture.loadFromData(p_ragePhoto.photoData(), "JPEG");
-    if (!cacheEnabled)
-    {
+    if (cacheEnabled)
+        picOk = cachePicture.loadFromData(p_ragePhoto.photoData(), "JPEG");
+    if (!cacheEnabled) {
         QImage tempPicture;
         picOk = tempPicture.loadFromData(p_ragePhoto.photoData(), "JPEG");
     }
@@ -154,19 +152,18 @@ void SnapmaticPicture::updateStrings()
     pictureStr = tr("PHOTO - %1").arg(localProperties.createdDateTime.toString("MM/dd/yy HH:mm:ss"));
     sortStr = localProperties.createdDateTime.toString("yyMMddHHmmss") % QString::number(localProperties.uid);
     QString exportStr = localProperties.createdDateTime.toString("yyyyMMdd") % "-" % QString::number(localProperties.uid);
-    if (getSnapmaticFormat() == SnapmaticFormat::G5E_Format) picFileName = "PGTA5" % QString::number(localProperties.uid);
+    if (getSnapmaticFormat() == SnapmaticFormat::G5E_Format)
+        picFileName = "PGTA5" % QString::number(localProperties.uid);
     picExportFileName = exportStr % "_" % cmpPicTitl;
 }
 
 bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool cacheEnabled_)
 {
-    if (!fileName.isEmpty())
-    {
+    if (!fileName.isEmpty()) {
         picFilePath = fileName;
         return readingPicture(cacheEnabled_);
     }
-    else
-    {
+    else {
         return false;
     }
 }
@@ -244,12 +241,10 @@ QString SnapmaticPicture::getExportPictureFileName()
 QString SnapmaticPicture::getOriginalPictureFileName()
 {
     QString newPicFileName = picFileName;
-    if (picFileName.right(4) == ".bak")
-    {
+    if (picFileName.right(4) == ".bak") {
         newPicFileName = QString(picFileName).remove(picFileName.length() - 4, 4);
     }
-    if (picFileName.right(7) == ".hidden")
-    {
+    if (picFileName.right(7) == ".hidden") {
         newPicFileName = QString(picFileName).remove(picFileName.length() - 7, 7);
     }
     return newPicFileName;
@@ -258,12 +253,10 @@ QString SnapmaticPicture::getOriginalPictureFileName()
 QString SnapmaticPicture::getOriginalPictureFilePath()
 {
     QString newPicFilePath = picFilePath;
-    if (picFilePath.right(4) == ".bak")
-    {
+    if (picFilePath.right(4) == ".bak") {
         newPicFilePath = QString(picFilePath).remove(picFilePath.length() - 4, 4);
     }
-    if (picFilePath.right(7) == ".hidden")
-    {
+    if (picFilePath.right(7) == ".hidden") {
         newPicFilePath = QString(picFilePath).remove(picFilePath.length() - 7, 7);
     }
     return newPicFilePath;
@@ -296,79 +289,65 @@ QString SnapmaticPicture::getPictureStr()
 
 QString SnapmaticPicture::getLastStep(bool readable)
 {
-    if (readable)
-    {
+    if (readable) {
         QStringList lastStepList = lastStep.split(";/");
-        if (lastStepList.length() < 2) { return lastStep; }
+        if (lastStepList.length() < 2)
+            return lastStep;
         bool intOk;
         QStringList descStepList = lastStepList.at(1).split(",");
-        if (descStepList.length() < 1) { return lastStep; }
+        if (descStepList.length() < 1)
+            return lastStep;
         int argsCount = descStepList.at(0).toInt(&intOk);
         if (!intOk) { return lastStep; }
-        if (argsCount == 1)
-        {
+        if (argsCount == 1) {
             QString currentAction = descStepList.at(1);
             QString actionFile = descStepList.at(2);
-            if (currentAction == "OpenFile")
-            {
+            if (currentAction == "OpenFile") {
                 return tr("open file %1").arg(actionFile);
             }
         }
-        else if (argsCount == 3 || argsCount == 4)
-        {
+        else if (argsCount == 3 || argsCount == 4) {
             QString currentAction = descStepList.at(1);
             QString actionFile = descStepList.at(2);
             QString actionError = descStepList.at(4);
             QString actionError2;
             if (argsCount == 4) { actionError2 = descStepList.at(5); }
-            if (currentAction == "ReadingFile")
-            {
+            if (currentAction == "ReadingFile") {
                 QString readableError = actionError;
-                if (actionError == "NOHEADER")
-                {
+                if (actionError == "NOHEADER") {
                     readableError = tr("header not exists");
                 }
-                else if (actionError == "MALFORMEDHEADER")
-                {
+                else if (actionError == "MALFORMEDHEADER") {
                     readableError = tr("header is malformed");
                 }
-                else if (actionError == "NOJPEG" || actionError == "NOPIC")
-                {
+                else if (actionError == "NOJPEG" || actionError == "NOPIC") {
                     readableError = tr("picture not exists (%1)").arg(actionError);
                 }
-                else if (actionError == "NOJSON" || actionError == "CTJSON")
-                {
+                else if (actionError == "NOJSON" || actionError == "CTJSON") {
                     readableError = tr("JSON not exists (%1)").arg(actionError);
                 }
-                else if (actionError == "NOTITL" || actionError == "CTTITL")
-                {
+                else if (actionError == "NOTITL" || actionError == "CTTITL") {
                     readableError = tr("title not exists (%1)").arg(actionError);
                 }
-                else if (actionError == "NODESC" || actionError == "CTDESC")
-                {
+                else if (actionError == "NODESC" || actionError == "CTDESC") {
                     readableError = tr("description not exists (%1)").arg(actionError);
                 }
-                else if (actionError == "JSONINCOMPLETE" && actionError2 == "JSONERROR")
-                {
+                else if (actionError == "JSONINCOMPLETE" && actionError2 == "JSONERROR") {
                     readableError = tr("JSON is incomplete and malformed");
                 }
-                else if (actionError == "JSONINCOMPLETE")
-                {
+                else if (actionError == "JSONINCOMPLETE") {
                     readableError = tr("JSON is incomplete");
                 }
-                else if (actionError == "JSONERROR")
-                {
+                else if (actionError == "JSONERROR") {
                     readableError = tr("JSON is malformed");
                 }
                 return tr("reading file %1 because of %2", "Example for %2: JSON is malformed error").arg(actionFile, readableError);
             }
-            else
-            {
+            else {
                 return lastStep;
             }
         }
-        else
-        {
+        else {
             return lastStep;
         }
     }
@@ -437,25 +416,20 @@ void SnapmaticPicture::parseJsonContent()
 
     bool jsonIncomplete = false;
     bool jsonError = false;
-    if (jsonObject.contains("loc"))
-    {
-        if (jsonObject["loc"].isObject())
-        {
+    if (jsonObject.contains("loc")) {
+        if (jsonObject["loc"].isObject()) {
             QJsonObject locObject = jsonObject["loc"].toObject();
-            if (locObject.contains("x"))
-            {
+            if (locObject.contains("x")) {
                 if (locObject["x"].isDouble()) { localProperties.location.x = locObject["x"].toDouble(); }
                 else { jsonError = true; }
             }
             else { jsonIncomplete = true; }
-            if (locObject.contains("y"))
-            {
+            if (locObject.contains("y")) {
                 if (locObject["y"].isDouble()) { localProperties.location.y = locObject["y"].toDouble(); }
                 else { jsonError = true; }
             }
             else { jsonIncomplete = true; }
-            if (locObject.contains("z"))
-            {
+            if (locObject.contains("z")) {
                 if (locObject["z"].isDouble()) { localProperties.location.z = locObject["z"].toDouble(); }
                 else { jsonError = true; }
             }
@@ -464,35 +438,30 @@ void SnapmaticPicture::parseJsonContent()
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("uid"))
-    {
+    if (jsonObject.contains("uid")) {
         bool uidOk;
         localProperties.uid = jsonMap["uid"].toInt(&uidOk);
         if (!uidOk) { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("area"))
-    {
+    if (jsonObject.contains("area")) {
         if (jsonObject["area"].isString()) { localProperties.location.area = jsonObject["area"].toString(); }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("crewid"))
-    {
+    if (jsonObject.contains("crewid")) {
         bool crewIDOk;
         localProperties.crewID = jsonMap["crewid"].toInt(&crewIDOk);
         if (!crewIDOk) { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("street"))
-    {
+    if (jsonObject.contains("street")) {
         bool streetIDOk;
         localProperties.streetID = jsonMap["street"].toInt(&streetIDOk);
         if (!streetIDOk) { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("creat"))
-    {
+    if (jsonObject.contains("creat")) {
         bool timestampOk;
         QDateTime createdTimestamp;
         localProperties.createdTimestamp = jsonMap["creat"].toUInt(&timestampOk);
@@ -505,59 +474,53 @@ void SnapmaticPicture::parseJsonContent()
         if (!timestampOk) { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("plyrs"))
-    {
+    if (jsonObject.contains("plyrs")) {
         if (jsonObject["plyrs"].isArray()) { localProperties.playersList = jsonMap["plyrs"].toStringList(); }
         else { jsonError = true; }
     }
     // else { jsonIncomplete = true; } // 2016 Snapmatic pictures left out plyrs when none are captured, so don't force exists on that one
-    if (jsonObject.contains("meme"))
-    {
+    if (jsonObject.contains("meme")) {
         if (jsonObject["meme"].isBool()) { localProperties.isMeme = jsonObject["meme"].toBool(); }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("mug"))
-    {
+    if (jsonObject.contains("mug")) {
         if (jsonObject["mug"].isBool()) { localProperties.isMug = jsonObject["mug"].toBool(); }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("slf"))
-    {
+    if (jsonObject.contains("slf")) {
         if (jsonObject["slf"].isBool()) { localProperties.isSelfie = jsonObject["slf"].toBool(); }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("drctr"))
-    {
+    if (jsonObject.contains("drctr")) {
         if (jsonObject["drctr"].isBool()) { localProperties.isFromDirector = jsonObject["drctr"].toBool(); }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("rsedtr"))
-    {
+    if (jsonObject.contains("rsedtr")) {
         if (jsonObject["rsedtr"].isBool()) { localProperties.isFromRSEditor = jsonObject["rsedtr"].toBool(); }
         else { jsonError = true; }
     }
-    // else { jsonIncomplete = true; } // Game release Snapmatic pictures prior May 2015 left out rsedtr, so don't force exists on that one
+    else { localProperties.isFromRSEditor = false; }
+    if (jsonObject.contains("onislandx")) {
+        if (jsonObject["onislandx"].isBool()) { localProperties.location.isCayoPerico = jsonObject["onislandx"].toBool(); }
+        else { jsonError = true; }
+    }
+    else { localProperties.location.isCayoPerico = false; }
 
-    if (!jsonIncomplete && !jsonError)
-    {
+    if (!jsonIncomplete && !jsonError) {
         jsonOk = true;
     }
-    else
-    {
-        if (jsonIncomplete && jsonError)
-        {
+    else {
+        if (jsonIncomplete && jsonError) {
             lastStep = "2;/4,ReadingFile," % convertDrawStringForLog(picFilePath) % ",3,JSONINCOMPLETE,JSONERROR";
         }
-        else if (jsonIncomplete)
-        {
+        else if (jsonIncomplete) {
             lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",3,JSONINCOMPLETE";
         }
-        else if (jsonError)
-        {
+        else if (jsonError) {
             lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",3,JSONERROR";
         }
         jsonOk = false;
@@ -585,10 +548,10 @@ bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties properties)
     jsonObject["slf"] = properties.isSelfie;
     jsonObject["drctr"] = properties.isFromDirector;
     jsonObject["rsedtr"] = properties.isFromRSEditor;
+    jsonObject["onislandx"] = properties.location.isCayoPerico;
 
     QJsonDocument jsonDocument(jsonObject);
-    if (setJsonStr(QString::fromUtf8(jsonDocument.toJson(QJsonDocument::Compact))))
-    {
+    if (setJsonStr(QString::fromUtf8(jsonDocument.toJson(QJsonDocument::Compact)))) {
         localProperties = properties;
         return true;
     }
@@ -613,14 +576,11 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
 {
     // Keep current format when Auto_Format is used
     SnapmaticFormat format = format_;
-    if (format_ == SnapmaticFormat::Auto_Format)
-    {
-        if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
-        {
+    if (format_ == SnapmaticFormat::Auto_Format) {
+        if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX) {
             format = SnapmaticFormat::G5E_Format;
         }
-        else
-        {
+        else {
             format = SnapmaticFormat::PGTA_Format;
         }
     }
@@ -631,10 +591,8 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
 #else
     QFile *picFile = new QFile(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
 #endif
-    if (picFile->open(QIODevice::WriteOnly))
-    {
-        if (format == SnapmaticFormat::G5E_Format)
-        {
+    if (picFile->open(QIODevice::WriteOnly)) {
+        if (format == SnapmaticFormat::G5E_Format) {
             p_ragePhoto.save(picFile, RagePhoto::PhotoFormat::G5EX);
 #if QT_VERSION >= 0x050000
             saveSuccess = picFile->commit();
@@ -644,8 +602,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
 #endif
             delete picFile;
         }
-        else if (format == SnapmaticFormat::JPEG_Format)
-        {
+        else if (format == SnapmaticFormat::JPEG_Format) {
             picFile->write(p_ragePhoto.photoData());
 #if QT_VERSION >= 0x050000
             saveSuccess = picFile->commit();
@@ -655,8 +612,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
 #endif
             delete picFile;
         }
-        else
-        {
+        else {
             p_ragePhoto.save(picFile, RagePhoto::PhotoFormat::GTA5);
 #if QT_VERSION >= 0x050000
             saveSuccess = picFile->commit();
@@ -688,8 +644,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
 #endif
         return saveSuccess;
     }
-    else
-    {
+    else {
         delete picFile;
         return saveSuccess;
     }
@@ -708,16 +663,13 @@ void SnapmaticPicture::setPicFilePath(const QString &picFilePath_)
 bool SnapmaticPicture::deletePicFile()
 {
     bool success = false;
-    if (!QFile::exists(picFilePath))
-    {
+    if (!QFile::exists(picFilePath)) {
         success = true;
     }
-    else if (QFile::remove(picFilePath))
-    {
+    else if (QFile::remove(picFilePath)) {
         success = true;
     }
-    if (isHidden())
-    {
+    if (isHidden()) {
         const QString picBakPath = QString(picFilePath).remove(picFilePath.length() - 7, 7) % ".bak";
         if (QFile::exists(picBakPath)) QFile::remove(picBakPath);
     }
@@ -732,8 +684,7 @@ bool SnapmaticPicture::deletePicFile()
 
 bool SnapmaticPicture::isHidden()
 {
-    if (picFilePath.right(7) == QLatin1String(".hidden"))
-    {
+    if (picFilePath.right(7) == QLatin1String(".hidden")) {
         return true;
     }
     return false;
@@ -741,8 +692,7 @@ bool SnapmaticPicture::isHidden()
 
 bool SnapmaticPicture::isVisible()
 {
-    if (picFilePath.right(7) == QLatin1String(".hidden"))
-    {
+    if (picFilePath.right(7) == QLatin1String(".hidden")) {
         return false;
     }
     return true;
@@ -750,15 +700,12 @@ bool SnapmaticPicture::isVisible()
 
 bool SnapmaticPicture::setPictureHidden()
 {
-    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
-    {
+    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX) {
         return false;
     }
-    if (!isHidden())
-    {
+    if (!isHidden()) {
         QString newPicFilePath = QString(picFilePath % ".hidden");
-        if (QFile::rename(picFilePath, newPicFilePath))
-        {
+        if (QFile::rename(picFilePath, newPicFilePath)) {
             picFilePath = newPicFilePath;
             return true;
         }
@@ -769,15 +716,12 @@ bool SnapmaticPicture::setPictureHidden()
 
 bool SnapmaticPicture::setPictureVisible()
 {
-    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
-    {
+    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX) {
         return false;
     }
-    if (isHidden())
-    {
+    if (isHidden()) {
         QString newPicFilePath = QString(picFilePath).remove(picFilePath.length() - 7, 7);
-        if (QFile::rename(picFilePath, newPicFilePath))
-        {
+        if (QFile::rename(picFilePath, newPicFilePath)) {
             picFilePath = newPicFilePath;
             return true;
         }
@@ -797,8 +741,7 @@ QSize SnapmaticPicture::getSnapmaticResolution()
 
 SnapmaticFormat SnapmaticPicture::getSnapmaticFormat()
 {
-    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
-    {
+    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX) {
         return SnapmaticFormat::G5E_Format;
     }
     return SnapmaticFormat::PGTA_Format;
@@ -806,13 +749,11 @@ SnapmaticFormat SnapmaticPicture::getSnapmaticFormat()
 
 void SnapmaticPicture::setSnapmaticFormat(SnapmaticFormat format)
 {
-    if (format == SnapmaticFormat::G5E_Format)
-    {
+    if (format == SnapmaticFormat::G5E_Format) {
         p_ragePhoto.setPhotoFormat(RagePhoto::PhotoFormat::G5EX);
         return;
     }
-    else if (format == SnapmaticFormat::PGTA_Format)
-    {
+    else if (format == SnapmaticFormat::PGTA_Format) {
         p_ragePhoto.setPhotoFormat(RagePhoto::PhotoFormat::GTA5);
         return;
     }
@@ -829,10 +770,8 @@ bool SnapmaticPicture::isFormatSwitched()
 bool SnapmaticPicture::verifyTitle(const QString &title)
 {
     // VERIFY TITLE FOR BE A VALID SNAPMATIC TITLE
-    if (title.length() <= 39 && title.length() > 0)
-    {
-        for (const QChar &titleChar : title)
-        {
+    if (title.length() <= 39 && title.length() > 0) {
+        for (const QChar &titleChar : title) {
             if (!verifyTitleChar(titleChar)) return false;
         }
         return true;
@@ -843,8 +782,7 @@ bool SnapmaticPicture::verifyTitle(const QString &title)
 bool SnapmaticPicture::verifyTitleChar(const QChar &titleChar)
 {
     // VERIFY CHAR FOR BE A VALID SNAPMATIC CHARACTER
-    if (titleChar.isLetterOrNumber() || titleChar.isPrint())
-    {
+    if (titleChar.isLetterOrNumber() || titleChar.isPrint()) {
         if (titleChar == '<' || titleChar == '>' || titleChar == '\\') return false;
         return true;
     }

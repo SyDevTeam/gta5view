@@ -29,7 +29,11 @@ AboutDialog::AboutDialog(QWidget *parent) :
     ui(new Ui::AboutDialog)
 {
     // Set Window Flags
+#if QT_VERSION >= 0x050900
+    setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
 
     // Build Strings
     QString appVersion = QApplication::applicationVersion();

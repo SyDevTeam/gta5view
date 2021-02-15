@@ -85,7 +85,8 @@ void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
     QPixmap renderPixmap(renderResolution);
     renderPixmap.fill(Qt::transparent);
     QPainter renderPainter(&renderPixmap);
-    const QImage renderImage = picture->getImage().scaled(renderResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+    const QImage originalImage = picture->getImage();
+    const QImage renderImage = originalImage.scaled(renderResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation); // Stack smash
     if (renderImage.width() < renderResolution.width()) {
         renderPainter.drawImage((renderResolution.width() - renderImage.width()) / 2, 0, renderImage, Qt::AutoColor);
     }
@@ -115,8 +116,7 @@ void SnapmaticWidget::snapmaticUpdated()
 
 void SnapmaticWidget::customSignal(QString signal)
 {
-    if (signal == "PictureUpdated")
-    {
+    if (signal == "PictureUpdated") {
         QPixmap SnapmaticPixmap = QPixmap::fromImage(smpic->getImage().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
         ui->labPicture->setPixmap(SnapmaticPixmap);
     }
@@ -146,7 +146,8 @@ void SnapmaticWidget::on_cmdView_clicked()
     QObject::connect(picDialog, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
 
     // add previous next buttons
-    if (navigationBar) picDialog->addPreviousNextButtons();
+    if (navigationBar)
+        picDialog->addPreviousNextButtons();
 
     // show picture dialog
 #ifdef Q_OS_ANDROID
@@ -175,23 +176,21 @@ void SnapmaticWidget::on_cmdExport_clicked()
 
 void SnapmaticWidget::on_cmdDelete_clicked()
 {
-    if (deletePicture()) emit pictureDeleted();
+    if (deletePicture())
+        emit pictureDeleted();
 }
 
 bool SnapmaticWidget::deletePicture()
 {
     int uchoice = QMessageBox::question(this, tr("Delete picture"), tr("Are you sure to delete %1 from your Snapmatic pictures?").arg("\""+smpic->getPictureTitle()+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::No);
-    if (uchoice == QMessageBox::Yes)
-    {
-        if (smpic->deletePictureFile())
-        {
+    if (uchoice == QMessageBox::Yes) {
+        if (smpic->deletePictureFile()) {
 #ifdef GTA5SYNC_TELEMETRY
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "DeleteSuccess";
@@ -208,8 +207,7 @@ bool SnapmaticWidget::deletePicture()
 #endif
             return true;
         }
-        else
-        {
+        else {
             QMessageBox::warning(this, tr("Delete picture"), tr("Failed at deleting %1 from your Snapmatic pictures").arg("\""+smpic->getPictureTitle()+"\""));
         }
     }
@@ -224,29 +222,22 @@ void SnapmaticWidget::mousePressEvent(QMouseEvent *ev)
 void SnapmaticWidget::mouseReleaseEvent(QMouseEvent *ev)
 {
     ProfileWidget::mouseReleaseEvent(ev);
-    if (ui->cbSelected->isVisible())
-    {
-        if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
-        {
+    if (ui->cbSelected->isVisible()) {
+        if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton) {
             ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
         }
     }
-    else
-    {
+    else {
         const int contentMode = getContentMode();
-        if ((contentMode == 0 || contentMode == 10 || contentMode == 20) && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
-        {
-            if (ev->modifiers().testFlag(Qt::ShiftModifier))
-            {
+        if ((contentMode == 0 || contentMode == 10 || contentMode == 20) && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton) {
+            if (ev->modifiers().testFlag(Qt::ShiftModifier)) {
                 ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
             }
-            else
-            {
+            else {
                 on_cmdView_clicked();
             }
         }
-        else if (!ui->cbSelected->isVisible() && (contentMode == 1 || contentMode == 11 || contentMode == 21) && ev->button() == Qt::LeftButton && ev->modifiers().testFlag(Qt::ShiftModifier))
-        {
+        else if (!ui->cbSelected->isVisible() && (contentMode == 1 || contentMode == 11 || contentMode == 21) && ev->button() == Qt::LeftButton && ev->modifiers().testFlag(Qt::ShiftModifier)) {
             ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
         }
     }
@@ -257,8 +248,7 @@ void SnapmaticWidget::mouseDoubleClickEvent(QMouseEvent *ev)
     ProfileWidget::mouseDoubleClickEvent(ev);
 
     const int contentMode = getContentMode();
-    if (!ui->cbSelected->isVisible() && (contentMode == 1 || contentMode == 11 || contentMode == 21) && ev->button() == Qt::LeftButton)
-    {
+    if (!ui->cbSelected->isVisible() && (contentMode == 1 || contentMode == 11 || contentMode == 21) && ev->button() == Qt::LeftButton) {
         on_cmdView_clicked();
     }
 }
@@ -290,32 +280,27 @@ void SnapmaticWidget::dialogPreviousPictureRequested()
 
 void SnapmaticWidget::on_cbSelected_stateChanged(int arg1)
 {
-    if (arg1 == Qt::Checked)
-    {
+    if (arg1 == Qt::Checked) {
         emit widgetSelected();
     }
-    else if (arg1 == Qt::Unchecked)
-    {
+    else if (arg1 == Qt::Unchecked) {
         emit widgetDeselected();
     }
 }
 
 void SnapmaticWidget::adjustTextColor()
 {
-    if (isHidden())
-    {
+    if (isHidden()) {
         ui->labPicStr->setStyleSheet(QString("QLabel{color: rgb(%1, %2, %3);}").arg(QString::number(highlightHiddenColor.red()), QString::number(highlightHiddenColor.green()), QString::number(highlightHiddenColor.blue())));
     }
-    else
-    {
+    else {
         ui->labPicStr->setStyleSheet("");
     }
 }
 
 bool SnapmaticWidget::makePictureHidden()
 {
-    if (smpic->setPictureHidden())
-    {
+    if (smpic->setPictureHidden()) {
         adjustTextColor();
         return true;
     }
@@ -324,8 +309,7 @@ bool SnapmaticWidget::makePictureHidden()
 
 bool SnapmaticWidget::makePictureVisible()
 {
-    if (smpic->setPictureVisible())
-    {
+    if (smpic->setPictureVisible()) {
         adjustTextColor();
         return true;
     }
@@ -335,17 +319,13 @@ bool SnapmaticWidget::makePictureVisible()
 void SnapmaticWidget::makePictureHiddenSlot()
 {
     if (!makePictureHidden())
-    {
         QMessageBox::warning(this, QApplication::translate("UserInterface", "Hide In-game"), QApplication::translate("SnapmaticWidget", "Failed to hide %1 In-game from your Snapmatic pictures").arg("\""+smpic->getPictureTitle()+"\""));
-    }
 }
 
 void SnapmaticWidget::makePictureVisibleSlot()
 {
     if (!makePictureVisible())
-    {
         QMessageBox::warning(this, QApplication::translate("UserInterface", "Show In-game"), QApplication::translate("SnapmaticWidget", "Failed to show %1 In-game from your Snapmatic pictures").arg("\""+smpic->getPictureTitle()+"\""));
-    }
 }
 
 void SnapmaticWidget::editSnapmaticProperties()
@@ -375,21 +355,17 @@ void SnapmaticWidget::editSnapmaticImage()
     importDialog->enableOverwriteMode();
     importDialog->setModal(true);
     importDialog->exec();
-    if (importDialog->isImportAgreed())
-    {
+    if (importDialog->isImportAgreed()) {
         const QByteArray previousPicture = smpic->getPictureStream();
         bool success = smpic->setImage(importDialog->image());
-        if (success)
-        {
+        if (success) {
             QString currentFilePath = smpic->getPictureFilePath();
             QString originalFilePath = smpic->getOriginalPictureFilePath();
             QString backupFileName = originalFilePath % ".bak";
-            if (!QFile::exists(backupFileName))
-            {
+            if (!QFile::exists(backupFileName)) {
                 QFile::copy(currentFilePath, backupFileName);
             }
-            if (!smpic->exportPicture(currentFilePath))
-            {
+            if (!smpic->exportPicture(currentFilePath)) {
                 smpic->setPictureStream(previousPicture);
                 QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of I/O Error"));
                 return;
@@ -400,8 +376,7 @@ void SnapmaticWidget::editSnapmaticImage()
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "ImageEdited";
@@ -417,8 +392,7 @@ void SnapmaticWidget::editSnapmaticImage()
             }
 #endif
         }
-        else
-        {
+        else {
             QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of Image Error"));
             return;
         }
@@ -429,42 +403,38 @@ void SnapmaticWidget::editSnapmaticImage()
 void SnapmaticWidget::openMapViewer()
 {
     SnapmaticPicture *picture = smpic;
-    MapLocationDialog *mapLocDialog = new MapLocationDialog(picture->getSnapmaticProperties().location.x, picture->getSnapmaticProperties().location.y, this);
+    SnapmaticProperties currentProperties = picture->getSnapmaticProperties();
+    MapLocationDialog *mapLocDialog = new MapLocationDialog(currentProperties.location.x, currentProperties.location.y, this);
+    mapLocDialog->setCayoPerico(currentProperties.location.isCayoPerico);
     mapLocDialog->setModal(true);
     mapLocDialog->show();
     mapLocDialog->exec();
-    if (mapLocDialog->propUpdated())
-    {
+    if (mapLocDialog->propUpdated()) {
         // Update Snapmatic Properties
-        SnapmaticProperties localSpJson = picture->getSnapmaticProperties();
-        localSpJson.location.x = mapLocDialog->getXpos();
-        localSpJson.location.y = mapLocDialog->getYpos();
-        localSpJson.location.z = 0;
+        currentProperties.location.x = mapLocDialog->getXpos();
+        currentProperties.location.y = mapLocDialog->getYpos();
+        currentProperties.location.z = 0;
 
         // Update Snapmatic Picture
         QString currentFilePath = picture->getPictureFilePath();
         QString originalFilePath = picture->getOriginalPictureFilePath();
         QString backupFileName = originalFilePath % ".bak";
-        if (!QFile::exists(backupFileName))
-        {
+        if (!QFile::exists(backupFileName)) {
             QFile::copy(currentFilePath, backupFileName);
         }
         SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
-        picture->setSnapmaticProperties(localSpJson);
-        if (!picture->exportPicture(currentFilePath))
-        {
+        picture->setSnapmaticProperties(currentProperties);
+        if (!picture->exportPicture(currentFilePath)) {
             QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of I/O Error"));
             picture->setSnapmaticProperties(fallbackProperties);
         }
 #ifdef GTA5SYNC_TELEMETRY
-        else
-        {
+        else {
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "LocationEdited";

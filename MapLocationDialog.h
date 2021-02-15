@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017 Syping
+* Copyright (C) 2017-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ class MapLocationDialog : public QDialog
 public:
     explicit MapLocationDialog(double x, double y, QWidget *parent = 0);
     void drawPointOnMap(double x, double y);
+    void setCayoPerico(bool isCayoPerico);
     bool propUpdated();
     double getXpos();
     double getYpos();
@@ -48,11 +49,7 @@ private slots:
     void on_cmdApply_clicked();
     void on_cmdChange_clicked();
     void on_cmdRevert_clicked();
-#if QT_VERSION >= 0x060000
     void updatePosFromEvent(double x, double y);
-#else
-    void updatePosFromEvent(int x, int y);
-#endif
     void on_cmdClose_clicked();
 
 private:
@@ -62,6 +59,7 @@ private:
     double ypos_new;
     bool propUpdate;
     bool changeMode;
+    bool p_isCayoPerico;
     Ui::MapLocationDialog *ui;
 };
 

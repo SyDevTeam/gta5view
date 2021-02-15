@@ -49,7 +49,11 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     ui(new Ui::ImportDialog)
 {
     // Set Window Flags
+#if QT_VERSION >= 0x050900
+    setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
 
     ui->setupUi(this);
     ui->cmdOK->setDefault(true);

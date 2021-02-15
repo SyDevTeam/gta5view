@@ -35,6 +35,7 @@ struct SnapmaticProperties {
         double x;
         double y;
         double z;
+        bool isCayoPerico;
     };
     int uid;
     int crewID;

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,23 +17,15 @@
 *****************************************************************************/
 
 #include "StringParser.h"
+#include "config.h"
 #include <QTextDocument>
+#include <QApplication>
 #include <QLibraryInfo>
 #include <QByteArray>
 #include <QFileInfo>
 #include <QString>
 #include <QList>
 #include <QDir>
-
-#ifdef GTA5SYNC_PROJECT
-#include <QApplication>
-#include "config.h"
-#endif
-
-StringParser::StringParser()
-{
-
-}
 
 QString StringParser::escapeString(const QString &toEscape)
 {
@@ -44,7 +36,6 @@ QString StringParser::escapeString(const QString &toEscape)
 #endif
 }
 
-#ifdef GTA5SYNC_PROJECT
 QString StringParser::convertBuildedString(const QString &buildedStr)
 {
     QString outputStr = buildedStr;
@@ -61,4 +52,3 @@ QString StringParser::convertBuildedString(const QString &buildedStr)
     outputStr.replace("SEPARATOR:", QDir::separator());
     return outputStr;
 }
-#endif

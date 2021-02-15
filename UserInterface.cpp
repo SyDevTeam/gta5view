@@ -77,96 +77,79 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
 
     // Set Icon for Close Button
-    if (QIcon::hasThemeIcon("dialog-close"))
-    {
+    if (QIcon::hasThemeIcon("dialog-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
-    else if (QIcon::hasThemeIcon("gtk-close"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
     }
 
     // Set Icon for Reload Button
-    if (QIcon::hasThemeIcon("view-refresh"))
-    {
+    if (QIcon::hasThemeIcon("view-refresh")) {
         ui->cmdReload->setIcon(QIcon::fromTheme("view-refresh"));
     }
-    else if (QIcon::hasThemeIcon("reload"))
-    {
+    else if (QIcon::hasThemeIcon("reload")) {
         ui->cmdReload->setIcon(QIcon::fromTheme("reload"));
     }
 
     // Set Icon for Choose GTA V Folder Menu Item
-    if (QIcon::hasThemeIcon("document-open-folder"))
-    {
+    if (QIcon::hasThemeIcon("document-open-folder")) {
         ui->actionSelect_GTA_Folder->setIcon(QIcon::fromTheme("document-open-folder"));
     }
-    else if (QIcon::hasThemeIcon("gtk-directory"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-directory")) {
         ui->actionSelect_GTA_Folder->setIcon(QIcon::fromTheme("gtk-directory"));
     }
 
     // Set Icon for Open File Menu Item
-    if (QIcon::hasThemeIcon("document-open"))
-    {
+    if (QIcon::hasThemeIcon("document-open")) {
         ui->actionOpen_File->setIcon(QIcon::fromTheme("document-open"));
     }
 
     // Set Icon for Close Profile Menu Item
-    if (QIcon::hasThemeIcon("dialog-close"))
-    {
+    if (QIcon::hasThemeIcon("dialog-close")) {
         ui->actionSelect_profile->setIcon(QIcon::fromTheme("dialog-close"));
     }
-    else if (QIcon::hasThemeIcon("gtk-close"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-close")) {
         ui->actionSelect_profile->setIcon(QIcon::fromTheme("gtk-close"));
     }
 
     // Set Icon for Exit Menu Item
-    if (QIcon::hasThemeIcon("application-exit"))
-    {
+    if (QIcon::hasThemeIcon("application-exit")) {
 #ifndef Q_OS_MACOS // Setting icon for exit/quit lead to a crash in Mac OS X
         ui->actionExit->setIcon(QIcon::fromTheme("application-exit"));
 #endif
     }
 
     // Set Icon for Preferences Menu Item
-    if (QIcon::hasThemeIcon("preferences-system"))
-    {
+    if (QIcon::hasThemeIcon("preferences-system")) {
 #ifndef Q_OS_MACOS // Setting icon for preferences/settings/options lead to a crash in Mac OS X
         ui->actionOptions->setIcon(QIcon::fromTheme("preferences-system"));
 #endif
     }
-    else if (QIcon::hasThemeIcon("configure"))
-    {
+    else if (QIcon::hasThemeIcon("configure")) {
 #ifndef Q_OS_MACOS // Setting icon for preferences/settings/options lead to a crash in Mac OS X
         ui->actionOptions->setIcon(QIcon::fromTheme("configure"));
 #endif
     }
 
     // Set Icon for Profile Import Menu Item
-    if (QIcon::hasThemeIcon("document-import"))
-    {
+    if (QIcon::hasThemeIcon("document-import")) {
         ui->action_Import->setIcon(QIcon::fromTheme("document-import"));
     }
-    else if (QIcon::hasThemeIcon("document-open"))
-    {
+    else if (QIcon::hasThemeIcon("document-open")) {
         ui->action_Import->setIcon(QIcon::fromTheme("document-open"));
     }
 
     // Set Icon for Profile Export Menu Item
-    if (QIcon::hasThemeIcon("document-export"))
-    {
+    if (QIcon::hasThemeIcon("document-export")) {
         ui->actionExport_selected->setIcon(QIcon::fromTheme("document-export"));
     }
-    else if (QIcon::hasThemeIcon("document-save"))
-    {
+    else if (QIcon::hasThemeIcon("document-save")) {
         ui->actionExport_selected->setIcon(QIcon::fromTheme("document-save"));
     }
 
     // Set Icon for Profile Remove Menu Item
-    if (QIcon::hasThemeIcon("remove"))
-    {
+    if (QIcon::hasThemeIcon("remove")) {
         ui->actionDelete_selected->setIcon(QIcon::fromTheme("remove"));
     }
 
@@ -245,8 +228,7 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
 void UserInterface::setupProfileUi()
 {
     qreal screenRatio = AppEnv::screenRatio();
-    if (GTAV_Profiles.isEmpty())
-    {
+    if (GTAV_Profiles.isEmpty()) {
         QPushButton *changeDirBtn = new QPushButton(tr("Select &GTA V Folder..."), ui->swSelection);
         changeDirBtn->setObjectName("cmdChangeDir");
         changeDirBtn->setMinimumSize(0, 40 * screenRatio);
@@ -256,8 +238,7 @@ void UserInterface::setupProfileUi()
 
         QObject::connect(changeDirBtn, SIGNAL(clicked(bool)), this, SLOT(changeFolder_clicked()));
     }
-    else for (QString GTAV_Profile : GTAV_Profiles)
-    {
+    else for (const QString &GTAV_Profile : GTAV_Profiles) {
         QPushButton *profileBtn = new QPushButton(GTAV_Profile, ui->swSelection);
         profileBtn->setObjectName(GTAV_Profile);
         profileBtn->setMinimumSize(0, 40 * screenRatio);
@@ -277,8 +258,7 @@ void UserInterface::changeFolder_clicked()
 
 void UserInterface::on_cmdReload_clicked()
 {
-    for (QPushButton *profileBtn : profileBtns)
-    {
+    for (QPushButton *profileBtn : profileBtns) {
         ui->vlButtons->removeWidget(profileBtn);
         delete profileBtn;
     }
@@ -341,11 +321,8 @@ void UserInterface::closeEvent(QCloseEvent *ev)
 UserInterface::~UserInterface()
 {
     if (profileOpen)
-    {
         closeProfile_p();
-    }
-    for (QPushButton *profileBtn : profileBtns)
-    {
+    for (QPushButton *profileBtn : profileBtns) {
         delete profileBtn;
     }
     profileBtns.clear();
@@ -392,33 +369,25 @@ void UserInterface::profileLoaded()
 void UserInterface::on_actionSelect_all_triggered()
 {
     if (profileOpen)
-    {
         profileUI->selectAllWidgets();
-    }
 }
 
 void UserInterface::on_actionDeselect_all_triggered()
 {
     if (profileOpen)
-    {
         profileUI->deselectAllWidgets();
-    }
 }
 
 void UserInterface::on_actionExport_selected_triggered()
 {
     if (profileOpen)
-    {
         profileUI->exportSelected();
-    }
 }
 
 void UserInterface::on_actionDelete_selected_triggered()
 {
     if (profileOpen)
-    {
         profileUI->deleteSelected();
-    }
 }
 
 void UserInterface::on_actionOptions_triggered()
@@ -443,9 +412,7 @@ void UserInterface::on_actionOptions_triggered()
 void UserInterface::on_action_Import_triggered()
 {
     if (profileOpen)
-    {
         profileUI->importFiles();
-    }
 }
 
 void UserInterface::on_actionOpen_File_triggered()
@@ -459,7 +426,11 @@ fileDialogPreOpen:
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, false);
+#if QT_VERSION >= 0x050900
+    fileDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
     fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
     fileDialog.setWindowTitle(tr("Open File..."));
 
     QStringList filters;

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -31,7 +31,11 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
     ui(new Ui::PlayerListDialog)
 {
     // Set Window Flags
+#if QT_VERSION >= 0x050900
+    setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
 
     listUpdated = false;
     ui->setupUi(this);
@@ -39,40 +43,32 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
     ui->cmdCancel->setFocus();
 
     // Set Icon for Apply Button
-    if (QIcon::hasThemeIcon("dialog-ok-apply"))
-    {
+    if (QIcon::hasThemeIcon("dialog-ok-apply")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok-apply"));
     }
-    else if (QIcon::hasThemeIcon("dialog-apply"))
-    {
+    else if (QIcon::hasThemeIcon("dialog-apply")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-apply"));
     }
-    else if (QIcon::hasThemeIcon("gtk-apply"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-apply")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("gtk-apply"));
     }
-    else if (QIcon::hasThemeIcon("dialog-ok"))
-    {
+    else if (QIcon::hasThemeIcon("dialog-ok")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
     }
-    else if (QIcon::hasThemeIcon("gtk-ok"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-ok")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
     }
 
     // Set Icon for Cancel Button
-    if (QIcon::hasThemeIcon("dialog-cancel"))
-    {
+    if (QIcon::hasThemeIcon("dialog-cancel")) {
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
-    else if (QIcon::hasThemeIcon("gtk-cancel"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-cancel")) {
         ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
     }
 
     // Set Icon for Manage Buttons
-    if (QIcon::hasThemeIcon("go-previous") && QIcon::hasThemeIcon("go-next") && QIcon::hasThemeIcon("list-add"))
-    {
+    if (QIcon::hasThemeIcon("go-previous") && QIcon::hasThemeIcon("go-next") && QIcon::hasThemeIcon("list-add")) {
 #if QT_VERSION < 0x050600
         qreal screenRatio = AppEnv::screenRatio();
         if (screenRatio != 1) {
@@ -87,8 +83,7 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
         ui->cmdMakeSe->setIcon(QIcon::fromTheme("go-next"));
         ui->cmdMakeAd->setIcon(QIcon::fromTheme("list-add"));
     }
-    else
-    {
+    else {
 #if QT_VERSION < 0x050600
         qreal screenRatio = AppEnv::screenRatio();
         if (screenRatio != 1) {
@@ -112,12 +107,10 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
 
 PlayerListDialog::~PlayerListDialog()
 {
-    for (QObject *object : ui->listAvPlayers->children())
-    {
+    for (QObject *object : ui->listAvPlayers->children()) {
         delete object;
     }
-    for (QObject *object : ui->listSePlayers->children())
-    {
+    for (QObject *object : ui->listSePlayers->children()) {
         delete object;
     }
     delete ui;
@@ -131,16 +124,13 @@ void PlayerListDialog::on_cmdCancel_clicked()
 void PlayerListDialog::buildInterface()
 {
     const QStringList dbPlayers = profileDB->getPlayers();
-    for (QString sePlayer : players)
-    {
+    for (const QString &sePlayer : players) {
         QListWidgetItem *playerItem = new QListWidgetItem(profileDB->getPlayerName(sePlayer));
         playerItem->setData(Qt::UserRole, sePlayer);
         ui->listSePlayers->addItem(playerItem);
     }
-    for (QString dbPlayer : dbPlayers)
-    {
-        if (!players.contains(dbPlayer))
-        {
+    for (const QString &dbPlayer : dbPlayers) {
+        if (!players.contains(dbPlayer)) {
             QListWidgetItem *playerItem = new QListWidgetItem(profileDB->getPlayerName(dbPlayer));
             playerItem->setData(Qt::UserRole, dbPlayer);
             ui->listAvPlayers->addItem(playerItem);
@@ -151,8 +141,7 @@ void PlayerListDialog::buildInterface()
 
 void PlayerListDialog::on_cmdMakeAv_clicked()
 {
-    for (QListWidgetItem *item : ui->listSePlayers->selectedItems())
-    {
+    for (QListWidgetItem *item : ui->listSePlayers->selectedItems()) {
         QString playerName = item->text();
         int playerID = item->data(Qt::UserRole).toInt();
         delete item;
@@ -166,13 +155,11 @@ void PlayerListDialog::on_cmdMakeAv_clicked()
 void PlayerListDialog::on_cmdMakeSe_clicked()
 {
     int maxPlayers = 30;
-    if (maxPlayers < ui->listSePlayers->count() + ui->listAvPlayers->selectedItems().count())
-    {
+    if (maxPlayers < ui->listSePlayers->count() + ui->listAvPlayers->selectedItems().count()) {
         QMessageBox::warning(this, tr("Add Players..."), tr("Failed to add more Players because the limit of Players are %1!").arg(QString::number(maxPlayers)));
         return;
     }
-    for (QListWidgetItem *item : ui->listAvPlayers->selectedItems())
-    {
+    for (QListWidgetItem *item : ui->listAvPlayers->selectedItems()) {
         QString playerName = item->text();
         int playerID = item->data(Qt::UserRole).toInt();
         delete item;
@@ -186,15 +173,12 @@ void PlayerListDialog::on_cmdMakeAd_clicked()
 {
     bool playerOk;
     int playerID = QInputDialog::getInt(this, tr("Add Player..."), tr("Enter Social Club Player ID"), 1, 1, 214783647, 1, &playerOk, windowFlags());
-    if (playerOk)
-    {
-        for (int i = 0; i < ui->listAvPlayers->count(); ++i)
-        {
+    if (playerOk) {
+        for (int i = 0; i < ui->listAvPlayers->count(); ++i) {
             QListWidgetItem *item = ui->listAvPlayers->item(i);
             QString itemPlayerName = item->text();
             int itemPlayerID = item->data(Qt::UserRole).toInt();
-            if (itemPlayerID == playerID)
-            {
+            if (itemPlayerID == playerID) {
                 delete item;
                 QListWidgetItem *playerItem = new QListWidgetItem(itemPlayerName);
                 playerItem->setData(Qt::UserRole, playerID);
@@ -202,8 +186,7 @@ void PlayerListDialog::on_cmdMakeAd_clicked()
                 return;
             }
         }
-        for (int i = 0; i < ui->listSePlayers->count(); ++i)
-        {
+        for (int i = 0; i < ui->listSePlayers->count(); ++i) {
             QListWidgetItem *item = ui->listSePlayers->item(i);
             int itemPlayerID = item->data(Qt::UserRole).toInt();
             if (itemPlayerID == playerID)
@@ -221,8 +204,7 @@ void PlayerListDialog::on_cmdMakeAd_clicked()
 void PlayerListDialog::on_cmdApply_clicked()
 {
     players.clear();
-    for (int i = 0; i < ui->listSePlayers->count(); ++i)
-    {
+    for (int i = 0; i < ui->listSePlayers->count(); ++i) {
         players += ui->listSePlayers->item(i)->data(Qt::UserRole).toString();
     }
     emit playerListUpdated(players);

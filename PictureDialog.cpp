@@ -127,10 +127,20 @@ PictureDialog::PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, Cre
 void PictureDialog::setupPictureDialog()
 {
     // Set Window Flags
+#if QT_VERSION >= 0x050900
+    setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+    setWindowFlag(Qt::CustomizeWindowHint, true);
+#else
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint^Qt::CustomizeWindowHint);
+#endif
 #ifdef Q_OS_LINUX
-    // for stupid Window Manager (GNOME 3 should feel triggered)
+    // for stupid Window Manager like GNOME
+#if QT_VERSION >= 0x050900
+    setWindowFlag(Qt::Dialog, false);
+    setWindowFlag(Qt::Window, true);
+#else
     setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
+#endif
 #endif
 
     // Setup User Interface
@@ -684,7 +694,10 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 #endif
         PictureWidget *pictureWidget = new PictureWidget(this); // Work!
         pictureWidget->setObjectName("PictureWidget");
-#if QT_VERSION >= 0x050600
+#if QT_VERSION >= 0x050900
+        pictureWidget->setWindowFlag(Qt::FramelessWindowHint, true);
+        pictureWidget->setWindowFlag(Qt::MaximizeUsingFullscreenGeometryHint, true);
+#elif QT_VERSION >= 0x050600
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::MaximizeUsingFullscreenGeometryHint);
 #else
         pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint);
@@ -729,13 +742,15 @@ int PictureDialog::getIndex()
 void PictureDialog::openPreviewMap()
 {
     SnapmaticPicture *picture = smpic;
+    SnapmaticProperties currentProperties = picture->getSnapmaticProperties();
     MapLocationDialog *mapLocDialog;
     if (rqFullscreen && fullscreenWidget != nullptr) {
-        mapLocDialog = new MapLocationDialog(picture->getSnapmaticProperties().location.x, picture->getSnapmaticProperties().location.y, fullscreenWidget);
+        mapLocDialog = new MapLocationDialog(currentProperties.location.x, currentProperties.location.y, fullscreenWidget);
     }
     else {
-        mapLocDialog = new MapLocationDialog(picture->getSnapmaticProperties().location.x, picture->getSnapmaticProperties().location.y, this);
+        mapLocDialog = new MapLocationDialog(currentProperties.location.x, currentProperties.location.y, this);
     }
+    mapLocDialog->setCayoPerico(currentProperties.location.isCayoPerico);
     mapLocDialog->setWindowIcon(windowIcon());
     mapLocDialog->setModal(true);
 #ifndef Q_OS_ANDROID
@@ -746,10 +761,9 @@ void PictureDialog::openPreviewMap()
     mapLocDialog->exec();
     if (mapLocDialog->propUpdated()) {
         // Update Snapmatic Properties
-        SnapmaticProperties localSpJson = picture->getSnapmaticProperties();
-        localSpJson.location.x = mapLocDialog->getXpos();
-        localSpJson.location.y = mapLocDialog->getYpos();
-        localSpJson.location.z = 0;
+        currentProperties.location.x = mapLocDialog->getXpos();
+        currentProperties.location.y = mapLocDialog->getYpos();
+        currentProperties.location.z = 0;
 
         // Update Snapmatic Picture
         QString currentFilePath = picture->getPictureFilePath();
@@ -759,7 +773,7 @@ void PictureDialog::openPreviewMap()
             QFile::copy(currentFilePath, backupFileName);
         }
         SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
-        picture->setSnapmaticProperties(localSpJson);
+        picture->setSnapmaticProperties(currentProperties);
         if (!picture->exportPicture(currentFilePath)) {
             QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of I/O Error"));
             picture->setSnapmaticProperties(fallbackProperties);

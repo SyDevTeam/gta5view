@@ -41,41 +41,38 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, ProfileDatabase *profileD
     ui(new Ui::SnapmaticEditor)
 {
     // Set Window Flags
+#if QT_VERSION >= 0x050900
+    setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
 
     ui->setupUi(this);
     ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
     // Set Icon for Apply Button
-    if (QIcon::hasThemeIcon("dialog-ok-apply"))
-    {
+    if (QIcon::hasThemeIcon("dialog-ok-apply")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok-apply"));
     }
-    else if (QIcon::hasThemeIcon("dialog-apply"))
-    {
+    else if (QIcon::hasThemeIcon("dialog-apply")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-apply"));
     }
-    else if (QIcon::hasThemeIcon("gtk-apply"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-apply")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("gtk-apply"));
     }
-    else if (QIcon::hasThemeIcon("dialog-ok"))
-    {
+    else if (QIcon::hasThemeIcon("dialog-ok")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
     }
-    else if (QIcon::hasThemeIcon("gtk-ok"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-ok")) {
         ui->cmdApply->setIcon(QIcon::fromTheme("dialog-ok"));
     }
 
     // Set Icon for Cancel Button
-    if (QIcon::hasThemeIcon("dialog-cancel"))
-    {
+    if (QIcon::hasThemeIcon("dialog-cancel")) {
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
-    else if (QIcon::hasThemeIcon("gtk-cancel"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-cancel")) {
         ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
     }
 
@@ -96,27 +93,18 @@ SnapmaticEditor::~SnapmaticEditor()
 
 void SnapmaticEditor::selfie_toggled(bool checked)
 {
-    if (checked)
-    {
-        isSelfie = true;
-    }
-    else
-    {
-        isSelfie = false;
-    }
+    isSelfie = checked;
 }
 
 
 void SnapmaticEditor::mugshot_toggled(bool checked)
 {
-    if (checked)
-    {
+    if (checked) {
         isMugshot = true;
         ui->cbDirector->setEnabled(false);
         ui->cbDirector->setChecked(false);
     }
-    else
-    {
+    else {
         isMugshot = false;
         ui->cbDirector->setEnabled(true);
     }
@@ -124,14 +112,12 @@ void SnapmaticEditor::mugshot_toggled(bool checked)
 
 void SnapmaticEditor::editor_toggled(bool checked)
 {
-    if (checked)
-    {
+    if (checked) {
         isEditor = true;
         ui->cbDirector->setEnabled(false);
         ui->cbDirector->setChecked(false);
     }
-    else
-    {
+    else {
         isEditor = false;
         ui->cbDirector->setEnabled(true);
     }
@@ -139,8 +125,7 @@ void SnapmaticEditor::editor_toggled(bool checked)
 
 void SnapmaticEditor::on_rbSelfie_toggled(bool checked)
 {
-    if (checked)
-    {
+    if (checked) {
         mugshot_toggled(false);
         editor_toggled(false);
         selfie_toggled(true);
@@ -149,8 +134,7 @@ void SnapmaticEditor::on_rbSelfie_toggled(bool checked)
 
 void SnapmaticEditor::on_rbMugshot_toggled(bool checked)
 {
-    if (checked)
-    {
+    if (checked) {
         selfie_toggled(false);
         editor_toggled(false);
         mugshot_toggled(true);
@@ -159,8 +143,7 @@ void SnapmaticEditor::on_rbMugshot_toggled(bool checked)
 
 void SnapmaticEditor::on_rbEditor_toggled(bool checked)
 {
-    if (checked)
-    {
+    if (checked) {
         selfie_toggled(false);
         mugshot_toggled(false);
         editor_toggled(true);
@@ -169,8 +152,7 @@ void SnapmaticEditor::on_rbEditor_toggled(bool checked)
 
 void SnapmaticEditor::on_rbCustom_toggled(bool checked)
 {
-    if (checked)
-    {
+    if (checked) {
         selfie_toggled(false);
         mugshot_toggled(false);
         editor_toggled(false);
@@ -189,20 +171,16 @@ void SnapmaticEditor::setSnapmaticPicture(SnapmaticPicture *picture)
     playersList = snapmaticProperties.playersList;
     ui->cbDirector->setChecked(snapmaticProperties.isFromDirector);
     ui->cbMeme->setChecked(snapmaticProperties.isMeme);
-    if (isSelfie)
-    {
+    if (isSelfie) {
         ui->rbSelfie->setChecked(true);
     }
-    else if (isMugshot)
-    {
+    else if (isMugshot) {
         ui->rbMugshot->setChecked(true);
     }
-    else if (isEditor)
-    {
+    else if (isEditor) {
         ui->rbEditor->setChecked(true);
     }
-    else
-    {
+    else {
         ui->rbCustom->setChecked(true);
     }
     setSnapmaticCrew(returnCrewName(crewID));
@@ -212,8 +190,7 @@ void SnapmaticEditor::setSnapmaticPicture(SnapmaticPicture *picture)
 
 void SnapmaticEditor::insertPlayerNames(QStringList *players)
 {
-    for (int i = 0; i < players->size(); ++i)
-    {
+    for (int i = 0; i < players->size(); ++i) {
         players->replace(i, profileDB->getPlayerName(players->at(i)));
     }
 }
@@ -229,54 +206,48 @@ void SnapmaticEditor::setSnapmaticPlayers(const QStringList &players)
 {
     QString editStr = QString("<a href=\"g5e://editplayers\" style=\"text-decoration: none;\">%1</a>").arg(tr("Edit"));
     QString playersStr;
-    if (players.length() != 1)
-    {
+    if (players.length() != 1) {
         playersStr = tr("Players: %1 (%2)", "Multiple Player are inserted here");
     }
-    else
-    {
+    else {
         playersStr = tr("Player: %1 (%2)", "One Player is inserted here");
     }
-    if (players.length() != 0)
-    {
+    if (players.length() != 0) {
         ui->labPlayers->setText(playersStr.arg(players.join(", "), editStr));
     }
-    else
-    {
+    else {
         ui->labPlayers->setText(playersStr.arg(QApplication::translate("PictureDialog", "No Players"), editStr));
     }
 #ifndef Q_OS_ANDROID
     ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
     ui->frameWidget->resize(ui->gbValues->width(), ui->frameWidget->heightForWidth(ui->frameWidget->width()));
-    if (heightForWidth(width()) > height()) { resize(width(), heightForWidth(width())); }
+    if (heightForWidth(width()) > height())
+        resize(width(), heightForWidth(width()));
 #endif
 }
 
 void SnapmaticEditor::setSnapmaticTitle(const QString &title)
 {
-    if (title.length() > 39)
-    {
+    if (title.length() > 39) {
         snapmaticTitle = title.left(39);
     }
-    else
-    {
+    else {
         snapmaticTitle = title;
     }
     QString editStr = QString("<a href=\"g5e://edittitle\" style=\"text-decoration: none;\">%1</a>").arg(tr("Edit"));
     QString titleStr = tr("Title: %1 (%2)").arg(StringParser::escapeString(snapmaticTitle), editStr);
     ui->labTitle->setText(titleStr);
-    if (SnapmaticPicture::verifyTitle(snapmaticTitle))
-    {
+    if (SnapmaticPicture::verifyTitle(snapmaticTitle)) {
         ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes", "Yes, should work fine"))));
     }
-    else
-    {
+    else {
         ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: red\">%1</span>").arg(tr("No", "No, could lead to issues"))));
     }
 #ifndef Q_OS_ANDROID
     ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
     ui->frameWidget->resize(ui->gbValues->width(), ui->frameWidget->heightForWidth(ui->frameWidget->width()));
-    if (heightForWidth(width()) > height()) { resize(width(), heightForWidth(width())); }
+    if (heightForWidth(width()) > height())
+        resize(width(), heightForWidth(width()));
 #endif
 }
 
@@ -288,7 +259,8 @@ void SnapmaticEditor::setSnapmaticCrew(const QString &crew)
 #ifndef Q_OS_ANDROID
     ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
     ui->frameWidget->resize(ui->gbValues->width(), ui->frameWidget->heightForWidth(ui->frameWidget->width()));
-    if (heightForWidth(width()) > height()) { resize(width(), heightForWidth(width())); }
+    if (heightForWidth(width()) > height())
+        resize(width(), heightForWidth(width()));
 #endif
 }
 
@@ -304,8 +276,7 @@ void SnapmaticEditor::on_cmdCancel_clicked()
 
 void SnapmaticEditor::on_cmdApply_clicked()
 {
-    if (ui->cbQualify->isChecked())
-    {
+    if (ui->cbQualify->isChecked()) {
         qualifyAvatar();
     }
     snapmaticProperties.crewID = crewID;
@@ -315,27 +286,23 @@ void SnapmaticEditor::on_cmdApply_clicked()
     snapmaticProperties.isFromDirector = ui->cbDirector->isChecked();
     snapmaticProperties.isMeme = ui->cbMeme->isChecked();
     snapmaticProperties.playersList = playersList;
-    if (smpic)
-    {
+    if (smpic) {
         QString currentFilePath = smpic->getPictureFilePath();
         QString originalFilePath = smpic->getOriginalPictureFilePath();
         QString backupFileName = originalFilePath % ".bak";
-        if (!QFile::exists(backupFileName))
-        {
+        if (!QFile::exists(backupFileName)) {
             QFile::copy(currentFilePath, backupFileName);
         }
         SnapmaticProperties fallbackProperties = smpic->getSnapmaticProperties();
         QString fallbackTitle = smpic->getPictureTitle();
         smpic->setSnapmaticProperties(snapmaticProperties);
         smpic->setPictureTitle(snapmaticTitle);
-        if (!smpic->exportPicture(currentFilePath))
-        {
+        if (!smpic->exportPicture(currentFilePath)) {
             QMessageBox::warning(this, tr("Snapmatic Properties"), tr("Patching of Snapmatic Properties failed because of I/O Error"));
             smpic->setSnapmaticProperties(fallbackProperties);
             smpic->setPictureTitle(fallbackTitle);
         }
-        else
-        {
+        else {
             smpic->updateStrings();
             smpic->emitUpdate();
 #ifdef GTA5SYNC_TELEMETRY
@@ -343,8 +310,7 @@ void SnapmaticEditor::on_cmdApply_clicked()
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "PropertyEdited";
@@ -373,8 +339,7 @@ void SnapmaticEditor::qualifyAvatar()
 
 void SnapmaticEditor::on_cbQualify_toggled(bool checked)
 {
-    if (checked)
-    {
+    if (checked) {
         ui->cbMeme->setEnabled(false);
         ui->cbDirector->setEnabled(false);
         ui->rbCustom->setEnabled(false);
@@ -382,15 +347,13 @@ void SnapmaticEditor::on_cbQualify_toggled(bool checked)
         ui->rbEditor->setEnabled(false);
         ui->rbMugshot->setEnabled(false);
     }
-    else
-    {
+    else {
         ui->cbMeme->setEnabled(true);
         ui->rbCustom->setEnabled(true);
         ui->rbSelfie->setEnabled(true);
         ui->rbEditor->setEnabled(true);
         ui->rbMugshot->setEnabled(true);
-        if (ui->rbSelfie->isChecked() || ui->rbCustom->isChecked())
-        {
+        if (ui->rbSelfie->isChecked() || ui->rbCustom->isChecked()) {
             ui->cbDirector->setEnabled(true);
         }
     }
@@ -398,8 +361,7 @@ void SnapmaticEditor::on_cbQualify_toggled(bool checked)
 
 void SnapmaticEditor::on_labPlayers_linkActivated(const QString &link)
 {
-    if (link == "g5e://editplayers")
-    {
+    if (link == "g5e://editplayers") {
         PlayerListDialog *playerListDialog = new PlayerListDialog(playersList, profileDB, this);
         connect(playerListDialog, SIGNAL(playerListUpdated(QStringList)), this, SLOT(playerListUpdated(QStringList)));
         playerListDialog->setModal(true);
@@ -411,12 +373,10 @@ void SnapmaticEditor::on_labPlayers_linkActivated(const QString &link)
 
 void SnapmaticEditor::on_labTitle_linkActivated(const QString &link)
 {
-    if (link == "g5e://edittitle")
-    {
+    if (link == "g5e://edittitle") {
         bool ok;
         QString newTitle = QInputDialog::getText(this, tr("Snapmatic Title"), tr("New Snapmatic title:"), QLineEdit::Normal, snapmaticTitle, &ok, windowFlags());
-        if (ok && !newTitle.isEmpty())
-        {
+        if (ok && !newTitle.isEmpty()) {
             setSnapmaticTitle(newTitle);
         }
     }
@@ -424,39 +384,33 @@ void SnapmaticEditor::on_labTitle_linkActivated(const QString &link)
 
 void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
 {
-    if (link == "g5e://editcrew")
-    {
+    if (link == "g5e://editcrew") {
         bool ok;
         int indexNum = 0;
         QStringList itemList;
         QStringList crewList = crewDB->getCrews();
-        if (!crewList.contains(QLatin1String("0")))
-        {
+        if (!crewList.contains(QLatin1String("0"))) {
             crewList += QLatin1String("0");
         }
         crewList.sort();
-        for (QString crew : crewList)
-        {
+        for (const QString &crew : crewList) {
             itemList += QString("%1 (%2)").arg(crew, returnCrewName(crew.toInt()));
         }
-        if (crewList.contains(QString::number(crewID)))
-        {
+        if (crewList.contains(QString::number(crewID))) {
             indexNum = crewList.indexOf(QString::number(crewID));
         }
         QString newCrew = QInputDialog::getItem(this, tr("Snapmatic Crew"), tr("New Snapmatic crew:"), itemList, indexNum, true, &ok, windowFlags());
-        if (ok && !newCrew.isEmpty())
-        {
-            if (newCrew.contains(" ")) newCrew = newCrew.split(" ").at(0);
-            if (newCrew.length() > 10) return;
-            for (QChar crewChar : newCrew)
-            {
-                if (!crewChar.isNumber())
-                {
+        if (ok && !newCrew.isEmpty()) {
+            if (newCrew.contains(" "))
+                newCrew = newCrew.split(" ").at(0);
+            if (newCrew.length() > 10)
+                return;
+            for (const QChar &crewChar : newCrew) {
+                if (!crewChar.isNumber()) {
                     return;
                 }
             }
-            if (!crewList.contains(newCrew))
-            {
+            if (!crewList.contains(newCrew)) {
                 crewDB->addCrew(crewID);
             }
             crewID = newCrew.toInt();

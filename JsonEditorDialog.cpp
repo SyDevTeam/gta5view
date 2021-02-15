@@ -28,7 +28,6 @@
 
 #if QT_VERSION >= 0x050200
 #include <QFontDatabase>
-#include <QDebug>
 #endif
 
 #ifdef GTA5SYNC_TELEMETRY
@@ -40,29 +39,30 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
     ui(new Ui::JsonEditorDialog)
 {
     // Set Window Flags
+#if QT_VERSION >= 0x050900
+    setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+    setWindowFlag(Qt::WindowMinMaxButtonsHint, true);
+#else
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowMinMaxButtonsHint);
+#endif
 
     ui->setupUi(this);
     ui->cmdClose->setDefault(true);
     ui->cmdClose->setFocus();
 
     // Set Icon for Close Button
-    if (QIcon::hasThemeIcon("dialog-close"))
-    {
+    if (QIcon::hasThemeIcon("dialog-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
     }
-    else if (QIcon::hasThemeIcon("gtk-close"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-close")) {
         ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
     }
 
     // Set Icon for Save Button
-    if (QIcon::hasThemeIcon("document-save"))
-    {
+    if (QIcon::hasThemeIcon("document-save")) {
         ui->cmdSave->setIcon(QIcon::fromTheme("document-save"));
     }
-    else if (QIcon::hasThemeIcon("gtk-save"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-save")) {
         ui->cmdSave->setIcon(QIcon::fromTheme("gtk-save"));
     }
 
@@ -99,8 +99,7 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
     ui->hlButtons->setContentsMargins(9 * screenRatio, 0, 9 * screenRatio, 0);
     ui->vlInterface->setContentsMargins(0, 0, 0, 9 * screenRatio);
 #endif
-    if (screenRatio > 1)
-    {
+    if (screenRatio > 1) {
         ui->lineJSON->setMinimumHeight(qRound(1 * screenRatio));
         ui->lineJSON->setMaximumHeight(qRound(1 * screenRatio));
         ui->lineJSON->setLineWidth(qRound(1 * screenRatio));
@@ -121,28 +120,22 @@ void JsonEditorDialog::closeEvent(QCloseEvent *ev)
     QJsonDocument jsonOriginal = QJsonDocument::fromJson(jsonCode.toUtf8());
     QString originalCode = QString::fromUtf8(jsonOriginal.toJson(QJsonDocument::Compact));
     QString newCode = QString::fromUtf8(jsonNew.toJson(QJsonDocument::Compact));
-    if (newCode != originalCode)
-    {
+    if (newCode != originalCode) {
         QMessageBox::StandardButton button = QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("<h4>Unsaved changes detected</h4>You want to save the JSON content before you quit?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Cancel);
-        if (button == QMessageBox::Yes)
-        {
-            if (saveJsonContent())
-            {
+        if (button == QMessageBox::Yes) {
+            if (saveJsonContent()) {
                 ev->accept();
             }
-            else
-            {
+            else {
                 ev->ignore();
             }
             return;
         }
-        else if (button == QMessageBox::No)
-        {
+        else if (button == QMessageBox::No) {
             ev->accept();
             return;
         }
-        else
-        {
+        else {
             ev->ignore();
             return;
         }
@@ -153,47 +146,38 @@ bool JsonEditorDialog::saveJsonContent()
 {
     QString jsonPatched = QString(ui->txtJSON->toPlainText()).replace("\t", "    ");
     QJsonDocument jsonNew = QJsonDocument::fromJson(jsonPatched.toUtf8());
-    if (!jsonNew.isEmpty())
-    {
+    if (!jsonNew.isEmpty()) {
         QJsonDocument jsonOriginal = QJsonDocument::fromJson(jsonCode.toUtf8());
         QString originalCode = QString::fromUtf8(jsonOriginal.toJson(QJsonDocument::Compact));
         QString newCode = QString::fromUtf8(jsonNew.toJson(QJsonDocument::Compact));
-        if (newCode != originalCode)
-        {
+        if (newCode != originalCode) {
             QString currentFilePath = smpic->getPictureFilePath();
             QString originalFilePath = smpic->getOriginalPictureFilePath();
             QString backupFileName = originalFilePath % ".bak";
-            if (!QFile::exists(backupFileName))
-            {
+            if (!QFile::exists(backupFileName)) {
                 QFile::copy(currentFilePath, backupFileName);
             }
             smpic->setJsonStr(newCode, true);
-            if (!smpic->isJsonOk())
-            {
+            if (!smpic->isJsonOk()) {
                 QString lastStep = smpic->getLastStep(false);
                 QString readableError;
-                if (lastStep.contains("JSONINCOMPLETE") && lastStep.contains("JSONERROR"))
-                {
+                if (lastStep.contains("JSONINCOMPLETE") && lastStep.contains("JSONERROR")) {
                     readableError = SnapmaticPicture::tr("JSON is incomplete and malformed");
                 }
-                else if (lastStep.contains("JSONINCOMPLETE"))
-                {
+                else if (lastStep.contains("JSONINCOMPLETE")) {
                     readableError = SnapmaticPicture::tr("JSON is incomplete");
                 }
-                else if (lastStep.contains("JSONERROR"))
-                {
+                else if (lastStep.contains("JSONERROR")) {
                     readableError = SnapmaticPicture::tr("JSON is malformed");
                 }
-                else
-                {
+                else {
                     readableError = tr("JSON Error");
                 }
                 QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of %1").arg(readableError));
                 smpic->setJsonStr(originalCode, true);
                 return false;
             }
-            if (!smpic->exportPicture(currentFilePath))
-            {
+            if (!smpic->exportPicture(currentFilePath)) {
                 QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of I/O Error"));
                 smpic->setJsonStr(originalCode, true);
                 return false;
@@ -206,8 +190,7 @@ bool JsonEditorDialog::saveJsonContent()
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "JSONEdited";
@@ -225,8 +208,7 @@ bool JsonEditorDialog::saveJsonContent()
         }
         return true;
     }
-    else
-    {
+    else {
         QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("Patching of Snapmatic Properties failed because of JSON Error"));
         return false;
     }
@@ -240,7 +222,5 @@ void JsonEditorDialog::on_cmdClose_clicked()
 void JsonEditorDialog::on_cmdSave_clicked()
 {
     if (saveJsonContent())
-    {
         close();
-    }
 }

@@ -29,7 +29,11 @@ MapLocationDialog::MapLocationDialog(double x, double y, QWidget *parent) :
     ui(new Ui::MapLocationDialog)
 {
     // Set Window Flags
+#if QT_VERSION >= 0x050900
+    setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
     setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
 
     ui->setupUi(this);
     ui->cmdDone->setVisible(false);
@@ -45,12 +49,10 @@ MapLocationDialog::MapLocationDialog(double x, double y, QWidget *parent) :
     ui->vlMapDialog->setSpacing(widgetMargin);
     setMinimumSize(500 * screenRatio, 600 * screenRatio);
     setMaximumSize(500 * screenRatio, 600 * screenRatio);
-    setFixedSize(500 * screenRatio, 600 * screenRatio);
     setMouseTracking(true);
 
     changeMode = false;
     propUpdate = false;
-    drawPointOnMap(xpos_old, ypos_old);
 }
 
 MapLocationDialog::~MapLocationDialog()
@@ -64,6 +66,22 @@ void MapLocationDialog::drawPointOnMap(double xpos_d, double ypos_d)
     xpos_new = xpos_d;
     ypos_new = ypos_d;
     repaint();
+}
+
+void MapLocationDialog::setCayoPerico(bool isCayoPerico)
+{
+    qreal screenRatio = AppEnv::screenRatio();
+    p_isCayoPerico = isCayoPerico;
+    if (isCayoPerico) {
+        setMinimumSize(500 * screenRatio, 500 * screenRatio);
+        setMaximumSize(500 * screenRatio, 500 * screenRatio);
+        ui->hlMapDialog->removeItem(ui->vlMapDialog);
+        ui->hlMapDialog->insertLayout(0, ui->vlMapDialog);
+        ui->hlMapDialog->removeItem(ui->vlPosLayout);
+        ui->hlMapDialog->addLayout(ui->vlPosLayout);
+        ui->labPos->setAlignment(Qt::AlignRight);
+    }
+    drawPointOnMap(xpos_old, ypos_old);
 }
 
 void MapLocationDialog::on_cmdChange_clicked()
@@ -85,45 +103,34 @@ void MapLocationDialog::on_cmdDone_clicked()
 {
     ui->cmdDone->setVisible(false);
     ui->cmdChange->setVisible(true);
-    if (xpos_new != xpos_old || ypos_new != ypos_old)
-    {
+    if (xpos_new != xpos_old || ypos_new != ypos_old) {
         ui->cmdApply->setVisible(true);
         ui->cmdRevert->setVisible(true);
     }
-
     setCursor(Qt::ArrowCursor);
     changeMode = false;
 }
 
-#if QT_VERSION >= 0x060000
 void MapLocationDialog::updatePosFromEvent(double x, double y)
 {
     QSize mapPixelSize = size();
-    double xpos_ad = x;
-    double ypos_ad = mapPixelSize.height() - y;
-    double xrat = 10000 / (double)mapPixelSize.width();
-    double yrat = 12000 / (double)mapPixelSize.height();
-    double xpos_rv = xrat * xpos_ad;
-    double ypos_rv = yrat * ypos_ad;
-    double xpos_fp = xpos_rv - 4000;
-    double ypos_fp = ypos_rv - 4000;
-    drawPointOnMap(xpos_fp, ypos_fp);
+    double x_per = x / mapPixelSize.width(); // get X %
+    double y_per = y / mapPixelSize.height(); // get Y %
+    double x_pos, y_pos;
+    if (p_isCayoPerico) {
+        x_pos = x_per * 2340; // 2340 is 100% for X (Cayo Perico)
+        y_pos = y_per * -2340; // -2340 is 100% for Y (Cayo Perico)
+        x_pos = x_pos + 3560; // +3560 gets corrected for X (Cayo Perico)
+        y_pos = y_pos - 3980; // -4000 gets corrected for Y (Cayo Perico)
+    }
+    else {
+        x_pos = x_per * 10000; // 10000 is 100% for X (Los Santos)
+        y_pos = y_per * -12000; // -12000 is 100% for Y (Los Santos)
+        x_pos = x_pos - 4000; // -4000 gets corrected for X (Los Santos)
+        y_pos = y_pos + 8000; // +8000 gets corrected for Y (Los Santos)
+    }
+    drawPointOnMap(x_pos, y_pos);
 }
-#else
-void MapLocationDialog::updatePosFromEvent(int x, int y)
-{
-    QSize mapPixelSize = size();
-    int xpos_ad = x;
-    int ypos_ad = mapPixelSize.height() - y;
-    double xrat = 10000 / (double)mapPixelSize.width();
-    double yrat = 12000 / (double)mapPixelSize.height();
-    double xpos_rv = xrat * xpos_ad;
-    double ypos_rv = yrat * ypos_ad;
-    double xpos_fp = xpos_rv - 4000;
-    double ypos_fp = ypos_rv - 4000;
-    drawPointOnMap(xpos_fp, ypos_fp);
-}
-#endif
 
 void MapLocationDialog::paintEvent(QPaintEvent *ev)
 {
@@ -132,73 +139,110 @@ void MapLocationDialog::paintEvent(QPaintEvent *ev)
     qreal screenRatioPR = AppEnv::screenRatioPR();
 
     // Paint Map
-    QSize mapPixelSize = QSize(width() * screenRatioPR, height() * screenRatioPR);
-    painter.drawPixmap(0, 0, width(), height(), QPixmap(":/img/mappreview.jpg").scaled(mapPixelSize, Qt::IgnoreAspectRatio, Qt::SmoothTransformation));
+    QImage mapImage;
+    if (p_isCayoPerico) {
+        mapImage = QImage(":/img/mapcayoperico.jpg");
+    }
+    else {
+        mapImage = QImage(":/img/mappreview.jpg");
+    }
+    painter.setRenderHint(QPainter::SmoothPixmapTransform, true);
+    painter.drawImage(QRect(QPoint(0, 0), size()), mapImage);
 
     // Paint Marker
+    QSize mapPixelSize = size();
     int pointMarkerSize = 8 * screenRatio;
     int pointMarkerHalfSize = pointMarkerSize / 2;
-    long xpos_ms = qRound(xpos_new);
-    long ypos_ms = qRound(ypos_new);
-    double xpos_ma = xpos_ms + 4000;
-    double ypos_ma = ypos_ms + 4000;
-    double xrat = (double)width() / 10000;
-    double yrat = (double)height() / 12000;
-    long xpos_mp = qRound(xpos_ma * xrat);
-    long ypos_mp = qRound(ypos_ma * yrat);
-    long xpos_pr;
-    long ypos_pr;
+    double xpos_mp, ypos_mp;
+    if (p_isCayoPerico) {
+        double xpos_per = xpos_new - 3560; // correct X in reserve
+        double ypos_per = ypos_new + 3980; // correct y in reserve
+        xpos_per = xpos_per / 2340; // divide 100% for X
+        ypos_per = ypos_per / -2340; // divide 100% for Y
+        xpos_mp = xpos_per * mapPixelSize.width(); // locate window width pos
+        ypos_mp = ypos_per * mapPixelSize.height(); // locate window height pos
+    }
+    else {
+        double xpos_per = xpos_new + 4000; // correct X in reserve
+        double ypos_per = ypos_new - 8000; // correct y in reserve
+        xpos_per = xpos_per / 10000; // divide 100% for X
+        ypos_per = ypos_per / -12000; // divide 100% for Y
+        xpos_mp = xpos_per * mapPixelSize.width(); // locate window width pos
+        ypos_mp = ypos_per * mapPixelSize.height(); // locate window height pos
+    }
+    long xpos_pr, ypos_pr;
     if (screenRatioPR != 1) {
-#ifdef Q_OS_WIN
-        xpos_pr = xpos_mp - pointMarkerHalfSize;
-        ypos_pr = ypos_mp + pointMarkerHalfSize;
-#else
         xpos_pr = xpos_mp - pointMarkerHalfSize + screenRatioPR;
-        ypos_pr = ypos_mp + pointMarkerHalfSize - screenRatioPR;
-#endif
+        ypos_pr = ypos_mp - pointMarkerHalfSize + screenRatioPR;
     }
     else {
         xpos_pr = xpos_mp - pointMarkerHalfSize;
-        ypos_pr = ypos_mp + pointMarkerHalfSize;
+        ypos_pr = ypos_mp - pointMarkerHalfSize;
     }
     QPixmap mapMarkerPixmap = IconLoader::loadingPointmakerIcon().pixmap(QSize(pointMarkerSize, pointMarkerSize));
-    painter.drawPixmap(xpos_pr, height() - ypos_pr, pointMarkerSize, pointMarkerSize, mapMarkerPixmap);
+    painter.drawPixmap(xpos_pr, ypos_pr, pointMarkerSize, pointMarkerSize, mapMarkerPixmap);
 
     QDialog::paintEvent(ev);
 }
 
 void MapLocationDialog::mouseMoveEvent(QMouseEvent *ev)
 {
-    if (!changeMode) { ev->ignore(); }
-    else if (ev->buttons() & Qt::LeftButton)
-    {
+    if (!changeMode) {
+        ev->ignore();
+    }
+    else if (ev->buttons() & Qt::LeftButton) {
 #if QT_VERSION >= 0x060000
-        updatePosFromEvent(ev->position().x(), ev->position().y());
+        const QPointF localPos = ev->position();
+#elif QT_VERSION >= 0x050000
+        const QPointF localPos = ev->localPos();
 #else
-        updatePosFromEvent(ev->x(), ev->y());
+        const QPoint localPos = ev->pos();
+#endif
+#ifdef Q_OS_WIN
+        qreal screenRatioPR = AppEnv::screenRatioPR();
+        if (screenRatioPR != 1) {
+            updatePosFromEvent(localPos.x() - screenRatioPR, localPos.y() - screenRatioPR);
+        }
+        else {
+            updatePosFromEvent(localPos.x(), localPos.y());
+        }
+#else
+        updatePosFromEvent(localPos.x(), localPos.y());
 #endif
         ev->accept();
     }
-    else
-    {
+    else {
         ev->ignore();
     }
 }
 
 void MapLocationDialog::mouseReleaseEvent(QMouseEvent *ev)
 {
-    if (!changeMode) { ev->ignore(); }
-    else if (ev->button() == Qt::LeftButton)
-    {
+    if (!changeMode) {
+        ev->ignore();
+    }
+    else if (ev->button() == Qt::LeftButton) {
 #if QT_VERSION >= 0x060000
-        updatePosFromEvent(ev->position().x(), ev->position().y());
+        const QPointF localPos = ev->position();
+#elif QT_VERSION >= 0x050000
+        const QPointF localPos = ev->localPos();
 #else
-        updatePosFromEvent(ev->x(), ev->y());
+        const QPointF localPos = ev->posF();
+#endif
+#ifdef Q_OS_WIN
+        qreal screenRatioPR = AppEnv::screenRatioPR();
+        if (screenRatioPR != 1) {
+            updatePosFromEvent(localPos.x() - screenRatioPR, localPos.y() - screenRatioPR);
+        }
+        else {
+            updatePosFromEvent(localPos.x(), localPos.y());
+        }
+#else
+        updatePosFromEvent(localPos.x(), localPos.y());
 #endif
         ev->accept();
     }
-    else
-    {
+    else {
         ev->ignore();
     }
 }
