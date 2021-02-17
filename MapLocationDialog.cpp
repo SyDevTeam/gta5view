@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2020 Syping
+* Copyright (C) 2017-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
 #include "IconLoader.h"
 #include "AppEnv.h"
 #include <QPainter>
-#include <QDebug>
 #include <QStyle>
 
 MapLocationDialog::MapLocationDialog(double x, double y, QWidget *parent) :
@@ -121,7 +120,7 @@ void MapLocationDialog::updatePosFromEvent(double x, double y)
         x_pos = x_per * 2340; // 2340 is 100% for X (Cayo Perico)
         y_pos = y_per * -2340; // -2340 is 100% for Y (Cayo Perico)
         x_pos = x_pos + 3560; // +3560 gets corrected for X (Cayo Perico)
-        y_pos = y_pos - 3980; // -4000 gets corrected for Y (Cayo Perico)
+        y_pos = y_pos - 3980; // -3980 gets corrected for Y (Cayo Perico)
     }
     else {
         x_pos = x_per * 10000; // 10000 is 100% for X (Los Santos)
@@ -196,7 +195,7 @@ void MapLocationDialog::mouseMoveEvent(QMouseEvent *ev)
 #elif QT_VERSION >= 0x050000
         const QPointF localPos = ev->localPos();
 #else
-        const QPoint localPos = ev->pos();
+        const QPointF localPos = ev->posF();
 #endif
 #ifdef Q_OS_WIN
         qreal screenRatioPR = AppEnv::screenRatioPR();

@@ -6,7 +6,7 @@ environment:
 
 steps:
 - name: Windows Installer
-  image: sypingauto/gta5view-build:1.9-shared
+  image: sypingauto/gta5view-build:1.10-shared
   environment:
     BUILD_SCRIPT: "wininstall_build.sh"
     QT_SELECT: "qt5-x86_64-w64-mingw32"
@@ -18,7 +18,7 @@ steps:
     - name: gta5view
       path: /srv/gta5view
 - name: Windows Portable
-  image: sypingauto/gta5view-build:1.9-static
+  image: sypingauto/gta5view-build:1.10-static
   environment:
     BUILD_SCRIPT: "windows_build.sh"
     QT_SELECT: "qt5-x86_64-w64-mingw32"

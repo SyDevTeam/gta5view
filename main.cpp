@@ -49,7 +49,6 @@
 #include <QLayout>
 #include <QObject>
 #include <QString>
-#include <QDebug>
 #include <QFont>
 #include <QFile>
 

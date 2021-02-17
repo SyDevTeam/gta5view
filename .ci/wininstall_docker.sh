@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOCKER_IMAGE=sypingauto/gta5view-build:1.9-shared
+DOCKER_IMAGE=sypingauto/gta5view-build:1.10-shared
 PROJECT_DIR_DOCKER=/gta5view
 
 cd ${PROJECT_DIR} && \
