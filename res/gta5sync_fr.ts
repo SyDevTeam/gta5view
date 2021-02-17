@@ -605,7 +605,7 @@ Si vous l&apos;utilisez comme Avatar, l&apos;image sera détachée !</translatio
         <translation>&amp;Terminer</translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.cpp" line="65"/>
+        <location filename="../MapLocationDialog.cpp" line="64"/>
         <source>X: %1
 Y: %2</source>
         <comment>X and Y position</comment>
@@ -2299,22 +2299,22 @@ Appuyer sur 1 pour le mode par défaut</translation>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="150"/>
+        <location filename="../main.cpp" line="148"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation>Voulez-vous aider au développement de %1 en transmettant vos données d&apos;utilisation ?</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="151"/>
+        <location filename="../main.cpp" line="149"/>
         <source>%1 User Statistics</source>
         <translation>Statistiques utilisateurs %1</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="155"/>
+        <location filename="../main.cpp" line="153"/>
         <source>Yes, I want include personal usage data.</source>
         <translation>Oui, je veux partager mes données d&apos;utilisation.</translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="164"/>
+        <location filename="../main.cpp" line="162"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>

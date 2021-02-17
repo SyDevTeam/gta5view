@@ -585,7 +585,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.cpp" line="65"/>
+        <location filename="../MapLocationDialog.cpp" line="64"/>
         <source>X: %1
 Y: %2</source>
         <comment>X and Y position</comment>
@@ -2235,22 +2235,22 @@ Press 1 for Default View</source>
 <context>
     <name>TelemetryDialog</name>
     <message>
-        <location filename="../main.cpp" line="150"/>
+        <location filename="../main.cpp" line="148"/>
         <source>You want help %1 to improve in the future by including personal usage data in your submission?</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="151"/>
+        <location filename="../main.cpp" line="149"/>
         <source>%1 User Statistics</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="155"/>
+        <location filename="../main.cpp" line="153"/>
         <source>Yes, I want include personal usage data.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../main.cpp" line="164"/>
+        <location filename="../main.cpp" line="162"/>
         <source>&amp;OK</source>
         <translation type="unfinished"></translation>
     </message>

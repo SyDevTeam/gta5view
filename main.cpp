@@ -105,7 +105,6 @@ int main(int argc, char *argv[])
 #if QT_VERSION >= 0x060000
     a.setFont(QApplication::font("QMenu"));
 #elif QT_VERSION >= 0x050400
-#else
     if (QSysInfo::windowsVersion() >= 0x0080) {
         a.setFont(QApplication::font("QMenu"));
     }
