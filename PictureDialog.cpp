@@ -305,17 +305,12 @@ void PictureDialog::styliseDialog()
 }
 
 #ifdef Q_OS_WIN
+#if QT_VERSION >= 0x050000
 #if QT_VERSION >= 0x060000
 bool PictureDialog::nativeEvent(const QByteArray &eventType, void *message, qintptr *result)
-{
-    MSG *msg = reinterpret_cast<MSG*>(message);
-    if (msg->message == 0x031e || msg->message == 0x0320) {
-        styliseDialog();
-    }
-    return QWidget::nativeEvent(eventType, message, result);
-}
-#elif QT_VERSION >= 0x050000
+#else
 bool PictureDialog::nativeEvent(const QByteArray &eventType, void *message, long *result)
+#endif
 {
     MSG *msg = reinterpret_cast<MSG*>(message);
     if (msg->message == 0x031e || msg->message == 0x0320) {
@@ -411,11 +406,11 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                     }
                 }
             }
-            if (ev->type() == QEvent::MouseMove && dragStart) {
+            if (dragStart && ev->type() == QEvent::MouseMove) {
                 QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(ev);
                 if (mouseEvent->pos().y() <= layout()->menuBar()->height()) {
                     if (mouseEvent->buttons() & Qt::LeftButton) {
-                        QPoint diff = mouseEvent->pos() - dragPosition;
+                        const QPoint diff = mouseEvent->pos() - dragPosition;
                         move(QPoint(pos() + diff));
                         updateGeometry();
                     }
