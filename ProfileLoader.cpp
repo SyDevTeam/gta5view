@@ -71,7 +71,6 @@ void ProfileLoader::run()
         emit loadingProgress(curFile, maximumV);
         const QString picturePath = profileFolder % "/" % SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
-        QTextStream(stdout) << "Current: " << picturePath << Qt::endl;
         if (picture->readingPicture(true)) {
             if (picture->isFormatSwitched()) {
                 picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);

@@ -11,7 +11,6 @@ cd build && \
 /usr/local/bin/cmake \
    "-DCMAKE_PREFIX_PATH=/usr/local/opt/qt" \
    "${CMAKE_BUILD_TYPE}" \
-   "-DFORCE_QT_VERSION=5" \
    "-DGTA5VIEW_BUILDCODE=${PACKAGE_CODE}" \
    "-DGTA5VIEW_APPVER=${APPLICATION_VERSION}" \
    "-DGTA5VIEW_COMMIT=${APPLICATION_COMMIT}" \
