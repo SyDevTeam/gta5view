@@ -305,7 +305,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
     <message>
         <location filename="../ImportDialog.ui" line="311"/>
         <source>Resolution:</source>
-        <translation>Résolution:</translation>
+        <translation>Résolution :</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="324"/>

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2020 Syping
+* Copyright (C) 2020-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -90,15 +90,20 @@ bool RagePhoto::load()
     quint32 format = charToUInt32LE(uInt32Buffer);
 
     if (format == static_cast<quint32>(PhotoFormat::GTA5)) {
-        char photoHeader[256];
-        size = dataBuffer.read(photoHeader, 256);
-        if (size != 256)
+        char *photoHeader = static_cast<char*>(malloc(256));
+        if (!photoHeader)
             return false;
+        size = dataBuffer.read(photoHeader, 256);
+        if (size != 256) {
+            free(photoHeader);
+            return false;
+        }
         for (const QChar &photoChar : utf16LEToString(photoHeader, 256)) {
             if (photoChar.isNull())
                 break;
             p_photoString += photoChar;
         }
+        free(photoHeader);
 
         size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
@@ -142,11 +147,16 @@ bool RagePhoto::load()
             return false;
         quint32 t_photoSize = charToUInt32LE(uInt32Buffer);
 
-        char photoData[t_photoSize];
-        size = dataBuffer.read(photoData, t_photoSize);
-        if (size != t_photoSize)
+        char *photoData = static_cast<char*>(malloc(t_photoSize));
+        if (!photoData)
             return false;
+        size = dataBuffer.read(photoData, t_photoSize);
+        if (size != t_photoSize) {
+            free(photoData);
+            return false;
+        }
         p_photoData = QByteArray(photoData, t_photoSize);
+        free(photoData);
 
         dataBuffer.seek(p_jsonOffset + 264);
         size = dataBuffer.read(markerBuffer, 4);
@@ -160,15 +170,20 @@ bool RagePhoto::load()
             return false;
         p_jsonBuffer = charToUInt32LE(uInt32Buffer);
 
-        char jsonBytes[p_jsonBuffer];
-        size = dataBuffer.read(jsonBytes, p_jsonBuffer);
-        if (size != p_jsonBuffer)
+        char *jsonBytes = static_cast<char*>(malloc(p_jsonBuffer));
+        if (!jsonBytes)
             return false;
+        size = dataBuffer.read(jsonBytes, p_jsonBuffer);
+        if (size != p_jsonBuffer) {
+            free(jsonBytes);
+            return false;
+        }
         for (quint32 i = 0; i != p_jsonBuffer; i++) {
             if (jsonBytes[i] == '\x00')
                 break;
             p_jsonData += jsonBytes[i];
         }
+        free(jsonBytes);
         QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_jsonData);
         if (t_jsonDocument.isNull())
             return false;
@@ -186,15 +201,20 @@ bool RagePhoto::load()
             return false;
         p_titlBuffer = charToUInt32LE(uInt32Buffer);
 
-        char titlBytes[p_titlBuffer];
-        size = dataBuffer.read(titlBytes, p_titlBuffer);
-        if (size != p_titlBuffer)
+        char *titlBytes = static_cast<char*>(malloc(p_titlBuffer));
+        if (!titlBytes)
             return false;
+        size = dataBuffer.read(titlBytes, p_titlBuffer);
+        if (size != p_titlBuffer){
+            free(titlBytes);
+            return false;
+        }
         for (const QChar &titlChar : QString::fromUtf8(titlBytes, p_titlBuffer)) {
             if (titlChar.isNull())
                 break;
             p_titleString += titlChar;
         }
+        free(titlBytes);
 
         dataBuffer.seek(p_descOffset + 264);
         size = dataBuffer.read(markerBuffer, 4);
@@ -208,15 +228,20 @@ bool RagePhoto::load()
             return false;
         p_descBuffer = charToUInt32LE(uInt32Buffer);
 
-        char descBytes[p_descBuffer];
-        size = dataBuffer.read(descBytes, p_descBuffer);
-        if (size != p_descBuffer)
+        char *descBytes = static_cast<char*>(malloc(p_descBuffer));
+        if (!descBytes)
             return false;
+        size = dataBuffer.read(descBytes, p_descBuffer);
+        if (size != p_descBuffer) {
+            free(descBytes);
+            return false;
+        }
         for (const QChar &descChar : QString::fromUtf8(descBytes, p_descBuffer)) {
             if (descChar.isNull())
                 break;
             p_descriptionString += descChar;
         }
+        free(descBytes);
 
         dataBuffer.seek(p_endOfFile + 260);
         size = dataBuffer.read(markerBuffer, 4);
@@ -243,12 +268,17 @@ bool RagePhoto::load()
                 return false;
             quint32 compressedSize = charToUInt32LE(uInt32Buffer);
 
-            char compressedPhotoHeader[compressedSize];
-            size = dataBuffer.read(compressedPhotoHeader, compressedSize);
-            if (size != compressedSize)
+            char *compressedPhotoHeader = static_cast<char*>(malloc(compressedSize));
+            if (!compressedPhotoHeader)
                 return false;
+            size = dataBuffer.read(compressedPhotoHeader, compressedSize);
+            if (size != compressedSize) {
+                free(compressedPhotoHeader);
+                return false;
+            }
             QByteArray t_photoHeader = QByteArray::fromRawData(compressedPhotoHeader, compressedSize);
             t_photoHeader = qUncompress(t_photoHeader);
+            free(compressedPhotoHeader);
             if (t_photoHeader.isEmpty())
                 return false;
             p_photoString = QString::fromUtf8(t_photoHeader);
@@ -268,12 +298,17 @@ bool RagePhoto::load()
                 return false;
             compressedSize = charToUInt32LE(uInt32Buffer);
 
-            char compressedPhoto[compressedSize];
-            size = dataBuffer.read(compressedPhoto, compressedSize);
-            if (size != compressedSize)
+            char *compressedPhoto = static_cast<char*>(malloc(compressedSize));
+            if (!compressedPhoto)
                 return false;
+            size = dataBuffer.read(compressedPhoto, compressedSize);
+            if (size != compressedSize) {
+                free(compressedPhoto);
+                return false;
+            }
             QByteArray t_photoData = QByteArray::fromRawData(compressedPhoto, compressedSize);
             p_photoData = qUncompress(t_photoData);
+            free(compressedPhoto);
 
             size = dataBuffer.read(uInt32Buffer, 4);
             if (size != 4)
@@ -290,12 +325,17 @@ bool RagePhoto::load()
                 return false;
             compressedSize = charToUInt32LE(uInt32Buffer);
 
-            char compressedJson[compressedSize];
-            size = dataBuffer.read(compressedJson, compressedSize);
-            if (size != compressedSize)
+            char *compressedJson = static_cast<char*>(malloc(compressedSize));
+            if (!compressedJson)
                 return false;
+            size = dataBuffer.read(compressedJson, compressedSize);
+            if (size != compressedSize) {
+                free(compressedJson);
+                return false;
+            }
             QByteArray t_jsonBytes = QByteArray::fromRawData(compressedJson, compressedSize);
             p_jsonData = qUncompress(t_jsonBytes);
+            free(compressedJson);
             if (p_jsonData.isEmpty())
                 return false;
             QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_jsonData);
@@ -318,12 +358,17 @@ bool RagePhoto::load()
                 return false;
             compressedSize = charToUInt32LE(uInt32Buffer);
 
-            char compressedTitl[compressedSize];
-            size = dataBuffer.read(compressedTitl, compressedSize);
-            if (size != compressedSize)
+            char *compressedTitl = static_cast<char*>(malloc(compressedSize));
+            if (!compressedTitl)
                 return false;
+            size = dataBuffer.read(compressedTitl, compressedSize);
+            if (size != compressedSize) {
+                free(compressedTitl);
+                return false;
+            }
             QByteArray t_titlBytes = QByteArray::fromRawData(compressedTitl, compressedSize);
             t_titlBytes = qUncompress(t_titlBytes);
+            free(compressedTitl);
             p_titleString = QString::fromUtf8(t_titlBytes);
 
             size = dataBuffer.read(uInt32Buffer, 4);
@@ -341,12 +386,17 @@ bool RagePhoto::load()
                 return false;
             compressedSize = charToUInt32LE(uInt32Buffer);
 
-            char compressedDesc[compressedSize];
-            size = dataBuffer.read(compressedDesc, compressedSize);
-            if (size != compressedSize)
+            char *compressedDesc = static_cast<char*>(malloc(compressedSize));
+            if (!compressedDesc)
                 return false;
+            size = dataBuffer.read(compressedDesc, compressedSize);
+            if (size != compressedSize) {
+                free(compressedDesc);
+                return false;
+            }
             QByteArray t_descBytes = QByteArray::fromRawData(compressedDesc, compressedSize);
             t_descBytes = qUncompress(t_descBytes);
+            free(compressedDesc);
             p_descriptionString = QString::fromUtf8(t_descBytes);
 
             size = dataBuffer.read(uInt32Buffer, 4);
@@ -382,7 +432,7 @@ bool RagePhoto::load()
             size = dataBuffer.read(length, 1);
             if (size != 1)
                 return false;
-            int i_length = QByteArray::number((int)length[0], 16).toInt() + 6;
+            int i_length = QByteArray::number(static_cast<int>(length[0]), 16).toInt() + 6;
 
 #if QT_VERSION >= 0x050A00
             size = dataBuffer.skip(i_length);
