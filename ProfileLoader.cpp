@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -49,7 +49,7 @@ void ProfileLoader::run()
 
     SavegameFiles.removeDuplicates();
     SnapmaticPics.removeDuplicates();
-    for (const QString &BackupFile : BackupFiles) {
+    for (const QString &BackupFile : qAsConst(BackupFiles)) {
         SavegameFiles.removeAll(BackupFile);
         SnapmaticPics.removeAll(BackupFile);
     }
@@ -58,7 +58,7 @@ void ProfileLoader::run()
 
     // Loading pictures and savegames
     emit loadingProgress(curFile, maximumV);
-    for (const QString &SavegameFile : SavegameFiles) {
+    for (const QString &SavegameFile : qAsConst(SavegameFiles)) {
         emit loadingProgress(curFile, maximumV);
         const QString sgdPath = profileFolder % "/" % SavegameFile;
         SavegameData *savegame = new SavegameData(sgdPath);
@@ -67,10 +67,11 @@ void ProfileLoader::run()
         }
         curFile++;
     }
-    for (const QString &SnapmaticPic : SnapmaticPics) {
+    for (const QString &SnapmaticPic : qAsConst(SnapmaticPics)) {
         emit loadingProgress(curFile, maximumV);
         const QString picturePath = profileFolder % "/" % SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
+        QTextStream(stdout) << "Current: " << picturePath << Qt::endl;
         if (picture->readingPicture(true)) {
             if (picture->isFormatSwitched()) {
                 picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
@@ -89,7 +90,7 @@ void ProfileLoader::run()
 
     // adding found crews
     crewDB->setAddingCrews(true);
-    for (int crewID : crewList) {
+    for (int crewID : qAsConst(crewList)) {
         crewDB->addCrew(crewID);
     }
     crewDB->setAddingCrews(false);
