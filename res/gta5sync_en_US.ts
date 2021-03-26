@@ -1357,19 +1357,19 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="514"/>
-        <location filename="../UserInterface.cpp" line="514"/>
+        <location filename="../UserInterface.cpp" line="527"/>
         <source>GTA V Export (*.g5e)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="515"/>
-        <location filename="../UserInterface.cpp" line="515"/>
+        <location filename="../UserInterface.cpp" line="528"/>
         <source>Savegames files (SGTA*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="516"/>
-        <location filename="../UserInterface.cpp" line="516"/>
+        <location filename="../UserInterface.cpp" line="529"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1384,14 +1384,14 @@ Press 1 for Default View</source>
         <location filename="../ImportDialog.cpp" line="534"/>
         <location filename="../ImportDialog.cpp" line="844"/>
         <location filename="../ProfileInterface.cpp" line="518"/>
-        <location filename="../UserInterface.cpp" line="517"/>
+        <location filename="../UserInterface.cpp" line="530"/>
         <source>All files (**)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="542"/>
         <location filename="../ProfileInterface.cpp" line="969"/>
-        <location filename="../UserInterface.cpp" line="598"/>
+        <location filename="../UserInterface.cpp" line="611"/>
         <source>No valid file is selected</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1410,13 +1410,13 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="643"/>
-        <location filename="../UserInterface.cpp" line="554"/>
+        <location filename="../UserInterface.cpp" line="567"/>
         <source>Failed to read Snapmatic picture</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="682"/>
-        <location filename="../UserInterface.cpp" line="568"/>
+        <location filename="../UserInterface.cpp" line="581"/>
         <source>Failed to read Savegame file</source>
         <translation type="unfinished"></translation>
     </message>
@@ -1640,7 +1640,7 @@ Press 1 for Default View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="513"/>
+        <location filename="../UserInterface.cpp" line="526"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2259,7 +2259,7 @@ Press 1 for Default View</source>
     <name>UserInterface</name>
     <message>
         <location filename="../UserInterface.ui" line="20"/>
-        <location filename="../UserInterface.cpp" line="69"/>
+        <location filename="../UserInterface.cpp" line="75"/>
         <source>%2 - %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2291,8 +2291,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="153"/>
-        <location filename="../UserInterface.cpp" line="216"/>
-        <location filename="../UserInterface.cpp" line="715"/>
+        <location filename="../UserInterface.cpp" line="229"/>
+        <location filename="../UserInterface.cpp" line="728"/>
         <source>&amp;Close</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2323,8 +2323,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
-        <location filename="../UserInterface.cpp" line="67"/>
-        <location filename="../UserInterface.cpp" line="805"/>
+        <location filename="../UserInterface.cpp" line="73"/>
+        <location filename="../UserInterface.cpp" line="818"/>
         <source>&amp;About %1</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2380,15 +2380,15 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
-        <location filename="../UserInterface.cpp" line="309"/>
+        <location filename="../UserInterface.cpp" line="322"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
         <location filename="../OptionsDialog.cpp" line="708"/>
-        <location filename="../UserInterface.cpp" line="255"/>
-        <location filename="../UserInterface.cpp" line="773"/>
+        <location filename="../UserInterface.cpp" line="268"/>
+        <location filename="../UserInterface.cpp" line="786"/>
         <source>Select GTA V Folder...</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2436,53 +2436,53 @@ Press 1 for Default View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="71"/>
-        <location filename="../UserInterface.cpp" line="372"/>
-        <location filename="../UserInterface.cpp" line="818"/>
+        <location filename="../UserInterface.cpp" line="77"/>
+        <location filename="../UserInterface.cpp" line="385"/>
+        <location filename="../UserInterface.cpp" line="831"/>
         <source>Select Profile</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="159"/>
-        <location filename="../UserInterface.cpp" line="802"/>
+        <location filename="../UserInterface.cpp" line="165"/>
+        <location filename="../UserInterface.cpp" line="815"/>
         <source>&amp;Donate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="169"/>
+        <location filename="../UserInterface.cpp" line="178"/>
         <source>Donate</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="177"/>
+        <location filename="../UserInterface.cpp" line="186"/>
         <source>Donation methods</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="205"/>
+        <location filename="../UserInterface.cpp" line="217"/>
         <source>Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="510"/>
+        <location filename="../UserInterface.cpp" line="523"/>
         <source>Open File...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="554"/>
-        <location filename="../UserInterface.cpp" line="568"/>
-        <location filename="../UserInterface.cpp" line="592"/>
-        <location filename="../UserInterface.cpp" line="598"/>
+        <location filename="../UserInterface.cpp" line="567"/>
+        <location filename="../UserInterface.cpp" line="581"/>
+        <location filename="../UserInterface.cpp" line="605"/>
+        <location filename="../UserInterface.cpp" line="611"/>
         <source>Open File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="592"/>
+        <location filename="../UserInterface.cpp" line="605"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="680"/>
+        <location filename="../UserInterface.cpp" line="693"/>
         <source>%1 - Messages</source>
         <translation type="unfinished"></translation>
     </message>

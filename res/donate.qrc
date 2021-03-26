@@ -6,4 +6,7 @@
         <file>xmr.svgz</file>
         <file>zec.svgz</file>
     </qresource>
+    <qresource prefix="/img">
+        <file>donate.svgz</file>
+    </qresource>
 </RCC>

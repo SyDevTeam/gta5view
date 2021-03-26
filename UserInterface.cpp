@@ -38,7 +38,6 @@
 #include <QSpacerItem>
 #include <QPushButton>
 #include <QMessageBox>
-#include <QClipboard>
 #include <QSettings>
 #include <QFileInfo>
 #include <QTimer>
@@ -47,15 +46,22 @@
 #include <QDir>
 #include <QMap>
 
+#ifdef GTA5SYNC_DONATE
+#ifdef GTA5SYNC_DONATE_ADDRESSES
+#include <QFontDatabase>
+#include <QClipboard>
+#endif
+#endif
+
 #ifdef GTA5SYNC_MOTD
 UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, MessageThread *threadMessage, QWidget *parent) :
     QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB), threadMessage(threadMessage),
     ui(new Ui::UserInterface)
-  #else
+#else
 UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
     QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
     ui(new Ui::UserInterface)
-  #endif
+#endif
 {
     ui->setupUi(this);
     contentMode = 0;
@@ -163,6 +169,9 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     else if (QIcon::hasThemeIcon("taxes-finances")) {
         donateAction->setIcon(QIcon::fromTheme("taxes-finances"));
     }
+    else {
+        donateAction->setIcon(QIcon(":/img/donate.svgz"));
+    }
     ui->menuHelp->insertAction(ui->actionAbout_gta5sync, donateAction);
     QObject::connect(donateAction, &QAction::triggered, this, [=](){
         QDialog *donateDialog = new QDialog(this);
@@ -174,7 +183,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 #endif
         QVBoxLayout *donateLayout = new QVBoxLayout;
         donateDialog->setLayout(donateLayout);
-        QLabel *methodsLabel = new QLabel(QString("<b>%1</b>").arg(tr("Donation methods")), this);
+        QLabel *methodsLabel = new QLabel(QString("<b>%1</b>").arg(tr("Donation methods").toHtmlEscaped()), this);
         methodsLabel->setWordWrap(true);
         donateLayout->addWidget(methodsLabel);
         const QStringList addressList = QString::fromUtf8(GTA5SYNC_DONATE_ADDRESSES).split(',');
@@ -192,14 +201,17 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
                     currencyLabel->setPixmap(QIcon(iconPath).pixmap(QSize(32, 32)));
                     addressLayout->addWidget(currencyLabel);
                 }
-                else {
-                    QLabel *currencyLabel = new QLabel(QString("<b>%1</b>").arg(currency.toUpper()), this);
-                    addressLayout->addWidget(currencyLabel);
-                }
+                QLabel *currencyLabel = new QLabel(currency, this);
+                currencyLabel->setTextFormat(Qt::PlainText);
+                QFont currencyFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
+                currencyFont.setWeight(QFont::Bold);
+                currencyFont.setCapitalization(QFont::AllUppercase);
+                currencyLabel->setFont(currencyFont);
+                addressLayout->addWidget(currencyLabel);
                 QLabel *addressLabel = new QLabel(address, this);
                 addressLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-                addressLabel->setTextFormat(Qt::PlainText);
                 addressLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+                addressLabel->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
                 addressLabel->setWordWrap(true);
                 addressLayout->addWidget(addressLabel);
                 QPushButton *addressButton = new QPushButton(tr("Copy"), this);
@@ -210,6 +222,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
                 donateLayout->addLayout(addressLayout);
             }
         }
+        donateLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
         QHBoxLayout *buttonLayout = new QHBoxLayout;
         buttonLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
         QPushButton *closeButton = new QPushButton(donateDialog);
