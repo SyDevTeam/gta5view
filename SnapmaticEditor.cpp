@@ -21,6 +21,7 @@
 #include "SnapmaticPicture.h"
 #include "PlayerListDialog.h"
 #include "StringParser.h"
+#include "wrapper.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
@@ -405,7 +406,7 @@ void SnapmaticEditor::on_labCrew_linkActivated(const QString &link)
                 newCrew = newCrew.split(" ").at(0);
             if (newCrew.length() > 10)
                 return;
-            for (const QChar &crewChar : newCrew) {
+            for (const QChar &crewChar : qAsConst(newCrew)) {
                 if (!crewChar.isNumber()) {
                     return;
                 }

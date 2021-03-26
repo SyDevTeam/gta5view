@@ -93,6 +93,7 @@ set(GTA5VIEW_SOURCES
 
 set(GTA5VIEW_HEADERS
     config.h
+    wrapper.h
     AboutDialog.h
     AppEnv.h
     CrewDatabase.h

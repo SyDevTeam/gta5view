@@ -240,8 +240,19 @@ void MapLocationDialog::mouseReleaseEvent(QMouseEvent *ev)
 
 void MapLocationDialog::wheelEvent(QWheelEvent *ev)
 {
+#if QT_VERSION >= 0x050000
     const QPoint numPixels = ev->pixelDelta();
     const QPoint numDegrees = ev->angleDelta();
+#else
+    QPoint numDegrees;
+    if (ev->orientation() == Qt::Horizontal) {
+        numDegrees.setX(ev->delta());
+    }
+    else {
+        numDegrees.setY(ev->delta());
+    }
+#endif
+#if QT_VERSION >= 0x050000
     if (!numPixels.isNull()) {
         if (numPixels.y() < 0 && zoomPercent != 100) {
             zoomPercent = zoomPercent - 10;
@@ -251,8 +262,10 @@ void MapLocationDialog::wheelEvent(QWheelEvent *ev)
             zoomPercent = zoomPercent + 10;
             repaint();
         }
+        return;
     }
-    else if (!numDegrees.isNull()) {
+#endif
+    if (!numDegrees.isNull()) {
         if (numDegrees.y() < 0 && zoomPercent != 100) {
             zoomPercent = zoomPercent - 10;
             repaint();

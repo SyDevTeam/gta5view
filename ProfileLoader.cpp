@@ -20,6 +20,7 @@
 #include "SnapmaticPicture.h"
 #include "SavegameData.h"
 #include "CrewDatabase.h"
+#include "wrapper.h"
 #include <QStringBuilder>
 #include <QStringList>
 #include <QString>

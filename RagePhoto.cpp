@@ -837,8 +837,7 @@ void RagePhoto::uInt32ToCharLE(quint32 x, char *y)
 const QByteArray RagePhoto::stringToUtf16LE(const QString &string)
 {
 #if QT_VERSION >= 0x060000
-    QStringEncoder stringEncoder = QStringEncoder(QStringEncoder::Utf16LE);
-    return stringEncoder(string);
+    return QStringEncoder(QStringEncoder::Utf16LE)(string);
 #else
     return QTextCodec::codecForName("UTF-16LE")->fromUnicode(string);
 #endif
@@ -847,8 +846,7 @@ const QByteArray RagePhoto::stringToUtf16LE(const QString &string)
 const QString RagePhoto::utf16LEToString(const QByteArray &data)
 {
 #if QT_VERSION >= 0x060000
-    QStringDecoder stringDecoder = QStringDecoder(QStringDecoder::Utf16LE);
-    return stringDecoder(data);
+    return QStringDecoder(QStringDecoder::Utf16LE)(data);
 #else
     return QTextCodec::codecForName("UTF-16LE")->toUnicode(data);
 #endif
@@ -857,8 +855,7 @@ const QString RagePhoto::utf16LEToString(const QByteArray &data)
 const QString RagePhoto::utf16LEToString(const char *data, int size)
 {
 #if QT_VERSION >= 0x060000
-    QStringDecoder stringDecoder = QStringDecoder(QStringDecoder::Utf16LE);
-    return stringDecoder(QByteArray::fromRawData(data, size));
+    return QStringDecoder(QStringDecoder::Utf16LE)(QByteArray::fromRawData(data, size));
 #else
     return QTextCodec::codecForName("UTF-16LE")->toUnicode(data, size);
 #endif

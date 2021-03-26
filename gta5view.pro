@@ -25,7 +25,8 @@ DEPLOYMENT.display_name = gta5view
 TARGET = gta5view
 TEMPLATE = app
 
-HEADERS += config.h
+HEADERS += config.h \
+    wrapper.h
 PRECOMPILED_HEADER += config.h
 
 SOURCES += main.cpp \
