@@ -233,6 +233,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
         else if (QIcon::hasThemeIcon("gtk-close")) {
             closeButton->setIcon(QIcon::fromTheme("gtk-close"));
         }
+        closeButton->setDefault(true);
         buttonLayout->addWidget(closeButton);
         donateLayout->addLayout(buttonLayout);
         QObject::connect(closeButton, &QPushButton::clicked, donateDialog, &QDialog::accept);
