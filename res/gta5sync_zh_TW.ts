@@ -252,7 +252,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="117"/>
         <source>Force Borderless</source>
-        <translation type="unfinished"></translation>
+        <translation>強制無邊框</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="129"/>
@@ -2507,17 +2507,17 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.cpp" line="159"/>
         <location filename="../UserInterface.cpp" line="802"/>
         <source>&amp;Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>贊助(&amp;D)</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="169"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>贊助</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="177"/>
         <source>Donation methods</source>
-        <translation type="unfinished"></translation>
+        <translation>贊助方式</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="205"/>
