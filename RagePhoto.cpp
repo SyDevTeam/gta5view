@@ -259,10 +259,10 @@ bool RagePhoto::load()
         auto benchmark_parse_end = std::chrono::high_resolution_clock::now();
         auto benchmark_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(benchmark_parse_end - benchmark_parse_start);
         if (p_inputMode == 1) {
-            QTextStream(stdout) << QFileInfo(p_filePath).fileName() << ": " << static_cast<int>(benchmark_ns.count()) << "ns" << Qt::endl;
+            QTextStream(stdout) << QFileInfo(p_filePath).fileName() << ": " << benchmark_ns.count() << "ns" << Qt::endl;
         }
         else {
-            QTextStream(stdout) << "PGTA5" << p_jsonObject.value("uid").toInt() << ": " << static_cast<int>(benchmark_ns.count()) << "ns" << Qt::endl;
+            QTextStream(stdout) << "PGTA5" << p_jsonObject.value("uid").toInt() << ": " << benchmark_ns.count() << "ns" << Qt::endl;
         }
 #endif
 
@@ -424,10 +424,10 @@ bool RagePhoto::load()
             auto benchmark_parse_end = std::chrono::high_resolution_clock::now();
             auto benchmark_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(benchmark_parse_end - benchmark_parse_start);
             if (p_inputMode == 1) {
-                QTextStream(stdout) << QFileInfo(p_filePath).fileName() << ": " << static_cast<int>(benchmark_ns.count()) << "ns" << Qt::endl;
+                QTextStream(stdout) << QFileInfo(p_filePath).fileName() << ": " << benchmark_ns.count() << "ns" << Qt::endl;
             }
             else {
-                QTextStream(stdout) << "PGTA5" << p_jsonObject.value("uid").toInt() << ": " << static_cast<int>(benchmark_ns.count()) << "ns" << Qt::endl;
+                QTextStream(stdout) << "PGTA5" << p_jsonObject.value("uid").toInt() << ": " << benchmark_ns.count() << "ns" << Qt::endl;
             }
 #endif
 
@@ -702,10 +702,6 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
 
         uInt32ToCharLE(p_endOfFile, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
-
-#if QT_VERSION >= 0x050000
-        ioDevice->aboutToClose();
-#endif
     }
     else if (photoFormat == PhotoFormat::GTA5) {
         char uInt32Buffer[4];
@@ -809,17 +805,17 @@ RagePhoto* RagePhoto::loadFile(const QString &filePath)
 quint32 RagePhoto::charToUInt32BE(char *x)
 {
     return (static_cast<unsigned char>(x[0]) << 24 |
-                                                static_cast<unsigned char>(x[1]) << 16 |
-                                                                                    static_cast<unsigned char>(x[2]) << 8 |
-                                                                                                                        static_cast<unsigned char>(x[3]));
+            static_cast<unsigned char>(x[1]) << 16 |
+            static_cast<unsigned char>(x[2]) << 8 |
+            static_cast<unsigned char>(x[3]));
 }
 
 quint32 RagePhoto::charToUInt32LE(char *x)
 {
     return (static_cast<unsigned char>(x[3]) << 24 |
-                                                static_cast<unsigned char>(x[2]) << 16 |
-                                                                                    static_cast<unsigned char>(x[1]) << 8 |
-                                                                                                                        static_cast<unsigned char>(x[0]));
+            static_cast<unsigned char>(x[2]) << 16 |
+            static_cast<unsigned char>(x[1]) << 8 |
+            static_cast<unsigned char>(x[0]));
 }
 
 void RagePhoto::uInt32ToCharBE(quint32 x, char *y)
