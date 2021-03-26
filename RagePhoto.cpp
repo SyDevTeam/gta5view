@@ -23,6 +23,10 @@
 #if QT_VERSION < 0x060000
 #include <QTextCodec>
 #endif
+#ifdef RAGEPHOTO_BENCHMARK
+#include <QFileInfo>
+#include <chrono>
+#endif
 
 RagePhoto::RagePhoto()
 {
@@ -83,6 +87,10 @@ bool RagePhoto::load()
     QBuffer dataBuffer(&p_fileData);
     dataBuffer.open(QIODevice::ReadOnly);
 
+#ifdef RAGEPHOTO_BENCHMARK
+    auto benchmark_parse_start = std::chrono::high_resolution_clock::now();
+#endif
+
     char uInt32Buffer[4];
     qint64 size = dataBuffer.read(uInt32Buffer, 4);
     if (size != 4)
@@ -90,12 +98,9 @@ bool RagePhoto::load()
     quint32 format = charToUInt32LE(uInt32Buffer);
 
     if (format == static_cast<quint32>(PhotoFormat::GTA5)) {
-        char *photoHeader = static_cast<char*>(malloc(256));
-        if (!photoHeader)
-            return false;
+        char photoHeader[256];
         size = dataBuffer.read(photoHeader, 256);
         if (size != 256) {
-            free(photoHeader);
             return false;
         }
         for (const QChar &photoChar : utf16LEToString(photoHeader, 256)) {
@@ -103,7 +108,6 @@ bool RagePhoto::load()
                 break;
             p_photoString += photoChar;
         }
-        free(photoHeader);
 
         size = dataBuffer.read(uInt32Buffer, 4);
         if (size != 4)
@@ -209,11 +213,12 @@ bool RagePhoto::load()
             free(titlBytes);
             return false;
         }
-        for (const QChar &titlChar : QString::fromUtf8(titlBytes, p_titlBuffer)) {
-            if (titlChar.isNull())
+        quint32 i;
+        for (i = 0; i != p_titlBuffer; i++) {
+            if (titlBytes[i] == '\x00')
                 break;
-            p_titleString += titlChar;
         }
+        p_titleString = QString::fromUtf8(titlBytes, i);
         free(titlBytes);
 
         dataBuffer.seek(p_descOffset + 264);
@@ -236,11 +241,11 @@ bool RagePhoto::load()
             free(descBytes);
             return false;
         }
-        for (const QChar &descChar : QString::fromUtf8(descBytes, p_descBuffer)) {
-            if (descChar.isNull())
+        for (i = 0; i != p_descBuffer; i++) {
+            if (descBytes[i] == '\x00')
                 break;
-            p_descriptionString += descChar;
         }
+        p_descriptionString = QString::fromUtf8(descBytes, i);
         free(descBytes);
 
         dataBuffer.seek(p_endOfFile + 260);
@@ -249,6 +254,17 @@ bool RagePhoto::load()
             return false;
         if (strncmp(markerBuffer, "JEND", 4) != 0)
             return false;
+
+#ifdef RAGEPHOTO_BENCHMARK
+        auto benchmark_parse_end = std::chrono::high_resolution_clock::now();
+        auto benchmark_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(benchmark_parse_end - benchmark_parse_start);
+        if (p_inputMode == 1) {
+            QTextStream(stdout) << QFileInfo(p_filePath).fileName() << ": " << static_cast<int>(benchmark_ns.count()) << "ns" << Qt::endl;
+        }
+        else {
+            QTextStream(stdout) << "PGTA5" << p_jsonObject.value("uid").toInt() << ": " << static_cast<int>(benchmark_ns.count()) << "ns" << Qt::endl;
+        }
+#endif
 
         if (p_photoFormat != PhotoFormat::G5EX)
             p_photoFormat = PhotoFormat::GTA5;
@@ -404,6 +420,17 @@ bool RagePhoto::load()
                 return false;
             p_endOfFile = charToUInt32LE(uInt32Buffer);
 
+#ifdef RAGEPHOTO_BENCHMARK
+            auto benchmark_parse_end = std::chrono::high_resolution_clock::now();
+            auto benchmark_ns = std::chrono::duration_cast<std::chrono::nanoseconds>(benchmark_parse_end - benchmark_parse_start);
+            if (p_inputMode == 1) {
+                QTextStream(stdout) << QFileInfo(p_filePath).fileName() << ": " << static_cast<int>(benchmark_ns.count()) << "ns" << Qt::endl;
+            }
+            else {
+                QTextStream(stdout) << "PGTA5" << p_jsonObject.value("uid").toInt() << ": " << static_cast<int>(benchmark_ns.count()) << "ns" << Qt::endl;
+            }
+#endif
+
             p_photoFormat = PhotoFormat::G5EX;
 
             p_fileData.clear();
@@ -421,12 +448,12 @@ bool RagePhoto::load()
         else if (format == static_cast<quint32>(ExportFormat::G5E1P)) {
 #if QT_VERSION >= 0x050A00
             size = dataBuffer.skip(1);
-#else
-            QByteArray skipData = dataBuffer.read(1);
-            size = skipData.size();
-#endif
             if (size != 1)
                 return false;
+#else
+            if (!dataBuffer.seek(dataBuffer.pos() + 1))
+                return false;
+#endif
 
             char length[1];
             size = dataBuffer.read(length, 1);
@@ -436,12 +463,12 @@ bool RagePhoto::load()
 
 #if QT_VERSION >= 0x050A00
             size = dataBuffer.skip(i_length);
-#else
-            skipData = dataBuffer.read(i_length);
-            size = skipData.size();
-#endif
             if (size != i_length)
                 return false;
+#else
+            if (!dataBuffer.seek(dataBuffer.pos() + i_length))
+                return false;
+#endif
 
             p_photoFormat = PhotoFormat::G5EX;
             p_fileData = qUncompress(dataBuffer.readAll());
@@ -613,67 +640,67 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
     if (photoFormat == PhotoFormat::G5EX) {
         char uInt32Buffer[4];
         quint32 format = static_cast<quint32>(PhotoFormat::G5EX);
-        uInt32ToCharLE(&format, uInt32Buffer);
+        uInt32ToCharLE(format, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
         format = static_cast<quint32>(ExportFormat::G5E3P);
-        uInt32ToCharLE(&format, uInt32Buffer);
+        uInt32ToCharLE(format, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         QByteArray compressedData = qCompress(p_photoString.toUtf8(), 9);
         quint32 compressedSize = compressedData.size();
-        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        uInt32ToCharLE(compressedSize, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
         ioDevice->write(compressedData);
 
-        uInt32ToCharLE(&p_headerSum, uInt32Buffer);
+        uInt32ToCharLE(p_headerSum, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        uInt32ToCharLE(&p_photoBuffer, uInt32Buffer);
+        uInt32ToCharLE(p_photoBuffer, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         compressedData = qCompress(p_photoData, 9);
         compressedSize = compressedData.size();
-        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        uInt32ToCharLE(compressedSize, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
         ioDevice->write(compressedData);
 
-        uInt32ToCharLE(&p_jsonOffset, uInt32Buffer);
+        uInt32ToCharLE(p_jsonOffset, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        uInt32ToCharLE(&p_jsonBuffer, uInt32Buffer);
+        uInt32ToCharLE(p_jsonBuffer, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         compressedData = qCompress(p_jsonData, 9);
         compressedSize = compressedData.size();
-        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        uInt32ToCharLE(compressedSize, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
         ioDevice->write(compressedData);
 
-        uInt32ToCharLE(&p_titlOffset, uInt32Buffer);
+        uInt32ToCharLE(p_titlOffset, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        uInt32ToCharLE(&p_titlBuffer, uInt32Buffer);
+        uInt32ToCharLE(p_titlBuffer, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         compressedData = qCompress(p_titleString.toUtf8(), 9);
         compressedSize = compressedData.size();
-        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        uInt32ToCharLE(compressedSize, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
         ioDevice->write(compressedData);
 
-        uInt32ToCharLE(&p_descOffset, uInt32Buffer);
+        uInt32ToCharLE(p_descOffset, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        uInt32ToCharLE(&p_descBuffer, uInt32Buffer);
+        uInt32ToCharLE(p_descBuffer, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         compressedData = qCompress(p_descriptionString.toUtf8(), 9);
         compressedSize = compressedData.size();
-        uInt32ToCharLE(&compressedSize, uInt32Buffer);
+        uInt32ToCharLE(compressedSize, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
         ioDevice->write(compressedData);
 
-        uInt32ToCharLE(&p_endOfFile, uInt32Buffer);
+        uInt32ToCharLE(p_endOfFile, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
 #if QT_VERSION >= 0x050000
@@ -683,11 +710,11 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
     else if (photoFormat == PhotoFormat::GTA5) {
         char uInt32Buffer[4];
         quint32 format = static_cast<quint32>(PhotoFormat::GTA5);
-        uInt32ToCharLE(&format, uInt32Buffer);
+        uInt32ToCharLE(format, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         QByteArray photoHeader = stringToUtf16LE(p_photoString);
-        if (photoHeader.left(2) == "\xFF\xFE") {
+        if (photoHeader.startsWith("\xFF\xFE")) {
             photoHeader.remove(0, 2);
         }
         qint64 photoHeaderSize = photoHeader.size();
@@ -700,28 +727,28 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
             ioDevice->write("\x00", 1);
         }
 
-        uInt32ToCharLE(&p_headerSum, uInt32Buffer);
+        uInt32ToCharLE(p_headerSum, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        uInt32ToCharLE(&p_endOfFile, uInt32Buffer);
+        uInt32ToCharLE(p_endOfFile, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        uInt32ToCharLE(&p_jsonOffset, uInt32Buffer);
+        uInt32ToCharLE(p_jsonOffset, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        uInt32ToCharLE(&p_titlOffset, uInt32Buffer);
+        uInt32ToCharLE(p_titlOffset, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
-        uInt32ToCharLE(&p_descOffset, uInt32Buffer);
+        uInt32ToCharLE(p_descOffset, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         ioDevice->write("JPEG", 4);
 
-        uInt32ToCharLE(&p_photoBuffer, uInt32Buffer);
+        uInt32ToCharLE(p_photoBuffer, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         quint32 t_photoSize = p_photoData.size();
-        uInt32ToCharLE(&t_photoSize, uInt32Buffer);
+        uInt32ToCharLE(t_photoSize, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         ioDevice->write(p_photoData);
@@ -732,7 +759,7 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
         ioDevice->seek(p_jsonOffset + 264);
         ioDevice->write("JSON", 4);
 
-        uInt32ToCharLE(&p_jsonBuffer, uInt32Buffer);
+        uInt32ToCharLE(p_jsonBuffer, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         qint64 dataSize = p_jsonData.size();
@@ -744,7 +771,7 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
         ioDevice->seek(p_titlOffset + 264);
         ioDevice->write("TITL", 4);
 
-        uInt32ToCharLE(&p_titlBuffer, uInt32Buffer);
+        uInt32ToCharLE(p_titlBuffer, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         QByteArray data = p_titleString.toUtf8();
@@ -757,7 +784,7 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
         ioDevice->seek(p_descOffset + 264);
         ioDevice->write("DESC", 4);
 
-        uInt32ToCharLE(&p_descBuffer, uInt32Buffer);
+        uInt32ToCharLE(p_descBuffer, uInt32Buffer);
         ioDevice->write(uInt32Buffer, 4);
 
         data = p_descriptionString.toUtf8();
@@ -769,10 +796,6 @@ void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
 
         ioDevice->seek(p_endOfFile + 260);
         ioDevice->write("JEND", 4);
-
-#if QT_VERSION >= 0x050000
-        ioDevice->aboutToClose();
-#endif
     }
 }
 
@@ -786,36 +809,36 @@ RagePhoto* RagePhoto::loadFile(const QString &filePath)
 quint32 RagePhoto::charToUInt32BE(char *x)
 {
     return (static_cast<unsigned char>(x[0]) << 24 |
-            static_cast<unsigned char>(x[1]) << 16 |
-            static_cast<unsigned char>(x[2]) << 8 |
-            static_cast<unsigned char>(x[3]));
+                                                static_cast<unsigned char>(x[1]) << 16 |
+                                                                                    static_cast<unsigned char>(x[2]) << 8 |
+                                                                                                                        static_cast<unsigned char>(x[3]));
 }
 
 quint32 RagePhoto::charToUInt32LE(char *x)
 {
     return (static_cast<unsigned char>(x[3]) << 24 |
-            static_cast<unsigned char>(x[2]) << 16 |
-            static_cast<unsigned char>(x[1]) << 8 |
-            static_cast<unsigned char>(x[0]));
+                                                static_cast<unsigned char>(x[2]) << 16 |
+                                                                                    static_cast<unsigned char>(x[1]) << 8 |
+                                                                                                                        static_cast<unsigned char>(x[0]));
 }
 
-void RagePhoto::uInt32ToCharBE(quint32 *x, char *y)
+void RagePhoto::uInt32ToCharBE(quint32 x, char *y)
 {
-    y[0] = (*x >> 24) & 0xFF;
-    y[1] = (*x >> 16) & 0xFF;
-    y[2] = (*x >> 8) & 0xFF;
-    y[3] = (*x) & 0xFF;
+    y[0] = x >> 24;
+    y[1] = x >> 16;
+    y[2] = x >> 8;
+    y[3] = x;
 }
 
-void RagePhoto::uInt32ToCharLE(quint32 *x, char *y)
+void RagePhoto::uInt32ToCharLE(quint32 x, char *y)
 {
-    y[0] = (*x) & 0xFF;
-    y[1] = (*x >> 8) & 0xFF;
-    y[2] = (*x >> 16) & 0xFF;
-    y[3] = (*x >> 24) & 0xFF;
+    y[0] = x;
+    y[1] = x >> 8;
+    y[2] = x >> 16;
+    y[3] = x >> 24;
 }
 
-QByteArray RagePhoto::stringToUtf16LE(const QString &string)
+const QByteArray RagePhoto::stringToUtf16LE(const QString &string)
 {
 #if QT_VERSION >= 0x060000
     QStringEncoder stringEncoder = QStringEncoder(QStringEncoder::Utf16LE);
@@ -825,7 +848,7 @@ QByteArray RagePhoto::stringToUtf16LE(const QString &string)
 #endif
 }
 
-QString RagePhoto::utf16LEToString(const QByteArray &data)
+const QString RagePhoto::utf16LEToString(const QByteArray &data)
 {
 #if QT_VERSION >= 0x060000
     QStringDecoder stringDecoder = QStringDecoder(QStringDecoder::Utf16LE);
@@ -835,7 +858,7 @@ QString RagePhoto::utf16LEToString(const QByteArray &data)
 #endif
 }
 
-QString RagePhoto::utf16LEToString(const char *data, int size)
+const QString RagePhoto::utf16LEToString(const char *data, int size)
 {
 #if QT_VERSION >= 0x060000
     QStringDecoder stringDecoder = QStringDecoder(QStringDecoder::Utf16LE);

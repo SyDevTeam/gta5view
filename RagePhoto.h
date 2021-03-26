@@ -79,11 +79,11 @@ public:
 private:
     inline quint32 charToUInt32BE(char *x);
     inline quint32 charToUInt32LE(char *x);
-    inline void uInt32ToCharBE(quint32 *x, char *y);
-    inline void uInt32ToCharLE(quint32 *x, char *y);
-    inline QByteArray stringToUtf16LE(const QString &string);
-    inline QString utf16LEToString(const QByteArray &data);
-    inline QString utf16LEToString(const char *data, int size);
+    inline void uInt32ToCharBE(quint32 x, char *y);
+    inline void uInt32ToCharLE(quint32 x, char *y);
+    inline const QByteArray stringToUtf16LE(const QString &string);
+    inline const QString utf16LEToString(const QByteArray &data);
+    inline const QString utf16LEToString(const char *data, int size);
     PhotoFormat p_photoFormat;
     QJsonObject p_jsonObject;
     QByteArray p_fileData;
