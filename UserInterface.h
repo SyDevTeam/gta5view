@@ -91,6 +91,11 @@ private:
 #ifdef GTA5SYNC_MOTD
     MessageThread *threadMessage;
 #endif
+#ifdef GTA5SYNC_DONATE
+#ifdef GTA5SYNC_DONATE_ADDRESSES
+    QAction *donateAction;
+#endif
+#endif
     Ui::UserInterface *ui;
     ProfileInterface *profileUI;
     QList<QPushButton*> profileBtns;

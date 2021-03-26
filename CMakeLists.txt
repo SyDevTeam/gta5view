@@ -217,6 +217,22 @@ if(FLATPAK_BUILD)
     )
 endif()
 
+option(WITH_DONATE "Donate menu option and donation dialog" OFF)
+if(WITH_DONATE)
+    set(DONATE_ADDRESSES "" CACHE STRING "Donation addresses")
+    list(APPEND GTA5VIEW_DEFINES
+        -DGTA5SYNC_DONATE
+    )
+    list(APPEND GTA5VIEW_RESOURCES
+        res/donate.qrc
+    )
+    if(DONATE_ADDRESSES)
+        list(APPEND GTA5VIEW_DEFINES
+            "-DGTA5SYNC_DONATE_ADDRESSES=\"${DONATE_ADDRESSES}\""
+        )
+    endif()
+endif()
+
 option(WITH_MOTD "Developer message system directed to users" OFF)
 if(WITH_MOTD)
     set(MOTD_WEBURL "" CACHE STRING "Messages WebURL")

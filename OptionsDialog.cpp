@@ -234,15 +234,12 @@ void OptionsDialog::setupLanguageBox()
     availableLanguages.removeDuplicates();
     availableLanguages.sort();
 
-    for (QString lang : availableLanguages)
-    {
+    for (QString lang : availableLanguages) {
         // correcting Language Location if possible
         QString aLang = lang;
-        if (QFile::exists(":/global/global." % lang % ".loc"))
-        {
+        if (QFile::exists(":/global/global." % lang % ".loc")) {
             QFile locFile(":/global/global." % lang % ".loc");
-            if (locFile.open(QFile::ReadOnly))
-            {
+            if (locFile.open(QFile::ReadOnly)) {
                 aLang = QString::fromUtf8(locFile.readLine()).trimmed();
                 locFile.close();
             }
@@ -253,8 +250,7 @@ void OptionsDialog::setupLanguageBox()
         QString langIconStr = "flag-" % TranslationClass::getCountryCode(langLocale);
 
         ui->cbAreaLanguage->addItem(QIcon::fromTheme(langIconStr), cbLangStr, lang);
-        if (currentAreaLanguage == lang)
-        {
+        if (currentAreaLanguage == lang) {
 #if QT_VERSION >= 0x050000
             ui->cbAreaLanguage->setCurrentText(cbLangStr);
 #else
@@ -265,8 +261,7 @@ void OptionsDialog::setupLanguageBox()
     }
 
     QString aCurrentAreaLanguage = Translator->getCurrentAreaLanguage();
-    if (QFile::exists(":/global/global." % aCurrentAreaLanguage % ".loc"))
-    {
+    if (QFile::exists(":/global/global." % aCurrentAreaLanguage % ".loc")) {
         qDebug() << "locFile found";
         QFile locFile(":/global/global." % aCurrentAreaLanguage % ".loc");
         if (locFile.open(QFile::ReadOnly))
@@ -286,10 +281,8 @@ void OptionsDialog::setupRadioButtons()
     contentMode = settings->value("ContentMode", 0).toInt(&contentModeOk);
     settings->endGroup();
 
-    if (contentModeOk)
-    {
-        switch (contentMode)
-        {
+    if (contentModeOk) {
+        switch (contentMode) {
         case 0:
         case 20:
             ui->rbModern->setChecked(true);
@@ -329,8 +322,7 @@ void OptionsDialog::setupInterfaceSettings()
             currentIndex++;
         }
     }
-    else
-    {
+    else {
         if (availableStyles.contains(currentStyle, Qt::CaseInsensitive)) {
             int currentIndex = 0;
             for (const QString &currentStyleFF : availableStyles) {
@@ -379,16 +371,13 @@ void OptionsDialog::applySettings()
 
     settings->beginGroup("Profile");
     int newContentMode = 20;
-    if (ui->rbModern->isChecked())
-    {
+    if (ui->rbModern->isChecked()) {
         newContentMode = 20;
     }
-    else if (ui->rbClassic->isChecked())
-    {
+    else if (ui->rbClassic->isChecked()) {
         newContentMode = 10;
     }
-    if (ui->cbDoubleclick->isChecked())
-    {
+    if (ui->cbDoubleclick->isChecked()) {
         newContentMode++;
     }
     settings->setValue("ContentMode", newContentMode);
@@ -400,18 +389,15 @@ void OptionsDialog::applySettings()
     settings->endGroup();
 
     settings->beginGroup("Pictures");
-    if (ui->cbPicCustomQuality->isChecked())
-    {
+    if (ui->cbPicCustomQuality->isChecked()) {
         settings->setValue("CustomQuality", ui->hsPicQuality->value());
     }
     settings->setValue("CustomQualityEnabled", ui->cbPicCustomQuality->isChecked());
     QString sizeMode = "Default";
-    if (ui->rbPicDesktopRes->isChecked())
-    {
+    if (ui->rbPicDesktopRes->isChecked()) {
         sizeMode = "Desktop";
     }
-    else if (ui->rbPicCustomRes->isChecked())
-    {
+    else if (ui->rbPicCustomRes->isChecked()) {
         sizeMode = "Custom";
         settings->setValue("CustomSize", QSize(ui->sbPicExportWidth->value(), ui->sbPicExportHeight->value()));
     }
@@ -456,8 +442,7 @@ void OptionsDialog::applySettings()
     settings->endGroup();
     Telemetry->refresh();
     Telemetry->work();
-    if (ui->cbUsageData->isChecked() && Telemetry->canPush())
-    {
+    if (ui->cbUsageData->isChecked() && Telemetry->canPush()) {
         QJsonDocument jsonDocument;
         QJsonObject jsonObject;
         jsonObject["Type"] = "SettingsUpdated";
@@ -478,22 +463,19 @@ void OptionsDialog::applySettings()
     bool languageChanged = ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentLanguage;
     bool languageAreaChanged = ui->cbAreaLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentAreaLanguage;
 #endif
-    if (languageChanged)
-    {
+    if (languageChanged) {
         Translator->unloadTranslation(qApp);
         Translator->initUserLanguage();
         Translator->loadTranslation(qApp);
     }
-    else if (languageAreaChanged)
-    {
+    else if (languageAreaChanged) {
         Translator->initUserLanguage();
     }
 
     settings->sync();
     emit settingsApplied(newContentMode, languageChanged);
 
-    if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder))
-    {
+    if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder)) {
         QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The new Custom Folder will initialise after you restart %1.").arg(GTA5SYNC_APPSTR));
     }
 }
@@ -510,11 +492,9 @@ void OptionsDialog::setupDefaultProfile()
 
 void OptionsDialog::commitProfiles(const QStringList &profiles)
 {
-    for (QString profile : profiles)
-    {
+    for (QString profile : profiles) {
         ui->cbProfiles->addItem(tr("Profile: %1").arg(profile), profile);
-        if (defaultProfile == profile)
-        {
+        if (defaultProfile == profile) {
 #if QT_VERSION >= 0x050000
             ui->cbProfiles->setCurrentText(tr("Profile: %1").arg(profile));
 #else
@@ -552,8 +532,7 @@ void OptionsDialog::setupPictureSettings()
 
     // Quality Settings
     customQuality = settings->value("CustomQuality", defaultQuality).toInt();
-    if (customQuality < 1 || customQuality > 100)
-    {
+    if (customQuality < 1 || customQuality > 100) {
         customQuality = 100;
     }
     ui->hsPicQuality->setValue(customQuality);
@@ -561,42 +540,34 @@ void OptionsDialog::setupPictureSettings()
 
     // Size Settings
     cusExportSize = settings->value("CustomSize", defExportSize).toSize();
-    if (cusExportSize.width() > 3840)
-    {
+    if (cusExportSize.width() > 3840) {
         cusExportSize.setWidth(3840);
     }
-    else if (cusExportSize.height() > 2160)
-    {
+    else if (cusExportSize.height() > 2160) {
         cusExportSize.setHeight(2160);
     }
-    if (cusExportSize.width() < 1)
-    {
+    if (cusExportSize.width() < 1) {
         cusExportSize.setWidth(1);
     }
-    else if (cusExportSize.height() < 1)
-    {
+    else if (cusExportSize.height() < 1) {
         cusExportSize.setHeight(1);
     }
     ui->sbPicExportWidth->setValue(cusExportSize.width());
     ui->sbPicExportHeight->setValue(cusExportSize.height());
 
     QString sizeMode = settings->value("ExportSizeMode", "Default").toString();
-    if (sizeMode == "Desktop")
-    {
+    if (sizeMode == "Desktop") {
         ui->rbPicDesktopRes->setChecked(true);
     }
-    else if (sizeMode == "Custom")
-    {
+    else if (sizeMode == "Custom") {
         ui->rbPicCustomRes->setChecked(true);
     }
-    else
-    {
+    else {
         ui->rbPicDefaultRes->setChecked(true);
     }
 
     aspectRatio = (Qt::AspectRatioMode)settings->value("AspectRatio", Qt::KeepAspectRatio).toInt();
-    if (aspectRatio == Qt::IgnoreAspectRatio)
-    {
+    if (aspectRatio == Qt::IgnoreAspectRatio) {
         ui->cbIgnoreAspectRatio->setChecked(true);
     }
 
@@ -615,17 +586,14 @@ void OptionsDialog::setupStatisticsSettings()
     ui->cbUsageData->setChecked(settings->value("PushUsageData", false).toBool());
     settings->endGroup();
 
-    if (Telemetry->isStateForced())
-    {
+    if (Telemetry->isStateForced()) {
         ui->cbParticipateStats->setEnabled(false);
     }
 
-    if (Telemetry->isRegistered())
-    {
+    if (Telemetry->isRegistered()) {
         ui->labParticipationID->setText(tr("Participation ID: %1").arg(Telemetry->getRegisteredID()));
     }
-    else
-    {
+    else {
         ui->labParticipationID->setText(tr("Participation ID: %1").arg(tr("Not registered")));
         ui->cmdCopyStatsID->setVisible(false);
     }
@@ -639,62 +607,49 @@ void OptionsDialog::setupWindowsGameSettings()
 #ifdef GTA5SYNC_GAME
     GameVersion gameVersion = AppEnv::getGameVersion();
 #ifdef Q_OS_WIN
-    if (gameVersion != GameVersion::NoVersion)
-    {
-        if (gameVersion == GameVersion::SocialClubVersion)
-        {
+    if (gameVersion != GameVersion::NoVersion) {
+        if (gameVersion == GameVersion::SocialClubVersion) {
             ui->gbSteam->setDisabled(true);
             ui->labSocialClubFound->setText(tr("Found: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes"))));
             ui->labSteamFound->setText(tr("Found: %1").arg(QString("<span style=\"color: red\">%1</span>").arg(tr("No"))));
-            if (AppEnv::getGameLanguage(GameVersion::SocialClubVersion) != GameLanguage::Undefined)
-            {
+            if (AppEnv::getGameLanguage(GameVersion::SocialClubVersion) != GameLanguage::Undefined) {
                 ui->labSocialClubLanguage->setText(tr("Language: %1").arg(QLocale(AppEnv::gameLanguageToString(AppEnv::getGameLanguage(GameVersion::SocialClubVersion))).nativeLanguageName()));
             }
-            else
-            {
+            else {
                 ui->labSocialClubLanguage->setText(tr("Language: %1").arg(tr("OS defined")));
             }
             ui->labSteamLanguage->setVisible(false);
         }
-        else if (gameVersion == GameVersion::SteamVersion)
-        {
+        else if (gameVersion == GameVersion::SteamVersion) {
             ui->gbSocialClub->setDisabled(true);
             ui->labSocialClubFound->setText(tr("Found: %1").arg(QString("<span style=\"color: red\">%1</span>").arg(tr("No"))));
             ui->labSteamFound->setText(tr("Found: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes"))));
             ui->labSocialClubLanguage->setVisible(false);
-            if (AppEnv::getGameLanguage(GameVersion::SteamVersion) != GameLanguage::Undefined)
-            {
+            if (AppEnv::getGameLanguage(GameVersion::SteamVersion) != GameLanguage::Undefined) {
                 ui->labSteamLanguage->setText(tr("Language: %1").arg(QLocale(AppEnv::gameLanguageToString(AppEnv::getGameLanguage(GameVersion::SteamVersion))).nativeLanguageName()));
             }
-            else
-            {
+            else {
                 ui->labSteamLanguage->setText(tr("Language: %1").arg(tr("Steam defined")));
             }
         }
-        else
-        {
+        else {
             ui->labSocialClubFound->setText(tr("Found: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes"))));
             ui->labSteamFound->setText(tr("Found: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes"))));
-            if (AppEnv::getGameLanguage(GameVersion::SocialClubVersion) != GameLanguage::Undefined)
-            {
+            if (AppEnv::getGameLanguage(GameVersion::SocialClubVersion) != GameLanguage::Undefined) {
                 ui->labSocialClubLanguage->setText(tr("Language: %1").arg(QLocale(AppEnv::gameLanguageToString(AppEnv::getGameLanguage(GameVersion::SocialClubVersion))).nativeLanguageName()));
             }
-            else
-            {
+            else {
                 ui->labSocialClubLanguage->setText(tr("Language: %1").arg(tr("OS defined")));
             }
-            if (AppEnv::getGameLanguage(GameVersion::SteamVersion) != GameLanguage::Undefined)
-            {
+            if (AppEnv::getGameLanguage(GameVersion::SteamVersion) != GameLanguage::Undefined) {
                 ui->labSteamLanguage->setText(tr("Language: %1").arg(QLocale(AppEnv::gameLanguageToString(AppEnv::getGameLanguage(GameVersion::SteamVersion))).nativeLanguageName()));
             }
-            else
-            {
+            else {
                 ui->labSteamLanguage->setText(tr("Language: %1").arg(tr("Steam defined")));
             }
         }
     }
-    else
-    {
+    else {
         ui->tabWidget->removeTab(ui->tabWidget->indexOf(ui->tabGame));
     }
 #else
@@ -707,12 +662,10 @@ void OptionsDialog::setupWindowsGameSettings()
 
 void OptionsDialog::on_cbIgnoreAspectRatio_toggled(bool checked)
 {
-    if (checked)
-    {
+    if (checked) {
         aspectRatio = Qt::IgnoreAspectRatio;
     }
-    else
-    {
+    else {
         aspectRatio = Qt::KeepAspectRatio;
     }
 }
@@ -724,8 +677,7 @@ void OptionsDialog::setupCustomGTAFolder()
     settings->beginGroup("dir");
     currentCFolder = settings->value("dir", "").toString();
     currentFFolder = settings->value("force", false).toBool();
-    if (currentCFolder == "" && ok)
-    {
+    if (currentCFolder == "" && ok) {
         currentCFolder = defaultGameFolder;
     }
     ui->txtFolder->setText(currentCFolder);
@@ -754,8 +706,7 @@ void OptionsDialog::setupSnapmaticPictureViewer()
 void OptionsDialog::on_cmdExploreFolder_clicked()
 {
     QString GTAV_Folder = QFileDialog::getExistingDirectory(this, UserInterface::tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-    if (QFileInfo(GTAV_Folder).exists())
-    {
+    if (QFileInfo(GTAV_Folder).exists()) {
         ui->txtFolder->setText(GTAV_Folder);
     }
 }

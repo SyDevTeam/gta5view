@@ -38,6 +38,7 @@
 #include <QSpacerItem>
 #include <QPushButton>
 #include <QMessageBox>
+#include <QClipboard>
 #include <QSettings>
 #include <QFileInfo>
 #include <QTimer>
@@ -50,11 +51,11 @@
 UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, MessageThread *threadMessage, QWidget *parent) :
     QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB), threadMessage(threadMessage),
     ui(new Ui::UserInterface)
-#else
+  #else
 UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
     QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
     ui(new Ui::UserInterface)
-#endif
+  #endif
 {
     ui->setupUi(this);
     contentMode = 0;
@@ -153,6 +154,84 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
         ui->actionDelete_selected->setIcon(QIcon::fromTheme("remove"));
     }
 
+#ifdef GTA5SYNC_DONATE
+#ifdef GTA5SYNC_DONATE_ADDRESSES
+    donateAction = new QAction(tr("&Donate"), this);
+    if (QIcon::hasThemeIcon("help-donate")) {
+        donateAction->setIcon(QIcon::fromTheme("help-donate"));
+    }
+    else if (QIcon::hasThemeIcon("taxes-finances")) {
+        donateAction->setIcon(QIcon::fromTheme("taxes-finances"));
+    }
+    ui->menuHelp->insertAction(ui->actionAbout_gta5sync, donateAction);
+    QObject::connect(donateAction, &QAction::triggered, this, [=](){
+        QDialog *donateDialog = new QDialog(this);
+        donateDialog->setWindowTitle(QString("%1 - %2").arg(GTA5SYNC_APPSTR, tr("Donate")));
+#if QT_VERSION >= 0x050900
+        donateDialog->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
+        donateDialog->setWindowFlags(donateDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
+        QVBoxLayout *donateLayout = new QVBoxLayout;
+        donateDialog->setLayout(donateLayout);
+        QLabel *methodsLabel = new QLabel(QString("<b>%1</b>").arg(tr("Donation methods")), this);
+        methodsLabel->setWordWrap(true);
+        donateLayout->addWidget(methodsLabel);
+        const QStringList addressList = QString::fromUtf8(GTA5SYNC_DONATE_ADDRESSES).split(',');
+        for (const QString &address : addressList) {
+            const QStringList addressList = address.split(':');
+            if (addressList.length() == 2) {
+                const QString currency = addressList.at(0);
+                const QString address = addressList.at(1);
+                QHBoxLayout *addressLayout = new QHBoxLayout;
+                const QString iconPath = QString(":/donate/%1.svgz").arg(currency);
+                if (QFile::exists(iconPath)) {
+                    QLabel *currencyLabel = new QLabel(this);
+                    currencyLabel->setFixedSize(32, 32);
+                    currencyLabel->setScaledContents(true);
+                    currencyLabel->setPixmap(QIcon(iconPath).pixmap(QSize(32, 32)));
+                    addressLayout->addWidget(currencyLabel);
+                }
+                else {
+                    QLabel *currencyLabel = new QLabel(QString("<b>%1</b>").arg(currency.toUpper()), this);
+                    addressLayout->addWidget(currencyLabel);
+                }
+                QLabel *addressLabel = new QLabel(address, this);
+                addressLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+                addressLabel->setTextFormat(Qt::PlainText);
+                addressLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+                addressLabel->setWordWrap(true);
+                addressLayout->addWidget(addressLabel);
+                QPushButton *addressButton = new QPushButton(tr("Copy"), this);
+                QObject::connect(addressButton, &QPushButton::pressed, this, [=](){
+                    QApplication::clipboard()->setText(address);
+                });
+                addressLayout->addWidget(addressButton);
+                donateLayout->addLayout(addressLayout);
+            }
+        }
+        QHBoxLayout *buttonLayout = new QHBoxLayout;
+        buttonLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+        QPushButton *closeButton = new QPushButton(donateDialog);
+        closeButton->setText(tr("&Close"));
+        if (QIcon::hasThemeIcon("dialog-close")) {
+            closeButton->setIcon(QIcon::fromTheme("dialog-close"));
+        }
+        else if (QIcon::hasThemeIcon("gtk-close")) {
+            closeButton->setIcon(QIcon::fromTheme("gtk-close"));
+        }
+        buttonLayout->addWidget(closeButton);
+        donateLayout->addLayout(buttonLayout);
+        QObject::connect(closeButton, &QPushButton::clicked, donateDialog, &QDialog::accept);
+        QObject::connect(donateDialog, &QDialog::finished, donateDialog, &QDialog::deleteLater);
+        QTimer::singleShot(0, closeButton, [=](){
+            closeButton->setFocus();
+        });
+        donateDialog->open();
+    });
+#endif
+#endif
+
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
 #ifndef Q_QS_ANDROID
@@ -172,22 +251,20 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
     if (folderExists) {
         QDir::setCurrent(GTAV_Folder);
     }
-    else {
-        if (showFolderDialog) {
-            GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-            if (QFileInfo(GTAV_Folder).exists()) {
-                folderExists = true;
-                QDir::setCurrent(GTAV_Folder);
-                AppEnv::setGameFolder(GTAV_Folder);
+    else if (showFolderDialog) {
+        GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+        if (QFileInfo(GTAV_Folder).exists()) {
+            folderExists = true;
+            QDir::setCurrent(GTAV_Folder);
+            AppEnv::setGameFolder(GTAV_Folder);
 
-                // First time folder selection save
-                settings.beginGroup("dir");
-                if (settings.value("dir", "").toString().isEmpty())
-                {
-                    settings.setValue("dir", GTAV_Folder);
-                }
-                settings.endGroup();
+            // First time folder selection save
+            settings.beginGroup("dir");
+            if (settings.value("dir", "").toString().isEmpty())
+            {
+                settings.setValue("dir", GTAV_Folder);
             }
+            settings.endGroup();
         }
     }
 
@@ -289,8 +366,7 @@ void UserInterface::openProfile(const QString &profileName_)
 
 void UserInterface::closeProfile()
 {
-    if (profileOpen)
-    {
+    if (profileOpen) {
         closeProfile_p();
     }
     setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
@@ -465,68 +541,61 @@ fileDialogPreOpen:
 bool UserInterface::openFile(QString selectedFile, bool warn)
 {
     QString selectedFileName = QFileInfo(selectedFile).fileName();
-    if (QFile::exists(selectedFile))
-    {
-        if (selectedFileName.left(4) == "PGTA" || selectedFileName.right(4) == ".g5e")
-        {
+    if (QFile::exists(selectedFile)) {
+        if (selectedFileName.left(4) == "PGTA" || selectedFileName.right(4) == ".g5e") {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
-            if (picture->readingPicture())
-            {
+            if (picture->readingPicture()) {
                 openSnapmaticFile(picture);
                 delete picture;
                 return true;
             }
-            else
-            {
-                if (warn) QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("Failed to read Snapmatic picture"));
+            else {
+                if (warn)
+                    QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("Failed to read Snapmatic picture"));
                 delete picture;
                 return false;
             }
         }
-        else if (selectedFileName.left(4) == "SGTA")
-        {
+        else if (selectedFileName.left(4) == "SGTA") {
             SavegameData *savegame = new SavegameData(selectedFile);
-            if (savegame->readingSavegame())
-            {
+            if (savegame->readingSavegame()) {
                 openSavegameFile(savegame);
                 delete savegame;
                 return true;
             }
-            else
-            {
-                if (warn) QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("Failed to read Savegame file"));
+            else {
+                if (warn)
+                    QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("Failed to read Savegame file"));
                 delete savegame;
                 return false;
             }
         }
-        else
-        {
+        else {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
             SavegameData *savegame = new SavegameData(selectedFile);
-            if (picture->readingPicture())
-            {
+            if (picture->readingPicture()) {
                 delete savegame;
                 openSnapmaticFile(picture);
                 delete picture;
                 return true;
             }
-            else if (savegame->readingSavegame())
-            {
+            else if (savegame->readingSavegame()) {
                 delete picture;
                 openSavegameFile(savegame);
                 delete savegame;
                 return true;
             }
-            else
-            {
+            else {
                 delete savegame;
                 delete picture;
-                if (warn) QMessageBox::warning(this, tr("Open File"), tr("Can't open %1 because of not valid file format").arg("\""+selectedFileName+"\""));
+                if (warn)
+                    QMessageBox::warning(this, tr("Open File"), tr("Can't open %1 because of not valid file format").arg("\""+selectedFileName+"\""));
                 return false;
             }
         }
     }
-    if (warn) QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("No valid file is selected"));
+    if (warn)
+        QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("No valid file is selected"));
     return false;
 }
 
@@ -571,13 +640,11 @@ void UserInterface::openSavegameFile(SavegameData *savegame)
 
 void UserInterface::settingsApplied(int _contentMode, bool languageChanged)
 {
-    if (languageChanged)
-    {
+    if (languageChanged) {
         retranslateUi();
     }
     contentMode = _contentMode;
-    if (profileOpen)
-    {
+    if (profileOpen) {
         profileUI->settingsApplied(contentMode, languageChanged);
     }
 }
@@ -611,7 +678,11 @@ void UserInterface::showMessages(const QStringList messages)
 {
     QDialog *messageDialog = new QDialog(this);
     messageDialog->setWindowTitle(tr("%1 - Messages").arg(GTA5SYNC_APPSTR));
+#if QT_VERSION >= 0x050900
+    messageDialog->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
     messageDialog->setWindowFlags(messageDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
     QVBoxLayout *messageLayout = new QVBoxLayout;
     messageDialog->setLayout(messageLayout);
     QStackedWidget *stackWidget = new QStackedWidget(messageDialog);
@@ -682,7 +753,9 @@ void UserInterface::showMessages(const QStringList messages)
     });
     QObject::connect(closeButton, &QPushButton::clicked, messageDialog, &QDialog::accept);
     QObject::connect(messageDialog, &QDialog::finished, messageDialog, &QDialog::deleteLater);
-    QTimer::singleShot(0, closeButton, SLOT(setFocus()));
+    QTimer::singleShot(0, closeButton, [=](){
+        closeButton->setFocus();
+    });
     messageDialog->show();
 }
 
@@ -698,10 +771,8 @@ void UserInterface::updateCacheId(uint cacheId)
 void UserInterface::on_actionSelect_GTA_Folder_triggered()
 {
     QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-    if (QFileInfo(GTAV_Folder_Temp).exists())
-    {
-        if (profileOpen)
-        {
+    if (QFileInfo(GTAV_Folder_Temp).exists()) {
+        if (profileOpen) {
             closeProfile_p();
         }
         GTAV_Folder = GTAV_Folder_Temp;
@@ -714,36 +785,36 @@ void UserInterface::on_actionSelect_GTA_Folder_triggered()
 void UserInterface::on_action_Enable_In_game_triggered()
 {
     if (profileOpen)
-    {
         profileUI->enableSelected();
-    }
 }
 
 void UserInterface::on_action_Disable_In_game_triggered()
 {
     if (profileOpen)
-    {
         profileUI->disableSelected();
-    }
 }
 
 void UserInterface::retranslateUi()
 {
     ui->retranslateUi(this);
+#ifdef GTA5SYNC_DONATE
+#ifdef GTA5SYNC_DONATE_ADDRESSES
+    donateAction->setText(tr("&Donate"));
+#endif
+#endif
     ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
     QString appVersion = GTA5SYNC_APPVER;
 #ifndef GTA5SYNC_BUILDTYPE_REL
 #ifdef GTA5SYNC_COMMIT
-    if (!appVersion.contains("-")) { appVersion = appVersion % "-" % GTA5SYNC_COMMIT; }
+    if (!appVersion.contains("-"))
+        appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
 #endif
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
-    if (profileOpen)
-    {
+    if (profileOpen) {
         setWindowTitle(defaultWindowTitle.arg(profileName));
     }
-    else
-    {
+    else {
         setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     }
 }

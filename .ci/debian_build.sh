@@ -28,7 +28,9 @@ cmake \
    "-DGTA5VIEW_BUILDCODE=${PACKAGE_CODE}" \
    "-DGTA5VIEW_APPVER=${APPLICATION_VERSION}" \
    "-DGTA5VIEW_COMMIT=${APPLICATION_COMMIT}" \
+   "-DWITH_DONATE=ON" \
    "-DWITH_TELEMETRY=ON" \
+   "-DDONATE_ADDRESSES=$(cat ${PROJECT_DIR}/.ci/donate.txt)" \
    "-DTELEMETRY_WEBURL=https://dev.syping.de/gta5view-userstats/" \
    "-DQCONF_BUILD=ON" \
    ../../ && \

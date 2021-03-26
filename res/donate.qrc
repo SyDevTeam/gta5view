@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/donate">
+        <file>btc.svgz</file>
+        <file>eth.svgz</file>
+        <file>ltc.svgz</file>
+        <file>xmr.svgz</file>
+        <file>zec.svgz</file>
+    </qresource>
+</RCC>
