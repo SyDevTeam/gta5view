@@ -182,11 +182,12 @@ bool RagePhoto::load()
             free(jsonBytes);
             return false;
         }
-        for (quint32 i = 0; i != p_jsonBuffer; i++) {
+        quint32 i;
+        for (i = 0; i != p_jsonBuffer; i++) {
             if (jsonBytes[i] == '\x00')
                 break;
-            p_jsonData += jsonBytes[i];
         }
+        p_jsonData = QByteArray(jsonBytes, i);
         free(jsonBytes);
         QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_jsonData);
         if (t_jsonDocument.isNull())
@@ -213,7 +214,6 @@ bool RagePhoto::load()
             free(titlBytes);
             return false;
         }
-        quint32 i;
         for (i = 0; i != p_titlBuffer; i++) {
             if (titlBytes[i] == '\x00')
                 break;

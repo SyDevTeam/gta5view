@@ -31,6 +31,7 @@
 #include "ImportDialog.h"
 #include "UiModLabel.h"
 #include "pcg_basic.h"
+#include "wrapper.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QNetworkAccessManager>
@@ -103,22 +104,18 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui->saProfileContent->setImageDropEnabled(true);
 
     // Set Icon for Close Button
-    if (QIcon::hasThemeIcon("dialog-close"))
-    {
+    if (QIcon::hasThemeIcon("dialog-close")) {
         ui->cmdCloseProfile->setIcon(QIcon::fromTheme("dialog-close"));
     }
-    else if (QIcon::hasThemeIcon("gtk-close"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-close")) {
         ui->cmdCloseProfile->setIcon(QIcon::fromTheme("gtk-close"));
     }
 
     // Set Icon for Import Button
-    if (QIcon::hasThemeIcon("document-import"))
-    {
+    if (QIcon::hasThemeIcon("document-import")) {
         ui->cmdImport->setIcon(QIcon::fromTheme("document-import"));
     }
-    else if (QIcon::hasThemeIcon("document-open"))
-    {
+    else if (QIcon::hasThemeIcon("document-open")) {
         ui->cmdImport->setIcon(QIcon::fromTheme("document-open"));
     }
 
@@ -128,13 +125,11 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui->hlButtons->setSpacing(6 * screenRatio);
     ui->hlButtons->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 #else
-    if (QApplication::style()->objectName() == "macintosh")
-    {
+    if (QApplication::style()->objectName() == "macintosh") {
         ui->hlButtons->setSpacing(6 * screenRatio);
         ui->hlButtons->setContentsMargins(9 * screenRatio, 15 * screenRatio, 15 * screenRatio, 17 * screenRatio);
     }
-    else
-    {
+    else {
         ui->hlButtons->setSpacing(6 * screenRatio);
         ui->hlButtons->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
     }
@@ -149,22 +144,22 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 
 ProfileInterface::~ProfileInterface()
 {
-    for (ProfileWidget *widget : widgets.keys())
-    {
-        widget->removeEventFilter(this);
-        widget->disconnect();
-        delete widget;
+    for (const QString &widgetStr : qAsConst(widgets)) {
+        ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+        if (widget != nullptr) {
+            widget->removeEventFilter(this);
+            widget->disconnect();
+            delete widget;
+        }
     }
     widgets.clear();
 
-    for (SavegameData *savegame : savegames)
-    {
+    for (SavegameData *savegame : qAsConst(savegames)) {
         delete savegame;
     }
     savegames.clear();
 
-    for (SnapmaticPicture *picture : pictures)
-    {
+    for (SnapmaticPicture *picture : qAsConst(pictures)) {
         delete picture;
     }
     pictures.clear();
@@ -262,8 +257,8 @@ void ProfileInterface::loadingProgress(int value, int maximum)
 void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 {
     ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(widget);
-    if (widgets.contains(proWidget)) {
-        QString widgetKey = widgets[proWidget];
+    const QString widgetKey = widgets.value(proWidget, QString());
+    if (!widgetKey.isNull()) {
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
 #if QT_VERSION >= 0x050600
@@ -282,8 +277,8 @@ void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 void ProfileInterface::insertSavegameIPI(QWidget *widget)
 {
     ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(widget);
-    if (widgets.contains(proWidget)) {
-        QString widgetKey = widgets[proWidget];
+    const QString widgetKey = widgets.value(proWidget, QString());
+    if (!widgetKey.isNull()) {
         QStringList widgetsKeyList = widgets.values();
         QStringList savegameKeyList = widgetsKeyList.filter("SGD", Qt::CaseSensitive);
 #if QT_VERSION >= 0x050600
@@ -303,8 +298,8 @@ void ProfileInterface::dialogNextPictureRequested(QWidget *dialog)
 {
     PictureDialog *picDialog = qobject_cast<PictureDialog*>(dialog);
     ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(sender());
-    if (widgets.contains(proWidget)) {
-        QString widgetKey = widgets[proWidget];
+    const QString widgetKey = widgets.value(proWidget, QString());
+    if (!widgetKey.isNull()) {
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
 #if QT_VERSION >= 0x050600
@@ -313,22 +308,17 @@ void ProfileInterface::dialogNextPictureRequested(QWidget *dialog)
         qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
 #endif
         int picIndex;
-        if (picDialog->isIndexed())
-        {
+        if (picDialog->isIndexed()) {
             picIndex = picDialog->getIndex();
         }
-        else
-        {
+        else {
             picIndex = pictureKeyList.indexOf(widgetKey);
         }
         picIndex++;
-        if (pictureKeyList.length() > picIndex)
-        {
-            QString newWidgetKey = pictureKeyList.at(picIndex);
-            SnapmaticWidget *picWidget = (SnapmaticWidget*)widgets.key(newWidgetKey);
-            //picDialog->setMaximumHeight(QWIDGETSIZE_MAX);
+        if (pictureKeyList.length() > picIndex) {
+            const QString newWidgetKey = pictureKeyList.at(picIndex);
+            SnapmaticWidget *picWidget = static_cast<SnapmaticWidget*>(widgets.key(newWidgetKey));
             picDialog->setSnapmaticPicture(picWidget->getPicture(), picIndex);
-            //picDialog->setMaximumHeight(picDialog->height());
         }
     }
 }
@@ -337,9 +327,8 @@ void ProfileInterface::dialogPreviousPictureRequested(QWidget *dialog)
 {
     PictureDialog *picDialog = qobject_cast<PictureDialog*>(dialog);
     ProfileWidget *proWidget = qobject_cast<ProfileWidget*>(sender());
-    if (widgets.contains(proWidget))
-    {
-        QString widgetKey = widgets[proWidget];
+    const QString widgetKey = widgets.value(proWidget, QString());
+    if (!widgetKey.isNull()) {
         QStringList widgetsKeyList = widgets.values();
         QStringList pictureKeyList = widgetsKeyList.filter("PIC", Qt::CaseSensitive);
 #if QT_VERSION >= 0x050600
@@ -348,22 +337,17 @@ void ProfileInterface::dialogPreviousPictureRequested(QWidget *dialog)
         qSort(pictureKeyList.begin(), pictureKeyList.end(), qGreater<QString>());
 #endif
         int picIndex;
-        if (picDialog->isIndexed())
-        {
+        if (picDialog->isIndexed()) {
             picIndex = picDialog->getIndex();
         }
-        else
-        {
+        else {
             picIndex = pictureKeyList.indexOf(widgetKey);
         }
-        if (picIndex > 0)
-        {
+        if (picIndex > 0) {
             picIndex--;
-            QString newWidgetKey = pictureKeyList.at(picIndex );
-            SnapmaticWidget *picWidget = (SnapmaticWidget*)widgets.key(newWidgetKey);
-            //picDialog->setMaximumHeight(QWIDGETSIZE_MAX);
+            const QString newWidgetKey = pictureKeyList.at(picIndex);
+            SnapmaticWidget *picWidget = static_cast<SnapmaticWidget*>(widgets.key(newWidgetKey));
             picDialog->setSnapmaticPicture(picWidget->getPicture(), picIndex);
-            //picDialog->setMaximumHeight(picDialog->height());
         }
     }
 }
@@ -381,15 +365,12 @@ void ProfileInterface::sortingProfileInterface()
     qSort(widgetsKeyList.begin(), widgetsKeyList.end());
 #endif
 
-    for (QString widgetKey : widgetsKeyList)
-    {
+    for (const QString &widgetKey : qAsConst(widgetsKeyList)) {
         ProfileWidget *widget = widgets.key(widgetKey);
-        if (widget->getWidgetType() == "SnapmaticWidget")
-        {
+        if (widget->getWidgetType() == "SnapmaticWidget") {
             ui->vlSnapmatic->insertWidget(0, widget);
         }
-        else if (widget->getWidgetType() == "SavegameWidget")
-        {
+        else if (widget->getWidgetType() == "SavegameWidget") {
             ui->vlSavegame->addWidget(widget);
         }
     }
@@ -411,12 +392,10 @@ void ProfileInterface::profileLoaded_p()
     isProfileLoaded = true;
     emit profileLoaded();
 
-    if (!fixedPictures.isEmpty())
-    {
+    if (!fixedPictures.isEmpty()) {
         int fixedInt = 0;
         QString fixedStr;
-        for (QString fixedPicture : fixedPictures)
-        {
+        for (const QString &fixedPicture : qAsConst(fixedPictures)) {
             if (fixedInt != 0) { fixedStr += "<br>"; }
             fixedStr += fixedPicture;
             fixedInt++;
@@ -433,13 +412,13 @@ void ProfileInterface::savegameDeleted_event()
 void ProfileInterface::savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteEmited)
 {
     SavegameData *savegame = sgdWidget->getSavegame();
-    if (sgdWidget->isSelected()) { sgdWidget->setSelected(false); }
+    if (sgdWidget->isSelected())
+        sgdWidget->setSelected(false);
     widgets.remove(sgdWidget);
 
     sgdWidget->disconnect();
     sgdWidget->removeEventFilter(this);
-    if (sgdWidget == previousWidget)
-    {
+    if (sgdWidget == previousWidget) {
         previousWidget = nullptr;
     }
 
@@ -458,13 +437,13 @@ void ProfileInterface::pictureDeleted_event()
 void ProfileInterface::pictureDeleted(SnapmaticWidget *picWidget, bool isRemoteEmited)
 {
     SnapmaticPicture *picture = picWidget->getPicture();
-    if (picWidget->isSelected()) { picWidget->setSelected(false); }
+    if (picWidget->isSelected())
+        picWidget->setSelected(false);
     widgets.remove(picWidget);
 
     picWidget->disconnect();
     picWidget->removeEventFilter(this);
-    if (picWidget == previousWidget)
-    {
+    if (picWidget == previousWidget) {
         previousWidget = nullptr;
     }
 
@@ -499,13 +478,11 @@ fileDialogPreOpen: //Work?
 
     // Getting readable Image formats
     QString imageFormatsStr = " ";
-    for (QByteArray imageFormat : QImageReader::supportedImageFormats())
-    {
+    for (const QByteArray &imageFormat : QImageReader::supportedImageFormats()) {
         imageFormatsStr += QString("*.") % QString::fromUtf8(imageFormat).toLower() % " ";
     }
     QString importableFormatsStr = QString("*.g5e SGTA* PGTA*");
-    if (!imageFormatsStr.trimmed().isEmpty())
-    {
+    if (!imageFormatsStr.trimmed().isEmpty()) {
         importableFormatsStr = QString("*.g5e%1SGTA* PGTA*").arg(imageFormatsStr);
     }
 
@@ -524,21 +501,17 @@ fileDialogPreOpen: //Work?
     fileDialog.setDirectory(settings.value(profileName % "+Directory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value(profileName % "+Geometry", "").toByteArray());
 
-    if (fileDialog.exec())
-    {
+    if (fileDialog.exec()) {
         QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
+        if (selectedFiles.length() == 1) {
             QString selectedFile = selectedFiles.at(0);
             QDateTime importDateTime = QDateTime::currentDateTime();
             if (!importFile(selectedFile, importDateTime, true)) goto fileDialogPreOpen; //Work?
         }
-        else if (selectedFiles.length() > 1)
-        {
+        else if (selectedFiles.length() > 1) {
             importFilesProgress(selectedFiles);
         }
-        else
-        {
+        else {
             QMessageBox::warning(this, tr("Import..."), tr("No valid file is selected"));
             goto fileDialogPreOpen; //Work?
         }
@@ -574,25 +547,21 @@ bool ProfileInterface::importFilesProgress(QStringList selectedFiles)
 
     // THREADING HERE PLEASE
     QDateTime importDateTime = QDateTime::currentDateTime();
-    for (QString selectedFile : selectedFiles)
-    {
+    for (const QString &selectedFile : selectedFiles) {
         overallId++;
         pbDialog.setValue(overallId);
         pbDialog.setLabelText(tr("Import file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
         importDateTime = QDateTime::currentDateTime();
-        if (!importFile(selectedFile, importDateTime, false))
-        {
+        if (!importFile(selectedFile, importDateTime, false)) {
             failed << QFileInfo(selectedFile).fileName();
         }
     }
 
     pbDialog.close();
-    for (QString curErrorStr : failed)
-    {
+    for (const QString &curErrorStr : qAsConst(failed)) {
         errorStr += ", " % curErrorStr;
     }
-    if (errorStr != "")
-    {
+    if (errorStr != "") {
         errorStr.remove(0, 2);
         QMessageBox::warning(this, tr("Import..."), tr("Import failed with...\n\n%1").arg(errorStr));
         return false;
@@ -603,24 +572,20 @@ bool ProfileInterface::importFilesProgress(QStringList selectedFiles)
 bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime, bool notMultiple)
 {
     QString selectedFileName = QFileInfo(selectedFile).fileName();
-    if (QFile::exists(selectedFile))
-    {
-        if ((selectedFileName.left(4) == "PGTA" && !selectedFileName.contains('.')) || selectedFileName.right(4) == ".g5e")
-        {
+    if (QFile::exists(selectedFile)) {
+        if ((selectedFileName.left(4) == "PGTA" && !selectedFileName.contains('.')) || selectedFileName.right(4) == ".g5e") {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
-            if (picture->readingPicture(true))
-            {
+            if (picture->readingPicture(true)) {
                 bool success = importSnapmaticPicture(picture, notMultiple);
-                if (!success) delete picture;
+                if (!success)
+                    delete picture;
 #ifdef GTA5SYNC_TELEMETRY
-                if (success && notMultiple)
-                {
+                if (success && notMultiple) {
                     QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                     telemetrySettings.beginGroup("Telemetry");
                     bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
                     telemetrySettings.endGroup();
-                    if (pushUsageData && Telemetry->canPush())
-                    {
+                    if (pushUsageData && Telemetry->canPush()) {
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
@@ -638,29 +603,26 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 #endif
                 return success;
             }
-            else
-            {
-                if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("Failed to read Snapmatic picture"));
+            else {
+                if (notMultiple)
+                    QMessageBox::warning(this, tr("Import..."), tr("Failed to read Snapmatic picture"));
                 delete picture;
                 return false;
             }
         }
-        else if (selectedFileName.left(4) == "SGTA")
-        {
+        else if (selectedFileName.left(4) == "SGTA") {
             SavegameData *savegame = new SavegameData(selectedFile);
-            if (savegame->readingSavegame())
-            {
+            if (savegame->readingSavegame()) {
                 bool success = importSavegameData(savegame, selectedFile, notMultiple);
-                if (!success) delete savegame;
+                if (!success)
+                    delete savegame;
 #ifdef GTA5SYNC_TELEMETRY
-                if (success && notMultiple)
-                {
+                if (success && notMultiple) {
                     QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                     telemetrySettings.beginGroup("Telemetry");
                     bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
                     telemetrySettings.endGroup();
-                    if (pushUsageData && Telemetry->canPush())
-                    {
+                    if (pushUsageData && Telemetry->canPush()) {
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
@@ -677,23 +639,18 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 #endif
                 return success;
             }
-            else
-            {
+            else {
                 if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("Failed to read Savegame file"));
                 delete savegame;
                 return false;
             }
         }
-        else if (isSupportedImageFile(selectedFileName))
-        {
+        else if (isSupportedImageFile(selectedFileName)) {
             SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
-            if (picture->readingPicture(false))
-            {
-                if (!notMultiple)
-                {
+            if (picture->readingPicture(false)) {
+                if (!notMultiple) {
                     QFile snapmaticFile(selectedFile);
-                    if (!snapmaticFile.open(QFile::ReadOnly))
-                    {
+                    if (!snapmaticFile.open(QFile::ReadOnly)) {
                         delete picture;
                         return false;
                     }
@@ -701,8 +658,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     QImageReader snapmaticImageReader;
                     snapmaticImageReader.setDecideFormatFromContent(true);
                     snapmaticImageReader.setDevice(&snapmaticFile);
-                    if (!snapmaticImageReader.read(&snapmaticImage))
-                    {
+                    if (!snapmaticImageReader.read(&snapmaticImage)) {
                         delete picture;
                         return false;
                     }
@@ -710,38 +666,32 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     QPixmap snapmaticPixmap(960, 536);
                     snapmaticPixmap.fill(Qt::black);
                     QPainter snapmaticPainter(&snapmaticPixmap);
-                    if (snapmaticImage.height() == snapmaticImage.width())
-                    {
+                    if (snapmaticImage.height() == snapmaticImage.width()) {
                         // Avatar mode
                         int diffWidth = 0;
                         int diffHeight = 0;
                         snapmaticImage = snapmaticImage.scaled(470, 470, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-                        if (snapmaticImage.width() > snapmaticImage.height())
-                        {
+                        if (snapmaticImage.width() > snapmaticImage.height()) {
                             diffHeight = 470 - snapmaticImage.height();
                             diffHeight = diffHeight / 2;
                         }
-                        else if (snapmaticImage.width() < snapmaticImage.height())
-                        {
+                        else if (snapmaticImage.width() < snapmaticImage.height()) {
                             diffWidth = 470 - snapmaticImage.width();
                             diffWidth = diffWidth / 2;
                         }
                         snapmaticPainter.drawImage(145 + diffWidth, 66 + diffHeight, snapmaticImage);
                         customImageTitle = ImportDialog::tr("Custom Avatar", "Custom Avatar Description in SC, don't use Special Character!");
                     }
-                    else
-                    {
+                    else {
                         // Picture mode
                         int diffWidth = 0;
                         int diffHeight = 0;
                         snapmaticImage = snapmaticImage.scaled(960, 536, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-                        if (snapmaticImage.width() != 960)
-                        {
+                        if (snapmaticImage.width() != 960) {
                             diffWidth = 960 - snapmaticImage.width();
                             diffWidth = diffWidth / 2;
                         }
-                        else if (snapmaticImage.height() != 536)
-                        {
+                        else if (snapmaticImage.height() != 536) {
                             diffHeight = 536 - snapmaticImage.height();
                             diffHeight = diffHeight / 2;
                         }
@@ -749,8 +699,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         customImageTitle = ImportDialog::tr("Custom Picture", "Custom Picture Description in SC, don't use Special Character!");
                     }
                     snapmaticPainter.end();
-                    if (!picture->setImage(snapmaticPixmap.toImage()))
-                    {
+                    if (!picture->setImage(snapmaticPixmap.toImage())) {
                         delete picture;
                         return false;
                     }
@@ -760,8 +709,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
                     bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                     int cEnough = 0;
-                    while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit)
-                    {
+                    while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                         spJson.uid = getRandomUid();
                         fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                         fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
@@ -783,15 +731,14 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     picture->setPictureTitle(customImageTitle);
                     picture->updateStrings();
                     bool success = importSnapmaticPicture(picture, notMultiple);
-                    if (!success) delete picture;
+                    if (!success)
+                        delete picture;
                     return success;
                 }
-                else
-                {
+                else {
                     bool success = false;
                     QFile snapmaticFile(selectedFile);
-                    if (!snapmaticFile.open(QFile::ReadOnly))
-                    {
+                    if (!snapmaticFile.open(QFile::ReadOnly)) {
                         QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
                         delete picture;
                         return false;
@@ -800,8 +747,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     QImageReader snapmaticImageReader;
                     snapmaticImageReader.setDecideFormatFromContent(true);
                     snapmaticImageReader.setDevice(&snapmaticFile);
-                    if (!snapmaticImageReader.read(snapmaticImage))
-                    {
+                    if (!snapmaticImageReader.read(snapmaticImage)) {
                         QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
                         delete snapmaticImage;
                         delete picture;
@@ -812,18 +758,15 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     importDialog->setModal(true);
                     importDialog->show();
                     importDialog->exec();
-                    if (importDialog->isImportAgreed())
-                    {
-                        if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer()))
-                        {
+                    if (importDialog->isImportAgreed()) {
+                        if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
                             SnapmaticProperties spJson = picture->getSnapmaticProperties();
                             spJson.uid = getRandomUid();
                             bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                             bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
                             bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                             int cEnough = 0;
-                            while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit)
-                            {
+                            while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                                 spJson.uid = getRandomUid();
                                 fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                                 fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
@@ -846,14 +789,12 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                             picture->updateStrings();
                             success = importSnapmaticPicture(picture, notMultiple);
 #ifdef GTA5SYNC_TELEMETRY
-                            if (success)
-                            {
+                            if (success) {
                                 QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                                 telemetrySettings.beginGroup("Telemetry");
                                 bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
                                 telemetrySettings.endGroup();
-                                if (pushUsageData && Telemetry->canPush())
-                                {
+                                if (pushUsageData && Telemetry->canPush()) {
                                     QJsonDocument jsonDocument;
                                     QJsonObject jsonObject;
                                     jsonObject["Type"] = "ImportSuccess";
@@ -872,40 +813,36 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 #endif
                         }
                     }
-                    else
-                    {
+                    else {
                         delete picture;
                         success = true;
                     }
                     delete importDialog;
-                    if (!success) delete picture;
+                    if (!success)
+                        delete picture;
                     return success;
                 }
             }
-            else
-            {
+            else {
                 delete picture;
                 return false;
             }
         }
-        else
-        {
+        else {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
             SavegameData *savegame = new SavegameData(selectedFile);
-            if (picture->readingPicture())
-            {
+            if (picture->readingPicture()) {
                 bool success = importSnapmaticPicture(picture, notMultiple);
                 delete savegame;
-                if (!success) delete picture;
+                if (!success)
+                    delete picture;
 #ifdef GTA5SYNC_TELEMETRY
-                if (success && notMultiple)
-                {
+                if (success && notMultiple) {
                     QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                     telemetrySettings.beginGroup("Telemetry");
                     bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
                     telemetrySettings.endGroup();
-                    if (pushUsageData && Telemetry->canPush())
-                    {
+                    if (pushUsageData && Telemetry->canPush()) {
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
@@ -923,20 +860,18 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 #endif
                 return success;
             }
-            else if (savegame->readingSavegame())
-            {
+            else if (savegame->readingSavegame()) {
                 bool success = importSavegameData(savegame, selectedFile, notMultiple);
                 delete picture;
-                if (!success) delete savegame;
+                if (!success)
+                    delete savegame;
 #ifdef GTA5SYNC_TELEMETRY
-                if (success && notMultiple)
-                {
+                if (success && notMultiple) {
                     QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
                     telemetrySettings.beginGroup("Telemetry");
                     bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
                     telemetrySettings.endGroup();
-                    if (pushUsageData && Telemetry->canPush())
-                    {
+                    if (pushUsageData && Telemetry->canPush()) {
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
@@ -953,8 +888,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 #endif
                 return success;
             }
-            else
-            {
+            else {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "ImportError SnapmaticPicture" << picture->getLastStep();
                 qDebug() << "ImportError SavegameData" << savegame->getLastStep();
@@ -966,7 +900,8 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
             }
         }
     }
-    if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("No valid file is selected"));
+    if (notMultiple)
+        QMessageBox::warning(this, tr("Import..."), tr("No valid file is selected"));
     return false;
 }
 
@@ -974,21 +909,16 @@ bool ProfileInterface::importUrls(const QMimeData *mimeData)
 {
     QStringList pathList;
 
-    for (QUrl currentUrl : mimeData->urls())
-    {
+    for (const QUrl &currentUrl : mimeData->urls()) {
         if (currentUrl.isLocalFile())
-        {
             pathList += currentUrl.toLocalFile();
-        }
     }
 
-    if (pathList.length() == 1)
-    {
+    if (pathList.length() == 1) {
         QString selectedFile = pathList.at(0);
         return importFile(selectedFile, QDateTime::currentDateTime(), true);
     }
-    else if (pathList.length() > 1)
-    {
+    else if (pathList.length() > 1) {
         return importFilesProgress(pathList);
     }
     return false;
@@ -1042,23 +972,19 @@ bool ProfileInterface::importRemote(QUrl remoteUrl)
 
     urlPasteDialog.close();
 
-    if (netReply->isFinished())
-    {
+    if (netReply->isFinished()) {
         QImage *snapmaticImage = new QImage();
         QImageReader snapmaticImageReader;
         snapmaticImageReader.setDecideFormatFromContent(true);
         snapmaticImageReader.setDevice(netReply);
-        if (snapmaticImageReader.read(snapmaticImage))
-        {
+        if (snapmaticImageReader.read(snapmaticImage)) {
             retValue = importImage(snapmaticImage, QDateTime::currentDateTime());
         }
-        else
-        {
+        else {
             delete snapmaticImage;
         }
     }
-    else
-    {
+    else {
         netReply->abort();
     }
     delete netReply;
@@ -1069,26 +995,22 @@ bool ProfileInterface::importRemote(QUrl remoteUrl)
 bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateTime)
 {
     SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
-    if (picture->readingPicture(false))
-    {
+    if (picture->readingPicture(false)) {
         bool success = false;
         ImportDialog *importDialog = new ImportDialog(profileName, this);
         importDialog->setImage(snapmaticImage);
         importDialog->setModal(true);
         importDialog->show();
         importDialog->exec();
-        if (importDialog->isImportAgreed())
-        {
-            if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer()))
-            {
+        if (importDialog->isImportAgreed()) {
+            if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
                 SnapmaticProperties spJson = picture->getSnapmaticProperties();
                 spJson.uid = getRandomUid();
                 bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                 bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
                 bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
                 int cEnough = 0;
-                while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit)
-                {
+                while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                     spJson.uid = getRandomUid();
                     fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
                     fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
@@ -1112,17 +1034,16 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
                 success = importSnapmaticPicture(picture, true);
             }
         }
-        else
-        {
+        else {
             delete picture;
             success = true;
         }
         delete importDialog;
-        if (!success) delete picture;
+        if (!success)
+            delete picture;
         return success;
     }
-    else
-    {
+    else {
         delete picture;
         return false;
     }
@@ -1132,19 +1053,16 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
 {
     QString picFileName = picture->getPictureFileName();
     QString adjustedFileName = picture->getOriginalPictureFileName();
-    if (picFileName.left(4) != "PGTA")
-    {
-        if (warn) QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e"));
+    if (!picFileName.startsWith("PGTA5")) {
+        if (warn)
+            QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e"));
         return false;
     }
-    else if (QFile::exists(profileFolder % "/" % adjustedFileName) || QFile::exists(profileFolder % "/" % adjustedFileName % ".hidden"))
-    {
+    else if (QFile::exists(profileFolder % "/" % adjustedFileName) || QFile::exists(profileFolder % "/" % adjustedFileName % ".hidden")) {
         SnapmaticProperties snapmaticProperties = picture->getSnapmaticProperties();
-        if (warn)
-        {
+        if (warn) {
             int uchoice = QMessageBox::question(this, tr("Import..."), tr("A Snapmatic picture already exists with the uid %1, you want assign your import a new uid and timestamp?").arg(QString::number(snapmaticProperties.uid)), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes);
-            if (uchoice == QMessageBox::Yes)
-            {
+            if (uchoice == QMessageBox::Yes) {
                 // Update Snapmatic uid
                 snapmaticProperties.uid = getRandomUid();
                 snapmaticProperties.createdDateTime = QDateTime::currentDateTime();
@@ -1161,21 +1079,18 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
                 bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
                 bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
                 int cEnough = 0;
-                while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit)
-                {
+                while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                     snapmaticProperties.uid = getRandomUid();
                     fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
                     fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
                     fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
                     cEnough++;
                 }
-                if (fExists || fExistsBackup || fExistsHidden)
-                {
+                if (fExists || fExistsBackup || fExistsHidden) {
                     // That should never happen
                     return false;
                 }
-                if (!picture->setSnapmaticProperties(snapmaticProperties))
-                {
+                if (!picture->setSnapmaticProperties(snapmaticProperties)) {
                     // That should never happen
                     return false;
                 }
@@ -1183,13 +1098,11 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
                 picFileName = picture->getPictureFileName();
                 adjustedFileName = picture->getOriginalPictureFileName();
             }
-            else
-            {
+            else {
                 return false;
             }
         }
-        else
-        {
+        else {
             // Update Snapmatic uid
             snapmaticProperties.uid = getRandomUid();
             snapmaticProperties.createdDateTime = QDateTime::currentDateTime();
@@ -1206,21 +1119,18 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
             bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
             bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
             int cEnough = 0;
-            while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit)
-            {
+            while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                 snapmaticProperties.uid = getRandomUid();
                 fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
                 fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
                 fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
                 cEnough++;
             }
-            if (fExists || fExistsBackup || fExistsHidden)
-            {
+            if (fExists || fExistsBackup || fExistsHidden) {
                 // That should never happen
                 return false;
             }
-            if (!picture->setSnapmaticProperties(snapmaticProperties))
-            {
+            if (!picture->setSnapmaticProperties(snapmaticProperties)) {
                 // That should never happen
                 return false;
             }
@@ -1229,16 +1139,15 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
             adjustedFileName = picture->getOriginalPictureFileName();
         }
     }
-    if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format))
-    {
+    if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format)) {
         picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
         picture->setPicFilePath(profileFolder % "/" % adjustedFileName);
         pictureLoaded(picture, true);
         return true;
     }
-    else
-    {
-        if (warn) QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Snapmatic picture, can't copy the file into profile"));
+    else {
+        if (warn)
+            QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Snapmatic picture, can't copy the file into profile"));
         return false;
     }
 }
@@ -1249,50 +1158,45 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
     bool foundFree = 0;
     int currentSgd = 0;
 
-    while (currentSgd < 15 && !foundFree)
-    {
+    while (currentSgd < 15 && !foundFree) {
         QString sgdNumber = QString::number(currentSgd);
-        if (sgdNumber.length() == 1)
-        {
+        if (sgdNumber.length() == 1) {
             sgdNumber.insert(0, "0");
         }
         sgdFileName = "SGTA500" % sgdNumber;
 
-        if (!QFile::exists(profileFolder % "/" % sgdFileName))
-        {
+        if (!QFile::exists(profileFolder % "/" % sgdFileName)) {
             foundFree = true;
         }
         currentSgd++;
     }
 
-    if (foundFree)
-    {
-        if (QFile::copy(sgdPath, profileFolder % "/" % sgdFileName))
-        {
+    if (foundFree) {
+        if (QFile::copy(sgdPath, profileFolder % "/" % sgdFileName)) {
             savegame->setSavegameFileName(profileFolder % "/" % sgdFileName);
             savegameLoaded(savegame, profileFolder % "/" % sgdFileName, true);
             return true;
         }
-        else
-        {
-            if (warn) QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Savegame, can't copy the file into profile"));
+        else {
+            if (warn)
+                QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Savegame, can't copy the file into profile"));
             return false;
         }
     }
-    else
-    {
-        if (warn) QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Savegame, no Savegame slot is left"));
+    else {
+        if (warn)
+            QMessageBox::warning(this, tr("Import..."), tr("Failed to import the Savegame, no Savegame slot is left"));
         return false;
     }
 }
 
 void ProfileInterface::profileWidgetSelected()
 {
-    if (selectedWidgts == 0)
-    {
-        for (ProfileWidget *widget : widgets.keys())
-        {
-            widget->setSelectionMode(true);
+    if (selectedWidgts == 0) {
+        for (const QString &widgetStr : qAsConst(widgets)) {
+            ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+            if (widget != nullptr)
+                widget->setSelectionMode(true);
         }
     }
     selectedWidgts++;
@@ -1300,13 +1204,11 @@ void ProfileInterface::profileWidgetSelected()
 
 void ProfileInterface::profileWidgetDeselected()
 {
-    if (selectedWidgts == 1)
-    {
+    if (selectedWidgts == 1) {
         int scrollBarValue = ui->saProfile->verticalScrollBar()->value();
-        for (ProfileWidget *widget : widgets.keys())
-        {
-            if (contentMode != 2)
-            {
+        for (const QString &widgetStr : qAsConst(widgets)) {
+            ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+            if (widget != nullptr && contentMode != 2) {
                 widget->setSelectionMode(false);
             }
         }
@@ -1317,24 +1219,25 @@ void ProfileInterface::profileWidgetDeselected()
 
 void ProfileInterface::selectAllWidgets()
 {
-    for (ProfileWidget *widget : widgets.keys())
-    {
-        widget->setSelected(true);
+    for (const QString &widgetStr : qAsConst(widgets)) {
+        ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+        if (widget != nullptr)
+            widget->setSelected(true);
     }
 }
 
 void ProfileInterface::deselectAllWidgets()
 {
-    for (ProfileWidget *widget : widgets.keys())
-    {
-        widget->setSelected(false);
+    for (const QString &widgetStr : qAsConst(widgets)) {
+        ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+        if (widget != nullptr)
+            widget->setSelected(false);
     }
 }
 
 void ProfileInterface::exportSelected()
 {
-    if (selectedWidgts != 0)
-    {
+    if (selectedWidgts != 0) {
         int exportCount = 0;
         int exportPictures = 0;
         int exportSavegames = 0;
@@ -1346,26 +1249,23 @@ void ProfileInterface::exportSelected()
         //bool dontUseNativeDialog = settings.value("DontUseNativeDialog", false).toBool();
         settings.beginGroup("ExportDirectory");
         QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected..."), settings.value(profileName, profileFolder).toString());
-        if (exportDirectory != "")
-        {
+        if (exportDirectory != "") {
             settings.setValue(profileName, exportDirectory);
-            for (ProfileWidget *widget : widgets.keys())
-            {
-                if (widget->isSelected())
-                {
-                    if (widget->getWidgetType() == "SnapmaticWidget")
-                    {
-                        exportPictures++;
-                    }
-                    else if (widget->getWidgetType() == "SavegameWidget")
-                    {
-                        exportSavegames++;
+            for (const QString &widgetStr : qAsConst(widgets)) {
+                ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+                if (widget != nullptr) {
+                    if (widget->isSelected()) {
+                        if (widget->getWidgetType() == "SnapmaticWidget") {
+                            exportPictures++;
+                        }
+                        else if (widget->getWidgetType() == "SavegameWidget") {
+                            exportSavegames++;
+                        }
                     }
                 }
             }
 
-            if (exportPictures != 0)
-            {
+            if (exportPictures != 0) {
                 QInputDialog inputDialog;
                 QStringList inputDialogItems;
                 inputDialogItems << tr("JPG pictures and GTA Snapmatic");
@@ -1384,29 +1284,23 @@ void ProfileInterface::exportSelected()
 
                 bool itemSelected = false;
                 QString selectedItem = inputDialog.getItem(this, tr("Export selected..."), tr("%1Export Snapmatic pictures%2<br><br>JPG pictures make it possible to open the picture with a Image Viewer<br>GTA Snapmatic make it possible to import the picture into the game<br><br>Export as:").arg(ExportPreSpan, ExportPostSpan), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-                if (itemSelected)
-                {
-                    if (selectedItem == tr("JPG pictures and GTA Snapmatic"))
-                    {
+                if (itemSelected) {
+                    if (selectedItem == tr("JPG pictures and GTA Snapmatic")) {
                         pictureExportEnabled = true;
                         pictureCopyEnabled = true;
                     }
-                    else if (selectedItem == tr("JPG pictures only"))
-                    {
+                    else if (selectedItem == tr("JPG pictures only")) {
                         pictureExportEnabled = true;
                     }
-                    else if (selectedItem == tr("GTA Snapmatic only"))
-                    {
+                    else if (selectedItem == tr("GTA Snapmatic only")) {
                         pictureCopyEnabled = true;
                     }
-                    else
-                    {
+                    else {
                         pictureExportEnabled = true;
                         pictureCopyEnabled = true;
                     }
                 }
-                else
-                {
+                else {
                     // Don't export anymore when any Cancel button got clicked
                     settings.endGroup();
                     settings.endGroup();
@@ -1416,13 +1310,11 @@ void ProfileInterface::exportSelected()
 
             // Counting the exports together
             exportCount = exportCount + exportSavegames;
-            if (pictureExportEnabled && pictureCopyEnabled)
-            {
+            if (pictureExportEnabled && pictureCopyEnabled) {
                 int exportPictures2 = exportPictures * 2;
                 exportCount = exportCount + exportPictures2;
             }
-            else
-            {
+            else {
                 exportCount = exportCount + exportPictures;
             }
 
@@ -1456,22 +1348,18 @@ void ProfileInterface::exportSelected()
             errorList << getFailedCopyPictures;
             errorList << getFailedSavegames;
 
-            for (QString curErrorStr : errorList)
-            {
+            for (const QString &curErrorStr : qAsConst(errorList)) {
                 errorStr += ", " % curErrorStr;
             }
-            if (errorStr != "")
-            {
+            if (errorStr != "") {
                 errorStr.remove(0, 2);
                 QMessageBox::warning(this, tr("Export selected..."), tr("Export failed with...\n\n%1").arg(errorStr));
             }
 
-            if (exportThread->isFinished())
-            {
+            if (exportThread->isFinished()) {
                 delete exportThread;
             }
-            else
-            {
+            else {
                 QEventLoop threadFinishLoop;
                 QObject::connect(exportThread, SIGNAL(finished()), &threadFinishLoop, SLOT(quit()));
                 threadFinishLoop.exec();
@@ -1481,50 +1369,42 @@ void ProfileInterface::exportSelected()
         settings.endGroup();
         settings.endGroup();
     }
-    else
-    {
+    else {
         QMessageBox::information(this, tr("Export selected..."), tr("No Snapmatic pictures or Savegames files are selected"));
     }
 }
 
 void ProfileInterface::deleteSelectedL(bool isRemoteEmited)
 {
-    if (selectedWidgts != 0)
-    {
-        if (QMessageBox::Yes == QMessageBox::warning(this, tr("Remove selected"), tr("You really want remove the selected Snapmatic picutres and Savegame files?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No))
-        {
-            for (ProfileWidget *widget : widgets.keys())
-            {
-                if (widget->isSelected())
-                {
-                    if (widget->getWidgetType() == "SnapmaticWidget")
-                    {
-                        SnapmaticWidget *picWidget = qobject_cast<SnapmaticWidget*>(widget);
-                        if (picWidget->getPicture()->deletePictureFile())
-                        {
-                            pictureDeleted(picWidget, isRemoteEmited);
+    if (selectedWidgts != 0) {
+        if (QMessageBox::Yes == QMessageBox::warning(this, tr("Remove selected"), tr("You really want remove the selected Snapmatic picutres and Savegame files?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
+            for (const QString &widgetStr : qAsConst(widgets)) {
+                ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+                if (widget != nullptr) {
+                    if (widget->isSelected()) {
+                        if (widget->getWidgetType() == "SnapmaticWidget") {
+                            SnapmaticWidget *picWidget = qobject_cast<SnapmaticWidget*>(widget);
+                            if (picWidget->getPicture()->deletePictureFile()) {
+                                pictureDeleted(picWidget, isRemoteEmited);
+                            }
                         }
-                    }
-                    else if (widget->getWidgetType() == "SavegameWidget")
-                    {
-                        SavegameWidget *sgdWidget = qobject_cast<SavegameWidget*>(widget);
-                        SavegameData *savegame = sgdWidget->getSavegame();
-                        QString fileName = savegame->getSavegameFileName();
-                        if (!QFile::exists(fileName) || QFile::remove(fileName))
-                        {
-                            savegameDeleted(sgdWidget, isRemoteEmited);
+                        else if (widget->getWidgetType() == "SavegameWidget") {
+                            SavegameWidget *sgdWidget = qobject_cast<SavegameWidget*>(widget);
+                            SavegameData *savegame = sgdWidget->getSavegame();
+                            QString fileName = savegame->getSavegameFileName();
+                            if (!QFile::exists(fileName) || QFile::remove(fileName)) {
+                                savegameDeleted(sgdWidget, isRemoteEmited);
+                            }
                         }
                     }
                 }
             }
-            if (selectedWidgts != 0)
-            {
+            if (selectedWidgts != 0) {
                 QMessageBox::warning(this, tr("Remove selected"), tr("Failed to remove all selected Snapmatic pictures and/or Savegame files"));
             }
         }
     }
-    else
-    {
+    else {
         QMessageBox::information(this, tr("Remove selected"), tr("No Snapmatic pictures or Savegames files are selected"));
     }
 }
@@ -1566,39 +1446,41 @@ void ProfileInterface::importFiles()
 
 void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
 {
-    if (languageChanged) retranslateUi();
+    if (languageChanged)
+        retranslateUi();
     contentMode = _contentMode;
-    if (contentMode == 2)
-    {
-        for (ProfileWidget *widget : widgets.keys())
-        {
-            widget->setSelectionMode(true);
-            widget->setContentMode(contentMode);
-            if (languageChanged) widget->retranslate();
+    if (contentMode == 2) {
+        for (const QString &widgetStr : qAsConst(widgets)) {
+            ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+            if (widget != nullptr) {
+                widget->setSelectionMode(true);
+                widget->setContentMode(contentMode);
+                if (languageChanged)
+                    widget->retranslate();
+            }
         }
     }
-    else
-    {
-        for (ProfileWidget *widget : widgets.keys())
-        {
-            if (selectedWidgts == 0)
-            {
-                widget->setSelectionMode(false);
+    else {
+        for (const QString &widgetStr : qAsConst(widgets)) {
+            ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+            if (widget != nullptr) {
+                if (selectedWidgts == 0) {
+                    widget->setSelectionMode(false);
+                }
+                widget->setContentMode(contentMode);
+                if (languageChanged)
+                    widget->retranslate();
             }
-            widget->setContentMode(contentMode);
-            if (languageChanged) widget->retranslate();
         }
     }
 #ifdef Q_OS_MAC
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
-    if (QApplication::style()->objectName() == "macintosh")
-    {
+    if (QApplication::style()->objectName() == "macintosh") {
         ui->hlButtons->setSpacing(6 * screenRatio);
         ui->hlButtons->setContentsMargins(9 * screenRatio, 15 * screenRatio, 15 * screenRatio, 17 * screenRatio);
     }
-    else
-    {
+    else {
         ui->hlButtons->setSpacing(6 * screenRatio);
         ui->hlButtons->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
     }
@@ -1608,33 +1490,29 @@ void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
 void ProfileInterface::enableSelected()
 {
     QList<SnapmaticWidget*> snapmaticWidgets;
-    for (ProfileWidget *widget : widgets.keys())
-    {
-        if (widget->isSelected())
-        {
-            if (widget->getWidgetType() == "SnapmaticWidget")
-            {
-                SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
-                snapmaticWidgets += snapmaticWidget;
+    for (const QString &widgetStr : qAsConst(widgets)) {
+        ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+        if (widget != nullptr) {
+            if (widget->isSelected()) {
+                if (widget->getWidgetType() == "SnapmaticWidget") {
+                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                    snapmaticWidgets += snapmaticWidget;
+                }
             }
         }
     }
-    if (snapmaticWidgets.isEmpty())
-    {
+    if (snapmaticWidgets.isEmpty()) {
         QMessageBox::information(this, QApplication::translate("UserInterface", "Show In-game"), QApplication::translate("ProfileInterface", "No Snapmatic pictures are selected"));
         return;
     }
     QStringList fails;
-    for (SnapmaticWidget *widget : snapmaticWidgets)
-    {
+    for (SnapmaticWidget *widget : qAsConst(snapmaticWidgets)) {
         SnapmaticPicture *picture = widget->getPicture();
-        if (!widget->makePictureVisible())
-        {
+        if (!widget->makePictureVisible()) {
             fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
         }
     }
-    if (!fails.isEmpty())
-    {
+    if (!fails.isEmpty()) {
         QMessageBox::warning(this, QApplication::translate("UserInterface", "Show In-game"), QApplication::translate("ProfileInterface", "%1 failed with...\n\n%2", "Action failed with...").arg(QApplication::translate("UserInterface", "Show In-game"), fails.join(", ")));
     }
 }
@@ -1642,33 +1520,29 @@ void ProfileInterface::enableSelected()
 void ProfileInterface::disableSelected()
 {
     QList<SnapmaticWidget*> snapmaticWidgets;
-    for (ProfileWidget *widget : widgets.keys())
-    {
-        if (widget->isSelected())
-        {
-            if (widget->getWidgetType() == "SnapmaticWidget")
-            {
-                SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
-                snapmaticWidgets += snapmaticWidget;
+    for (const QString &widgetStr : qAsConst(widgets)) {
+        ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+        if (widget != nullptr) {
+            if (widget->isSelected()) {
+                if (widget->getWidgetType() == "SnapmaticWidget") {
+                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                    snapmaticWidgets += snapmaticWidget;
+                }
             }
         }
     }
-    if (snapmaticWidgets.isEmpty())
-    {
+    if (snapmaticWidgets.isEmpty()) {
         QMessageBox::information(this, QApplication::translate("UserInterface", "Hide In-game"), QApplication::translate("ProfileInterface", "No Snapmatic pictures are selected"));
         return;
     }
     QStringList fails;
-    for (SnapmaticWidget *widget : snapmaticWidgets)
-    {
+    for (SnapmaticWidget *widget : qAsConst(snapmaticWidgets)) {
         SnapmaticPicture *picture = widget->getPicture();
-        if (!widget->makePictureHidden())
-        {
+        if (!widget->makePictureHidden()) {
             fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
         }
     }
-    if (!fails.isEmpty())
-    {
+    if (!fails.isEmpty()) {
         QMessageBox::warning(this, QApplication::translate("UserInterface", "Hide In-game"), QApplication::translate("ProfileInterface", "%1 failed with...\n\n%2", "Action failed with...").arg(QApplication::translate("UserInterface", "Hide In-game"), fails.join(", ")));
     }
 }
@@ -1740,8 +1614,9 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
         contextMenu.addAction(SavegameWidget::tr("&Export"), this, SLOT(exportSelected()), QKeySequence::fromString("Ctrl+E"));
         contextMenu.addAction(SavegameWidget::tr("&Remove"), this, SLOT(deleteSelectedR()), QKeySequence::fromString("Ctrl+Del"));
         contextMenu.addSeparator();
-        if (!picWidget->isSelected())
+        if (!picWidget->isSelected()) {
             contextMenu.addAction(SnapmaticWidget::tr("&Select"), picWidget, SLOT(pictureSelected()));
+        }
         else {
             contextMenu.addAction(SnapmaticWidget::tr("&Deselect"), picWidget, SLOT(pictureSelected()));
         }
@@ -1825,14 +1700,13 @@ void ProfileInterface::contextMenuTriggeredSGD(QContextMenuEvent *ev)
 
 void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
 {
-    if (!mimeData) return;
-    if (mimeData->hasImage())
-    {
+    if (!mimeData)
+        return;
+    if (mimeData->hasImage()) {
         QImage *snapmaticImage = new QImage(qvariant_cast<QImage>(mimeData->imageData()));
         importImage(snapmaticImage, QDateTime::currentDateTime());
     }
-    else if (mimeData->hasUrls())
-    {
+    else if (mimeData->hasUrls()) {
         importUrls(mimeData);
     }
 }
@@ -1843,7 +1717,8 @@ void ProfileInterface::retranslateUi()
     QString appVersion = GTA5SYNC_APPVER;
 #ifndef GTA5SYNC_BUILDTYPE_REL
 #ifdef GTA5SYNC_COMMIT
-    if (!appVersion.contains("-")) { appVersion = appVersion % "-" % GTA5SYNC_COMMIT; }
+    if (!appVersion.contains("-"))
+        appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
 #endif
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
@@ -1851,52 +1726,38 @@ void ProfileInterface::retranslateUi()
 
 bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
 {
-    if (event->type() == QEvent::KeyPress)
-    {
-        if (isProfileLoaded)
-        {
+    if (event->type() == QEvent::KeyPress) {
+        if (isProfileLoaded) {
             QKeyEvent *keyEvent = dynamic_cast<QKeyEvent*>(event);
-            switch (keyEvent->key())
-            {
+            switch (keyEvent->key()) {
             case Qt::Key_V:
-                if (QApplication::keyboardModifiers().testFlag(Qt::ControlModifier) && !QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier))
-                {
+                if (QApplication::keyboardModifiers().testFlag(Qt::ControlModifier) && !QApplication::keyboardModifiers().testFlag(Qt::ShiftModifier)) {
                     const QMimeData *clipboardData = QApplication::clipboard()->mimeData();
-                    if (clipboardData->hasImage())
-                    {
+                    if (clipboardData->hasImage()) {
                         QImage *snapmaticImage = new QImage(qvariant_cast<QImage>(clipboardData->imageData()));
                         importImage(snapmaticImage, QDateTime::currentDateTime());
                     }
-                    else if (clipboardData->hasUrls())
-                    {
-                        if (clipboardData->urls().length() >= 2)
-                        {
+                    else if (clipboardData->hasUrls()) {
+                        if (clipboardData->urls().length() >= 2) {
                             importUrls(clipboardData);
                         }
-                        else if (clipboardData->urls().length() == 1)
-                        {
+                        else if (clipboardData->urls().length() == 1) {
                             QUrl clipboardUrl = clipboardData->urls().at(0);
-                            if (clipboardUrl.isLocalFile())
-                            {
+                            if (clipboardUrl.isLocalFile()) {
                                 importFile(clipboardUrl.toLocalFile(), QDateTime::currentDateTime(), true);
                             }
-                            else
-                            {
+                            else {
                                 importRemote(clipboardUrl);
                             }
                         }
                     }
-                    else if (clipboardData->hasText())
-                    {
+                    else if (clipboardData->hasText()) {
                         QUrl clipboardUrl = QUrl::fromUserInput(clipboardData->text());
-                        if (clipboardUrl.isValid())
-                        {
-                            if (clipboardUrl.isLocalFile())
-                            {
+                        if (clipboardUrl.isValid()) {
+                            if (clipboardUrl.isLocalFile()) {
                                 importFile(clipboardUrl.toLocalFile(), QDateTime::currentDateTime(), true);
                             }
-                            else
-                            {
+                            else {
                                 importRemote(clipboardUrl);
                             }
                         }
@@ -1905,34 +1766,25 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
             }
         }
     }
-    else if (event->type() == QEvent::MouseMove)
-    {
-        if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
-        {
+    else if (event->type() == QEvent::MouseMove) {
+        if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded) {
             ProfileWidget *pWidget = qobject_cast<ProfileWidget*>(watched);
-            if (pWidget->underMouse())
-            {
+            if (pWidget->underMouse()) {
                 bool styleSheetChanged = false;
-                if (pWidget->getWidgetType() == "SnapmaticWidget")
-                {
-                    if (pWidget != previousWidget)
-                    {
+                if (pWidget->getWidgetType() == "SnapmaticWidget") {
+                    if (pWidget != previousWidget) {
                         pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
                         styleSheetChanged = true;
                     }
                 }
-                else if (pWidget->getWidgetType() == "SavegameWidget")
-                {
-                    if (pWidget != previousWidget)
-                    {
+                else if (pWidget->getWidgetType() == "SavegameWidget") {
+                    if (pWidget != previousWidget) {
                         pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color:palette(highlight)}QLabel#labSavegameStr{color:palette(highlighted-text)}"));
                         styleSheetChanged = true;
                     }
                 }
-                if (styleSheetChanged)
-                {
-                    if (previousWidget != nullptr)
-                    {
+                if (styleSheetChanged) {
+                    if (previousWidget != nullptr) {
                         previousWidget->setStyleSheet(QLatin1String(""));
                     }
                     previousWidget = pWidget;
@@ -1941,47 +1793,33 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
             return true;
         }
     }
-    else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease)
-    {
-        if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded)
-        {
+    else if (event->type() == QEvent::MouseButtonPress || event->type() == QEvent::MouseButtonRelease) {
+        if ((watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") && isProfileLoaded) {
             ProfileWidget *pWidget = nullptr;
-            QMap<ProfileWidget*, QString>::const_iterator it = widgets.constBegin();
-            QMap<ProfileWidget*, QString>::const_iterator end = widgets.constEnd();
-            while (it != end)
-            {
+            for (auto it = widgets.constBegin(); it != widgets.constEnd(); it++) {
                 ProfileWidget *widget = it.key();
                 QPoint mousePos = widget->mapFromGlobal(QCursor::pos());
-                if (widget->rect().contains(mousePos))
-                {
+                if (widget->rect().contains(mousePos)) {
                     pWidget = widget;
                     break;
                 }
-                it++;
             }
-            if (pWidget != nullptr)
-            {
+            if (pWidget != nullptr) {
                 bool styleSheetChanged = false;
-                if (pWidget->getWidgetType() == "SnapmaticWidget")
-                {
-                    if (pWidget != previousWidget)
-                    {
+                if (pWidget->getWidgetType() == "SnapmaticWidget") {
+                    if (pWidget != previousWidget) {
                         pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
                         styleSheetChanged = true;
                     }
                 }
-                else if (pWidget->getWidgetType() == "SavegameWidget")
-                {
-                    if (pWidget != previousWidget)
-                    {
+                else if (pWidget->getWidgetType() == "SavegameWidget") {
+                    if (pWidget != previousWidget) {
                         pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color:palette(highlight)}QLabel#labSavegameStr{color:palette(highlighted-text)}"));
                         styleSheetChanged = true;
                     }
                 }
-                if (styleSheetChanged)
-                {
-                    if (previousWidget != nullptr)
-                    {
+                if (styleSheetChanged) {
+                    if (previousWidget != nullptr) {
                         previousWidget->setStyleSheet(QLatin1String(""));
                     }
                     previousWidget = pWidget;
@@ -1989,33 +1827,25 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
             }
         }
     }
-    else if (event->type() == QEvent::WindowDeactivate && isProfileLoaded)
-    {
-        if (previousWidget != nullptr && watched == previousWidget)
-        {
+    else if (event->type() == QEvent::WindowDeactivate && isProfileLoaded) {
+        if (previousWidget != nullptr && watched == previousWidget) {
             previousWidget->setStyleSheet(QLatin1String(""));
             previousWidget = nullptr;
         }
     }
-    else if (event->type() == QEvent::Leave && isProfileLoaded && !contextMenuOpened)
-    {
-        if (watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget")
-        {
+    else if (event->type() == QEvent::Leave && isProfileLoaded && !contextMenuOpened) {
+        if (watched->objectName() == "SavegameWidget" || watched->objectName() == "SnapmaticWidget") {
             ProfileWidget *pWidget = qobject_cast<ProfileWidget*>(watched);
             QPoint mousePos = pWidget->mapFromGlobal(QCursor::pos());
-            if (!pWidget->geometry().contains(mousePos))
-            {
-                if (previousWidget != nullptr)
-                {
+            if (!pWidget->geometry().contains(mousePos)) {
+                if (previousWidget != nullptr) {
                     previousWidget->setStyleSheet(QLatin1String(""));
                     previousWidget = nullptr;
                 }
             }
         }
-        else if (watched->objectName() == "ProfileInterface")
-        {
-            if (previousWidget != nullptr)
-            {
+        else if (watched->objectName() == "ProfileInterface") {
+            if (previousWidget != nullptr) {
                 previousWidget->setStyleSheet(QLatin1String(""));
                 previousWidget = nullptr;
             }
@@ -2027,50 +1857,36 @@ bool ProfileInterface::eventFilter(QObject *watched, QEvent *event)
 void ProfileInterface::hoverProfileWidgetCheck()
 {
     ProfileWidget *pWidget = nullptr;
-    QMap<ProfileWidget*, QString>::const_iterator it = widgets.constBegin();
-    QMap<ProfileWidget*, QString>::const_iterator end = widgets.constEnd();
-    while (it != end)
-    {
+    for (auto it = widgets.constBegin(); it != widgets.constEnd(); it++) {
         ProfileWidget *widget = it.key();
-        if (widget->underMouse())
-        {
+        if (widget->underMouse()) {
             pWidget = widget;
             break;
         }
-        it++;
     }
-    if (pWidget != nullptr)
-    {
+    if (pWidget != nullptr) {
         bool styleSheetChanged = false;
-        if (pWidget->getWidgetType() == "SnapmaticWidget")
-        {
-            if (pWidget != previousWidget)
-            {
+        if (pWidget->getWidgetType() == "SnapmaticWidget") {
+            if (pWidget != previousWidget) {
                 pWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
                 styleSheetChanged = true;
             }
         }
-        else if (pWidget->getWidgetType() == "SavegameWidget")
-        {
-            if (pWidget != previousWidget)
-            {
+        else if (pWidget->getWidgetType() == "SavegameWidget") {
+            if (pWidget != previousWidget) {
                 pWidget->setStyleSheet(QString("QFrame#SavegameFrame{background-color:palette(highlight)}QLabel#labSavegameStr{color:palette(highlighted-text)}"));
                 styleSheetChanged = true;
             }
         }
-        if (styleSheetChanged)
-        {
-            if (previousWidget != nullptr)
-            {
+        if (styleSheetChanged) {
+            if (previousWidget != nullptr) {
                 previousWidget->setStyleSheet(QLatin1String(""));
             }
             previousWidget = pWidget;
         }
     }
-    else
-    {
-        if (previousWidget != nullptr)
-        {
+    else {
+        if (previousWidget != nullptr) {
             previousWidget->setStyleSheet(QLatin1String(""));
             previousWidget = nullptr;
         }
@@ -2080,14 +1896,11 @@ void ProfileInterface::hoverProfileWidgetCheck()
 void ProfileInterface::updatePalette()
 {
     ui->saProfile->setStyleSheet(QString("QWidget#saProfileContent{background-color:palette(base)}"));
-    if (previousWidget != nullptr)
-    {
-        if (previousWidget->getWidgetType() == "SnapmaticWidget")
-        {
+    if (previousWidget != nullptr) {
+        if (previousWidget->getWidgetType() == "SnapmaticWidget") {
             previousWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
         }
-        else if (previousWidget->getWidgetType() == "SavegameWidget")
-        {
+        else if (previousWidget->getWidgetType() == "SavegameWidget") {
             previousWidget->setStyleSheet(QString("QFrame#SnapmaticFrame{background-color:palette(highlight)}QLabel#labPicStr{color:palette(highlighted-text)}"));
         }
     }
@@ -2095,11 +1908,9 @@ void ProfileInterface::updatePalette()
 
 bool ProfileInterface::isSupportedImageFile(QString selectedFileName)
 {
-    for (QByteArray imageFormat : QImageReader::supportedImageFormats())
-    {
+    for (const QByteArray &imageFormat : QImageReader::supportedImageFormats()) {
         QString imageFormatStr = QString(".") % QString::fromUtf8(imageFormat).toLower();
-        if (selectedFileName.length() >= imageFormatStr.length() && selectedFileName.toLower().right(imageFormatStr.length()) == imageFormatStr)
-        {
+        if (selectedFileName.length() >= imageFormatStr.length() && selectedFileName.toLower().right(imageFormatStr.length()) == imageFormatStr) {
             return true;
         }
     }
@@ -2108,25 +1919,22 @@ bool ProfileInterface::isSupportedImageFile(QString selectedFileName)
 
 void ProfileInterface::massTool(MassTool tool)
 {
-    switch(tool)
-    {
-    case MassTool::Qualify:
-    {
+    switch(tool) {
+    case MassTool::Qualify: {
         QList<SnapmaticWidget*> snapmaticWidgets;
-        for (ProfileWidget *widget : widgets.keys())
-        {
-            if (widget->isSelected())
-            {
-                if (widget->getWidgetType() == "SnapmaticWidget")
-                {
-                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
-                    snapmaticWidgets += snapmaticWidget;
+        for (const QString &widgetStr : qAsConst(widgets)) {
+            ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+            if (widget != nullptr) {
+                if (widget->isSelected()) {
+                    if (widget->getWidgetType() == "SnapmaticWidget") {
+                        SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                        snapmaticWidgets += snapmaticWidget;
+                    }
                 }
             }
         }
 
-        if (snapmaticWidgets.isEmpty())
-        {
+        if (snapmaticWidgets.isEmpty()) {
             QMessageBox::information(this, tr("Qualify as Avatar"), tr("No Snapmatic pictures are selected"));
             return;
         }
@@ -2153,8 +1961,7 @@ void ProfileInterface::massTool(MassTool tool)
         // Begin Progress
 
         QStringList fails;
-        for (SnapmaticWidget *snapmaticWidget : snapmaticWidgets)
-        {
+        for (SnapmaticWidget *snapmaticWidget : qAsConst(snapmaticWidgets)) {
             // Update Progress
             overallId++;
             pbDialog.setValue(overallId);
@@ -2172,54 +1979,47 @@ void ProfileInterface::massTool(MassTool tool)
             QString currentFilePath = picture->getPictureFilePath();
             QString originalFilePath = picture->getOriginalPictureFilePath();
             QString backupFileName = originalFilePath % ".bak";
-            if (!QFile::exists(backupFileName))
-            {
+            if (!QFile::exists(backupFileName)) {
                 QFile::copy(currentFilePath, backupFileName);
             }
             SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
             picture->setSnapmaticProperties(snapmaticProperties);
-            if (!picture->exportPicture(currentFilePath))
-            {
+            if (!picture->exportPicture(currentFilePath)) {
                 picture->setSnapmaticProperties(fallbackProperties);
                 fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
             }
-            else
-            {
+            else {
                 picture->emitUpdate();
                 QApplication::processEvents();
             }
         }
         pbDialog.close();
-        if (!fails.isEmpty())
-        {
+        if (!fails.isEmpty()) {
             QMessageBox::warning(this, tr("Qualify as Avatar"), tr("%1 failed with...\n\n%2", "Action failed with...").arg(tr("Qualify", "%1 failed with..."), fails.join(", ")));
         }
     }
         break;
-    case MassTool::Players:
-    {
+    case MassTool::Players: {
         QList<SnapmaticWidget*> snapmaticWidgets;
-        for (ProfileWidget *widget : widgets.keys())
-        {
-            if (widget->isSelected())
-            {
-                if (widget->getWidgetType() == "SnapmaticWidget")
-                {
-                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
-                    snapmaticWidgets += snapmaticWidget;
+        for (const QString &widgetStr : qAsConst(widgets)) {
+            ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+            if (widget != nullptr) {
+                if (widget->isSelected()) {
+                    if (widget->getWidgetType() == "SnapmaticWidget") {
+                        SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                        snapmaticWidgets += snapmaticWidget;
+                    }
                 }
             }
         }
 
-        if (snapmaticWidgets.isEmpty())
-        {
+        if (snapmaticWidgets.isEmpty()) {
             QMessageBox::information(this, tr("Change Players..."), tr("No Snapmatic pictures are selected"));
             return;
         }
 
         QStringList players;
-        if (snapmaticWidgets.length() == 1)
-        {
+        if (snapmaticWidgets.length() == 1) {
             players = snapmaticWidgets.at(0)->getPicture()->getSnapmaticProperties().playersList;
         }
 
@@ -2228,9 +2028,7 @@ void ProfileInterface::massTool(MassTool tool)
         playerListDialog->show();
         playerListDialog->exec();
         if (!playerListDialog->isListUpdated())
-        {
             return;
-        }
         players = playerListDialog->getPlayerList();
         delete playerListDialog;
 
@@ -2256,8 +2054,7 @@ void ProfileInterface::massTool(MassTool tool)
         // Begin Progress
 
         QStringList fails;
-        for (SnapmaticWidget *snapmaticWidget : snapmaticWidgets)
-        {
+        for (SnapmaticWidget *snapmaticWidget : qAsConst(snapmaticWidgets)) {
             // Update Progress
             overallId++;
             pbDialog.setValue(overallId);
@@ -2271,54 +2068,47 @@ void ProfileInterface::massTool(MassTool tool)
             QString currentFilePath = picture->getPictureFilePath();
             QString originalFilePath = picture->getOriginalPictureFilePath();
             QString backupFileName = originalFilePath % ".bak";
-            if (!QFile::exists(backupFileName))
-            {
+            if (!QFile::exists(backupFileName)) {
                 QFile::copy(currentFilePath, backupFileName);
             }
             SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
             picture->setSnapmaticProperties(snapmaticProperties);
-            if (!picture->exportPicture(currentFilePath))
-            {
+            if (!picture->exportPicture(currentFilePath)) {
                 picture->setSnapmaticProperties(fallbackProperties);
                 fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
             }
-            else
-            {
+            else {
                 picture->emitUpdate();
                 QApplication::processEvents();
             }
         }
         pbDialog.close();
-        if (!fails.isEmpty())
-        {
+        if (!fails.isEmpty()) {
             QMessageBox::warning(this, tr("Change Players..."), tr("%1 failed with...\n\n%2", "Action failed with...").arg(tr("Change Players", "%1 failed with..."), fails.join(", ")));
         }
     }
         break;
-    case MassTool::Crew:
-    {
+    case MassTool::Crew: {
         QList<SnapmaticWidget*> snapmaticWidgets;
-        for (ProfileWidget *widget : widgets.keys())
-        {
-            if (widget->isSelected())
-            {
-                if (widget->getWidgetType() == "SnapmaticWidget")
-                {
-                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
-                    snapmaticWidgets += snapmaticWidget;
+        for (const QString &widgetStr : qAsConst(widgets)) {
+            ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+            if (widget != nullptr) {
+                if (widget->isSelected()) {
+                    if (widget->getWidgetType() == "SnapmaticWidget") {
+                        SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                        snapmaticWidgets += snapmaticWidget;
+                    }
                 }
             }
         }
 
-        if (snapmaticWidgets.isEmpty())
-        {
+        if (snapmaticWidgets.isEmpty()) {
             QMessageBox::information(this, tr("Change Crew..."), tr("No Snapmatic pictures are selected"));
             return;
         }
 
         int crewID = 0;
-        if (snapmaticWidgets.length() == 1)
-        {
+        if (snapmaticWidgets.length() == 1) {
             crewID = snapmaticWidgets.at(0)->getPicture()->getSnapmaticProperties().crewID;
         }
         {
@@ -2327,40 +2117,32 @@ preSelectionCrewID:
             int indexNum = 0;
             QStringList itemList;
             QStringList crewList = crewDB->getCrews();
-            if (!crewList.contains(QLatin1String("0")))
-            {
+            if (!crewList.contains(QLatin1String("0"))) {
                 crewList += QLatin1String("0");
             }
             crewList.sort();
-            for (QString crew : crewList)
-            {
+            for (QString crew : crewList) {
                 itemList += QString("%1 (%2)").arg(crew, crewDB->getCrewName(crew.toInt()));
             }
-            if (crewList.contains(QString::number(crewID)))
-            {
+            if (crewList.contains(QString::number(crewID))) {
                 indexNum = crewList.indexOf(QString::number(crewID));
             }
             QString newCrew = QInputDialog::getItem(this, QApplication::translate("SnapmaticEditor", "Snapmatic Crew"), QApplication::translate("SnapmaticEditor", "New Snapmatic crew:"), itemList, indexNum, true, &ok, windowFlags()^Qt::Dialog^Qt::WindowMinMaxButtonsHint);
-            if (ok && !newCrew.isEmpty())
-            {
+            if (ok && !newCrew.isEmpty()) {
                 if (newCrew.contains(" ")) newCrew = newCrew.split(" ").at(0);
                 if (newCrew.length() > 10) return;
-                for (QChar crewChar : newCrew)
-                {
-                    if (!crewChar.isNumber())
-                    {
+                for (const QChar &crewChar : newCrew) {
+                    if (!crewChar.isNumber()) {
                         QMessageBox::warning(this, tr("Change Crew..."), tr("Failed to enter a valid Snapmatic Crew ID"));
                         goto preSelectionCrewID;
                     }
                 }
-                if (!crewList.contains(newCrew))
-                {
+                if (!crewList.contains(newCrew)) {
                     crewDB->addCrew(crewID);
                 }
                 crewID = newCrew.toInt();
             }
-            else
-            {
+            else {
                 return;
             }
         }
@@ -2387,8 +2169,7 @@ preSelectionCrewID:
         // Begin Progress
 
         QStringList fails;
-        for (SnapmaticWidget *snapmaticWidget : snapmaticWidgets)
-        {
+        for (SnapmaticWidget *snapmaticWidget : qAsConst(snapmaticWidgets)) {
             // Update Progress
             overallId++;
             pbDialog.setValue(overallId);
@@ -2402,71 +2183,61 @@ preSelectionCrewID:
             QString currentFilePath = picture->getPictureFilePath();
             QString originalFilePath = picture->getOriginalPictureFilePath();
             QString backupFileName = originalFilePath % ".bak";
-            if (!QFile::exists(backupFileName))
-            {
+            if (!QFile::exists(backupFileName)) {
                 QFile::copy(currentFilePath, backupFileName);
             }
             SnapmaticProperties fallbackProperties = picture->getSnapmaticProperties();
             picture->setSnapmaticProperties(snapmaticProperties);
-            if (!picture->exportPicture(currentFilePath))
-            {
+            if (!picture->exportPicture(currentFilePath)) {
                 picture->setSnapmaticProperties(fallbackProperties);
                 fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
             }
-            else
-            {
+            else {
                 picture->emitUpdate();
                 QApplication::processEvents();
             }
         }
         pbDialog.close();
-        if (!fails.isEmpty())
-        {
+        if (!fails.isEmpty()) {
             QMessageBox::warning(this, tr("Change Crew..."), tr("%1 failed with...\n\n%2", "Action failed with...").arg(tr("Change Crew", "%1 failed with..."), fails.join(", ")));
         }
     }
         break;
-    case MassTool::Title:
-    {
+    case MassTool::Title: {
         QList<SnapmaticWidget*> snapmaticWidgets;
-        for (ProfileWidget *widget : widgets.keys())
-        {
-            if (widget->isSelected())
-            {
-                if (widget->getWidgetType() == "SnapmaticWidget")
-                {
-                    SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
-                    snapmaticWidgets += snapmaticWidget;
+        for (const QString &widgetStr : qAsConst(widgets)) {
+            ProfileWidget *widget = widgets.key(widgetStr, nullptr);
+            if (widget != nullptr) {
+                if (widget->isSelected()) {
+                    if (widget->getWidgetType() == "SnapmaticWidget") {
+                        SnapmaticWidget *snapmaticWidget = qobject_cast<SnapmaticWidget*>(widget);
+                        snapmaticWidgets += snapmaticWidget;
+                    }
                 }
             }
         }
 
-        if (snapmaticWidgets.isEmpty())
-        {
+        if (snapmaticWidgets.isEmpty()) {
             QMessageBox::information(this, tr("Change Title..."), tr("No Snapmatic pictures are selected"));
             return;
         }
 
         QString snapmaticTitle;
-        if (snapmaticWidgets.length() == 1)
-        {
+        if (snapmaticWidgets.length() == 1) {
             snapmaticTitle = snapmaticWidgets.at(0)->getPicture()->getPictureTitle();
         }
         {
 preSelectionTitle:
             bool ok;
             QString newTitle = QInputDialog::getText(this, QApplication::translate("SnapmaticEditor", "Snapmatic Title"), QApplication::translate("SnapmaticEditor", "New Snapmatic title:"), QLineEdit::Normal, snapmaticTitle, &ok, windowFlags()^Qt::Dialog^Qt::WindowMinMaxButtonsHint);
-            if (ok && !newTitle.isEmpty())
-            {
-                if (!SnapmaticPicture::verifyTitle(newTitle))
-                {
+            if (ok && !newTitle.isEmpty()) {
+                if (!SnapmaticPicture::verifyTitle(newTitle)) {
                     QMessageBox::warning(this, tr("Change Title..."), tr("Failed to enter a valid Snapmatic title"));
                     goto preSelectionTitle;
                 }
                 snapmaticTitle = newTitle;
             }
-            else
-            {
+            else {
                 return;
             }
         }
@@ -2493,8 +2264,7 @@ preSelectionTitle:
         // Begin Progress
 
         QStringList fails;
-        for (SnapmaticWidget *snapmaticWidget : snapmaticWidgets)
-        {
+        for (SnapmaticWidget *snapmaticWidget : qAsConst(snapmaticWidgets)) {
             // Update Progress
             overallId++;
             pbDialog.setValue(overallId);
@@ -2505,26 +2275,22 @@ preSelectionTitle:
             QString currentFilePath = picture->getPictureFilePath();
             QString originalFilePath = picture->getOriginalPictureFilePath();
             QString backupFileName = originalFilePath % ".bak";
-            if (!QFile::exists(backupFileName))
-            {
+            if (!QFile::exists(backupFileName)) {
                 QFile::copy(currentFilePath, backupFileName);
             }
             QString fallbackTitle = picture->getPictureTitle();
             picture->setPictureTitle(snapmaticTitle);
-            if (!picture->exportPicture(currentFilePath))
-            {
+            if (!picture->exportPicture(currentFilePath)) {
                 picture->setPictureTitle(fallbackTitle);
                 fails << QString("%1 [%2]").arg(picture->getPictureTitle(), picture->getPictureString());
             }
-            else
-            {
+            else {
                 picture->emitUpdate();
                 QApplication::processEvents();
             }
         }
         pbDialog.close();
-        if (!fails.isEmpty())
-        {
+        if (!fails.isEmpty()) {
             QMessageBox::warning(this, tr("Change Title..."), tr("%1 failed with...\n\n%2", "Action failed with...").arg(tr("Change Title", "%1 failed with..."), fails.join(", ")));
         }
     }
