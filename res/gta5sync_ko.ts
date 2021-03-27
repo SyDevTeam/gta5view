@@ -253,7 +253,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="117"/>
         <source>Force Borderless</source>
-        <translation type="unfinished"></translation>
+        <translation>강제 테두리 없는 창</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="129"/>
@@ -2546,17 +2546,17 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.cpp" line="165"/>
         <location filename="../UserInterface.cpp" line="816"/>
         <source>&amp;Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>기부하기(&amp;D)</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="178"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>기부하기</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="186"/>
         <source>Donation methods</source>
-        <translation type="unfinished"></translation>
+        <translation>기부 방법</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="217"/>
