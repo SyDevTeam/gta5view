@@ -148,7 +148,11 @@ QString AppEnv::getPluginsFolder()
 QString AppEnv::getImagesFolder()
 {
 #if defined(GTA5SYNC_QCONF) && defined(GTA5SYNC_CMAKE)
+#ifdef Q_OS_WIN
+    return StringParser::convertBuildedString(GTA5SYNC_SHARE % QLatin1String("/resources"));
+#else
     return StringParser::convertBuildedString(GTA5SYNC_SHARE % QLatin1String("/APPNAME:/resources"));
+#endif
 #else
     return QLatin1String(":/img");
 #endif
