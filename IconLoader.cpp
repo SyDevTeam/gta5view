@@ -30,12 +30,12 @@ QIcon IconLoader::loadingAppIcon()
     QIcon appIcon;
 #if defined(GTA5SYNC_QCONF) && defined(GTA5SYNC_CMAKE)
 #ifdef Q_OS_WIN
-    const QString pattern = AppEnv::getImagesFolder() % QLatin1String(":/gta5view-%1.png");
+    const QString pattern = AppEnv::getImagesFolder() % QLatin1String("/gta5view-%1.png");
 #else
     const QString pattern = AppEnv::getShareFolder() % QLatin1String("/icons/hicolor/%1x%1/apps/de.syping.gta5view.png");
 #endif
 #else
-    const QString pattern = AppEnv::getImagesFolder() % QLatin1String(":/gta5view-%1.png");
+    const QString pattern = AppEnv::getImagesFolder() % QLatin1String("/gta5view-%1.png");
 #endif
     appIcon.addFile(pattern.arg("16"), QSize(16, 16));
     appIcon.addFile(pattern.arg("24"), QSize(24, 24));
