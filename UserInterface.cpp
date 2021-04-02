@@ -170,7 +170,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
         donateAction->setIcon(QIcon::fromTheme("taxes-finances"));
     }
     else {
-        donateAction->setIcon(QIcon(AppEnv::getImagesFolder() % "/donate.svgz"));
+        donateAction->setIcon(QIcon(":/img/donate.svgz"));
     }
     ui->menuHelp->insertAction(ui->actionAbout_gta5sync, donateAction);
     QObject::connect(donateAction, &QAction::triggered, this, [=](){
