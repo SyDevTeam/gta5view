@@ -65,7 +65,7 @@ QString AppEnv::getGameFolder(bool *ok)
         }
     }
 
-    QString GTAV_defaultFolder = StandardPaths::documentsLocation() % QDir::separator() % "Rockstar Games" % QDir::separator() % "GTA V";
+    const QString GTAV_defaultFolder = StandardPaths::documentsLocation() % "/Rockstar Games/GTA V";
     QString GTAV_returnFolder = GTAV_defaultFolder;
 
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
@@ -129,13 +129,13 @@ QString AppEnv::getInLangFolder()
 #ifdef GTA5SYNC_INLANG
     return StringParser::convertBuildedString(GTA5SYNC_INLANG);
 #else
-    return StringParser::convertBuildedString(GTA5SYNC_SHARE % QLatin1String("SEPARATOR:APPNAME:SEPARATOR:translations"));
+    return StringParser::convertBuildedString(GTA5SYNC_SHARE % QLatin1String("/APPNAME:/translations"));
 #endif
 #else
 #ifdef GTA5SYNC_INLANG
     return StringParser::convertBuildedString(GTA5SYNC_INLANG);
 #else
-    return QString(":/tr");
+    return QLatin1String(":/tr");
 #endif
 #endif
 }
@@ -143,6 +143,20 @@ QString AppEnv::getInLangFolder()
 QString AppEnv::getPluginsFolder()
 {
     return StringParser::convertBuildedString(GTA5SYNC_PLUG);
+}
+
+QString AppEnv::getImagesFolder()
+{
+#if defined(GTA5SYNC_QCONF) && defined(GTA5SYNC_CMAKE)
+    return StringParser::convertBuildedString(GTA5SYNC_SHARE % QLatin1String("/APPNAME:/resources"));
+#else
+    return QLatin1String(":/img");
+#endif
+}
+
+QString AppEnv::getShareFolder()
+{
+    return StringParser::convertBuildedString(GTA5SYNC_SHARE);
 }
 
 // Web Stuff

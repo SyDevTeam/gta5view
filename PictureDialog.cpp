@@ -163,10 +163,10 @@ void PictureDialog::setupPictureDialog()
     qreal screenRatio = AppEnv::screenRatio();
     qreal screenRatioPR = AppEnv::screenRatioPR();
     if (screenRatio != 1 || screenRatioPR != 1) {
-        avatarAreaPicture = QImage(":/img/avatararea.png").scaledToHeight(snapmaticResolution.height() * screenRatio * screenRatioPR, Qt::FastTransformation);
+        avatarAreaPicture = QImage(AppEnv::getImagesFolder() % "/avatararea.png").scaledToHeight(snapmaticResolution.height() * screenRatio * screenRatioPR, Qt::FastTransformation);
     }
     else {
-        avatarAreaPicture = QImage(":/img/avatararea.png");
+        avatarAreaPicture = QImage(AppEnv::getImagesFolder() % "/avatararea.png");
     }
     avatarLocX = 145;
     avatarLocY = 66;
@@ -243,8 +243,8 @@ void PictureDialog::addPreviousNextButtons()
 #endif
     uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     uiToolbar->setObjectName("UiToolbar");
-    uiToolbar->addAction(QIcon(":/img/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
-    uiToolbar->addAction(QIcon(":/img/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
+    uiToolbar->addAction(QIcon(AppEnv::getImagesFolder() % "/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
+    uiToolbar->addAction(QIcon(AppEnv::getImagesFolder() % "/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
 #ifdef Q_OS_MAC
 #if QT_VERSION >= 0x050000
     uiToolbar->setStyle(QStyleFactory::create("Fusion"));

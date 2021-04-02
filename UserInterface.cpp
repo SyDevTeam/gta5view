@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2019 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -170,7 +170,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
         donateAction->setIcon(QIcon::fromTheme("taxes-finances"));
     }
     else {
-        donateAction->setIcon(QIcon(":/img/donate.svgz"));
+        donateAction->setIcon(QIcon(AppEnv::getImagesFolder() % "/donate.svgz"));
     }
     ui->menuHelp->insertAction(ui->actionAbout_gta5sync, donateAction);
     QObject::connect(donateAction, &QAction::triggered, this, [=](){
@@ -715,8 +715,8 @@ void UserInterface::showMessages(const QStringList messages)
         nextButton->setIcon(QIcon::fromTheme("go-next"));
     }
     else {
-        backButton->setIcon(QIcon(":/img/back.svgz"));
-        nextButton->setIcon(QIcon(":/img/next.svgz"));
+        backButton->setIcon(QIcon(AppEnv::getImagesFolder() % "/back.svgz"));
+        nextButton->setIcon(QIcon(AppEnv::getImagesFolder() % "/next.svgz"));
     }
     backButton->setEnabled(false);
     if (stackWidget->count() <= 1) {

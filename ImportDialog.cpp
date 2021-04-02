@@ -63,7 +63,7 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     watermarkAvatar = true;
     watermarkPicture = false;
     insideAvatarZone = false;
-    avatarAreaImage = QImage(":/img/avatarareaimport.png");
+    avatarAreaImage = QImage(AppEnv::getImagesFolder() % "/avatarareaimport.png");
     selectedColour = QColor::fromRgb(0, 0, 0, 255);
 
     // Set Icon for OK Button
@@ -323,18 +323,18 @@ void ImportDialog::processWatermark(QPainter *snapmaticPainter)
     }
     // draw watermark
     if (redWatermark) {
-        const QImage viewWatermark = QImage(":/img/watermark_2r.png");
+        const QImage viewWatermark = QImage(AppEnv::getImagesFolder() % "/watermark_2r.png");
         snapmaticPainter->drawImage(snapmaticResolution.width() - viewWatermark.width(), 0, viewWatermark);
     }
     else
     {
-        QImage viewWatermark = QImage(":/img/watermark_2b.png");
+        QImage viewWatermark = QImage(AppEnv::getImagesFolder() % "/watermark_2b.png");
         if (!blackWatermark) {
             viewWatermark.invertPixels(QImage::InvertRgb);
         }
         snapmaticPainter->drawImage(snapmaticResolution.width() - viewWatermark.width(), 0, viewWatermark);
     }
-    QImage textWatermark = QImage(":/img/watermark_1b.png");
+    QImage textWatermark = QImage(AppEnv::getImagesFolder() % "/watermark_1b.png");
     if (!blackWatermark) {
         textWatermark.invertPixels(QImage::InvertRgb);
     }

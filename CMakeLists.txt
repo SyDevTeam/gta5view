@@ -168,8 +168,8 @@ set(GTA5VIEW_TRANSLATIONS
 )
 
 list(APPEND GTA5VIEW_RESOURCES
-    res/app.qrc
     res/global.qrc
+    res/template.qrc
 )
 set_property(SOURCE res/global.qrc PROPERTY AUTORCC_OPTIONS "-threshold;0;-compress;9")
 
@@ -205,6 +205,7 @@ if(QCONF_BUILD)
     )
 else()
     list(APPEND GTA5VIEW_RESOURCES
+        res/img.qrc
         res/tr_g5p.qrc
         res/qt${QT_VERSION_MAJOR}/tr_qt.qrc
     )
@@ -369,5 +370,7 @@ install(FILES res/gta5view-256.png DESTINATION share/icons/hicolor/256x256/apps 
 install(FILES res/gta5view-512.png DESTINATION share/icons/hicolor/512x512/apps RENAME de.syping.gta5view.png)
 install(FILES res/de.syping.gta5view.png DESTINATION share/pixmaps)
 if(QCONF_BUILD)
+    include(res/img.cmake)
+    install(FILES ${GTA5VIEW_IMGFILES} DESTINATION share/gta5view/resources)
     install(FILES ${GTA5VIEW_QMFILES} DESTINATION share/gta5view/translations)
 endif()

@@ -4,7 +4,14 @@
         <file>avatararea.png</file>
         <file>avatarareaimport.png</file>
         <file>back.svgz</file>
-        <file>empty1x16.png</file>
+        <file>flag-de.png</file>
+        <file>flag-fr.png</file>
+        <file>flag-gb.png</file>
+        <file>flag-kr.png</file>
+        <file>flag-ru.png</file>
+        <file>flag-tw.png</file>
+        <file>flag-ua.png</file>
+        <file>flag-us.png</file>
         <file>gta5view-16.png</file>
         <file>gta5view-24.png</file>
         <file>gta5view-32.png</file>
@@ -25,8 +32,5 @@
         <file>watermark_1b.png</file>
         <file>watermark_2b.png</file>
         <file>watermark_2r.png</file>
-    </qresource>
-    <qresource prefix="/template">
-        <file>template.g5e</file>
     </qresource>
 </RCC>

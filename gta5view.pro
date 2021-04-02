@@ -144,7 +144,8 @@ TRANSLATIONS += \
     res/gta5sync_zh_TW.ts
 
 RESOURCES += \
-    res/app.qrc \
+    res/img.qrc \
+    res/template.qrc \
     res/tr_g5p.qrc
 
 DISTFILES += \

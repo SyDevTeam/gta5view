@@ -39,7 +39,9 @@ public:
     static bool setGameFolder(QString gameFolder);
     static QString getExLangFolder();
     static QString getInLangFolder();
+    static QString getImagesFolder();
     static QString getPluginsFolder();
+    static QString getShareFolder();
 
     // Web Stuff
     static QByteArray getUserAgent();

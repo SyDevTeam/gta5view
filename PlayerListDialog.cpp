@@ -19,6 +19,7 @@
 #include "PlayerListDialog.h"
 #include "ui_PlayerListDialog.h"
 #include "AppEnv.h"
+#include <QStringBuilder>
 #include <QFontMetrics>
 #include <QInputDialog>
 #include <QMessageBox>
@@ -94,9 +95,9 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
             ui->cmdMakeAd->setIconSize(iconSize);
         }
 #endif
-        ui->cmdMakeAv->setIcon(QIcon(":/img/back.svgz"));
-        ui->cmdMakeSe->setIcon(QIcon(":/img/next.svgz"));
-        ui->cmdMakeAd->setIcon(QIcon(":/img/add.svgz"));
+        ui->cmdMakeAv->setIcon(QIcon(AppEnv::getImagesFolder() % "/back.svgz"));
+        ui->cmdMakeSe->setIcon(QIcon(AppEnv::getImagesFolder() % "/next.svgz"));
+        ui->cmdMakeAd->setIcon(QIcon(AppEnv::getImagesFolder() % "/add.svgz"));
     }
     buildInterface();
 
@@ -124,7 +125,7 @@ void PlayerListDialog::on_cmdCancel_clicked()
 void PlayerListDialog::buildInterface()
 {
     const QStringList dbPlayers = profileDB->getPlayers();
-    for (const QString &sePlayer : players) {
+    for (const QString &sePlayer : qAsConst(players)) {
         QListWidgetItem *playerItem = new QListWidgetItem(profileDB->getPlayerName(sePlayer));
         playerItem->setData(Qt::UserRole, sePlayer);
         ui->listSePlayers->addItem(playerItem);

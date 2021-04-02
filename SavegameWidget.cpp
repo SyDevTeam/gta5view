@@ -25,6 +25,7 @@
 #include "SavegameCopy.h"
 #include "AppEnv.h"
 #include "config.h"
+#include <QStringBuilder>
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
@@ -59,7 +60,7 @@ SavegameWidget::SavegameWidget(QWidget *parent) :
     ui->labSavegamePic->setFixedSize(48 * screenRatio, 27 * screenRatio);
 
     ui->labSavegamePic->setScaledContents(true);
-    ui->labSavegamePic->setPixmap(QPixmap(":/img/savegame.svgz"));
+    ui->labSavegamePic->setPixmap(QPixmap(AppEnv::getImagesFolder() % "/savegame.svgz"));
 
     QString exportSavegameStr = tr("Export Savegame...");
     Q_UNUSED(exportSavegameStr)

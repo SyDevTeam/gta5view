@@ -604,7 +604,7 @@ Wenn du es als Avatar verwenden möchtest wird es abgetrennt!</translation>
         <translation>&amp;Fertig</translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.cpp" line="64"/>
+        <location filename="../MapLocationDialog.cpp" line="65"/>
         <source>X: %1
 Y: %2</source>
         <comment>X and Y position</comment>
@@ -756,26 +756,26 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.ui" line="422"/>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="614"/>
-        <location filename="../OptionsDialog.cpp" line="625"/>
-        <location filename="../OptionsDialog.cpp" line="626"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="637"/>
+        <location filename="../OptionsDialog.cpp" line="604"/>
+        <location filename="../OptionsDialog.cpp" line="605"/>
+        <location filename="../OptionsDialog.cpp" line="616"/>
+        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="627"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
         <source>Found: %1</source>
         <translation>Gefunden: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
         <location filename="../OptionsDialog.ui" line="429"/>
-        <location filename="../OptionsDialog.cpp" line="616"/>
-        <location filename="../OptionsDialog.cpp" line="619"/>
-        <location filename="../OptionsDialog.cpp" line="629"/>
-        <location filename="../OptionsDialog.cpp" line="632"/>
+        <location filename="../OptionsDialog.cpp" line="607"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
+        <location filename="../OptionsDialog.cpp" line="620"/>
+        <location filename="../OptionsDialog.cpp" line="623"/>
+        <location filename="../OptionsDialog.cpp" line="630"/>
+        <location filename="../OptionsDialog.cpp" line="633"/>
+        <location filename="../OptionsDialog.cpp" line="636"/>
         <location filename="../OptionsDialog.cpp" line="639"/>
-        <location filename="../OptionsDialog.cpp" line="642"/>
-        <location filename="../OptionsDialog.cpp" line="645"/>
-        <location filename="../OptionsDialog.cpp" line="648"/>
         <source>Language: %1</source>
         <translation>Sprache: %1</translation>
     </message>
@@ -796,7 +796,7 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
-        <location filename="../OptionsDialog.cpp" line="580"/>
+        <location filename="../OptionsDialog.cpp" line="571"/>
         <source>Participate in %1 User Statistics</source>
         <translation>An %1 Benutzerstatistik teilnehmen</translation>
     </message>
@@ -827,8 +827,8 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
-        <location filename="../OptionsDialog.cpp" line="594"/>
-        <location filename="../OptionsDialog.cpp" line="597"/>
+        <location filename="../OptionsDialog.cpp" line="585"/>
+        <location filename="../OptionsDialog.cpp" line="588"/>
         <source>Participation ID: %1</source>
         <translation>Teilnahme ID: %1</translation>
     </message>
@@ -884,8 +884,8 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="611"/>
         <location filename="../OptionsDialog.ui" line="633"/>
-        <location filename="../OptionsDialog.cpp" line="230"/>
-        <location filename="../OptionsDialog.cpp" line="274"/>
+        <location filename="../OptionsDialog.cpp" line="224"/>
+        <location filename="../OptionsDialog.cpp" line="265"/>
         <source>Current: %1</source>
         <translation>Aktuell: %1</translation>
     </message>
@@ -922,95 +922,95 @@ Y: %2</translation>
         <translation>Abbre&amp;chen</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="479"/>
+        <location filename="../OptionsDialog.cpp" line="470"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="174"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation>System</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="188"/>
+        <location filename="../OptionsDialog.cpp" line="179"/>
         <source>%1 (Game language)</source>
         <comment>Next closest language compared to the Game settings</comment>
         <translation>%1 (Spielsprache)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="192"/>
-        <location filename="../OptionsDialog.cpp" line="195"/>
+        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="185"/>
         <source>%1 (Closest to Interface)</source>
         <comment>Next closest language compared to the Interface</comment>
         <translation>%1 (Näheste zur Oberfläche)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="188"/>
-        <location filename="../OptionsDialog.cpp" line="192"/>
-        <location filename="../OptionsDialog.cpp" line="195"/>
+        <location filename="../OptionsDialog.cpp" line="179"/>
+        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="185"/>
         <source>Auto</source>
         <comment>Automatic language choice.</comment>
         <translation>Automatisch</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="174"/>
         <source>%1 (Language priority)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation>%1 (Sprachenpriorität)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="479"/>
+        <location filename="../OptionsDialog.cpp" line="470"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>Der eigene Ordner wird initialisiert sobald du %1 neugestartet hast.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="581"/>
+        <location filename="../OptionsDialog.cpp" line="572"/>
         <source>View %1 User Statistics Online</source>
         <translation>%1 Benutzerstatistik Online ansehen</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="597"/>
+        <location filename="../OptionsDialog.cpp" line="588"/>
         <source>Not registered</source>
         <translation>Nicht registriert</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="626"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="637"/>
+        <location filename="../OptionsDialog.cpp" line="604"/>
+        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="627"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
         <source>Yes</source>
         <translation>Ja</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="614"/>
-        <location filename="../OptionsDialog.cpp" line="625"/>
+        <location filename="../OptionsDialog.cpp" line="605"/>
+        <location filename="../OptionsDialog.cpp" line="616"/>
         <source>No</source>
         <translation>Nein</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="619"/>
-        <location filename="../OptionsDialog.cpp" line="642"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
+        <location filename="../OptionsDialog.cpp" line="633"/>
         <source>OS defined</source>
         <translation>OS-defined</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="632"/>
-        <location filename="../OptionsDialog.cpp" line="648"/>
+        <location filename="../OptionsDialog.cpp" line="623"/>
+        <location filename="../OptionsDialog.cpp" line="639"/>
         <source>Steam defined</source>
         <translation>Steam-definiert</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="489"/>
+        <location filename="../OptionsDialog.cpp" line="480"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Kein Profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="496"/>
-        <location filename="../OptionsDialog.cpp" line="499"/>
-        <location filename="../OptionsDialog.cpp" line="501"/>
+        <location filename="../OptionsDialog.cpp" line="487"/>
+        <location filename="../OptionsDialog.cpp" line="490"/>
+        <location filename="../OptionsDialog.cpp" line="492"/>
         <source>Profile: %1</source>
         <translation>Profil: %1</translation>
     </message>
@@ -1265,28 +1265,28 @@ Drücke 1 für Standardmodus</translation>
         <translation>Abbre&amp;chen</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="159"/>
+        <location filename="../PlayerListDialog.cpp" line="160"/>
         <source>Add Players...</source>
         <translation>Spieler hinzufügen...</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="159"/>
+        <location filename="../PlayerListDialog.cpp" line="160"/>
         <source>Failed to add more Players because the limit of Players are %1!</source>
         <translation>Fehlgeschlagen beim Hinzufügen von mehr Spielern weil der Limit von Spielern %1 ist!</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="175"/>
-        <location filename="../PlayerListDialog.cpp" line="194"/>
+        <location filename="../PlayerListDialog.cpp" line="176"/>
+        <location filename="../PlayerListDialog.cpp" line="195"/>
         <source>Add Player...</source>
         <translation>Spieler hinzufügen...</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="175"/>
+        <location filename="../PlayerListDialog.cpp" line="176"/>
         <source>Enter Social Club Player ID</source>
         <translation>Social Club Spieler ID eingeben</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="194"/>
+        <location filename="../PlayerListDialog.cpp" line="195"/>
         <source>Failed to add Player %1 because Player %1 is already added!</source>
         <translation>Fehlgeschlagen beim Hinzufügen vom Spieler %1 weil Spieler %1 bereits hinzugefügt wurde!</translation>
     </message>
@@ -1753,7 +1753,7 @@ Drücke 1 für Standardmodus</translation>
         <translation>Savegame löschen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="64"/>
+        <location filename="../SavegameWidget.cpp" line="65"/>
         <source>Export Savegame...</source>
         <translation>Spielstand exportieren...</translation>
     </message>
@@ -1763,45 +1763,45 @@ Drücke 1 für Standardmodus</translation>
         <translation>SPIELSTAND %3 - %1&lt;br&gt;%2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="96"/>
         <location filename="../SavegameWidget.cpp" line="97"/>
+        <location filename="../SavegameWidget.cpp" line="98"/>
         <source>WRONG FORMAT</source>
         <translation>FALSCHES FORMAT</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="67"/>
-        <location filename="../SavegameWidget.cpp" line="124"/>
+        <location filename="../SavegameWidget.cpp" line="68"/>
+        <location filename="../SavegameWidget.cpp" line="125"/>
         <source>AUTOSAVE - %1
 %2</source>
         <translation>AUTOSAVE - %1
 %2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="68"/>
-        <location filename="../SavegameWidget.cpp" line="125"/>
+        <location filename="../SavegameWidget.cpp" line="69"/>
+        <location filename="../SavegameWidget.cpp" line="126"/>
         <source>SAVE %3 - %1
 %2</source>
         <translation>SPIELSTAND %3 - %1
 %2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="118"/>
+        <location filename="../SavegameWidget.cpp" line="119"/>
         <source>UNKNOWN</source>
         <translation>UNKNOWN</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="138"/>
+        <location filename="../SavegameWidget.cpp" line="139"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>Bist du sicher %1 von deinen Spielständen zu löschen?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="138"/>
-        <location filename="../SavegameWidget.cpp" line="191"/>
+        <location filename="../SavegameWidget.cpp" line="139"/>
+        <location filename="../SavegameWidget.cpp" line="192"/>
         <source>Delete Savegame</source>
         <translation>Savegame löschen</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="191"/>
+        <location filename="../SavegameWidget.cpp" line="192"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>Fehlgeschlagen beim Löschen %1 von deinen Spielständen</translation>
     </message>
@@ -2470,7 +2470,7 @@ Drücke 1 für Standardmodus</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="708"/>
+        <location filename="../OptionsDialog.cpp" line="699"/>
         <location filename="../UserInterface.cpp" line="269"/>
         <location filename="../UserInterface.cpp" line="787"/>
         <source>Select GTA V Folder...</source>

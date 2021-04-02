@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -17,34 +17,45 @@
 *****************************************************************************/
 
 #include "IconLoader.h"
+#include "AppEnv.h"
+#include <QStringBuilder>
 #include <QIcon>
 
 IconLoader::IconLoader()
 {
-
 }
 
 QIcon IconLoader::loadingAppIcon()
 {
     QIcon appIcon;
-    appIcon.addFile(":/img/gta5view-16.png", QSize(16, 16));
-    appIcon.addFile(":/img/gta5view-24.png", QSize(24, 24));
-    appIcon.addFile(":/img/gta5view-32.png", QSize(32, 32));
-    appIcon.addFile(":/img/gta5view-40.png", QSize(40, 40));
-    appIcon.addFile(":/img/gta5view-48.png", QSize(48, 48));
-    appIcon.addFile(":/img/gta5view-64.png", QSize(64, 64));
-    appIcon.addFile(":/img/gta5view-96.png", QSize(96, 96));
-    appIcon.addFile(":/img/gta5view-128.png", QSize(128, 128));
-    appIcon.addFile(":/img/gta5view-256.png", QSize(256, 256));
+#if defined(GTA5SYNC_QCONF) && defined(GTA5SYNC_CMAKE)
+#ifdef Q_OS_WIN
+    const QString pattern = AppEnv::getImagesFolder() % QLatin1String(":/gta5view-%1.png");
+#else
+    const QString pattern = AppEnv::getShareFolder() % QLatin1String("/icons/hicolor/%1x%1/apps/de.syping.gta5view.png");
+#endif
+#else
+    const QString pattern = AppEnv::getImagesFolder() % QLatin1String(":/gta5view-%1.png");
+#endif
+    appIcon.addFile(pattern.arg("16"), QSize(16, 16));
+    appIcon.addFile(pattern.arg("24"), QSize(24, 24));
+    appIcon.addFile(pattern.arg("32"), QSize(32, 32));
+    appIcon.addFile(pattern.arg("40"), QSize(40, 40));
+    appIcon.addFile(pattern.arg("48"), QSize(48, 48));
+    appIcon.addFile(pattern.arg("64"), QSize(64, 64));
+    appIcon.addFile(pattern.arg("96"), QSize(96, 96));
+    appIcon.addFile(pattern.arg("128"), QSize(128, 128));
+    appIcon.addFile(pattern.arg("256"), QSize(256, 256));
     return appIcon;
 }
 
 QIcon IconLoader::loadingPointmakerIcon()
 {
     QIcon pointmakerIcon;
-    pointmakerIcon.addFile(":/img/pointmaker-8.png", QSize(8, 8));
-    pointmakerIcon.addFile(":/img/pointmaker-16.png", QSize(16, 16));
-    pointmakerIcon.addFile(":/img/pointmaker-24.png", QSize(24, 24));
-    pointmakerIcon.addFile(":/img/pointmaker-32.png", QSize(32, 32));
+    const QString pattern = AppEnv::getImagesFolder() % QLatin1String("/pointmaker-%1.png");
+    pointmakerIcon.addFile(pattern.arg("8"), QSize(8, 8));
+    pointmakerIcon.addFile(pattern.arg("16"), QSize(16, 16));
+    pointmakerIcon.addFile(pattern.arg("24"), QSize(24, 24));
+    pointmakerIcon.addFile(pattern.arg("32"), QSize(32, 32));
     return pointmakerIcon;
 }

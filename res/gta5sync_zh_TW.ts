@@ -602,7 +602,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <translation>完成(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../MapLocationDialog.cpp" line="64"/>
+        <location filename="../MapLocationDialog.cpp" line="65"/>
         <source>X: %1
 Y: %2</source>
         <comment>X and Y position</comment>
@@ -754,26 +754,26 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.ui" line="422"/>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="614"/>
-        <location filename="../OptionsDialog.cpp" line="625"/>
-        <location filename="../OptionsDialog.cpp" line="626"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="637"/>
+        <location filename="../OptionsDialog.cpp" line="604"/>
+        <location filename="../OptionsDialog.cpp" line="605"/>
+        <location filename="../OptionsDialog.cpp" line="616"/>
+        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="627"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
         <source>Found: %1</source>
         <translation>找到: %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
         <location filename="../OptionsDialog.ui" line="429"/>
-        <location filename="../OptionsDialog.cpp" line="616"/>
-        <location filename="../OptionsDialog.cpp" line="619"/>
-        <location filename="../OptionsDialog.cpp" line="629"/>
-        <location filename="../OptionsDialog.cpp" line="632"/>
+        <location filename="../OptionsDialog.cpp" line="607"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
+        <location filename="../OptionsDialog.cpp" line="620"/>
+        <location filename="../OptionsDialog.cpp" line="623"/>
+        <location filename="../OptionsDialog.cpp" line="630"/>
+        <location filename="../OptionsDialog.cpp" line="633"/>
+        <location filename="../OptionsDialog.cpp" line="636"/>
         <location filename="../OptionsDialog.cpp" line="639"/>
-        <location filename="../OptionsDialog.cpp" line="642"/>
-        <location filename="../OptionsDialog.cpp" line="645"/>
-        <location filename="../OptionsDialog.cpp" line="648"/>
         <source>Language: %1</source>
         <translation>語言: %1</translation>
     </message>
@@ -794,7 +794,7 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
-        <location filename="../OptionsDialog.cpp" line="580"/>
+        <location filename="../OptionsDialog.cpp" line="571"/>
         <source>Participate in %1 User Statistics</source>
         <translation>參與 %1 使用者統計</translation>
     </message>
@@ -830,8 +830,8 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
-        <location filename="../OptionsDialog.cpp" line="594"/>
-        <location filename="../OptionsDialog.cpp" line="597"/>
+        <location filename="../OptionsDialog.cpp" line="585"/>
+        <location filename="../OptionsDialog.cpp" line="588"/>
         <source>Participation ID: %1</source>
         <translation>參與 ID: %1</translation>
     </message>
@@ -853,8 +853,8 @@ Y: %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="611"/>
         <location filename="../OptionsDialog.ui" line="633"/>
-        <location filename="../OptionsDialog.cpp" line="230"/>
-        <location filename="../OptionsDialog.cpp" line="274"/>
+        <location filename="../OptionsDialog.cpp" line="224"/>
+        <location filename="../OptionsDialog.cpp" line="265"/>
         <source>Current: %1</source>
         <translation>目前: %1</translation>
     </message>
@@ -920,95 +920,95 @@ Y: %2</translation>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="174"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation>系統</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="192"/>
-        <location filename="../OptionsDialog.cpp" line="195"/>
+        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="185"/>
         <source>%1 (Closest to Interface)</source>
         <comment>Next closest language compared to the Interface</comment>
         <translation>%1 (與介面接近的語言)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="188"/>
-        <location filename="../OptionsDialog.cpp" line="192"/>
-        <location filename="../OptionsDialog.cpp" line="195"/>
+        <location filename="../OptionsDialog.cpp" line="179"/>
+        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="185"/>
         <source>Auto</source>
         <comment>Automatic language choice.</comment>
         <translation>自動</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="182"/>
+        <location filename="../OptionsDialog.cpp" line="174"/>
         <source>%1 (Language priority)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation>%1 (語言優先)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="188"/>
+        <location filename="../OptionsDialog.cpp" line="179"/>
         <source>%1 (Game language)</source>
         <comment>Next closest language compared to the Game settings</comment>
         <translation>%1 (遊戲語言)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="479"/>
+        <location filename="../OptionsDialog.cpp" line="470"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="479"/>
+        <location filename="../OptionsDialog.cpp" line="470"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>自訂資料夾將在 %1 重新啟動後初始化.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="489"/>
+        <location filename="../OptionsDialog.cpp" line="480"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>無</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="496"/>
-        <location filename="../OptionsDialog.cpp" line="499"/>
-        <location filename="../OptionsDialog.cpp" line="501"/>
+        <location filename="../OptionsDialog.cpp" line="487"/>
+        <location filename="../OptionsDialog.cpp" line="490"/>
+        <location filename="../OptionsDialog.cpp" line="492"/>
         <source>Profile: %1</source>
         <translation>設定檔: %1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="581"/>
+        <location filename="../OptionsDialog.cpp" line="572"/>
         <source>View %1 User Statistics Online</source>
         <translation>檢視 %1 使用者統計資訊</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="597"/>
+        <location filename="../OptionsDialog.cpp" line="588"/>
         <source>Not registered</source>
         <translation>未註冊參與</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="613"/>
-        <location filename="../OptionsDialog.cpp" line="626"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="637"/>
+        <location filename="../OptionsDialog.cpp" line="604"/>
+        <location filename="../OptionsDialog.cpp" line="617"/>
+        <location filename="../OptionsDialog.cpp" line="627"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
         <source>Yes</source>
         <translation>是</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="614"/>
-        <location filename="../OptionsDialog.cpp" line="625"/>
+        <location filename="../OptionsDialog.cpp" line="605"/>
+        <location filename="../OptionsDialog.cpp" line="616"/>
         <source>No</source>
         <translation>否</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="619"/>
-        <location filename="../OptionsDialog.cpp" line="642"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
+        <location filename="../OptionsDialog.cpp" line="633"/>
         <source>OS defined</source>
         <translation>系統定義</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="632"/>
-        <location filename="../OptionsDialog.cpp" line="648"/>
+        <location filename="../OptionsDialog.cpp" line="623"/>
+        <location filename="../OptionsDialog.cpp" line="639"/>
         <source>Steam defined</source>
         <translation>Steam 定義</translation>
     </message>
@@ -1263,28 +1263,28 @@ Press 1 for Default View</source>
         <translation>取消(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="159"/>
+        <location filename="../PlayerListDialog.cpp" line="160"/>
         <source>Add Players...</source>
         <translation>新增玩家...</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="159"/>
+        <location filename="../PlayerListDialog.cpp" line="160"/>
         <source>Failed to add more Players because the limit of Players are %1!</source>
         <translation>因為數量限制 %1，無法新增更多玩家!</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="175"/>
-        <location filename="../PlayerListDialog.cpp" line="194"/>
+        <location filename="../PlayerListDialog.cpp" line="176"/>
+        <location filename="../PlayerListDialog.cpp" line="195"/>
         <source>Add Player...</source>
         <translation>新增玩家...</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="175"/>
+        <location filename="../PlayerListDialog.cpp" line="176"/>
         <source>Enter Social Club Player ID</source>
         <translation>輸入玩家的 Social Club ID</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="194"/>
+        <location filename="../PlayerListDialog.cpp" line="195"/>
         <source>Failed to add Player %1 because Player %1 is already added!</source>
         <translation>新增 %1 失敗，因為 %1 已被新增!</translation>
     </message>
@@ -1844,50 +1844,50 @@ Press 1 for Default View</source>
         <translation>沒有選擇有效的檔案</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="64"/>
+        <location filename="../SavegameWidget.cpp" line="65"/>
         <source>Export Savegame...</source>
         <translation>匯出遊戲存檔...</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="67"/>
-        <location filename="../SavegameWidget.cpp" line="124"/>
+        <location filename="../SavegameWidget.cpp" line="68"/>
+        <location filename="../SavegameWidget.cpp" line="125"/>
         <source>AUTOSAVE - %1
 %2</source>
         <translation>自動存檔 - %1
 %2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="68"/>
-        <location filename="../SavegameWidget.cpp" line="125"/>
+        <location filename="../SavegameWidget.cpp" line="69"/>
+        <location filename="../SavegameWidget.cpp" line="126"/>
         <source>SAVE %3 - %1
 %2</source>
         <translation>存檔 %3 - %1
 %2</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="96"/>
         <location filename="../SavegameWidget.cpp" line="97"/>
+        <location filename="../SavegameWidget.cpp" line="98"/>
         <source>WRONG FORMAT</source>
         <translation>格式錯誤</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="118"/>
+        <location filename="../SavegameWidget.cpp" line="119"/>
         <source>UNKNOWN</source>
         <translation>未知</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="138"/>
-        <location filename="../SavegameWidget.cpp" line="191"/>
+        <location filename="../SavegameWidget.cpp" line="139"/>
+        <location filename="../SavegameWidget.cpp" line="192"/>
         <source>Delete Savegame</source>
         <translation>刪除存檔</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="138"/>
+        <location filename="../SavegameWidget.cpp" line="139"/>
         <source>Are you sure to delete %1 from your savegames?</source>
         <translation>你確定要刪除存檔 %1?</translation>
     </message>
     <message>
-        <location filename="../SavegameWidget.cpp" line="191"/>
+        <location filename="../SavegameWidget.cpp" line="192"/>
         <source>Failed at deleting %1 from your savegames</source>
         <translation>刪除存檔 %1 失敗</translation>
     </message>
@@ -2438,7 +2438,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="708"/>
+        <location filename="../OptionsDialog.cpp" line="699"/>
         <location filename="../UserInterface.cpp" line="269"/>
         <location filename="../UserInterface.cpp" line="787"/>
         <source>Select GTA V Folder...</source>

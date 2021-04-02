@@ -21,6 +21,7 @@
 #include "TranslationClass.h"
 #include "StandardPaths.h"
 #include "UserInterface.h"
+#include "wrapper.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
@@ -92,22 +93,18 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->rbPicDefaultRes->setText(ui->rbPicDefaultRes->text().arg(QString::number(defExportSize.width()), QString::number(defExportSize.height())));
 
     // Set Icon for OK Button
-    if (QIcon::hasThemeIcon("dialog-ok"))
-    {
+    if (QIcon::hasThemeIcon("dialog-ok")) {
         ui->cmdOK->setIcon(QIcon::fromTheme("dialog-ok"));
     }
-    else if (QIcon::hasThemeIcon("gtk-ok"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-ok")) {
         ui->cmdOK->setIcon(QIcon::fromTheme("gtk-ok"));
     }
 
     // Set Icon for Cancel Button
-    if (QIcon::hasThemeIcon("dialog-cancel"))
-    {
+    if (QIcon::hasThemeIcon("dialog-cancel")) {
         ui->cmdCancel->setIcon(QIcon::fromTheme("dialog-cancel"));
     }
-    else if (QIcon::hasThemeIcon("gtk-cancel"))
-    {
+    else if (QIcon::hasThemeIcon("gtk-cancel")) {
         ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
     }
 
@@ -145,15 +142,11 @@ void OptionsDialog::setupTreeWidget()
 {
     const QStringList players = profileDB->getPlayers();
     if (players.length() != 0) {
-        QStringList::const_iterator it = players.constBegin();
-        QStringList::const_iterator end = players.constEnd();
-        while (it != end)
-        {
+        for (auto it = players.constBegin(); it != players.constEnd(); it++) {
             bool ok;
             int playerID = it->toInt(&ok);
-            if (ok)
-            {
-                QString playerName = profileDB->getPlayerName(playerID);
+            if (ok) {
+                const QString playerName = profileDB->getPlayerName(playerID);
 
                 QStringList playerTreeViewList;
                 playerTreeViewList += *it;
@@ -163,7 +156,6 @@ void OptionsDialog::setupTreeWidget()
                 ui->twPlayers->addTopLevelItem(playerItem);
                 playerItems += playerItem;
             }
-            it++;
         }
         ui->twPlayers->sortItems(1, Qt::AscendingOrder);
     }
@@ -179,20 +171,18 @@ void OptionsDialog::setupLanguageBox()
     currentAreaLanguage = settings->value("AreaLanguage", "Auto").toString();
     settings->endGroup();
 
-    QString cbSysStr = tr("%1 (Language priority)", "First language a person can talk with a different person/application. \"Native\" or \"Not Native\".").arg(tr("System",
+    const QString cbSysStr = tr("%1 (Language priority)", "First language a person can talk with a different person/application. \"Native\" or \"Not Native\".").arg(tr("System",
                                                                                                                                                                   "System in context of System default"));
 #ifdef Q_OS_WIN
     QString cbAutoStr;
-    if (AppEnv::getGameLanguage(AppEnv::getGameVersion()) != GameLanguage::Undefined)
-    {
+    if (AppEnv::getGameLanguage(AppEnv::getGameVersion()) != GameLanguage::Undefined) {
         cbAutoStr = tr("%1 (Game language)", "Next closest language compared to the Game settings").arg(tr("Auto", "Automatic language choice."));
     }
-    else
-    {
+    else {
         cbAutoStr = tr("%1 (Closest to Interface)", "Next closest language compared to the Interface").arg(tr("Auto", "Automatic language choice."));
     }
 #else
-    QString cbAutoStr = tr("%1 (Closest to Interface)", "Next closest language compared to the Interface").arg(tr("Auto", "Automatic language choice."));
+    const QString cbAutoStr = tr("%1 (Closest to Interface)", "Next closest language compared to the Interface").arg(tr("Auto", "Automatic language choice."));
 #endif
     ui->cbLanguage->addItem(cbSysStr, "System");
     ui->cbAreaLanguage->addItem(cbAutoStr, "Auto");
@@ -206,15 +196,18 @@ void OptionsDialog::setupLanguageBox()
     availableLanguages.removeDuplicates();
     availableLanguages.sort();
 
-    for (QString lang : availableLanguages)
-    {
+    for (const QString &lang : qAsConst(availableLanguages)) {
         QLocale langLocale(lang);
-        QString cbLangStr = langLocale.nativeLanguageName() % " (" % langLocale.nativeCountryName() % ") [" % lang % "]";
-        QString langIconStr = "flag-" % TranslationClass::getCountryCode(langLocale);
+        const QString cbLangStr = langLocale.nativeLanguageName() % " (" % langLocale.nativeCountryName() % ") [" % lang % "]";
+        const QString langIconPath = AppEnv::getImagesFolder() % "/flag-" % TranslationClass::getCountryCode(langLocale) % ".png";
 
-        ui->cbLanguage->addItem(QIcon::fromTheme(langIconStr), cbLangStr, lang);
-        if (currentLanguage == lang)
-        {
+        if (QFile::exists(langIconPath)) {
+            ui->cbLanguage->addItem(QIcon(langIconPath), cbLangStr, lang);
+        }
+        else {
+            ui->cbLanguage->addItem(cbLangStr, lang);
+        }
+        if (currentLanguage == lang) {
 #if QT_VERSION >= 0x050000
             ui->cbLanguage->setCurrentText(cbLangStr);
 #else
@@ -225,7 +218,8 @@ void OptionsDialog::setupLanguageBox()
     }
 
     QString aCurrentLanguage = QString("en_GB");
-    if (Translator->isLanguageLoaded()) { aCurrentLanguage = Translator->getCurrentLanguage(); }
+    if (Translator->isLanguageLoaded())
+        aCurrentLanguage = Translator->getCurrentLanguage();
     QLocale currentLocale = QLocale(aCurrentLanguage);
     ui->labCurrentLanguage->setText(tr("Current: %1").arg(currentLocale.nativeLanguageName() % " (" % currentLocale.nativeCountryName() % ") [" % aCurrentLanguage % "]"));
 
@@ -234,7 +228,7 @@ void OptionsDialog::setupLanguageBox()
     availableLanguages.removeDuplicates();
     availableLanguages.sort();
 
-    for (QString lang : availableLanguages) {
+    for (const QString &lang : qAsConst(availableLanguages)) {
         // correcting Language Location if possible
         QString aLang = lang;
         if (QFile::exists(":/global/global." % lang % ".loc")) {
@@ -246,10 +240,8 @@ void OptionsDialog::setupLanguageBox()
         }
 
         QLocale langLocale(aLang);
-        QString cbLangStr = langLocale.nativeLanguageName() % " (" % langLocale.nativeCountryName() % ") [" % aLang % "]";
-        QString langIconStr = "flag-" % TranslationClass::getCountryCode(langLocale);
-
-        ui->cbAreaLanguage->addItem(QIcon::fromTheme(langIconStr), cbLangStr, lang);
+        const QString cbLangStr = langLocale.nativeLanguageName() % " (" % langLocale.nativeCountryName() % ") [" % aLang % "]";
+        ui->cbAreaLanguage->addItem(cbLangStr, lang);
         if (currentAreaLanguage == lang) {
 #if QT_VERSION >= 0x050000
             ui->cbAreaLanguage->setCurrentText(cbLangStr);
@@ -264,8 +256,7 @@ void OptionsDialog::setupLanguageBox()
     if (QFile::exists(":/global/global." % aCurrentAreaLanguage % ".loc")) {
         qDebug() << "locFile found";
         QFile locFile(":/global/global." % aCurrentAreaLanguage % ".loc");
-        if (locFile.open(QFile::ReadOnly))
-        {
+        if (locFile.open(QFile::ReadOnly)) {
             aCurrentAreaLanguage = QString::fromUtf8(locFile.readLine()).trimmed();
             locFile.close();
         }
@@ -492,7 +483,7 @@ void OptionsDialog::setupDefaultProfile()
 
 void OptionsDialog::commitProfiles(const QStringList &profiles)
 {
-    for (QString profile : profiles) {
+    for (const QString &profile : profiles) {
         ui->cbProfiles->addItem(tr("Profile: %1").arg(profile), profile);
         if (defaultProfile == profile) {
 #if QT_VERSION >= 0x050000
@@ -705,8 +696,8 @@ void OptionsDialog::setupSnapmaticPictureViewer()
 
 void OptionsDialog::on_cmdExploreFolder_clicked()
 {
-    QString GTAV_Folder = QFileDialog::getExistingDirectory(this, UserInterface::tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-    if (QFileInfo(GTAV_Folder).exists()) {
+    const QString GTAV_Folder = QFileDialog::getExistingDirectory(this, UserInterface::tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+    if (QDir(GTAV_Folder).exists()) {
         ui->txtFolder->setText(GTAV_Folder);
     }
 }

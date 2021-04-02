@@ -65,7 +65,11 @@
 
 #ifdef GTA5SYNC_QCONF
 #ifndef GTA5SYNC_SHARE
-#define GTA5SYNC_SHARE "RUNDIR:SEPARATOR:..SEPARATOR:share"
+#ifdef Q_OS_WIN
+#define GTA5SYNC_SHARE "RUNDIR:"
+#else
+#define GTA5SYNC_SHARE "RUNDIR:/../share"
+#endif
 #endif
 #ifndef GTA5SYNC_LANG
 #define GTA5SYNC_LANG "QCONFLANG:"
@@ -83,10 +87,10 @@
 #define GTA5SYNC_SHARE "RUNDIR:"
 #endif
 #ifndef GTA5SYNC_LANG
-#define GTA5SYNC_LANG "SHAREDDIR:SEPARATOR:lang"
+#define GTA5SYNC_LANG "SHAREDDIR:/lang"
 #endif
 #ifndef GTA5SYNC_PLUG
-#define GTA5SYNC_PLUG "RUNDIR:SEPARATOR:plugins"
+#define GTA5SYNC_PLUG "RUNDIR:/plugins"
 #endif
 #endif
 

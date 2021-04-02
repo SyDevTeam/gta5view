@@ -20,6 +20,7 @@
 #include "ui_MapLocationDialog.h"
 #include "IconLoader.h"
 #include "AppEnv.h"
+#include <QStringBuilder>
 #include <QPainter>
 #include <QStyle>
 
@@ -79,10 +80,10 @@ void MapLocationDialog::setCayoPerico(bool isCayoPerico)
         ui->hlMapDialog->removeItem(ui->vlPosLayout);
         ui->hlMapDialog->addLayout(ui->vlPosLayout);
         ui->labPos->setAlignment(Qt::AlignRight);
-        mapImage = QImage(":/img/mapcayoperico.jpg");
+        mapImage = QImage(AppEnv::getImagesFolder() % "/mapcayoperico.jpg");
     }
     else {
-        mapImage = QImage(":/img/mappreview.jpg");
+        mapImage = QImage(AppEnv::getImagesFolder() % "/mappreview.jpg");
     }
     drawPointOnMap(xpos_old, ypos_old);
 }
