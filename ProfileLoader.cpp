@@ -30,6 +30,7 @@
 #include <QList>
 #else
 #include "sys/types.h"
+#include "sys/stat.h"
 #include "dirent.h"
 #endif
 
@@ -47,7 +48,7 @@ void ProfileLoader::run()
 
 #ifdef Q_OS_WIN
     QDir dir(profileFolder);
-    const QStringList files = dir.entryList();
+    const QStringList files = dir.entryList(QDir::Files);
     for (const QString &fileName : files) {
         if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
             savegameFiles << fileName;
@@ -63,13 +64,18 @@ void ProfileLoader::run()
     struct dirent *dp;
     while ((dp = readdir(dirp)) != 0) {
         const QString fileName = QString::fromUtf8(dp->d_name);
-        if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
-            savegameFiles << fileName;
-            maximumV++;
-        }
-        if (fileName.startsWith("PGTA5") && !fileName.endsWith(".bak")) {
-            snapmaticPics << fileName;
-            maximumV++;
+        const QString filePath = profileFolder % "/" % fileName;
+        struct stat fileStat;
+        stat(filePath.toUtf8().constData(), &fileStat);
+        if (S_ISREG(fileStat.st_mode) != 0) {
+            if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
+                savegameFiles << fileName;
+                maximumV++;
+            }
+            if (fileName.startsWith("PGTA5") && !fileName.endsWith(".bak")) {
+                snapmaticPics << fileName;
+                maximumV++;
+            }
         }
     }
     closedir(dirp);
