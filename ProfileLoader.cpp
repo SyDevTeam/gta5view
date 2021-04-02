@@ -16,18 +16,22 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#include "ProfileLoader.h"
 #include "SnapmaticPicture.h"
+#include "ProfileLoader.h"
 #include "SavegameData.h"
 #include "CrewDatabase.h"
 #include "wrapper.h"
 #include <QStringBuilder>
-#include <QStringList>
+#include <QVector>
 #include <QString>
-#include <QThread>
-#include <QList>
 #include <QFile>
+#ifdef Q_OS_WIN
 #include <QDir>
+#include <QList>
+#else
+#include "sys/types.h"
+#include "dirent.h"
+#endif
 
 ProfileLoader::ProfileLoader(QString profileFolder, CrewDatabase *crewDB, QObject *parent) : QThread(parent), profileFolder(profileFolder), crewDB(crewDB)
 {
@@ -36,30 +40,44 @@ ProfileLoader::ProfileLoader(QString profileFolder, CrewDatabase *crewDB, QObjec
 void ProfileLoader::run()
 {
     int curFile = 1;
-    QDir profileDir;
-    QList<int> crewList;
-    profileDir.setPath(profileFolder);
+    int maximumV = 0;
+    QVector<int> crewList;
+    QVector<QString> savegameFiles;
+    QVector<QString> snapmaticPics;
 
-    // Seek pictures and savegames
-    profileDir.setNameFilters(QStringList("SGTA5*"));
-    QStringList SavegameFiles = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
-    QStringList BackupFiles = SavegameFiles.filter(".bak", Qt::CaseInsensitive);
-    profileDir.setNameFilters(QStringList("PGTA5*"));
-    QStringList SnapmaticPics = profileDir.entryList(QDir::Files | QDir::NoDot, QDir::NoSort);
-    BackupFiles += SnapmaticPics.filter(".bak", Qt::CaseInsensitive);
-
-    SavegameFiles.removeDuplicates();
-    SnapmaticPics.removeDuplicates();
-    for (const QString &BackupFile : qAsConst(BackupFiles)) {
-        SavegameFiles.removeAll(BackupFile);
-        SnapmaticPics.removeAll(BackupFile);
+#ifdef Q_OS_WIN
+    QDir dir(profileFolder);
+    const QStringList files = dir.entryList();
+    for (const QString &fileName : files) {
+        if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
+            savegameFiles << fileName;
+            maximumV++;
+        }
+        if (fileName.startsWith("PGTA5") && !fileName.endsWith(".bak")) {
+            snapmaticPics << fileName;
+            maximumV++;
+        }
     }
-
-    int maximumV = SavegameFiles.length() + SnapmaticPics.length();
+#else
+    DIR *dirp = opendir(profileFolder.toUtf8().constData());
+    struct dirent *dp;
+    while ((dp = readdir(dirp)) != 0) {
+        const QString fileName = QString::fromUtf8(dp->d_name);
+        if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
+            savegameFiles << fileName;
+            maximumV++;
+        }
+        if (fileName.startsWith("PGTA5") && !fileName.endsWith(".bak")) {
+            snapmaticPics << fileName;
+            maximumV++;
+        }
+    }
+    closedir(dirp);
+#endif
 
     // Loading pictures and savegames
     emit loadingProgress(curFile, maximumV);
-    for (const QString &SavegameFile : qAsConst(SavegameFiles)) {
+    for (const QString &SavegameFile : qAsConst(savegameFiles)) {
         emit loadingProgress(curFile, maximumV);
         const QString sgdPath = profileFolder % "/" % SavegameFile;
         SavegameData *savegame = new SavegameData(sgdPath);
@@ -68,7 +86,7 @@ void ProfileLoader::run()
         }
         curFile++;
     }
-    for (const QString &SnapmaticPic : qAsConst(SnapmaticPics)) {
+    for (const QString &SnapmaticPic : qAsConst(snapmaticPics)) {
         emit loadingProgress(curFile, maximumV);
         const QString picturePath = profileFolder % "/" % SnapmaticPic;
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
