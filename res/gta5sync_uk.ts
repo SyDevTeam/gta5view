@@ -49,7 +49,7 @@ Running with Qt %6&lt;br/&gt;
         <translatorcomment>PROFessoR &apos;AppleSOft&apos;,https://steamcommunity.com/id/AppleSOft
 VenJam1n,https://socialclub.rockstargames.com/member/--VenJam1n--
 twitter,https://twitter.com/_VenJam1n</translatorcomment>
-        <translation>VenJam1n,g5e://about?VmVuSmFtMW4:U3RlYW06IDxhIGhyZWY9Imh0dHBzOi8vc3RlYW1jb21tdW5pdHkuY29tL3Byb2ZpbGVzLzc2NTYxMTk3OTg0NjM1ODE2LyI+UFJPRmVzc29SICdBcHBsZVNPZnQnPC9hPjxici8+U29jaWFsIENsdWI6IDxhIGhyZWY9Imh0dHBzOi8vc29jaWFsY2x1Yi5yb2Nrc3RhcmdhbWVzLmNvbS9tZW1iZXIvLS1WZW5KYW0xbi0tLzU2Mzc1NjkiPlZlbkphbTFuPC9hPjxici8+VHdpdHRlcjogPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9fVmVuSmFtMW4iPlZlbkphbTFuPC9hPg</translation>
+        <translation>VenJam1n,g5e://about?VmVuSmFtMW4:U3RlYW06IDxhIGhyZWY9Imh0dHBzOi8vc3RlYW1jb21tdW5pdHkuY29tL3Byb2ZpbGVzLzc2NTYxMTk3OTg0NjM1ODE2LyI+UFJPRmVzc29SICdBcHBsZVNPZnQnPC9hPjxici8+U29jaWFsIENsdWI6IDxhIGhyZWY9Imh0dHBzOi8vc29jaWFsY2x1Yi5yb2Nrc3RhcmdhbWVzLmNvbS9tZW1iZXIvLS1WZW5KYW0xbi0tLzU2Mzc1NjkiPlZlbkphbTFuPC9hPjxici8+VHdpdHRlcjogPGEgaHJlZj0iaHR0cHM6Ly90d2l0dGVyLmNvbS9fVmVuSmFtMW4iPlZlbkphbTFuPC9hPjxici8+PGJyLz7Qn9C+0LbQtdGA0YLQstGD0LLQsNC90L3Rjzxici8+PGEgaHJlZj0iaHR0cHM6Ly9zdGVhbWNvbW11bml0eS5jb20vdHJhZGVvZmZlci9uZXc/cGFydG5lcj0yNDM3MDA4OCZ0b2tlbj1HSW16XzhRSyI+U3RlYW0gVHJhZGU8L2E</translation>
     </message>
     <message>
         <location filename="../AboutDialog.cpp" line="72"/>
@@ -256,7 +256,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.ui" line="117"/>
         <source>Force Borderless</source>
-        <translation type="unfinished"></translation>
+        <translation>Примусово без рамок</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="129"/>
@@ -2526,17 +2526,17 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.cpp" line="165"/>
         <location filename="../UserInterface.cpp" line="816"/>
         <source>&amp;Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>&amp;Пожертвування</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="178"/>
         <source>Donate</source>
-        <translation type="unfinished"></translation>
+        <translation>Пожертвування</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="186"/>
         <source>Donation methods</source>
-        <translation type="unfinished"></translation>
+        <translation>Метод пожертвування</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="217"/>
