@@ -49,7 +49,11 @@
 #ifdef GTA5SYNC_DONATE
 #ifdef GTA5SYNC_DONATE_ADDRESSES
 #include <QFontDatabase>
+#include <QSvgRenderer>
 #include <QClipboard>
+#include <QPainter>
+#include "QrCode.h"
+using namespace qrcodegen;
 #endif
 #endif
 
@@ -57,11 +61,11 @@
 UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, MessageThread *threadMessage, QWidget *parent) :
     QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB), threadMessage(threadMessage),
     ui(new Ui::UserInterface)
-#else
+  #else
 UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent) :
     QMainWindow(parent), profileDB(profileDB), crewDB(crewDB), threadDB(threadDB),
     ui(new Ui::UserInterface)
-#endif
+  #endif
 {
     ui->setupUi(this);
     contentMode = 0;
@@ -214,11 +218,40 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
                 addressLabel->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
                 addressLabel->setWordWrap(true);
                 addressLayout->addWidget(addressLabel);
-                QPushButton *addressButton = new QPushButton(tr("Copy"), this);
-                QObject::connect(addressButton, &QPushButton::pressed, this, [=](){
+                QPushButton *viewAddressButton = new QPushButton(tr("View"), this);
+                QObject::connect(viewAddressButton, &QPushButton::pressed, this, [=](){
+                    QDialog *addressDialog = new QDialog(donateDialog);
+                    QVBoxLayout *addressLayout = new QVBoxLayout;
+                    addressDialog->setLayout(addressLayout);
+                    QrCode qr = QrCode::encodeText(address.toUtf8().constData(), QrCode::Ecc::MEDIUM);
+                    const std::string svgString = qr.toSvgString(0);
+                    QSvgRenderer svgRenderer(QByteArray::fromRawData(svgString.c_str(), svgString.size()));
+                    qreal screenRatio = AppEnv::screenRatio();
+                    qreal screenRatioPR = AppEnv::screenRatioPR();
+                    const QSize widgetSize = QSize(300, 300) * screenRatio;
+                    const QSize pixmapSize = widgetSize * screenRatioPR;
+                    QPixmap addressPixmap(pixmapSize);
+                    addressPixmap.fill(Qt::white);
+                    QPainter addressPainter(&addressPixmap);
+                    svgRenderer.render(&addressPainter, QRectF(QPointF(0, 0), pixmapSize));
+                    addressPainter.end();
+#if QT_VERSION >= 0x050600
+                    addressPixmap.setDevicePixelRatio(screenRatioPR);
+#endif
+                    QLabel *addressLabel = new QLabel(addressDialog);
+                    addressLabel->setFixedSize(widgetSize);
+                    addressLabel->setPixmap(addressPixmap);
+                    addressLayout->addWidget(addressLabel);
+                    addressDialog->setFixedSize(addressDialog->sizeHint());
+                    QObject::connect(addressDialog, &QDialog::finished, addressDialog, &QDialog::deleteLater);
+                    addressDialog->open();
+                });
+                addressLayout->addWidget(viewAddressButton);
+                QPushButton *copyAddressButton = new QPushButton(tr("Copy"), this);
+                QObject::connect(copyAddressButton, &QPushButton::pressed, this, [=](){
                     QApplication::clipboard()->setText(address);
                 });
-                addressLayout->addWidget(addressButton);
+                addressLayout->addWidget(copyAddressButton);
                 donateLayout->addLayout(addressLayout);
             }
         }

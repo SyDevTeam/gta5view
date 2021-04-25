@@ -221,6 +221,12 @@ endif()
 option(WITH_DONATE "Donate menu option and donation dialog" OFF)
 if(WITH_DONATE)
     set(DONATE_ADDRESSES "" CACHE STRING "Donation addresses")
+    list(APPEND GTA5VIEW_HEADERS
+        anpro/QrCode.h
+    )
+    list(APPEND GTA5VIEW_SOURCES
+        anpro/QrCode.cpp
+    )
     list(APPEND GTA5VIEW_DEFINES
         -DGTA5SYNC_DONATE
     )

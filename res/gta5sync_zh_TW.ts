@@ -1377,7 +1377,7 @@ Press 1 for Default View</source>
         <location filename="../ImportDialog.cpp" line="534"/>
         <location filename="../ImportDialog.cpp" line="844"/>
         <location filename="../ProfileInterface.cpp" line="495"/>
-        <location filename="../UserInterface.cpp" line="531"/>
+        <location filename="../UserInterface.cpp" line="564"/>
         <source>All files (**)</source>
         <translation>所有檔案 (**)</translation>
     </message>
@@ -1422,26 +1422,26 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="491"/>
-        <location filename="../UserInterface.cpp" line="528"/>
+        <location filename="../UserInterface.cpp" line="561"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="492"/>
-        <location filename="../UserInterface.cpp" line="529"/>
+        <location filename="../UserInterface.cpp" line="562"/>
         <source>Savegames files (SGTA*)</source>
         <translation>遊戲存檔 (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="493"/>
-        <location filename="../UserInterface.cpp" line="530"/>
+        <location filename="../UserInterface.cpp" line="563"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Snapmatic 圖片 (PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="515"/>
         <location filename="../ProfileInterface.cpp" line="904"/>
-        <location filename="../UserInterface.cpp" line="612"/>
+        <location filename="../UserInterface.cpp" line="645"/>
         <source>No valid file is selected</source>
         <translation>沒有選擇有效的檔案</translation>
     </message>
@@ -1460,13 +1460,13 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="608"/>
-        <location filename="../UserInterface.cpp" line="568"/>
+        <location filename="../UserInterface.cpp" line="601"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>無法讀取 Snapmatic 圖片</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="643"/>
-        <location filename="../UserInterface.cpp" line="582"/>
+        <location filename="../UserInterface.cpp" line="615"/>
         <source>Failed to read Savegame file</source>
         <translation>無法讀取遊戲存檔</translation>
     </message>
@@ -1678,7 +1678,7 @@ Press 1 for Default View</source>
         <translation>更改標題</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="527"/>
+        <location filename="../UserInterface.cpp" line="560"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation>所有設定檔檔案 (*.g5e SGTA* PGTA*)</translation>
     </message>
@@ -2306,7 +2306,7 @@ Press 1 for Default View</source>
     <name>UserInterface</name>
     <message>
         <location filename="../UserInterface.ui" line="20"/>
-        <location filename="../UserInterface.cpp" line="75"/>
+        <location filename="../UserInterface.cpp" line="79"/>
         <source>%2 - %1</source>
         <translation>%2 - %1</translation>
     </message>
@@ -2338,8 +2338,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="153"/>
-        <location filename="../UserInterface.cpp" line="229"/>
-        <location filename="../UserInterface.cpp" line="729"/>
+        <location filename="../UserInterface.cpp" line="262"/>
+        <location filename="../UserInterface.cpp" line="762"/>
         <source>&amp;Close</source>
         <translation>關閉(&amp;C)</translation>
     </message>
@@ -2375,8 +2375,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
-        <location filename="../UserInterface.cpp" line="73"/>
-        <location filename="../UserInterface.cpp" line="819"/>
+        <location filename="../UserInterface.cpp" line="77"/>
+        <location filename="../UserInterface.cpp" line="852"/>
         <source>&amp;About %1</source>
         <translation>關於 %1(&amp;A)</translation>
     </message>
@@ -2432,15 +2432,15 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
-        <location filename="../UserInterface.cpp" line="323"/>
+        <location filename="../UserInterface.cpp" line="356"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>選擇 GTA V 資料夾(&amp;G)...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
         <location filename="../OptionsDialog.cpp" line="699"/>
-        <location filename="../UserInterface.cpp" line="269"/>
-        <location filename="../UserInterface.cpp" line="787"/>
+        <location filename="../UserInterface.cpp" line="302"/>
+        <location filename="../UserInterface.cpp" line="820"/>
         <source>Select GTA V Folder...</source>
         <translation>選擇 GTA V 資料夾...</translation>
     </message>
@@ -2497,30 +2497,35 @@ Press 1 for Default View</source>
         <translation>在遊戲中隱藏</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="77"/>
-        <location filename="../UserInterface.cpp" line="386"/>
-        <location filename="../UserInterface.cpp" line="832"/>
+        <location filename="../UserInterface.cpp" line="81"/>
+        <location filename="../UserInterface.cpp" line="419"/>
+        <location filename="../UserInterface.cpp" line="865"/>
         <source>Select Profile</source>
         <translation>選擇設定檔</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="165"/>
-        <location filename="../UserInterface.cpp" line="816"/>
+        <location filename="../UserInterface.cpp" line="169"/>
+        <location filename="../UserInterface.cpp" line="849"/>
         <source>&amp;Donate</source>
         <translation>贊助(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="178"/>
+        <location filename="../UserInterface.cpp" line="182"/>
         <source>Donate</source>
         <translation>贊助</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="186"/>
+        <location filename="../UserInterface.cpp" line="190"/>
         <source>Donation methods</source>
         <translation>贊助方式</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="217"/>
+        <location filename="../UserInterface.cpp" line="221"/>
+        <source>View</source>
+        <translation>檢視</translation>
+    </message>
+    <message>
+        <location filename="../UserInterface.cpp" line="250"/>
         <source>Copy</source>
         <translation>複製</translation>
     </message>
@@ -2529,25 +2534,25 @@ Press 1 for Default View</source>
         <translation type="obsolete">複製(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="524"/>
+        <location filename="../UserInterface.cpp" line="557"/>
         <source>Open File...</source>
         <translation>開啟檔案...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="568"/>
-        <location filename="../UserInterface.cpp" line="582"/>
-        <location filename="../UserInterface.cpp" line="606"/>
-        <location filename="../UserInterface.cpp" line="612"/>
+        <location filename="../UserInterface.cpp" line="601"/>
+        <location filename="../UserInterface.cpp" line="615"/>
+        <location filename="../UserInterface.cpp" line="639"/>
+        <location filename="../UserInterface.cpp" line="645"/>
         <source>Open File</source>
         <translation>開啟檔案</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="606"/>
+        <location filename="../UserInterface.cpp" line="639"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>格式無效，無法開啟 %1</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="694"/>
+        <location filename="../UserInterface.cpp" line="727"/>
         <source>%1 - Messages</source>
         <translation>%1 - 新聞</translation>
     </message>

@@ -2121,7 +2121,7 @@ preSelectionCrewID:
                 crewList += QLatin1String("0");
             }
             crewList.sort();
-            for (QString crew : crewList) {
+            for (QString crew : qAsConst(crewList)) {
                 itemList += QString("%1 (%2)").arg(crew, crewDB->getCrewName(crew.toInt()));
             }
             if (crewList.contains(QString::number(crewID))) {
