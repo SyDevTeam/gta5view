@@ -187,75 +187,103 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 #endif
         QVBoxLayout *donateLayout = new QVBoxLayout;
         donateDialog->setLayout(donateLayout);
-        QLabel *methodsLabel = new QLabel(QString("<b>%1</b>").arg(tr("Donation methods").toHtmlEscaped()), this);
+        QLabel *methodsLabel = new QLabel(QString("<b>%1</b>").arg(tr("Donation methods").toHtmlEscaped()), donateDialog);
         methodsLabel->setWordWrap(true);
         donateLayout->addWidget(methodsLabel);
+        QHBoxLayout *currencyLayout = new QHBoxLayout;
+        donateLayout->addLayout(currencyLayout);
         const QStringList addressList = QString::fromUtf8(GTA5SYNC_DONATE_ADDRESSES).split(',');
         for (const QString &address : addressList) {
             const QStringList addressList = address.split(':');
             if (addressList.length() == 2) {
                 const QString currency = addressList.at(0);
                 const QString address = addressList.at(1);
-                QHBoxLayout *addressLayout = new QHBoxLayout;
-                const QString iconPath = QString(":/donate/%1.svgz").arg(currency);
-                if (QFile::exists(iconPath)) {
-                    QLabel *currencyLabel = new QLabel(this);
-                    currencyLabel->setFixedSize(32, 32);
-                    currencyLabel->setScaledContents(true);
-                    currencyLabel->setPixmap(QIcon(iconPath).pixmap(QSize(32, 32)));
-                    addressLayout->addWidget(currencyLabel);
+                QString currencyStr = currency;
+                const QString strPath = QString(":/donate/%1.str").arg(currency);
+                if (QFile::exists(strPath)) {
+                    QFile strFile(strPath);
+                    if (strFile.open(QIODevice::ReadOnly)) {
+                        currencyStr = QString::fromUtf8(strFile.readAll());
+                        strFile.close();
+                    }
                 }
-                QLabel *currencyLabel = new QLabel(currency, this);
-                currencyLabel->setTextFormat(Qt::PlainText);
-                QFont currencyFont = QFontDatabase::systemFont(QFontDatabase::FixedFont);
-                currencyFont.setWeight(QFont::Bold);
-                currencyFont.setCapitalization(QFont::AllUppercase);
-                currencyLabel->setFont(currencyFont);
-                addressLayout->addWidget(currencyLabel);
-                QLabel *addressLabel = new QLabel(address, this);
-                addressLabel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-                addressLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
-                addressLabel->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
-                addressLabel->setWordWrap(true);
-                addressLayout->addWidget(addressLabel);
-                QPushButton *viewAddressButton = new QPushButton(tr("View"), this);
-                QObject::connect(viewAddressButton, &QPushButton::pressed, this, [=](){
+                const QString iconPath = QString(":/donate/%1.svgz").arg(currency);
+                QPushButton *currencyButton = new QPushButton(currencyStr, donateDialog);
+                currencyButton->setToolTip(currencyStr);
+                if (QFile::exists(iconPath)) {
+                    currencyButton->setIconSize(QSize(32, 32));
+                    currencyButton->setIcon(QIcon(iconPath));
+                }
+                currencyLayout->addWidget(currencyButton);
+                QObject::connect(currencyButton, &QPushButton::pressed, donateDialog, [=](){
                     QDialog *addressDialog = new QDialog(donateDialog);
+                    addressDialog->setWindowTitle(currencyStr);
+#if QT_VERSION >= 0x050900
+                    addressDialog->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+#else
+                    addressDialog->setWindowFlags(donateDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
+#endif
                     QVBoxLayout *addressLayout = new QVBoxLayout;
                     addressDialog->setLayout(addressLayout);
+                    QLabel *addressLabel = new QLabel(address, addressDialog);
+                    addressLabel->setAlignment(Qt::AlignCenter);
+                    addressLabel->setTextFormat(Qt::PlainText);
+                    addressLabel->setTextInteractionFlags(Qt::TextSelectableByMouse);
+                    addressLayout->addWidget(addressLabel);
+                    QHBoxLayout *qrLayout = new QHBoxLayout;
+                    qrLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
                     QrCode qr = QrCode::encodeText(address.toUtf8().constData(), QrCode::Ecc::MEDIUM);
                     const std::string svgString = qr.toSvgString(0);
                     QSvgRenderer svgRenderer(QByteArray::fromRawData(svgString.c_str(), svgString.size()));
                     qreal screenRatio = AppEnv::screenRatio();
                     qreal screenRatioPR = AppEnv::screenRatioPR();
-                    const QSize widgetSize = QSize(300, 300) * screenRatio;
+                    const QSize widgetSize = QSize(200, 200) * screenRatio;
                     const QSize pixmapSize = widgetSize * screenRatioPR;
-                    QPixmap addressPixmap(pixmapSize);
-                    addressPixmap.fill(Qt::white);
-                    QPainter addressPainter(&addressPixmap);
-                    svgRenderer.render(&addressPainter, QRectF(QPointF(0, 0), pixmapSize));
-                    addressPainter.end();
+                    QPixmap qrPixmap(pixmapSize);
+                    qrPixmap.fill(Qt::white);
+                    QPainter qrPainter(&qrPixmap);
+                    svgRenderer.render(&qrPainter, QRectF(QPointF(0, 0), pixmapSize));
+                    qrPainter.end();
 #if QT_VERSION >= 0x050600
-                    addressPixmap.setDevicePixelRatio(screenRatioPR);
+                    qrPixmap.setDevicePixelRatio(screenRatioPR);
 #endif
-                    QLabel *addressLabel = new QLabel(addressDialog);
-                    addressLabel->setFixedSize(widgetSize);
-                    addressLabel->setPixmap(addressPixmap);
-                    addressLayout->addWidget(addressLabel);
-                    addressDialog->setFixedSize(addressDialog->sizeHint());
+                    QLabel *qrLabel = new QLabel(addressDialog);
+                    qrLabel->setFixedSize(widgetSize);
+                    qrLabel->setPixmap(qrPixmap);
+                    qrLayout->addWidget(qrLabel);
+                    qrLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+                    addressLayout->addLayout(qrLayout);
+                    QHBoxLayout *buttonLayout = new QHBoxLayout;
+                    buttonLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+                    QPushButton *copyAddressButton = new QPushButton(tr("&Copy"), addressDialog);
+                    if (QIcon::hasThemeIcon("edit-copy")) {
+                        copyAddressButton->setIcon(QIcon::fromTheme("edit-copy"));
+                    }
+                    QObject::connect(copyAddressButton, &QPushButton::pressed, addressDialog, [=](){
+                        QApplication::clipboard()->setText(address);
+                    });
+                    buttonLayout->addWidget(copyAddressButton);
+                    QPushButton *closeButton = new QPushButton(tr("&Close"), addressDialog);
+                    if (QIcon::hasThemeIcon("dialog-close")) {
+                        closeButton->setIcon(QIcon::fromTheme("dialog-close"));
+                    }
+                    else if (QIcon::hasThemeIcon("gtk-close")) {
+                        closeButton->setIcon(QIcon::fromTheme("gtk-close"));
+                    }
+                    closeButton->setDefault(true);
+                    buttonLayout->addWidget(closeButton);
+                    buttonLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
+                    addressLayout->addLayout(buttonLayout);
+                    QObject::connect(closeButton, &QPushButton::clicked, addressDialog, &QDialog::accept);
                     QObject::connect(addressDialog, &QDialog::finished, addressDialog, &QDialog::deleteLater);
+                    QTimer::singleShot(0, addressDialog, [=](){
+                        addressDialog->setFocus();
+                    });
                     addressDialog->open();
+                    addressDialog->setFixedSize(addressDialog->size());
                 });
-                addressLayout->addWidget(viewAddressButton);
-                QPushButton *copyAddressButton = new QPushButton(tr("Copy"), this);
-                QObject::connect(copyAddressButton, &QPushButton::pressed, this, [=](){
-                    QApplication::clipboard()->setText(address);
-                });
-                addressLayout->addWidget(copyAddressButton);
-                donateLayout->addLayout(addressLayout);
             }
         }
-        donateLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding));
         QHBoxLayout *buttonLayout = new QHBoxLayout;
         buttonLayout->addSpacerItem(new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum));
         QPushButton *closeButton = new QPushButton(donateDialog);
@@ -271,10 +299,11 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
         donateLayout->addLayout(buttonLayout);
         QObject::connect(closeButton, &QPushButton::clicked, donateDialog, &QDialog::accept);
         QObject::connect(donateDialog, &QDialog::finished, donateDialog, &QDialog::deleteLater);
-        QTimer::singleShot(0, closeButton, [=](){
-            closeButton->setFocus();
+        QTimer::singleShot(0, donateDialog, [=](){
+            donateDialog->setFocus();
         });
         donateDialog->open();
+        donateDialog->setFixedSize(donateDialog->size());
     });
 #endif
 #endif

@@ -108,6 +108,11 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
         ui->cmdCancel->setIcon(QIcon::fromTheme("gtk-cancel"));
     }
 
+    // Set Icon for Copy Button
+    if (QIcon::hasThemeIcon("edit-copy")) {
+        ui->cmdCopyStatsID->setIcon(QIcon::fromTheme("edit-copy"));
+    }
+
     setupTreeWidget();
     setupLanguageBox();
     setupRadioButtons();

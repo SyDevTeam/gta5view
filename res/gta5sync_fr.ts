@@ -757,26 +757,26 @@ Y : %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="399"/>
         <location filename="../OptionsDialog.ui" line="422"/>
-        <location filename="../OptionsDialog.cpp" line="604"/>
-        <location filename="../OptionsDialog.cpp" line="605"/>
-        <location filename="../OptionsDialog.cpp" line="616"/>
-        <location filename="../OptionsDialog.cpp" line="617"/>
-        <location filename="../OptionsDialog.cpp" line="627"/>
-        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="609"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
+        <location filename="../OptionsDialog.cpp" line="621"/>
+        <location filename="../OptionsDialog.cpp" line="622"/>
+        <location filename="../OptionsDialog.cpp" line="632"/>
+        <location filename="../OptionsDialog.cpp" line="633"/>
         <source>Found: %1</source>
         <translation>Trouvé : %1</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="406"/>
         <location filename="../OptionsDialog.ui" line="429"/>
-        <location filename="../OptionsDialog.cpp" line="607"/>
-        <location filename="../OptionsDialog.cpp" line="610"/>
-        <location filename="../OptionsDialog.cpp" line="620"/>
-        <location filename="../OptionsDialog.cpp" line="623"/>
-        <location filename="../OptionsDialog.cpp" line="630"/>
-        <location filename="../OptionsDialog.cpp" line="633"/>
-        <location filename="../OptionsDialog.cpp" line="636"/>
-        <location filename="../OptionsDialog.cpp" line="639"/>
+        <location filename="../OptionsDialog.cpp" line="612"/>
+        <location filename="../OptionsDialog.cpp" line="615"/>
+        <location filename="../OptionsDialog.cpp" line="625"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="635"/>
+        <location filename="../OptionsDialog.cpp" line="638"/>
+        <location filename="../OptionsDialog.cpp" line="641"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
         <source>Language: %1</source>
         <translation>Langue : %1</translation>
     </message>
@@ -797,7 +797,7 @@ Y : %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="465"/>
-        <location filename="../OptionsDialog.cpp" line="571"/>
+        <location filename="../OptionsDialog.cpp" line="576"/>
         <source>Participate in %1 User Statistics</source>
         <translation>Participer aux statistiques d&apos;usage %1</translation>
     </message>
@@ -828,8 +828,8 @@ Y : %2</translation>
     </message>
     <message>
         <location filename="../OptionsDialog.ui" line="554"/>
-        <location filename="../OptionsDialog.cpp" line="585"/>
-        <location filename="../OptionsDialog.cpp" line="588"/>
+        <location filename="../OptionsDialog.cpp" line="590"/>
+        <location filename="../OptionsDialog.cpp" line="593"/>
         <source>Participation ID: %1</source>
         <translation>ID de participation : %1</translation>
     </message>
@@ -880,8 +880,8 @@ Y : %2</translation>
     <message>
         <location filename="../OptionsDialog.ui" line="611"/>
         <location filename="../OptionsDialog.ui" line="633"/>
-        <location filename="../OptionsDialog.cpp" line="224"/>
-        <location filename="../OptionsDialog.cpp" line="265"/>
+        <location filename="../OptionsDialog.cpp" line="229"/>
+        <location filename="../OptionsDialog.cpp" line="270"/>
         <source>Current: %1</source>
         <translation>Actuel : %1</translation>
     </message>
@@ -923,95 +923,95 @@ Y : %2</translation>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="174"/>
+        <location filename="../OptionsDialog.cpp" line="179"/>
         <source>System</source>
         <comment>System in context of System default</comment>
         <translation>Système</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="179"/>
+        <location filename="../OptionsDialog.cpp" line="184"/>
         <source>%1 (Game language)</source>
         <comment>Next closest language compared to the Game settings</comment>
         <translation>%1 (Langue du jeu)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="182"/>
-        <location filename="../OptionsDialog.cpp" line="185"/>
+        <location filename="../OptionsDialog.cpp" line="187"/>
+        <location filename="../OptionsDialog.cpp" line="190"/>
         <source>%1 (Closest to Interface)</source>
         <comment>Next closest language compared to the Interface</comment>
         <translation>%1 (Langage proche de l&apos;interface)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="179"/>
-        <location filename="../OptionsDialog.cpp" line="182"/>
-        <location filename="../OptionsDialog.cpp" line="185"/>
+        <location filename="../OptionsDialog.cpp" line="184"/>
+        <location filename="../OptionsDialog.cpp" line="187"/>
+        <location filename="../OptionsDialog.cpp" line="190"/>
         <source>Auto</source>
         <comment>Automatic language choice.</comment>
         <translation>Automatique</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="174"/>
+        <location filename="../OptionsDialog.cpp" line="179"/>
         <source>%1 (Language priority)</source>
         <comment>First language a person can talk with a different person/application. &quot;Native&quot; or &quot;Not Native&quot;.</comment>
         <translation>%1 (Priorité de la langue)</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="470"/>
+        <location filename="../OptionsDialog.cpp" line="475"/>
         <source>%1</source>
         <comment>%1</comment>
         <translation>%1</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="470"/>
+        <location filename="../OptionsDialog.cpp" line="475"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
         <translation>Le nouveau Dossier personnalisé sera initialisé au redémarrage de %1.</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="572"/>
+        <location filename="../OptionsDialog.cpp" line="577"/>
         <source>View %1 User Statistics Online</source>
         <translation>Voir les statistiques d&apos;usage %1 en ligne</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="588"/>
+        <location filename="../OptionsDialog.cpp" line="593"/>
         <source>Not registered</source>
         <translation>Pas enregistré</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="604"/>
-        <location filename="../OptionsDialog.cpp" line="617"/>
-        <location filename="../OptionsDialog.cpp" line="627"/>
-        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="609"/>
+        <location filename="../OptionsDialog.cpp" line="622"/>
+        <location filename="../OptionsDialog.cpp" line="632"/>
+        <location filename="../OptionsDialog.cpp" line="633"/>
         <source>Yes</source>
         <translation>Oui</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="605"/>
-        <location filename="../OptionsDialog.cpp" line="616"/>
+        <location filename="../OptionsDialog.cpp" line="610"/>
+        <location filename="../OptionsDialog.cpp" line="621"/>
         <source>No</source>
         <translation>Non</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="610"/>
-        <location filename="../OptionsDialog.cpp" line="633"/>
+        <location filename="../OptionsDialog.cpp" line="615"/>
+        <location filename="../OptionsDialog.cpp" line="638"/>
         <source>OS defined</source>
         <translation>Défini par le système d&apos;exploitation</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="623"/>
-        <location filename="../OptionsDialog.cpp" line="639"/>
+        <location filename="../OptionsDialog.cpp" line="628"/>
+        <location filename="../OptionsDialog.cpp" line="644"/>
         <source>Steam defined</source>
         <translation>Défini par Steam</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="480"/>
+        <location filename="../OptionsDialog.cpp" line="485"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
         <translation>Aucun profil</translation>
     </message>
     <message>
-        <location filename="../OptionsDialog.cpp" line="487"/>
-        <location filename="../OptionsDialog.cpp" line="490"/>
         <location filename="../OptionsDialog.cpp" line="492"/>
+        <location filename="../OptionsDialog.cpp" line="495"/>
+        <location filename="../OptionsDialog.cpp" line="497"/>
         <source>Profile: %1</source>
         <translation>Profil : %1</translation>
     </message>
@@ -1391,13 +1391,13 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="492"/>
-        <location filename="../UserInterface.cpp" line="562"/>
+        <location filename="../UserInterface.cpp" line="591"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Fichiers de sauvegarde GTA (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="493"/>
-        <location filename="../UserInterface.cpp" line="563"/>
+        <location filename="../UserInterface.cpp" line="592"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Photos Snapmatic (PGTA*)</translation>
     </message>
@@ -1412,7 +1412,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <location filename="../ImportDialog.cpp" line="534"/>
         <location filename="../ImportDialog.cpp" line="844"/>
         <location filename="../ProfileInterface.cpp" line="495"/>
-        <location filename="../UserInterface.cpp" line="564"/>
+        <location filename="../UserInterface.cpp" line="593"/>
         <source>All files (**)</source>
         <translation>Tous les fichiers (**)</translation>
     </message>
@@ -1434,7 +1434,7 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../ProfileInterface.cpp" line="515"/>
         <location filename="../ProfileInterface.cpp" line="904"/>
-        <location filename="../UserInterface.cpp" line="645"/>
+        <location filename="../UserInterface.cpp" line="674"/>
         <source>No valid file is selected</source>
         <translation>Fichier invalide</translation>
     </message>
@@ -1445,13 +1445,13 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="608"/>
-        <location filename="../UserInterface.cpp" line="601"/>
+        <location filename="../UserInterface.cpp" line="630"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Impossible d&apos;ouvrir la photo Snapmatic</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="643"/>
-        <location filename="../UserInterface.cpp" line="615"/>
+        <location filename="../UserInterface.cpp" line="644"/>
         <source>Failed to read Savegame file</source>
         <translation>Impossible de lire le fichier de sauvegarde</translation>
     </message>
@@ -1679,13 +1679,13 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation>Supprimer la sélection ?</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="560"/>
+        <location filename="../UserInterface.cpp" line="589"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation>Tous les fichiers de profil (*.g5e SGTA* PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="491"/>
-        <location filename="../UserInterface.cpp" line="561"/>
+        <location filename="../UserInterface.cpp" line="590"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
     </message>
@@ -2349,8 +2349,9 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="153"/>
-        <location filename="../UserInterface.cpp" line="262"/>
-        <location filename="../UserInterface.cpp" line="762"/>
+        <location filename="../UserInterface.cpp" line="266"/>
+        <location filename="../UserInterface.cpp" line="290"/>
+        <location filename="../UserInterface.cpp" line="791"/>
         <source>&amp;Close</source>
         <translation>Fer&amp;mer</translation>
     </message>
@@ -2426,15 +2427,15 @@ Appuyer sur 1 pour le mode par défaut</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
-        <location filename="../UserInterface.cpp" line="356"/>
+        <location filename="../UserInterface.cpp" line="385"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>Modifier l&apos;emplacement de &amp;GTA V...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
-        <location filename="../OptionsDialog.cpp" line="699"/>
-        <location filename="../UserInterface.cpp" line="302"/>
-        <location filename="../UserInterface.cpp" line="820"/>
+        <location filename="../OptionsDialog.cpp" line="704"/>
+        <location filename="../UserInterface.cpp" line="331"/>
+        <location filename="../UserInterface.cpp" line="849"/>
         <source>Select GTA V Folder...</source>
         <translation>Modifier l&apos;emplacement de GTA V...</translation>
     </message>
@@ -2495,20 +2496,20 @@ Appuyer sur 1 pour le mode par défaut</translation>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
         <location filename="../UserInterface.cpp" line="77"/>
-        <location filename="../UserInterface.cpp" line="852"/>
+        <location filename="../UserInterface.cpp" line="881"/>
         <source>&amp;About %1</source>
         <translation>&amp;À propos de %1</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="81"/>
-        <location filename="../UserInterface.cpp" line="419"/>
-        <location filename="../UserInterface.cpp" line="865"/>
+        <location filename="../UserInterface.cpp" line="448"/>
+        <location filename="../UserInterface.cpp" line="894"/>
         <source>Select Profile</source>
         <translation>Sélectionner un profil</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="169"/>
-        <location filename="../UserInterface.cpp" line="849"/>
+        <location filename="../UserInterface.cpp" line="878"/>
         <source>&amp;Donate</source>
         <translation type="unfinished"></translation>
     </message>
@@ -2523,39 +2524,38 @@ Appuyer sur 1 pour le mode par défaut</translation>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="221"/>
         <source>View</source>
-        <translation>Voir</translation>
+        <translation type="vanished">Voir</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="250"/>
         <source>Copy</source>
-        <translation>Copier</translation>
+        <translation type="vanished">Copier</translation>
     </message>
     <message>
+        <location filename="../UserInterface.cpp" line="258"/>
         <source>&amp;Copy</source>
-        <translation type="obsolete">&amp;Copier</translation>
+        <translation>&amp;Copier</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="557"/>
+        <location filename="../UserInterface.cpp" line="586"/>
         <source>Open File...</source>
         <translation>Ouvrir...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="601"/>
-        <location filename="../UserInterface.cpp" line="615"/>
-        <location filename="../UserInterface.cpp" line="639"/>
-        <location filename="../UserInterface.cpp" line="645"/>
+        <location filename="../UserInterface.cpp" line="630"/>
+        <location filename="../UserInterface.cpp" line="644"/>
+        <location filename="../UserInterface.cpp" line="668"/>
+        <location filename="../UserInterface.cpp" line="674"/>
         <source>Open File</source>
         <translation>Ouvrir</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="639"/>
+        <location filename="../UserInterface.cpp" line="668"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>Impossible d&apos;ouvrir %1, format invalide</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="727"/>
+        <location filename="../UserInterface.cpp" line="756"/>
         <source>%1 - Messages</source>
         <translation>%1 - Nouvelles</translation>
     </message>
