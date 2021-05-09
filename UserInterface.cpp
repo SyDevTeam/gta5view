@@ -48,7 +48,6 @@
 
 #ifdef GTA5SYNC_DONATE
 #ifdef GTA5SYNC_DONATE_ADDRESSES
-#include <QFontDatabase>
 #include <QSvgRenderer>
 #include <QClipboard>
 #include <QPainter>
@@ -235,9 +234,8 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
                     QrCode qr = QrCode::encodeText(address.toUtf8().constData(), QrCode::Ecc::MEDIUM);
                     const std::string svgString = qr.toSvgString(0);
                     QSvgRenderer svgRenderer(QByteArray::fromRawData(svgString.c_str(), svgString.size()));
-                    qreal screenRatio = AppEnv::screenRatio();
                     qreal screenRatioPR = AppEnv::screenRatioPR();
-                    const QSize widgetSize = QSize(200, 200) * screenRatio;
+                    const QSize widgetSize = QSize(200, 200);
                     const QSize pixmapSize = widgetSize * screenRatioPR;
                     QPixmap qrPixmap(pixmapSize);
                     qrPixmap.fill(Qt::white);

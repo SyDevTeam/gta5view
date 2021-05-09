@@ -241,6 +241,7 @@ void MapLocationDialog::mouseReleaseEvent(QMouseEvent *ev)
 
 void MapLocationDialog::wheelEvent(QWheelEvent *ev)
 {
+#ifdef GTA5SYNC_EXPERIMENTAL
 #if QT_VERSION >= 0x050000
     const QPoint numPixels = ev->pixelDelta();
     const QPoint numDegrees = ev->angleDelta();
@@ -276,6 +277,9 @@ void MapLocationDialog::wheelEvent(QWheelEvent *ev)
             repaint();
         }
     }
+#else
+    Q_UNUSED(ev)
+#endif
 }
 
 void MapLocationDialog::on_cmdChange_clicked()
