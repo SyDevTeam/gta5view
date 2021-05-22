@@ -251,9 +251,8 @@ Snapmatic Bilder und Spielständen</translation>
         <translation>Wasserzeichen</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="117"/>
         <source>Force Borderless</source>
-        <translation>Erzwinge keine Ränder</translation>
+        <translation type="vanished">Erzwinge keine Ränder</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="129"/>
@@ -301,6 +300,11 @@ Snapmatic Bilder und Spielständen</translation>
     <message>
         <source>X</source>
         <translation type="obsolete">X</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="117"/>
+        <source>Crop to Aspect Ratio</source>
+        <translation>Seitenverhältnis zuschneiden</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="257"/>
@@ -1379,13 +1383,13 @@ Drücke 1 für Standardmodus</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="492"/>
-        <location filename="../UserInterface.cpp" line="589"/>
+        <location filename="../UserInterface.cpp" line="588"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Spielstanddateien (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="493"/>
-        <location filename="../UserInterface.cpp" line="590"/>
+        <location filename="../UserInterface.cpp" line="589"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Snapmatic Bilder (PGTA*)</translation>
     </message>
@@ -1405,7 +1409,7 @@ Drücke 1 für Standardmodus</translation>
         <location filename="../ImportDialog.cpp" line="534"/>
         <location filename="../ImportDialog.cpp" line="844"/>
         <location filename="../ProfileInterface.cpp" line="495"/>
-        <location filename="../UserInterface.cpp" line="591"/>
+        <location filename="../UserInterface.cpp" line="590"/>
         <source>All files (**)</source>
         <translation>Alle Dateien (**)</translation>
     </message>
@@ -1426,13 +1430,13 @@ Drücke 1 für Standardmodus</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="608"/>
-        <location filename="../UserInterface.cpp" line="628"/>
+        <location filename="../UserInterface.cpp" line="625"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Fehler beim Lesen vom Snapmatic Bild</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="643"/>
-        <location filename="../UserInterface.cpp" line="642"/>
+        <location filename="../UserInterface.cpp" line="639"/>
         <source>Failed to read Savegame file</source>
         <translation>Fehler beim Lesen von Spielstanddatei</translation>
     </message>
@@ -1473,7 +1477,7 @@ Drücke 1 für Standardmodus</translation>
     <message>
         <location filename="../ProfileInterface.cpp" line="515"/>
         <location filename="../ProfileInterface.cpp" line="904"/>
-        <location filename="../UserInterface.cpp" line="672"/>
+        <location filename="../UserInterface.cpp" line="669"/>
         <source>No valid file is selected</source>
         <translation>Keine gültige Datei wurde ausgewählt</translation>
     </message>
@@ -1677,13 +1681,13 @@ Drücke 1 für Standardmodus</translation>
         <translation>Exportiere Datei %1 von %2 Dateien</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="587"/>
+        <location filename="../UserInterface.cpp" line="586"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation>Alle Profildateien (*.g5e SGTA* PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="491"/>
-        <location filename="../UserInterface.cpp" line="588"/>
+        <location filename="../UserInterface.cpp" line="587"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
     </message>
@@ -2410,7 +2414,7 @@ Drücke 1 für Standardmodus</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
-        <location filename="../UserInterface.cpp" line="383"/>
+        <location filename="../UserInterface.cpp" line="382"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>Wähle &amp;GTA V Ordner...</translation>
     </message>
@@ -2428,7 +2432,7 @@ Drücke 1 für Standardmodus</translation>
         <location filename="../UserInterface.ui" line="153"/>
         <location filename="../UserInterface.cpp" line="264"/>
         <location filename="../UserInterface.cpp" line="288"/>
-        <location filename="../UserInterface.cpp" line="789"/>
+        <location filename="../UserInterface.cpp" line="786"/>
         <source>&amp;Close</source>
         <translation>S&amp;chließen</translation>
     </message>
@@ -2464,8 +2468,8 @@ Drücke 1 für Standardmodus</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="80"/>
-        <location filename="../UserInterface.cpp" line="446"/>
-        <location filename="../UserInterface.cpp" line="892"/>
+        <location filename="../UserInterface.cpp" line="445"/>
+        <location filename="../UserInterface.cpp" line="889"/>
         <source>Select Profile</source>
         <translation>Profil auswählen</translation>
     </message>
@@ -2473,12 +2477,12 @@ Drücke 1 für Standardmodus</translation>
         <location filename="../UserInterface.ui" line="322"/>
         <location filename="../OptionsDialog.cpp" line="704"/>
         <location filename="../UserInterface.cpp" line="329"/>
-        <location filename="../UserInterface.cpp" line="847"/>
+        <location filename="../UserInterface.cpp" line="844"/>
         <source>Select GTA V Folder...</source>
         <translation>Wähle GTA V Ordner...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="584"/>
+        <location filename="../UserInterface.cpp" line="583"/>
         <source>Open File...</source>
         <translation>Datei öffnen...</translation>
     </message>
@@ -2491,13 +2495,13 @@ Drücke 1 für Standardmodus</translation>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
         <location filename="../UserInterface.cpp" line="76"/>
-        <location filename="../UserInterface.cpp" line="879"/>
+        <location filename="../UserInterface.cpp" line="876"/>
         <source>&amp;About %1</source>
         <translation>&amp;Über %1</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="168"/>
-        <location filename="../UserInterface.cpp" line="876"/>
+        <location filename="../UserInterface.cpp" line="873"/>
         <source>&amp;Donate</source>
         <translation>Spen&amp;den</translation>
     </message>
@@ -2525,20 +2529,20 @@ Drücke 1 für Standardmodus</translation>
         <translation type="vanished">Kopieren</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="628"/>
-        <location filename="../UserInterface.cpp" line="642"/>
-        <location filename="../UserInterface.cpp" line="666"/>
-        <location filename="../UserInterface.cpp" line="672"/>
+        <location filename="../UserInterface.cpp" line="625"/>
+        <location filename="../UserInterface.cpp" line="639"/>
+        <location filename="../UserInterface.cpp" line="663"/>
+        <location filename="../UserInterface.cpp" line="669"/>
         <source>Open File</source>
         <translation>Datei öffnen</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="666"/>
+        <location filename="../UserInterface.cpp" line="663"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>Kann nicht %1 öffnen weil Dateiformat nicht gültig ist</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="754"/>
+        <location filename="../UserInterface.cpp" line="751"/>
         <source>%1 - Messages</source>
         <translation>%1 - Nachrichten</translation>
     </message>

@@ -114,7 +114,7 @@
            <item>
             <widget class="QCheckBox" name="cbBorderless">
              <property name="text">
-              <string>Force Borderless</string>
+              <string>Crop to Aspect Ratio</string>
              </property>
             </widget>
            </item>

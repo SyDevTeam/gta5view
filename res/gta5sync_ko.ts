@@ -251,9 +251,8 @@ Pictures and Savegames</source>
         <translation>워터마크</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="117"/>
         <source>Force Borderless</source>
-        <translation>강제 테두리 없는 창</translation>
+        <translation type="vanished">강제 테두리 없는 창</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="129"/>
@@ -298,6 +297,11 @@ Pictures and Savegames</source>
     <message>
         <source>X</source>
         <translation type="obsolete">X</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="117"/>
+        <source>Crop to Aspect Ratio</source>
+        <translation>원본 비율로 자르기</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="257"/>
@@ -1393,7 +1397,7 @@ Press 1 for Default View</source>
         <location filename="../ImportDialog.cpp" line="534"/>
         <location filename="../ImportDialog.cpp" line="844"/>
         <location filename="../ProfileInterface.cpp" line="495"/>
-        <location filename="../UserInterface.cpp" line="591"/>
+        <location filename="../UserInterface.cpp" line="590"/>
         <source>All files (**)</source>
         <translation>모든 파일 (**)</translation>
     </message>
@@ -1438,26 +1442,26 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="491"/>
-        <location filename="../UserInterface.cpp" line="588"/>
+        <location filename="../UserInterface.cpp" line="587"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V로 내보내기 (*.g5e)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="492"/>
-        <location filename="../UserInterface.cpp" line="589"/>
+        <location filename="../UserInterface.cpp" line="588"/>
         <source>Savegames files (SGTA*)</source>
         <translation>세이브 파일 (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="493"/>
-        <location filename="../UserInterface.cpp" line="590"/>
+        <location filename="../UserInterface.cpp" line="589"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>스냅매틱 이미지 (PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="515"/>
         <location filename="../ProfileInterface.cpp" line="904"/>
-        <location filename="../UserInterface.cpp" line="672"/>
+        <location filename="../UserInterface.cpp" line="669"/>
         <source>No valid file is selected</source>
         <translation>올바른 파일이 선택되지 않았습니다.</translation>
     </message>
@@ -1478,13 +1482,13 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="608"/>
-        <location filename="../UserInterface.cpp" line="628"/>
+        <location filename="../UserInterface.cpp" line="625"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>스냅매틱 이미지를 읽지 못했습니다.</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="643"/>
-        <location filename="../UserInterface.cpp" line="642"/>
+        <location filename="../UserInterface.cpp" line="639"/>
         <source>Failed to read Savegame file</source>
         <translation>세이브 파일을 읽지 못했습니다.</translation>
     </message>
@@ -1703,7 +1707,7 @@ Press 1 for Default View</source>
         <translation>제목 변경</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="587"/>
+        <location filename="../UserInterface.cpp" line="586"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation>모든 프로필 파일 (*.g5e SGTA* PGTA*)</translation>
     </message>
@@ -2379,7 +2383,7 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.ui" line="153"/>
         <location filename="../UserInterface.cpp" line="264"/>
         <location filename="../UserInterface.cpp" line="288"/>
-        <location filename="../UserInterface.cpp" line="789"/>
+        <location filename="../UserInterface.cpp" line="786"/>
         <source>&amp;Close</source>
         <translation>닫기(&amp;C)</translation>
     </message>
@@ -2416,7 +2420,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
         <location filename="../UserInterface.cpp" line="76"/>
-        <location filename="../UserInterface.cpp" line="879"/>
+        <location filename="../UserInterface.cpp" line="876"/>
         <source>&amp;About %1</source>
         <translation>%1 정보(&amp;A)</translation>
     </message>
@@ -2472,7 +2476,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
-        <location filename="../UserInterface.cpp" line="383"/>
+        <location filename="../UserInterface.cpp" line="382"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>GTA V 폴더 선택(&amp;G)</translation>
     </message>
@@ -2480,7 +2484,7 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.ui" line="322"/>
         <location filename="../OptionsDialog.cpp" line="704"/>
         <location filename="../UserInterface.cpp" line="329"/>
-        <location filename="../UserInterface.cpp" line="847"/>
+        <location filename="../UserInterface.cpp" line="844"/>
         <source>Select GTA V Folder...</source>
         <translation>GTA V 폴더 선택</translation>
     </message>
@@ -2538,14 +2542,14 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="80"/>
-        <location filename="../UserInterface.cpp" line="446"/>
-        <location filename="../UserInterface.cpp" line="892"/>
+        <location filename="../UserInterface.cpp" line="445"/>
+        <location filename="../UserInterface.cpp" line="889"/>
         <source>Select Profile</source>
         <translation>프로필 선택</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="168"/>
-        <location filename="../UserInterface.cpp" line="876"/>
+        <location filename="../UserInterface.cpp" line="873"/>
         <source>&amp;Donate</source>
         <translation>기부하기(&amp;D)</translation>
     </message>
@@ -2573,25 +2577,25 @@ Press 1 for Default View</source>
         <translation>복사(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="584"/>
+        <location filename="../UserInterface.cpp" line="583"/>
         <source>Open File...</source>
         <translation>파일 열기...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="628"/>
-        <location filename="../UserInterface.cpp" line="642"/>
-        <location filename="../UserInterface.cpp" line="666"/>
-        <location filename="../UserInterface.cpp" line="672"/>
+        <location filename="../UserInterface.cpp" line="625"/>
+        <location filename="../UserInterface.cpp" line="639"/>
+        <location filename="../UserInterface.cpp" line="663"/>
+        <location filename="../UserInterface.cpp" line="669"/>
         <source>Open File</source>
         <translation>파일 열기</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="666"/>
+        <location filename="../UserInterface.cpp" line="663"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>올바른 파일 형식이 아니므로 %1을 열 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="754"/>
+        <location filename="../UserInterface.cpp" line="751"/>
         <source>%1 - Messages</source>
         <translation>%1 - 뉴스</translation>
     </message>

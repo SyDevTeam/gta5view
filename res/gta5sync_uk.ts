@@ -254,9 +254,8 @@ Pictures and Savegames</source>
         <translation>Водяний знак</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="117"/>
         <source>Force Borderless</source>
-        <translation>Примусово без рамок</translation>
+        <translation type="vanished">Примусово без рамок</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="129"/>
@@ -301,6 +300,11 @@ Pictures and Savegames</source>
     <message>
         <source>X</source>
         <translation type="obsolete">Х</translation>
+    </message>
+    <message>
+        <location filename="../ImportDialog.ui" line="117"/>
+        <source>Crop to Aspect Ratio</source>
+        <translation>Обрізати під співвідношення сторін</translation>
     </message>
     <message>
         <location filename="../ImportDialog.ui" line="257"/>
@@ -1383,7 +1387,7 @@ Press 1 for Default View</source>
         <location filename="../ImportDialog.cpp" line="534"/>
         <location filename="../ImportDialog.cpp" line="844"/>
         <location filename="../ProfileInterface.cpp" line="495"/>
-        <location filename="../UserInterface.cpp" line="591"/>
+        <location filename="../UserInterface.cpp" line="590"/>
         <source>All files (**)</source>
         <translation>Усі файли (**)</translation>
     </message>
@@ -1428,26 +1432,26 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="491"/>
-        <location filename="../UserInterface.cpp" line="588"/>
+        <location filename="../UserInterface.cpp" line="587"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="492"/>
-        <location filename="../UserInterface.cpp" line="589"/>
+        <location filename="../UserInterface.cpp" line="588"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Файли збереження гри (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="493"/>
-        <location filename="../UserInterface.cpp" line="590"/>
+        <location filename="../UserInterface.cpp" line="589"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Snapmatic зображення (PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="515"/>
         <location filename="../ProfileInterface.cpp" line="904"/>
-        <location filename="../UserInterface.cpp" line="672"/>
+        <location filename="../UserInterface.cpp" line="669"/>
         <source>No valid file is selected</source>
         <translation>Вибрані недійсні файли</translation>
     </message>
@@ -1468,13 +1472,13 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="608"/>
-        <location filename="../UserInterface.cpp" line="628"/>
+        <location filename="../UserInterface.cpp" line="625"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Не вдалося прочитати Snapmatic картинку</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="643"/>
-        <location filename="../UserInterface.cpp" line="642"/>
+        <location filename="../UserInterface.cpp" line="639"/>
         <source>Failed to read Savegame file</source>
         <translation>Не вдалося прочитати файл збереження гри</translation>
     </message>
@@ -1688,7 +1692,7 @@ Press 1 for Default View</source>
         <translation>Змінити назву</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="587"/>
+        <location filename="../UserInterface.cpp" line="586"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation>Усі файли зображень (*.g5e SGTA* PGTA*)</translation>
     </message>
@@ -2359,7 +2363,7 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.ui" line="153"/>
         <location filename="../UserInterface.cpp" line="264"/>
         <location filename="../UserInterface.cpp" line="288"/>
-        <location filename="../UserInterface.cpp" line="789"/>
+        <location filename="../UserInterface.cpp" line="786"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрити</translation>
     </message>
@@ -2396,7 +2400,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
         <location filename="../UserInterface.cpp" line="76"/>
-        <location filename="../UserInterface.cpp" line="879"/>
+        <location filename="../UserInterface.cpp" line="876"/>
         <source>&amp;About %1</source>
         <translation>&amp;Про %1</translation>
     </message>
@@ -2452,7 +2456,7 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
-        <location filename="../UserInterface.cpp" line="383"/>
+        <location filename="../UserInterface.cpp" line="382"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>Вибрати &amp;GTA V теку...</translation>
     </message>
@@ -2460,7 +2464,7 @@ Press 1 for Default View</source>
         <location filename="../UserInterface.ui" line="322"/>
         <location filename="../OptionsDialog.cpp" line="704"/>
         <location filename="../UserInterface.cpp" line="329"/>
-        <location filename="../UserInterface.cpp" line="847"/>
+        <location filename="../UserInterface.cpp" line="844"/>
         <source>Select GTA V Folder...</source>
         <translation>Вибрати GTA V теку...</translation>
     </message>
@@ -2518,14 +2522,14 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="80"/>
-        <location filename="../UserInterface.cpp" line="446"/>
-        <location filename="../UserInterface.cpp" line="892"/>
+        <location filename="../UserInterface.cpp" line="445"/>
+        <location filename="../UserInterface.cpp" line="889"/>
         <source>Select Profile</source>
         <translation>Вибрати профіль</translation>
     </message>
     <message>
         <location filename="../UserInterface.cpp" line="168"/>
-        <location filename="../UserInterface.cpp" line="876"/>
+        <location filename="../UserInterface.cpp" line="873"/>
         <source>&amp;Donate</source>
         <translation>&amp;Пожертвування</translation>
     </message>
@@ -2553,25 +2557,25 @@ Press 1 for Default View</source>
         <translation>&amp;Копіювати</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="584"/>
+        <location filename="../UserInterface.cpp" line="583"/>
         <source>Open File...</source>
         <translation>Відкрити файл...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="628"/>
-        <location filename="../UserInterface.cpp" line="642"/>
-        <location filename="../UserInterface.cpp" line="666"/>
-        <location filename="../UserInterface.cpp" line="672"/>
+        <location filename="../UserInterface.cpp" line="625"/>
+        <location filename="../UserInterface.cpp" line="639"/>
+        <location filename="../UserInterface.cpp" line="663"/>
+        <location filename="../UserInterface.cpp" line="669"/>
         <source>Open File</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="666"/>
+        <location filename="../UserInterface.cpp" line="663"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>Неможливо відкрити %1 через невідомий формат файлу</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="754"/>
+        <location filename="../UserInterface.cpp" line="751"/>
         <source>%1 - Messages</source>
         <translation>%1 - Новини</translation>
     </message>

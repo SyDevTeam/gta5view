@@ -327,15 +327,14 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
     }
     else if (showFolderDialog) {
         GTAV_Folder = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-        if (QFileInfo(GTAV_Folder).exists()) {
+        if (QDir(GTAV_Folder).exists()) {
             folderExists = true;
             QDir::setCurrent(GTAV_Folder);
             AppEnv::setGameFolder(GTAV_Folder);
 
             // First time folder selection save
             settings.beginGroup("dir");
-            if (settings.value("dir", "").toString().isEmpty())
-            {
+            if (settings.value("dir", "").toString().isEmpty()) {
                 settings.setValue("dir", GTAV_Folder);
             }
             settings.endGroup();
@@ -597,11 +596,9 @@ fileDialogPreOpen:
     fileDialog.setDirectory(settings.value("OpenDialogDirectory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value("OpenDialogGeometry","").toByteArray());
 
-    if (fileDialog.exec())
-    {
+    if (fileDialog.exec()) {
         QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
+        if (selectedFiles.length() == 1) {
             QString selectedFile = selectedFiles.at(0);
             if (!openFile(selectedFile, true)) goto fileDialogPreOpen;
         }
@@ -845,7 +842,7 @@ void UserInterface::updateCacheId(uint cacheId)
 void UserInterface::on_actionSelect_GTA_Folder_triggered()
 {
     QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-    if (QFileInfo(GTAV_Folder_Temp).exists()) {
+    if (QDir(GTAV_Folder_Temp).exists()) {
         if (profileOpen) {
             closeProfile_p();
         }
