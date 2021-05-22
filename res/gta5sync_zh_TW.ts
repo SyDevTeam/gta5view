@@ -234,18 +234,18 @@ Pictures and Savegames</source>
         <translation>圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="92"/>
+        <location filename="../ImportDialog.ui" line="99"/>
         <source>Avatar</source>
         <translation>大頭貼</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="99"/>
-        <location filename="../ImportDialog.ui" line="267"/>
+        <location filename="../ImportDialog.ui" line="92"/>
+        <location filename="../ImportDialog.ui" line="189"/>
         <source>Ignore Aspect Ratio</source>
         <translation>忽略長寬比</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="110"/>
+        <location filename="../ImportDialog.ui" line="106"/>
         <source>Watermark</source>
         <translation>浮水印</translation>
     </message>
@@ -254,12 +254,12 @@ Pictures and Savegames</source>
         <translation type="vanished">強制無邊框</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="129"/>
+        <location filename="../ImportDialog.ui" line="125"/>
         <source>Background</source>
         <translation>背景</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="139"/>
+        <location filename="../ImportDialog.ui" line="135"/>
         <location filename="../ImportDialog.cpp" line="86"/>
         <location filename="../ImportDialog.cpp" line="396"/>
         <location filename="../ImportDialog.cpp" line="814"/>
@@ -267,7 +267,7 @@ Pictures and Savegames</source>
         <translation>背景顏色: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="163"/>
+        <location filename="../ImportDialog.ui" line="159"/>
         <source>Select background colour</source>
         <translation>選擇背景顏色</translation>
     </message>
@@ -276,7 +276,7 @@ Pictures and Savegames</source>
         <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="192"/>
+        <location filename="../ImportDialog.ui" line="205"/>
         <location filename="../ImportDialog.cpp" line="87"/>
         <location filename="../ImportDialog.cpp" line="402"/>
         <location filename="../ImportDialog.cpp" line="889"/>
@@ -284,12 +284,12 @@ Pictures and Savegames</source>
         <translation>背景圖片:</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="216"/>
+        <location filename="../ImportDialog.ui" line="229"/>
         <source>Select background image</source>
         <translation>選擇背景圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="226"/>
+        <location filename="../ImportDialog.ui" line="239"/>
         <source>Remove background image</source>
         <translation>移除背景圖片</translation>
     </message>
@@ -298,77 +298,77 @@ Pictures and Savegames</source>
         <translation type="obsolete">X</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="117"/>
+        <location filename="../ImportDialog.ui" line="113"/>
         <source>Crop to Aspect Ratio</source>
         <translation>裁剪長寬比</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="257"/>
+        <location filename="../ImportDialog.ui" line="196"/>
         <source>Force Colour in Avatar Zone</source>
         <translation>強制在大頭貼區域使用顏色</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="292"/>
+        <location filename="../ImportDialog.ui" line="271"/>
         <source>Advanced</source>
         <translation>進階</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="300"/>
+        <location filename="../ImportDialog.ui" line="301"/>
         <source>Resolution:</source>
         <translation>解析度:</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="313"/>
+        <location filename="../ImportDialog.ui" line="314"/>
         <source>Snapmatic resolution</source>
         <translation>Snapmatic 解析度</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="324"/>
+        <location filename="../ImportDialog.ui" line="279"/>
         <source>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</source>
         <translation>避免壓縮來提高圖片品質，但可能會破壞 Snapmatic 運作</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="327"/>
+        <location filename="../ImportDialog.ui" line="282"/>
         <source>Unlimited Buffer</source>
         <translation>無限緩衝</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="334"/>
+        <location filename="../ImportDialog.ui" line="289"/>
         <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
         <translation>除非你知道自己在幹什麼，否則修改圖片將使 Snapmatic 故障</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="337"/>
+        <location filename="../ImportDialog.ui" line="292"/>
         <source>Import as-is</source>
         <translation>照原樣匯入</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="351"/>
+        <location filename="../ImportDialog.ui" line="343"/>
         <source>Import options</source>
         <translation>匯入選項</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="354"/>
+        <location filename="../ImportDialog.ui" line="346"/>
         <source>&amp;Options</source>
         <translation>選項(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="383"/>
+        <location filename="../ImportDialog.ui" line="375"/>
         <source>Import picture</source>
         <translation>匯入圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="386"/>
+        <location filename="../ImportDialog.ui" line="378"/>
         <source>&amp;OK</source>
         <translation>確定(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="399"/>
+        <location filename="../ImportDialog.ui" line="391"/>
         <source>Discard picture</source>
         <translation>捨棄圖片</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="402"/>
+        <location filename="../ImportDialog.ui" line="394"/>
         <source>&amp;Cancel</source>
         <translation>取消(&amp;C)</translation>
     </message>

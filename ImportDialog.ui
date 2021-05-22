@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>516</width>
-    <height>677</height>
+    <height>673</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -85,33 +85,29 @@
         </property>
         <layout class="QVBoxLayout" name="vlSettings">
          <item>
-          <layout class="QHBoxLayout" name="hlCheckboxesTop">
-           <item>
-            <widget class="QCheckBox" name="cbAvatar">
-             <property name="text">
-              <string>Avatar</string>
-             </property>
-            </widget>
-           </item>
-           <item>
+          <layout class="QGridLayout" name="glPicture">
+           <item row="0" column="1">
             <widget class="QCheckBox" name="cbIgnore">
              <property name="text">
               <string>Ignore Aspect Ratio</string>
              </property>
             </widget>
            </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="hlCheckboxesButtom">
-           <item>
+           <item row="0" column="0">
+            <widget class="QCheckBox" name="cbAvatar">
+             <property name="text">
+              <string>Avatar</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
             <widget class="QCheckBox" name="cbWatermark">
              <property name="text">
               <string>Watermark</string>
              </property>
             </widget>
            </item>
-           <item>
+           <item row="1" column="1">
             <widget class="QCheckBox" name="cbBorderless">
              <property name="text">
               <string>Crop to Aspect Ratio</string>
@@ -130,8 +126,8 @@
         </property>
         <layout class="QVBoxLayout" name="vlBackground">
          <item>
-          <layout class="QHBoxLayout" name="hlColour">
-           <item>
+          <layout class="QGridLayout" name="glBackground">
+           <item row="0" column="0">
             <layout class="QHBoxLayout" name="hlColourManage">
              <item>
               <widget class="QLabel" name="labColour">
@@ -184,7 +180,24 @@
              </item>
             </layout>
            </item>
-           <item>
+           <item row="2" column="1">
+            <widget class="QCheckBox" name="cbStretch">
+             <property name="enabled">
+              <bool>true</bool>
+             </property>
+             <property name="text">
+              <string>Ignore Aspect Ratio</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QCheckBox" name="cbForceAvatarColour">
+             <property name="text">
+              <string>Force Colour in Avatar Zone</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
             <layout class="QHBoxLayout" name="hlBackgroundManage">
              <item>
               <widget class="QLabel" name="labBackgroundImage">
@@ -249,24 +262,60 @@
            </item>
           </layout>
          </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gbAdvanced">
+        <property name="title">
+         <string>Advanced</string>
+        </property>
+        <layout class="QVBoxLayout" name="vlAdvanced">
          <item>
-          <layout class="QHBoxLayout" name="hlBackground">
-           <item>
-            <widget class="QCheckBox" name="cbForceAvatarColour">
+          <layout class="QGridLayout" name="glAdvanced">
+           <item row="1" column="0">
+            <widget class="QCheckBox" name="cbUnlimited">
+             <property name="toolTip">
+              <string>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</string>
+             </property>
              <property name="text">
-              <string>Force Colour in Avatar Zone</string>
+              <string>Unlimited Buffer</string>
              </property>
             </widget>
            </item>
-           <item>
-            <widget class="QCheckBox" name="cbStretch">
-             <property name="enabled">
-              <bool>true</bool>
+           <item row="1" column="1">
+            <widget class="QCheckBox" name="cbImportAsIs">
+             <property name="toolTip">
+              <string>Import as-is, don't change the picture at all, guaranteed to break Snapmatic unless you know what you doing</string>
              </property>
              <property name="text">
-              <string>Ignore Aspect Ratio</string>
+              <string>Import as-is</string>
              </property>
             </widget>
+           </item>
+           <item row="0" column="0" colspan="2">
+            <layout class="QHBoxLayout" name="hlResolution">
+             <item>
+              <widget class="QLabel" name="labResolution">
+               <property name="text">
+                <string>Resolution:</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="cbResolution">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>Snapmatic resolution</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
            </item>
           </layout>
          </item>
@@ -285,63 +334,6 @@
          </size>
         </property>
        </spacer>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="gbAdvanced">
-        <property name="title">
-         <string>Advanced</string>
-        </property>
-        <layout class="QVBoxLayout" name="vlAdvanced">
-         <item>
-          <layout class="QHBoxLayout" name="hlResolution">
-           <item>
-            <widget class="QLabel" name="labResolution">
-             <property name="text">
-              <string>Resolution:</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QComboBox" name="cbResolution">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="toolTip">
-              <string>Snapmatic resolution</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="hlExpert">
-           <item>
-            <widget class="QCheckBox" name="cbUnlimited">
-             <property name="toolTip">
-              <string>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</string>
-             </property>
-             <property name="text">
-              <string>Unlimited Buffer</string>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QCheckBox" name="cbImportAsIs">
-             <property name="toolTip">
-              <string>Import as-is, don't change the picture at all, guaranteed to break Snapmatic unless you know what you doing</string>
-             </property>
-             <property name="text">
-              <string>Import as-is</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </item>
-        </layout>
-       </widget>
       </item>
       <item>
        <layout class="QHBoxLayout" name="hlButtons">

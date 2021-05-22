@@ -231,13 +231,13 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <translation>Importer...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="99"/>
-        <location filename="../ImportDialog.ui" line="267"/>
+        <location filename="../ImportDialog.ui" line="92"/>
+        <location filename="../ImportDialog.ui" line="189"/>
         <source>Ignore Aspect Ratio</source>
         <translation>Déverrouiller le ratio d&apos;aspect</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="92"/>
+        <location filename="../ImportDialog.ui" line="99"/>
         <source>Avatar</source>
         <translation>Avatar</translation>
     </message>
@@ -247,17 +247,17 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <translation>Image</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="110"/>
+        <location filename="../ImportDialog.ui" line="106"/>
         <source>Watermark</source>
         <translation>Filigrane</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="129"/>
+        <location filename="../ImportDialog.ui" line="125"/>
         <source>Background</source>
         <translation>Fond</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="139"/>
+        <location filename="../ImportDialog.ui" line="135"/>
         <location filename="../ImportDialog.cpp" line="86"/>
         <location filename="../ImportDialog.cpp" line="396"/>
         <location filename="../ImportDialog.cpp" line="814"/>
@@ -265,7 +265,7 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <translation>Couleur de fond : &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="163"/>
+        <location filename="../ImportDialog.ui" line="159"/>
         <source>Select background colour</source>
         <translation>Choisir la couleur de fond</translation>
     </message>
@@ -274,12 +274,12 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="216"/>
+        <location filename="../ImportDialog.ui" line="229"/>
         <source>Select background image</source>
         <translation>Choisir l&apos;image de fond</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="226"/>
+        <location filename="../ImportDialog.ui" line="239"/>
         <source>Remove background image</source>
         <translation>Supprimer l&apos;image de fond</translation>
     </message>
@@ -294,82 +294,82 @@ et les fichiers de sauvegarde de Grand Theft Auto V</translation>
         <translation type="obsolete">X</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="117"/>
+        <location filename="../ImportDialog.ui" line="113"/>
         <source>Crop to Aspect Ratio</source>
         <translation>Recadrage au ratio d&apos;aspect</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="257"/>
+        <location filename="../ImportDialog.ui" line="196"/>
         <source>Force Colour in Avatar Zone</source>
         <translation>Forcer la couleur dans la zone d&apos;avatar</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="292"/>
+        <location filename="../ImportDialog.ui" line="271"/>
         <source>Advanced</source>
         <translation>Avancé</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="300"/>
+        <location filename="../ImportDialog.ui" line="301"/>
         <source>Resolution:</source>
         <translation>Résolution :</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="313"/>
+        <location filename="../ImportDialog.ui" line="314"/>
         <source>Snapmatic resolution</source>
         <translation>Résolution Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="324"/>
+        <location filename="../ImportDialog.ui" line="279"/>
         <source>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</source>
         <translation>Éviter la compression et étendre la mémoire tampon à la place, améliore la qualité de l&apos;image mais peut casser Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="327"/>
+        <location filename="../ImportDialog.ui" line="282"/>
         <source>Unlimited Buffer</source>
         <translation>Mémoire tampon illimitée</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="334"/>
+        <location filename="../ImportDialog.ui" line="289"/>
         <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
         <translation>Importer tel quel,ne changez pas du tout l&apos;image, garantie de casser Snapmatic à moins que vous ne sachiez ce que vous faites</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="337"/>
+        <location filename="../ImportDialog.ui" line="292"/>
         <source>Import as-is</source>
         <translation>Importer tel quel</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="351"/>
+        <location filename="../ImportDialog.ui" line="343"/>
         <source>Import options</source>
         <translation>Options d&apos;importation</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="354"/>
+        <location filename="../ImportDialog.ui" line="346"/>
         <source>&amp;Options</source>
         <translation>&amp;Options</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="383"/>
+        <location filename="../ImportDialog.ui" line="375"/>
         <source>Import picture</source>
         <translation>Importer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="386"/>
+        <location filename="../ImportDialog.ui" line="378"/>
         <source>&amp;OK</source>
         <translation>&amp;OK</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="399"/>
+        <location filename="../ImportDialog.ui" line="391"/>
         <source>Discard picture</source>
         <translation>Supprimer l&apos;image</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="402"/>
+        <location filename="../ImportDialog.ui" line="394"/>
         <source>&amp;Cancel</source>
         <translation>&amp;Annuler</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="192"/>
+        <location filename="../ImportDialog.ui" line="205"/>
         <location filename="../ImportDialog.cpp" line="87"/>
         <location filename="../ImportDialog.cpp" line="402"/>
         <location filename="../ImportDialog.cpp" line="889"/>

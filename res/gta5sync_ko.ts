@@ -235,18 +235,18 @@ Pictures and Savegames</source>
         <translation>이미지</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="92"/>
+        <location filename="../ImportDialog.ui" line="99"/>
         <source>Avatar</source>
         <translation>아바타</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="99"/>
-        <location filename="../ImportDialog.ui" line="267"/>
+        <location filename="../ImportDialog.ui" line="92"/>
+        <location filename="../ImportDialog.ui" line="189"/>
         <source>Ignore Aspect Ratio</source>
         <translation>화면 비율 무시</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="110"/>
+        <location filename="../ImportDialog.ui" line="106"/>
         <source>Watermark</source>
         <translation>워터마크</translation>
     </message>
@@ -255,12 +255,12 @@ Pictures and Savegames</source>
         <translation type="vanished">강제 테두리 없는 창</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="129"/>
+        <location filename="../ImportDialog.ui" line="125"/>
         <source>Background</source>
         <translation>배경</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="139"/>
+        <location filename="../ImportDialog.ui" line="135"/>
         <location filename="../ImportDialog.cpp" line="86"/>
         <location filename="../ImportDialog.cpp" line="396"/>
         <location filename="../ImportDialog.cpp" line="814"/>
@@ -268,7 +268,7 @@ Pictures and Savegames</source>
         <translation>배경 색상: &lt;span style=&quot;color: %1&quot;&gt;%1&lt;/span&gt;</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="163"/>
+        <location filename="../ImportDialog.ui" line="159"/>
         <source>Select background colour</source>
         <translation>배경 색상 선택</translation>
     </message>
@@ -277,7 +277,7 @@ Pictures and Savegames</source>
         <translation type="obsolete">...</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="192"/>
+        <location filename="../ImportDialog.ui" line="205"/>
         <location filename="../ImportDialog.cpp" line="87"/>
         <location filename="../ImportDialog.cpp" line="402"/>
         <location filename="../ImportDialog.cpp" line="889"/>
@@ -285,12 +285,12 @@ Pictures and Savegames</source>
         <translation>배경 이미지:</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="216"/>
+        <location filename="../ImportDialog.ui" line="229"/>
         <source>Select background image</source>
         <translation>배경 이미지 선택</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="226"/>
+        <location filename="../ImportDialog.ui" line="239"/>
         <source>Remove background image</source>
         <translation>배경 이미지 제거</translation>
     </message>
@@ -299,77 +299,77 @@ Pictures and Savegames</source>
         <translation type="obsolete">X</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="117"/>
+        <location filename="../ImportDialog.ui" line="113"/>
         <source>Crop to Aspect Ratio</source>
         <translation>원본 비율로 자르기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="257"/>
+        <location filename="../ImportDialog.ui" line="196"/>
         <source>Force Colour in Avatar Zone</source>
         <translation>아바타 구역에 색상을 적용합니다</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="292"/>
+        <location filename="../ImportDialog.ui" line="271"/>
         <source>Advanced</source>
         <translation>고급</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="300"/>
+        <location filename="../ImportDialog.ui" line="301"/>
         <source>Resolution:</source>
         <translation>해상도:</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="313"/>
+        <location filename="../ImportDialog.ui" line="314"/>
         <source>Snapmatic resolution</source>
         <translation>스냅매틱 해상도</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="324"/>
+        <location filename="../ImportDialog.ui" line="279"/>
         <source>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</source>
         <translation>압축하지 않고 버퍼를 확장하여 화질을 향상시키지만 스냅매틱이 손상될 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="327"/>
+        <location filename="../ImportDialog.ui" line="282"/>
         <source>Unlimited Buffer</source>
         <translation>버퍼 제한 없음</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="334"/>
+        <location filename="../ImportDialog.ui" line="289"/>
         <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
         <translation>원본 그대로 가져오기 기능은 이미지를 건들지 않지만 이 기능으로 인해 당신의 스냅매틱이 손상될 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="337"/>
+        <location filename="../ImportDialog.ui" line="292"/>
         <source>Import as-is</source>
         <translation>원본 그대로 가져오기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="351"/>
+        <location filename="../ImportDialog.ui" line="343"/>
         <source>Import options</source>
         <translation>가져오기 옵션</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="354"/>
+        <location filename="../ImportDialog.ui" line="346"/>
         <source>&amp;Options</source>
         <translation>옵션(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="383"/>
+        <location filename="../ImportDialog.ui" line="375"/>
         <source>Import picture</source>
         <translation>사진 가져오기</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="386"/>
+        <location filename="../ImportDialog.ui" line="378"/>
         <source>&amp;OK</source>
         <translation>확인(&amp;O)</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="399"/>
+        <location filename="../ImportDialog.ui" line="391"/>
         <source>Discard picture</source>
         <translation>사진 삭제</translation>
     </message>
     <message>
-        <location filename="../ImportDialog.ui" line="402"/>
+        <location filename="../ImportDialog.ui" line="394"/>
         <source>&amp;Cancel</source>
         <translation>취소(&amp;C)</translation>
     </message>
