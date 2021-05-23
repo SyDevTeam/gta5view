@@ -170,7 +170,11 @@ bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool cach
 
 bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
 {
+#ifdef GTA5SYNC_DYNAMIC_PHOTOBUFFER
     quint32 jpegPicStreamLength = p_ragePhoto.photoBuffer();
+#else
+    quint32 jpegPicStreamLength = 524288U;
+#endif
     QByteArray picByteArray;
     int comLvl = 100;
     bool saveSuccess = false;
@@ -193,6 +197,10 @@ bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
                 }
             }
             else {
+#ifndef GTA5SYNC_DYNAMIC_PHOTOBUFFER
+                if (p_ragePhoto.photoBuffer() != jpegPicStreamLength)
+                    p_ragePhoto.setPhotoBuffer(jpegPicStreamLength, true);
+#endif
                 picByteArray = picByteArrayT;
             }
         }
