@@ -90,8 +90,10 @@ private slots:
     void dialogNextPictureRequested(QWidget *dialog);
     void dialogPreviousPictureRequested(QWidget *dialog);
     void on_saProfileContent_dropped(const QMimeData *mimeData);
+#if QT_VERSION >= 0x050000
     void directoryChanged(const QString &path);
     void directoryScanned(QVector<QString> savegameFiles, QVector<QString> snapmaticPics);
+#endif
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
@@ -107,9 +109,11 @@ private:
     QList<SavegameData*> savegames;
     QList<SnapmaticPicture*> pictures;
     QMap<ProfileWidget*,QString> widgets;
+#if QT_VERSION >= 0x050000
     QFileSystemWatcher fileSystemWatcher;
     QVector<QString> savegameFiles;
     QVector<QString> snapmaticPics;
+#endif
     QSpacerItem *saSpacerItem;
     QStringList fixedPictures;
     QString enabledPicStr;

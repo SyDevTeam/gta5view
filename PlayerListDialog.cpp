@@ -18,6 +18,7 @@
 
 #include "PlayerListDialog.h"
 #include "ui_PlayerListDialog.h"
+#include "wrapper.h"
 #include "AppEnv.h"
 #include <QStringBuilder>
 #include <QFontMetrics>

@@ -138,8 +138,10 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     // Seed RNG
     pcg32_srandom_r(&rng, time(NULL), (intptr_t)&rng);
 
+#if QT_VERSION >= 0x050000
     // Register Metatypes
     qRegisterMetaType<QVector<QString>>();
+#endif
 
     setMouseTracking(true);
     installEventFilter(this);
@@ -182,7 +184,9 @@ void ProfileInterface::setupProfileInterface()
     fixedPictures.clear();
     ui->labProfileLoading->setText(tr("Loading..."));
     profileLoader = new ProfileLoader(profileFolder, crewDB);
+#if QT_VERSION >= 0x050000
     QObject::connect(profileLoader, SIGNAL(directoryScanned(QVector<QString>,QVector<QString>)), this, SLOT(directoryScanned(QVector<QString>,QVector<QString>)));
+#endif
     QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(savegameLoaded_event(SavegameData*, QString)));
     QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*)), this, SLOT(pictureLoaded_event(SnapmaticPicture*)));
     QObject::connect(profileLoader, SIGNAL(pictureFixed(SnapmaticPicture*)), this, SLOT(pictureFixed_event(SnapmaticPicture*)));
@@ -258,8 +262,10 @@ void ProfileInterface::loadingProgress(int value, int maximum)
     ui->labProfileLoading->setText(loadingStr.arg(QString::number(value), QString::number(maximum)));
 }
 
+#if QT_VERSION >= 0x050000
 void ProfileInterface::directoryChanged(const QString &path)
 {
+    Q_UNUSED(path)
     QDir dir(profileFolder);
     QVector<QString> t_savegameFiles;
     QVector<QString> t_snapmaticPics;
@@ -314,6 +320,7 @@ void ProfileInterface::directoryScanned(QVector<QString> savegameFiles_s, QVecto
     fileSystemWatcher.addPath(profileFolder);
     QObject::connect(&fileSystemWatcher, SIGNAL(directoryChanged(QString)), this, SLOT(directoryChanged(QString)));
 }
+#endif
 
 void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 {
@@ -1206,7 +1213,9 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
     if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format)) {
         picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
         picture->setPicFilePath(profileFolder % "/" % adjustedFileName);
+#if QT_VERSION >= 0x050000
         snapmaticPics << picture->getPictureFileName();
+#endif
         pictureLoaded(picture, true);
         return true;
     }
@@ -1240,7 +1249,9 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         const QString newSgdPath = profileFolder % "/" % sgdFileName;
         if (QFile::copy(sgdPath, newSgdPath)) {
             savegame->setSavegameFileName(newSgdPath);
+#if QT_VERSION >= 0x050000
             savegameFiles << newSgdPath;
+#endif
             savegameLoaded(savegame, newSgdPath, true);
             return true;
         }

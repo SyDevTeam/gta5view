@@ -395,7 +395,7 @@ Pictures and Savegames</source>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="216"/>
-        <location filename="../ProfileInterface.cpp" line="744"/>
+        <location filename="../ProfileInterface.cpp" line="751"/>
         <source>Custom Avatar</source>
         <comment>Custom Avatar Description in SC, don&apos;t use Special Character!</comment>
         <translatorcomment>소셜클럽의 사용자 지정 아바타 설명입니다. 특수 문자를 사용하지 마십시오!</translatorcomment>
@@ -404,7 +404,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../ImportDialog.cpp" line="262"/>
         <location filename="../ImportDialog.cpp" line="748"/>
-        <location filename="../ProfileInterface.cpp" line="760"/>
+        <location filename="../ProfileInterface.cpp" line="767"/>
         <source>Custom Picture</source>
         <comment>Custom Picture Description in SC, don&apos;t use Special Character!</comment>
         <translatorcomment>소셜클럽의 사용자 지정 그림 설명입니다. 특수 문자를 사용하지 마십시오!</translatorcomment>
@@ -1073,37 +1073,37 @@ Y: %2</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="186"/>
-        <location filename="../ProfileInterface.cpp" line="1648"/>
+        <location filename="../ProfileInterface.cpp" line="1659"/>
         <source>Export as &amp;Picture...</source>
         <translation>내 PC에 이미지로 내보내기(&amp;P)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="187"/>
-        <location filename="../ProfileInterface.cpp" line="1649"/>
+        <location filename="../ProfileInterface.cpp" line="1660"/>
         <source>Export as &amp;Snapmatic...</source>
         <translation>내 PC에 스냅매틱으로 내보내기(&amp;S)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="189"/>
-        <location filename="../ProfileInterface.cpp" line="1642"/>
+        <location filename="../ProfileInterface.cpp" line="1653"/>
         <source>&amp;Edit Properties...</source>
         <translation>속성 편집(&amp;E)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="190"/>
-        <location filename="../ProfileInterface.cpp" line="1643"/>
+        <location filename="../ProfileInterface.cpp" line="1654"/>
         <source>&amp;Overwrite Image...</source>
         <translation>이미지 덮어쓰기(&amp;O)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="192"/>
-        <location filename="../ProfileInterface.cpp" line="1645"/>
+        <location filename="../ProfileInterface.cpp" line="1656"/>
         <source>Open &amp;Map Viewer...</source>
         <translation>지도 뷰어 열기(&amp;M)</translation>
     </message>
     <message>
         <location filename="../PictureDialog.cpp" line="194"/>
-        <location filename="../ProfileInterface.cpp" line="1646"/>
+        <location filename="../ProfileInterface.cpp" line="1657"/>
         <source>Open &amp;JSON Editor...</source>
         <translation>JSON 편집기 열기(&amp;J)</translation>
     </message>
@@ -1283,28 +1283,28 @@ Press 1 for Default View</source>
         <translation>취소(&amp;C)</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="160"/>
+        <location filename="../PlayerListDialog.cpp" line="161"/>
         <source>Add Players...</source>
         <translation>플레이어 추가</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="160"/>
+        <location filename="../PlayerListDialog.cpp" line="161"/>
         <source>Failed to add more Players because the limit of Players are %1!</source>
         <translation>플레이어의 제한이 %1이므로 플레이어를 추가하지 못했습니다!</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="176"/>
-        <location filename="../PlayerListDialog.cpp" line="195"/>
+        <location filename="../PlayerListDialog.cpp" line="177"/>
+        <location filename="../PlayerListDialog.cpp" line="196"/>
         <source>Add Player...</source>
         <translation>플레이어 추가</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="176"/>
+        <location filename="../PlayerListDialog.cpp" line="177"/>
         <source>Enter Social Club Player ID</source>
         <translation>소셜 클럽 플레이어 아이디 입력</translation>
     </message>
     <message>
-        <location filename="../PlayerListDialog.cpp" line="195"/>
+        <location filename="../PlayerListDialog.cpp" line="196"/>
         <source>Failed to add Player %1 because Player %1 is already added!</source>
         <translation>%1 플레이어가 이미 추가되어 %1 플레이어를 추가하지 못했습니다!</translation>
     </message>
@@ -1356,23 +1356,23 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ImportDialog.cpp" line="523"/>
         <location filename="../ImportDialog.cpp" line="833"/>
-        <location filename="../ProfileInterface.cpp" line="537"/>
-        <location filename="../ProfileInterface.cpp" line="538"/>
-        <location filename="../ProfileInterface.cpp" line="576"/>
-        <location filename="../ProfileInterface.cpp" line="597"/>
-        <location filename="../ProfileInterface.cpp" line="627"/>
-        <location filename="../ProfileInterface.cpp" line="669"/>
-        <location filename="../ProfileInterface.cpp" line="704"/>
-        <location filename="../ProfileInterface.cpp" line="804"/>
-        <location filename="../ProfileInterface.cpp" line="813"/>
-        <location filename="../ProfileInterface.cpp" line="961"/>
-        <location filename="../ProfileInterface.cpp" line="967"/>
-        <location filename="../ProfileInterface.cpp" line="1000"/>
-        <location filename="../ProfileInterface.cpp" line="1122"/>
-        <location filename="../ProfileInterface.cpp" line="1128"/>
-        <location filename="../ProfileInterface.cpp" line="1215"/>
-        <location filename="../ProfileInterface.cpp" line="1249"/>
-        <location filename="../ProfileInterface.cpp" line="1255"/>
+        <location filename="../ProfileInterface.cpp" line="544"/>
+        <location filename="../ProfileInterface.cpp" line="545"/>
+        <location filename="../ProfileInterface.cpp" line="583"/>
+        <location filename="../ProfileInterface.cpp" line="604"/>
+        <location filename="../ProfileInterface.cpp" line="634"/>
+        <location filename="../ProfileInterface.cpp" line="676"/>
+        <location filename="../ProfileInterface.cpp" line="711"/>
+        <location filename="../ProfileInterface.cpp" line="811"/>
+        <location filename="../ProfileInterface.cpp" line="820"/>
+        <location filename="../ProfileInterface.cpp" line="968"/>
+        <location filename="../ProfileInterface.cpp" line="974"/>
+        <location filename="../ProfileInterface.cpp" line="1007"/>
+        <location filename="../ProfileInterface.cpp" line="1129"/>
+        <location filename="../ProfileInterface.cpp" line="1135"/>
+        <location filename="../ProfileInterface.cpp" line="1224"/>
+        <location filename="../ProfileInterface.cpp" line="1260"/>
+        <location filename="../ProfileInterface.cpp" line="1266"/>
         <source>Import...</source>
         <translation>가져오기</translation>
     </message>
@@ -1389,14 +1389,14 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ImportDialog.cpp" line="533"/>
         <location filename="../ImportDialog.cpp" line="843"/>
-        <location filename="../ProfileInterface.cpp" line="555"/>
+        <location filename="../ProfileInterface.cpp" line="562"/>
         <source>All image files (%1)</source>
         <translation>모든 이미지 파일 (%1)</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="534"/>
         <location filename="../ImportDialog.cpp" line="844"/>
-        <location filename="../ProfileInterface.cpp" line="556"/>
+        <location filename="../ProfileInterface.cpp" line="563"/>
         <location filename="../UserInterface.cpp" line="590"/>
         <source>All files (**)</source>
         <translation>모든 파일 (**)</translation>
@@ -1404,14 +1404,14 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ImportDialog.cpp" line="551"/>
         <location filename="../ImportDialog.cpp" line="861"/>
-        <location filename="../ProfileInterface.cpp" line="804"/>
+        <location filename="../ProfileInterface.cpp" line="811"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
         <translation>파일을 열 수 없으므로 %1을 가져올 수 없습니다.</translation>
     </message>
     <message>
         <location filename="../ImportDialog.cpp" line="559"/>
         <location filename="../ImportDialog.cpp" line="869"/>
-        <location filename="../ProfileInterface.cpp" line="813"/>
+        <location filename="../ProfileInterface.cpp" line="820"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
         <translation>파일을 구문 분석할 수 없으므로 %1을 가져올 수 없습니다.</translation>
     </message>
@@ -1421,58 +1421,58 @@ Press 1 for Default View</source>
         <translation>활성화된 이미지: %2의 %1</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="183"/>
+        <location filename="../ProfileInterface.cpp" line="185"/>
         <source>Loading...</source>
         <translation>불러오는 중...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="464"/>
+        <location filename="../ProfileInterface.cpp" line="471"/>
         <source>Snapmatic Loader</source>
         <translation>스냅매틱 불러오기</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="464"/>
+        <location filename="../ProfileInterface.cpp" line="471"/>
         <source>&lt;h4&gt;Following Snapmatic Pictures got repaired&lt;/h4&gt;%1</source>
         <translation>&lt;h4&gt;다음 스냅매틱 이미지를 복구했습니다. &lt;/h4&gt;%1</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="551"/>
+        <location filename="../ProfileInterface.cpp" line="558"/>
         <source>Importable files (%1)</source>
         <translation>가져올 수 있는 파일 (%1)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="552"/>
+        <location filename="../ProfileInterface.cpp" line="559"/>
         <location filename="../UserInterface.cpp" line="587"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V로 내보내기 (*.g5e)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="553"/>
+        <location filename="../ProfileInterface.cpp" line="560"/>
         <location filename="../UserInterface.cpp" line="588"/>
         <source>Savegames files (SGTA*)</source>
         <translation>세이브 파일 (SGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="554"/>
+        <location filename="../ProfileInterface.cpp" line="561"/>
         <location filename="../UserInterface.cpp" line="589"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>스냅매틱 이미지 (PGTA*)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="576"/>
-        <location filename="../ProfileInterface.cpp" line="967"/>
+        <location filename="../ProfileInterface.cpp" line="583"/>
+        <location filename="../ProfileInterface.cpp" line="974"/>
         <location filename="../UserInterface.cpp" line="669"/>
         <source>No valid file is selected</source>
         <translation>올바른 파일이 선택되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="598"/>
-        <location filename="../ProfileInterface.cpp" line="614"/>
+        <location filename="../ProfileInterface.cpp" line="605"/>
+        <location filename="../ProfileInterface.cpp" line="621"/>
         <source>Import file %1 of %2 files</source>
         <translation>%2 파일 중 %1 파일을 가져옵니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="627"/>
+        <location filename="../ProfileInterface.cpp" line="634"/>
         <source>Import failed with...
 
 %1</source>
@@ -1481,91 +1481,91 @@ Press 1 for Default View</source>
 %1</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="669"/>
+        <location filename="../ProfileInterface.cpp" line="676"/>
         <location filename="../UserInterface.cpp" line="625"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>스냅매틱 이미지를 읽지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="704"/>
+        <location filename="../ProfileInterface.cpp" line="711"/>
         <location filename="../UserInterface.cpp" line="639"/>
         <source>Failed to read Savegame file</source>
         <translation>세이브 파일을 읽지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="961"/>
+        <location filename="../ProfileInterface.cpp" line="968"/>
         <source>Can&apos;t import %1 because file format can&apos;t be detected</source>
         <translation>파일 형식을 검색할 수 없으므로 %1을 가져올 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1016"/>
+        <location filename="../ProfileInterface.cpp" line="1023"/>
         <source>Prepare Content for Import...</source>
         <translation>가져올 컨텐츠를 준비합니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1122"/>
+        <location filename="../ProfileInterface.cpp" line="1129"/>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e</source>
         <translation>스냅매틱 이미지를 가져오지 못했습니다. 파일이 PGTA로 시작되거나 .g5e로 끝나지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1128"/>
+        <location filename="../ProfileInterface.cpp" line="1135"/>
         <source>A Snapmatic picture already exists with the uid %1, you want assign your import a new uid and timestamp?</source>
         <translation>uid %1이(가) 있는 스냅매틱 이미지가 이미 있습니다. 가져오기를 새 uid 및 타임스탬프를 할당하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1215"/>
+        <location filename="../ProfileInterface.cpp" line="1224"/>
         <source>Failed to import the Snapmatic picture, can&apos;t copy the file into profile</source>
         <translation>스냅매틱 이미지를 가져오지 못했습니다. 파일을 프로필에 복사할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1249"/>
+        <location filename="../ProfileInterface.cpp" line="1260"/>
         <source>Failed to import the Savegame, can&apos;t copy the file into profile</source>
         <translation>게임 저장 파일을 가져오지 못했습니다. 파일을 프로필에 복사할 수 없습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1255"/>
+        <location filename="../ProfileInterface.cpp" line="1266"/>
         <source>Failed to import the Savegame, no Savegame slot is left</source>
         <translation>게임 저장 파일을 가져오지 못했습니다. 게임 저장 슬롯이 남아 있지 않습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1318"/>
-        <location filename="../ProfileInterface.cpp" line="1353"/>
-        <location filename="../ProfileInterface.cpp" line="1390"/>
-        <location filename="../ProfileInterface.cpp" line="1423"/>
-        <location filename="../ProfileInterface.cpp" line="1440"/>
+        <location filename="../ProfileInterface.cpp" line="1329"/>
+        <location filename="../ProfileInterface.cpp" line="1364"/>
+        <location filename="../ProfileInterface.cpp" line="1401"/>
+        <location filename="../ProfileInterface.cpp" line="1434"/>
+        <location filename="../ProfileInterface.cpp" line="1451"/>
         <source>Export selected...</source>
         <translation>내보내기를 선택했습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1338"/>
-        <location filename="../ProfileInterface.cpp" line="1355"/>
+        <location filename="../ProfileInterface.cpp" line="1349"/>
+        <location filename="../ProfileInterface.cpp" line="1366"/>
         <source>JPG pictures and GTA Snapmatic</source>
         <translation>JPG 이미지 및 GTA 스냅매틱</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1339"/>
-        <location filename="../ProfileInterface.cpp" line="1359"/>
+        <location filename="../ProfileInterface.cpp" line="1350"/>
+        <location filename="../ProfileInterface.cpp" line="1370"/>
         <source>JPG pictures only</source>
         <translation>JPG 이미지만</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1340"/>
-        <location filename="../ProfileInterface.cpp" line="1362"/>
+        <location filename="../ProfileInterface.cpp" line="1351"/>
+        <location filename="../ProfileInterface.cpp" line="1373"/>
         <source>GTA Snapmatic only</source>
         <translation>GTA 스냅매틱만</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1353"/>
+        <location filename="../ProfileInterface.cpp" line="1364"/>
         <source>%1Export Snapmatic pictures%2&lt;br&gt;&lt;br&gt;JPG pictures make it possible to open the picture with a Image Viewer&lt;br&gt;GTA Snapmatic make it possible to import the picture into the game&lt;br&gt;&lt;br&gt;Export as:</source>
         <translation>%1 스냅매틱 이미지 내보내기를 시작합니다.%2 &lt;br&gt;&lt;br&gt;JPG 이미지를 사용하면 이미지 뷰어로 파일을 열 수 있습니다.&lt;br&gt;GTA 스냅매틱을 사용하면 다음과 같이 이미지를 게임으로 가져올 수 있습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1391"/>
+        <location filename="../ProfileInterface.cpp" line="1402"/>
         <source>Initialising export...</source>
         <translation>내보내기를 초기화하는 중...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1423"/>
+        <location filename="../ProfileInterface.cpp" line="1434"/>
         <source>Export failed with...
 
 %1</source>
@@ -1574,45 +1574,45 @@ Press 1 for Default View</source>
 %1</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1440"/>
-        <location filename="../ProfileInterface.cpp" line="1475"/>
+        <location filename="../ProfileInterface.cpp" line="1451"/>
+        <location filename="../ProfileInterface.cpp" line="1486"/>
         <source>No Snapmatic pictures or Savegames files are selected</source>
         <translation>스냅매틱 이미지 또는 세이브 파일이 선택되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1447"/>
-        <location filename="../ProfileInterface.cpp" line="1470"/>
-        <location filename="../ProfileInterface.cpp" line="1475"/>
+        <location filename="../ProfileInterface.cpp" line="1458"/>
+        <location filename="../ProfileInterface.cpp" line="1481"/>
+        <location filename="../ProfileInterface.cpp" line="1486"/>
         <source>Remove selected</source>
         <translation>선택한 항목 삭제</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1447"/>
+        <location filename="../ProfileInterface.cpp" line="1458"/>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
         <translation>선택한 스냅매틱 이미지 및 세이브 파일을 삭제하시겠습니까?</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1470"/>
+        <location filename="../ProfileInterface.cpp" line="1481"/>
         <source>Failed to remove all selected Snapmatic pictures and/or Savegame files</source>
         <translation>선택한 모든 스냅매틱 이미지 및 세이브 파일을 삭제하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1572"/>
-        <location filename="../ProfileInterface.cpp" line="1602"/>
-        <location filename="../ProfileInterface.cpp" line="2005"/>
-        <location filename="../ProfileInterface.cpp" line="2084"/>
-        <location filename="../ProfileInterface.cpp" line="2173"/>
-        <location filename="../ProfileInterface.cpp" line="2288"/>
+        <location filename="../ProfileInterface.cpp" line="1583"/>
+        <location filename="../ProfileInterface.cpp" line="1613"/>
+        <location filename="../ProfileInterface.cpp" line="2016"/>
+        <location filename="../ProfileInterface.cpp" line="2095"/>
+        <location filename="../ProfileInterface.cpp" line="2184"/>
+        <location filename="../ProfileInterface.cpp" line="2299"/>
         <source>No Snapmatic pictures are selected</source>
         <translation>스냅매틱 이미지가 선택되지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1583"/>
-        <location filename="../ProfileInterface.cpp" line="1613"/>
-        <location filename="../ProfileInterface.cpp" line="2065"/>
-        <location filename="../ProfileInterface.cpp" line="2154"/>
-        <location filename="../ProfileInterface.cpp" line="2269"/>
-        <location filename="../ProfileInterface.cpp" line="2361"/>
+        <location filename="../ProfileInterface.cpp" line="1594"/>
+        <location filename="../ProfileInterface.cpp" line="1624"/>
+        <location filename="../ProfileInterface.cpp" line="2076"/>
+        <location filename="../ProfileInterface.cpp" line="2165"/>
+        <location filename="../ProfileInterface.cpp" line="2280"/>
+        <location filename="../ProfileInterface.cpp" line="2372"/>
         <source>%1 failed with...
 
 %2</source>
@@ -1623,84 +1623,84 @@ Press 1 for Default View</source>
 %2</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2005"/>
-        <location filename="../ProfileInterface.cpp" line="2065"/>
+        <location filename="../ProfileInterface.cpp" line="2016"/>
+        <location filename="../ProfileInterface.cpp" line="2076"/>
         <source>Qualify as Avatar</source>
         <translation>아바타 자격 부여</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2016"/>
-        <location filename="../ProfileInterface.cpp" line="2109"/>
-        <location filename="../ProfileInterface.cpp" line="2224"/>
-        <location filename="../ProfileInterface.cpp" line="2319"/>
+        <location filename="../ProfileInterface.cpp" line="2027"/>
+        <location filename="../ProfileInterface.cpp" line="2120"/>
+        <location filename="../ProfileInterface.cpp" line="2235"/>
+        <location filename="../ProfileInterface.cpp" line="2330"/>
         <source>Patch selected...</source>
         <translation>패치가 선택됨...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2017"/>
-        <location filename="../ProfileInterface.cpp" line="2035"/>
-        <location filename="../ProfileInterface.cpp" line="2110"/>
-        <location filename="../ProfileInterface.cpp" line="2128"/>
-        <location filename="../ProfileInterface.cpp" line="2225"/>
-        <location filename="../ProfileInterface.cpp" line="2243"/>
-        <location filename="../ProfileInterface.cpp" line="2320"/>
-        <location filename="../ProfileInterface.cpp" line="2338"/>
+        <location filename="../ProfileInterface.cpp" line="2028"/>
+        <location filename="../ProfileInterface.cpp" line="2046"/>
+        <location filename="../ProfileInterface.cpp" line="2121"/>
+        <location filename="../ProfileInterface.cpp" line="2139"/>
+        <location filename="../ProfileInterface.cpp" line="2236"/>
+        <location filename="../ProfileInterface.cpp" line="2254"/>
+        <location filename="../ProfileInterface.cpp" line="2331"/>
+        <location filename="../ProfileInterface.cpp" line="2349"/>
         <source>Patch file %1 of %2 files</source>
         <translation>%2 파일의 %1 패치 파일입니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2065"/>
+        <location filename="../ProfileInterface.cpp" line="2076"/>
         <source>Qualify</source>
         <comment>%1 failed with...</comment>
         <translatorcomment>%1이(가) 실패한 경우...</translatorcomment>
         <translation>자격 부여</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2084"/>
-        <location filename="../ProfileInterface.cpp" line="2154"/>
+        <location filename="../ProfileInterface.cpp" line="2095"/>
+        <location filename="../ProfileInterface.cpp" line="2165"/>
         <source>Change Players...</source>
         <translation>플레이어 변경</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2154"/>
+        <location filename="../ProfileInterface.cpp" line="2165"/>
         <source>Change Players</source>
         <comment>%1 failed with...</comment>
         <translatorcomment>%1이(가) 실패한 경우...</translatorcomment>
         <translation>플레이어 변경</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2173"/>
-        <location filename="../ProfileInterface.cpp" line="2203"/>
-        <location filename="../ProfileInterface.cpp" line="2269"/>
+        <location filename="../ProfileInterface.cpp" line="2184"/>
+        <location filename="../ProfileInterface.cpp" line="2214"/>
+        <location filename="../ProfileInterface.cpp" line="2280"/>
         <source>Change Crew...</source>
         <translation>조직 변경</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2203"/>
+        <location filename="../ProfileInterface.cpp" line="2214"/>
         <source>Failed to enter a valid Snapmatic Crew ID</source>
         <translation>올바른 스냅매틱 조직 아이디를 입력하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2269"/>
+        <location filename="../ProfileInterface.cpp" line="2280"/>
         <source>Change Crew</source>
         <comment>%1 failed with...</comment>
         <translatorcomment>%1이(가) 실패한 경우...</translatorcomment>
         <translation>조직 변경</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2288"/>
-        <location filename="../ProfileInterface.cpp" line="2302"/>
-        <location filename="../ProfileInterface.cpp" line="2361"/>
+        <location filename="../ProfileInterface.cpp" line="2299"/>
+        <location filename="../ProfileInterface.cpp" line="2313"/>
+        <location filename="../ProfileInterface.cpp" line="2372"/>
         <source>Change Title...</source>
         <translation>제목 변경</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2302"/>
+        <location filename="../ProfileInterface.cpp" line="2313"/>
         <source>Failed to enter a valid Snapmatic title</source>
         <translation>올바른 스냅매틱 제목을 입력하지 않았습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2361"/>
+        <location filename="../ProfileInterface.cpp" line="2372"/>
         <source>Change Title</source>
         <comment>%1 failed with...</comment>
         <translatorcomment>%1이(가) 실패한 경우...</translatorcomment>
@@ -1800,45 +1800,45 @@ Press 1 for Default View</source>
         <translation>삭제</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1716"/>
+        <location filename="../ProfileInterface.cpp" line="1727"/>
         <source>&amp;View</source>
         <translation>보기(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1681"/>
-        <location filename="../ProfileInterface.cpp" line="1717"/>
-        <location filename="../ProfileInterface.cpp" line="1747"/>
+        <location filename="../ProfileInterface.cpp" line="1692"/>
+        <location filename="../ProfileInterface.cpp" line="1728"/>
+        <location filename="../ProfileInterface.cpp" line="1758"/>
         <source>&amp;Export</source>
         <translation>내보내기(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1682"/>
-        <location filename="../ProfileInterface.cpp" line="1718"/>
-        <location filename="../ProfileInterface.cpp" line="1748"/>
+        <location filename="../ProfileInterface.cpp" line="1693"/>
+        <location filename="../ProfileInterface.cpp" line="1729"/>
+        <location filename="../ProfileInterface.cpp" line="1759"/>
         <source>&amp;Remove</source>
         <translation>삭제(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1721"/>
-        <location filename="../ProfileInterface.cpp" line="1751"/>
+        <location filename="../ProfileInterface.cpp" line="1732"/>
+        <location filename="../ProfileInterface.cpp" line="1762"/>
         <source>&amp;Select</source>
         <translation>선택(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1724"/>
-        <location filename="../ProfileInterface.cpp" line="1753"/>
+        <location filename="../ProfileInterface.cpp" line="1735"/>
+        <location filename="../ProfileInterface.cpp" line="1764"/>
         <source>&amp;Deselect</source>
         <translation>선택 해제(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1727"/>
-        <location filename="../ProfileInterface.cpp" line="1756"/>
+        <location filename="../ProfileInterface.cpp" line="1738"/>
+        <location filename="../ProfileInterface.cpp" line="1767"/>
         <source>Select &amp;All</source>
         <translation>모두 선택(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1730"/>
-        <location filename="../ProfileInterface.cpp" line="1759"/>
+        <location filename="../ProfileInterface.cpp" line="1741"/>
+        <location filename="../ProfileInterface.cpp" line="1770"/>
         <source>&amp;Deselect All</source>
         <translation>모두 선택 해제(&amp;D)</translation>
     </message>
@@ -2043,25 +2043,25 @@ Press 1 for Default View</source>
         <translation>JSON 오류로 인해 스냅매틱 속성을 패치하지 못했습니다.</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2197"/>
+        <location filename="../ProfileInterface.cpp" line="2208"/>
         <location filename="../SnapmaticEditor.cpp" line="403"/>
         <source>Snapmatic Crew</source>
         <translation>조직 스냅매틱</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2197"/>
+        <location filename="../ProfileInterface.cpp" line="2208"/>
         <location filename="../SnapmaticEditor.cpp" line="403"/>
         <source>New Snapmatic crew:</source>
         <translation>새로운 조직 스냅매틱:</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2299"/>
+        <location filename="../ProfileInterface.cpp" line="2310"/>
         <location filename="../SnapmaticEditor.cpp" line="379"/>
         <source>Snapmatic Title</source>
         <translation>스냅매틱 제목</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2299"/>
+        <location filename="../ProfileInterface.cpp" line="2310"/>
         <location filename="../SnapmaticEditor.cpp" line="379"/>
         <source>New Snapmatic title:</source>
         <translation>새로운 스냅매틱 제목:</translation>
@@ -2241,62 +2241,62 @@ Press 1 for Default View</source>
         <translation>삭제</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1635"/>
-        <location filename="../ProfileInterface.cpp" line="1672"/>
-        <location filename="../ProfileInterface.cpp" line="1738"/>
+        <location filename="../ProfileInterface.cpp" line="1646"/>
+        <location filename="../ProfileInterface.cpp" line="1683"/>
+        <location filename="../ProfileInterface.cpp" line="1749"/>
         <source>Edi&amp;t</source>
         <translation>편집(&amp;T)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1637"/>
-        <location filename="../ProfileInterface.cpp" line="1678"/>
-        <location filename="../ProfileInterface.cpp" line="1744"/>
+        <location filename="../ProfileInterface.cpp" line="1648"/>
+        <location filename="../ProfileInterface.cpp" line="1689"/>
+        <location filename="../ProfileInterface.cpp" line="1755"/>
         <source>Show &amp;In-game</source>
         <translation>인게임에서 보이기(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1640"/>
-        <location filename="../ProfileInterface.cpp" line="1679"/>
-        <location filename="../ProfileInterface.cpp" line="1745"/>
+        <location filename="../ProfileInterface.cpp" line="1651"/>
+        <location filename="../ProfileInterface.cpp" line="1690"/>
+        <location filename="../ProfileInterface.cpp" line="1756"/>
         <source>Hide &amp;In-game</source>
         <translation>인게임에서 숨기기(&amp;I)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1647"/>
+        <location filename="../ProfileInterface.cpp" line="1658"/>
         <source>&amp;Export</source>
         <translation>내보내기(&amp;E)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1650"/>
+        <location filename="../ProfileInterface.cpp" line="1661"/>
         <source>&amp;View</source>
         <translation>보기(&amp;V)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1653"/>
+        <location filename="../ProfileInterface.cpp" line="1664"/>
         <source>&amp;Remove</source>
         <translation>삭제(&amp;R)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1656"/>
-        <location filename="../ProfileInterface.cpp" line="1685"/>
+        <location filename="../ProfileInterface.cpp" line="1667"/>
+        <location filename="../ProfileInterface.cpp" line="1696"/>
         <source>&amp;Select</source>
         <translation>선택(&amp;S)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1658"/>
-        <location filename="../ProfileInterface.cpp" line="1688"/>
+        <location filename="../ProfileInterface.cpp" line="1669"/>
+        <location filename="../ProfileInterface.cpp" line="1699"/>
         <source>&amp;Deselect</source>
         <translation>선택 해제(&amp;D)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1661"/>
-        <location filename="../ProfileInterface.cpp" line="1691"/>
+        <location filename="../ProfileInterface.cpp" line="1672"/>
+        <location filename="../ProfileInterface.cpp" line="1702"/>
         <source>Select &amp;All</source>
         <translation>모두 선택(&amp;A)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1664"/>
-        <location filename="../ProfileInterface.cpp" line="1694"/>
+        <location filename="../ProfileInterface.cpp" line="1675"/>
+        <location filename="../ProfileInterface.cpp" line="1705"/>
         <source>&amp;Deselect All</source>
         <translation>모두 선택 해제(&amp;D)</translation>
     </message>
@@ -2500,42 +2500,42 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="346"/>
-        <location filename="../ProfileInterface.cpp" line="1676"/>
-        <location filename="../ProfileInterface.cpp" line="1742"/>
+        <location filename="../ProfileInterface.cpp" line="1687"/>
+        <location filename="../ProfileInterface.cpp" line="1753"/>
         <source>Change &amp;Title...</source>
         <translation>제목 변경(&amp;T)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="354"/>
-        <location filename="../ProfileInterface.cpp" line="1675"/>
-        <location filename="../ProfileInterface.cpp" line="1741"/>
+        <location filename="../ProfileInterface.cpp" line="1686"/>
+        <location filename="../ProfileInterface.cpp" line="1752"/>
         <source>Change &amp;Crew...</source>
         <translation>&amp;조직 상징 변경(&amp;C)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="362"/>
-        <location filename="../ProfileInterface.cpp" line="1673"/>
-        <location filename="../ProfileInterface.cpp" line="1739"/>
+        <location filename="../ProfileInterface.cpp" line="1684"/>
+        <location filename="../ProfileInterface.cpp" line="1750"/>
         <source>&amp;Qualify as Avatar</source>
         <translation>아바타 자격 부여(&amp;Q)</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="370"/>
-        <location filename="../ProfileInterface.cpp" line="1674"/>
-        <location filename="../ProfileInterface.cpp" line="1740"/>
+        <location filename="../ProfileInterface.cpp" line="1685"/>
+        <location filename="../ProfileInterface.cpp" line="1751"/>
         <source>Change &amp;Players...</source>
         <translation>플레이어 변경(&amp;P)</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1572"/>
         <location filename="../ProfileInterface.cpp" line="1583"/>
+        <location filename="../ProfileInterface.cpp" line="1594"/>
         <location filename="../SnapmaticWidget.cpp" line="328"/>
         <source>Show In-game</source>
         <translation>인게임 보이기</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="1602"/>
         <location filename="../ProfileInterface.cpp" line="1613"/>
+        <location filename="../ProfileInterface.cpp" line="1624"/>
         <location filename="../SnapmaticWidget.cpp" line="322"/>
         <source>Hide In-game</source>
         <translation>인게임 숨기기</translation>
