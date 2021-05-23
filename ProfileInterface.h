@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2021 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -30,6 +30,7 @@
 #include "SavegameData.h"
 #include "CrewDatabase.h"
 #include "pcg_basic.h"
+#include <QFileSystemWatcher>
 #include <QProgressDialog>
 #include <QSpacerItem>
 #include <QDateTime>
@@ -89,6 +90,8 @@ private slots:
     void dialogNextPictureRequested(QWidget *dialog);
     void dialogPreviousPictureRequested(QWidget *dialog);
     void on_saProfileContent_dropped(const QMimeData *mimeData);
+    void directoryChanged(const QString &path);
+    void directoryScanned(QVector<QString> savegameFiles, QVector<QString> snapmaticPics);
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
@@ -104,6 +107,9 @@ private:
     QList<SavegameData*> savegames;
     QList<SnapmaticPicture*> pictures;
     QMap<ProfileWidget*,QString> widgets;
+    QFileSystemWatcher fileSystemWatcher;
+    QVector<QString> savegameFiles;
+    QVector<QString> snapmaticPics;
     QSpacerItem *saSpacerItem;
     QStringList fixedPictures;
     QString enabledPicStr;

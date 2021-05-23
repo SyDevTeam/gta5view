@@ -81,6 +81,9 @@ void ProfileLoader::run()
     closedir(dirp);
 #endif
 
+    // Directory successfully scanned
+    emit directoryScanned(savegameFiles, snapmaticPics);
+
     // Loading pictures and savegames
     emit loadingProgress(curFile, maximumV);
     for (const QString &SavegameFile : qAsConst(savegameFiles)) {

@@ -138,6 +138,9 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     // Seed RNG
     pcg32_srandom_r(&rng, time(NULL), (intptr_t)&rng);
 
+    // Register Metatypes
+    qRegisterMetaType<QVector<QString>>();
+
     setMouseTracking(true);
     installEventFilter(this);
 }
@@ -179,6 +182,7 @@ void ProfileInterface::setupProfileInterface()
     fixedPictures.clear();
     ui->labProfileLoading->setText(tr("Loading..."));
     profileLoader = new ProfileLoader(profileFolder, crewDB);
+    QObject::connect(profileLoader, SIGNAL(directoryScanned(QVector<QString>,QVector<QString>)), this, SLOT(directoryScanned(QVector<QString>,QVector<QString>)));
     QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(savegameLoaded_event(SavegameData*, QString)));
     QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*)), this, SLOT(pictureLoaded_event(SnapmaticPicture*)));
     QObject::connect(profileLoader, SIGNAL(pictureFixed(SnapmaticPicture*)), this, SLOT(pictureFixed_event(SnapmaticPicture*)));
@@ -252,6 +256,63 @@ void ProfileInterface::loadingProgress(int value, int maximum)
     ui->pbPictureLoading->setMaximum(maximum);
     ui->pbPictureLoading->setValue(value);
     ui->labProfileLoading->setText(loadingStr.arg(QString::number(value), QString::number(maximum)));
+}
+
+void ProfileInterface::directoryChanged(const QString &path)
+{
+    QDir dir(profileFolder);
+    QVector<QString> t_savegameFiles;
+    QVector<QString> t_snapmaticPics;
+    QVector<QString> n_savegameFiles;
+    QVector<QString> n_snapmaticPics;
+    const QStringList files = dir.entryList(QDir::Files);
+    for (const QString &fileName : files) {
+        if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
+            t_savegameFiles << fileName;
+            if (!savegameFiles.contains(fileName)) {
+                n_savegameFiles << fileName;
+            }
+        }
+        if (fileName.startsWith("PGTA5") && !fileName.endsWith(".bak")) {
+            t_snapmaticPics << fileName;
+            if (!snapmaticPics.contains(fileName)) {
+                n_snapmaticPics << fileName;
+            }
+        }
+    }
+    savegameFiles = t_savegameFiles;
+    snapmaticPics = t_snapmaticPics;
+
+    if (!n_savegameFiles.isEmpty() || !n_snapmaticPics.isEmpty()) {
+        QEventLoop loop;
+        QTimer::singleShot(1000, &loop, SLOT(quit()));
+        loop.exec();
+
+        for (const QString &fileName : qAsConst(n_savegameFiles)) {
+            const QString filePath = profileFolder % "/" % fileName;
+            SavegameData *savegame = new SavegameData(filePath);
+            if (savegame->readingSavegame())
+                savegameLoaded(savegame, filePath, true);
+            else
+                delete savegame;
+        }
+        for (const QString &fileName : qAsConst(n_snapmaticPics)) {
+            const QString filePath = profileFolder % "/" % fileName;
+            SnapmaticPicture *picture = new SnapmaticPicture(filePath);
+            if (picture->readingPicture(true))
+                pictureLoaded(picture, true);
+            else
+                delete picture;
+        }
+    }
+}
+
+void ProfileInterface::directoryScanned(QVector<QString> savegameFiles_s, QVector<QString> snapmaticPics_s)
+{
+    savegameFiles = savegameFiles_s;
+    snapmaticPics = snapmaticPics_s;
+    fileSystemWatcher.addPath(profileFolder);
+    QObject::connect(&fileSystemWatcher, SIGNAL(directoryChanged(QString)), this, SLOT(directoryChanged(QString)));
 }
 
 void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
@@ -727,7 +788,8 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
 #endif
                     picture->setSnapmaticProperties(spJson);
-                    picture->setPicFileName(QString("PGTA5%1").arg(QString::number(spJson.uid)));
+                    const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
+                    picture->setPicFileName(picFileName);
                     picture->setPictureTitle(customImageTitle);
                     picture->updateStrings();
                     bool success = importSnapmaticPicture(picture, notMultiple);
@@ -784,7 +846,8 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                             spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
 #endif
                             picture->setSnapmaticProperties(spJson);
-                            picture->setPicFileName(QString("PGTA5%1").arg(QString::number(spJson.uid)));
+                            const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
+                            picture->setPicFileName(picFileName);
                             picture->setPictureTitle(importDialog->getImageTitle());
                             picture->updateStrings();
                             success = importSnapmaticPicture(picture, notMultiple);
@@ -1028,7 +1091,8 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
                 spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
 #endif
                 picture->setSnapmaticProperties(spJson);
-                picture->setPicFileName(QString("PGTA5%1").arg(QString::number(spJson.uid)));
+                const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
+                picture->setPicFileName(picFileName);
                 picture->setPictureTitle(importDialog->getImageTitle());
                 picture->updateStrings();
                 success = importSnapmaticPicture(picture, true);
@@ -1142,6 +1206,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
     if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format)) {
         picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
         picture->setPicFilePath(profileFolder % "/" % adjustedFileName);
+        snapmaticPics << picture->getPictureFileName();
         pictureLoaded(picture, true);
         return true;
     }
@@ -1172,9 +1237,11 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
     }
 
     if (foundFree) {
-        if (QFile::copy(sgdPath, profileFolder % "/" % sgdFileName)) {
-            savegame->setSavegameFileName(profileFolder % "/" % sgdFileName);
-            savegameLoaded(savegame, profileFolder % "/" % sgdFileName, true);
+        const QString newSgdPath = profileFolder % "/" % sgdFileName;
+        if (QFile::copy(sgdPath, newSgdPath)) {
+            savegame->setSavegameFileName(newSgdPath);
+            savegameFiles << newSgdPath;
+            savegameLoaded(savegame, newSgdPath, true);
             return true;
         }
         else {
@@ -2131,7 +2198,7 @@ preSelectionCrewID:
             if (ok && !newCrew.isEmpty()) {
                 if (newCrew.contains(" ")) newCrew = newCrew.split(" ").at(0);
                 if (newCrew.length() > 10) return;
-                for (const QChar &crewChar : newCrew) {
+                for (const QChar &crewChar : qAsConst(newCrew)) {
                     if (!crewChar.isNumber()) {
                         QMessageBox::warning(this, tr("Change Crew..."), tr("Failed to enter a valid Snapmatic Crew ID"));
                         goto preSelectionCrewID;
