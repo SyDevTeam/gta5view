@@ -42,7 +42,7 @@ AboutDialog::AboutDialog(QWidget *parent) :
     const QString projectBuild = AppEnv::getBuildDateTime();
     const QString buildStr = GTA5SYNC_BUILDSTRING;
 #ifdef GTA5SYNC_COMMIT
-    if ((strcmp(literalBuildType, REL_BUILDTYPE) == 0) && !appVersion.contains("-"))
+    if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
         appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
 
