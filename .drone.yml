@@ -2,7 +2,7 @@ kind: pipeline
 type: docker
   
 environment:
-  BUILD_TYPE: "DEV"
+  BUILD_TYPE: "REL"
 
 steps:
 - name: Windows Installer

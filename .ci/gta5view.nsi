@@ -1,6 +1,7 @@
 ######################################################################
 
 !define APP_NAME "gta5view"
+!define APP_EXT ".g5e"
 !define COMP_NAME "Syping"
 !define WEB_SITE "https://gta5view.syping.de/"
 !define VERSION "1.10.0.0"
@@ -219,6 +220,30 @@ WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}"  "Publisher" "${COMP_NAME}"
 !ifdef WEB_SITE
 WriteRegStr ${REG_ROOT} "${UNINSTALL_PATH}"  "URLInfoAbout" "${WEB_SITE}"
 !endif
+SectionEnd
+
+######################################################################
+
+Section -ShellAssoc
+WriteRegStr ${REG_ROOT} "Software\Classes\${APP_NAME}\DefaultIcon" "" "$INSTDIR\${MAIN_APP_EXE},0"
+WriteRegStr ${REG_ROOT} "Software\Classes\${APP_NAME}\shell\open\command" "" '"$INSTDIR\${MAIN_APP_EXE}" "%1"'
+WriteRegStr ${REG_ROOT} "Software\Classes\${APP_EXT}" "" "${APP_NAME}"
+WriteRegStr ${REG_ROOT} "Software\Classes\${APP_EXT}" "Content Type" "application/x-gta5view-export"
+System::Call 'SHELL32::SHChangeNotify(i0x8000000,i0,p0,p0)'
+SectionEnd
+
+######################################################################
+
+Section -un.ShellAssoc
+ClearErrors
+ReadRegStr $0 ${REG_ROOT} "Software\Classes\${APP_EXT}" ""
+DeleteRegKey ${REG_ROOT} "Software\Classes\${APP_NAME}"
+${IfNot} ${Errors}
+${AndIf} $0 == "${APP_NAME}"
+DeleteRegValue ${REG_ROOT} "Software\Classes\${APP_EXT}" ""
+DeleteRegKey /IfEmpty ${REG_ROOT} "Software\Classes\${APP_EXT}"
+${EndIf}
+System::Call 'SHELL32::SHChangeNotify(i0x8000000,i0,p0,p0)'
 SectionEnd
 
 ######################################################################

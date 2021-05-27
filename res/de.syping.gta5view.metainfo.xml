@@ -33,6 +33,7 @@
     <developer_name>Syping</developer_name>
 
     <releases>
+        <release date="2021-05-27" version="1.10.0"/>
         <release date="2021-03-22" version="1.9.2"/>
         <release date="2020-12-16" version="1.9.1"/>
         <release date="2020-11-30" version="1.9.0"/>
