@@ -78,11 +78,12 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     defaultWindowTitle = tr("%2 - %1").arg("%1", GTA5SYNC_APPSTR);
 
     setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
-    QString appVersion = GTA5SYNC_APPVER;
-#ifndef GTA5SYNC_BUILDTYPE_REL
+    QString appVersion = QApplication::applicationVersion();
+    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
+    const QString buildType = tr(literalBuildType);
 #ifdef GTA5SYNC_COMMIT
-    if (!appVersion.contains("-")) { appVersion = appVersion % "-" % GTA5SYNC_COMMIT; }
-#endif
+    if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
+        appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
 
