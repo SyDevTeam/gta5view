@@ -80,7 +80,6 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     QString appVersion = QApplication::applicationVersion();
     const char* literalBuildType = GTA5SYNC_BUILDTYPE;
-    const QString buildType = tr(literalBuildType);
 #ifdef GTA5SYNC_COMMIT
     if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
         appVersion = appVersion % "-" % GTA5SYNC_COMMIT;

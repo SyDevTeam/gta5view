@@ -93,11 +93,11 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     saSpacerItem = nullptr;
 
     updatePalette();
-    QString appVersion = GTA5SYNC_APPVER;
-#ifndef GTA5SYNC_BUILDTYPE_REL
+    QString appVersion = QApplication::applicationVersion();
+    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
 #ifdef GTA5SYNC_COMMIT
-    if (!appVersion.contains("-")) { appVersion = appVersion % "-" % GTA5SYNC_COMMIT; }
-#endif
+    if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
+        appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
     ui->saProfileContent->setFilesDropEnabled(true);
