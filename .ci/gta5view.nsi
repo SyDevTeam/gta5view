@@ -5,7 +5,7 @@
 !define WEB_SITE "https://gta5view.syping.de/"
 !define VERSION "1.10.0.0"
 !define COPYRIGHT "Copyright © 2016-2021 Syping"
-!define DESCRIPTION "Grand Theft Auto V Savegame and Snapmatic Viewer/Editor"
+!define DESCRIPTION "Open Source Snapmatic and Savegame viewer/editor for GTA V"
 !define INSTALLER_NAME "gta5view_setup.exe"
 !define MAIN_APP_EXE "gta5view.exe"
 !define INSTALL_TYPE "SetShellVarContext all"

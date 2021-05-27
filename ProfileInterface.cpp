@@ -266,11 +266,13 @@ void ProfileInterface::loadingProgress(int value, int maximum)
 void ProfileInterface::directoryChanged(const QString &path)
 {
     Q_UNUSED(path)
+
     QDir dir(profileFolder);
     QVector<QString> t_savegameFiles;
     QVector<QString> t_snapmaticPics;
     QVector<QString> n_savegameFiles;
     QVector<QString> n_snapmaticPics;
+
     const QStringList files = dir.entryList(QDir::Files);
     for (const QString &fileName : files) {
         if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
@@ -290,26 +292,24 @@ void ProfileInterface::directoryChanged(const QString &path)
     snapmaticPics = t_snapmaticPics;
 
     if (!n_savegameFiles.isEmpty() || !n_snapmaticPics.isEmpty()) {
-        QEventLoop loop;
-        QTimer::singleShot(1000, &loop, SLOT(quit()));
-        loop.exec();
-
-        for (const QString &fileName : qAsConst(n_savegameFiles)) {
-            const QString filePath = profileFolder % "/" % fileName;
-            SavegameData *savegame = new SavegameData(filePath);
-            if (savegame->readingSavegame())
-                savegameLoaded(savegame, filePath, true);
-            else
-                delete savegame;
-        }
-        for (const QString &fileName : qAsConst(n_snapmaticPics)) {
-            const QString filePath = profileFolder % "/" % fileName;
-            SnapmaticPicture *picture = new SnapmaticPicture(filePath);
-            if (picture->readingPicture(true))
-                pictureLoaded(picture, true);
-            else
-                delete picture;
-        }
+        QTimer::singleShot(1000, this, [=](){
+            for (const QString &fileName : qAsConst(n_savegameFiles)) {
+                const QString filePath = profileFolder % "/" % fileName;
+                SavegameData *savegame = new SavegameData(filePath);
+                if (savegame->readingSavegame())
+                    savegameLoaded(savegame, filePath, true);
+                else
+                    delete savegame;
+            }
+            for (const QString &fileName : qAsConst(n_snapmaticPics)) {
+                const QString filePath = profileFolder % "/" % fileName;
+                SnapmaticPicture *picture = new SnapmaticPicture(filePath);
+                if (picture->readingPicture(true))
+                    pictureLoaded(picture, true);
+                else
+                    delete picture;
+            }
+        });
     }
 }
 
@@ -318,7 +318,7 @@ void ProfileInterface::directoryScanned(QVector<QString> savegameFiles_s, QVecto
     savegameFiles = savegameFiles_s;
     snapmaticPics = snapmaticPics_s;
     fileSystemWatcher.addPath(profileFolder);
-    QObject::connect(&fileSystemWatcher, SIGNAL(directoryChanged(QString)), this, SLOT(directoryChanged(QString)));
+    QObject::connect(&fileSystemWatcher, &QFileSystemWatcher::directoryChanged, this, &ProfileInterface::directoryChanged);
 }
 #endif
 

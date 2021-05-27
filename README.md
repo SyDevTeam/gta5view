@@ -1,5 +1,5 @@
 ## gta5view
-Grand Theft Auto V Savegame and Snapmatic viewer/editor
+Open Source Snapmatic and Savegame viewer/editor for GTA V
 
 - View Snapmatics with the ability to disable them in-game
 - Edit Snapmatic pictures and properties in multiple ways

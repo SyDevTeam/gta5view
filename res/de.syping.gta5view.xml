@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-gta5view-export">
+    <comment>gta5view Export</comment>
+    <glob pattern="*.g5e"/>
+    <generic-icon name="de.syping.gta5view"/>
+  </mime-type>
+</mime-info>

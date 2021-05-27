@@ -11,11 +11,12 @@
     <summary>Open and edit GTA V profiles</summary>
     <summary xml:lang="de">GTA V Profile öffnen und bearbeiten</summary>
     <summary xml:lang="ru">Просмотрщик и редактор профилей GTA V</summary>
+    <summary xml:lang="zh-TW">打開與編輯 GTA V 個人檔案</summary>
 
     <icon type="remote">https://img.syping.de/gta5view/gta5view.png</icon>
 
     <description>
-        <p>Open Source Snapmatic picture and Savegame viewer/editor for GTA V</p>
+        <p>Open Source Snapmatic and Savegame viewer/editor for GTA V</p>
         <p>Features</p>
         <ul>
             <li>View Snapmatics with the ability to disable them in-game</li>
