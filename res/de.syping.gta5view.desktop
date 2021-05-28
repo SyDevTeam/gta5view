@@ -3,6 +3,7 @@ Type=Application
 Name=gta5view
 Comment=Open and edit GTA V profiles
 Comment[de]=GTA V Profile öffnen und bearbeiten
+Comment[ko]=GTA V 프로필을 열고 편집
 Comment[ru]=Просмотрщик и редактор профилей GTA V
 Comment[zh_TW]=打開與編輯 GTA V 個人檔案
 Categories=Qt;Utility;FileTools;
