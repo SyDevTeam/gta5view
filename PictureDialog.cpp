@@ -839,7 +839,7 @@ void PictureDialog::editSnapmaticImage()
     importDialog->exec();
     if (importDialog->isImportAgreed()) {
         const QByteArray previousPicture = smpic->getPictureStream();
-        bool success = smpic->setImage(importDialog->image());
+        bool success = smpic->setImage(importDialog->image(), importDialog->isUnlimitedBuffer());
         if (success) {
             QString currentFilePath = smpic->getPictureFilePath();
             QString originalFilePath = smpic->getOriginalPictureFilePath();

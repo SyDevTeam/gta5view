@@ -16,7 +16,7 @@ Open Source Snapmatic and Savegame viewer/editor for GTA V
     # Note: Install Docker Community Edition and Git before continuing
     git clone https://gitlab.com/Syping/gta5view && cd gta5view
     docker pull sypingauto/gta5view-build:1.10-static
-    docker run --rm -v ${PWD}:/gta5view -it sypingauto/gta5view-build:1.10-static
+    docker run --rm -v "$PWD:/gta5view" -it sypingauto/gta5view-build:1.10-static
     cd /gta5view && mkdir -p build && cd build
     mingw64-qt-cmake ../
     make -j $(nproc --all)

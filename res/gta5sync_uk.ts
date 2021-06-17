@@ -1387,7 +1387,7 @@ Press 1 for Default View</source>
         <location filename="../ImportDialog.cpp" line="534"/>
         <location filename="../ImportDialog.cpp" line="844"/>
         <location filename="../ProfileInterface.cpp" line="563"/>
-        <location filename="../UserInterface.cpp" line="590"/>
+        <location filename="../UserInterface.cpp" line="595"/>
         <source>All files (**)</source>
         <translation>Усі файли (**)</translation>
     </message>
@@ -1432,26 +1432,26 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="559"/>
-        <location filename="../UserInterface.cpp" line="587"/>
+        <location filename="../UserInterface.cpp" line="592"/>
         <source>GTA V Export (*.g5e)</source>
         <translation>GTA V Export (*.g5e)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="560"/>
-        <location filename="../UserInterface.cpp" line="588"/>
+        <location filename="../UserInterface.cpp" line="593"/>
         <source>Savegames files (SGTA*)</source>
         <translation>Файли збереження гри (SGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="561"/>
-        <location filename="../UserInterface.cpp" line="589"/>
+        <location filename="../UserInterface.cpp" line="594"/>
         <source>Snapmatic pictures (PGTA*)</source>
         <translation>Snapmatic зображення (PGTA*)</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="583"/>
         <location filename="../ProfileInterface.cpp" line="974"/>
-        <location filename="../UserInterface.cpp" line="669"/>
+        <location filename="../UserInterface.cpp" line="674"/>
         <source>No valid file is selected</source>
         <translation>Вибрані недійсні файли</translation>
     </message>
@@ -1472,13 +1472,13 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="676"/>
-        <location filename="../UserInterface.cpp" line="625"/>
+        <location filename="../UserInterface.cpp" line="630"/>
         <source>Failed to read Snapmatic picture</source>
         <translation>Не вдалося прочитати Snapmatic картинку</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="711"/>
-        <location filename="../UserInterface.cpp" line="639"/>
+        <location filename="../UserInterface.cpp" line="644"/>
         <source>Failed to read Savegame file</source>
         <translation>Не вдалося прочитати файл збереження гри</translation>
     </message>
@@ -1579,20 +1579,20 @@ Press 1 for Default View</source>
     <message>
         <location filename="../ProfileInterface.cpp" line="1583"/>
         <location filename="../ProfileInterface.cpp" line="1613"/>
-        <location filename="../ProfileInterface.cpp" line="2016"/>
-        <location filename="../ProfileInterface.cpp" line="2095"/>
-        <location filename="../ProfileInterface.cpp" line="2184"/>
-        <location filename="../ProfileInterface.cpp" line="2299"/>
+        <location filename="../ProfileInterface.cpp" line="2015"/>
+        <location filename="../ProfileInterface.cpp" line="2094"/>
+        <location filename="../ProfileInterface.cpp" line="2183"/>
+        <location filename="../ProfileInterface.cpp" line="2298"/>
         <source>No Snapmatic pictures are selected</source>
         <translation>Не вибрано жодного Snapmatic зображення</translation>
     </message>
     <message>
         <location filename="../ProfileInterface.cpp" line="1594"/>
         <location filename="../ProfileInterface.cpp" line="1624"/>
-        <location filename="../ProfileInterface.cpp" line="2076"/>
-        <location filename="../ProfileInterface.cpp" line="2165"/>
-        <location filename="../ProfileInterface.cpp" line="2280"/>
-        <location filename="../ProfileInterface.cpp" line="2372"/>
+        <location filename="../ProfileInterface.cpp" line="2075"/>
+        <location filename="../ProfileInterface.cpp" line="2164"/>
+        <location filename="../ProfileInterface.cpp" line="2279"/>
+        <location filename="../ProfileInterface.cpp" line="2371"/>
         <source>%1 failed with...
 
 %2</source>
@@ -1612,87 +1612,87 @@ Press 1 for Default View</source>
         <translation>Snapmatic зображення з uid %1 вже існує, ви хочете призначити для імпорту новий uid та мітку часу?</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2016"/>
-        <location filename="../ProfileInterface.cpp" line="2076"/>
+        <location filename="../ProfileInterface.cpp" line="2015"/>
+        <location filename="../ProfileInterface.cpp" line="2075"/>
         <source>Qualify as Avatar</source>
         <translation>Позначити як Аватар</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2027"/>
-        <location filename="../ProfileInterface.cpp" line="2120"/>
-        <location filename="../ProfileInterface.cpp" line="2235"/>
-        <location filename="../ProfileInterface.cpp" line="2330"/>
+        <location filename="../ProfileInterface.cpp" line="2026"/>
+        <location filename="../ProfileInterface.cpp" line="2119"/>
+        <location filename="../ProfileInterface.cpp" line="2234"/>
+        <location filename="../ProfileInterface.cpp" line="2329"/>
         <source>Patch selected...</source>
         <translation>Вибір патчу...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2028"/>
-        <location filename="../ProfileInterface.cpp" line="2046"/>
-        <location filename="../ProfileInterface.cpp" line="2121"/>
-        <location filename="../ProfileInterface.cpp" line="2139"/>
-        <location filename="../ProfileInterface.cpp" line="2236"/>
-        <location filename="../ProfileInterface.cpp" line="2254"/>
-        <location filename="../ProfileInterface.cpp" line="2331"/>
-        <location filename="../ProfileInterface.cpp" line="2349"/>
+        <location filename="../ProfileInterface.cpp" line="2027"/>
+        <location filename="../ProfileInterface.cpp" line="2045"/>
+        <location filename="../ProfileInterface.cpp" line="2120"/>
+        <location filename="../ProfileInterface.cpp" line="2138"/>
+        <location filename="../ProfileInterface.cpp" line="2235"/>
+        <location filename="../ProfileInterface.cpp" line="2253"/>
+        <location filename="../ProfileInterface.cpp" line="2330"/>
+        <location filename="../ProfileInterface.cpp" line="2348"/>
         <source>Patch file %1 of %2 files</source>
         <translation>Патч файлу %1 з %2 файлів</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2076"/>
+        <location filename="../ProfileInterface.cpp" line="2075"/>
         <source>Qualify</source>
         <comment>%1 failed with...</comment>
         <translation>Якість</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2095"/>
-        <location filename="../ProfileInterface.cpp" line="2165"/>
+        <location filename="../ProfileInterface.cpp" line="2094"/>
+        <location filename="../ProfileInterface.cpp" line="2164"/>
         <source>Change Players...</source>
         <translation>Зміна гравців...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2165"/>
+        <location filename="../ProfileInterface.cpp" line="2164"/>
         <source>Change Players</source>
         <comment>%1 failed with...</comment>
         <translation>Змінити гравців</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2184"/>
-        <location filename="../ProfileInterface.cpp" line="2214"/>
-        <location filename="../ProfileInterface.cpp" line="2280"/>
+        <location filename="../ProfileInterface.cpp" line="2183"/>
+        <location filename="../ProfileInterface.cpp" line="2213"/>
+        <location filename="../ProfileInterface.cpp" line="2279"/>
         <source>Change Crew...</source>
         <translation>Зміна банди...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2214"/>
+        <location filename="../ProfileInterface.cpp" line="2213"/>
         <source>Failed to enter a valid Snapmatic Crew ID</source>
         <translation>Не вдалося ввести дійсний ID Банди Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2280"/>
+        <location filename="../ProfileInterface.cpp" line="2279"/>
         <source>Change Crew</source>
         <comment>%1 failed with...</comment>
         <translation>Змінити банду</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2299"/>
-        <location filename="../ProfileInterface.cpp" line="2313"/>
-        <location filename="../ProfileInterface.cpp" line="2372"/>
+        <location filename="../ProfileInterface.cpp" line="2298"/>
+        <location filename="../ProfileInterface.cpp" line="2312"/>
+        <location filename="../ProfileInterface.cpp" line="2371"/>
         <source>Change Title...</source>
         <translation>Зміна назви...</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2313"/>
+        <location filename="../ProfileInterface.cpp" line="2312"/>
         <source>Failed to enter a valid Snapmatic title</source>
         <translation>Не вдалося ввести дійсний заголовок Snapmatic</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2372"/>
+        <location filename="../ProfileInterface.cpp" line="2371"/>
         <source>Change Title</source>
         <comment>%1 failed with...</comment>
         <translation>Змінити назву</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="586"/>
+        <location filename="../UserInterface.cpp" line="591"/>
         <source>All profile files (*.g5e SGTA* PGTA*)</source>
         <translation>Усі файли зображень (*.g5e SGTA* PGTA*)</translation>
     </message>
@@ -2028,25 +2028,25 @@ Press 1 for Default View</source>
         <translation>Змінити властивості Snapmatic не вдалося через JSON Помилку</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2208"/>
+        <location filename="../ProfileInterface.cpp" line="2207"/>
         <location filename="../SnapmaticEditor.cpp" line="403"/>
         <source>Snapmatic Crew</source>
         <translation>Snapmatic банда</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2208"/>
+        <location filename="../ProfileInterface.cpp" line="2207"/>
         <location filename="../SnapmaticEditor.cpp" line="403"/>
         <source>New Snapmatic crew:</source>
         <translation>Нова Snapmatic банда:</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2310"/>
+        <location filename="../ProfileInterface.cpp" line="2309"/>
         <location filename="../SnapmaticEditor.cpp" line="379"/>
         <source>Snapmatic Title</source>
         <translation>Snapmatic назва</translation>
     </message>
     <message>
-        <location filename="../ProfileInterface.cpp" line="2310"/>
+        <location filename="../ProfileInterface.cpp" line="2309"/>
         <location filename="../SnapmaticEditor.cpp" line="379"/>
         <source>New Snapmatic title:</source>
         <translation>Новий Snapmatic заголовок:</translation>
@@ -2103,19 +2103,19 @@ Press 1 for Default View</source>
     <name>SnapmaticPicture</name>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="165"/>
-        <location filename="../SnapmaticPicture.cpp" line="344"/>
+        <location filename="../SnapmaticPicture.cpp" line="345"/>
         <source>JSON is incomplete and malformed</source>
         <translation>JSON неповний та неправильний</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="168"/>
-        <location filename="../SnapmaticPicture.cpp" line="347"/>
+        <location filename="../SnapmaticPicture.cpp" line="348"/>
         <source>JSON is incomplete</source>
         <translation>JSON неповний</translation>
     </message>
     <message>
         <location filename="../JsonEditorDialog.cpp" line="171"/>
-        <location filename="../SnapmaticPicture.cpp" line="350"/>
+        <location filename="../SnapmaticPicture.cpp" line="351"/>
         <source>JSON is malformed</source>
         <translation>JSON неправильний</translation>
     </message>
@@ -2125,42 +2125,42 @@ Press 1 for Default View</source>
         <translation>ФОТО - %1</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="314"/>
+        <location filename="../SnapmaticPicture.cpp" line="315"/>
         <source>open file %1</source>
         <translation>відкрити файл%1</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="326"/>
+        <location filename="../SnapmaticPicture.cpp" line="327"/>
         <source>header not exists</source>
         <translation>заголовок не існує</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="329"/>
+        <location filename="../SnapmaticPicture.cpp" line="330"/>
         <source>header is malformed</source>
         <translation>заголовок неправильний</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="332"/>
+        <location filename="../SnapmaticPicture.cpp" line="333"/>
         <source>picture not exists (%1)</source>
         <translation>зображення не існує (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="335"/>
+        <location filename="../SnapmaticPicture.cpp" line="336"/>
         <source>JSON not exists (%1)</source>
         <translation>JSON не існує (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="338"/>
+        <location filename="../SnapmaticPicture.cpp" line="339"/>
         <source>title not exists (%1)</source>
         <translation>заголовок не існує (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="341"/>
+        <location filename="../SnapmaticPicture.cpp" line="342"/>
         <source>description not exists (%1)</source>
         <translation>опис не існує (%1)</translation>
     </message>
     <message>
-        <location filename="../SnapmaticPicture.cpp" line="352"/>
+        <location filename="../SnapmaticPicture.cpp" line="353"/>
         <source>reading file %1 because of %2</source>
         <comment>Example for %2: JSON is malformed error</comment>
         <translation>читання файлу %1 тому що %2</translation>
@@ -2329,7 +2329,7 @@ Press 1 for Default View</source>
     <name>UserInterface</name>
     <message>
         <location filename="../UserInterface.ui" line="20"/>
-        <location filename="../UserInterface.cpp" line="78"/>
+        <location filename="../UserInterface.cpp" line="83"/>
         <source>%2 - %1</source>
         <translation>%2 - %1</translation>
     </message>
@@ -2361,9 +2361,9 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="153"/>
-        <location filename="../UserInterface.cpp" line="264"/>
-        <location filename="../UserInterface.cpp" line="288"/>
-        <location filename="../UserInterface.cpp" line="786"/>
+        <location filename="../UserInterface.cpp" line="269"/>
+        <location filename="../UserInterface.cpp" line="293"/>
+        <location filename="../UserInterface.cpp" line="791"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрити</translation>
     </message>
@@ -2399,8 +2399,8 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="236"/>
-        <location filename="../UserInterface.cpp" line="76"/>
-        <location filename="../UserInterface.cpp" line="876"/>
+        <location filename="../UserInterface.cpp" line="80"/>
+        <location filename="../UserInterface.cpp" line="885"/>
         <source>&amp;About %1</source>
         <translation>&amp;Про %1</translation>
     </message>
@@ -2456,15 +2456,15 @@ Press 1 for Default View</source>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="319"/>
-        <location filename="../UserInterface.cpp" line="382"/>
+        <location filename="../UserInterface.cpp" line="387"/>
         <source>Select &amp;GTA V Folder...</source>
         <translation>Вибрати &amp;GTA V теку...</translation>
     </message>
     <message>
         <location filename="../UserInterface.ui" line="322"/>
         <location filename="../OptionsDialog.cpp" line="704"/>
-        <location filename="../UserInterface.cpp" line="329"/>
-        <location filename="../UserInterface.cpp" line="844"/>
+        <location filename="../UserInterface.cpp" line="334"/>
+        <location filename="../UserInterface.cpp" line="849"/>
         <source>Select GTA V Folder...</source>
         <translation>Вибрати GTA V теку...</translation>
     </message>
@@ -2521,25 +2521,25 @@ Press 1 for Default View</source>
         <translation>Сховати у грі</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="80"/>
-        <location filename="../UserInterface.cpp" line="445"/>
-        <location filename="../UserInterface.cpp" line="889"/>
+        <location filename="../UserInterface.cpp" line="85"/>
+        <location filename="../UserInterface.cpp" line="450"/>
+        <location filename="../UserInterface.cpp" line="898"/>
         <source>Select Profile</source>
         <translation>Вибрати профіль</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="168"/>
-        <location filename="../UserInterface.cpp" line="873"/>
+        <location filename="../UserInterface.cpp" line="173"/>
+        <location filename="../UserInterface.cpp" line="878"/>
         <source>&amp;Donate</source>
         <translation>&amp;Пожертвування</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="181"/>
+        <location filename="../UserInterface.cpp" line="186"/>
         <source>Donate</source>
         <translation>Пожертвування</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="189"/>
+        <location filename="../UserInterface.cpp" line="194"/>
         <source>Donation methods</source>
         <translation>Метод пожертвування</translation>
     </message>
@@ -2552,30 +2552,30 @@ Press 1 for Default View</source>
         <translation type="vanished">Копіювати</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="256"/>
+        <location filename="../UserInterface.cpp" line="261"/>
         <source>&amp;Copy</source>
         <translation>&amp;Копіювати</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="583"/>
+        <location filename="../UserInterface.cpp" line="588"/>
         <source>Open File...</source>
         <translation>Відкрити файл...</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="625"/>
-        <location filename="../UserInterface.cpp" line="639"/>
-        <location filename="../UserInterface.cpp" line="663"/>
-        <location filename="../UserInterface.cpp" line="669"/>
+        <location filename="../UserInterface.cpp" line="630"/>
+        <location filename="../UserInterface.cpp" line="644"/>
+        <location filename="../UserInterface.cpp" line="668"/>
+        <location filename="../UserInterface.cpp" line="674"/>
         <source>Open File</source>
         <translation>Відкрити файл</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="663"/>
+        <location filename="../UserInterface.cpp" line="668"/>
         <source>Can&apos;t open %1 because of not valid file format</source>
         <translation>Неможливо відкрити %1 через невідомий формат файлу</translation>
     </message>
     <message>
-        <location filename="../UserInterface.cpp" line="751"/>
+        <location filename="../UserInterface.cpp" line="756"/>
         <source>%1 - Messages</source>
         <translation>%1 - Новини</translation>
     </message>

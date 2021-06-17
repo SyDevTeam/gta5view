@@ -73,7 +73,12 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->menuProfile->setEnabled(false);
     ui->actionSelect_profile->setEnabled(false);
     ui->actionAbout_gta5sync->setIcon(IconLoader::loadingAppIcon());
+#ifdef Q_OS_MAC
+    ui->actionAbout_gta5sync->setText(QApplication::translate("MAC_APPLICATION_MENU", "About %1").arg(GTA5SYNC_APPSTR));
+    ui->actionOptions->setText(QApplication::translate("MAC_APPLICATION_MENU", "Preferences..."));
+#else
     ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
+#endif
     ui->cmdClose->setToolTip(ui->cmdClose->toolTip().arg(GTA5SYNC_APPSTR));
     defaultWindowTitle = tr("%2 - %1").arg("%1", GTA5SYNC_APPSTR);
 
@@ -873,13 +878,17 @@ void UserInterface::retranslateUi()
     donateAction->setText(tr("&Donate"));
 #endif
 #endif
+#ifdef Q_OS_MAC
+    ui->actionAbout_gta5sync->setText(QApplication::translate("MAC_APPLICATION_MENU", "About %1").arg(GTA5SYNC_APPSTR));
+    ui->actionOptions->setText(QApplication::translate("MAC_APPLICATION_MENU", "Preferences..."));
+#else
     ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
-    QString appVersion = GTA5SYNC_APPVER;
-#ifndef GTA5SYNC_BUILDTYPE_REL
-#ifdef GTA5SYNC_COMMIT
-    if (!appVersion.contains("-"))
-        appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
+    QString appVersion = QApplication::applicationVersion();
+    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
+#ifdef GTA5SYNC_COMMIT
+    if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
+        appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
     if (profileOpen) {

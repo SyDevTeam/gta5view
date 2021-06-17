@@ -199,6 +199,7 @@ bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
             else {
 #ifndef GTA5SYNC_DYNAMIC_PHOTOBUFFER
                 if (p_ragePhoto.photoBuffer() != jpegPicStreamLength)
+                    p_ragePhoto.setPhotoData(QByteArray()); // avoid buffer set fail
                     p_ragePhoto.setPhotoBuffer(jpegPicStreamLength, true);
 #endif
                 picByteArray = picByteArrayT;

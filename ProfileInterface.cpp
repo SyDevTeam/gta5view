@@ -1792,12 +1792,11 @@ void ProfileInterface::on_saProfileContent_dropped(const QMimeData *mimeData)
 void ProfileInterface::retranslateUi()
 {
     ui->retranslateUi(this);
-    QString appVersion = GTA5SYNC_APPVER;
-#ifndef GTA5SYNC_BUILDTYPE_REL
+    QString appVersion = QApplication::applicationVersion();
+    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
 #ifdef GTA5SYNC_COMMIT
-    if (!appVersion.contains("-"))
+    if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
         appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
-#endif
 #endif
     ui->labVersion->setText(QString("%1 %2").arg(GTA5SYNC_APPSTR, appVersion));
 }
