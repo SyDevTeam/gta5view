@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2020-2021 Syping
+* Copyright (C) 2020-2022 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -22,6 +22,9 @@
 #include <QFile>
 #if QT_VERSION < 0x060000
 #include <QTextCodec>
+#else
+#include <QStringEncoder>
+#include <QStringDecoder>
 #endif
 #ifdef RAGEPHOTO_BENCHMARK
 #include <QFileInfo>

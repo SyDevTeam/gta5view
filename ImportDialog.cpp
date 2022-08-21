@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2021 Syping
+* Copyright (C) 2017-2022 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -112,7 +112,11 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
 #ifndef Q_OS_MAC
     ui->vlButtom->setContentsMargins(9 * screenRatio, 6 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 #else
+#if QT_VERSION >= 0x060000
+    if (QApplication::style()->objectName() == "macos") {
+#else
     if (QApplication::style()->objectName() == "macintosh") {
+#endif
         ui->vlButtom->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
     }
     else {

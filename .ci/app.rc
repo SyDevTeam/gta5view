@@ -24,7 +24,7 @@ BEGIN
             VALUE   "FileDescription",  "gta5view"
             VALUE   "FileVersion",      "MAJOR_VER.MINOR_VER.PATCH_VERSTR_BUILD_VER"
             VALUE   "InternalName",     "gta5view"
-            VALUE   "LegalCopyright",   "Copyright © 2016-2021 Syping"
+            VALUE   "LegalCopyright",   "Copyright © 2016-2022 Syping"
             VALUE   "OriginalFilename", "gta5view.exe"
             VALUE   "ProductName",      "gta5view"
             VALUE   "ProductVersion",   "MAJOR_VER.MINOR_VER.PATCH_VERSTR_BUILD_VER"

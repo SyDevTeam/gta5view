@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2021 Syping
+* Copyright (C) 2016-2022 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -125,7 +125,11 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     ui->hlButtons->setSpacing(6 * screenRatio);
     ui->hlButtons->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 #else
+#if QT_VERSION >= 0x060000
+    if (QApplication::style()->objectName() == "macos") {
+#else
     if (QApplication::style()->objectName() == "macintosh") {
+#endif
         ui->hlButtons->setSpacing(6 * screenRatio);
         ui->hlButtons->setContentsMargins(9 * screenRatio, 15 * screenRatio, 15 * screenRatio, 17 * screenRatio);
     }
@@ -1554,7 +1558,11 @@ void ProfileInterface::settingsApplied(int _contentMode, bool languageChanged)
 #ifdef Q_OS_MAC
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
+#if QT_VERSION >= 0x060000
+    if (QApplication::style()->objectName() == "macos") {
+#else
     if (QApplication::style()->objectName() == "macintosh") {
+#endif
         ui->hlButtons->setSpacing(6 * screenRatio);
         ui->hlButtons->setContentsMargins(9 * screenRatio, 15 * screenRatio, 15 * screenRatio, 17 * screenRatio);
     }

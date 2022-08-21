@@ -34,6 +34,8 @@
 
 #if QT_VERSION < 0x060000
 #include <QTextCodec>
+#else
+#include <QStringDecoder>
 #endif
 
 #if QT_VERSION >= 0x050000
