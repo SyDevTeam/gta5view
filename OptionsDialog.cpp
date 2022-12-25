@@ -282,6 +282,7 @@ void OptionsDialog::setupRadioButtons()
         case 0:
         case 20:
             ui->rbModern->setChecked(true);
+            ui->cbDoubleclick->setChecked(false);
             break;
         case 1:
         case 2:
@@ -291,11 +292,12 @@ void OptionsDialog::setupRadioButtons()
             break;
         case 10:
             ui->rbClassic->setChecked(true);
-#if QT_VERSION >= 0x050800
-            Q_FALLTHROUGH();
-#endif
+            ui->cbDoubleclick->setChecked(false);
+            break;
         case 11:
+            ui->rbClassic->setChecked(true);
             ui->cbDoubleclick->setChecked(true);
+            break;
         }
     }
 }
