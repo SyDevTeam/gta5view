@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.7)
 
-project(gta5view LANGUAGES C CXX)
+project(gta5view VERSION 1.11.0 LANGUAGES C CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -38,7 +38,7 @@ if(APPLE)
         res/gta5view.icns
     )
     set(MACOSX_BUNDLE_BUNDLE_NAME gta5view)
-    set(MACOSX_BUNDLE_BUNDLE_VERSION 1.10.1)
+    set(MACOSX_BUNDLE_BUNDLE_VERSION ${gta5view_VERSION})
     set(MACOSX_BUNDLE_ICON_FILE gta5view.icns)
     set(MACOSX_BUNDLE_GUI_IDENTIFIER de.syping.gta5view)
     set_source_files_properties(res/gta5view.icns PROPERTIES MACOSX_PACKAGE_LOCATION "Resources")
@@ -50,111 +50,112 @@ list(APPEND GTA5VIEW_DEFINES
 )
 
 set(GTA5VIEW_SOURCES
-    main.cpp
-    AboutDialog.cpp
-    AppEnv.cpp
-    CrewDatabase.cpp
-    DatabaseThread.cpp
-    ExportDialog.cpp
-    ExportThread.cpp
-    GlobalString.cpp
-    IconLoader.cpp
-    ImportDialog.cpp
-    JsonEditorDialog.cpp
-    MapLocationDialog.cpp
-    OptionsDialog.cpp
-    PictureDialog.cpp
-    PictureExport.cpp
-    PictureWidget.cpp
-    PlayerListDialog.cpp
-    ProfileDatabase.cpp
-    ProfileInterface.cpp
-    ProfileLoader.cpp
-    ProfileWidget.cpp
-    RagePhoto.cpp
-    SavegameCopy.cpp
-    SavegameData.cpp
-    SavegameDialog.cpp
-    SavegameWidget.cpp
-    SidebarGenerator.cpp
-    SnapmaticEditor.cpp
-    SnapmaticPicture.cpp
-    SnapmaticWidget.cpp
-    StandardPaths.cpp
-    StringParser.cpp
-    TranslationClass.cpp
-    UserInterface.cpp
-    anpro/imagecropper.cpp
-    pcg/pcg_basic.c
-    uimod/JSHighlighter.cpp
-    uimod/UiModLabel.cpp
-    uimod/UiModWidget.cpp
+    src/main.cpp
+    src/AboutDialog.cpp
+    src/AppEnv.cpp
+    src/CrewDatabase.cpp
+    src/DatabaseThread.cpp
+    src/ExportDialog.cpp
+    src/ExportThread.cpp
+    src/GlobalString.cpp
+    src/IconLoader.cpp
+    src/ImportDialog.cpp
+    src/JsonEditorDialog.cpp
+    src/MapLocationDialog.cpp
+    src/OptionsDialog.cpp
+    src/PictureDialog.cpp
+    src/PictureExport.cpp
+    src/PictureWidget.cpp
+    src/PlayerListDialog.cpp
+    src/ProfileDatabase.cpp
+    src/ProfileInterface.cpp
+    src/ProfileLoader.cpp
+    src/ProfileWidget.cpp
+    src/RagePhoto.cpp
+    src/SavegameCopy.cpp
+    src/SavegameData.cpp
+    src/SavegameDialog.cpp
+    src/SavegameWidget.cpp
+    src/SidebarGenerator.cpp
+    src/SnapmaticEditor.cpp
+    src/SnapmaticPicture.cpp
+    src/SnapmaticWidget.cpp
+    src/StandardPaths.cpp
+    src/StringParser.cpp
+    src/TranslationClass.cpp
+    src/UserInterface.cpp
+    src/anpro/imagecropper.cpp
+    src/pcg/pcg_basic.c
+    src/uimod/JSHighlighter.cpp
+    src/uimod/UiModLabel.cpp
+    src/uimod/UiModWidget.cpp
 )
 
 set(GTA5VIEW_HEADERS
-    config.h
-    wrapper.h
-    AboutDialog.h
-    AppEnv.h
-    CrewDatabase.h
-    DatabaseThread.h
-    ExportDialog.h
-    ExportThread.h
-    GlobalString.h
-    IconLoader.h
-    ImportDialog.h
-    JsonEditorDialog.h
-    MapLocationDialog.h
-    OptionsDialog.h
-    PictureDialog.h
-    PictureExport.h
-    PictureWidget.h
-    PlayerListDialog.h
-    ProfileDatabase.h
-    ProfileInterface.h
-    ProfileLoader.h
-    ProfileWidget.h
-    RagePhoto.h
-    SavegameCopy.h
-    SavegameData.h
-    SavegameDialog.h
-    SavegameWidget.h
-    SidebarGenerator.h
-    SnapmaticEditor.h
-    SnapmaticPicture.h
-    SnapmaticWidget.h
-    StandardPaths.h
-    StringParser.h
-    TranslationClass.h
-    UserInterface.h
-    anpro/imagecropper.h
-    pcg/pcg_basic.h
-    uimod/JSHighlighter.h
-    uimod/UiModLabel.h
-    uimod/UiModWidget.h
+    src/config.h
+    src/wrapper.h
+    src/AboutDialog.h
+    src/AppEnv.h
+    src/CrewDatabase.h
+    src/DatabaseThread.h
+    src/ExportDialog.h
+    src/ExportThread.h
+    src/GlobalString.h
+    src/IconLoader.h
+    src/ImportDialog.h
+    src/JsonEditorDialog.h
+    src/MapLocationDialog.h
+    src/OptionsDialog.h
+    src/PictureDialog.h
+    src/PictureExport.h
+    src/PictureWidget.h
+    src/PlayerListDialog.h
+    src/ProfileDatabase.h
+    src/ProfileInterface.h
+    src/ProfileLoader.h
+    src/ProfileWidget.h
+    src/RagePhoto.h
+    src/SavegameCopy.h
+    src/SavegameData.h
+    src/SavegameDialog.h
+    src/SavegameWidget.h
+    src/SidebarGenerator.h
+    src/SnapmaticEditor.h
+    src/SnapmaticPicture.h
+    src/SnapmaticWidget.h
+    src/StandardPaths.h
+    src/StringParser.h
+    src/TranslationClass.h
+    src/UserInterface.h
+    src/anpro/imagecropper.h
+    src/pcg/pcg_basic.h
+    src/uimod/JSHighlighter.h
+    src/uimod/UiModLabel.h
+    src/uimod/UiModWidget.h
 )
 
 set(GTA5VIEW_INCLUDEDIR
-    anpro
-    pcg
-    uimod
+    src
+    src/anpro
+    src/pcg
+    src/uimod
 )
 
 set(GTA5VIEW_FORMS
-    AboutDialog.ui
-    ExportDialog.ui
-    ImportDialog.ui
-    JsonEditorDialog.ui
-    MapLocationDialog.ui
-    OptionsDialog.ui
-    PictureDialog.ui
-    PlayerListDialog.ui
-    ProfileInterface.ui
-    SavegameDialog.ui
-    SavegameWidget.ui
-    SnapmaticEditor.ui
-    SnapmaticWidget.ui
-    UserInterface.ui
+    src/AboutDialog.ui
+    src/ExportDialog.ui
+    src/ImportDialog.ui
+    src/JsonEditorDialog.ui
+    src/MapLocationDialog.ui
+    src/OptionsDialog.ui
+    src/PictureDialog.ui
+    src/PlayerListDialog.ui
+    src/ProfileInterface.ui
+    src/SavegameDialog.ui
+    src/SavegameWidget.ui
+    src/SnapmaticEditor.ui
+    src/SnapmaticWidget.ui
+    src/UserInterface.ui
 )
 
 set(GTA5VIEW_TRANSLATIONS
@@ -222,10 +223,10 @@ option(WITH_DONATE "Donate menu option and donation dialog" OFF)
 if(WITH_DONATE)
     set(DONATE_ADDRESSES "" CACHE STRING "Donation addresses")
     list(APPEND GTA5VIEW_HEADERS
-        anpro/QrCode.h
+        src/anpro/QrCode.h
     )
     list(APPEND GTA5VIEW_SOURCES
-        anpro/QrCode.cpp
+        src/anpro/QrCode.cpp
     )
     list(APPEND GTA5VIEW_DEFINES
         -DGTA5SYNC_DONATE
@@ -244,10 +245,10 @@ option(WITH_MOTD "Developer message system directed to users" OFF)
 if(WITH_MOTD)
     set(MOTD_WEBURL "" CACHE STRING "Messages WebURL")
     list(APPEND GTA5VIEW_HEADERS
-        MessageThread.h
+        src/MessageThread.h
     )
     list(APPEND GTA5VIEW_SOURCES
-        MessageThread.cpp
+        src/MessageThread.cpp
     )
     list(APPEND GTA5VIEW_DEFINES
         -DGTA5SYNC_MOTD
@@ -267,15 +268,15 @@ if(WITH_TELEMETRY)
     set(TELEMETRY_REGURL "" CACHE STRING "Telemetry RegURL")
     set(TELEMETRY_WEBURL "" CACHE STRING "Telemetry WebURL")
     list(APPEND GTA5VIEW_HEADERS
-        TelemetryClass.h
-        tmext/TelemetryClassAuthenticator.h
+        src/TelemetryClass.h
+        src/tmext/TelemetryClassAuthenticator.h
     )
     list(APPEND GTA5VIEW_SOURCES
-        TelemetryClass.cpp
-        tmext/TelemetryClassAuthenticator.cpp
+        src/TelemetryClass.cpp
+        src/tmext/TelemetryClassAuthenticator.cpp
     )
     list(APPEND GTA5VIEW_INCLUDEDIR
-        tmext
+        src/tmext
     )
     list(APPEND GTA5VIEW_DEFINES
         -DGTA5SYNC_TELEMETRY
@@ -351,7 +352,7 @@ if(LINGUIST_FOUND AND QCONF_BUILD)
 endif()
 
 if(CMAKE_VERSION VERSION_GREATER_EQUAL "3.16.0")
-    target_precompile_headers(gta5view PRIVATE config.h)
+    target_precompile_headers(gta5view PRIVATE src/config.h)
 endif()
 
 if(Qt5Core_VERSION VERSION_GREATER_EQUAL "5.14.0")

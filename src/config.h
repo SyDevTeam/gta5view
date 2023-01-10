@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2021 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -47,11 +47,11 @@
 #endif
 
 #ifndef GTA5SYNC_COPYRIGHT
-#define GTA5SYNC_COPYRIGHT "2016-2022"
+#define GTA5SYNC_COPYRIGHT "2016-2023"
 #endif
 
 #ifndef GTA5SYNC_APPVER
-#define GTA5SYNC_APPVER "1.10.1"
+#define GTA5SYNC_APPVER "1.11.0"
 #endif
 
 #if __cplusplus
