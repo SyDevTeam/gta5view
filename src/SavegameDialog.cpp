@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2018 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -28,11 +28,7 @@ SavegameDialog::SavegameDialog(QWidget *parent) :
     ui(new Ui::SavegameDialog)
 {
     // Set Window Flags
-#if QT_VERSION >= 0x050900
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
 
     // Setup User Interface
     ui->setupUi(this);

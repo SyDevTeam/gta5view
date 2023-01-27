@@ -17,7 +17,6 @@
 *****************************************************************************/
 
 #include "SnapmaticPicture.h"
-#include "StringParser.h"
 #include "SavegameData.h"
 #include <QStringBuilder>
 #include <QByteArray>
@@ -78,7 +77,7 @@ QString SavegameData::getSavegameDataString(const QByteArray &savegameHeader)
     QList<QByteArray> savegameBytesList = savegameBytes.split(char(0x01));
     savegameBytes = savegameBytesList.at(1);
     savegameBytesList.clear();
-    return SnapmaticPicture::parseTitleString(savegameBytes, savegameBytes.length());
+    return SnapmaticPicture::parseTitleString(savegameBytes);
 }
 
 bool SavegameData::readingSavegameFromFile(const QString &fileName)

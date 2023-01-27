@@ -1,0 +1,4 @@
+[submodule "src/libragephoto"]
+path = src/libragephoto
+url = https://github.com/Syping/libragephoto.git
+branch = 0.2.0

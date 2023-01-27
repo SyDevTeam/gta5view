@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2021 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,15 +21,12 @@
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "SavegameDialog.h"
-#include "OptionsDialog.h"
 #include "PictureDialog.h"
 #include "UserInterface.h"
 #include "CrewDatabase.h"
 #include "SavegameData.h"
-#include "UiModWidget.h"
 #include "UiModLabel.h"
 #include "IconLoader.h"
-#include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
 #include <QSignalMapper>
@@ -227,7 +224,6 @@ int main(int argc, char *argv[])
         bool readOk = picture.readingPictureFromFile(arg1);
         picDialog.setWindowIcon(IconLoader::loadingAppIcon());
         picDialog.setSnapmaticPicture(&picture, readOk);
-        picDialog.setWindowFlags(picDialog.windowFlags()^Qt::Dialog^Qt::Window);
 
         int crewID = picture.getSnapmaticProperties().crewID;
         if (crewID != 0)
@@ -254,7 +250,6 @@ int main(int argc, char *argv[])
         bool readOk = savegame.readingSavegameFromFile(arg1);
         savegameDialog.setWindowIcon(IconLoader::loadingAppIcon());
         savegameDialog.setSavegameData(&savegame, arg1, readOk);
-        savegameDialog.setWindowFlags(savegameDialog.windowFlags()^Qt::Dialog^Qt::Window);
 
         if (!readOk)
             return 1;

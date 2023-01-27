@@ -20,6 +20,9 @@ endif()
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Network Svg Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS LinguistTools QUIET)
 
+set(RAGEPHOTO_STATIC ON CACHE BOOL "Build libragephoto as static library")
+add_subdirectory(src/libragephoto)
+
 if(WIN32)
     list(APPEND GTA5VIEW_LIBS
         dwmapi
@@ -71,7 +74,6 @@ set(GTA5VIEW_SOURCES
     src/ProfileInterface.cpp
     src/ProfileLoader.cpp
     src/ProfileWidget.cpp
-    src/RagePhoto.cpp
     src/SavegameCopy.cpp
     src/SavegameData.cpp
     src/SavegameDialog.cpp
@@ -114,7 +116,6 @@ set(GTA5VIEW_HEADERS
     src/ProfileInterface.h
     src/ProfileLoader.h
     src/ProfileWidget.h
-    src/RagePhoto.h
     src/SavegameCopy.h
     src/SavegameData.h
     src/SavegameDialog.h
@@ -360,8 +361,8 @@ if(Qt5Core_VERSION VERSION_GREATER_EQUAL "5.14.0")
 endif()
 
 target_compile_definitions(gta5view PRIVATE ${GTA5VIEW_DEFINES})
-target_include_directories(gta5view PRIVATE ${GTA5VIEW_INCLUDEDIR})
-target_link_libraries(gta5view PRIVATE Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Widgets ${GTA5VIEW_LIBS})
+target_include_directories(gta5view PRIVATE ${GTA5VIEW_INCLUDEDIR} ${RAGEPHOTO_INCLUDE_DIRS})
+target_link_libraries(gta5view PRIVATE Qt${QT_VERSION_MAJOR}::Network Qt${QT_VERSION_MAJOR}::Svg Qt${QT_VERSION_MAJOR}::Widgets ragephoto ${GTA5VIEW_LIBS})
 
 install(TARGETS gta5view DESTINATION bin)
 install(FILES res/de.syping.gta5view.desktop DESTINATION share/applications)

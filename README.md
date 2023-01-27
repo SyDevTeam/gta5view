@@ -15,7 +15,7 @@ Open Source Snapmatic and Savegame viewer/editor for GTA V
 
     # Note: Install Docker Community Edition and Git before continuing
     docker pull sypingauto/gta5view-build:1.10-static
-    git clone https://gitlab.com/Syping/gta5view
+    git clone --recurse-submodules https://gitlab.com/Syping/gta5view
     docker run --rm -v "$PWD/gta5view:/gta5view" -it sypingauto/gta5view-build:1.10-static
     mingw64-qt-cmake -B /gta5view/build /gta5view
     cmake --build /gta5view/build
@@ -23,7 +23,7 @@ Open Source Snapmatic and Savegame viewer/editor for GTA V
 #### Build gta5view for Debian/Ubuntu
 
     sudo apt-get install cmake git gcc g++ libqt5svg5-dev make qtbase5-dev qttranslations5-l10n
-    git clone https://gitlab.com/Syping/gta5view
+    git clone --recurse-submodules https://gitlab.com/Syping/gta5view
     cmake -B gta5view-build gta5view
     cmake --build gta5view-build
     sudo cmake --install gta5view-build
@@ -31,7 +31,7 @@ Open Source Snapmatic and Savegame viewer/editor for GTA V
 #### Build gta5view for Arch/Manjaro
 
     sudo pacman -S cmake gcc git make qt5-base qt5-svg qt5-tools qt5-translations
-    git clone https://gitlab.com/Syping/gta5view
+    git clone --recurse-submodules https://gitlab.com/Syping/gta5view
     cmake -B gta5view-build gta5view
     cmake --build gta5view-build
     sudo cmake --install gta5view-build
@@ -39,7 +39,7 @@ Open Source Snapmatic and Savegame viewer/editor for GTA V
 #### Build gta5view for Fedora/RHEL
 
     sudo dnf install cmake git gcc gcc-c++ make qt5-qtbase-devel qt5-qtsvg-devel qt5-qttranslations
-    git clone https://gitlab.com/Syping/gta5view
+    git clone --recurse-submodules https://gitlab.com/Syping/gta5view
     cmake -B gta5view-build gta5view
     cmake --build gta5view-build
     sudo cmake --install gta5view-build

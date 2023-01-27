@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2021 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -20,11 +20,9 @@
 #include "PictureWidget.h"
 #include "ProfileDatabase.h"
 #include "ui_PictureDialog.h"
-#include "SidebarGenerator.h"
 #include "MapLocationDialog.h"
 #include "JsonEditorDialog.h"
 #include "SnapmaticEditor.h"
-#include "StandardPaths.h"
 #include "PictureExport.h"
 #include "ImportDialog.h"
 #include "StringParser.h"
@@ -127,21 +125,8 @@ PictureDialog::PictureDialog(bool primaryWindow, ProfileDatabase *profileDB, Cre
 void PictureDialog::setupPictureDialog()
 {
     // Set Window Flags
-#if QT_VERSION >= 0x050900
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
     setWindowFlag(Qt::CustomizeWindowHint, true);
-#else
-    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint^Qt::CustomizeWindowHint);
-#endif
-#ifdef Q_OS_LINUX
-    // for stupid Window Manager like GNOME
-#if QT_VERSION >= 0x050900
-    setWindowFlag(Qt::Dialog, false);
-    setWindowFlag(Qt::Window, true);
-#else
-    setWindowFlags(windowFlags()^Qt::Dialog^Qt::Window);
-#endif
-#endif
 
     // Setup User Interface
     ui->setupUi(this);
@@ -234,13 +219,6 @@ void PictureDialog::closeEvent(QCloseEvent *ev)
 void PictureDialog::addPreviousNextButtons()
 {
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
-#if QT_VERSION < 0x050600
-    qreal screenRatio = AppEnv::screenRatio();
-    if (screenRatio != 1) {
-        QSize iconSize = uiToolbar->iconSize();
-        uiToolbar->setIconSize(QSize(iconSize.width() * screenRatio, iconSize.height() * screenRatio));
-    }
-#endif
     uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     uiToolbar->setObjectName("UiToolbar");
     uiToolbar->addAction(QIcon(AppEnv::getImagesFolder() % "/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
@@ -689,14 +667,8 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 #endif
         PictureWidget *pictureWidget = new PictureWidget(this); // Work!
         pictureWidget->setObjectName("PictureWidget");
-#if QT_VERSION >= 0x050900
         pictureWidget->setWindowFlag(Qt::FramelessWindowHint, true);
         pictureWidget->setWindowFlag(Qt::MaximizeUsingFullscreenGeometryHint, true);
-#elif QT_VERSION >= 0x050600
-        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint^Qt::MaximizeUsingFullscreenGeometryHint);
-#else
-        pictureWidget->setWindowFlags(pictureWidget->windowFlags()^Qt::FramelessWindowHint);
-#endif
         pictureWidget->setWindowTitle(windowTitle());
         pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color:black;}");
         pictureWidget->setImage(smpic->getImage(), desktopRect);
@@ -785,7 +757,7 @@ void PictureDialog::openPreviewMap()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "LocationEdited";
                 jsonObject["ExtraFlags"] = "Viewer";
-                jsonObject["EditedSize"] = QString::number(picture->getContentMaxLength());
+                jsonObject["EditedSize"] = QString::number(picture->ragePhoto()->photoSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -863,7 +835,7 @@ void PictureDialog::editSnapmaticImage()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "ImageEdited";
                 jsonObject["ExtraFlags"] = "Viewer";
-                jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+                jsonObject["EditedSize"] = QString::number(smpic->ragePhoto()->photoSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else

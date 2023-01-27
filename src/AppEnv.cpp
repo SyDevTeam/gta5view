@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2021 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -435,11 +435,7 @@ bool AppEnv::setGameLanguage(GameVersion gameVersion, GameLanguage gameLanguage)
 
 qreal AppEnv::screenRatio()
 {
-#if QT_VERSION >= 0x050000
     qreal dpi = QApplication::primaryScreen()->logicalDotsPerInch();
-#else
-    qreal dpi = QApplication::desktop()->logicalDpiX();
-#endif
 #ifdef Q_OS_MAC
     return (dpi / 72);
 #else
@@ -449,9 +445,5 @@ qreal AppEnv::screenRatio()
 
 qreal AppEnv::screenRatioPR()
 {
-#if QT_VERSION >= 0x050600
     return QApplication::primaryScreen()->devicePixelRatio();
-#else
-    return 1;
-#endif
 }

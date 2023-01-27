@@ -1,6 +1,6 @@
 /*****************************************************************************
-* gta5spv Grand Theft Auto Snapmatic Picture Viewer
-* Copyright (C) 2016-2021 Syping
+* gta5view Grand Theft Auto V Profile Viewer
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -37,18 +37,287 @@
 #else
 #include <QStringDecoder>
 #endif
-
-#if QT_VERSION >= 0x050000
 #include <QSaveFile>
-#else
-#include "StandardPaths.h"
-#endif
 
 // IMAGES VALUES
 #define snapmaticResolutionW 960
 #define snapmaticResolutionH 536
 #define snapmaticResolution QSize(snapmaticResolutionW, snapmaticResolutionH)
 
+// GTA5VIEW RELATED INTERNAL FUNCTIONS
+inline quint32 gta5view_charToUInt32LE(char *x)
+{
+    return (static_cast<unsigned char>(x[3]) << 24 |
+            static_cast<unsigned char>(x[2]) << 16 |
+            static_cast<unsigned char>(x[1]) << 8 |
+            static_cast<unsigned char>(x[0]));
+}
+
+inline void gta5view_uInt32ToCharLE(quint32 x, char *y)
+{
+    y[0] = x;
+    y[1] = x >> 8;
+    y[2] = x >> 16;
+    y[3] = x >> 24;
+}
+
+inline bool gta5view_export_load(const QByteArray &fileData, RagePhoto *ragePhoto)
+{
+    QBuffer dataBuffer;
+    dataBuffer.setData(fileData);
+    if (!dataBuffer.open(QIODevice::ReadOnly))
+        return false;
+    dataBuffer.seek(4);
+
+    char uInt32Buffer[4];
+    qint64 size = dataBuffer.read(uInt32Buffer, 4);
+    if (size != 4)
+        return false;
+
+    quint32 format = gta5view_charToUInt32LE(uInt32Buffer);
+    if (format == G5EExportFormat::G5E3P) {
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        quint32 compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
+
+        char *compressedPhotoHeader = static_cast<char*>(std::malloc(compressedSize));
+        if (!compressedPhotoHeader)
+            return false;
+        size = dataBuffer.read(compressedPhotoHeader, compressedSize);
+        if (size != compressedSize) {
+            free(compressedPhotoHeader);
+            return false;
+        }
+        QByteArray t_photoHeader = QByteArray::fromRawData(compressedPhotoHeader, compressedSize);
+        t_photoHeader = qUncompress(t_photoHeader);
+        free(compressedPhotoHeader);
+        if (t_photoHeader.isEmpty())
+            return false;
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        quint32 t_headerSum = gta5view_charToUInt32LE(uInt32Buffer);
+        ragePhoto->setHeader(t_photoHeader.constData(), t_headerSum);
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        quint32 t_photoBuffer = gta5view_charToUInt32LE(uInt32Buffer);
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
+
+        char *compressedPhoto = static_cast<char*>(std::malloc(compressedSize));
+        if (!compressedPhoto)
+            return false;
+        size = dataBuffer.read(compressedPhoto, compressedSize);
+        if (size != compressedSize) {
+            free(compressedPhoto);
+            return false;
+        }
+        QByteArray t_photoData = QByteArray::fromRawData(compressedPhoto, compressedSize);
+        t_photoData = qUncompress(t_photoData);
+        free(compressedPhoto);
+        ragePhoto->setPhoto(t_photoData.constData(), t_photoData.size(), t_photoBuffer);
+
+        // JSON offset will be calculated later, offsets will be removed in G5E4P
+        size = dataBuffer.skip(4);
+        if (size != 4)
+            return false;
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        quint32 t_jsonBuffer = gta5view_charToUInt32LE(uInt32Buffer);
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
+
+        char *compressedJson = static_cast<char*>(std::malloc(compressedSize));
+        if (!compressedJson)
+            return false;
+        size = dataBuffer.read(compressedJson, compressedSize);
+        if (size != compressedSize) {
+            free(compressedJson);
+            return false;
+        }
+        QByteArray t_jsonData = QByteArray::fromRawData(compressedJson, compressedSize);
+        t_jsonData = qUncompress(t_jsonData);
+        free(compressedJson);
+        if (t_jsonData.isEmpty())
+            return false;
+        ragePhoto->setJson(t_jsonData.constData(), t_jsonBuffer);
+
+        // TITL offset will be calculated later, offsets will be removed in G5E4P
+        size = dataBuffer.skip(4);
+        if (size != 4)
+            return false;
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        quint32 t_titlBuffer = gta5view_charToUInt32LE(uInt32Buffer);
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
+
+        char *compressedTitl = static_cast<char*>(std::malloc(compressedSize));
+        if (!compressedTitl)
+            return false;
+        size = dataBuffer.read(compressedTitl, compressedSize);
+        if (size != compressedSize) {
+            free(compressedTitl);
+            return false;
+        }
+        QByteArray t_titlData = QByteArray::fromRawData(compressedTitl, compressedSize);
+        t_titlData = qUncompress(t_titlData);
+        free(compressedTitl);
+        ragePhoto->setTitle(t_titlData.constData(), t_titlBuffer);
+
+        // DESC offset will be calculated later, offsets will be removed in G5E4P
+        size = dataBuffer.skip(4);
+        if (size != 4)
+            return false;
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        quint32 t_descBuffer = gta5view_charToUInt32LE(uInt32Buffer);
+
+        size = dataBuffer.read(uInt32Buffer, 4);
+        if (size != 4)
+            return false;
+        compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
+
+        char *compressedDesc = static_cast<char*>(std::malloc(compressedSize));
+        if (!compressedDesc)
+            return false;
+        size = dataBuffer.read(compressedDesc, compressedSize);
+        if (size != compressedSize) {
+            free(compressedDesc);
+            return false;
+        }
+        QByteArray t_descData = QByteArray::fromRawData(compressedDesc, compressedSize);
+        t_descData  = qUncompress(t_descData);
+        free(compressedDesc);
+        ragePhoto->setDescription(t_descData.constData(), t_descBuffer);
+
+        // EOF will be calculated later, EOF marker will be removed in G5E4P
+        size = dataBuffer.skip(4);
+        if (size != 4)
+            return false;
+
+        // libragephoto needs to know we gave it a GTA V Snapmatic
+        ragePhoto->setFormat(RagePhoto::GTA5);
+
+        return true;
+    }
+    else if (format == G5EExportFormat::G5E2P) {
+        const QByteArray t_fileData = qUncompress(dataBuffer.readAll());
+        if (t_fileData.isEmpty())
+            return false;
+        return ragePhoto->load(t_fileData.constData(), t_fileData.size());
+    }
+    else if (format == G5EExportFormat::G5E1P) {
+        size = dataBuffer.skip(1);
+        if (size != 1)
+            return false;
+
+        char length[1];
+        size = dataBuffer.read(length, 1);
+        if (size != 1)
+            return false;
+        int i_length = QByteArray::number(static_cast<int>(length[0]), 16).toInt() + 6;
+
+        size = dataBuffer.skip(i_length);
+        if (size != i_length)
+            return false;
+
+        const QByteArray t_fileData = qUncompress(dataBuffer.readAll());
+        if (t_fileData.isEmpty())
+            return false;
+        return ragePhoto->load(t_fileData.constData(), t_fileData.size());
+    }
+    return false;
+}
+
+inline void gta5view_export_save(QIODevice *ioDevice, RagePhotoData *data)
+{
+    char uInt32Buffer[4];
+    quint32 format = G5EPhotoFormat::G5EX;
+    gta5view_uInt32ToCharLE(format, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+    format = G5EExportFormat::G5E3P;
+    gta5view_uInt32ToCharLE(format, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    QByteArray compressedData = qCompress(QByteArray::fromRawData(data->header, strlen(data->header)), 9);
+    quint32 compressedSize = compressedData.size();
+    gta5view_uInt32ToCharLE(compressedSize, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+    ioDevice->write(compressedData);
+
+    gta5view_uInt32ToCharLE(data->headerSum, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    gta5view_uInt32ToCharLE(data->photoBuffer, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    compressedData = qCompress(QByteArray::fromRawData(data->jpeg, data->jpegSize), 9);
+    compressedSize = compressedData.size();
+    gta5view_uInt32ToCharLE(compressedSize, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+    ioDevice->write(compressedData);
+
+    gta5view_uInt32ToCharLE(data->jsonOffset, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    gta5view_uInt32ToCharLE(data->jsonBuffer, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    compressedData = qCompress(QByteArray::fromRawData(data->json, strlen(data->json)), 9);
+    compressedSize = compressedData.size();
+    gta5view_uInt32ToCharLE(compressedSize, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+    ioDevice->write(compressedData);
+
+    gta5view_uInt32ToCharLE(data->titlOffset, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    gta5view_uInt32ToCharLE(data->titlBuffer, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    compressedData = qCompress(QByteArray::fromRawData(data->title, strlen(data->title)), 9);
+    compressedSize = compressedData.size();
+    gta5view_uInt32ToCharLE(compressedSize, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+    ioDevice->write(compressedData);
+
+    gta5view_uInt32ToCharLE(data->descOffset, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    gta5view_uInt32ToCharLE(data->descBuffer, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+
+    compressedData = qCompress(QByteArray::fromRawData(data->description, strlen(data->description)), 9);
+    compressedSize = compressedData.size();
+    gta5view_uInt32ToCharLE(compressedSize, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+    ioDevice->write(compressedData);
+
+    gta5view_uInt32ToCharLE(data->endOfFile, uInt32Buffer);
+    ioDevice->write(uInt32Buffer, 4);
+}
+
+// SNAPMATIC PICTURE CLASS
 SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : QObject(parent), picFilePath(fileName)
 {
     reset();
@@ -68,8 +337,12 @@ void SnapmaticPicture::reset()
     lastStep = QString();
     sortStr = QString();
 
+    // INIT PIC FORMAT
+    picFormat = 0;
+
     // INIT PIC BOOLS
     isFormatSwitch = false;
+    isPreLoaded = false;
     picOk = false;
 
     // INIT JSON
@@ -77,32 +350,45 @@ void SnapmaticPicture::reset()
 
     // SNAPMATIC PROPERTIES
     localProperties = {};
+
+    // JSON OBJECT
+    jsonObject = QJsonObject();
 }
 
 bool SnapmaticPicture::preloadFile()
 {
-    QFile *picFile = new QFile(picFilePath);
+    QFile picFile(picFilePath);
     picFileName = QFileInfo(picFilePath).fileName();
-
     isFormatSwitch = false;
 
-    if (!picFile->open(QFile::ReadOnly)) {
+    if (!picFile.open(QIODevice::ReadOnly)) {
         lastStep = "1;/1,OpenFile," % convertDrawStringForLog(picFilePath);
-        delete picFile;
         return false;
     }
 
-    p_ragePhoto.setIODevice(picFile);
-    bool ok = p_ragePhoto.load();
-    picFile->close();
-    delete picFile;
+    const qint64 fileMaxSize = (1024 * 1024 * 64);
+    const QByteArray fileData = picFile.read(fileMaxSize);
+
+    bool ok = p_ragePhoto.load(fileData.constData(), fileData.size());
+    picFormat = p_ragePhoto.format();
+
+    // libragephoto doesn't support modules yet
+    if (picFormat == G5EPhotoFormat::G5EX)
+        ok = gta5view_export_load(fileData, &p_ragePhoto);
+
     if (!ok)
         return false;
 
-    if (picFilePath.right(4) != QLatin1String(".g5e")) {
-        if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX)
+    const QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_ragePhoto.json());
+    if (t_jsonDocument.isNull())
+        return false;
+    jsonObject = t_jsonDocument.object();
+
+    if (!picFilePath.endsWith(".g5e", Qt::CaseInsensitive)) {
+        if (picFormat == G5EPhotoFormat::G5EX)
             isFormatSwitch = true;
     }
+    isPreLoaded = true;
     emit preloaded();
     return ok;
 }
@@ -116,17 +402,17 @@ bool SnapmaticPicture::readingPicture(bool cacheEnabled_)
     cacheEnabled = cacheEnabled_;
 
     bool ok = true;
-    if (!p_ragePhoto.isLoaded())
+    if (!isPreLoaded)
         ok = preloadFile();
 
     if (!ok)
         return false;
 
     if (cacheEnabled)
-        picOk = cachePicture.loadFromData(p_ragePhoto.photoData(), "JPEG");
+        picOk = cachePicture.loadFromData(QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize()), "JPEG");
     if (!cacheEnabled) {
         QImage tempPicture;
-        picOk = tempPicture.loadFromData(p_ragePhoto.photoData(), "JPEG");
+        picOk = tempPicture.loadFromData(QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize()), "JPEG");
     }
 
     parseJsonContent(); // JSON parsing is own function
@@ -138,7 +424,7 @@ bool SnapmaticPicture::readingPicture(bool cacheEnabled_)
 
 void SnapmaticPicture::updateStrings()
 {
-    QString cmpPicTitl = p_ragePhoto.title();
+    QString cmpPicTitl(p_ragePhoto.title());
     cmpPicTitl.replace('\"', "''");
     cmpPicTitl.replace(' ', '_');
     cmpPicTitl.replace(':', '-');
@@ -153,7 +439,7 @@ void SnapmaticPicture::updateStrings()
     cmpPicTitl.remove('.');
     pictureStr = tr("PHOTO - %1").arg(localProperties.createdDateTime.toString("MM/dd/yy HH:mm:ss"));
     sortStr = localProperties.createdDateTime.toString("yyMMddHHmmss") % QString::number(localProperties.uid);
-    QString exportStr = localProperties.createdDateTime.toString("yyyyMMdd") % "-" % QString::number(localProperties.uid);
+    const QString exportStr = localProperties.createdDateTime.toString("yyyyMMdd") % "-" % QString::number(localProperties.uid);
     if (getSnapmaticFormat() == SnapmaticFormat::G5E_Format)
         picFileName = "PGTA5" % QString::number(localProperties.uid);
     picExportFileName = exportStr % "_" % cmpPicTitl;
@@ -165,17 +451,16 @@ bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool cach
         picFilePath = fileName;
         return readingPicture(cacheEnabled_);
     }
-    else {
+    else
         return false;
-    }
 }
 
 bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
 {
-#ifdef GTA5SYNC_DYNAMIC_PHOTOBUFFER
-    quint32 jpegPicStreamLength = p_ragePhoto.photoBuffer();
+#ifdef GTA5SYNC_DYNAMIC_PHOTOBUFFER // It's not properly implemented yet, please don't define
+    quint32 jpegPicStreamLength = p_ragePhoto.data()->photoBuffer();
 #else
-    quint32 jpegPicStreamLength = 524288U;
+    quint32 jpegPicStreamLength = RagePhoto::DEFAULT_GTA5_PHOTOBUFFER;
 #endif
     QByteArray picByteArray;
     int comLvl = 100;
@@ -193,19 +478,11 @@ bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
                     comLvl--;
                     saveSuccess = false;
                 }
-                else {
-                    p_ragePhoto.setPhotoBuffer(size, true);
+                else
                     picByteArray = picByteArrayT;
-                }
             }
-            else {
-#ifndef GTA5SYNC_DYNAMIC_PHOTOBUFFER
-                if (p_ragePhoto.photoBuffer() != jpegPicStreamLength)
-                    p_ragePhoto.setPhotoData(QByteArray()); // avoid buffer set fail
-                    p_ragePhoto.setPhotoBuffer(jpegPicStreamLength, true);
-#endif
+            else
                 picByteArray = picByteArrayT;
-            }
         }
     }
     if (saveSuccess)
@@ -215,7 +492,18 @@ bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
 
 bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean method
 {
-    bool success = p_ragePhoto.setPhotoData(streamArray);
+#ifdef GTA5SYNC_DYNAMIC_PHOTOBUFFER // It's not properly implemented yet, please don't define
+    quint32 jpegPicStreamLength = p_ragePhoto.data()->photoBuffer();
+#else
+    quint32 jpegPicStreamLength = RagePhoto::DEFAULT_GTA5_PHOTOBUFFER;
+#endif
+    if (streamArray.size() > jpegPicStreamLength)
+        jpegPicStreamLength = streamArray.size();
+#ifdef GTA5SYNC_COMPACT_PHOTOBUFFER // Experiment to save less than the default photo buffer
+    if (streamArray.size() < jpegPicStreamLength)
+        jpegPicStreamLength = streamArray.size();
+#endif
+    bool success = p_ragePhoto.setPhoto(streamArray.data(), streamArray.size(), jpegPicStreamLength);
     if (success) {
         if (cacheEnabled) {
             QImage replacedPicture;
@@ -224,24 +512,17 @@ bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean 
         }
         return true;
     }
-    else {
+    else
         return false;
-    }
 }
 
 bool SnapmaticPicture::setPictureTitl(const QString &newTitle_)
 {
     QString newTitle = newTitle_;
-    if (newTitle.length() > 39) {
+    if (newTitle.length() > 39)
         newTitle = newTitle.left(39);
-    }
-    p_ragePhoto.setTitle(newTitle);
+    p_ragePhoto.setTitle(newTitle.toStdString().c_str());
     return true;
-}
-
-int SnapmaticPicture::getContentMaxLength()
-{
-    return p_ragePhoto.photoBuffer();
 }
 
 QString SnapmaticPicture::getExportPictureFileName()
@@ -252,24 +533,20 @@ QString SnapmaticPicture::getExportPictureFileName()
 QString SnapmaticPicture::getOriginalPictureFileName()
 {
     QString newPicFileName = picFileName;
-    if (picFileName.right(4) == ".bak") {
+    if (picFileName.right(4) == ".bak")
         newPicFileName = QString(picFileName).remove(picFileName.length() - 4, 4);
-    }
-    if (picFileName.right(7) == ".hidden") {
+    if (picFileName.right(7) == ".hidden")
         newPicFileName = QString(picFileName).remove(picFileName.length() - 7, 7);
-    }
     return newPicFileName;
 }
 
 QString SnapmaticPicture::getOriginalPictureFilePath()
 {
     QString newPicFilePath = picFilePath;
-    if (picFilePath.right(4) == ".bak") {
+    if (picFilePath.right(4) == ".bak")
         newPicFilePath = QString(picFilePath).remove(picFilePath.length() - 4, 4);
-    }
-    if (picFilePath.right(7) == ".hidden") {
+    if (picFilePath.right(7) == ".hidden")
         newPicFilePath = QString(picFilePath).remove(picFilePath.length() - 7, 7);
-    }
     return newPicFilePath;
 }
 
@@ -309,13 +586,13 @@ QString SnapmaticPicture::getLastStep(bool readable)
         if (descStepList.length() < 1)
             return lastStep;
         int argsCount = descStepList.at(0).toInt(&intOk);
-        if (!intOk) { return lastStep; }
+        if (!intOk)
+            return lastStep;
         if (argsCount == 1) {
             QString currentAction = descStepList.at(1);
             QString actionFile = descStepList.at(2);
-            if (currentAction == "OpenFile") {
+            if (currentAction == "OpenFile")
                 return tr("open file %1").arg(actionFile);
-            }
         }
         else if (argsCount == 3 || argsCount == 4) {
             QString currentAction = descStepList.at(1);
@@ -325,42 +602,31 @@ QString SnapmaticPicture::getLastStep(bool readable)
             if (argsCount == 4) { actionError2 = descStepList.at(5); }
             if (currentAction == "ReadingFile") {
                 QString readableError = actionError;
-                if (actionError == "NOHEADER") {
+                if (actionError == "NOHEADER")
                     readableError = tr("header not exists");
-                }
-                else if (actionError == "MALFORMEDHEADER") {
+                else if (actionError == "MALFORMEDHEADER")
                     readableError = tr("header is malformed");
-                }
-                else if (actionError == "NOJPEG" || actionError == "NOPIC") {
+                else if (actionError == "NOJPEG" || actionError == "NOPIC")
                     readableError = tr("picture not exists (%1)").arg(actionError);
-                }
-                else if (actionError == "NOJSON" || actionError == "CTJSON") {
+                else if (actionError == "NOJSON" || actionError == "CTJSON")
                     readableError = tr("JSON not exists (%1)").arg(actionError);
-                }
-                else if (actionError == "NOTITL" || actionError == "CTTITL") {
+                else if (actionError == "NOTITL" || actionError == "CTTITL")
                     readableError = tr("title not exists (%1)").arg(actionError);
-                }
-                else if (actionError == "NODESC" || actionError == "CTDESC") {
+                else if (actionError == "NODESC" || actionError == "CTDESC")
                     readableError = tr("description not exists (%1)").arg(actionError);
-                }
-                else if (actionError == "JSONINCOMPLETE" && actionError2 == "JSONERROR") {
+                else if (actionError == "JSONINCOMPLETE" && actionError2 == "JSONERROR")
                     readableError = tr("JSON is incomplete and malformed");
-                }
-                else if (actionError == "JSONINCOMPLETE") {
+                else if (actionError == "JSONINCOMPLETE")
                     readableError = tr("JSON is incomplete");
-                }
-                else if (actionError == "JSONERROR") {
+                else if (actionError == "JSONERROR")
                     readableError = tr("JSON is malformed");
-                }
                 return tr("reading file %1 because of %2", "Example for %2: JSON is malformed error").arg(actionFile, readableError);
             }
-            else {
+            else
                 return lastStep;
-            }
         }
-        else {
+        else
             return lastStep;
-        }
     }
     return lastStep;
 
@@ -368,18 +634,16 @@ QString SnapmaticPicture::getLastStep(bool readable)
 
 QImage SnapmaticPicture::getImage()
 {
-    if (cacheEnabled) {
+    if (cacheEnabled)
         return cachePicture;
-    }
-    else {
-        return QImage::fromData(p_ragePhoto.photoData(), "JPEG");
-    }
+    else
+        return QImage::fromData(QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize()), "JPEG");
     return QImage();
 }
 
 QByteArray SnapmaticPicture::getPictureStream()
 {
-    return p_ragePhoto.photoData();
+    return QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize());
 }
 
 bool SnapmaticPicture::isPicOk()
@@ -412,7 +676,7 @@ bool SnapmaticPicture::isJsonOk()
 
 QString SnapmaticPicture::getJsonStr()
 {
-    return QString::fromUtf8(p_ragePhoto.jsonData());
+    return QString::fromUtf8(p_ragePhoto.json());
 }
 
 SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
@@ -422,7 +686,6 @@ SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
 
 void SnapmaticPicture::parseJsonContent()
 {
-    QJsonObject jsonObject = p_ragePhoto.jsonObject();
     QVariantMap jsonMap = jsonObject.toVariantMap();
 
     bool jsonIncomplete = false;
@@ -540,28 +803,28 @@ void SnapmaticPicture::parseJsonContent()
 
 bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties properties)
 {
-    QJsonObject jsonObject = p_ragePhoto.jsonObject();
+    QJsonObject t_jsonObject = jsonObject;
 
     QJsonObject locObject;
     locObject["x"] = properties.location.x;
     locObject["y"] = properties.location.y;
     locObject["z"] = properties.location.z;
 
-    jsonObject["loc"] = locObject;
-    jsonObject["uid"] = properties.uid;
-    jsonObject["area"] = properties.location.area;
-    jsonObject["crewid"] = properties.crewID;
-    jsonObject["street"] = properties.streetID;
-    jsonObject["creat"] = QJsonValue::fromVariant(properties.createdTimestamp);
-    jsonObject["plyrs"] = QJsonValue::fromVariant(properties.playersList);
-    jsonObject["meme"] = properties.isMeme;
-    jsonObject["mug"] = properties.isMug;
-    jsonObject["slf"] = properties.isSelfie;
-    jsonObject["drctr"] = properties.isFromDirector;
-    jsonObject["rsedtr"] = properties.isFromRSEditor;
-    jsonObject["onislandx"] = properties.location.isCayoPerico;
+    t_jsonObject["loc"] = locObject;
+    t_jsonObject["uid"] = properties.uid;
+    t_jsonObject["area"] = properties.location.area;
+    t_jsonObject["crewid"] = properties.crewID;
+    t_jsonObject["street"] = properties.streetID;
+    t_jsonObject["creat"] = QJsonValue::fromVariant(properties.createdTimestamp);
+    t_jsonObject["plyrs"] = QJsonValue::fromVariant(properties.playersList);
+    t_jsonObject["meme"] = properties.isMeme;
+    t_jsonObject["mug"] = properties.isMug;
+    t_jsonObject["slf"] = properties.isSelfie;
+    t_jsonObject["drctr"] = properties.isFromDirector;
+    t_jsonObject["rsedtr"] = properties.isFromRSEditor;
+    t_jsonObject["onislandx"] = properties.location.isCayoPerico;
 
-    QJsonDocument jsonDocument(jsonObject);
+    const QJsonDocument jsonDocument(t_jsonObject);
     if (setJsonStr(QString::fromUtf8(jsonDocument.toJson(QJsonDocument::Compact)))) {
         localProperties = properties;
         return true;
@@ -571,14 +834,16 @@ bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties properties)
 
 bool SnapmaticPicture::setJsonStr(const QString &newJsonStr, bool updateProperties)
 {
-    if (p_ragePhoto.setJsonData(newJsonStr.toUtf8())) {
-        if (updateProperties)
-            parseJsonContent();
-        return true;
-    }
-    else {
+    const QJsonDocument t_jsonDocument = QJsonDocument::fromJson(newJsonStr.toStdString().c_str());
+    if (t_jsonDocument.isNull())
         return false;
-    }
+    const QByteArray t_jsonData = t_jsonDocument.toJson(QJsonDocument::Compact);
+    jsonObject = t_jsonDocument.object();
+
+    p_ragePhoto.setJson(t_jsonData.constData());
+    if (updateProperties)
+        parseJsonContent();
+    return true;
 }
 
 // FILE MANAGEMENT
@@ -588,7 +853,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
     // Keep current format when Auto_Format is used
     SnapmaticFormat format = format_;
     if (format_ == SnapmaticFormat::Auto_Format) {
-        if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX) {
+        if (p_ragePhoto.format() == G5EPhotoFormat::G5EX) {
             format = SnapmaticFormat::G5E_Format;
         }
         else {
@@ -597,68 +862,27 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
     }
 
     bool saveSuccess = false;
-#if QT_VERSION >= 0x050000
-    QSaveFile *picFile = new QSaveFile(fileName);
-#else
-    QFile *picFile = new QFile(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
-#endif
-    if (picFile->open(QIODevice::WriteOnly)) {
+    QSaveFile picFile(fileName);
+    if (picFile.open(QIODevice::WriteOnly)) {
         if (format == SnapmaticFormat::G5E_Format) {
-            p_ragePhoto.save(picFile, RagePhoto::PhotoFormat::G5EX);
-#if QT_VERSION >= 0x050000
-            saveSuccess = picFile->commit();
-#else
-            saveSuccess = true;
-            picFile->close();
-#endif
-            delete picFile;
+            gta5view_export_save(&picFile, p_ragePhoto.data());
+            saveSuccess = picFile.commit();
         }
         else if (format == SnapmaticFormat::JPEG_Format) {
-            picFile->write(p_ragePhoto.photoData());
-#if QT_VERSION >= 0x050000
-            saveSuccess = picFile->commit();
-#else
-            saveSuccess = true;
-            picFile->close();
-#endif
-            delete picFile;
+            picFile.write(QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize()));
+            saveSuccess = picFile.commit();
         }
         else {
-            p_ragePhoto.save(picFile, RagePhoto::PhotoFormat::GTA5);
-#if QT_VERSION >= 0x050000
-            saveSuccess = picFile->commit();
-#else
-            saveSuccess = true;
-            picFile->close();
-#endif
-            delete picFile;
+            bool ok;
+            const std::string photo = p_ragePhoto.save(&ok);
+            if (ok)
+                picFile.write(photo.data(), photo.size());
+            saveSuccess = picFile.commit();
         }
-#if QT_VERSION <= 0x050000
-        if (saveSuccess) {
-            bool tempBakCreated = false;
-            if (QFile::exists(fileName)) {
-                if (!QFile::rename(fileName, fileName % ".tmp")) {
-                    QFile::remove(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
-                    return false;
-                }
-                tempBakCreated = true;
-            }
-            if (!QFile::rename(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp", fileName)) {
-                QFile::remove(StandardPaths::tempLocation() % "/" % QFileInfo(fileName).fileName() % ".tmp");
-                if (tempBakCreated)
-                    QFile::rename(fileName % ".tmp", fileName);
-                return false;
-            }
-            if (tempBakCreated)
-                QFile::remove(fileName % ".tmp");
-        }
-#endif
         return saveSuccess;
     }
-    else {
-        delete picFile;
+    else
         return saveSuccess;
-    }
 }
 
 void SnapmaticPicture::setPicFileName(const QString &picFileName_)
@@ -674,19 +898,19 @@ void SnapmaticPicture::setPicFilePath(const QString &picFilePath_)
 bool SnapmaticPicture::deletePicFile()
 {
     bool success = false;
-    if (!QFile::exists(picFilePath)) {
+    if (!QFile::exists(picFilePath))
         success = true;
-    }
-    else if (QFile::remove(picFilePath)) {
+    else if (QFile::remove(picFilePath))
         success = true;
-    }
     if (isHidden()) {
         const QString picBakPath = QString(picFilePath).remove(picFilePath.length() - 7, 7) % ".bak";
-        if (QFile::exists(picBakPath)) QFile::remove(picBakPath);
+        if (QFile::exists(picBakPath))
+            QFile::remove(picBakPath);
     }
     else {
         const QString picBakPath = picFilePath % ".bak";
-        if (QFile::exists(picBakPath)) QFile::remove(picBakPath);
+        if (QFile::exists(picBakPath))
+            QFile::remove(picBakPath);
     }
     return success;
 }
@@ -695,23 +919,21 @@ bool SnapmaticPicture::deletePicFile()
 
 bool SnapmaticPicture::isHidden()
 {
-    if (picFilePath.right(7) == QLatin1String(".hidden")) {
+    if (picFilePath.right(7) == QLatin1String(".hidden"))
         return true;
-    }
     return false;
 }
 
 bool SnapmaticPicture::isVisible()
 {
-    if (picFilePath.right(7) == QLatin1String(".hidden")) {
+    if (picFilePath.right(7) == QLatin1String(".hidden"))
         return false;
-    }
     return true;
 }
 
 bool SnapmaticPicture::setPictureHidden()
 {
-    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX) {
+    if (picFormat == G5EPhotoFormat::G5EX) {
         return false;
     }
     if (!isHidden()) {
@@ -727,9 +949,8 @@ bool SnapmaticPicture::setPictureHidden()
 
 bool SnapmaticPicture::setPictureVisible()
 {
-    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX) {
+    if (picFormat == G5EPhotoFormat::G5EX)
         return false;
-    }
     if (isHidden()) {
         QString newPicFilePath = QString(picFilePath).remove(picFilePath.length() - 7, 7);
         if (QFile::rename(picFilePath, newPicFilePath)) {
@@ -752,20 +973,19 @@ QSize SnapmaticPicture::getSnapmaticResolution()
 
 SnapmaticFormat SnapmaticPicture::getSnapmaticFormat()
 {
-    if (p_ragePhoto.photoFormat() == RagePhoto::PhotoFormat::G5EX) {
+    if (picFormat == G5EPhotoFormat::G5EX)
         return SnapmaticFormat::G5E_Format;
-    }
     return SnapmaticFormat::PGTA_Format;
 }
 
 void SnapmaticPicture::setSnapmaticFormat(SnapmaticFormat format)
 {
     if (format == SnapmaticFormat::G5E_Format) {
-        p_ragePhoto.setPhotoFormat(RagePhoto::PhotoFormat::G5EX);
+        picFormat = G5EPhotoFormat::G5EX;
         return;
     }
     else if (format == SnapmaticFormat::PGTA_Format) {
-        p_ragePhoto.setPhotoFormat(RagePhoto::PhotoFormat::GTA5);
+        picFormat = RagePhoto::PhotoFormat::GTA5;
         return;
     }
     qDebug() << "setSnapmaticFormat: Invalid SnapmaticFormat defined, valid SnapmaticFormats are G5E_Format and PGTA_Format";
@@ -794,7 +1014,8 @@ bool SnapmaticPicture::verifyTitleChar(const QChar &titleChar)
 {
     // VERIFY CHAR FOR BE A VALID SNAPMATIC CHARACTER
     if (titleChar.isLetterOrNumber() || titleChar.isPrint()) {
-        if (titleChar == '<' || titleChar == '>' || titleChar == '\\') return false;
+        if (titleChar == '<' || titleChar == '>' || titleChar == '\\')
+            return false;
         return true;
     }
     return false;
@@ -802,9 +1023,8 @@ bool SnapmaticPicture::verifyTitleChar(const QChar &titleChar)
 
 // STRING OPERATIONS
 
-QString SnapmaticPicture::parseTitleString(const QByteArray &commitBytes, int maxLength)
+QString SnapmaticPicture::parseTitleString(const QByteArray &commitBytes)
 {
-    Q_UNUSED(maxLength)
 #if QT_VERSION >= 0x060000
     QStringDecoder strDecoder = QStringDecoder(QStringDecoder::Utf16LE);
     QString retStr = strDecoder(commitBytes);

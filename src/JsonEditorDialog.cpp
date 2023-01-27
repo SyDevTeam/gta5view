@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2021 Syping
+* Copyright (C) 2017-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -39,12 +39,8 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
     ui(new Ui::JsonEditorDialog)
 {
     // Set Window Flags
-#if QT_VERSION >= 0x050900
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
     setWindowFlag(Qt::WindowMinMaxButtonsHint, true);
-#else
-    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowMinMaxButtonsHint);
-#endif
 
     ui->setupUi(this);
     ui->cmdClose->setDefault(true);
@@ -194,7 +190,7 @@ bool JsonEditorDialog::saveJsonContent()
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "JSONEdited";
-                jsonObject["EditedSize"] = QString::number(smpic->getContentMaxLength());
+                jsonObject["EditedSize"] = QString::number(smpic->ragePhoto()->photoSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2021 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -184,11 +184,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     QObject::connect(donateAction, &QAction::triggered, this, [=](){
         QDialog *donateDialog = new QDialog(this);
         donateDialog->setWindowTitle(QString("%1 - %2").arg(GTA5SYNC_APPSTR, tr("Donate")));
-#if QT_VERSION >= 0x050900
         donateDialog->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-        donateDialog->setWindowFlags(donateDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
         QVBoxLayout *donateLayout = new QVBoxLayout;
         donateDialog->setLayout(donateLayout);
         QLabel *methodsLabel = new QLabel(QString("<b>%1</b>").arg(tr("Donation methods").toHtmlEscaped()), donateDialog);
@@ -222,11 +218,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
                 QObject::connect(currencyButton, &QPushButton::pressed, donateDialog, [=](){
                     QDialog *addressDialog = new QDialog(donateDialog);
                     addressDialog->setWindowTitle(currencyStr);
-#if QT_VERSION >= 0x050900
                     addressDialog->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-                    addressDialog->setWindowFlags(donateDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
                     QVBoxLayout *addressLayout = new QVBoxLayout;
                     addressDialog->setLayout(addressLayout);
                     QLabel *addressLabel = new QLabel(address, addressDialog);
@@ -580,11 +572,7 @@ fileDialogPreOpen:
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, false);
-#if QT_VERSION >= 0x050900
     fileDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
     fileDialog.setWindowTitle(tr("Open File..."));
 
     QStringList filters;
@@ -754,11 +742,7 @@ void UserInterface::showMessages(const QStringList messages)
 {
     QDialog *messageDialog = new QDialog(this);
     messageDialog->setWindowTitle(tr("%1 - Messages").arg(GTA5SYNC_APPSTR));
-#if QT_VERSION >= 0x050900
     messageDialog->setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-    messageDialog->setWindowFlags(messageDialog->windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
     QVBoxLayout *messageLayout = new QVBoxLayout;
     messageDialog->setLayout(messageLayout);
     QStackedWidget *stackWidget = new QStackedWidget(messageDialog);

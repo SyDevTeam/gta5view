@@ -1,6 +1,6 @@
 /*****************************************************************************
-* gta5spv Grand Theft Auto Snapmatic Picture Viewer
-* Copyright (C) 2016-2020 Syping
+* gta5view Grand Theft Auto V Profile Viewer
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,6 +21,7 @@
 
 #include "RagePhoto.h"
 #include <QStringList>
+#include <QJsonObject>
 #include <QDateTime>
 #include <QObject>
 #include <QString>
@@ -28,6 +29,16 @@
 #include <QFile>
 
 enum class SnapmaticFormat : int { Auto_Format = 0, PGTA_Format = 1, JPEG_Format = 2, G5E_Format = 3 };
+enum G5EExportFormat : uint32_t {
+    G5E1P = 0x454C0010UL,
+    G5E2P = 0x01000032UL,
+    G5E2S = 0x02000032UL,
+    G5E3P = 0x01000033UL,
+    G5E3S = 0x02000033UL,
+};
+enum G5EPhotoFormat : uint32_t {
+    G5EX = 0x45354700UL,
+};
 
 struct SnapmaticProperties {
     struct SnapmaticLocation {
@@ -74,7 +85,6 @@ public:
     QString getExportPictureFileName();
     QString getOriginalPictureFileName();
     QString getOriginalPictureFilePath();
-    int getContentMaxLength();
     bool setImage(const QImage &picture, bool eXtendMode = false);
     bool setPictureTitl(const QString &newTitle); // Please use setPictureTitle instead
     bool setPictureStream(const QByteArray &streamArray);
@@ -130,7 +140,7 @@ public:
     static bool verifyTitle(const QString &title);
 
     // STRING OPERATIONS
-    static QString parseTitleString(const QByteArray &commitBytes, int maxLength);
+    static QString parseTitleString(const QByteArray &commitBytes);
     static QString convertDrawStringForLog(const QString &inputStr);
     static QString convertLogStringForDraw(const QString &inputStr);
 
@@ -145,14 +155,17 @@ private:
     QString pictureStr;
     QString lastStep;
     QString sortStr;
+    uint32_t picFormat;
     bool picOk;
     bool cacheEnabled;
     bool isFormatSwitch;
+    bool isPreLoaded;
 
     // JSON
     void parseJsonContent();
     bool jsonOk;
     SnapmaticProperties localProperties;
+    QJsonObject jsonObject;
 
     // VERIFY CONTENT
     static bool verifyTitleChar(const QChar &titleChar);

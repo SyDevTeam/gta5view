@@ -56,11 +56,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui(new Ui::OptionsDialog)
 {
     // Set Window Flags
-#if QT_VERSION >= 0x050900
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
 
     // Setup User Interface
     ui->setupUi(this);

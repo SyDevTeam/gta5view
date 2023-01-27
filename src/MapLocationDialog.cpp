@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2021 Syping
+* Copyright (C) 2017-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -29,11 +29,7 @@ MapLocationDialog::MapLocationDialog(double x, double y, QWidget *parent) :
     ui(new Ui::MapLocationDialog)
 {
     // Set Window Flags
-#if QT_VERSION >= 0x050900
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
 
     ui->setupUi(this);
     ui->cmdDone->setVisible(false);

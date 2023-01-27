@@ -24,14 +24,12 @@
 #include "DatabaseThread.h"
 #include "SavegameWidget.h"
 #include "PictureDialog.h"
-#include "PictureExport.h"
 #include "StandardPaths.h"
 #include "ProfileLoader.h"
 #include "ExportThread.h"
 #include "ImportDialog.h"
 #include "UiModLabel.h"
 #include "pcg_basic.h"
-#include "wrapper.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QNetworkAccessManager>
@@ -544,7 +542,7 @@ fileDialogPreOpen: //Work?
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
     fileDialog.setWindowTitle(tr("Import..."));
     fileDialog.setLabelText(QFileDialog::Accept, tr("Import..."));
 
@@ -604,7 +602,8 @@ bool ProfileInterface::importFilesProgress(QStringList selectedFiles)
 
     // Progress dialog
     QProgressDialog pbDialog(this);
-    pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+    pbDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+    pbDialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
     pbDialog.setWindowTitle(tr("Import..."));
     pbDialog.setLabelText(tr("Import file %1 of %2 files").arg(QString::number(1), QString::number(maximumId)));
     pbDialog.setRange(1, maximumId);
@@ -661,7 +660,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
-                        jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+                        jsonObject["ImportSize"] = QString::number(picture->ragePhoto()->photoSize());
 #if QT_VERSION >= 0x060000
                         jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -873,7 +872,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                                     QJsonObject jsonObject;
                                     jsonObject["Type"] = "ImportSuccess";
                                     jsonObject["ExtraFlag"] = "Dialog";
-                                    jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+                                    jsonObject["ImportSize"] = QString::number(picture->ragePhoto()->photoSize());
 #if QT_VERSION >= 0x060000
                                     jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -920,7 +919,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
-                        jsonObject["ImportSize"] = QString::number(picture->getContentMaxLength());
+                        jsonObject["ImportSize"] = QString::number(picture->ragePhoto()->photoSize());
 #if QT_VERSION >= 0x060000
                         jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -1002,27 +1001,16 @@ bool ProfileInterface::importRemote(QUrl remoteUrl)
 {
     bool retValue = false;
     QDialog urlPasteDialog(this);
-#if QT_VERSION >= 0x050000
     urlPasteDialog.setObjectName(QStringLiteral("UrlPasteDialog"));
-#else
-    urlPasteDialog.setObjectName(QString::fromUtf8("UrlPasteDialog"));
-#endif
-    urlPasteDialog.setWindowFlags(urlPasteDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+    urlPasteDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+    urlPasteDialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
     urlPasteDialog.setWindowTitle(tr("Import..."));
     urlPasteDialog.setModal(true);
     QVBoxLayout urlPasteLayout(&urlPasteDialog);
-#if QT_VERSION >= 0x050000
     urlPasteLayout.setObjectName(QStringLiteral("UrlPasteLayout"));
-#else
-    urlPasteLayout.setObjectName(QString::fromUtf8("UrlPasteLayout"));
-#endif
     urlPasteDialog.setLayout(&urlPasteLayout);
     UiModLabel urlPasteLabel(&urlPasteDialog);
-#if QT_VERSION >= 0x050000
     urlPasteLabel.setObjectName(QStringLiteral("UrlPasteLabel"));
-#else
-    urlPasteLabel.setObjectName(QString::fromUtf8("UrlPasteLabel"));
-#endif
 
     urlPasteLabel.setText(tr("Prepare Content for Import..."));
     urlPasteLayout.addWidget(&urlPasteLabel);
@@ -1401,7 +1389,8 @@ void ProfileInterface::exportSelected()
             }
 
             QProgressDialog pbDialog(this);
-            pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+            pbDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+            pbDialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
             pbDialog.setWindowTitle(tr("Export selected..."));
             pbDialog.setLabelText(tr("Initialising export..."));
             pbDialog.setRange(0, exportCount);
@@ -2030,7 +2019,8 @@ void ProfileInterface::massTool(MassTool tool)
         int overallId = 0;
 
         QProgressDialog pbDialog(this);
-        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+        pbDialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
         pbDialog.setWindowTitle(tr("Patch selected..."));
         pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(1), QString::number(maximumId)));
         pbDialog.setRange(1, maximumId);
@@ -2123,7 +2113,8 @@ void ProfileInterface::massTool(MassTool tool)
         int overallId = 0;
 
         QProgressDialog pbDialog(this);
-        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+        pbDialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
         pbDialog.setWindowTitle(tr("Patch selected..."));
         pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(1), QString::number(maximumId)));
         pbDialog.setRange(1, maximumId);
@@ -2238,7 +2229,8 @@ preSelectionCrewID:
         int overallId = 0;
 
         QProgressDialog pbDialog(this);
-        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+        pbDialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
         pbDialog.setWindowTitle(tr("Patch selected..."));
         pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(1), QString::number(maximumId)));
         pbDialog.setRange(1, maximumId);
@@ -2333,7 +2325,8 @@ preSelectionTitle:
         int overallId = 0;
 
         QProgressDialog pbDialog(this);
-        pbDialog.setWindowFlags(pbDialog.windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
+        pbDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+        pbDialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
         pbDialog.setWindowTitle(tr("Patch selected..."));
         pbDialog.setLabelText(tr("Patch file %1 of %2 files").arg(QString::number(overallId), QString::number(maximumId)));
         pbDialog.setRange(1, maximumId);

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2021 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,6 @@
 
 #include "PlayerListDialog.h"
 #include "ui_PlayerListDialog.h"
-#include "wrapper.h"
 #include "AppEnv.h"
 #include <QStringBuilder>
 #include <QFontMetrics>
@@ -33,11 +32,7 @@ PlayerListDialog::PlayerListDialog(QStringList players, ProfileDatabase *profile
     ui(new Ui::PlayerListDialog)
 {
     // Set Window Flags
-#if QT_VERSION >= 0x050900
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
 
     listUpdated = false;
     ui->setupUi(this);
