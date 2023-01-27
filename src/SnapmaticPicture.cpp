@@ -86,12 +86,12 @@ inline bool gta5view_export_load(const QByteArray &fileData, RagePhoto *ragePhot
             return false;
         size = dataBuffer.read(compressedPhotoHeader, compressedSize);
         if (size != compressedSize) {
-            free(compressedPhotoHeader);
+            std::free(compressedPhotoHeader);
             return false;
         }
         QByteArray t_photoHeader = QByteArray::fromRawData(compressedPhotoHeader, compressedSize);
         t_photoHeader = qUncompress(t_photoHeader);
-        free(compressedPhotoHeader);
+        std::free(compressedPhotoHeader);
         if (t_photoHeader.isEmpty())
             return false;
 
@@ -116,12 +116,12 @@ inline bool gta5view_export_load(const QByteArray &fileData, RagePhoto *ragePhot
             return false;
         size = dataBuffer.read(compressedPhoto, compressedSize);
         if (size != compressedSize) {
-            free(compressedPhoto);
+            std::free(compressedPhoto);
             return false;
         }
         QByteArray t_photoData = QByteArray::fromRawData(compressedPhoto, compressedSize);
         t_photoData = qUncompress(t_photoData);
-        free(compressedPhoto);
+        std::free(compressedPhoto);
         ragePhoto->setPhoto(t_photoData.constData(), t_photoData.size(), t_photoBuffer);
 
         // JSON offset will be calculated later, offsets will be removed in G5E4P
@@ -144,12 +144,12 @@ inline bool gta5view_export_load(const QByteArray &fileData, RagePhoto *ragePhot
             return false;
         size = dataBuffer.read(compressedJson, compressedSize);
         if (size != compressedSize) {
-            free(compressedJson);
+            std::free(compressedJson);
             return false;
         }
         QByteArray t_jsonData = QByteArray::fromRawData(compressedJson, compressedSize);
         t_jsonData = qUncompress(t_jsonData);
-        free(compressedJson);
+        std::free(compressedJson);
         if (t_jsonData.isEmpty())
             return false;
         ragePhoto->setJson(t_jsonData.constData(), t_jsonBuffer);
@@ -174,12 +174,12 @@ inline bool gta5view_export_load(const QByteArray &fileData, RagePhoto *ragePhot
             return false;
         size = dataBuffer.read(compressedTitl, compressedSize);
         if (size != compressedSize) {
-            free(compressedTitl);
+            std::free(compressedTitl);
             return false;
         }
         QByteArray t_titlData = QByteArray::fromRawData(compressedTitl, compressedSize);
         t_titlData = qUncompress(t_titlData);
-        free(compressedTitl);
+        std::free(compressedTitl);
         ragePhoto->setTitle(t_titlData.constData(), t_titlBuffer);
 
         // DESC offset will be calculated later, offsets will be removed in G5E4P
@@ -202,12 +202,12 @@ inline bool gta5view_export_load(const QByteArray &fileData, RagePhoto *ragePhot
             return false;
         size = dataBuffer.read(compressedDesc, compressedSize);
         if (size != compressedSize) {
-            free(compressedDesc);
+            std::free(compressedDesc);
             return false;
         }
         QByteArray t_descData = QByteArray::fromRawData(compressedDesc, compressedSize);
         t_descData  = qUncompress(t_descData);
-        free(compressedDesc);
+        std::free(compressedDesc);
         ragePhoto->setDescription(t_descData.constData(), t_descBuffer);
 
         // EOF will be calculated later, EOF marker will be removed in G5E4P
