@@ -376,8 +376,103 @@ bool SnapmaticPicture::preloadFile()
     if (picFormat == G5EPhotoFormat::G5EX)
         ok = gta5view_export_load(fileData, &p_ragePhoto);
 
-    if (!ok)
+    if (!ok) {
+        const RagePhoto::Error error = static_cast<RagePhoto::Error>(p_ragePhoto.error());
+        switch (error) {
+        case RagePhoto::Uninitialised:
+            lastStep = "1;/1,OpenFile," % convertDrawStringForLog(picFilePath);
+            break;
+        case RagePhoto::NoFormatIdentifier:
+        case RagePhoto::IncompleteHeader:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",1,NOHEADER";
+            break;
+        case RagePhoto::IncompatibleFormat:
+            lastStep = "2;/4,ReadingFile," % convertDrawStringForLog(picFilePath) % ",1,MALFORMEDHEADER,LIBRAGEPHOTO_INCOMPATIBLE_FORMAT";
+            break;
+        case RagePhoto::UnicodeInitError:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",1,LIBRAGEPHOTO_UNICODE_ERROR";
+            break;
+        case RagePhoto::UnicodeHeaderError:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",1,MALFORMEDHEADER";
+            break;
+        case RagePhoto::HeaderMallocError:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",1,LIBRAGEPHOTO_MALLOC_ERROR";
+            break;
+        case RagePhoto::IncompleteChecksum:
+        case RagePhoto::IncompleteEOF:
+        case RagePhoto::IncompleteJsonOffset:
+        case RagePhoto::IncompleteTitleOffset:
+        case RagePhoto::IncompleteDescOffset:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",2,NOHEADER";
+            break;
+        case RagePhoto::IncompleteJpegMarker:
+        case RagePhoto::IncorrectJpegMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",2,NOJPEG";
+            break;
+        case RagePhoto::IncompletePhotoBuffer:
+        case RagePhoto::IncompletePhotoSize:
+        case RagePhoto::PhotoReadError:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",2,NOPIC";
+            break;
+        case RagePhoto::PhotoMallocError:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",2,LIBRAGEPHOTO_MALLOC_ERROR";
+            break;
+        case RagePhoto::IncompleteJsonMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",3,NOJSON";
+            break;
+        case RagePhoto::IncorrectJsonMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",3,CTJSON";
+            break;
+        case RagePhoto::IncompleteJsonBuffer:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",3,LIBRAGEPHOTO_INCOMPLETE_BUFFER_ERROR";
+            break;
+        case RagePhoto::JsonReadError:
+            lastStep = "2;/4,ReadingFile," % convertDrawStringForLog(picFilePath) % ",3,NOJSON,LIBRAGEPHOTO_READ_ERROR";
+            break;
+        case RagePhoto::JsonMallocError:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",3,LIBRAGEPHOTO_MALLOC_ERROR";
+            break;
+        case RagePhoto::IncompleteTitleMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",4,NOTITL";
+            break;
+        case RagePhoto::IncorrectTitleMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",4,CTTITL";
+            break;
+        case RagePhoto::IncompleteTitleBuffer:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",4,LIBRAGEPHOTO_INCOMPLETE_BUFFER_ERROR";
+            break;
+        case RagePhoto::TitleReadError:
+            lastStep = "2;/4,ReadingFile," % convertDrawStringForLog(picFilePath) % ",4,NOTITL,LIBRAGEPHOTO_READ_ERROR";
+            break;
+        case RagePhoto::TitleMallocError:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",4,LIBRAGEPHOTO_MALLOC_ERROR";
+            break;
+        case RagePhoto::IncompleteDescMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",5,NODESC";
+            break;
+        case RagePhoto::IncorrectDescMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",5,CTDESC";
+            break;
+        case RagePhoto::IncompleteDescBuffer:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",5,LIBRAGEPHOTO_INCOMPLETE_BUFFER_ERROR";
+            break;
+        case RagePhoto::DescReadError:
+            lastStep = "2;/4,ReadingFile," % convertDrawStringForLog(picFilePath) % ",5,NODESC,LIBRAGEPHOTO_READ_ERROR";
+            break;
+        case RagePhoto::DescMallocError:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",5,LIBRAGEPHOTO_MALLOC_ERROR";
+            break;
+        case RagePhoto::IncompleteJendMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",6,LIBRAGEPHOTO_INCOMPLETE_JEND_ERROR";
+            break;
+        case RagePhoto::IncorrectJendMarker:
+            lastStep = "2;/3,ReadingFile," % convertDrawStringForLog(picFilePath) % ",6,LIBRAGEPHOTO_INCORRECT_JEND_ERROR";
+            break;
+        default:
+            break;
+        }
         return false;
+    }
 
     const QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_ragePhoto.json());
     if (t_jsonDocument.isNull())
