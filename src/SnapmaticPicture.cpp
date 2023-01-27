@@ -366,8 +366,7 @@ bool SnapmaticPicture::preloadFile()
         return false;
     }
 
-    const qint64 fileMaxSize = (1024 * 1024 * 64);
-    const QByteArray fileData = picFile.read(fileMaxSize);
+    const QByteArray fileData = picFile.readAll();
 
     bool ok = p_ragePhoto.load(fileData.constData(), fileData.size());
     picFormat = p_ragePhoto.format();
