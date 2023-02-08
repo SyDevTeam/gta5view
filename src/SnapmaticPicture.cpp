@@ -268,7 +268,7 @@ inline void gta5view_export_save(QIODevice *ioDevice, RagePhotoData *data)
     gta5view_uInt32ToCharLE(data->headerSum, uInt32Buffer);
     ioDevice->write(uInt32Buffer, 4);
 
-    gta5view_uInt32ToCharLE(data->photoBuffer, uInt32Buffer);
+    gta5view_uInt32ToCharLE(data->jpegBuffer, uInt32Buffer);
     ioDevice->write(uInt32Buffer, 4);
 
     compressedData = qCompress(QByteArray::fromRawData(data->jpeg, data->jpegSize), 9);
@@ -366,7 +366,8 @@ bool SnapmaticPicture::preloadFile()
         return false;
     }
 
-    const QByteArray fileData = picFile.readAll();
+    const qint64 fileSize = picFile.size();
+    const QByteArray fileData = picFile.read(fileSize);
 
     bool ok = p_ragePhoto.load(fileData.constData(), fileData.size());
     picFormat = p_ragePhoto.format();
