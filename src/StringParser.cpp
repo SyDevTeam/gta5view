@@ -27,15 +27,6 @@
 #include <QList>
 #include <QDir>
 
-QString StringParser::escapeString(const QString &toEscape)
-{
-#if QT_VERSION >= 0x050000
-    return toEscape.toHtmlEscaped();
-#else
-    return Qt::escape(toEscape);
-#endif
-}
-
 QString StringParser::convertBuildedString(const QString &buildedStr)
 {
     QString outputStr = buildedStr;

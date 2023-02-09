@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -53,24 +53,26 @@ public:
     void retranslate();
     ~SnapmaticWidget();
 
-private slots:
+public slots:
     void on_cmdView_clicked();
     void on_cmdCopy_clicked();
     void on_cmdExport_clicked();
     void on_cmdDelete_clicked();
-    void on_cbSelected_stateChanged(int arg1);
-    void adjustTextColor();
     void pictureSelected();
     void selectAllWidgets();
     void deselectAllWidgets();
-    void dialogNextPictureRequested();
-    void dialogPreviousPictureRequested();
     void makePictureVisibleSlot();
     void makePictureHiddenSlot();
     void editSnapmaticProperties();
     void editSnapmaticRawJson();
     void editSnapmaticImage();
     void openMapViewer();
+
+private slots:
+    void on_cbSelected_stateChanged(int arg1);
+    void adjustTextColor();
+    void dialogNextPictureRequested();
+    void dialogPreviousPictureRequested();
     void snapmaticUpdated();
     void customSignal(QString signal);
 

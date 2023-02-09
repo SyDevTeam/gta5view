@@ -305,9 +305,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
-#ifndef Q_QS_ANDROID
     resize(625 * screenRatio, 500 * screenRatio);
-#endif
     ui->vlUserInterface->setSpacing(6 * screenRatio);
     ui->vlUserInterface->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 }
@@ -496,12 +494,7 @@ void UserInterface::on_actionAbout_gta5sync_triggered()
     AboutDialog *aboutDialog = new AboutDialog(this);
     aboutDialog->setWindowIcon(windowIcon());
     aboutDialog->setModal(true);
-#ifdef Q_OS_ANDROID
-    // Android ...
-    aboutDialog->showMaximized();
-#else
     aboutDialog->show();
-#endif
     aboutDialog->exec();
     delete aboutDialog;
 }
@@ -544,12 +537,7 @@ void UserInterface::on_actionOptions_triggered()
     QObject::connect(optionsDialog, SIGNAL(settingsApplied(int, bool)), this, SLOT(settingsApplied(int, bool)));
 
     optionsDialog->setModal(true);
-#ifdef Q_OS_ANDROID
-    // Android ...
-    optionsDialog->showMaximized();
-#else
     optionsDialog->show();
-#endif
     optionsDialog->exec();
 
     delete optionsDialog;
@@ -606,7 +594,7 @@ bool UserInterface::openFile(QString selectedFile, bool warn)
 {
     QString selectedFileName = QFileInfo(selectedFile).fileName();
     if (QFile::exists(selectedFile)) {
-        if (selectedFileName.left(4) == "PGTA" || selectedFileName.right(4) == ".g5e") {
+        if (selectedFileName.startsWith("PGTA5") || selectedFileName.startsWith("PRDR3") || selectedFileName.endsWith(".g5e")) {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
             if (picture->readingPicture()) {
                 openSnapmaticFile(picture);
@@ -676,14 +664,9 @@ void UserInterface::openSnapmaticFile(SnapmaticPicture *picture)
     QObject::connect(threadDB, SIGNAL(crewNameUpdated()), &picDialog, SLOT(crewNameUpdated()));
     QObject::connect(threadDB, SIGNAL(playerNameUpdated()), &picDialog, SLOT(playerNameUpdated()));
 
-#ifdef Q_OS_ANDROID
-    // Android optimization should be put here
-    picDialog.showMaximized();
-#else
     picDialog.show();
     picDialog.setMinimumSize(picDialog.size());
     picDialog.setMaximumSize(picDialog.size());
-#endif
 
     picDialog.exec();
 }
@@ -693,12 +676,7 @@ void UserInterface::openSavegameFile(SavegameData *savegame)
     SavegameDialog sgdDialog(this);
     sgdDialog.setSavegameData(savegame, savegame->getSavegameFileName(), true);
     sgdDialog.setModal(true);
-#ifdef Q_OS_ANDROID
-    // Android optimization should be put here
-    sgdDialog.showMaximized();
-#else
     sgdDialog.show();
-#endif
     sgdDialog.exec();
 }
 

@@ -20,7 +20,6 @@
 #include "ProfileLoader.h"
 #include "SavegameData.h"
 #include "CrewDatabase.h"
-#include "wrapper.h"
 #include <QStringBuilder>
 #include <QVector>
 #include <QString>
@@ -29,9 +28,9 @@
 #include <QDir>
 #include <QList>
 #else
-#include "sys/types.h"
-#include "sys/stat.h"
-#include "dirent.h"
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <dirent.h>
 #endif
 
 ProfileLoader::ProfileLoader(QString profileFolder, CrewDatabase *crewDB, QObject *parent) : QThread(parent), profileFolder(profileFolder), crewDB(crewDB)

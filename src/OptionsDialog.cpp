@@ -21,7 +21,6 @@
 #include "TranslationClass.h"
 #include "StandardPaths.h"
 #include "UserInterface.h"
-#include "wrapper.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
@@ -65,16 +64,10 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
-#if QT_VERSION >= 0x050000
     qreal screenRatioPR = AppEnv::screenRatioPR();
     QRect desktopResolution = QApplication::primaryScreen()->geometry();
     int desktopSizeWidth = qRound((double)desktopResolution.width() * screenRatioPR);
     int desktopSizeHeight = qRound((double)desktopResolution.height() * screenRatioPR);
-#else
-    QRect desktopResolution = QApplication::desktop()->screenGeometry(this);
-    int desktopSizeWidth = desktopResolution.width();
-    int desktopSizeHeight = desktopResolution.height();
-#endif
     aspectRatio = Qt::KeepAspectRatio;
     defExportSize = SnapmaticPicture::getSnapmaticResolution();
     cusExportSize = defExportSize;
@@ -560,7 +553,7 @@ void OptionsDialog::setupPictureSettings()
         ui->rbPicDefaultRes->setChecked(true);
     }
 
-    aspectRatio = (Qt::AspectRatioMode)settings->value("AspectRatio", Qt::KeepAspectRatio).toInt();
+    aspectRatio = static_cast<Qt::AspectRatioMode>(settings->value("AspectRatio", Qt::KeepAspectRatio).toInt());
     if (aspectRatio == Qt::IgnoreAspectRatio) {
         ui->cbIgnoreAspectRatio->setChecked(true);
     }

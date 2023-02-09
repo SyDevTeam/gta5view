@@ -84,7 +84,7 @@
 #define crewID QString::number(picture->getSnapmaticProperties().crewID)
 #define picArea picture->getSnapmaticProperties().location.area
 #define picPath picture->getPictureFilePath()
-#define picTitl StringParser::escapeString(picture->getPictureTitle())
+#define picTitl picture->getPictureTitle().toHtmlEscaped()
 #define plyrsList picture->getSnapmaticProperties().playersList
 #if QT_VERSION >= 0x060000
 #define created QLocale().toString(picture->getSnapmaticProperties().createdDateTime, QLocale::ShortFormat)
@@ -168,15 +168,15 @@ void PictureDialog::setupPictureDialog()
 
     // Manage menu
     manageMenu = new QMenu(this);
-    manageMenu->addAction(tr("Export as &Picture..."), this, SLOT(exportSnapmaticPicture()));
-    manageMenu->addAction(tr("Export as &Snapmatic..."), this, SLOT(copySnapmaticPicture()));
+    manageMenu->addAction(tr("Export as &Picture..."), this, &PictureDialog::exportSnapmaticPicture);
+    manageMenu->addAction(tr("Export as &Snapmatic..."), this, &PictureDialog::copySnapmaticPicture);
     manageMenu->addSeparator();
-    manageMenu->addAction(tr("&Edit Properties..."), this, SLOT(editSnapmaticProperties()));
-    manageMenu->addAction(tr("&Overwrite Image..."), this, SLOT(editSnapmaticImage()));
+    manageMenu->addAction(tr("&Edit Properties..."), this, &PictureDialog::editSnapmaticProperties);
+    manageMenu->addAction(tr("&Overwrite Image..."), this, &PictureDialog::editSnapmaticImage);
     manageMenu->addSeparator();
-    QAction *openViewerAction = manageMenu->addAction(tr("Open &Map Viewer..."), this, SLOT(openPreviewMap()));
+    QAction *openViewerAction = manageMenu->addAction(tr("Open &Map Viewer..."), this, &PictureDialog::openPreviewMap);
     openViewerAction->setShortcut(Qt::Key_M);
-    manageMenu->addAction(tr("Open &JSON Editor..."), this, SLOT(editSnapmaticRawJson()));
+    manageMenu->addAction(tr("Open &JSON Editor..."), this, &PictureDialog::editSnapmaticRawJson);
     ui->cmdManage->setMenu(manageMenu);
 
     // Global map
@@ -221,8 +221,8 @@ void PictureDialog::addPreviousNextButtons()
     QToolBar *uiToolbar = new QToolBar("Picture Toolbar", this);
     uiToolbar->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
     uiToolbar->setObjectName("UiToolbar");
-    uiToolbar->addAction(QIcon(AppEnv::getImagesFolder() % "/back.svgz"), "", this, SLOT(previousPictureRequestedSlot()));
-    uiToolbar->addAction(QIcon(AppEnv::getImagesFolder() % "/next.svgz"), "", this, SLOT(nextPictureRequestedSlot()));
+    uiToolbar->addAction(QIcon(AppEnv::getImagesFolder() % "/back.svgz"), "", this, &PictureDialog::previousPictureRequestedSlot);
+    uiToolbar->addAction(QIcon(AppEnv::getImagesFolder() % "/next.svgz"), "", this, &PictureDialog::nextPictureRequestedSlot);
 #ifdef Q_OS_MAC
 #if QT_VERSION >= 0x050000
     uiToolbar->setStyle(QStyleFactory::create("Fusion"));
@@ -348,12 +348,10 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 openPreviewMap();
                 returnValue = true;
                 break;
-#if QT_VERSION >= 0x050300
             case Qt::Key_Exit:
                 ui->cmdClose->click();
                 returnValue = true;
                 break;
-#endif
             case Qt::Key_Enter: case Qt::Key_Return:
                 on_labPicture_mouseDoubleClicked(Qt::LeftButton);
                 returnValue = true;
@@ -365,7 +363,6 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
             }
         }
 #ifdef Q_OS_WIN
-#if QT_VERSION >= 0x050000
         if (obj != ui->labPicture && naviEnabled) {
             if (ev->type() == QEvent::MouseButtonPress) {
                 QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(ev);
@@ -395,7 +392,6 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
                 }
             }
         }
-#endif
 #endif
     }
     return returnValue;
@@ -485,8 +481,8 @@ void PictureDialog::renderOverlayPicture()
 void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, bool _indexed, int _index)
 {
     if (smpic != nullptr) {
-        QObject::disconnect(smpic, SIGNAL(updated()), this, SLOT(updated()));
-        QObject::disconnect(smpic, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
+        QObject::disconnect(smpic, &SnapmaticPicture::updated, this, &PictureDialog::updated);
+        QObject::disconnect(smpic, &SnapmaticPicture::customSignal, this, &PictureDialog::customSignal);
     }
     snapmaticPicture = QImage();
     indexed = _indexed;
@@ -511,14 +507,14 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         }
         setWindowTitle(windowTitleStr.arg(picTitl));
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
-        QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
+        QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);
     }
     else {
         ui->labJSON->setText(jsonDrawString.arg("0", "0", "0", tr("No Players"), tr("No Crew"), tr("Unknown Location")));
-        QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
+        QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);
     }
-    QObject::connect(smpic, SIGNAL(updated()), this, SLOT(updated()));
-    QObject::connect(smpic, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
+    QObject::connect(smpic, &SnapmaticPicture::updated, this, &PictureDialog::updated);
+    QObject::connect(smpic, &SnapmaticPicture::customSignal, this, &PictureDialog::customSignal);
     emit newPictureCommited(snapmaticPicture);
 }
 
@@ -573,9 +569,7 @@ void PictureDialog::renderPicture()
         shownImagePainter.drawImage(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, overlayTempImage, Qt::AutoColor);
     }
     shownImagePainter.end();
-#if QT_VERSION >= 0x050600
     shownImagePixmap.setDevicePixelRatio(screenRatioPR);
-#endif
     ui->labPicture->setPixmap(shownImagePixmap);
 }
 
@@ -586,7 +580,7 @@ void PictureDialog::crewNameUpdated()
     if (crewIDStr == crewStr) {
         crewStr = crewDB->getCrewName(crewIDStr);
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
-        QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
+        QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);
     }
 }
 
@@ -595,7 +589,7 @@ void PictureDialog::playerNameUpdated()
     SnapmaticPicture *picture = smpic; // used by macro
     if (plyrsList.count() >= 1) {
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
-        QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
+        QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);
     }
 }
 
@@ -675,9 +669,9 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
         pictureWidget->setModal(true);
 
         fullscreenWidget = pictureWidget;
-        QObject::connect(this, SIGNAL(newPictureCommited(QImage)), pictureWidget, SLOT(setImage(QImage)));
-        QObject::connect(pictureWidget, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
-        QObject::connect(pictureWidget, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
+        QObject::connect(this, &PictureDialog::newPictureCommited, pictureWidget, QOverload<QImage>::of(&PictureWidget::setImage));
+        QObject::connect(pictureWidget, &PictureWidget::nextPictureRequested, this, &PictureDialog::dialogNextPictureRequested);
+        QObject::connect(pictureWidget, &PictureWidget::previousPictureRequested, this, &PictureDialog::dialogPreviousPictureRequested);
 
         pictureWidget->move(desktopRect.x(), desktopRect.y());
         pictureWidget->resize(desktopRect.width(), desktopRect.height());
@@ -866,11 +860,7 @@ void PictureDialog::editSnapmaticRawJson()
     }
     jsonEditor->setWindowIcon(windowIcon());
     jsonEditor->setModal(true);
-#ifndef Q_OS_ANDROID
     jsonEditor->show();
-#else
-    jsonEditor->showMaximized();
-#endif
     jsonEditor->exec();
     delete jsonEditor;
 }
@@ -887,7 +877,7 @@ void PictureDialog::updated()
     }
     setWindowTitle(windowTitleStr.arg(picTitl));
     ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
-    QTimer::singleShot(0, this, SLOT(adaptDialogSize()));
+    QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);
 }
 
 void PictureDialog::customSignal(QString signal)

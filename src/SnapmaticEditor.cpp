@@ -21,7 +21,6 @@
 #include "SnapmaticPicture.h"
 #include "PlayerListDialog.h"
 #include "StringParser.h"
-#include "wrapper.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
@@ -42,11 +41,7 @@ SnapmaticEditor::SnapmaticEditor(CrewDatabase *crewDB, ProfileDatabase *profileD
     ui(new Ui::SnapmaticEditor)
 {
     // Set Window Flags
-#if QT_VERSION >= 0x050900
     setWindowFlag(Qt::WindowContextHelpButtonHint, false);
-#else
-    setWindowFlags(windowFlags()^Qt::WindowContextHelpButtonHint);
-#endif
 
     ui->setupUi(this);
     ui->cmdCancel->setDefault(true);
@@ -236,7 +231,7 @@ void SnapmaticEditor::setSnapmaticTitle(const QString &title)
         snapmaticTitle = title;
     }
     QString editStr = QString("<a href=\"g5e://edittitle\" style=\"text-decoration: none;\">%1</a>").arg(tr("Edit"));
-    QString titleStr = tr("Title: %1 (%2)").arg(StringParser::escapeString(snapmaticTitle), editStr);
+    QString titleStr = tr("Title: %1 (%2)").arg(snapmaticTitle.toHtmlEscaped(), editStr);
     ui->labTitle->setText(titleStr);
     if (SnapmaticPicture::verifyTitle(snapmaticTitle)) {
         ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: green\">%1</span>").arg(tr("Yes", "Yes, should work fine"))));
@@ -244,25 +239,21 @@ void SnapmaticEditor::setSnapmaticTitle(const QString &title)
     else {
         ui->labAppropriate->setText(tr("Appropriate: %1").arg(QString("<span style=\"color: red\">%1</span>").arg(tr("No", "No, could lead to issues"))));
     }
-#ifndef Q_OS_ANDROID
     ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
     ui->frameWidget->resize(ui->gbValues->width(), ui->frameWidget->heightForWidth(ui->frameWidget->width()));
     if (heightForWidth(width()) > height())
         resize(width(), heightForWidth(width()));
-#endif
 }
 
 void SnapmaticEditor::setSnapmaticCrew(const QString &crew)
 {
     QString editStr = QString("<a href=\"g5e://editcrew\" style=\"text-decoration: none;\">%1</a>").arg(tr("Edit"));
-    QString crewStr = tr("Crew: %1 (%2)").arg(StringParser::escapeString(crew), editStr);
+    QString crewStr = tr("Crew: %1 (%2)").arg(crew.toHtmlEscaped(), editStr);
     ui->labCrew->setText(crewStr);
-#ifndef Q_OS_ANDROID
     ui->gbValues->resize(ui->gbValues->width(), ui->gbValues->heightForWidth(ui->gbValues->width()));
     ui->frameWidget->resize(ui->gbValues->width(), ui->frameWidget->heightForWidth(ui->frameWidget->width()));
     if (heightForWidth(width()) > height())
         resize(width(), heightForWidth(width()));
-#endif
 }
 
 QString SnapmaticEditor::returnCrewName(int crewID_)

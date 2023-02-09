@@ -25,7 +25,6 @@
 class StringParser
 {
 public:
-    static QString escapeString(const QString &toEscape);
     static QString convertBuildedString(const QString &buildedStr);
 };
 
