@@ -219,6 +219,14 @@ if(FLATPAK_BUILD)
     )
 endif()
 
+option(RAGEPHOTO_ABI_WRAPPER "Use libragephoto's ABI wrapper" OFF)
+if(RAGEPHOTO_ABI_WRAPPER)
+    set(RAGEPHOTO_C_API ON CACHE BOOL "Build libragephoto with C API support" FORCE)
+    list(APPEND GTA5VIEW_DEFINES
+        -DRAGEPHOTO_USE_ABI_WRAPPER
+    )
+endif()
+
 option(WITH_DONATE "Donate menu option and donation dialog" OFF)
 if(WITH_DONATE)
     set(DONATE_ADDRESSES "" CACHE STRING "Donation addresses")
