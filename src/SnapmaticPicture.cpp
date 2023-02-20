@@ -61,8 +61,10 @@ inline void gta5view_uInt32ToCharLE(quint32 x, char *y)
     y[3] = x >> 24;
 }
 
-inline bool gta5view_export_load(const QByteArray &fileData, RagePhoto *ragePhoto)
+ragephoto_bool_t gta5view_export_load(RagePhotoData *rp_data, const char *data, size_t length)
 {
+    const QByteArray fileData = QByteArray::fromRawData(data, length);
+
     QBuffer dataBuffer;
     dataBuffer.setData(fileData);
     if (!dataBuffer.open(QIODevice::ReadOnly))
@@ -70,181 +72,268 @@ inline bool gta5view_export_load(const QByteArray &fileData, RagePhoto *ragePhot
     dataBuffer.seek(4);
 
     char uInt32Buffer[4];
-    qint64 size = dataBuffer.read(uInt32Buffer, 4);
-    if (size != 4)
+    size_t size = dataBuffer.read(uInt32Buffer, 4);
+    if (size != 4) {
+        rp_data->error = RagePhoto::NoFormatIdentifier;
         return false;
+    }
 
-    quint32 format = gta5view_charToUInt32LE(uInt32Buffer);
+    uint32_t format = gta5view_charToUInt32LE(uInt32Buffer);
     if (format == G5EExportFormat::G5E3P) {
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteHeader;
             return false;
+        }
         quint32 compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
 
         char *compressedPhotoHeader = static_cast<char*>(std::malloc(compressedSize));
-        if (!compressedPhotoHeader)
+        if (!compressedPhotoHeader) {
+            rp_data->error = RagePhoto::HeaderMallocError;
             return false;
+        }
         size = dataBuffer.read(compressedPhotoHeader, compressedSize);
         if (size != compressedSize) {
             std::free(compressedPhotoHeader);
+            rp_data->error = RagePhoto::UnicodeHeaderError;
             return false;
         }
         QByteArray t_photoHeader = QByteArray::fromRawData(compressedPhotoHeader, compressedSize);
         t_photoHeader = qUncompress(t_photoHeader);
         std::free(compressedPhotoHeader);
-        if (t_photoHeader.isEmpty())
+        if (t_photoHeader.isEmpty()) {
+            rp_data->error = RagePhoto::IncompleteHeader;
             return false;
+        }
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteHeader;
             return false;
-        quint32 t_headerSum = gta5view_charToUInt32LE(uInt32Buffer);
-        ragePhoto->setHeader(t_photoHeader.constData(), t_headerSum);
+        }
+        rp_data->headerSum = gta5view_charToUInt32LE(uInt32Buffer);
+        rp_data->header = static_cast<char*>(std::malloc(t_photoHeader.size() + 1));
+        if (!rp_data->header) {
+            rp_data->error = RagePhoto::HeaderMallocError;
+            return false;
+        }
+        std::memcpy(rp_data->header, t_photoHeader.constData(), t_photoHeader.size() + 1);
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompletePhotoBuffer;
             return false;
-        quint32 t_photoBuffer = gta5view_charToUInt32LE(uInt32Buffer);
+        }
+        rp_data->jpegBuffer = gta5view_charToUInt32LE(uInt32Buffer);
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompletePhotoBuffer;
             return false;
+        }
         compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
 
         char *compressedPhoto = static_cast<char*>(std::malloc(compressedSize));
-        if (!compressedPhoto)
+        if (!compressedPhoto) {
+            rp_data->error = RagePhoto::PhotoMallocError;
             return false;
+        }
         size = dataBuffer.read(compressedPhoto, compressedSize);
         if (size != compressedSize) {
             std::free(compressedPhoto);
+            rp_data->error = RagePhoto::PhotoReadError;
             return false;
         }
         QByteArray t_photoData = QByteArray::fromRawData(compressedPhoto, compressedSize);
         t_photoData = qUncompress(t_photoData);
         std::free(compressedPhoto);
-        ragePhoto->setPhoto(t_photoData.constData(), t_photoData.size(), t_photoBuffer);
+        rp_data->jpeg = static_cast<char*>(std::malloc(t_photoData.size()));
+        if (!rp_data->jpeg) {
+            rp_data->error = RagePhoto::PhotoMallocError;
+            return false;
+        }
+        std::memcpy(rp_data->jpeg, t_photoData.constData(), t_photoData.size());
+        rp_data->jpegSize = t_photoData.size();
 
         // JSON offset will be calculated later, offsets will be removed in G5E4P
         size = dataBuffer.skip(4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteJsonOffset;
             return false;
+        }
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteJsonBuffer;
             return false;
-        quint32 t_jsonBuffer = gta5view_charToUInt32LE(uInt32Buffer);
+        }
+        rp_data->jsonBuffer = gta5view_charToUInt32LE(uInt32Buffer);
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteJsonBuffer;
             return false;
+        }
         compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
 
         char *compressedJson = static_cast<char*>(std::malloc(compressedSize));
-        if (!compressedJson)
+        if (!compressedJson) {
+            rp_data->error = RagePhoto::JsonMallocError;
             return false;
+        }
         size = dataBuffer.read(compressedJson, compressedSize);
         if (size != compressedSize) {
             std::free(compressedJson);
+            rp_data->error = RagePhoto::JsonReadError;
             return false;
         }
         QByteArray t_jsonData = QByteArray::fromRawData(compressedJson, compressedSize);
         t_jsonData = qUncompress(t_jsonData);
         std::free(compressedJson);
-        if (t_jsonData.isEmpty())
+        if (t_jsonData.isEmpty()) {
+            rp_data->error = RagePhoto::JsonReadError;
             return false;
-        ragePhoto->setJson(t_jsonData.constData(), t_jsonBuffer);
+        }
+        rp_data->json = static_cast<char*>(std::malloc(t_jsonData.size() + 1));
+        if (!rp_data->json) {
+            rp_data->error = RagePhoto::JsonMallocError;
+            return false;
+        }
+        std::memcpy(rp_data->json, t_jsonData.constData(), t_jsonData.size() + 1);
 
         // TITL offset will be calculated later, offsets will be removed in G5E4P
         size = dataBuffer.skip(4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteTitleOffset;
             return false;
+        }
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteTitleBuffer;
             return false;
-        quint32 t_titlBuffer = gta5view_charToUInt32LE(uInt32Buffer);
+        }
+        rp_data->titlBuffer = gta5view_charToUInt32LE(uInt32Buffer);
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteTitleBuffer;
             return false;
+        }
         compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
 
         char *compressedTitl = static_cast<char*>(std::malloc(compressedSize));
-        if (!compressedTitl)
+        if (!compressedTitl) {
+            rp_data->error = RagePhoto::TitleMallocError;
             return false;
+        }
         size = dataBuffer.read(compressedTitl, compressedSize);
         if (size != compressedSize) {
             std::free(compressedTitl);
+            rp_data->error = RagePhoto::TitleReadError;
             return false;
         }
         QByteArray t_titlData = QByteArray::fromRawData(compressedTitl, compressedSize);
         t_titlData = qUncompress(t_titlData);
         std::free(compressedTitl);
-        ragePhoto->setTitle(t_titlData.constData(), t_titlBuffer);
+        rp_data->title = static_cast<char*>(std::malloc(t_titlData.size() + 1));
+        if (!rp_data->title) {
+            rp_data->error = RagePhoto::TitleMallocError;
+            return false;
+        }
+        std::memcpy(rp_data->title, t_titlData.constData(), t_titlData.size() + 1);
 
         // DESC offset will be calculated later, offsets will be removed in G5E4P
         size = dataBuffer.skip(4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteDescOffset;
             return false;
+        }
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteDescBuffer;
             return false;
-        quint32 t_descBuffer = gta5view_charToUInt32LE(uInt32Buffer);
+        }
+        rp_data->descBuffer = gta5view_charToUInt32LE(uInt32Buffer);
 
         size = dataBuffer.read(uInt32Buffer, 4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteDescBuffer;
             return false;
+        }
         compressedSize = gta5view_charToUInt32LE(uInt32Buffer);
 
         char *compressedDesc = static_cast<char*>(std::malloc(compressedSize));
-        if (!compressedDesc)
+        if (!compressedDesc) {
+            rp_data->error = RagePhoto::DescMallocError;
             return false;
+        }
         size = dataBuffer.read(compressedDesc, compressedSize);
         if (size != compressedSize) {
             std::free(compressedDesc);
+            rp_data->error = RagePhoto::DescReadError;
             return false;
         }
         QByteArray t_descData = QByteArray::fromRawData(compressedDesc, compressedSize);
-        t_descData  = qUncompress(t_descData);
+        t_descData = qUncompress(t_descData);
         std::free(compressedDesc);
-        ragePhoto->setDescription(t_descData.constData(), t_descBuffer);
+        rp_data->description = static_cast<char*>(std::malloc(t_descData.size() + 1));
+        if (!rp_data->description) {
+            rp_data->error = RagePhoto::DescMallocError;
+            return false;
+        }
+        std::memcpy(rp_data->description, t_descData.constData(), t_descData.size() + 1);
 
         // EOF will be calculated later, EOF marker will be removed in G5E4P
         size = dataBuffer.skip(4);
-        if (size != 4)
+        if (size != 4) {
+            rp_data->error = RagePhoto::IncompleteEOF;
             return false;
+        }
 
         // libragephoto needs to know we gave it a GTA V Snapmatic
-        ragePhoto->setFormat(RagePhoto::GTA5);
+        rp_data->photoFormat = RagePhoto::GTA5;
+        rp_data->error = RagePhoto::NoError;
+        RagePhoto::setBufferOffsets(rp_data);
 
         return true;
     }
     else if (format == G5EExportFormat::G5E2P) {
         const QByteArray t_fileData = qUncompress(dataBuffer.readAll());
-        if (t_fileData.isEmpty())
+        if (t_fileData.isEmpty()) {
+            rp_data->error = RagePhoto::IncompatibleFormat;
             return false;
-        return ragePhoto->load(t_fileData.constData(), t_fileData.size());
+        }
+        return RagePhoto::load(rp_data, nullptr, t_fileData.constData(), t_fileData.size());
     }
     else if (format == G5EExportFormat::G5E1P) {
         size = dataBuffer.skip(1);
-        if (size != 1)
+        if (size != 1) {
+            rp_data->error = RagePhoto::IncompatibleFormat;
             return false;
+        }
 
         char length[1];
         size = dataBuffer.read(length, 1);
-        if (size != 1)
+        if (size != 1) {
+            rp_data->error = RagePhoto::IncompatibleFormat;
             return false;
+        }
         int i_length = QByteArray::number(static_cast<int>(length[0]), 16).toInt() + 6;
 
         size = dataBuffer.skip(i_length);
-        if (size != i_length)
+        if (size != i_length) {
+            rp_data->error = RagePhoto::IncompatibleFormat;
             return false;
+        }
 
         const QByteArray t_fileData = qUncompress(dataBuffer.readAll());
-        if (t_fileData.isEmpty())
+        if (t_fileData.isEmpty()) {
+            rp_data->error = RagePhoto::IncompatibleFormat;
             return false;
-        return ragePhoto->load(t_fileData.constData(), t_fileData.size());
+        }
+        return RagePhoto::load(rp_data, nullptr, t_fileData.constData(), t_fileData.size());
     }
     return false;
 }
@@ -320,6 +409,11 @@ inline void gta5view_export_save(QIODevice *ioDevice, RagePhotoData *data)
 // SNAPMATIC PICTURE CLASS
 SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : QObject(parent), picFilePath(fileName)
 {
+    RagePhotoFormatParser g5eParser[1]{};
+    g5eParser[0].photoFormat = G5EPhotoFormat::G5EX;
+    g5eParser[0].funcLoad = &gta5view_export_load;
+    p_ragePhoto.addParser(&g5eParser[0]);
+
     reset();
 }
 
@@ -372,12 +466,8 @@ bool SnapmaticPicture::preloadFile()
     bool ok = p_ragePhoto.load(fileData.constData(), fileData.size());
     picFormat = p_ragePhoto.format();
 
-    // libragephoto doesn't support modules yet
-    if (picFormat == G5EPhotoFormat::G5EX)
-        ok = gta5view_export_load(fileData, &p_ragePhoto);
-
     if (!ok) {
-        const RagePhoto::Error error = static_cast<RagePhoto::Error>(p_ragePhoto.error());
+        const int32_t error = p_ragePhoto.error();
         switch (error) {
         case RagePhoto::Uninitialised:
             lastStep = "1;/1,OpenFile," % convertDrawStringForLog(picFilePath);
