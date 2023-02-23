@@ -160,7 +160,6 @@ private:
     QString pictureStr;
     QString lastStep;
     QString sortStr;
-    uint32_t picFormat;
     bool picOk;
     bool cacheEnabled;
     bool isFormatSwitch;

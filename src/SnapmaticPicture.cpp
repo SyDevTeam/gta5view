@@ -292,8 +292,6 @@ ragephoto_bool_t gta5view_export_load(RagePhotoData *rp_data, const char *data, 
             return false;
         }
 
-        // libragephoto needs to know we gave it a GTA V Snapmatic
-        rp_data->photoFormat = RagePhoto::GTA5;
         rp_data->error = RagePhoto::NoError;
         RagePhoto::setBufferOffsets(rp_data);
 
@@ -305,7 +303,9 @@ ragephoto_bool_t gta5view_export_load(RagePhotoData *rp_data, const char *data, 
             rp_data->error = RagePhoto::IncompatibleFormat;
             return false;
         }
-        return RagePhoto::load(rp_data, nullptr, t_fileData.constData(), t_fileData.size());
+        const bool ok = RagePhoto::load(t_fileData.constData(), t_fileData.size(), rp_data, nullptr);
+        rp_data->photoFormat = G5EPhotoFormat::G5EX;
+        return ok;
     }
     else if (format == G5EExportFormat::G5E1P) {
         size = dataBuffer.skip(1);
@@ -333,7 +333,10 @@ ragephoto_bool_t gta5view_export_load(RagePhotoData *rp_data, const char *data, 
             rp_data->error = RagePhoto::IncompatibleFormat;
             return false;
         }
-        return RagePhoto::load(rp_data, nullptr, t_fileData.constData(), t_fileData.size());
+
+        const bool ok = RagePhoto::load(t_fileData.constData(), t_fileData.size(), rp_data, nullptr);
+        rp_data->photoFormat = G5EPhotoFormat::G5EX;
+        return ok;
     }
     return false;
 }
@@ -431,9 +434,6 @@ void SnapmaticPicture::reset()
     lastStep = QString();
     sortStr = QString();
 
-    // INIT PIC FORMAT
-    picFormat = 0;
-
     // INIT PIC BOOLS
     isFormatSwitch = false;
     isPreLoaded = false;
@@ -464,7 +464,6 @@ bool SnapmaticPicture::preloadFile()
     const QByteArray fileData = picFile.read(fileSize);
 
     bool ok = p_ragePhoto.load(fileData.constData(), fileData.size());
-    picFormat = p_ragePhoto.format();
 
     if (!ok) {
         const int32_t error = p_ragePhoto.error();
@@ -570,7 +569,7 @@ bool SnapmaticPicture::preloadFile()
     jsonObject = t_jsonDocument.object();
 
     if (!picFilePath.endsWith(".g5e", Qt::CaseInsensitive)) {
-        if (picFormat == G5EPhotoFormat::G5EX)
+        if (p_ragePhoto.format() == G5EPhotoFormat::G5EX)
             isFormatSwitch = true;
     }
     isPreLoaded = true;
@@ -594,10 +593,10 @@ bool SnapmaticPicture::readingPicture(bool cacheEnabled_)
         return false;
 
     if (cacheEnabled)
-        picOk = cachePicture.loadFromData(QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize()), "JPEG");
-    if (!cacheEnabled) {
+        picOk = cachePicture.loadFromData(QByteArray::fromRawData(p_ragePhoto.jpegData(), p_ragePhoto.jpegSize()), "JPEG");
+    else {
         QImage tempPicture;
-        picOk = tempPicture.loadFromData(QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize()), "JPEG");
+        picOk = tempPicture.loadFromData(QByteArray::fromRawData(p_ragePhoto.jpegData(), p_ragePhoto.jpegSize()), "JPEG");
     }
 
     parseJsonContent(); // JSON parsing is own function
@@ -688,7 +687,7 @@ bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean 
     if (streamArray.size() < jpegPicStreamLength)
         jpegPicStreamLength = streamArray.size();
 #endif
-    bool success = p_ragePhoto.setPhoto(streamArray.data(), streamArray.size(), jpegPicStreamLength);
+    bool success = p_ragePhoto.setJpeg(streamArray.data(), streamArray.size(), jpegPicStreamLength);
     if (success) {
         if (cacheEnabled) {
             QImage replacedPicture;
@@ -822,13 +821,13 @@ QImage SnapmaticPicture::getImage()
     if (cacheEnabled)
         return cachePicture;
     else
-        return QImage::fromData(QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize()), "JPEG");
+        return QImage::fromData(QByteArray::fromRawData(p_ragePhoto.jpegData(), p_ragePhoto.jpegSize()), "JPEG");
     return QImage();
 }
 
 QByteArray SnapmaticPicture::getPictureStream()
 {
-    return QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize());
+    return QByteArray::fromRawData(p_ragePhoto.jpegData(), p_ragePhoto.jpegSize());
 }
 
 bool SnapmaticPicture::isPicOk()
@@ -1054,7 +1053,7 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
             saveSuccess = picFile.commit();
         }
         else if (format == SnapmaticFormat::JPEG_Format) {
-            picFile.write(QByteArray::fromRawData(p_ragePhoto.photoData(), p_ragePhoto.photoSize()));
+            picFile.write(QByteArray::fromRawData(p_ragePhoto.jpegData(), p_ragePhoto.jpegSize()));
             saveSuccess = picFile.commit();
         }
         else {
@@ -1104,24 +1103,24 @@ bool SnapmaticPicture::deletePicFile()
 
 bool SnapmaticPicture::isHidden()
 {
-    if (picFilePath.right(7) == QLatin1String(".hidden"))
+    if (picFilePath.endsWith(".hidden", Qt::CaseInsensitive))
         return true;
     return false;
 }
 
 bool SnapmaticPicture::isVisible()
 {
-    if (picFilePath.right(7) == QLatin1String(".hidden"))
+    if (picFilePath.endsWith(".hidden", Qt::CaseInsensitive))
         return false;
     return true;
 }
 
 bool SnapmaticPicture::setPictureHidden()
 {
-    if (picFormat == G5EPhotoFormat::G5EX) {
+    if (p_ragePhoto.format() == G5EPhotoFormat::G5EX) {
         return false;
     }
-    if (!isHidden()) {
+    if (isVisible()) {
         QString newPicFilePath = QString(picFilePath % ".hidden");
         if (QFile::rename(picFilePath, newPicFilePath)) {
             picFilePath = newPicFilePath;
@@ -1134,7 +1133,7 @@ bool SnapmaticPicture::setPictureHidden()
 
 bool SnapmaticPicture::setPictureVisible()
 {
-    if (picFormat == G5EPhotoFormat::G5EX)
+    if (p_ragePhoto.format() == G5EPhotoFormat::G5EX)
         return false;
     if (isHidden()) {
         QString newPicFilePath = QString(picFilePath).remove(picFilePath.length() - 7, 7);
@@ -1158,7 +1157,7 @@ QSize SnapmaticPicture::getSnapmaticResolution()
 
 SnapmaticFormat SnapmaticPicture::getSnapmaticFormat()
 {
-    if (picFormat == G5EPhotoFormat::G5EX)
+    if (p_ragePhoto.format() == G5EPhotoFormat::G5EX)
         return SnapmaticFormat::G5E_Format;
     return SnapmaticFormat::PGTA_Format;
 }
@@ -1166,11 +1165,11 @@ SnapmaticFormat SnapmaticPicture::getSnapmaticFormat()
 void SnapmaticPicture::setSnapmaticFormat(SnapmaticFormat format)
 {
     if (format == SnapmaticFormat::G5E_Format) {
-        picFormat = G5EPhotoFormat::G5EX;
+        p_ragePhoto.setFormat(G5EPhotoFormat::G5EX);
         return;
     }
     else if (format == SnapmaticFormat::PGTA_Format) {
-        picFormat = RagePhoto::PhotoFormat::GTA5;
+        p_ragePhoto.setFormat(RagePhoto::PhotoFormat::GTA5);
         return;
     }
     qDebug() << "setSnapmaticFormat: Invalid SnapmaticFormat defined, valid SnapmaticFormats are G5E_Format and PGTA_Format";
