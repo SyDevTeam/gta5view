@@ -183,12 +183,10 @@ void PictureDialog::setupPictureDialog()
     globalMap = GlobalString::getGlobalMap();
 
     // Set Icon for Close Button
-    if (QIcon::hasThemeIcon("dialog-close")) {
+    if (QIcon::hasThemeIcon("dialog-close"))
         ui->cmdClose->setIcon(QIcon::fromTheme("dialog-close"));
-    }
-    else if (QIcon::hasThemeIcon("gtk-close")) {
+    else if (QIcon::hasThemeIcon("gtk-close"))
         ui->cmdClose->setIcon(QIcon::fromTheme("gtk-close"));
-    }
 
     installEventFilter(this);
 
@@ -251,9 +249,8 @@ void PictureDialog::styliseDialog()
         MARGINS margins = {0, 0, qRound(layout()->menuBar()->height() * AppEnv::screenRatioPR()), 0};
         HRESULT hr = S_OK;
         hr = DwmExtendFrameIntoClientArea(reinterpret_cast<HWND>(winId()), &margins);
-        if (SUCCEEDED(hr)) {
+        if (SUCCEEDED(hr))
             setStyleSheet("PictureDialog{background:transparent}");
-        }
     }
     else {
         MARGINS margins = {0, 0, 0, 0};
@@ -261,9 +258,8 @@ void PictureDialog::styliseDialog()
         bool colorOk = false;
         QSettings dwmRegistry("HKEY_CURRENT_USER\\Software\\Microsoft\\Windows\\DWM", QSettings::NativeFormat);
         QRgb color = dwmRegistry.value("ColorizationColor").toUInt(&colorOk);
-        if (colorOk) {
+        if (colorOk)
             setStyleSheet(QString("PictureDialog{background:%1}").arg(QColor::fromRgba(color).name()));
-        }
         else {
             HRESULT hr = S_OK;
             BOOL isOpaqueBlend;
@@ -291,9 +287,8 @@ bool PictureDialog::nativeEvent(const QByteArray &eventType, void *message, long
 #endif
 {
     MSG *msg = reinterpret_cast<MSG*>(message);
-    if (msg->message == 0x031e || msg->message == 0x0320) {
+    if (msg->message == 0x031e || msg->message == 0x0320)
         styliseDialog();
-    }
     return QWidget::nativeEvent(eventType, message, result);
 }
 #endif
@@ -337,11 +332,13 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
             case Qt::Key_2:
                 if (overlayEnabled) {
                     overlayEnabled = false;
-                    if (!previewMode) renderPicture();
+                    if (!previewMode)
+                        renderPicture();
                 }
                 else {
                     overlayEnabled = true;
-                    if (!previewMode) renderPicture();
+                    if (!previewMode)
+                        renderPicture();
                 }
                 break;
             case Qt::Key_M:
@@ -376,9 +373,8 @@ bool PictureDialog::eventFilter(QObject *obj, QEvent *ev)
             if (ev->type() == QEvent::MouseButtonRelease) {
                 QMouseEvent *mouseEvent = dynamic_cast<QMouseEvent*>(ev);
                 if (mouseEvent->pos().y() <= layout()->menuBar()->height()) {
-                    if (mouseEvent->button() == Qt::LeftButton) {
+                    if (mouseEvent->button() == Qt::LeftButton)
                         dragStart = false;
-                    }
                 }
             }
             if (dragStart && ev->type() == QEvent::MouseMove) {
@@ -447,9 +443,8 @@ void PictureDialog::renderOverlayPicture()
         preferedRect.setHeight(71 * screenRatio * screenRatioPR);
         overlaySpace.setHeight(80 * screenRatio * screenRatioPR);
     }
-    else {
+    else
         overlaySpace.setHeight(overlaySpace.height() + 6 * screenRatio * screenRatioPR);
-    }
 
     QImage overlayImage(overlaySpace.size(), QImage::Format_ARGB32_Premultiplied);
     overlayImage.fill(Qt::transparent);
@@ -460,12 +455,10 @@ void PictureDialog::renderOverlayPicture()
     overlayPainter.drawText(preferedRect, Qt::AlignLeft | hOverlay | Qt::TextDontClip | Qt::TextWordWrap, overlayText);
     overlayPainter.end();
 
-    if (overlaySpace.width() < 194 * screenRatio * screenRatioPR) {
+    if (overlaySpace.width() < 194 * screenRatio * screenRatioPR)
         overlaySpace.setWidth(200 * screenRatio * screenRatioPR);
-    }
-    else {
+    else
         overlaySpace.setWidth(overlaySpace.width() + 6 * screenRatio * screenRatioPR);
-    }
 
     QImage overlayBorderImage(overlaySpace.width(), overlaySpace.height(), QImage::Format_ARGB6666_Premultiplied);
     overlayBorderImage.fill(QColor(15, 15, 15, 162));
@@ -492,6 +485,7 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         QMessageBox::warning(this, tr("Snapmatic Picture Viewer"), tr("Failed at %1").arg(picture->getLastStep()));
         return;
     }
+    setWindowTitle(windowTitleStr.arg(picture->getPictureTitle()));
     if (picture->isPicOk()) {
         snapmaticPicture = picture->getImage();
         renderPicture();
@@ -499,13 +493,10 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
     }
     if (picture->isJsonOk()) {
         crewStr = crewDB->getCrewName(crewID);
-        if (globalMap.contains(picArea)) {
+        if (globalMap.contains(picArea))
             picAreaStr = globalMap.value(picArea);
-        }
-        else {
+        else
             picAreaStr = picArea;
-        }
-        setWindowTitle(windowTitleStr.arg(picTitl));
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
         QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);
     }
@@ -548,15 +539,12 @@ void PictureDialog::renderPicture()
     shownImagePixmap.fill(Qt::black);
     QPainter shownImagePainter(&shownImagePixmap);
     const QImage renderImage = snapmaticPicture.scaled(renderResolution, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-    if (renderImage.width() < renderResolution.width()) {
+    if (renderImage.width() < renderResolution.width())
         shownImagePainter.drawImage((renderResolution.width() - renderImage.width()) / 2, 0, renderImage, Qt::AutoColor);
-    }
-    else if (renderImage.height() < renderResolution.height()) {
+    else if (renderImage.height() < renderResolution.height())
         shownImagePainter.drawImage(0, (renderResolution.height() - renderImage.height()) / 2, renderImage, Qt::AutoColor);
-    }
-    else {
+    else
         shownImagePainter.drawImage(0, 0, renderImage, Qt::AutoColor);
-    }
     if (previewMode) {
         QFont shownImagePainterFont;
         shownImagePainterFont.setPixelSize(12 * screenRatio * screenRatioPR);
@@ -565,9 +553,8 @@ void PictureDialog::renderPicture()
         shownImagePainter.setFont(shownImagePainterFont);
         shownImagePainter.drawText(QRect(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, 140 * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR), Qt::AlignLeft | Qt::TextWordWrap, tr("Avatar Preview Mode\nPress 1 for Default View"));
     }
-    else if (overlayEnabled) {
+    else if (overlayEnabled)
         shownImagePainter.drawImage(3 * screenRatio * screenRatioPR, 3 * screenRatio * screenRatioPR, overlayTempImage, Qt::AutoColor);
-    }
     shownImagePainter.end();
     shownImagePixmap.setDevicePixelRatio(screenRatioPR);
     ui->labPicture->setPixmap(shownImagePixmap);
@@ -598,12 +585,10 @@ QString PictureDialog::generateCrewString()
     SnapmaticPicture *picture = smpic; // used by macro
     const QString crewIDStr = crewID; // save operation time
     if (crewIDStr != "0" && !crewIDStr.isEmpty()) {
-        if (crewIDStr != crewStr) {
+        if (crewIDStr != crewStr)
             return QString("<a href=\"https://socialclub.rockstargames.com/crew/" % QString(crewStr).replace(" ", "_") % "/" % crewIDStr % "\">" % crewStr % "</a>");
-        }
-        else {
+        else
             return QString(crewIDStr);
-        }
     }
     return tr("No Crew");
 }
@@ -633,12 +618,10 @@ QString PictureDialog::generatePlayersString()
 
 void PictureDialog::exportSnapmaticPicture()
 {
-    if (rqFullscreen && fullscreenWidget != nullptr) {
+    if (rqFullscreen && fullscreenWidget != nullptr)
         PictureExport::exportAsPicture(fullscreenWidget, smpic);
-    }
-    else {
+    else
         PictureExport::exportAsPicture(this, smpic);
-    }
 }
 
 void PictureDialog::copySnapmaticPicture()
@@ -751,7 +734,7 @@ void PictureDialog::openPreviewMap()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "LocationEdited";
                 jsonObject["ExtraFlags"] = "Viewer";
-                jsonObject["EditedSize"] = QString::number(picture->ragePhoto()->photoSize());
+                jsonObject["EditedSize"] = QString::number(picture->getPictureSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -779,11 +762,7 @@ void PictureDialog::editSnapmaticProperties()
     snapmaticEditor->setWindowIcon(windowIcon());
     snapmaticEditor->setSnapmaticPicture(picture);
     snapmaticEditor->setModal(true);
-#ifndef Q_OS_ANDROID
     snapmaticEditor->show();
-#else
-    snapmaticEditor->showMaximized();
-#endif
     snapmaticEditor->exec();
     delete snapmaticEditor;
 }
@@ -829,7 +808,7 @@ void PictureDialog::editSnapmaticImage()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "ImageEdited";
                 jsonObject["ExtraFlags"] = "Viewer";
-                jsonObject["EditedSize"] = QString::number(smpic->ragePhoto()->photoSize());
+                jsonObject["EditedSize"] = QString::number(smpic->getPictureSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -869,12 +848,10 @@ void PictureDialog::updated()
 {
     SnapmaticPicture *picture = smpic; // used by macro
     crewStr = crewDB->getCrewName(crewID);
-    if (globalMap.contains(picArea)) {
+    if (globalMap.contains(picArea))
         picAreaStr = globalMap[picArea];
-    }
-    else {
+    else
         picAreaStr = picArea;
-    }
     setWindowTitle(windowTitleStr.arg(picTitl));
     ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
     QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);

@@ -195,7 +195,7 @@ bool SnapmaticWidget::deletePicture()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "DeleteSuccess";
                 jsonObject["ExtraFlags"] = "Snapmatic";
-                jsonObject["DeletedSize"] = QString::number(smpic->ragePhoto()->photoSize());
+                jsonObject["DeletedSize"] = QString::number(smpic->getPictureSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["DeletedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -381,7 +381,7 @@ void SnapmaticWidget::editSnapmaticImage()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "ImageEdited";
                 jsonObject["ExtraFlags"] = "Interface";
-                jsonObject["EditedSize"] = QString::number(smpic->ragePhoto()->photoSize());
+                jsonObject["EditedSize"] = QString::number(smpic->getPictureSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -439,7 +439,7 @@ void SnapmaticWidget::openMapViewer()
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "LocationEdited";
                 jsonObject["ExtraFlags"] = "Interface";
-                jsonObject["EditedSize"] = QString::number(smpic->ragePhoto()->photoSize());
+                jsonObject["EditedSize"] = QString::number(smpic->getPictureSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else

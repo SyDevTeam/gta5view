@@ -281,7 +281,7 @@ fileDialogPreSave: //Work?
                 }
             }
             else {
-                bool isCopied = picture->exportPicture(selectedFile, SnapmaticFormat::PGTA_Format);
+                bool isCopied = picture->exportPicture(selectedFile, SnapmaticFormat::PGTA5_Format);
                 if (!isCopied) {
                     QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));
                     goto fileDialogPreSave; //Work?

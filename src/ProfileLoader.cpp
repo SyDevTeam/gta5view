@@ -100,8 +100,8 @@ void ProfileLoader::run()
         SnapmaticPicture *picture = new SnapmaticPicture(picturePath);
         if (picture->readingPicture(true)) {
             if (picture->isFormatSwitched()) {
-                picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
-                if (picture->exportPicture(picturePath, SnapmaticFormat::PGTA_Format)) {
+                picture->setSnapmaticFormat(SnapmaticFormat::PGTA5_Format);
+                if (picture->exportPicture(picturePath, SnapmaticFormat::PGTA5_Format)) {
                     emit pictureFixed(picture);
                 }
             }

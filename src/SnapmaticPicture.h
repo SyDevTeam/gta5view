@@ -31,9 +31,8 @@ typedef RagePhotoA RagePhoto;
 #include <QObject>
 #include <QString>
 #include <QImage>
-#include <QFile>
 
-enum class SnapmaticFormat : int { Auto_Format = 0, PGTA_Format = 1, JPEG_Format = 2, G5E_Format = 3 };
+enum class SnapmaticFormat : int32_t { Auto_Format = 0, PGTA5_Format = 1, PRDR3_Format = 2, JPEG_Format = 3, G5E_Format = 4, Unknown_Format = -1 };
 enum G5EExportFormat : uint32_t {
     G5E1P = 0x454C0010UL,
     G5E2P = 0x01000032UL,
@@ -79,17 +78,17 @@ public:
     bool readingPicture(bool cacheEnabled = false);
     bool isPicOk(); // Please use isPictureOk instead
     void clearCache();
-    QImage getImage();
-    QByteArray getPictureStream();
-    QString getLastStep(bool readable = true);
-    QString getPictureStr();
-    QString getPictureTitl();
-    QString getPictureSortStr();
-    QString getPictureFileName();
-    QString getPictureFilePath();
-    QString getExportPictureFileName();
-    QString getOriginalPictureFileName();
-    QString getOriginalPictureFilePath();
+    const QImage getImage();
+    const QByteArray getPictureStream();
+    const QString getLastStep(bool readable = true);
+    const QString getPictureStr();
+    const QString getPictureTitl();
+    const QString getPictureSortStr();
+    const QString getPictureFileName();
+    const QString getPictureFilePath();
+    const QString getExportPictureFileName();
+    const QString getOriginalPictureFileName();
+    const QString getOriginalPictureFilePath();
     bool setImage(const QImage &picture, bool eXtendMode = false);
     bool setPictureTitl(const QString &newTitle); // Please use setPictureTitle instead
     bool setPictureStream(const QByteArray &streamArray);
@@ -99,39 +98,40 @@ public:
 
     // FILE MANAGEMENT
     bool exportPicture(const QString &fileName, SnapmaticFormat format = SnapmaticFormat::Auto_Format);
-    void setPicFileName(const QString &picFileName); // Please use setPictureFileName instead
-    void setPicFilePath(const QString &picFilePath); // Please use setPictureFilePath instead
-    bool deletePicFile(); // Please use deletePictureFile instead
+    void setPicFileName(const QString &picFileName);
+    void setPicFilePath(const QString &picFilePath);
+    bool deletePicFile();
 
     // JSON
     bool isJsonOk();
-    QString getJsonStr(); // Please use getPictureJson instead
+    const QString getJsonStr();
     SnapmaticProperties getSnapmaticProperties();
     bool setSnapmaticProperties(SnapmaticProperties properties);
-    bool setJsonStr(const QString &jsonStr, bool updateProperties = false); // Please use setPictureJson instead
+    bool setJsonStr(const QString &jsonStr, bool updateProperties = false);
 
     // VISIBILITY
-    bool isHidden(); // Please use isPictureHidden instead
-    bool isVisible(); // Please use isPictureVisible instead
+    bool isHidden();
+    bool isVisible();
     bool setPictureHidden();
     bool setPictureVisible();
 
     // ALTERNATIVES (MORE DEVELOPER FRIENDLY FUNCTION CALLS)
-    QString getJsonString() { return getJsonStr(); } // Please use getPictureJson instead
-    QString getPictureJson() { return getJsonStr(); }
-    QString getPictureTitle() { return getPictureTitl(); }
-    QString getPictureString() { return getPictureStr(); }
-    bool setJsonString(const QString &jsonString, bool updateProperties = false) { return setJsonStr(jsonString, updateProperties); } // Please use setPictureJson instead
-    bool setPictureJson(const QString &json, bool updateProperties = false) { return setJsonStr(json, updateProperties); }
-    bool setPictureTitle(const QString &title) { return setPictureTitl(title); }
-    void setPictureFileName(const QString &fileName) { return setPicFileName(fileName); }
-    void setPictureFilePath(const QString &filePath) { return setPicFilePath(filePath); }
-    bool deletePictureFile() { return deletePicFile(); }
-    bool isPictureOk() { return isPicOk(); }
-    bool isPictureHidden() { return isHidden(); }
-    bool isPictureVisible() { return isVisible(); }
-    bool setHidden() { return setPictureHidden(); } // Please use setPictureHidden instead
-    bool setVisible() { return setPictureVisible(); } // Please use setPictureVisible instead
+    inline QString getJsonString() { return getJsonStr(); }
+    inline QString getPictureJson() { return getJsonStr(); }
+    inline QString getPictureTitle() { return getPictureTitl(); }
+    inline uint32_t getPictureSize() { return ragePhoto()->jpegSize(); }
+    inline QString getPictureString() { return getPictureStr(); }
+    inline bool setJsonString(const QString &jsonString, bool updateProperties = false) { return setJsonStr(jsonString, updateProperties); } // Please use setPictureJson instead
+    inline bool setPictureJson(const QString &json, bool updateProperties = false) { return setJsonStr(json, updateProperties); }
+    inline bool setPictureTitle(const QString &title) { return setPictureTitl(title); }
+    inline void setPictureFileName(const QString &fileName) { return setPicFileName(fileName); }
+    inline void setPictureFilePath(const QString &filePath) { return setPicFilePath(filePath); }
+    inline bool deletePictureFile() { return deletePicFile(); }
+    inline bool isPictureOk() { return isPicOk(); }
+    inline bool isPictureHidden() { return isHidden(); }
+    inline bool isPictureVisible() { return isVisible(); }
+    inline bool setHidden() { return setPictureHidden(); }
+    inline bool setVisible() { return setPictureVisible(); }
 
     // PREDEFINED PROPERTIES
     static QSize getSnapmaticResolution();

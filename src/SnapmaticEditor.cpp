@@ -306,7 +306,7 @@ void SnapmaticEditor::on_cmdApply_clicked()
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "PropertyEdited";
-                jsonObject["EditedSize"] = QString::number(smpic->ragePhoto()->photoSize());
+                jsonObject["EditedSize"] = QString::number(smpic->getPictureSize());
 #if QT_VERSION >= 0x060000
                 jsonObject["EditedTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else

@@ -660,7 +660,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
-                        jsonObject["ImportSize"] = QString::number(picture->ragePhoto()->photoSize());
+                        jsonObject["ImportSize"] = QString::number(picture->getPictureSize());
 #if QT_VERSION >= 0x060000
                         jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -872,7 +872,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                                     QJsonObject jsonObject;
                                     jsonObject["Type"] = "ImportSuccess";
                                     jsonObject["ExtraFlag"] = "Dialog";
-                                    jsonObject["ImportSize"] = QString::number(picture->ragePhoto()->photoSize());
+                                    jsonObject["ImportSize"] = QString::number(picture->getPictureSize());
 #if QT_VERSION >= 0x060000
                                     jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -919,7 +919,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                         QJsonDocument jsonDocument;
                         QJsonObject jsonObject;
                         jsonObject["Type"] = "ImportSuccess";
-                        jsonObject["ImportSize"] = QString::number(picture->ragePhoto()->photoSize());
+                        jsonObject["ImportSize"] = QString::number(picture->getPictureSize());
 #if QT_VERSION >= 0x060000
                         jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
 #else
@@ -1202,12 +1202,10 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
             adjustedFileName = picture->getOriginalPictureFileName();
         }
     }
-    if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA_Format)) {
-        picture->setSnapmaticFormat(SnapmaticFormat::PGTA_Format);
+    if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA5_Format)) {
+        picture->setSnapmaticFormat(SnapmaticFormat::PGTA5_Format);
         picture->setPicFilePath(profileFolder % "/" % adjustedFileName);
-#if QT_VERSION >= 0x050000
         snapmaticPics << picture->getPictureFileName();
-#endif
         pictureLoaded(picture, true);
         return true;
     }
@@ -1278,9 +1276,8 @@ void ProfileInterface::profileWidgetDeselected()
         int scrollBarValue = ui->saProfile->verticalScrollBar()->value();
         for (const QString &widgetStr : qAsConst(widgets)) {
             ProfileWidget *widget = widgets.key(widgetStr, nullptr);
-            if (widget != nullptr && contentMode != 2) {
+            if (widget != nullptr && contentMode != 2)
                 widget->setSelectionMode(false);
-            }
         }
         ui->saProfile->verticalScrollBar()->setValue(scrollBarValue);
     }
