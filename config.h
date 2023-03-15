@@ -47,11 +47,11 @@
 #endif
 
 #ifndef GTA5SYNC_COPYRIGHT
-#define GTA5SYNC_COPYRIGHT "2016-2022"
+#define GTA5SYNC_COPYRIGHT "2016-2023"
 #endif
 
 #ifndef GTA5SYNC_APPVER
-#define GTA5SYNC_APPVER "1.10.1"
+#define GTA5SYNC_APPVER "1.10.2"
 #endif
 
 #if __cplusplus

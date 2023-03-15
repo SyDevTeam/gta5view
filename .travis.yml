@@ -5,7 +5,7 @@ language: cpp
 
 services:
   - docker
-  
+
 env:
   global:
     - BUILD_TYPE=REL
@@ -27,7 +27,7 @@ matrix:
     - QT_SELECT=qt5-x86_64-w64-mingw32
     - RELEASE_LABEL="Windows 64-Bit Installer"
   - os: osx
-    osx_image: xcode12.2
+    osx_image: xcode14.2
     env:
         - BUILD_SCRIPT=osx_ci.sh
         - RELEASE_LABEL="Mac OS X 64-Bit Disk Image"

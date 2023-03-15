@@ -287,8 +287,16 @@ void ProfileInterface::directoryChanged(const QString &path)
         }
         if (fileName.startsWith("PGTA5") && !fileName.endsWith(".bak")) {
             t_snapmaticPics << fileName;
-            if (!snapmaticPics.contains(fileName)) {
-                n_snapmaticPics << fileName;
+            if (fileName.endsWith(".hidden")) {
+                const QString originalFileName = fileName.left(fileName.length() - 7);
+                if (!snapmaticPics.contains(fileName) && !snapmaticPics.contains(originalFileName)) {
+                    n_snapmaticPics << fileName;
+                }
+            }
+            else {
+                if (!snapmaticPics.contains(fileName) && !snapmaticPics.contains(fileName % ".hidden")) {
+                    n_snapmaticPics << fileName;
+                }
             }
         }
     }

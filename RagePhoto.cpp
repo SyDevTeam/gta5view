@@ -31,6 +31,20 @@
 #include <chrono>
 #endif
 
+inline quint32 joaatFromSI(const char *data, size_t size)
+{
+    quint32 val = 0xE47AB81CUL;
+    for (size_t i = 0; i != size; i++) {
+        val += data[i];
+        val += (val << 10);
+        val ^= (val >> 6);
+    }
+    val += (val << 3);
+    val ^= (val >> 11);
+    val += (val << 15);
+    return val;
+}
+
 RagePhoto::RagePhoto()
 {
     p_photoFormat = PhotoFormat::Undefined;
@@ -530,8 +544,15 @@ bool RagePhoto::setJsonData(const QByteArray &data)
     QJsonDocument t_jsonDocument = QJsonDocument::fromJson(data);
     if (t_jsonDocument.isNull())
         return false;
-    p_jsonData = t_jsonDocument.toJson(QJsonDocument::Compact);
     p_jsonObject = t_jsonDocument.object();
+    // serializer band-aid
+    QJsonObject t_jsonObject = p_jsonObject;
+    t_jsonObject["sign"] = "__gta5view.sign";
+    t_jsonDocument.setObject(t_jsonObject);
+    p_jsonData = t_jsonDocument.toJson(QJsonDocument::Compact);
+    char sign_char[24];
+    sprintf(sign_char, "%llu", (0x100000000000000ULL | joaatFromSI(p_photoData.constData(), p_photoData.size())));
+    p_jsonData.replace("\"__gta5view.sign\"", sign_char);
     return true;
 }
 
@@ -555,6 +576,8 @@ bool RagePhoto::setPhotoData(const QByteArray &data)
     if (size > p_photoBuffer)
         return false;
     p_photoData = data;
+    // serializer band-aid
+    setJsonData(p_jsonData);
     return true;
 }
 
@@ -563,6 +586,8 @@ bool RagePhoto::setPhotoData(const char *data, int size)
     if (static_cast<quint32>(size) > p_photoBuffer)
         return false;
     p_photoData = QByteArray(data, size);
+    // serializer band-aid
+    setJsonData(p_jsonData);
     return true;
 }
 
@@ -640,6 +665,9 @@ QByteArray RagePhoto::save(PhotoFormat photoFormat)
 
 void RagePhoto::save(QIODevice *ioDevice, PhotoFormat photoFormat)
 {
+    // serializer band-aid
+    setJsonData(p_jsonData);
+
     if (photoFormat == PhotoFormat::G5EX) {
         char uInt32Buffer[4];
         quint32 format = static_cast<quint32>(PhotoFormat::G5EX);
