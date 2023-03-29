@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017 Syping
+* Copyright (C) 2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -16,41 +16,18 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#ifndef JSONEDITORDIALOG_H
-#define JSONEDITORDIALOG_H
+#ifndef SNAPMATICJSON_H
+#define SNAPMATICJSON_H
+#ifndef Q_MOC_RUN
 
-#include "SnapmaticPicture.h"
-#include "JSHighlighter.h"
-#include <QDialog>
+#include <boost/json.hpp>
 
-namespace Ui {
-class JsonEditorDialog;
-}
-
-class JsonEditorDialog : public QDialog
+class SnapmaticJson
 {
-    Q_OBJECT
-
 public:
-    explicit JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent = 0);
-    bool saveJsonContent();
-    ~JsonEditorDialog();
-
-protected:
-    void closeEvent(QCloseEvent *ev);
-
-private slots:
-    void on_cmdClose_clicked();
-    void on_cmdSave_clicked();
-
-signals:
-    void codeUpdated(QString jsonCode);
-
-private:
-    std::string jsonCode;
-    JSHighlighter *jsonHl;
-    SnapmaticPicture *smpic;
-    Ui::JsonEditorDialog *ui;
+    static std::string serialize(const boost::json::value &jv, bool do_indent = false);
+    boost::json::object jsonObject;
 };
 
-#endif // JSONEDITORDIALOG_H
+#endif // Q_MOC_RUN
+#endif // SNAPMATICJSON_H

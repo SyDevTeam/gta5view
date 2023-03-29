@@ -18,8 +18,6 @@
 
 #include "SnapmaticPicture.h"
 #include <QStringBuilder>
-#include <QJsonDocument>
-#include <QJsonObject>
 #include <QStringList>
 #include <QVariantMap>
 #include <QFileInfo>
@@ -449,8 +447,8 @@ void SnapmaticPicture::reset()
     // SNAPMATIC PROPERTIES
     localProperties = {};
 
-    // JSON OBJECT
-    jsonObject = QJsonObject();
+    // JSON VALUE
+    snapmaticJson.jsonObject = boost::json::object();
 }
 
 bool SnapmaticPicture::preloadFile()
@@ -567,15 +565,17 @@ bool SnapmaticPicture::preloadFile()
         return false;
     }
 
-    const QJsonDocument t_jsonDocument = QJsonDocument::fromJson(p_ragePhoto.json());
-    if (t_jsonDocument.isNull())
-        return false;
-    jsonObject = t_jsonDocument.object();
+    if (!picFilePath.endsWith(".g5e", Qt::CaseInsensitive) && p_ragePhoto.format() == G5EPhotoFormat::G5EX)
+        isFormatSwitch = true;
 
-    if (!picFilePath.endsWith(".g5e", Qt::CaseInsensitive)) {
-        if (p_ragePhoto.format() == G5EPhotoFormat::G5EX)
-            isFormatSwitch = true;
-    }
+    std::error_code ec;
+    boost::json::value jsonValue = boost::json::parse(p_ragePhoto.json(), ec);
+    if (ec)
+        return false;
+    if (!jsonValue.is_object())
+        return false;
+    snapmaticJson.jsonObject = jsonValue.get_object();
+
     isPreLoaded = true;
     emit preloaded();
     return ok;
@@ -867,6 +867,11 @@ const QString SnapmaticPicture::getJsonStr()
     return QString::fromUtf8(p_ragePhoto.json());
 }
 
+const std::string SnapmaticPicture::getJsonStdStr()
+{
+    return std::string(p_ragePhoto.json());
+}
+
 SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
 {
     return localProperties;
@@ -875,25 +880,31 @@ SnapmaticProperties SnapmaticPicture::getSnapmaticProperties()
 void SnapmaticPicture::parseJsonContent()
 {
     const uint32_t format = p_ragePhoto.format();
-    QVariantMap jsonMap = jsonObject.toVariantMap();
+    const boost::json::object &t_jsonObject = snapmaticJson.jsonObject;
 
     bool jsonIncomplete = false;
     bool jsonError = false;
-    if (jsonObject.contains("loc")) {
-        if (jsonObject["loc"].isObject()) {
-            QJsonObject locObject = jsonObject["loc"].toObject();
+    if (t_jsonObject.contains("loc")) {
+        if (t_jsonObject.at("loc").is_object()) {
+            const boost::json::object locObject = t_jsonObject.at("loc").get_object();
             if (locObject.contains("x")) {
-                if (locObject["x"].isDouble()) { localProperties.location.x = locObject["x"].toDouble(); }
+                if (locObject.at("x").is_double()) { localProperties.location.x = locObject.at("x").get_double(); }
+                else if (locObject.at("x").is_int64()) { localProperties.location.x = static_cast<double>(locObject.at("x").get_int64()); }
+                else if (locObject.at("x").is_uint64()) { localProperties.location.x = static_cast<double>(locObject.at("x").get_uint64()); }
                 else { jsonError = true; }
             }
             else { jsonIncomplete = true; }
             if (locObject.contains("y")) {
-                if (locObject["y"].isDouble()) { localProperties.location.y = locObject["y"].toDouble(); }
+                if (locObject.at("y").is_double()) { localProperties.location.y = locObject.at("y").get_double(); }
+                else if (locObject.at("y").is_int64()) { localProperties.location.x = static_cast<double>(locObject.at("y").get_int64()); }
+                else if (locObject.at("y").is_uint64()) { localProperties.location.x = static_cast<double>(locObject.at("y").get_uint64()); }
                 else { jsonError = true; }
             }
             else { jsonIncomplete = true; }
             if (locObject.contains("z")) {
-                if (locObject["z"].isDouble()) { localProperties.location.z = locObject["z"].toDouble(); }
+                if (locObject.at("z").is_double()) { localProperties.location.z = locObject.at("z").get_double(); }
+                else if (locObject.at("z").is_int64()) { localProperties.location.x = static_cast<double>(locObject.at("z").get_int64()); }
+                else if (locObject.at("z").is_uint64()) { localProperties.location.x = static_cast<double>(locObject.at("z").get_uint64()); }
                 else { jsonError = true; }
             }
             else { jsonIncomplete = true; }
@@ -901,74 +912,87 @@ void SnapmaticPicture::parseJsonContent()
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("uid")) {
-        bool uidOk;
-        localProperties.uid = jsonMap["uid"].toInt(&uidOk);
-        if (!uidOk) { jsonError = true; }
+    if (t_jsonObject.contains("uid")) {
+        if (t_jsonObject.at("uid").is_uint64()) { localProperties.uid = t_jsonObject.at("uid").get_uint64(); }
+        else if (t_jsonObject.at("uid").is_int64()) { localProperties.uid = static_cast<uint64_t>(t_jsonObject.at("uid").get_int64()); }
+        else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("area")) {
-        if (jsonObject["area"].isString()) { localProperties.location.area = jsonObject["area"].toString(); }
+    if (t_jsonObject.contains("area")) {
+        if (t_jsonObject.at("area").is_string()) {
+            localProperties.location.area = QString::fromUtf8(t_jsonObject.at("area").get_string().c_str());
+        }
         else { jsonError = true; }
     }
     else if (gta5view_isGTAVFormat(format)) { jsonIncomplete = true; }
-    if (jsonObject.contains("crewid")) {
-        bool crewIDOk;
-        localProperties.crewID = jsonMap["crewid"].toInt(&crewIDOk);
-        if (!crewIDOk) { jsonError = true; }
+    if (t_jsonObject.contains("crewid")) {
+        if (t_jsonObject.at("crewid").is_uint64()) { localProperties.crewID = t_jsonObject.at("crewid").get_uint64(); }
+        else if (t_jsonObject.at("crewid").is_int64()) { localProperties.crewID = static_cast<uint64_t>(t_jsonObject.at("crewid").get_int64()); }
+        else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("street")) {
-        bool streetIDOk;
-        localProperties.streetID = jsonMap["street"].toInt(&streetIDOk);
-        if (!streetIDOk) { jsonError = true; }
+    if (t_jsonObject.contains("street")) {
+        if (t_jsonObject.at("street").is_uint64()) { localProperties.streetID = t_jsonObject.at("street").get_uint64(); }
+        else if (t_jsonObject.at("street").is_int64()) { localProperties.streetID = static_cast<uint64_t>(t_jsonObject.at("street").get_int64()); }
+        else { jsonError = true; }
     }
     else if (gta5view_isGTAVFormat(format)) { jsonIncomplete = true; }
-    if (jsonObject.contains("creat")) {
-        bool timestampOk;
-        QDateTime createdTimestamp;
-        localProperties.createdTimestamp = jsonMap["creat"].toUInt(&timestampOk);
-#if QT_VERSION >= 0x060000
-        createdTimestamp.setSecsSinceEpoch(localProperties.createdTimestamp);
-#else
-        createdTimestamp.setTime_t(localProperties.createdTimestamp);
-#endif
-        localProperties.createdDateTime = createdTimestamp;
-        if (!timestampOk) { jsonError = true; }
-    }
-    else { jsonIncomplete = true; }
-    if (jsonObject.contains("plyrs")) {
-        if (jsonObject["plyrs"].isArray()) { localProperties.playersList = jsonMap["plyrs"].toStringList(); }
-        else { jsonError = true; }
-    }
-    // else { jsonIncomplete = true; } // 2016 Snapmatic pictures left out plyrs when none are captured, so don't force exists on that one
-    if (jsonObject.contains("meme")) {
-        if (jsonObject["meme"].isBool()) { localProperties.isMeme = jsonObject["meme"].toBool(); }
+    if (t_jsonObject.contains("creat")) {
+        if (t_jsonObject.at("creat").is_int64()) {
+            QDateTime createdTimestamp;
+            localProperties.createdTimestamp = t_jsonObject.at("creat").get_int64();
+            createdTimestamp.setSecsSinceEpoch(localProperties.createdTimestamp);
+            localProperties.createdDateTime = createdTimestamp;
+        }
+        else if (t_jsonObject.at("creat").is_uint64()) {
+            QDateTime createdTimestamp;
+            localProperties.createdTimestamp = static_cast<int64_t>(t_jsonObject.at("creat").get_uint64());
+            createdTimestamp.setSecsSinceEpoch(localProperties.createdTimestamp);
+            localProperties.createdDateTime = createdTimestamp;
+        }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("mug")) {
-        if (jsonObject["mug"].isBool()) { localProperties.isMug = jsonObject["mug"].toBool(); }
+    if (t_jsonObject.contains("plyrs")) {
+        if (t_jsonObject.at("plyrs").is_array()) {
+            boost::json::array plyrsArray = t_jsonObject.at("plyrs").get_array();
+            QStringList playersList;
+            for (const boost::json::value &plyrVal : plyrsArray) {
+                if (plyrVal.is_string()) {
+                    playersList << QString::fromUtf8(plyrVal.get_string().c_str());
+                }
+            }
+            localProperties.playersList = playersList;
+        }
+        else { jsonError = true; }
+    }
+    if (t_jsonObject.contains("meme")) {
+        if (t_jsonObject.at("meme").is_bool()) { localProperties.isMeme = t_jsonObject.at("meme").get_bool(); }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("slf")) {
-        if (jsonObject["slf"].isBool()) { localProperties.isSelfie = jsonObject["slf"].toBool(); }
+    if (t_jsonObject.contains("mug")) {
+        if (t_jsonObject.at("mug").is_bool()) { localProperties.isMug = t_jsonObject.at("mug").get_bool(); }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("drctr")) {
-        if (jsonObject["drctr"].isBool()) { localProperties.isFromDirector = jsonObject["drctr"].toBool(); }
+    if (t_jsonObject.contains("slf")) {
+        if (t_jsonObject.at("slf").is_bool()) { localProperties.isSelfie = t_jsonObject.at("slf").get_bool(); }
         else { jsonError = true; }
     }
     else { jsonIncomplete = true; }
-    if (jsonObject.contains("rsedtr")) {
-        if (jsonObject["rsedtr"].isBool()) { localProperties.isFromRSEditor = jsonObject["rsedtr"].toBool(); }
+    if (t_jsonObject.contains("drctr")) {
+        if (t_jsonObject.at("drctr").is_bool()) { localProperties.isFromDirector = t_jsonObject.at("drctr").get_bool(); }
+        else { jsonError = true; }
+    }
+    else { jsonIncomplete = true; }
+    if (t_jsonObject.contains("rsedtr")) {
+        if (t_jsonObject.at("rsedtr").is_bool()) { localProperties.isFromRSEditor = t_jsonObject.at("rsedtr").get_bool(); }
         else { jsonError = true; }
     }
     else { localProperties.isFromRSEditor = false; }
-    if (jsonObject.contains("onislandx")) {
-        if (jsonObject["onislandx"].isBool()) { localProperties.location.isCayoPerico = jsonObject["onislandx"].toBool(); }
+    if (t_jsonObject.contains("onislandx")) {
+        if (t_jsonObject.at("onislandx").is_bool()) { localProperties.location.isCayoPerico = t_jsonObject.at("onislandx").get_bool(); }
         else { jsonError = true; }
     }
     else { localProperties.location.isCayoPerico = false; }
@@ -992,46 +1016,59 @@ void SnapmaticPicture::parseJsonContent()
 
 bool SnapmaticPicture::setSnapmaticProperties(SnapmaticProperties properties)
 {
-    QJsonObject t_jsonObject = jsonObject;
+    boost::json::object t_jsonObject = snapmaticJson.jsonObject;
 
-    QJsonObject locObject;
+    boost::json::object locObject;
     locObject["x"] = properties.location.x;
     locObject["y"] = properties.location.y;
     locObject["z"] = properties.location.z;
 
+    boost::json::array plyrsArray;
+    for (const QString &player : properties.playersList) {
+        plyrsArray.push_back(player.toUtf8().constData());
+    }
+
     t_jsonObject["loc"] = locObject;
     t_jsonObject["uid"] = properties.uid;
     t_jsonObject["crewid"] = properties.crewID;
-    t_jsonObject["creat"] = QJsonValue::fromVariant(properties.createdTimestamp);
-    t_jsonObject["plyrs"] = QJsonValue::fromVariant(properties.playersList);
+    t_jsonObject["creat"] = properties.createdTimestamp;
+    t_jsonObject["plyrs"] = plyrsArray;
     t_jsonObject["meme"] = properties.isMeme;
     t_jsonObject["mug"] = properties.isMug;
     t_jsonObject["slf"] = properties.isSelfie;
     t_jsonObject["drctr"] = properties.isFromDirector;
     t_jsonObject["rsedtr"] = properties.isFromRSEditor;
     if (gta5view_isGTAVFormat(p_ragePhoto.format())) {
-        t_jsonObject["area"] = properties.location.area;
+        t_jsonObject["area"] = properties.location.area.toUtf8().constData();
         t_jsonObject["street"] = properties.streetID;
         t_jsonObject["onislandx"] = properties.location.isCayoPerico;
     }
 
-    const QJsonDocument jsonDocument(t_jsonObject);
-    if (setJsonStr(QString::fromUtf8(jsonDocument.toJson(QJsonDocument::Compact)))) {
+    const std::string json = SnapmaticJson::serialize(t_jsonObject);
+    if (setJsonStr(QString::fromUtf8(json.c_str(), json.size()))) {
         localProperties = properties;
         return true;
     }
     return false;
 }
 
-bool SnapmaticPicture::setJsonStr(const QString &newJsonStr, bool updateProperties)
+bool SnapmaticPicture::setJsonStr(const QString &json, bool updateProperties)
 {
-    const QJsonDocument t_jsonDocument = QJsonDocument::fromJson(newJsonStr.toStdString().c_str());
-    if (t_jsonDocument.isNull())
-        return false;
-    const QByteArray t_jsonData = t_jsonDocument.toJson(QJsonDocument::Compact);
-    jsonObject = t_jsonDocument.object();
+    return setJsonStr(json.toStdString(), updateProperties);
+}
 
-    p_ragePhoto.setJson(t_jsonData.constData());
+bool SnapmaticPicture::setJsonStr(const std::string &json, bool updateProperties)
+{
+    std::error_code ec;
+    const boost::json::value t_jsonValue = boost::json::parse(json, ec);
+    if (ec)
+        return false;
+    if (!t_jsonValue.is_object())
+        return false;
+    const std::string t_json = SnapmaticJson::serialize(t_jsonValue);
+    snapmaticJson.jsonObject = t_jsonValue.get_object();
+
+    p_ragePhoto.setJson(t_json.c_str());
     if (updateProperties)
         parseJsonContent();
     return true;

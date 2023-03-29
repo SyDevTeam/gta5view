@@ -19,6 +19,7 @@
 #ifndef SNAPMATICPICTURE_H
 #define SNAPMATICPICTURE_H
 
+#include "SnapmaticJson.h"
 #ifdef RAGEPHOTO_USE_ABI_WRAPPER
 #include <RagePhotoA.h>
 typedef RagePhotoA RagePhoto;
@@ -26,7 +27,6 @@ typedef RagePhotoA RagePhoto;
 #include <RagePhoto.h>
 #endif
 #include <QStringList>
-#include <QJsonObject>
 #include <QDateTime>
 #include <QObject>
 #include <QString>
@@ -52,11 +52,11 @@ struct SnapmaticProperties {
         double z;
         bool isCayoPerico;
     };
-    int uid;
-    int crewID;
-    int streetID;
+    uint64_t uid;
+    uint64_t crewID;
+    uint64_t streetID;
     QStringList playersList;
-    uint createdTimestamp;
+    int64_t createdTimestamp;
     QDateTime createdDateTime;
     bool isMeme;
     bool isMug;
@@ -105,9 +105,11 @@ public:
     // JSON
     bool isJsonOk();
     const QString getJsonStr();
+    const std::string getJsonStdStr();
     SnapmaticProperties getSnapmaticProperties();
     bool setSnapmaticProperties(SnapmaticProperties properties);
-    bool setJsonStr(const QString &jsonStr, bool updateProperties = false);
+    bool setJsonStr(const std::string &json, bool updateProperties = false);
+    bool setJsonStr(const QString &json, bool updateProperties = false);
 
     // VISIBILITY
     bool isHidden();
@@ -116,12 +118,11 @@ public:
     bool setPictureVisible();
 
     // ALTERNATIVES (MORE DEVELOPER FRIENDLY FUNCTION CALLS)
-    inline QString getJsonString() { return getJsonStr(); }
     inline QString getPictureJson() { return getJsonStr(); }
     inline QString getPictureTitle() { return getPictureTitl(); }
     inline uint32_t getPictureSize() { return ragePhoto()->jpegSize(); }
     inline QString getPictureString() { return getPictureStr(); }
-    inline bool setJsonString(const QString &jsonString, bool updateProperties = false) { return setJsonStr(jsonString, updateProperties); } // Please use setPictureJson instead
+    inline bool setPictureJson(const std::string &json, bool updateProperties = false) { return setJsonStr(json, updateProperties); }
     inline bool setPictureJson(const QString &json, bool updateProperties = false) { return setJsonStr(json, updateProperties); }
     inline bool setPictureTitle(const QString &title) { return setPictureTitl(title); }
     inline void setPictureFileName(const QString &fileName) { return setPicFileName(fileName); }
@@ -169,7 +170,7 @@ private:
     void parseJsonContent();
     bool jsonOk;
     SnapmaticProperties localProperties;
-    QJsonObject jsonObject;
+    SnapmaticJson snapmaticJson;
 
     // VERIFY CONTENT
     static bool verifyTitleChar(const QChar &titleChar);
@@ -182,8 +183,6 @@ signals:
     void preloaded();
     void updated();
     void loaded();
-
-public slots:
 };
 
 #endif // SNAPMATICPICTURE_H

@@ -80,6 +80,7 @@ set(GTA5VIEW_SOURCES
     src/SavegameWidget.cpp
     src/SidebarGenerator.cpp
     src/SnapmaticEditor.cpp
+    src/SnapmaticJson.cpp
     src/SnapmaticPicture.cpp
     src/SnapmaticWidget.cpp
     src/StandardPaths.cpp
@@ -121,6 +122,7 @@ set(GTA5VIEW_HEADERS
     src/SavegameWidget.h
     src/SidebarGenerator.h
     src/SnapmaticEditor.h
+    src/SnapmaticJson.h
     src/SnapmaticPicture.h
     src/SnapmaticWidget.h
     src/StandardPaths.h
@@ -137,6 +139,7 @@ set(GTA5VIEW_HEADERS
 set(GTA5VIEW_INCLUDEDIR
     src
     src/anpro
+    src/json/include
     src/pcg
     src/uimod
 )

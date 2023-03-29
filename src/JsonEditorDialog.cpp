@@ -19,6 +19,7 @@
 #include "JsonEditorDialog.h"
 #include "ui_JsonEditorDialog.h"
 #include "SnapmaticEditor.h"
+#include "SnapmaticJson.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
@@ -63,7 +64,7 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
         ui->cmdSave->setIcon(QIcon::fromTheme("gtk-save"));
     }
 
-    jsonCode = picture->getJsonStr();
+    jsonCode = picture->getJsonStdStr();
 
 #if QT_VERSION >= 0x050200
     ui->txtJSON->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
@@ -80,9 +81,9 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
     ui->txtJSON->setTabStopWidth(fontMetrics.width("    "));
 #endif
 
-    QJsonDocument jsonDocument = QJsonDocument::fromJson(jsonCode.toUtf8());
+    const boost::json::value jsonValue = boost::json::parse(jsonCode);
     ui->txtJSON->setStyleSheet("QPlainTextEdit{background-color: rgb(46, 47, 48); color: rgb(238, 231, 172);}");
-    ui->txtJSON->setPlainText(QString::fromUtf8(jsonDocument.toJson(QJsonDocument::Indented)).trimmed());
+    ui->txtJSON->setPlainText(QString::fromUtf8(SnapmaticJson::serialize(jsonValue, true).c_str()));
     jsonHl = new JSHighlighter(ui->txtJSON->document());
 
     // DPI calculation
@@ -112,11 +113,14 @@ JsonEditorDialog::~JsonEditorDialog()
 
 void JsonEditorDialog::closeEvent(QCloseEvent *ev)
 {
-    QString jsonPatched = QString(ui->txtJSON->toPlainText()).replace("\t", "    ");
-    QJsonDocument jsonNew = QJsonDocument::fromJson(jsonPatched.toUtf8());
-    QJsonDocument jsonOriginal = QJsonDocument::fromJson(jsonCode.toUtf8());
-    QString originalCode = QString::fromUtf8(jsonOriginal.toJson(QJsonDocument::Compact));
-    QString newCode = QString::fromUtf8(jsonNew.toJson(QJsonDocument::Compact));
+    const QString jsonPatched = QString(ui->txtJSON->toPlainText()).replace("\t", "");
+    std::error_code ec;
+    const boost::json::value jsonNew = boost::json::parse(jsonPatched.toUtf8().constData(), ec);
+    const boost::json::value jsonOriginal = boost::json::parse(jsonCode, ec);
+    const std::string newCode = SnapmaticJson::serialize(jsonNew);
+    const std::string originalCode = SnapmaticJson::serialize(jsonOriginal);
+    qDebug() << newCode.c_str();
+    qDebug() << originalCode.c_str();
     if (newCode != originalCode) {
         QMessageBox::StandardButton button = QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("<h4>Unsaved changes detected</h4>You want to save the JSON content before you quit?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Cancel);
         if (button == QMessageBox::Yes) {
@@ -141,12 +145,13 @@ void JsonEditorDialog::closeEvent(QCloseEvent *ev)
 
 bool JsonEditorDialog::saveJsonContent()
 {
-    QString jsonPatched = QString(ui->txtJSON->toPlainText()).replace("\t", "    ");
-    QJsonDocument jsonNew = QJsonDocument::fromJson(jsonPatched.toUtf8());
-    if (!jsonNew.isEmpty()) {
-        QJsonDocument jsonOriginal = QJsonDocument::fromJson(jsonCode.toUtf8());
-        QString originalCode = QString::fromUtf8(jsonOriginal.toJson(QJsonDocument::Compact));
-        QString newCode = QString::fromUtf8(jsonNew.toJson(QJsonDocument::Compact));
+    const QString jsonPatched = QString(ui->txtJSON->toPlainText()).replace("\t", "");
+    std::error_code ec;
+    const boost::json::value jsonNew = boost::json::parse(jsonPatched.toUtf8().constData(), ec);
+    if (jsonNew.is_object()) {
+        const boost::json::value jsonOriginal = boost::json::parse(jsonCode, ec);
+        const std::string newCode = SnapmaticJson::serialize(jsonNew);
+        const std::string originalCode = SnapmaticJson::serialize(jsonOriginal);
         if (newCode != originalCode) {
             QString currentFilePath = smpic->getPictureFilePath();
             QString originalFilePath = smpic->getOriginalPictureFilePath();
