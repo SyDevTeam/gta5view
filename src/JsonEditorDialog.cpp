@@ -66,14 +66,7 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
 
     jsonCode = picture->getJsonStdStr();
 
-#if QT_VERSION >= 0x050200
     ui->txtJSON->setFont(QFontDatabase::systemFont(QFontDatabase::FixedFont));
-#else
-    QFont jsonFont = ui->txtJSON->font();
-    jsonFont.setStyleHint(QFont::Monospace);
-    jsonFont.setFixedPitch(true);
-    ui->txtJSON->setFont(jsonFont);
-#endif
     QFontMetrics fontMetrics(ui->txtJSON->font());
 #if QT_VERSION >= 0x050B00
     ui->txtJSON->setTabStopDistance(fontMetrics.horizontalAdvance("    "));
@@ -82,7 +75,7 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
 #endif
 
     const boost::json::value jsonValue = boost::json::parse(jsonCode);
-    ui->txtJSON->setStyleSheet("QPlainTextEdit{background-color: rgb(46, 47, 48); color: rgb(238, 231, 172);}");
+    ui->txtJSON->setStyleSheet("QPlainTextEdit{background-color:rgb(46,47,48);color:rgb(238,231,172);}");
     ui->txtJSON->setPlainText(QString::fromUtf8(SnapmaticJson::serialize(jsonValue, true).c_str()));
     jsonHl = new JSHighlighter(ui->txtJSON->document());
 
@@ -102,7 +95,7 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
         ui->lineJSON->setMaximumHeight(qRound(1 * screenRatio));
         ui->lineJSON->setLineWidth(qRound(1 * screenRatio));
     }
-    resize(450 * screenRatio, 550 * screenRatio);
+    resize(450 * screenRatio, 560 * screenRatio);
 }
 
 JsonEditorDialog::~JsonEditorDialog()
@@ -119,8 +112,6 @@ void JsonEditorDialog::closeEvent(QCloseEvent *ev)
     const boost::json::value jsonOriginal = boost::json::parse(jsonCode, ec);
     const std::string newCode = SnapmaticJson::serialize(jsonNew);
     const std::string originalCode = SnapmaticJson::serialize(jsonOriginal);
-    qDebug() << newCode.c_str();
-    qDebug() << originalCode.c_str();
     if (newCode != originalCode) {
         QMessageBox::StandardButton button = QMessageBox::warning(this, SnapmaticEditor::tr("Snapmatic Properties"), SnapmaticEditor::tr("<h4>Unsaved changes detected</h4>You want to save the JSON content before you quit?"), QMessageBox::Yes | QMessageBox::No | QMessageBox::Cancel, QMessageBox::Cancel);
         if (button == QMessageBox::Yes) {
