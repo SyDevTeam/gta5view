@@ -27,14 +27,14 @@ void serializer(std::ostream &os, const boost::json::value &jv, std::string *ind
         indent = &indent_;
     switch (jv.kind()) {
     case boost::json::kind::object: {
-        if (do_indent) {
-            os << "{\n";
-            indent->append(4, ' ');
-        }
-        else
-            os << "{";
         auto const &obj = jv.get_object();
         if (!obj.empty()) {
+            if (do_indent) {
+                os << "{\n";
+                indent->append(4, ' ');
+            }
+            else
+                os << "{";
             auto it = obj.begin();
             for (;;) {
                 if (do_indent)
@@ -49,25 +49,27 @@ void serializer(std::ostream &os, const boost::json::value &jv, std::string *ind
                 else
                     os << ",";
             }
-        }
-        if (do_indent) {
-            os << "\n";
-            indent->resize(indent->size() - 4);
-            os << *indent << "}";
+            if (do_indent) {
+                os << "\n";
+                indent->resize(indent->size() - 4);
+                os << *indent << "}";
+            }
+            else
+                os << "}";
         }
         else
-            os << "}";
+            os << "{}";
         break;
     }
     case boost::json::kind::array: {
-        if (do_indent) {
-            os << "[\n";
-            indent->append(4, ' ');
-        }
-        else
-            os << "[";
         auto const &arr = jv.get_array();
         if (!arr.empty()) {
+            if (do_indent) {
+                os << "[\n";
+                indent->append(4, ' ');
+            }
+            else
+                os << "[";
             auto it = arr.begin();
             for (;;) {
                 if (do_indent)
@@ -80,14 +82,16 @@ void serializer(std::ostream &os, const boost::json::value &jv, std::string *ind
                 else
                     os << ",";
             }
-        }
-        if (do_indent) {
-            os << "\n";
-            indent->resize(indent->size() - 4);
-            os << *indent << "]";
+            if (do_indent) {
+                os << "\n";
+                indent->resize(indent->size() - 4);
+                os << *indent << "]";
+            }
+            else
+                os << "]";
         }
         else
-            os << "]";
+            os << "[]";
         break;
     }
     case boost::json::kind::string: {
