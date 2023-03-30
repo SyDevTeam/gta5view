@@ -411,6 +411,11 @@ inline bool gta5view_isGTAVFormat(uint32_t photoFormat)
     return (photoFormat == G5EPhotoFormat::G5EX || photoFormat == RagePhoto::PhotoFormat::GTA5);
 }
 
+inline bool gta5view_isRDR2Format(uint32_t photoFormat)
+{
+    return (photoFormat == RagePhoto::PhotoFormat::RDR2);
+}
+
 // SNAPMATIC PICTURE CLASS
 SnapmaticPicture::SnapmaticPicture(const QString &fileName, QObject *parent) : QObject(parent), picFilePath(fileName)
 {
@@ -569,7 +574,7 @@ bool SnapmaticPicture::preloadFile()
         isFormatSwitch = true;
 
     std::error_code ec;
-    boost::json::value jsonValue = boost::json::parse(p_ragePhoto.json(), ec);
+    const boost::json::value jsonValue = boost::json::parse(p_ragePhoto.json(), ec);
     if (ec)
         return false;
     if (!jsonValue.is_object())
@@ -691,8 +696,21 @@ bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean 
     if (streamArray.size() < jpegPicStreamLength)
         jpegPicStreamLength = streamArray.size();
 #endif
-    bool success = p_ragePhoto.setJpeg(streamArray.data(), streamArray.size(), jpegPicStreamLength);
+    bool success = p_ragePhoto.setJpeg(streamArray.constData(), streamArray.size(), jpegPicStreamLength);
     if (success) {
+        // Update JPEG signature
+        uint32_t photoFormat = p_ragePhoto.format();
+        if (gta5view_isGTAVFormat(photoFormat)) {
+            snapmaticJson.jsonObject["sign"] = p_ragePhoto.jpegSign(RagePhoto::PhotoFormat::GTA5);
+            const std::string json = SnapmaticJson::serialize(snapmaticJson.jsonObject);
+            p_ragePhoto.setJson(json.c_str());
+        }
+        else if (gta5view_isRDR2Format(photoFormat)) {
+            snapmaticJson.jsonObject["sign"] = p_ragePhoto.jpegSign(RagePhoto::PhotoFormat::RDR2);
+            const std::string json = SnapmaticJson::serialize(snapmaticJson.jsonObject);
+            p_ragePhoto.setJson(json.c_str());
+        }
+
         if (cacheEnabled) {
             QImage replacedPicture;
             replacedPicture.loadFromData(streamArray);
@@ -709,7 +727,7 @@ bool SnapmaticPicture::setPictureTitl(const QString &newTitle_)
     QString newTitle = newTitle_;
     if (newTitle.length() > 39)
         newTitle.resize(39);
-    p_ragePhoto.setTitle(newTitle.toStdString().c_str());
+    p_ragePhoto.setTitle(newTitle.toUtf8().constData());
     return true;
 }
 
@@ -955,7 +973,7 @@ void SnapmaticPicture::parseJsonContent()
     else { jsonIncomplete = true; }
     if (t_jsonObject.contains("plyrs")) {
         if (t_jsonObject.at("plyrs").is_array()) {
-            boost::json::array plyrsArray = t_jsonObject.at("plyrs").get_array();
+            const boost::json::array plyrsArray = t_jsonObject.at("plyrs").get_array();
             QStringList playersList;
             for (const boost::json::value &plyrVal : plyrsArray) {
                 if (plyrVal.is_string()) {
@@ -1131,7 +1149,7 @@ bool SnapmaticPicture::deletePicFile()
     else if (QFile::remove(picFilePath))
         success = true;
     if (isHidden()) {
-        const QString picBakPath = QString(picFilePath).remove(picFilePath.length() - 7, 7) % ".bak";
+        const QString picBakPath = QString(picFilePath).chopped(7) % ".bak";
         if (QFile::exists(picBakPath))
             QFile::remove(picBakPath);
     }
@@ -1180,7 +1198,7 @@ bool SnapmaticPicture::setPictureVisible()
     if (p_ragePhoto.format() == G5EPhotoFormat::G5EX)
         return false;
     if (isHidden()) {
-        QString newPicFilePath = QString(picFilePath).remove(picFilePath.length() - 7, 7);
+        QString newPicFilePath = QString(picFilePath).chopped(7);
         if (QFile::rename(picFilePath, newPicFilePath)) {
             picFilePath = newPicFilePath;
             return true;
@@ -1240,7 +1258,8 @@ bool SnapmaticPicture::verifyTitle(const QString &title)
     // VERIFY TITLE FOR BE A VALID SNAPMATIC TITLE
     if (title.length() <= 39 && title.length() > 0) {
         for (const QChar &titleChar : title) {
-            if (!verifyTitleChar(titleChar)) return false;
+            if (!verifyTitleChar(titleChar))
+                return false;
         }
         return true;
     }
