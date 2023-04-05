@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -24,7 +24,8 @@
 #include <QFile>
 
 #define savegameHeaderLength 260
-#define verificationValue QByteArray::fromHex("00000001")
+#define verificationValue_GTA5 QByteArray::fromHex("00000001")
+#define verificationValue_RDR2 QByteArray::fromHex("00000004")
 
 SavegameData::SavegameData(const QString &fileName, QObject *parent) : QObject(parent), savegameFileName(fileName)
 {
@@ -57,13 +58,10 @@ bool SavegameData::readingSavegame()
         return false;
     }
     QByteArray savegameHeaderLine = saveFile->read(savegameHeaderLength);
-    if (savegameHeaderLine.left(4) == verificationValue)
-    {
+    if (savegameHeaderLine.startsWith(verificationValue_GTA5) || savegameHeaderLine.startsWith(verificationValue_RDR2)) {
         savegameStr = getSavegameDataString(savegameHeaderLine);
         if (savegameStr.length() >= 1)
-        {
             savegameOk = true;
-        }
     }
     saveFile->close();
     saveFile->deleteLater();
@@ -74,7 +72,12 @@ bool SavegameData::readingSavegame()
 QString SavegameData::getSavegameDataString(const QByteArray &savegameHeader)
 {
     QByteArray savegameBytes = savegameHeader.left(savegameHeaderLength);
-    QList<QByteArray> savegameBytesList = savegameBytes.split(char(0x01));
+    char split_byte = 0x00;
+    if (savegameHeader.startsWith(verificationValue_GTA5))
+        split_byte = 0x01;
+    else if (savegameHeader.startsWith(verificationValue_RDR2))
+        split_byte = 0x04;
+    QList<QByteArray> savegameBytesList = savegameBytes.split(split_byte);
     savegameBytes = savegameBytesList.at(1);
     savegameBytesList.clear();
     return SnapmaticPicture::parseTitleString(savegameBytes);
@@ -82,15 +85,12 @@ QString SavegameData::getSavegameDataString(const QByteArray &savegameHeader)
 
 bool SavegameData::readingSavegameFromFile(const QString &fileName)
 {
-    if (fileName != "")
-    {
+    if (fileName != "") {
         savegameFileName = fileName;
         return readingSavegame();
     }
     else
-    {
         return false;
-    }
 }
 
 bool SavegameData::isSavegameOk()

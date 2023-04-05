@@ -564,11 +564,12 @@ fileDialogPreOpen:
     fileDialog.setWindowTitle(tr("Open File..."));
 
     QStringList filters;
-    filters << ProfileInterface::tr("All profile files (*.g5e SGTA* PGTA*)");
-    filters << ProfileInterface::tr("GTA V Export (*.g5e)");
-    filters << ProfileInterface::tr("Savegames files (SGTA*)");
-    filters << ProfileInterface::tr("Snapmatic pictures (PGTA*)");
-    filters << ProfileInterface::tr("All files (**)");
+    filters << ProfileInterface::tr("All profile files (%1)").arg("*.g5e SGTA5* PGTA5* PRDR3*");
+    filters << ProfileInterface::tr("GTA V Export (%1)").arg("*.g5e");
+    filters << ProfileInterface::tr("GTA V Savegames files (%1)").arg("SGTA5*");
+    filters << ProfileInterface::tr("GTA V Snapmatic files (%1)").arg("PGTA5*");
+    filters << ProfileInterface::tr("RDR 2 Photo files (%1)").arg("PRDR3*");
+    filters << ProfileInterface::tr("All files (%1)").arg("**");
     fileDialog.setNameFilters(filters);
 
     QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
@@ -603,7 +604,7 @@ bool UserInterface::openFile(QString selectedFile, bool warn)
             }
             else {
                 if (warn)
-                    QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("Failed to read Snapmatic picture"));
+                    QMessageBox::warning(this, tr("Open File"), ProfileInterface::tr("Failed to read Photo file"));
                 delete picture;
                 return false;
             }
@@ -641,7 +642,7 @@ bool UserInterface::openFile(QString selectedFile, bool warn)
                 delete savegame;
                 delete picture;
                 if (warn)
-                    QMessageBox::warning(this, tr("Open File"), tr("Can't open %1 because of not valid file format").arg("\""+selectedFileName+"\""));
+                    QMessageBox::warning(this, tr("Open File"), tr("Can not open %1 because file format is not valid").arg("\""+selectedFileName+"\""));
                 return false;
             }
         }

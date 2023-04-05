@@ -45,40 +45,18 @@ void ProfileLoader::run()
     QVector<QString> savegameFiles;
     QVector<QString> snapmaticPics;
 
-#ifdef Q_OS_WIN
     QDir dir(profileFolder);
     const QStringList files = dir.entryList(QDir::Files);
     for (const QString &fileName : files) {
-        if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
+        if ((fileName.startsWith("SGTA5") || fileName.startsWith("SRDR3")) && !fileName.endsWith(".bak")) {
             savegameFiles << fileName;
             maximumV++;
         }
-        if (fileName.startsWith("PGTA5") && !fileName.endsWith(".bak")) {
+        if ((fileName.startsWith("PGTA5") || fileName.startsWith("PRDR3")) && !fileName.endsWith(".bak")) {
             snapmaticPics << fileName;
             maximumV++;
         }
     }
-#else
-    DIR *dirp = opendir(profileFolder.toUtf8().constData());
-    struct dirent *dp;
-    while ((dp = readdir(dirp)) != 0) {
-        const QString fileName = QString::fromUtf8(dp->d_name);
-        const QString filePath = profileFolder % "/" % fileName;
-        struct stat fileStat;
-        stat(filePath.toUtf8().constData(), &fileStat);
-        if (S_ISREG(fileStat.st_mode) != 0) {
-            if (fileName.startsWith("SGTA5") && !fileName.endsWith(".bak")) {
-                savegameFiles << fileName;
-                maximumV++;
-            }
-            if (fileName.startsWith("PGTA5") && !fileName.endsWith(".bak")) {
-                snapmaticPics << fileName;
-                maximumV++;
-            }
-        }
-    }
-    closedir(dirp);
-#endif
 
     // Directory successfully scanned
     emit directoryScanned(savegameFiles, snapmaticPics);
