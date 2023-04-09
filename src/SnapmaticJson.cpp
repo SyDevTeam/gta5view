@@ -16,9 +16,11 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
+#ifndef GTA5SYNC_BOOST
 #include <boost/json/src.hpp>
-#include <sstream>
+#endif
 #include "SnapmaticJson.h"
+#include <sstream>
 
 void serializer(std::ostream &os, const boost::json::value &jv, std::string *indent, bool do_indent)
 {

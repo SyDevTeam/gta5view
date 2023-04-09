@@ -48,7 +48,6 @@ if(APPLE)
 endif()
 
 list(APPEND GTA5VIEW_DEFINES
-    -DBOOST_JSON_STANDALONE
     -DGTA5SYNC_CMAKE
     -DGTA5SYNC_PROJECT
 )
@@ -140,7 +139,6 @@ set(GTA5VIEW_HEADERS
 set(GTA5VIEW_INCLUDEDIR
     src
     src/anpro
-    src/json/include
     src/pcg
     src/uimod
 )
@@ -228,6 +226,29 @@ if(RAGEPHOTO_ABI_WRAPPER)
     set(RAGEPHOTO_C_API ON CACHE BOOL "Build libragephoto with C API support" FORCE)
     list(APPEND GTA5VIEW_DEFINES
         -DRAGEPHOTO_USE_ABI_WRAPPER
+    )
+endif()
+
+option(WITH_BOOST "Use linked Boost library" OFF)
+if(WITH_BOOST)
+    find_package(Boost REQUIRED
+        COMPONENTS json
+    )
+    list(APPEND GTA5VIEW_LIBS
+        Boost::json
+    )
+    list(APPEND GTA5VIEW_DEFINES
+        -DGTA5SYNC_BOOST
+    )
+    list(APPEND GTA5VIEW_INCLUDEDIR
+        ${Boost_INCLUDE_DIRS}
+    )
+else()
+    list(APPEND GTA5VIEW_DEFINES
+        -DBOOST_JSON_STANDALONE
+    )
+    list(APPEND GTA5VIEW_INCLUDEDIR
+        src/json/include
     )
 endif()
 
