@@ -232,7 +232,7 @@ void PictureDialog::addPreviousNextButtons()
 
 void PictureDialog::adaptDialogSize()
 {
-    int newDialogHeight = (960 * AppEnv::screenRatio()) + ui->jsonFrame->heightForWidth(width());
+    int newDialogHeight = (536 * AppEnv::screenRatio()) + ui->jsonFrame->heightForWidth(width());
     if (naviEnabled)
         newDialogHeight = newDialogHeight + layout()->menuBar()->height();
     const QSize windowSize(width(), newDialogHeight);
