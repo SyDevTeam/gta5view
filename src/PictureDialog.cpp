@@ -141,8 +141,8 @@ void PictureDialog::setupPictureDialog()
     smpic = nullptr;
     crewStr = "";
 
-    // Get Snapmatic Resolution
-    const QSize snapmaticResolution = SnapmaticPicture::getSnapmaticResolution();
+    // Set default Snapmatic resolution (960x536)
+    const QSize snapmaticResolution = QSize(960, 536);
 
     // Avatar area
     qreal screenRatio = AppEnv::screenRatio();
@@ -232,7 +232,7 @@ void PictureDialog::addPreviousNextButtons()
 
 void PictureDialog::adaptDialogSize()
 {
-    int newDialogHeight = (SnapmaticPicture::getSnapmaticResolution().height() * AppEnv::screenRatio()) + ui->jsonFrame->heightForWidth(width());
+    int newDialogHeight = (960 * AppEnv::screenRatio()) + ui->jsonFrame->heightForWidth(width());
     if (naviEnabled)
         newDialogHeight = newDialogHeight + layout()->menuBar()->height();
     const QSize windowSize(width(), newDialogHeight);
@@ -533,7 +533,7 @@ void PictureDialog::renderPicture()
 {
     const qreal screenRatio = AppEnv::screenRatio();
     const qreal screenRatioPR = AppEnv::screenRatioPR();
-    const QSize snapmaticResolution(SnapmaticPicture::getSnapmaticResolution());
+    const QSize snapmaticResolution = QSize(960, 536);
     const QSize renderResolution(snapmaticResolution.width() * screenRatio * screenRatioPR, snapmaticResolution.height() * screenRatio * screenRatioPR);
     QPixmap shownImagePixmap(renderResolution);
     shownImagePixmap.fill(Qt::black);
@@ -783,6 +783,7 @@ void PictureDialog::editSnapmaticImage()
     importDialog->setModal(true);
     importDialog->exec();
     if (importDialog->isImportAgreed()) {
+        const QSize previousSize = smpic->getPictureResolution();
         const QByteArray previousPicture = smpic->getPictureStream();
         bool success = smpic->setImage(importDialog->image(), importDialog->isUnlimitedBuffer());
         if (success) {
@@ -793,8 +794,7 @@ void PictureDialog::editSnapmaticImage()
                 QFile::copy(currentFilePath, backupFileName);
             }
             if (!smpic->exportPicture(currentFilePath)) {
-                // TODO: Find a way to cache the image width and height
-                smpic->setPictureStream(previousPicture, 0, 0);
+                smpic->setPictureStream(previousPicture, previousSize.width(), previousSize.height());
                 QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of I/O Error"));
                 return;
             }

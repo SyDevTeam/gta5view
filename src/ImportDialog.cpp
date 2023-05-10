@@ -84,8 +84,7 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     ui->cmdBackgroundWipe->setVisible(false);
 
     // Snapmatic Resolution
-    snapmaticResolution = SnapmaticPicture::getSnapmaticResolution();
-    ui->cbResolution->addItem("GTA V", snapmaticResolution);
+    ui->cbResolution->addItem("GTA V", QSize(960, 536));
     ui->cbResolution->addItem("FiveM", QSize(1920, 1072));
     ui->cbResolution->addItem("1280x720", QSize(1280, 720));
     ui->cbResolution->addItem("1920x1080", QSize(1920, 1080));
@@ -371,7 +370,7 @@ void ImportDialog::processSettings(QString settingsProfile, bool setDefault)
         ui->cbForceAvatarColour->setChecked(settings.value("ForceAvatarColour", false).toBool());
         ui->cbUnlimited->setChecked(settings.value("UnlimitedBuffer", false).toBool());
         ui->cbImportAsIs->setChecked(settings.value("ImportAsIs", false).toBool());
-        const QVariant data = settings.value("Resolution", SnapmaticPicture::getSnapmaticResolution());
+        const QVariant data = settings.value("Resolution", QSize(960, 536));
 #if QT_VERSION >= 0x060000
         if (data.typeId() == QMetaType::QSize)
 #else
@@ -431,7 +430,7 @@ void ImportDialog::saveSettings(QString settingsProfile)
         settings.setValue("Resolution", data);
     }
     else {
-        settings.setValue("Resolution", SnapmaticPicture::getSnapmaticResolution());
+        settings.setValue("Resolution", QSize(960, 536));
     }
     settings.setValue("UnlimitedBuffer", ui->cbUnlimited->isChecked());
     settings.setValue("ImportAsIs", ui->cbImportAsIs->isChecked());
@@ -945,7 +944,7 @@ void ImportDialog::on_cbResolution_currentIndexChanged(int index)
 #endif
     {
         const QSize dataSize = data.toSize();
-        if (dataSize == SnapmaticPicture::getSnapmaticResolution()) {
+        if (dataSize == QSize(960, 536)) {
             ui->cbAvatar->setEnabled(true);
             snapmaticResolution = dataSize;
             reworkImage();

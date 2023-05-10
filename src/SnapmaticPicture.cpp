@@ -36,11 +36,6 @@
 #endif
 #include <QSaveFile>
 
-// IMAGES VALUES
-#define snapmaticResolutionW 960
-#define snapmaticResolutionH 536
-#define snapmaticResolution QSize(snapmaticResolutionW, snapmaticResolutionH)
-
 // GTA5VIEW RELATED INTERNAL FUNCTIONS
 inline quint32 gta5view_charToUInt32LE(char *x)
 {
@@ -601,11 +596,14 @@ bool SnapmaticPicture::readingPicture(bool cacheEnabled_)
     if (!ok)
         return false;
 
-    if (cacheEnabled)
+    if (cacheEnabled) {
         picOk = cachePicture.loadFromData(QByteArray::fromRawData(p_ragePhoto.jpegData(), p_ragePhoto.jpegSize()), "JPEG");
+        picRes = cachePicture.size();
+    }
     else {
         QImage tempPicture;
         picOk = tempPicture.loadFromData(QByteArray::fromRawData(p_ragePhoto.jpegData(), p_ragePhoto.jpegSize()), "JPEG");
+        picRes = tempPicture.size();
     }
 
     parseJsonContent(); // JSON parsing is own function
@@ -712,13 +710,17 @@ bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray, int width
         }
         else if (gta5view_isRDR2Format(photoFormat)) {
             snapmaticJson.jsonObject["sign"] = p_ragePhoto.jpegSign(RagePhoto::PhotoFormat::RDR2);
-            snapmaticJson.jsonObject["size"] = jpegPicStreamLength;
+            snapmaticJson.jsonObject["size"] = streamArray.size();
             snapmaticJson.jsonObject["width"] = width;
             snapmaticJson.jsonObject["height"] = height;
             const std::string json = SnapmaticJson::serialize(snapmaticJson.jsonObject);
             p_ragePhoto.setJson(json.c_str());
         }
 
+        // Update resolution
+        picRes = QSize(width, height);
+
+        // Update cache
         if (cacheEnabled) {
             QImage replacedPicture;
             replacedPicture.loadFromData(streamArray);
@@ -1216,11 +1218,9 @@ bool SnapmaticPicture::setPictureVisible()
     return true;
 }
 
-// PREDEFINED PROPERTIES
-
-QSize SnapmaticPicture::getSnapmaticResolution()
+const QSize SnapmaticPicture::getPictureResolution()
 {
-    return snapmaticResolution;
+    return picRes;
 }
 
 // SNAPMATIC FORMAT

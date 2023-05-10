@@ -80,6 +80,7 @@ public:
     void clearCache();
     const QImage getImage();
     const QByteArray getPictureStream();
+    const QSize getPictureResolution();
     const QString getLastStep(bool readable = true);
     const QString getPictureStr();
     const QString getPictureTitl();
@@ -134,9 +135,6 @@ public:
     inline bool setHidden() { return setPictureHidden(); }
     inline bool setVisible() { return setPictureVisible(); }
 
-    // PREDEFINED PROPERTIES
-    static QSize getSnapmaticResolution();
-
     // SNAPMATIC FORMAT
     SnapmaticFormat getSnapmaticFormat();
     void setSnapmaticFormat(SnapmaticFormat format);
@@ -161,6 +159,7 @@ private:
     QString pictureStr;
     QString lastStep;
     QString sortStr;
+    QSize picRes;
     bool picOk;
     bool cacheEnabled;
     bool isFormatSwitch;

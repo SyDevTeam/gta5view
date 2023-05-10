@@ -49,30 +49,24 @@ void ExportThread::run()
     // Quality Settings
     settings.beginGroup("Pictures");
     int defaultQuality = 100;
-    QSize defExportSize = SnapmaticPicture::getSnapmaticResolution();
     int customQuality = settings.value("CustomQuality", defaultQuality).toInt();
     if (customQuality < 1 || customQuality > 100)
-    {
         customQuality = 100;
-    }
     bool useCustomQuality = settings.value("CustomQualityEnabled", false).toBool();
 
     // Size Settings
+    const QSize defExportSize = QSize(960, 536);
     QSize cusExportSize = settings.value("CustomSize", defExportSize).toSize();
-    if (cusExportSize.width() > 3840)
-    {
-        cusExportSize.setWidth(3840);
+    if (cusExportSize.width() > 7680) {
+        cusExportSize.setWidth(7680);
     }
-    else if (cusExportSize.height() > 2160)
-    {
-        cusExportSize.setHeight(2160);
+    else if (cusExportSize.height() > 4320) {
+        cusExportSize.setHeight(4320);
     }
-    if (cusExportSize.width() < 1)
-    {
+    if (cusExportSize.width() < 1) {
         cusExportSize.setWidth(1);
     }
-    else if (cusExportSize.height() < 1)
-    {
+    else if (cusExportSize.height() < 1) {
         cusExportSize.setHeight(1);
     }
     QString sizeMode = settings.value("ExportSizeMode", "Default").toString();

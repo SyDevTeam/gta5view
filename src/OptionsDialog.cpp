@@ -69,7 +69,7 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     int desktopSizeWidth = qRound((double)desktopResolution.width() * screenRatioPR);
     int desktopSizeHeight = qRound((double)desktopResolution.height() * screenRatioPR);
     aspectRatio = Qt::KeepAspectRatio;
-    defExportSize = SnapmaticPicture::getSnapmaticResolution();
+    defExportSize = QSize(960, 536);
     cusExportSize = defExportSize;
     defaultQuality = 100;
     customQuality = 100;
@@ -519,19 +519,18 @@ void OptionsDialog::setupPictureSettings()
 
     // Quality Settings
     customQuality = settings->value("CustomQuality", defaultQuality).toInt();
-    if (customQuality < 1 || customQuality > 100) {
+    if (customQuality < 1 || customQuality > 100)
         customQuality = 100;
-    }
     ui->hsPicQuality->setValue(customQuality);
     ui->cbPicCustomQuality->setChecked(settings->value("CustomQualityEnabled", false).toBool());
 
     // Size Settings
     cusExportSize = settings->value("CustomSize", defExportSize).toSize();
-    if (cusExportSize.width() > 3840) {
-        cusExportSize.setWidth(3840);
+    if (cusExportSize.width() > 7680) {
+        cusExportSize.setWidth(7680);
     }
-    else if (cusExportSize.height() > 2160) {
-        cusExportSize.setHeight(2160);
+    else if (cusExportSize.height() > 4320) {
+        cusExportSize.setHeight(4320);
     }
     if (cusExportSize.width() < 1) {
         cusExportSize.setWidth(1);
@@ -539,7 +538,9 @@ void OptionsDialog::setupPictureSettings()
     else if (cusExportSize.height() < 1) {
         cusExportSize.setHeight(1);
     }
+    ui->sbPicExportWidth->setMaximum(7680);
     ui->sbPicExportWidth->setValue(cusExportSize.width());
+    ui->sbPicExportHeight->setMaximum(4320);
     ui->sbPicExportHeight->setValue(cusExportSize.height());
 
     QString sizeMode = settings->value("ExportSizeMode", "Default").toString();
