@@ -650,11 +650,14 @@ bool SnapmaticPicture::readingPictureFromFile(const QString &fileName, bool cach
 
 bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
 {
-#ifdef GTA5SYNC_DYNAMIC_PHOTOBUFFER // It's not properly implemented yet, please don't define
-    quint32 jpegPicStreamLength = p_ragePhoto.data()->photoBuffer();
-#else
-    quint32 jpegPicStreamLength = RagePhoto::DEFAULT_GTA5_PHOTOBUFFER;
-#endif
+    quint32 photoFormat = p_ragePhoto.format();
+    quint32 jpegPicStreamLength = 0;
+    if (gta5view_isGTAVFormat(photoFormat)) {
+        jpegPicStreamLength = RagePhoto::DEFAULT_GTA5_PHOTOBUFFER;
+    }
+    else if (gta5view_isRDR2Format(photoFormat)) {
+        jpegPicStreamLength = RagePhoto::DEFAULT_RDR2_PHOTOBUFFER;
+    }
     QByteArray picByteArray;
     int comLvl = 100;
     bool saveSuccess = false;
@@ -679,17 +682,20 @@ bool SnapmaticPicture::setImage(const QImage &picture, bool eXtendMode)
         }
     }
     if (saveSuccess)
-        return setPictureStream(picByteArray);
+        return setPictureStream(picByteArray, picture.width(), picture.height());
     return false;
 }
 
-bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean method
+bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray, int width, int height)
 {
-#ifdef GTA5SYNC_DYNAMIC_PHOTOBUFFER // It's not properly implemented yet, please don't define
-    quint32 jpegPicStreamLength = p_ragePhoto.data()->photoBuffer();
-#else
-    quint32 jpegPicStreamLength = RagePhoto::DEFAULT_GTA5_PHOTOBUFFER;
-#endif
+    quint32 photoFormat = p_ragePhoto.format();
+    quint32 jpegPicStreamLength = 0;
+    if (gta5view_isGTAVFormat(photoFormat)) {
+        jpegPicStreamLength = RagePhoto::DEFAULT_GTA5_PHOTOBUFFER;
+    }
+    else if (gta5view_isRDR2Format(photoFormat)) {
+        jpegPicStreamLength = RagePhoto::DEFAULT_RDR2_PHOTOBUFFER;
+    }
     if (streamArray.size() > jpegPicStreamLength)
         jpegPicStreamLength = streamArray.size();
 #ifdef GTA5SYNC_COMPACT_PHOTOBUFFER // Experiment to save less than the default photo buffer
@@ -699,7 +705,6 @@ bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean 
     bool success = p_ragePhoto.setJpeg(streamArray.constData(), streamArray.size(), jpegPicStreamLength);
     if (success) {
         // Update JPEG signature
-        uint32_t photoFormat = p_ragePhoto.format();
         if (gta5view_isGTAVFormat(photoFormat)) {
             snapmaticJson.jsonObject["sign"] = p_ragePhoto.jpegSign(RagePhoto::PhotoFormat::GTA5);
             const std::string json = SnapmaticJson::serialize(snapmaticJson.jsonObject);
@@ -707,6 +712,9 @@ bool SnapmaticPicture::setPictureStream(const QByteArray &streamArray) // clean 
         }
         else if (gta5view_isRDR2Format(photoFormat)) {
             snapmaticJson.jsonObject["sign"] = p_ragePhoto.jpegSign(RagePhoto::PhotoFormat::RDR2);
+            snapmaticJson.jsonObject["size"] = jpegPicStreamLength;
+            snapmaticJson.jsonObject["width"] = width;
+            snapmaticJson.jsonObject["height"] = height;
             const std::string json = SnapmaticJson::serialize(snapmaticJson.jsonObject);
             p_ragePhoto.setJson(json.c_str());
         }

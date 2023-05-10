@@ -91,7 +91,7 @@ public:
     const QString getOriginalPictureFilePath();
     bool setImage(const QImage &picture, bool eXtendMode = false);
     bool setPictureTitl(const QString &newTitle); // Please use setPictureTitle instead
-    bool setPictureStream(const QByteArray &streamArray);
+    bool setPictureStream(const QByteArray &streamArray, int width, int height);
     void updateStrings();
     void emitUpdate();
     void emitCustomSignal(const QString &signal);

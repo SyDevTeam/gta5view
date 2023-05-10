@@ -366,7 +366,8 @@ void SnapmaticWidget::editSnapmaticImage()
                 QFile::copy(currentFilePath, backupFileName);
             }
             if (!smpic->exportPicture(currentFilePath)) {
-                smpic->setPictureStream(previousPicture);
+                // TODO: Find a way to cache the image width and height
+                smpic->setPictureStream(previousPicture, 0, 0);
                 QMessageBox::warning(this, QApplication::translate("ImageEditorDialog", "Snapmatic Image Editor"), QApplication::translate("ImageEditorDialog", "Patching of Snapmatic Image failed because of I/O Error"));
                 return;
             }
