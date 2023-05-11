@@ -1087,7 +1087,7 @@ bool SnapmaticPicture::setJsonStr(const QString &json, bool updateProperties)
 
 bool SnapmaticPicture::setJsonStr(const std::string &json, bool updateProperties)
 {
-    std::error_code ec;
+    boost::json::error_code ec;
     const boost::json::value t_jsonValue = boost::json::parse(json, ec);
     if (ec)
         return false;
