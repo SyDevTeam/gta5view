@@ -74,9 +74,14 @@ JsonEditorDialog::JsonEditorDialog(SnapmaticPicture *picture, QWidget *parent) :
     ui->txtJSON->setTabStopWidth(fontMetrics.width("    "));
 #endif
 
-    const boost::json::value jsonValue = boost::json::parse(jsonCode);
     ui->txtJSON->setStyleSheet("QPlainTextEdit{background-color:rgb(46,47,48);color:rgb(238,231,172);}");
-    ui->txtJSON->setPlainText(QString::fromUtf8(SnapmaticJson::serialize(jsonValue, true).c_str()));
+
+    boost::json::error_code ec;
+    const boost::json::value jsonValue = boost::json::parse(jsonCode, ec);
+    if (jsonValue.is_object()) {
+        const boost::json::object jsonObject = jsonValue.get_object();
+        ui->txtJSON->setPlainText(QString::fromUtf8(SnapmaticJson::serialize(jsonObject, true).c_str()));
+    }
     jsonHl = new JSHighlighter(ui->txtJSON->document());
 
     // DPI calculation
@@ -107,7 +112,7 @@ JsonEditorDialog::~JsonEditorDialog()
 void JsonEditorDialog::closeEvent(QCloseEvent *ev)
 {
     const QString jsonPatched = QString(ui->txtJSON->toPlainText()).replace("\t", "");
-    std::error_code ec;
+    boost::json::error_code ec;
     const boost::json::value jsonNew = boost::json::parse(jsonPatched.toUtf8().constData(), ec);
     const boost::json::value jsonOriginal = boost::json::parse(jsonCode, ec);
     const std::string newCode = SnapmaticJson::serialize(jsonNew);
@@ -137,7 +142,7 @@ void JsonEditorDialog::closeEvent(QCloseEvent *ev)
 bool JsonEditorDialog::saveJsonContent()
 {
     const QString jsonPatched = QString(ui->txtJSON->toPlainText()).replace("\t", "");
-    std::error_code ec;
+    boost::json::error_code ec;
     const boost::json::value jsonNew = boost::json::parse(jsonPatched.toUtf8().constData(), ec);
     if (jsonNew.is_object()) {
         const boost::json::value jsonOriginal = boost::json::parse(jsonCode, ec);

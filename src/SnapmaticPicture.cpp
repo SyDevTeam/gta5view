@@ -568,7 +568,7 @@ bool SnapmaticPicture::preloadFile()
     if (!picFilePath.endsWith(".g5e", Qt::CaseInsensitive) && p_ragePhoto.format() == G5EPhotoFormat::G5EX)
         isFormatSwitch = true;
 
-    std::error_code ec;
+    boost::json::error_code ec;
     const boost::json::value jsonValue = boost::json::parse(p_ragePhoto.json(), ec);
     if (ec)
         return false;
