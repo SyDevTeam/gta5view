@@ -694,7 +694,7 @@ void OptionsDialog::setupSnapmaticPictureViewer()
 void OptionsDialog::on_cmdExploreFolder_clicked()
 {
     const QString GTAV_Folder = QFileDialog::getExistingDirectory(this, UserInterface::tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-    if (QDir(GTAV_Folder).exists()) {
+    if (!GTAV_Folder.isEmpty() && QDir(GTAV_Folder).exists()) {
         ui->txtFolder->setText(GTAV_Folder);
     }
 }

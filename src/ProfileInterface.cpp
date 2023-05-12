@@ -1302,8 +1302,8 @@ void ProfileInterface::exportSelected()
         settings.beginGroup("FileDialogs");
         //bool dontUseNativeDialog = settings.value("DontUseNativeDialog", false).toBool();
         settings.beginGroup("ExportDirectory");
-        QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected..."), settings.value(profileName, profileFolder).toString());
-        if (exportDirectory != "") {
+        const QString exportDirectory = QFileDialog::getExistingDirectory(this, tr("Export selected..."), settings.value(profileName, profileFolder).toString());
+        if (!exportDirectory.isEmpty()) {
             settings.setValue(profileName, exportDirectory);
             for (const QString &widgetStr : qAsConst(widgets)) {
                 ProfileWidget *widget = widgets.key(widgetStr, nullptr);
