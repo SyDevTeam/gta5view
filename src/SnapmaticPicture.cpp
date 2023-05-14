@@ -53,7 +53,7 @@ inline void gta5view_uInt32ToCharLE(quint32 x, char *y)
     y[3] = x >> 24;
 }
 
-ragephoto_bool_t gta5view_export_load(RagePhotoData *rp_data, const char *data, size_t length)
+bool gta5view_export_load(RagePhotoData *rp_data, const char *data, size_t length)
 {
     const QByteArray fileData = QByteArray::fromRawData(data, length);
 
