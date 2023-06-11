@@ -21,10 +21,10 @@
 
 #include "SnapmaticJson.h"
 #ifdef RAGEPHOTO_USE_ABI_WRAPPER
-#include <RagePhotoA.h>
+#include <RagePhotoA>
 typedef RagePhotoA RagePhoto;
 #else
-#include <RagePhoto.h>
+#include <RagePhoto>
 #endif
 #include <QStringList>
 #include <QDateTime>
