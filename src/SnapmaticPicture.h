@@ -90,6 +90,7 @@ public:
     const QString getExportPictureFileName();
     const QString getOriginalPictureFileName();
     const QString getOriginalPictureFilePath();
+    void initialise(uint32_t photoFormat);
     bool setImage(const QImage &picture, bool eXtendMode = false);
     bool setPictureTitl(const QString &newTitle); // Please use setPictureTitle instead
     bool setPictureStream(const QByteArray &streamArray, int width, int height);

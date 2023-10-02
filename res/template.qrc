@@ -1,5 +1,0 @@
-<RCC>
-    <qresource prefix="/template">
-        <file>template.g5e</file>
-    </qresource>
-</RCC>

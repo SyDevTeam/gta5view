@@ -725,174 +725,169 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
             }
         }
         else if (isSupportedImageFile(selectedFileName)) {
-            SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
-            if (picture->readingPicture(false)) {
-                if (!notMultiple) {
-                    QFile snapmaticFile(selectedFile);
-                    if (!snapmaticFile.open(QFile::ReadOnly)) {
-                        delete picture;
-                        return false;
+            SnapmaticPicture *picture = new SnapmaticPicture();
+            picture->initialise(RagePhoto::PhotoFormat::GTA5); // TODO: check which game we want create for
+            if (!notMultiple) {
+                QFile snapmaticFile(selectedFile);
+                if (!snapmaticFile.open(QFile::ReadOnly)) {
+                    delete picture;
+                    return false;
+                }
+                QImage snapmaticImage;
+                QImageReader snapmaticImageReader;
+                snapmaticImageReader.setDecideFormatFromContent(true);
+                snapmaticImageReader.setDevice(&snapmaticFile);
+                if (!snapmaticImageReader.read(&snapmaticImage)) {
+                    delete picture;
+                    return false;
+                }
+                QString customImageTitle;
+                QPixmap snapmaticPixmap(960, 536);
+                snapmaticPixmap.fill(Qt::black);
+                QPainter snapmaticPainter(&snapmaticPixmap);
+                if (snapmaticImage.height() == snapmaticImage.width()) {
+                    // Avatar mode
+                    int diffWidth = 0;
+                    int diffHeight = 0;
+                    snapmaticImage = snapmaticImage.scaled(470, 470, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                    if (snapmaticImage.width() > snapmaticImage.height()) {
+                        diffHeight = 470 - snapmaticImage.height();
+                        diffHeight = diffHeight / 2;
                     }
-                    QImage snapmaticImage;
-                    QImageReader snapmaticImageReader;
-                    snapmaticImageReader.setDecideFormatFromContent(true);
-                    snapmaticImageReader.setDevice(&snapmaticFile);
-                    if (!snapmaticImageReader.read(&snapmaticImage)) {
-                        delete picture;
-                        return false;
+                    else if (snapmaticImage.width() < snapmaticImage.height()) {
+                        diffWidth = 470 - snapmaticImage.width();
+                        diffWidth = diffWidth / 2;
                     }
-                    QString customImageTitle;
-                    QPixmap snapmaticPixmap(960, 536);
-                    snapmaticPixmap.fill(Qt::black);
-                    QPainter snapmaticPainter(&snapmaticPixmap);
-                    if (snapmaticImage.height() == snapmaticImage.width()) {
-                        // Avatar mode
-                        int diffWidth = 0;
-                        int diffHeight = 0;
-                        snapmaticImage = snapmaticImage.scaled(470, 470, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-                        if (snapmaticImage.width() > snapmaticImage.height()) {
-                            diffHeight = 470 - snapmaticImage.height();
-                            diffHeight = diffHeight / 2;
-                        }
-                        else if (snapmaticImage.width() < snapmaticImage.height()) {
-                            diffWidth = 470 - snapmaticImage.width();
-                            diffWidth = diffWidth / 2;
-                        }
-                        snapmaticPainter.drawImage(145 + diffWidth, 66 + diffHeight, snapmaticImage);
-                        customImageTitle = ImportDialog::tr("Custom Avatar", "Custom Avatar Description in SC, don't use Special Character!");
-                    }
-                    else {
-                        // Picture mode
-                        int diffWidth = 0;
-                        int diffHeight = 0;
-                        snapmaticImage = snapmaticImage.scaled(960, 536, Qt::KeepAspectRatio, Qt::SmoothTransformation);
-                        if (snapmaticImage.width() != 960) {
-                            diffWidth = 960 - snapmaticImage.width();
-                            diffWidth = diffWidth / 2;
-                        }
-                        else if (snapmaticImage.height() != 536) {
-                            diffHeight = 536 - snapmaticImage.height();
-                            diffHeight = diffHeight / 2;
-                        }
-                        snapmaticPainter.drawImage(0 + diffWidth, 0 + diffHeight, snapmaticImage);
-                        customImageTitle = ImportDialog::tr("Custom Picture", "Custom Picture Description in SC, don't use Special Character!");
-                    }
-                    snapmaticPainter.end();
-                    if (!picture->setImage(snapmaticPixmap.toImage())) {
-                        delete picture;
-                        return false;
-                    }
-                    SnapmaticProperties spJson = picture->getSnapmaticProperties();
-                    spJson.uid = getRandomUid();
-                    bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                    bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                    bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
-                    int cEnough = 0;
-                    while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
-                        spJson.uid = getRandomUid();
-                        fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                        fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                        fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
-                        cEnough++;
-                    }
-                    spJson.createdDateTime = importDateTime;
-                    qint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
-                    spJson.createdTimestamp = timestamp;
-                    picture->setSnapmaticProperties(spJson);
-                    const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
-                    picture->setPicFileName(picFileName);
-                    picture->setPictureTitle(customImageTitle);
-                    picture->updateStrings();
-                    bool success = importSnapmaticPicture(picture, notMultiple);
-                    if (!success)
-                        delete picture;
-                    return success;
+                    snapmaticPainter.drawImage(145 + diffWidth, 66 + diffHeight, snapmaticImage);
+                    customImageTitle = ImportDialog::tr("Custom Avatar", "Custom Avatar Description in SC, don't use Special Character!");
                 }
                 else {
-                    bool success = false;
-                    QFile snapmaticFile(selectedFile);
-                    if (!snapmaticFile.open(QFile::ReadOnly)) {
-                        QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
-                        delete picture;
-                        return false;
+                    // Picture mode
+                    int diffWidth = 0;
+                    int diffHeight = 0;
+                    snapmaticImage = snapmaticImage.scaled(960, 536, Qt::KeepAspectRatio, Qt::SmoothTransformation);
+                    if (snapmaticImage.width() != 960) {
+                        diffWidth = 960 - snapmaticImage.width();
+                        diffWidth = diffWidth / 2;
                     }
-                    QImage *snapmaticImage = new QImage();
-                    QImageReader snapmaticImageReader;
-                    snapmaticImageReader.setDecideFormatFromContent(true);
-                    snapmaticImageReader.setDevice(&snapmaticFile);
-                    if (!snapmaticImageReader.read(snapmaticImage)) {
-                        QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
-                        delete snapmaticImage;
-                        delete picture;
-                        return false;
+                    else if (snapmaticImage.height() != 536) {
+                        diffHeight = 536 - snapmaticImage.height();
+                        diffHeight = diffHeight / 2;
                     }
-                    ImportDialog *importDialog = new ImportDialog(profileName, this);
-                    importDialog->setImage(snapmaticImage);
-                    importDialog->setModal(true);
-                    importDialog->show();
-                    importDialog->exec();
-                    if (importDialog->isImportAgreed()) {
-                        if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
-                            SnapmaticProperties spJson = picture->getSnapmaticProperties();
-                            spJson.uid = getRandomUid();
-                            bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                            bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                            bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
-                            int cEnough = 0;
-                            while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
-                                spJson.uid = getRandomUid();
-                                fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                                fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                                fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
-                                cEnough++;
-                            }
-                            spJson.createdDateTime = importDateTime;
-                            qint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
-                            spJson.createdTimestamp = timestamp;
-                            picture->setSnapmaticProperties(spJson);
-                            const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
-                            picture->setPicFileName(picFileName);
-                            picture->setPictureTitle(importDialog->getImageTitle());
-                            picture->updateStrings();
-                            success = importSnapmaticPicture(picture, notMultiple);
-#ifdef GTA5SYNC_TELEMETRY
-                            if (success) {
-                                QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-                                telemetrySettings.beginGroup("Telemetry");
-                                bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
-                                telemetrySettings.endGroup();
-                                if (pushUsageData && Telemetry->canPush()) {
-                                    QJsonDocument jsonDocument;
-                                    QJsonObject jsonObject;
-                                    jsonObject["Type"] = "ImportSuccess";
-                                    jsonObject["ExtraFlag"] = "Dialog";
-                                    jsonObject["ImportSize"] = QString::number(picture->getPictureSize());
-#if QT_VERSION >= 0x060000
-                                    jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
-#else
-                                    jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
-#endif
-                                    jsonObject["ImportType"] = "Image";
-                                    jsonDocument.setObject(jsonObject);
-                                    Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
-                                }
-                            }
-#endif
-                        }
-                    }
-                    else {
-                        delete picture;
-                        success = true;
-                    }
-                    delete importDialog;
-                    if (!success)
-                        delete picture;
-                    return success;
+                    snapmaticPainter.drawImage(0 + diffWidth, 0 + diffHeight, snapmaticImage);
+                    customImageTitle = ImportDialog::tr("Custom Picture", "Custom Picture Description in SC, don't use Special Character!");
                 }
+                snapmaticPainter.end();
+                if (!picture->setImage(snapmaticPixmap.toImage())) {
+                    delete picture;
+                    return false;
+                }
+                SnapmaticProperties spJson = picture->getSnapmaticProperties();
+                spJson.uid = getRandomUid();
+                bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
+                bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                int cEnough = 0;
+                while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
+                    spJson.uid = getRandomUid();
+                    fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                    fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
+                    fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                    cEnough++;
+                }
+                spJson.createdDateTime = importDateTime;
+                qint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
+                spJson.createdTimestamp = timestamp;
+                picture->setSnapmaticProperties(spJson);
+                const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
+                picture->setPicFileName(picFileName);
+                picture->setPictureTitle(customImageTitle);
+                picture->updateStrings();
+                bool success = importSnapmaticPicture(picture, notMultiple);
+                if (!success)
+                    delete picture;
+                return success;
             }
             else {
-                delete picture;
-                return false;
+                bool success = false;
+                QFile snapmaticFile(selectedFile);
+                if (!snapmaticFile.open(QFile::ReadOnly)) {
+                    QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file can't be open").arg("\""+selectedFileName+"\""));
+                    delete picture;
+                    return false;
+                }
+                QImage *snapmaticImage = new QImage();
+                QImageReader snapmaticImageReader;
+                snapmaticImageReader.setDecideFormatFromContent(true);
+                snapmaticImageReader.setDevice(&snapmaticFile);
+                if (!snapmaticImageReader.read(snapmaticImage)) {
+                    QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file can't be parsed properly").arg("\""+selectedFileName+"\""));
+                    delete snapmaticImage;
+                    delete picture;
+                    return false;
+                }
+                ImportDialog *importDialog = new ImportDialog(profileName, this);
+                importDialog->setImage(snapmaticImage);
+                importDialog->setModal(true);
+                importDialog->show();
+                importDialog->exec();
+                if (importDialog->isImportAgreed()) {
+                    if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
+                        SnapmaticProperties spJson = picture->getSnapmaticProperties();
+                        spJson.uid = getRandomUid();
+                        bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                        bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
+                        bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                        int cEnough = 0;
+                        while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
+                            spJson.uid = getRandomUid();
+                            fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                            fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
+                            fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                            cEnough++;
+                        }
+                        spJson.createdDateTime = importDateTime;
+                        qint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
+                        spJson.createdTimestamp = timestamp;
+                        picture->setSnapmaticProperties(spJson);
+                        const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
+                        picture->setPicFileName(picFileName);
+                        picture->setPictureTitle(importDialog->getImageTitle());
+                        picture->updateStrings();
+                        success = importSnapmaticPicture(picture, notMultiple);
+#ifdef GTA5SYNC_TELEMETRY
+                        if (success) {
+                            QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+                            telemetrySettings.beginGroup("Telemetry");
+                            bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
+                            telemetrySettings.endGroup();
+                            if (pushUsageData && Telemetry->canPush()) {
+                                QJsonDocument jsonDocument;
+                                QJsonObject jsonObject;
+                                jsonObject["Type"] = "ImportSuccess";
+                                jsonObject["ExtraFlag"] = "Dialog";
+                                jsonObject["ImportSize"] = QString::number(picture->getPictureSize());
+#if QT_VERSION >= 0x060000
+                                jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
+#else
+                                jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
+#endif
+                                jsonObject["ImportType"] = "Image";
+                                jsonDocument.setObject(jsonObject);
+                                Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
+                            }
+                        }
+#endif
+                    }
+                }
+                else {
+                    delete picture;
+                    success = true;
+                }
+                delete importDialog;
+                if (!success)
+                    delete picture;
+                return success;
             }
         }
         else {
@@ -1050,60 +1045,55 @@ bool ProfileInterface::importRemote(QUrl remoteUrl)
 
 bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateTime)
 {
-    SnapmaticPicture *picture = new SnapmaticPicture(":/template/template.g5e");
-    if (picture->readingPicture(false)) {
-        bool success = false;
-        ImportDialog *importDialog = new ImportDialog(profileName, this);
-        importDialog->setImage(snapmaticImage);
-        importDialog->setModal(true);
-        importDialog->show();
-        importDialog->exec();
-        if (importDialog->isImportAgreed()) {
-            if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
-                SnapmaticProperties spJson = picture->getSnapmaticProperties();
+    bool success = false;
+    SnapmaticPicture *picture = new SnapmaticPicture();
+    picture->initialise(RagePhoto::PhotoFormat::GTA5); // TODO: check which game we want create for
+    ImportDialog *importDialog = new ImportDialog(profileName, this);
+    importDialog->setImage(snapmaticImage);
+    importDialog->setModal(true);
+    importDialog->show();
+    importDialog->exec();
+    if (importDialog->isImportAgreed()) {
+        if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
+            SnapmaticProperties spJson = picture->getSnapmaticProperties();
+            spJson.uid = getRandomUid();
+            bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+            bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
+            bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+            int cEnough = 0;
+            while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                 spJson.uid = getRandomUid();
-                bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
-                int cEnough = 0;
-                while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
-                    spJson.uid = getRandomUid();
-                    fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                    fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                    fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
-                    cEnough++;
-                }
-                spJson.createdDateTime = importDateTime;
-#if QT_VERSION >= 0x060000
-                quint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
-                if (timestamp > UINT32_MAX) {
-                    timestamp = UINT32_MAX;
-                }
-                spJson.createdTimestamp = (quint32)timestamp;
-#else
-                spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
-#endif
-                picture->setSnapmaticProperties(spJson);
-                const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
-                picture->setPicFileName(picFileName);
-                picture->setPictureTitle(importDialog->getImageTitle());
-                picture->updateStrings();
-                success = importSnapmaticPicture(picture, true);
+                fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
+                fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
+                fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                cEnough++;
             }
+            spJson.createdDateTime = importDateTime;
+#if QT_VERSION >= 0x060000
+            quint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
+            if (timestamp > UINT32_MAX) {
+                timestamp = UINT32_MAX;
+            }
+            spJson.createdTimestamp = (quint32)timestamp;
+#else
+            spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
+#endif
+            picture->setSnapmaticProperties(spJson);
+            const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
+            picture->setPicFileName(picFileName);
+            picture->setPictureTitle(importDialog->getImageTitle());
+            picture->updateStrings();
+            success = importSnapmaticPicture(picture, true);
         }
-        else {
-            delete picture;
-            success = true;
-        }
-        delete importDialog;
-        if (!success)
-            delete picture;
-        return success;
     }
     else {
         delete picture;
-        return false;
+        success = true;
     }
+    delete importDialog;
+    if (!success)
+        delete picture;
+    return success;
 }
 
 bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool warn)

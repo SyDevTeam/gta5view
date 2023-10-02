@@ -172,7 +172,6 @@ set(GTA5VIEW_TRANSLATIONS
 
 list(APPEND GTA5VIEW_RESOURCES
     res/global.qrc
-    res/template.qrc
 )
 set_property(SOURCE res/global.qrc PROPERTY AUTORCC_OPTIONS "-threshold;0;-compress;9")
 

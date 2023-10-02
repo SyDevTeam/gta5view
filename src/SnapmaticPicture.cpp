@@ -17,10 +17,12 @@
 *****************************************************************************/
 
 #include "SnapmaticPicture.h"
+#include "pcg_basic.h"
 #include <QStringBuilder>
 #include <QStringList>
 #include <QVariantMap>
 #include <QFileInfo>
+#include <QDateTime>
 #include <QString>
 #include <cstring>
 #include <QBuffer>
@@ -845,7 +847,125 @@ const QString SnapmaticPicture::getLastStep(bool readable)
             return lastStep;
     }
     return lastStep;
+}
 
+void SnapmaticPicture::initialise(uint32_t photoFormat)
+{
+    switch (photoFormat) {
+    case RagePhoto::PhotoFormat::GTA5:
+    case G5EPhotoFormat::G5EX:
+    {
+        p_ragePhoto.setFormat(photoFormat);
+        p_ragePhoto.setHeader("PHOTO - 09/20/23 04:41:35", 0x97D5BDBDUL, 0x00000000UL);
+        p_ragePhoto.setJpeg(std::string(), RagePhoto::DefaultSize::DEFAULT_GTA5_PHOTOBUFFER);
+
+        boost::json::object t_jsonObject;
+        t_jsonObject["area"] = "SANAND";
+        t_jsonObject["crewid"] = 0;
+        t_jsonObject["cv"] = true;
+        t_jsonObject["drctr"] = false;
+
+        boost::json::object t_locObject;
+        t_locObject["x"] = 0;
+        t_locObject["y"] = 0;
+        t_locObject["z"] = 0;
+
+        t_jsonObject["loc"] = t_locObject;
+        t_jsonObject["meme"] = false;
+        t_jsonObject["mid"] = "";
+        t_jsonObject["mode"] = "FREEMODE";
+        t_jsonObject["mug"] = false;
+        t_jsonObject["nm"] = "";
+        t_jsonObject["rds"] = "";
+        t_jsonObject["rsedtr"] = false;
+        t_jsonObject["scr"] = 1;
+        t_jsonObject["sid"] = "0x0";
+        t_jsonObject["slf"] = true;
+        t_jsonObject["street"] = 0;
+
+        pcg32_random_t rng;
+        pcg32_srandom_r(&rng, QDateTime::currentMSecsSinceEpoch(), (intptr_t)&rng);
+        uint32_t secondsInYear = pcg32_boundedrand_r(&rng, 31535999UL);
+        uint32_t timestamp = 1356998400UL + secondsInYear;
+        QDateTime dateTime = QDateTime::fromSecsSinceEpoch(timestamp, Qt::UTC);
+
+        boost::json::object t_timeObject;
+        t_timeObject["day"] = dateTime.date().day();
+        t_timeObject["hour"] = dateTime.time().hour();
+        t_timeObject["minute"] = dateTime.time().minute();
+        t_timeObject["month"] = dateTime.date().month();
+        t_timeObject["second"] = dateTime.time().second();
+        t_timeObject["year"] = dateTime.date().year();
+
+        t_jsonObject["time"] = t_timeObject;
+
+        const std::string json = SnapmaticJson::serialize(t_jsonObject, false);
+        setJsonStr(json, true);
+        jsonOk = true;
+
+        p_ragePhoto.setDescription("");
+
+        isPreLoaded = true;
+        picOk = true; // TODO: the picture is still "not ok", but soon after it will be, but we should not assume it
+    }
+        break;
+    case RagePhoto::PhotoFormat::RDR2:
+    {
+        p_ragePhoto.setFormat(photoFormat);
+        p_ragePhoto.setHeader("PHOTO - 09/20/23 04:39:16", 0x0F5B0A65UL, 0xDF91D3D2UL);
+        p_ragePhoto.setJpeg(std::string(), RagePhoto::DefaultSize::DEFAULT_RDR2_PHOTOBUFFER);
+
+        boost::json::object t_jsonObject;
+        t_jsonObject["advanced"] = false;
+        t_jsonObject["crewid"] = 0;
+        t_jsonObject["districtname"] = 0;
+        t_jsonObject["drctr"] = false;
+
+        boost::json::object t_locObject;
+        t_locObject["x"] = 0;
+        t_locObject["y"] = 0;
+        t_locObject["z"] = 0;
+
+        t_jsonObject["inphotomode"] = true;
+        t_jsonObject["loc"] = t_locObject;
+        t_jsonObject["meme"] = false;
+        t_jsonObject["mid"] = "";
+        t_jsonObject["mode"] = "SP";
+        t_jsonObject["mug"] = false;
+        t_jsonObject["nm"] = "";
+        t_jsonObject["regionname"] = 0;
+        t_jsonObject["rsedtr"] = false;
+        t_jsonObject["sid"] = "0x0";
+        t_jsonObject["slf"] = false;
+        t_jsonObject["statename"] = 0;
+
+        pcg32_random_t rng;
+        pcg32_srandom_r(&rng, QDateTime::currentMSecsSinceEpoch(), (intptr_t)&rng);
+        uint32_t secondsInYear = pcg32_boundedrand_r(&rng, 31535999UL);
+        int64_t timestamp = -2240524800L + secondsInYear;
+        QDateTime dateTime = QDateTime::fromSecsSinceEpoch(timestamp, Qt::UTC);
+
+        boost::json::object t_timeObject;
+        t_timeObject["day"] = dateTime.date().day();
+        t_timeObject["hour"] = dateTime.time().hour();
+        t_timeObject["minute"] = dateTime.time().minute();
+        t_timeObject["month"] = dateTime.date().month();
+        t_timeObject["second"] = dateTime.time().second();
+        t_timeObject["year"] = dateTime.date().year();
+
+        t_jsonObject["time"] = t_timeObject;
+
+        const std::string json = SnapmaticJson::serialize(t_jsonObject, false);
+        setJsonStr(json, true);
+        jsonOk = true;
+
+        p_ragePhoto.setDescription("");
+
+        isPreLoaded = true;
+        picOk = true; // TODO: the picture is still "not ok", but soon after it will be, but we should not assume it
+    }
+        break;
+    }
 }
 
 const QImage SnapmaticPicture::getImage()
