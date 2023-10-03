@@ -1052,7 +1052,7 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
                 fileFormat = "PGTA5%1";
                 break;
             case RagePhoto::PhotoFormat::RDR2:
-                fileFormat = "PRDR3%1";
+                fileFormat = "PRDR3%1_1";
                 break;
             default:
                 fileFormat = "%1.lrpx";
@@ -1108,7 +1108,7 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
         spFormat = SnapmaticFormat::PGTA5_Format;
         break;
     case RagePhoto::PhotoFormat::RDR2:
-        fileFormat = "PRDR3%1";
+        fileFormat = "PRDR3%1_1";
         spFormat = SnapmaticFormat::PRDR3_Format;
         break;
     default:
