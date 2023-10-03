@@ -60,12 +60,16 @@ QString AppEnv::getGameFolder(bool *ok)
         if (dir.exists()) {
             if (ok)
                 *ok = true;
-            qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
             return dir.absolutePath();
         }
     }
 
+#ifdef Q_OS_WIN
     const QString GTAV_defaultFolder = StandardPaths::documentsLocation() % "/Rockstar Games/GTA V";
+#else
+    // TODO: Try to locate the Steam Proton GTA V folder
+    const QString GTAV_defaultFolder = StandardPaths::documentsLocation() % "/Rockstar Games/GTA V";
+#endif
     QString GTAV_returnFolder = GTAV_defaultFolder;
 
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
@@ -79,7 +83,6 @@ QString AppEnv::getGameFolder(bool *ok)
         if (dir.exists()) {
             if (ok)
                 *ok = true;
-            qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
             return dir.absolutePath();
         }
     }
@@ -88,7 +91,6 @@ QString AppEnv::getGameFolder(bool *ok)
     if (dir.exists()) {
         if (ok)
             *ok = true;
-        qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
         return dir.absolutePath();
     }
 
@@ -97,7 +99,6 @@ QString AppEnv::getGameFolder(bool *ok)
         if (dir.exists()) {
             if (ok)
                 *ok = true;
-            qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
             return dir.absolutePath();
         }
     }
@@ -111,10 +112,8 @@ bool AppEnv::setGameFolder(QString gameFolder)
 {
     QDir dir;
     dir.setPath(gameFolder);
-    if (dir.exists()) {
-        qputenv("GTAV_FOLDER", dir.absolutePath().toUtf8());
+    if (dir.exists())
         return true;
-    }
     return false;
 }
 

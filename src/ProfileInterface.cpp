@@ -60,10 +60,6 @@
 #include <QUrl>
 #include <QDir>
 
-#include <cstdint>
-#include <random>
-#include <ctime>
-
 #ifdef GTA5SYNC_TELEMETRY
 #include "TelemetryClass.h"
 #include <QJsonDocument>
@@ -138,12 +134,10 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
 #endif
 
     // Seed RNG
-    pcg32_srandom_r(&rng, time(NULL), (intptr_t)&rng);
+    pcg32_srandom_r(&rng, QDateTime::currentMSecsSinceEpoch(), (intptr_t)&rng);
 
-#if QT_VERSION >= 0x050000
     // Register Metatypes
     qRegisterMetaType<QVector<QString>>();
-#endif
 
     setMouseTracking(true);
     installEventFilter(this);
@@ -175,10 +169,11 @@ ProfileInterface::~ProfileInterface()
     delete ui;
 }
 
-void ProfileInterface::setProfileFolder(QString folder, QString profile)
+void ProfileInterface::setProfileFolder(QString folder, QString profile, quint32 format)
 {
     profileFolder = folder;
     profileName = profile;
+    photoFormat = format;
 }
 
 void ProfileInterface::setupProfileInterface()
@@ -186,9 +181,7 @@ void ProfileInterface::setupProfileInterface()
     fixedPictures.clear();
     ui->labProfileLoading->setText(tr("Loading..."));
     profileLoader = new ProfileLoader(profileFolder, crewDB);
-#if QT_VERSION >= 0x050000
     QObject::connect(profileLoader, SIGNAL(directoryScanned(QVector<QString>,QVector<QString>)), this, SLOT(directoryScanned(QVector<QString>,QVector<QString>)));
-#endif
     QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(savegameLoaded_event(SavegameData*, QString)));
     QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*)), this, SLOT(pictureLoaded_event(SnapmaticPicture*)));
     QObject::connect(profileLoader, SIGNAL(pictureFixed(SnapmaticPicture*)), this, SLOT(pictureFixed_event(SnapmaticPicture*)));
@@ -264,7 +257,6 @@ void ProfileInterface::loadingProgress(int value, int maximum)
     ui->labProfileLoading->setText(loadingStr.arg(QString::number(value), QString::number(maximum)));
 }
 
-#if QT_VERSION >= 0x050000
 void ProfileInterface::directoryChanged(const QString &path)
 {
     Q_UNUSED(path)
@@ -330,7 +322,6 @@ void ProfileInterface::directoryScanned(QVector<QString> savegameFiles_s, QVecto
     fileSystemWatcher.addPath(profileFolder);
     QObject::connect(&fileSystemWatcher, &QFileSystemWatcher::directoryChanged, this, &ProfileInterface::directoryChanged);
 }
-#endif
 
 void ProfileInterface::insertSnapmaticIPI(QWidget *widget)
 {
@@ -726,7 +717,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
         }
         else if (isSupportedImageFile(selectedFileName)) {
             SnapmaticPicture *picture = new SnapmaticPicture();
-            picture->initialise(RagePhoto::PhotoFormat::GTA5); // TODO: check which game we want create for
+            picture->initialise(photoFormat);
             if (!notMultiple) {
                 QFile snapmaticFile(selectedFile);
                 if (!snapmaticFile.open(QFile::ReadOnly)) {
@@ -1045,27 +1036,39 @@ bool ProfileInterface::importRemote(QUrl remoteUrl)
 
 bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateTime)
 {
-    bool success = false;
     SnapmaticPicture *picture = new SnapmaticPicture();
-    picture->initialise(RagePhoto::PhotoFormat::GTA5); // TODO: check which game we want create for
+    picture->initialise(photoFormat);
     ImportDialog *importDialog = new ImportDialog(profileName, this);
     importDialog->setImage(snapmaticImage);
     importDialog->setModal(true);
     importDialog->show();
     importDialog->exec();
+    bool success = false;
     if (importDialog->isImportAgreed()) {
         if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
+            QString fileFormat;
+            switch (photoFormat) {
+            case RagePhoto::PhotoFormat::GTA5:
+                fileFormat = "PGTA5%1";
+                break;
+            case RagePhoto::PhotoFormat::RDR2:
+                fileFormat = "PRDR3%1";
+                break;
+            default:
+                fileFormat = "%1.lrpx";
+                break;
+            }
             SnapmaticProperties spJson = picture->getSnapmaticProperties();
             spJson.uid = getRandomUid();
-            bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-            bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-            bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+            bool fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)));
+            bool fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid) % ".bak"));
+            bool fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid) % ".hidden"));
             int cEnough = 0;
             while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                 spJson.uid = getRandomUid();
-                fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)));
+                fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid) % ".bak"));
+                fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid) % ".hidden"));
                 cEnough++;
             }
             spJson.createdDateTime = importDateTime;
@@ -1079,10 +1082,8 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
             spJson.createdTimestamp = spJson.createdDateTime.toTime_t();
 #endif
             picture->setSnapmaticProperties(spJson);
-            const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
-            picture->setPicFileName(picFileName);
+            picture->setPicFileName(fileFormat.arg(QString::number(spJson.uid)));
             picture->setPictureTitle(importDialog->getImageTitle());
-            picture->updateStrings();
             success = importSnapmaticPicture(picture, true);
         }
     }
@@ -1098,6 +1099,23 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
 
 bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool warn)
 {
+    QString fileFormat;
+    SnapmaticFormat spFormat;
+    switch (picture->ragePhoto()->format()) {
+    case RagePhoto::PhotoFormat::GTA5:
+    case G5EPhotoFormat::G5EX:
+        fileFormat = "PGTA5%1";
+        spFormat = SnapmaticFormat::PGTA5_Format;
+        break;
+    case RagePhoto::PhotoFormat::RDR2:
+        fileFormat = "PRDR3%1";
+        spFormat = SnapmaticFormat::PRDR3_Format;
+        break;
+    default:
+        fileFormat = "%.lrpx";
+        spFormat = SnapmaticFormat::G5E_Format;
+        break;
+    }
     QString picFileName = picture->getPictureFileName();
     QString adjustedFileName = picture->getOriginalPictureFileName();
     if (!picFileName.startsWith("PGTA5") && !picFileName.startsWith("PRDR3")) {
@@ -1122,15 +1140,15 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
 #else
                 snapmaticProperties.createdTimestamp = snapmaticProperties.createdDateTime.toTime_t();
 #endif
-                bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
-                bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
-                bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
+                bool fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)));
+                bool fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)) % ".bak");
+                bool fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)) % ".hidden");
                 int cEnough = 0;
                 while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                     snapmaticProperties.uid = getRandomUid();
-                    fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
-                    fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
-                    fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
+                    fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)));
+                    fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)) % ".bak");
+                    fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)) % ".hidden");
                     cEnough++;
                 }
                 if (fExists || fExistsBackup || fExistsHidden) {
@@ -1141,9 +1159,8 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
                     // That should never happen
                     return false;
                 }
-                picture->updateStrings();
-                picFileName = picture->getPictureFileName();
-                adjustedFileName = picture->getOriginalPictureFileName();
+                adjustedFileName = fileFormat.arg(QString::number(snapmaticProperties.uid));
+                picture->setPicFileName(adjustedFileName);
             }
             else {
                 return false;
@@ -1155,15 +1172,15 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
             snapmaticProperties.createdDateTime = QDateTime::currentDateTime();
             qint64 timestamp = snapmaticProperties.createdDateTime.toSecsSinceEpoch();
             snapmaticProperties.createdTimestamp = timestamp;
-            bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
-            bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
-            bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
+            bool fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)));
+            bool fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)) % ".bak");
+            bool fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)) % ".hidden");
             int cEnough = 0;
             while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                 snapmaticProperties.uid = getRandomUid();
-                fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid));
-                fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".bak");
-                fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(snapmaticProperties.uid) % ".hidden");
+                fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)));
+                fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)) % ".bak");
+                fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(snapmaticProperties.uid)) % ".hidden");
                 cEnough++;
             }
             if (fExists || fExistsBackup || fExistsHidden) {
@@ -1174,13 +1191,13 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
                 // That should never happen
                 return false;
             }
-            picture->updateStrings();
-            picFileName = picture->getPictureFileName();
-            adjustedFileName = picture->getOriginalPictureFileName();
+            adjustedFileName = fileFormat.arg(QString::number(snapmaticProperties.uid));
+            picture->setPicFileName(adjustedFileName);
         }
     }
-    if (picture->exportPicture(profileFolder % "/" % adjustedFileName, SnapmaticFormat::PGTA5_Format)) {
-        picture->setSnapmaticFormat(SnapmaticFormat::PGTA5_Format);
+    if (picture->exportPicture(profileFolder % "/" % adjustedFileName, spFormat)) {
+        picture->updateStrings();
+        picture->setSnapmaticFormat(spFormat);
         picture->setPicFilePath(profileFolder % "/" % adjustedFileName);
         snapmaticPics << picture->getPictureFileName();
         pictureLoaded(picture, true);
@@ -1216,9 +1233,7 @@ bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPat
         const QString newSgdPath = profileFolder % "/" % sgdFileName;
         if (QFile::copy(sgdPath, newSgdPath)) {
             savegame->setSavegameFileName(newSgdPath);
-#if QT_VERSION >= 0x050000
             savegameFiles << newSgdPath;
-#endif
             savegameLoaded(savegame, newSgdPath, true);
             return true;
         }
@@ -2374,8 +2389,7 @@ preSelectionTitle:
     }
 }
 
-int ProfileInterface::getRandomUid()
+quint32 ProfileInterface::getRandomUid()
 {
-    int random_int = pcg32_boundedrand_r(&rng, 2147483647);
-    return random_int;
+    return pcg32_boundedrand_r(&rng, 2147483647UL);
 }

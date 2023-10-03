@@ -1250,7 +1250,13 @@ bool SnapmaticPicture::exportPicture(const QString &fileName, SnapmaticFormat fo
         }
         else {
             bool ok;
-            const std::string photo = p_ragePhoto.save(&ok);
+            std::string photo;
+            if (format == SnapmaticFormat::PGTA5_Format)
+                photo = p_ragePhoto.save(RagePhoto::PhotoFormat::GTA5, &ok);
+            else if (format == SnapmaticFormat::PRDR3_Format)
+                photo = p_ragePhoto.save(RagePhoto::PhotoFormat::RDR2, &ok);
+            else
+                photo = p_ragePhoto.save(&ok);
             if (ok)
                 picFile.write(photo.data(), photo.size());
             saveSuccess = picFile.commit();

@@ -425,7 +425,7 @@ void UserInterface::openProfile(const QString &profileName_)
     profileUI = new ProfileInterface(profileDB, crewDB, threadDB);
     ui->swProfile->addWidget(profileUI);
     ui->swProfile->setCurrentWidget(profileUI);
-    profileUI->setProfileFolder(GTAV_ProfilesFolder % QDir::separator() % profileName, profileName);
+    profileUI->setProfileFolder(GTAV_ProfilesFolder % "/" % profileName, profileName, RagePhoto::PhotoFormat::GTA5); // TODO: do not assume GTA V
     profileUI->settingsApplied(contentMode, false);
     profileUI->setupProfileInterface();
     QObject::connect(profileUI, SIGNAL(profileClosed()), this, SLOT(closeProfile()));

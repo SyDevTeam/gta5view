@@ -49,7 +49,7 @@ class ProfileInterface : public QWidget
     Q_OBJECT
 public:
     explicit ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
-    void setProfileFolder(QString folder, QString profile);
+    void setProfileFolder(QString folder, QString profile, quint32 defaultPhotoFormat);
     void settingsApplied(int contentMode, bool languageChanged);
     void setupProfileInterface();
     void massTool(MassTool tool);
@@ -90,10 +90,8 @@ private slots:
     void dialogNextPictureRequested(QWidget *dialog);
     void dialogPreviousPictureRequested(QWidget *dialog);
     void on_saProfileContent_dropped(const QMimeData *mimeData);
-#if QT_VERSION >= 0x050000
     void directoryChanged(const QString &path);
     void directoryScanned(QVector<QString> savegameFiles, QVector<QString> snapmaticPics);
-#endif
 
 protected:
     bool eventFilter(QObject *watched, QEvent *event);
@@ -109,11 +107,9 @@ private:
     QList<SavegameData*> savegames;
     QList<SnapmaticPicture*> pictures;
     QMap<ProfileWidget*,QString> widgets;
-#if QT_VERSION >= 0x050000
     QFileSystemWatcher fileSystemWatcher;
     QVector<QString> savegameFiles;
     QVector<QString> snapmaticPics;
-#endif
     QSpacerItem *saSpacerItem;
     QStringList fixedPictures;
     QString enabledPicStr;
@@ -121,6 +117,7 @@ private:
     QString profileName;
     QString loadingStr;
     QString language;
+    quint32 photoFormat;
     pcg32_random_t rng;
     bool contextMenuOpened;
     bool isProfileLoaded;
@@ -143,7 +140,7 @@ private:
     void insertSnapmaticIPI(QWidget *widget);
     void insertSavegameIPI(QWidget *widget);
     void sortingProfileInterface();
-    int getRandomUid();
+    quint32 getRandomUid();
 
 signals:
     void profileLoaded();
