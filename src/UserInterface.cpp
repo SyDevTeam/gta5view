@@ -565,10 +565,11 @@ fileDialogPreOpen:
     fileDialog.setWindowTitle(tr("Open File..."));
 
     QStringList filters;
-    filters << ProfileInterface::tr("All profile files (%1)").arg("*.g5e SGTA5* PGTA5* PRDR3*");
+    filters << ProfileInterface::tr("All profile files (%1)").arg("*.g5e SGTA5* PGTA5* SRDR3* PRDR3*");
     filters << ProfileInterface::tr("GTA V Export (%1)").arg("*.g5e");
     filters << ProfileInterface::tr("GTA V Savegames files (%1)").arg("SGTA5*");
     filters << ProfileInterface::tr("GTA V Snapmatic files (%1)").arg("PGTA5*");
+    filters << ProfileInterface::tr("RDR 2 Savegames files (%1)").arg("SRDR3*");
     filters << ProfileInterface::tr("RDR 2 Photo files (%1)").arg("PRDR3*");
     filters << ProfileInterface::tr("All files (%1)").arg("**");
     fileDialog.setNameFilters(filters);

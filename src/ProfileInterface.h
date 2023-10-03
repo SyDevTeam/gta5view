@@ -131,7 +131,6 @@ private:
     bool importImage(QImage *snapmaticImage, QDateTime importDateTime);
     bool importFilesProgress(QStringList selectedFiles);
     bool importSnapmaticPicture(SnapmaticPicture *picture, bool warn = true);
-    bool importSavegameData(SavegameData *savegame, QString sgdPath, bool warn = true);
     void pictureLoaded(SnapmaticPicture *picture, bool inserted);
     void savegameLoaded(SavegameData *savegame, QString savegamePath, bool inserted);
     void savegameDeleted(SavegameWidget *sgdWidget, bool isRemoteEmited = false);

@@ -550,16 +550,16 @@ fileDialogPreOpen: //Work?
     for (const QByteArray &imageFormat : QImageReader::supportedImageFormats()) {
         imageFormatsStr += QString("*.") % QString::fromUtf8(imageFormat).toLower() % " ";
     }
-    QString importableFormatsStr = QString("*.g5e SGTA5* PGTA5*");
+    QString importableFormatsStr = QString("*.g5e PGTA5*");
     if (!imageFormatsStr.trimmed().isEmpty()) {
-        importableFormatsStr = QString("*.g5e%1SGTA5* PGTA5*").arg(imageFormatsStr);
+        importableFormatsStr = QString("*.g5e%1PGTA5*").arg(imageFormatsStr);
     }
 
     QStringList filters;
     filters << tr("All importable files (%1)").arg(importableFormatsStr);
     filters << tr("GTA V Export (%1)").arg("*.g5e");
-    filters << tr("GTA V Savegames files (%1)").arg("SGTA5*");
     filters << tr("GTA V Snapmatic files (%1)").arg("PGTA5*");
+    filters << tr("RDR 2 Photo files (%1)").arg("PRDR3*");
     filters << tr("All image files (%1)").arg(imageFormatsStr.trimmed());
     filters << tr("All files (%1)").arg("**");
     fileDialog.setNameFilters(filters);
@@ -677,41 +677,6 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                 if (notMultiple)
                     QMessageBox::warning(this, tr("Import..."), tr("Failed to read Snapmatic picture"));
                 delete picture;
-                return false;
-            }
-        }
-        else if (selectedFileName.left(4) == "SGTA") {
-            SavegameData *savegame = new SavegameData(selectedFile);
-            if (savegame->readingSavegame()) {
-                bool success = importSavegameData(savegame, selectedFile, notMultiple);
-                if (!success)
-                    delete savegame;
-#ifdef GTA5SYNC_TELEMETRY
-                if (success && notMultiple) {
-                    QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-                    telemetrySettings.beginGroup("Telemetry");
-                    bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
-                    telemetrySettings.endGroup();
-                    if (pushUsageData && Telemetry->canPush()) {
-                        QJsonDocument jsonDocument;
-                        QJsonObject jsonObject;
-                        jsonObject["Type"] = "ImportSuccess";
-#if QT_VERSION >= 0x060000
-                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
-#else
-                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
-#endif
-                        jsonObject["ImportType"] = "Savegame";
-                        jsonDocument.setObject(jsonObject);
-                        Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
-                    }
-                }
-#endif
-                return success;
-            }
-            else {
-                if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("Failed to read Savegame file"));
-                delete savegame;
                 return false;
             }
         }
@@ -883,10 +848,8 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
         }
         else {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
-            SavegameData *savegame = new SavegameData(selectedFile);
             if (picture->readingPicture()) {
                 bool success = importSnapmaticPicture(picture, notMultiple);
-                delete savegame;
                 if (!success)
                     delete picture;
 #ifdef GTA5SYNC_TELEMETRY
@@ -913,41 +876,11 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 #endif
                 return success;
             }
-            else if (savegame->readingSavegame()) {
-                bool success = importSavegameData(savegame, selectedFile, notMultiple);
-                delete picture;
-                if (!success)
-                    delete savegame;
-#ifdef GTA5SYNC_TELEMETRY
-                if (success && notMultiple) {
-                    QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-                    telemetrySettings.beginGroup("Telemetry");
-                    bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
-                    telemetrySettings.endGroup();
-                    if (pushUsageData && Telemetry->canPush()) {
-                        QJsonDocument jsonDocument;
-                        QJsonObject jsonObject;
-                        jsonObject["Type"] = "ImportSuccess";
-#if QT_VERSION >= 0x060000
-                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toSecsSinceEpoch());
-#else
-                        jsonObject["ImportTime"] = QString::number(QDateTime::currentDateTimeUtc().toTime_t());
-#endif
-                        jsonObject["ImportType"] = "Savegame";
-                        jsonDocument.setObject(jsonObject);
-                        Telemetry->push(TelemetryCategory::PersonalData, jsonDocument);
-                    }
-                }
-#endif
-                return success;
-            }
             else {
 #ifdef GTA5SYNC_DEBUG
                 qDebug() << "ImportError SnapmaticPicture" << picture->getLastStep();
-                qDebug() << "ImportError SavegameData" << savegame->getLastStep();
 #endif
                 delete picture;
-                delete savegame;
                 if (notMultiple) QMessageBox::warning(this, tr("Import..."), tr("Can't import %1 because file format can't be detected").arg("\""+selectedFileName+"\""));
                 return false;
             }
@@ -1206,46 +1139,6 @@ bool ProfileInterface::importSnapmaticPicture(SnapmaticPicture *picture, bool wa
     else {
         if (warn)
             QMessageBox::warning(this, tr("Import..."), tr("Photo import failed! Can not copy the file in the profile"));
-        return false;
-    }
-}
-
-bool ProfileInterface::importSavegameData(SavegameData *savegame, QString sgdPath, bool warn)
-{
-    QString sgdFileName;
-    bool foundFree = 0;
-    int currentSgd = 0;
-
-    while (currentSgd < 15 && !foundFree) {
-        QString sgdNumber = QString::number(currentSgd);
-        if (sgdNumber.length() == 1) {
-            sgdNumber.insert(0, "0");
-        }
-        sgdFileName = "SGTA500" % sgdNumber;
-
-        if (!QFile::exists(profileFolder % "/" % sgdFileName)) {
-            foundFree = true;
-        }
-        currentSgd++;
-    }
-
-    if (foundFree) {
-        const QString newSgdPath = profileFolder % "/" % sgdFileName;
-        if (QFile::copy(sgdPath, newSgdPath)) {
-            savegame->setSavegameFileName(newSgdPath);
-            savegameFiles << newSgdPath;
-            savegameLoaded(savegame, newSgdPath, true);
-            return true;
-        }
-        else {
-            if (warn)
-                QMessageBox::warning(this, tr("Import..."), tr("Savegame import failed! Can not copy the file in the profile"));
-            return false;
-        }
-    }
-    else {
-        if (warn)
-            QMessageBox::warning(this, tr("Import..."), tr("Savegame import failed! No Savegame slot is available"));
         return false;
     }
 }
