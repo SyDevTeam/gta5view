@@ -309,32 +309,19 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->vlUserInterface->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 }
 
-void UserInterface::setupDirEnv(bool showFolderDialog)
+void UserInterface::setupDirEnv(bool showFolderWindow)
 {
     // settings init
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
 
-    bool folderExists;
-    GTAV_Folder = AppEnv::getGTAVFolder(&folderExists);
-    if (!folderExists && showFolderDialog) {
-        const QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-        if (!GTAV_Folder_Temp.isEmpty() && QDir(GTAV_Folder_Temp).exists()) {
-            GTAV_Folder = GTAV_Folder_Temp;
-            folderExists = true;
-            AppEnv::setGTAVFolder(GTAV_Folder);
-
-            // First time folder selection save
-            settings.beginGroup("dir");
-            if (settings.value("dir", "").toString().isEmpty()) {
-                settings.setValue("dir", GTAV_Folder);
-            }
-            settings.endGroup();
-        }
-    }
+    bool folderExists_GTAV, folderExists_RDR2;
+    GTAV_Folder = AppEnv::getGTAVFolder(&folderExists_GTAV);
+    RDR2_Folder = AppEnv::getRDR2Folder(&folderExists_RDR2);
 
     // profiles init
     settings.beginGroup("Profile");
-    QString defaultProfile = settings.value("Default", "").toString();
+    QString defaultProfile = settings.value("Default", QString()).toString();
+    settings.endGroup();
 
     contentMode = settings.value("ContentMode", 0).toInt();
     if (contentMode == 1) {
@@ -344,51 +331,78 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
         contentMode = 20;
     }
 
-    if (folderExists) {
+    if (folderExists_GTAV) {
         QDir GTAV_ProfilesDir;
         GTAV_ProfilesDir.setPath(GTAV_Folder % "/Profiles");
-
         GTAV_Profiles = GTAV_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
-        setupProfileUi();
-
-        if (GTAV_Profiles.length() == 1) {
-            openProfile(GTAV_Profiles.at(0), RagePhoto::PhotoFormat::GTA5);
-        }
-        else if(GTAV_Profiles.contains(defaultProfile)) {
-            openProfile(defaultProfile, RagePhoto::PhotoFormat::GTA5);
-        }
     }
     else {
         GTAV_Profiles = QStringList();
-        setupProfileUi();
     }
-    settings.endGroup();
+
+    if (folderExists_RDR2) {
+        QDir RDR2_ProfilesDir;
+        RDR2_ProfilesDir.setPath(RDR2_Folder % "/Profiles");
+        RDR2_Profiles = RDR2_ProfilesDir.entryList(QDir::Dirs | QDir::NoDotAndDotDot, QDir::NoSort);
+    }
+    else {
+        RDR2_Profiles = QStringList();
+    }
+
+    setupProfileUi();
+
+    if (GTAV_Profiles.contains(defaultProfile)) {
+        openProfile(defaultProfile, RagePhoto::PhotoFormat::GTA5);
+    }
+    else if (GTAV_Profiles.length() == 1 && RDR2_Profiles.length() == 0) {
+        openProfile(GTAV_Profiles.at(0), RagePhoto::PhotoFormat::GTA5);
+    }
+    else if (GTAV_Profiles.length() == 0 && RDR2_Profiles.length() == 1) {
+        openProfile(RDR2_Profiles.at(0), RagePhoto::PhotoFormat::RDR2);
+    }
 }
 
 void UserInterface::setupProfileUi()
 {
     qreal screenRatio = AppEnv::screenRatio();
-    if (GTAV_Profiles.isEmpty()) {
-        QPushButton *changeDirBtn = new QPushButton(tr("Select &GTA V Folder..."), ui->swSelection);
-        changeDirBtn->setObjectName("cmdChangeDir");
-        changeDirBtn->setMinimumSize(0, 40 * screenRatio);
-        changeDirBtn->setAutoDefault(true);
-        ui->vlButtons->addWidget(changeDirBtn);
-        profileBtns += changeDirBtn;
+    if (!GTAV_Profiles.isEmpty()) {
+        int row = 1;
+        for (const QString &GTAV_Profile : GTAV_Profiles) {
+            QPushButton *profileBtn = new QPushButton(tr("Profile: %1").arg(GTAV_Profile), ui->swSelection);
+            profileBtn->setObjectName(GTAV_Profile);
+            profileBtn->setMinimumSize(0, 40 * screenRatio);
+            profileBtn->setAutoDefault(true);
+            ui->glProfiles->addWidget(profileBtn, row++, 0);
+            profileBtns += profileBtn;
 
-        QObject::connect(changeDirBtn, SIGNAL(clicked(bool)), this, SLOT(changeFolder_clicked()));
+            QObject::connect(profileBtn, &QPushButton::clicked, this, [=](){
+                openProfile(profileBtn->objectName(), RagePhoto::PhotoFormat::GTA5);
+            });
+        }
+        ui->labGTAV->setVisible(true);
     }
-    else for (const QString &GTAV_Profile : GTAV_Profiles) {
-        QPushButton *profileBtn = new QPushButton(GTAV_Profile, ui->swSelection);
-        profileBtn->setObjectName(GTAV_Profile);
-        profileBtn->setMinimumSize(0, 40 * screenRatio);
-        profileBtn->setAutoDefault(true);
-        ui->vlButtons->addWidget(profileBtn);
-        profileBtns += profileBtn;
+    else {
+        ui->labGTAV->setVisible(false);
+    }
+    if (!RDR2_Profiles.isEmpty()) {
+        int row = 1;
+        for (const QString &RDR2_Profile : RDR2_Profiles) {
+            QPushButton *profileBtn = new QPushButton(tr("Profile: %1").arg(RDR2_Profile), ui->swSelection);
+            profileBtn->setObjectName(RDR2_Profile);
+            profileBtn->setMinimumSize(0, 40 * screenRatio);
+            profileBtn->setAutoDefault(true);
+            ui->glProfiles->addWidget(profileBtn, row++, 1);
+            profileBtns += profileBtn;
 
-        QObject::connect(profileBtn, SIGNAL(clicked(bool)), this, SLOT(profileButton_clicked()));
+            QObject::connect(profileBtn, &QPushButton::clicked, this, [=](){
+                openProfile(profileBtn->objectName(), RagePhoto::PhotoFormat::RDR2);
+            });
+        }
+        ui->labRDR2->setVisible(true);
     }
-    profileBtns.at(0)->setFocus();
+    else {
+        ui->labRDR2->setVisible(false);
+    }
 }
 
 void UserInterface::changeFolder_clicked()
@@ -399,17 +413,11 @@ void UserInterface::changeFolder_clicked()
 void UserInterface::on_cmdReload_clicked()
 {
     for (QPushButton *profileBtn : profileBtns) {
-        ui->vlButtons->removeWidget(profileBtn);
+        ui->glProfiles->removeWidget(profileBtn);
         delete profileBtn;
     }
     profileBtns.clear();
     setupDirEnv();
-}
-
-void UserInterface::profileButton_clicked()
-{
-    QPushButton *profileBtn = (QPushButton*)sender();
-    openProfile(profileBtn->objectName(), RagePhoto::PhotoFormat::GTA5);
 }
 
 void UserInterface::openProfile(const QString &profileName_, quint32 gameFormat)
@@ -529,16 +537,13 @@ void UserInterface::on_actionDelete_selected_triggered()
 
 void UserInterface::on_actionOptions_triggered()
 {
-    OptionsDialog *optionsDialog = new OptionsDialog(profileDB, this);
-    optionsDialog->setWindowIcon(windowIcon());
-    optionsDialog->commitProfiles(GTAV_Profiles);
-    QObject::connect(optionsDialog, SIGNAL(settingsApplied(int, bool)), this, SLOT(settingsApplied(int, bool)));
-
-    optionsDialog->setModal(true);
-    optionsDialog->show();
-    optionsDialog->exec();
-
-    delete optionsDialog;
+    OptionsDialog optionsDialog(profileDB, this);
+    optionsDialog.setWindowIcon(windowIcon());
+    optionsDialog.commitProfiles(GTAV_Profiles); // TODO: Diff. GTA V and RDR 2 profiles
+    QObject::connect(&optionsDialog, &OptionsDialog::settingsApplied, this, &UserInterface::settingsApplied);
+    optionsDialog.setModal(true);
+    optionsDialog.show();
+    optionsDialog.exec();
 }
 
 void UserInterface::on_action_Import_triggered()
@@ -810,7 +815,6 @@ void UserInterface::on_actionSelect_GTA_Folder_triggered()
             closeProfile_p();
         }
         GTAV_Folder = GTAV_Folder_Temp;
-        AppEnv::setGTAVFolder(GTAV_Folder);
         on_cmdReload_clicked();
     }
 }

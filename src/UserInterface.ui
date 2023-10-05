@@ -69,20 +69,28 @@
          </spacer>
         </item>
         <item>
-         <widget class="QLabel" name="labSelectProfile">
-          <property name="text">
-           <string>Select profile</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-          <property name="wordWrap">
-           <bool>true</bool>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="vlButtons"/>
+         <layout class="QGridLayout" name="glProfiles">
+          <item row="0" column="1">
+           <widget class="QLabel" name="labRDR2">
+            <property name="text">
+             <string>RDR 2</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="labGTAV">
+            <property name="text">
+             <string>GTA V</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
          <spacer name="vsFooter">
@@ -171,7 +179,7 @@
      <x>0</x>
      <y>0</y>
      <width>625</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">

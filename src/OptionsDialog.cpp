@@ -60,26 +60,10 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
     // Setup User Interface
     ui->setupUi(this);
     ui->tabWidget->setCurrentIndex(0);
-    ui->labPicCustomRes->setVisible(false);
     ui->cmdCancel->setDefault(true);
     ui->cmdCancel->setFocus();
 
     qreal screenRatioPR = AppEnv::screenRatioPR();
-    QRect desktopResolution = QApplication::primaryScreen()->geometry();
-    int desktopSizeWidth = qRound((double)desktopResolution.width() * screenRatioPR);
-    int desktopSizeHeight = qRound((double)desktopResolution.height() * screenRatioPR);
-    aspectRatio = Qt::KeepAspectRatio;
-    defExportSize = QSize(960, 536);
-    cusExportSize = defExportSize;
-    defaultQuality = 100;
-    customQuality = 100;
-    contentMode = 0;
-    settings = new QSettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
-
-    percentString = ui->labPicQuality->text();
-    ui->labPicQuality->setText(percentString.arg(QString::number(defaultQuality)));
-    ui->rbPicDesktopRes->setText(ui->rbPicDesktopRes->text().arg(QString::number(desktopSizeWidth), QString::number(desktopSizeHeight)));
-    ui->rbPicDefaultRes->setText(ui->rbPicDefaultRes->text().arg(QString::number(defExportSize.width()), QString::number(defExportSize.height())));
 
     // Set Icon for OK Button
     if (QIcon::hasThemeIcon("dialog-ok")) {
@@ -102,15 +86,15 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
         ui->cmdCopyStatsID->setIcon(QIcon::fromTheme("edit-copy"));
     }
 
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
     setupTreeWidget();
-    setupLanguageBox();
-    setupRadioButtons();
-    setupDefaultProfile();
-    setupPictureSettings();
-    setupCustomGTAFolder();
-    setupInterfaceSettings();
-    setupStatisticsSettings();
-    setupSnapmaticPictureViewer();
+    setupLanguageBox(&settings);
+    setupRadioButtons(&settings);
+    setupDefaultProfile(&settings);
+    setupCustomGameFolder(&settings);
+    setupInterfaceSettings(&settings);
+    setupStatisticsSettings(&settings);
+    setupSnapmaticPictureViewer(&settings);
     setupWindowsGameSettings();
 
 #ifndef Q_QS_ANDROID
@@ -126,7 +110,6 @@ OptionsDialog::OptionsDialog(ProfileDatabase *profileDB, QWidget *parent) :
 
 OptionsDialog::~OptionsDialog()
 {
-    delete settings;
     qDeleteAll(playerItems.begin(), playerItems.end());
     playerItems.clear();
     delete ui;
@@ -158,7 +141,7 @@ void OptionsDialog::setupTreeWidget()
     }
 }
 
-void OptionsDialog::setupLanguageBox()
+void OptionsDialog::setupLanguageBox(QSettings *settings)
 {
     settings->beginGroup("Interface");
     currentLanguage = settings->value("Language", "System").toString();
@@ -259,7 +242,7 @@ void OptionsDialog::setupLanguageBox()
     ui->labCurrentAreaLanguage->setText(tr("Current: %1").arg(currentLocale.nativeLanguageName() % " (" % currentLocale.nativeCountryName() % ") [" % aCurrentAreaLanguage % "]"));
 }
 
-void OptionsDialog::setupRadioButtons()
+void OptionsDialog::setupRadioButtons(QSettings *settings)
 {
     bool contentModeOk;
     settings->beginGroup("Profile");
@@ -291,7 +274,7 @@ void OptionsDialog::setupRadioButtons()
     }
 }
 
-void OptionsDialog::setupInterfaceSettings()
+void OptionsDialog::setupInterfaceSettings(QSettings *settings)
 {
     settings->beginGroup("Startup");
     const QString currentStyle = QApplication::style()->objectName();
@@ -339,24 +322,25 @@ void OptionsDialog::on_cmdOK_clicked()
 
 void OptionsDialog::applySettings()
 {
-    settings->beginGroup("Interface");
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("Interface");
 #if QT_VERSION >= 0x050000
-    settings->setValue("Language", ui->cbLanguage->currentData());
-    settings->setValue("AreaLanguage", ui->cbAreaLanguage->currentData());
+    settings.setValue("Language", ui->cbLanguage->currentData());
+    settings.setValue("AreaLanguage", ui->cbAreaLanguage->currentData());
 #else
     settings->setValue("Language", ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()));
     settings->setValue("AreaLanguage", ui->cbAreaLanguage->itemData(ui->cbAreaLanguage->currentIndex()));
 #endif
 #ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200
-    settings->setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
+    settings.setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
 #endif
 #else
-    settings->setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
+    settings.setValue("NavigationBar", ui->cbSnapmaticNavigationBar->isChecked());
 #endif
-    settings->endGroup();
+    settings.endGroup();
 
-    settings->beginGroup("Profile");
+    settings.beginGroup("Profile");
     int newContentMode = 20;
     if (ui->rbModern->isChecked()) {
         newContentMode = 20;
@@ -367,66 +351,56 @@ void OptionsDialog::applySettings()
     if (ui->cbDoubleclick->isChecked()) {
         newContentMode++;
     }
-    settings->setValue("ContentMode", newContentMode);
+    settings.setValue("ContentMode", newContentMode);
 #if QT_VERSION >= 0x050000
-    settings->setValue("Default", ui->cbProfiles->currentData());
+    settings.setValue("Default", ui->cbProfiles->currentData());
 #else
     settings->setValue("Default", ui->cbProfiles->itemData(ui->cbProfiles->currentIndex()));
 #endif
-    settings->endGroup();
+    settings.endGroup();
 
-    settings->beginGroup("Pictures");
-    if (ui->cbPicCustomQuality->isChecked()) {
-        settings->setValue("CustomQuality", ui->hsPicQuality->value());
-    }
-    settings->setValue("CustomQualityEnabled", ui->cbPicCustomQuality->isChecked());
-    QString sizeMode = "Default";
-    if (ui->rbPicDesktopRes->isChecked()) {
-        sizeMode = "Desktop";
-    }
-    else if (ui->rbPicCustomRes->isChecked()) {
-        sizeMode = "Custom";
-        settings->setValue("CustomSize", QSize(ui->sbPicExportWidth->value(), ui->sbPicExportHeight->value()));
-    }
-    settings->setValue("ExportSizeMode", sizeMode);
-    settings->setValue("AspectRatio", aspectRatio);
-    settings->endGroup();
+    const bool forceCustomFolder = ui->cbForceCustomFolder->isChecked();
+    const bool forceCustomFolder_RDR2 = ui->cbForceCustomFolder_RDR2->isChecked();
+    settings.beginGroup("GameDirectory");
+    settings.beginGroup("GTA V");
+    settings.setValue("Directory", ui->txtFolder->text());
+    settings.setValue("ForceCustom", forceCustomFolder);
+    settings.endGroup();
+    settings.beginGroup("RDR 2");
+    settings.setValue("Directory", ui->txtFolder_RDR2->text());
+    settings.setValue("ForceCustom", forceCustomFolder_RDR2);
+    settings.endGroup();
+    settings.endGroup();
 
-    bool forceCustomFolder = ui->cbForceCustomFolder->isChecked();
-    settings->beginGroup("dir");
-    settings->setValue("dir", ui->txtFolder->text());
-    settings->setValue("force", forceCustomFolder);
-    settings->endGroup();
-
-    bool defaultStyle = ui->cbDefaultStyle->isChecked();
-    settings->beginGroup("Startup");
+    const bool defaultStyle = ui->cbDefaultStyle->isChecked();
+    settings.beginGroup("Startup");
     if (!defaultStyle) {
         QString newStyle = ui->cbStyleList->currentText();
-        settings->setValue("CustomStyle", true);
-        settings->setValue("AppStyle", newStyle);
+        settings.setValue("CustomStyle", true);
+        settings.setValue("AppStyle", newStyle);
         QApplication::setStyle(QStyleFactory::create(newStyle));
     }
     else {
-        settings->setValue("CustomStyle", false);
+        settings.setValue("CustomStyle", false);
     }
-    bool defaultFont = ui->cbDefaultFont->isChecked();
+    const bool defaultFont = ui->cbDefaultFont->isChecked();
     if (!defaultFont) {
         QFont newFont = ui->cbFont->currentFont();
-        settings->setValue("CustomFont", true);
-        settings->setValue("AppFont", newFont);
+        settings.setValue("CustomFont", true);
+        settings.setValue("AppFont", newFont);
         QApplication::setFont(newFont);
     }
     else {
-        settings->setValue("CustomFont", false);
+        settings.setValue("CustomFont", false);
     }
-    settings->endGroup();
+    settings.endGroup();
 
 #ifdef GTA5SYNC_TELEMETRY
-    settings->beginGroup("Telemetry");
-    settings->setValue("PushAppConf", ui->cbAppConfigStats->isChecked());
-    settings->setValue("PushUsageData", ui->cbUsageData->isChecked());
-    if (!Telemetry->isStateForced()) { settings->setValue("IsEnabled", ui->cbParticipateStats->isChecked()); }
-    settings->endGroup();
+    settings.beginGroup("Telemetry");
+    settings.setValue("PushAppConf", ui->cbAppConfigStats->isChecked());
+    settings.setValue("PushUsageData", ui->cbUsageData->isChecked());
+    if (!Telemetry->isStateForced()) { settings.setValue("IsEnabled", ui->cbParticipateStats->isChecked()); }
+    settings.endGroup();
     Telemetry->refresh();
     Telemetry->work();
     if (ui->cbUsageData->isChecked() && Telemetry->canPush()) {
@@ -459,7 +433,7 @@ void OptionsDialog::applySettings()
         Translator->initUserLanguage();
     }
 
-    settings->sync();
+    settings.sync();
     emit settingsApplied(newContentMode, languageChanged);
 
     if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder)) {
@@ -467,14 +441,14 @@ void OptionsDialog::applySettings()
     }
 }
 
-void OptionsDialog::setupDefaultProfile()
+void OptionsDialog::setupDefaultProfile(QSettings *settings)
 {
     settings->beginGroup("Profile");
-    defaultProfile = settings->value("Default", "").toString();
+    defaultProfile = settings->value("Default", QString()).toString();
     settings->endGroup();
 
     QString cbNoneStr = tr("No Profile", "No Profile, as default");
-    ui->cbProfiles->addItem(cbNoneStr, "");
+    ui->cbProfiles->addItem(cbNoneStr, QString());
 }
 
 void OptionsDialog::commitProfiles(const QStringList &profiles)
@@ -492,77 +466,7 @@ void OptionsDialog::commitProfiles(const QStringList &profiles)
     }
 }
 
-void OptionsDialog::on_rbPicCustomRes_toggled(bool checked)
-{
-    ui->labPicCustomRes->setEnabled(checked);
-    ui->sbPicExportWidth->setEnabled(checked);
-    ui->sbPicExportHeight->setEnabled(checked);
-    ui->labPicXDescription->setEnabled(checked);
-}
-
-void OptionsDialog::on_cbPicCustomQuality_toggled(bool checked)
-{
-    ui->hsPicQuality->setEnabled(checked);
-    ui->labPicQuality->setEnabled(checked);
-    ui->labPicQualityDescription->setEnabled(checked);
-}
-
-void OptionsDialog::on_hsPicQuality_valueChanged(int value)
-{
-    customQuality = value;
-    ui->labPicQuality->setText(percentString.arg(QString::number(value)));
-}
-
-void OptionsDialog::setupPictureSettings()
-{
-    settings->beginGroup("Pictures");
-
-    // Quality Settings
-    customQuality = settings->value("CustomQuality", defaultQuality).toInt();
-    if (customQuality < 1 || customQuality > 100)
-        customQuality = 100;
-    ui->hsPicQuality->setValue(customQuality);
-    ui->cbPicCustomQuality->setChecked(settings->value("CustomQualityEnabled", false).toBool());
-
-    // Size Settings
-    cusExportSize = settings->value("CustomSize", defExportSize).toSize();
-    if (cusExportSize.width() > 7680) {
-        cusExportSize.setWidth(7680);
-    }
-    else if (cusExportSize.height() > 4320) {
-        cusExportSize.setHeight(4320);
-    }
-    if (cusExportSize.width() < 1) {
-        cusExportSize.setWidth(1);
-    }
-    else if (cusExportSize.height() < 1) {
-        cusExportSize.setHeight(1);
-    }
-    ui->sbPicExportWidth->setMaximum(7680);
-    ui->sbPicExportWidth->setValue(cusExportSize.width());
-    ui->sbPicExportHeight->setMaximum(4320);
-    ui->sbPicExportHeight->setValue(cusExportSize.height());
-
-    QString sizeMode = settings->value("ExportSizeMode", "Default").toString();
-    if (sizeMode == "Desktop") {
-        ui->rbPicDesktopRes->setChecked(true);
-    }
-    else if (sizeMode == "Custom") {
-        ui->rbPicCustomRes->setChecked(true);
-    }
-    else {
-        ui->rbPicDefaultRes->setChecked(true);
-    }
-
-    aspectRatio = static_cast<Qt::AspectRatioMode>(settings->value("AspectRatio", Qt::KeepAspectRatio).toInt());
-    if (aspectRatio == Qt::IgnoreAspectRatio) {
-        ui->cbIgnoreAspectRatio->setChecked(true);
-    }
-
-    settings->endGroup();
-}
-
-void OptionsDialog::setupStatisticsSettings()
+void OptionsDialog::setupStatisticsSettings(QSettings *settings)
 {
 #ifdef GTA5SYNC_TELEMETRY
     ui->cbParticipateStats->setText(tr("Participate in %1 User Statistics").arg(GTA5SYNC_APPSTR));
@@ -648,32 +552,36 @@ void OptionsDialog::setupWindowsGameSettings()
 #endif
 }
 
-void OptionsDialog::on_cbIgnoreAspectRatio_toggled(bool checked)
+void OptionsDialog::setupCustomGameFolder(QSettings *settings)
 {
-    if (checked) {
-        aspectRatio = Qt::IgnoreAspectRatio;
-    }
-    else {
-        aspectRatio = Qt::KeepAspectRatio;
-    }
-}
-
-void OptionsDialog::setupCustomGTAFolder()
-{
-    bool ok;
-    QString defaultGameFolder = AppEnv::getGTAVFolder(&ok);
+    bool ok_GTAV, ok_RDR2;
+    const QString defaultGameFolder = AppEnv::getGTAVFolder(&ok_GTAV);
+    const QString defaultGameFolderR = AppEnv::getRDR2Folder(&ok_RDR2);
     settings->beginGroup("dir");
-    currentCFolder = settings->value("dir", "").toString();
+    currentCFolder = settings->value("dir", QString()).toString();
     currentFFolder = settings->value("force", false).toBool();
-    if (currentCFolder == "" && ok) {
+    settings->endGroup();
+    settings->beginGroup("GameDirectory");
+    settings->beginGroup("GTA V");
+    currentCFolder = settings->value("Directory", currentCFolder).toString();
+    currentFFolder = settings->value("ForceCustom", currentFFolder).toBool();
+    settings->endGroup();
+    settings->beginGroup("RDR 2");
+    currentCFolderR = settings->value("Directory", QString()).toString();
+    currentFFolderR = settings->value("ForceCustom", false).toBool();
+    settings->endGroup();
+    settings->endGroup();
+    if (currentCFolder.isEmpty() && ok_GTAV)
         currentCFolder = defaultGameFolder;
-    }
+    if (currentCFolderR.isEmpty() && ok_RDR2)
+        currentCFolderR = defaultGameFolderR;
     ui->txtFolder->setText(currentCFolder);
     ui->cbForceCustomFolder->setChecked(currentFFolder);
-    settings->endGroup();
+    ui->txtFolder_RDR2->setText(currentCFolderR);
+    ui->cbForceCustomFolder_RDR2->setChecked(currentFFolderR);
 }
 
-void OptionsDialog::setupSnapmaticPictureViewer()
+void OptionsDialog::setupSnapmaticPictureViewer(QSettings *settings)
 {
 #ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050200

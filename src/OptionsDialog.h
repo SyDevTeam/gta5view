@@ -41,10 +41,6 @@ public:
 
 private slots:
     void on_cmdOK_clicked();
-    void on_rbPicCustomRes_toggled(bool checked);
-    void on_cbPicCustomQuality_toggled(bool checked);
-    void on_hsPicQuality_valueChanged(int value);
-    void on_cbIgnoreAspectRatio_toggled(bool checked);
     void on_cmdExploreFolder_clicked();
     void on_cbDefaultStyle_toggled(bool checked);
     void on_cbDefaultFont_toggled(bool checked);
@@ -63,25 +59,21 @@ private:
     QString currentAreaLanguage;
     QString currentLanguage;
     QString currentCFolder;
+    QString currentCFolderR;
     QString defaultProfile;
     QString percentString;
-    QSettings *settings;
     bool withoutPlayers;
     bool currentFFolder;
+    bool currentFFolderR;
     int contentMode;
-    int customQuality;
-    int defaultQuality;
-    QSize defExportSize;
-    QSize cusExportSize;
     void setupTreeWidget();
-    void setupLanguageBox();
-    void setupRadioButtons();
-    void setupDefaultProfile();
-    void setupPictureSettings();
-    void setupCustomGTAFolder();
-    void setupInterfaceSettings();
-    void setupStatisticsSettings();
-    void setupSnapmaticPictureViewer();
+    void setupLanguageBox(QSettings *settings);
+    void setupRadioButtons(QSettings *settings);
+    void setupDefaultProfile(QSettings *settings);
+    void setupCustomGameFolder(QSettings *settings);
+    void setupInterfaceSettings(QSettings *settings);
+    void setupStatisticsSettings(QSettings *settings);
+    void setupSnapmaticPictureViewer(QSettings *settings);
     void setupWindowsGameSettings();
     void applySettings();
 };

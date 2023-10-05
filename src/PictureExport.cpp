@@ -26,16 +26,9 @@
 #include <QMessageBox>
 #include <QFileDialog>
 #include <QSettings>
-#include <QDebug>
-
-#if QT_VERSION < 0x050000
-#include <QDesktopWidget>
-#endif
-
-#if QT_VERSION >= 0x050000
 #include <QSaveFile>
 #include <QScreen>
-#endif
+#include <QDebug>
 
 PictureExport::PictureExport()
 {
@@ -48,29 +41,6 @@ void PictureExport::exportAsPicture(QWidget *parent, SnapmaticPicture *picture)
     // Picture Settings
     // Quality Settings
     settings.beginGroup("Pictures");
-    int defaultQuality = 100;
-    int customQuality = settings.value("CustomQuality", defaultQuality).toInt();
-    if (customQuality < 1 || customQuality > 100)
-        customQuality = 100;
-    bool useCustomQuality = settings.value("CustomQualityEnabled", false).toBool();
-
-    // Size Settings
-    const QSize defExportSize = QSize(960, 536);
-    QSize cusExportSize = settings.value("CustomSize", defExportSize).toSize();
-    if (cusExportSize.width() > 7680) {
-        cusExportSize.setWidth(7680);
-    }
-    else if (cusExportSize.height() > 4320) {
-        cusExportSize.setHeight(4320);
-    }
-    if (cusExportSize.width() < 1) {
-        cusExportSize.setWidth(1);
-    }
-    else if (cusExportSize.height() < 1) {
-        cusExportSize.setHeight(1);
-    }
-    QString sizeMode = settings.value("ExportSizeMode", "Default").toString();
-    Qt::AspectRatioMode aspectRatio = (Qt::AspectRatioMode)settings.value("AspectRatio", Qt::KeepAspectRatio).toInt();
     QString defaultExportFormat = settings.value("DefaultExportFormat", ".jpg").toString();
     settings.endGroup();
     // End Picture Settings
@@ -87,7 +57,7 @@ fileDialogPreSave: //Work?
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("suffix");
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
     fileDialog.setWindowTitle(PictureDialog::tr("Export as Picture..."));
     fileDialog.setLabelText(QFileDialog::Accept, PictureDialog::tr("Export"));
 
@@ -107,16 +77,13 @@ fileDialogPreSave: //Work?
             QString saveFileFormat;
             QString selectedFile = selectedFiles.at(0);
 
-            if (selectedFile.right(4) == ".jpg") {
+            if (selectedFile.endsWith(".jpg") || selectedFile.endsWith(".jpeg")) {
                 saveFileFormat = "JPEG";
             }
-            else if (selectedFile.right(4) == ".jpeg") {
-                saveFileFormat = "JPEG";
-            }
-            else if (selectedFile.right(4) == ".png") {
+            else if (selectedFile.endsWith(".png")) {
                 saveFileFormat = "PNG";
             }
-            else if (selectedFile.right(7) == ".suffix") {
+            else if (selectedFile.endsWith(".suffix")) {
                 if (fileDialog.selectedNameFilter() == "JPEG picture (*.jpg)") {
                     selectedFile.replace(".suffix", ".jpg");
                 }
@@ -134,49 +101,23 @@ fileDialogPreSave: //Work?
                 }
             }
 
-            // Scale Picture
             QImage exportPicture = picture->getImage();
-            if (sizeMode == "Desktop") {
-#if QT_VERSION >= 0x050000
-                qreal screenRatioPR = AppEnv::screenRatioPR();
-                QRect desktopResolution = QApplication::primaryScreen()->geometry();
-                int desktopSizeWidth = qRound((double)desktopResolution.width() * screenRatioPR);
-                int desktopSizeHeight = qRound((double)desktopResolution.height() * screenRatioPR);
-#else
-                QRect desktopResolution = QApplication::desktop()->screenGeometry();
-                int desktopSizeWidth = desktopResolution.width();
-                int desktopSizeHeight = desktopResolution.height();
-#endif
-                exportPicture = exportPicture.scaled(desktopSizeWidth, desktopSizeHeight, aspectRatio, Qt::SmoothTransformation);
-            }
-            else if (sizeMode == "Custom") {
-                exportPicture = exportPicture.scaled(cusExportSize, aspectRatio, Qt::SmoothTransformation);
-            }
 
             int errorId = 0;
             bool isSaved = false;
-#if QT_VERSION >= 0x050000
-            QSaveFile *picFile = new QSaveFile(selectedFile);
-#else
-            QFile *picFile = new QFile(selectedFile);
-#endif
-            if (picFile->open(QIODevice::WriteOnly)) {
-                isSaved = exportPicture.save(picFile, saveFileFormat.toStdString().c_str(), useCustomQuality ? customQuality : defaultQuality);
-#if QT_VERSION >= 0x050000
+            QSaveFile picFile(selectedFile);
+            if (picFile.open(QIODevice::WriteOnly)) {
+                isSaved = exportPicture.save(&picFile, saveFileFormat.toStdString().c_str(), 100);
                 if (isSaved) {
-                    isSaved = picFile->commit();
+                    isSaved = picFile.commit();
                 }
                 else {
                     errorId = 1;
                 }
-#else
-                picFile->close();
-#endif
             }
             else {
                 errorId = 2;
             }
-            delete picFile;
 
             if (!isSaved) {
                 switch (errorId) {
@@ -225,7 +166,7 @@ fileDialogPreSave: //Work?
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix(".rem");
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
     fileDialog.setWindowTitle(PictureDialog::tr("Export as Snapmatic..."));
     fileDialog.setLabelText(QFileDialog::Accept, PictureDialog::tr("Export"));
 
@@ -246,14 +187,14 @@ fileDialogPreSave: //Work?
             QString selectedFile = selectedFiles.at(0);
             bool isAutoExt = false;
 #ifndef GTA5SYNC_FLATPAK
-            if (selectedFile.right(5) == ".auto") {
+            if (selectedFile.endsWith(".auto")) {
                 isAutoExt = true;
                 QString dirPath = QFileInfo(selectedFile).dir().path();
                 QString stockFileName = sgdFileInfo.fileName();
                 selectedFile = dirPath % "/" % stockFileName;
             }
 #endif
-            if (selectedFile.right(4) == ".rem") {
+            if (selectedFile.endsWith(".rem")) {
                 selectedFile.remove(selectedFile.length() - 4, 4);
             }
 
@@ -263,7 +204,7 @@ fileDialogPreSave: //Work?
                 }
             }
 
-            if (selectedFile.right(4) == ".g5e") {
+            if (selectedFile.endsWith(".g5e")) {
                 bool isExported = picture->exportPicture(selectedFile, SnapmaticFormat::G5E_Format);
                 if (!isExported) {
                     QMessageBox::warning(parent, PictureDialog::tr("Export as Snapmatic"), PictureDialog::tr("Failed to export current Snapmatic picture"));

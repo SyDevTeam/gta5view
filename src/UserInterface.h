@@ -48,14 +48,13 @@ public:
 #else
     explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
 #endif
-    void setupDirEnv(bool showFolderDialog = true);
+    void setupDirEnv(bool showFolderWindow = true);
     ~UserInterface();
 
 private slots:
     void closeProfile();
     void profileLoaded();
     void changeFolder_clicked();
-    void profileButton_clicked();
     void on_cmdReload_clicked();
     void on_actionExit_triggered();
     void on_actionSelect_profile_triggered();

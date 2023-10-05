@@ -36,7 +36,7 @@ public:
 
     // Folder Stuff
     static QString getGTAVFolder(bool *ok = 0);
-    static bool setGTAVFolder(QString gameFolder);
+    static QString getRDR2Folder(bool *ok = 0);
     static QString getExLangFolder();
     static QString getInLangFolder();
     static QString getImagesFolder();

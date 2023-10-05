@@ -78,6 +78,13 @@ QString AppEnv::getGTAVFolder(bool *ok)
     GTAV_returnFolder = settings.value("dir", GTAV_defaultFolder).toString();
     settings.endGroup();
 
+    settings.beginGroup("GameDirectory");
+    settings.beginGroup("GTA V");
+    forceDir = settings.value("ForceCustom", forceDir).toBool();
+    GTAV_returnFolder = settings.value("Directory", GTAV_returnFolder).toString();
+    settings.endGroup();
+    settings.endGroup();
+
     if (forceDir) {
         dir.setPath(GTAV_returnFolder);
         if (dir.exists()) {
@@ -108,13 +115,63 @@ QString AppEnv::getGTAVFolder(bool *ok)
     return QString();
 }
 
-bool AppEnv::setGTAVFolder(QString gameFolder)
+QString AppEnv::getRDR2Folder(bool *ok)
 {
     QDir dir;
-    dir.setPath(gameFolder);
-    if (dir.exists())
-        return true;
-    return false;
+    QString RDR2_FOLDER = QString::fromUtf8(qgetenv("RDR2_FOLDER"));
+    if (!RDR2_FOLDER.isEmpty()) {
+        dir.setPath(RDR2_FOLDER);
+        if (dir.exists()) {
+            if (ok)
+                *ok = true;
+            return dir.absolutePath();
+        }
+    }
+
+#ifdef Q_OS_UNIX
+    // TODO: Try to locate the Steam Proton RDR 2 folder
+    const QString RDR2_defaultFolder = StandardPaths::documentsLocation() % "/Rockstar Games/Red Dead Redemption 2";
+#else
+    const QString RDR2_defaultFolder = StandardPaths::documentsLocation() % "/Rockstar Games/Red Dead Redemption 2";
+#endif
+    QString RDR2_returnFolder = RDR2_defaultFolder;
+
+    QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
+    settings.beginGroup("GameDirectory");
+    settings.beginGroup("RDR 2");
+    bool forceDir = settings.value("ForceCustom", false).toBool();
+    RDR2_returnFolder = settings.value("Directory", RDR2_defaultFolder).toString();
+    settings.endGroup();
+    settings.endGroup();
+
+    if (forceDir) {
+        dir.setPath(RDR2_returnFolder);
+        if (dir.exists()) {
+            if (ok)
+                *ok = true;
+            return dir.absolutePath();
+        }
+    }
+
+    dir.setPath(RDR2_defaultFolder);
+    if (dir.exists()) {
+        if (ok)
+            *ok = true;
+        return dir.absolutePath();
+    }
+
+    if (!forceDir) {
+        dir.setPath(RDR2_returnFolder);
+        if (dir.exists()) {
+            if (ok)
+                *ok = true;
+            return dir.absolutePath();
+        }
+    }
+
+    if (ok)
+        *ok = false;
+    return QString();
 }
 
 QString AppEnv::getExLangFolder()
