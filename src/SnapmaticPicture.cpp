@@ -920,13 +920,13 @@ void SnapmaticPicture::initialise(uint32_t photoFormat)
         t_jsonObject["crewid"] = 0;
         t_jsonObject["districtname"] = 0;
         t_jsonObject["drctr"] = false;
+        t_jsonObject["inphotomode"] = true;
 
         boost::json::object t_locObject;
         t_locObject["x"] = 0;
         t_locObject["y"] = 0;
         t_locObject["z"] = 0;
 
-        t_jsonObject["inphotomode"] = true;
         t_jsonObject["loc"] = t_locObject;
         t_jsonObject["meme"] = false;
         t_jsonObject["mid"] = "";

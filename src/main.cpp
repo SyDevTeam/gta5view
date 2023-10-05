@@ -54,7 +54,7 @@
 #endif
 
 #ifdef Q_OS_WIN
-#include "windows.h"
+#include <windows.h>
 #include <iostream>
 #endif
 
@@ -131,21 +131,22 @@ int main(int argc, char *argv[])
     bool telemetryWindowLaunched = settings.value("PersonalUsageDataWindowLaunched", false).toBool();
     bool pushUsageData = settings.value("PushUsageData", false).toBool();
     if (!telemetryWindowLaunched && !pushUsageData) {
-        QDialog *telemetryDialog = new QDialog();
-        telemetryDialog->setObjectName(QStringLiteral("TelemetryDialog"));
-        telemetryDialog->setWindowTitle(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
-        telemetryDialog->setWindowFlags(telemetryDialog->windowFlags()^Qt::WindowContextHelpButtonHint^Qt::WindowCloseButtonHint);
-        telemetryDialog->setWindowIcon(IconLoader::loadingAppIcon());
-        QVBoxLayout *telemetryLayout = new QVBoxLayout(telemetryDialog);
+        QDialog telemetryDialog;
+        telemetryDialog.setObjectName(QStringLiteral("TelemetryDialog"));
+        telemetryDialog.setWindowTitle(QString("%1 %2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER));
+        telemetryDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+        telemetryDialog.setWindowFlag(Qt::WindowCloseButtonHint, false);
+        telemetryDialog.setWindowIcon(IconLoader::loadingAppIcon());
+        QVBoxLayout *telemetryLayout = new QVBoxLayout(&telemetryDialog);
         telemetryLayout->setObjectName(QStringLiteral("TelemetryLayout"));
-        telemetryDialog->setLayout(telemetryLayout);
-        UiModLabel *telemetryLabel = new UiModLabel(telemetryDialog);
+        telemetryDialog.setLayout(telemetryLayout);
+        UiModLabel *telemetryLabel = new UiModLabel(&telemetryDialog);
         telemetryLabel->setObjectName(QStringLiteral("TelemetryLabel"));
         telemetryLabel->setText(QString("<h4>%2</h4>%1").arg(
                                     QApplication::translate("TelemetryDialog", "You want help %1 to improve in the future by including personal usage data in your submission?").arg(GTA5SYNC_APPSTR),
                                     QApplication::translate("TelemetryDialog", "%1 User Statistics").arg(GTA5SYNC_APPSTR)));
         telemetryLayout->addWidget(telemetryLabel);
-        QCheckBox *telemetryCheckBox = new QCheckBox(telemetryDialog);
+        QCheckBox *telemetryCheckBox = new QCheckBox(&telemetryDialog);
         telemetryCheckBox->setObjectName(QStringLiteral("TelemetryCheckBox"));
         telemetryCheckBox->setText(QApplication::translate("TelemetryDialog", "Yes, I want include personal usage data."));
         telemetryLayout->addWidget(telemetryCheckBox);
@@ -154,14 +155,14 @@ int main(int argc, char *argv[])
         telemetryLayout->addLayout(telemetryButtonLayout);
         QSpacerItem *telemetryButtonSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
         telemetryButtonLayout->addSpacerItem(telemetryButtonSpacer);
-        QPushButton *telemetryButton = new QPushButton(telemetryDialog);
+        QPushButton *telemetryButton = new QPushButton(&telemetryDialog);
         telemetryButton->setObjectName(QStringLiteral("TelemetryButton"));
         telemetryButton->setText(QApplication::translate("TelemetryDialog", "&OK"));
         telemetryButtonLayout->addWidget(telemetryButton);
-        QObject::connect(telemetryButton, SIGNAL(clicked(bool)), telemetryDialog, SLOT(close()));
-        telemetryDialog->setFixedSize(telemetryDialog->sizeHint());
-        telemetryDialog->exec();
-        QObject::disconnect(telemetryButton, SIGNAL(clicked(bool)), telemetryDialog, SLOT(close()));
+        QObject::connect(telemetryButton, &QPushButton::clicked, &telemetryDialog, &QDialog::close);
+        telemetryDialog.setFixedSize(telemetryDialog.sizeHint());
+        telemetryDialog.exec();
+        QObject::disconnect(telemetryButton, &QPushButton::clicked, &telemetryDialog, &QDialog::close);
         if (telemetryCheckBox->isChecked()) {
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
@@ -173,20 +174,19 @@ int main(int argc, char *argv[])
             Telemetry->work();
         }
         settings.setValue("PersonalUsageDataWindowLaunched", true);
-        delete telemetryDialog;
     }
 #endif
     settings.endGroup();
 
     for (const QString &currentArg : applicationArgs) {
         QString reworkedArg;
-        if (currentArg.left(9) == "-showpic=" && selectedAction == "") {
-            reworkedArg = QString(currentArg).remove(0,9);
+        if (currentArg.startsWith("-showpic=") && selectedAction == "") {
+            reworkedArg = QString(currentArg).remove(0, 9);
             arg1 = reworkedArg;
             selectedAction = "showpic";
         }
-        else if (currentArg.left(9) == "-showsgd=" && selectedAction == "") {
-            reworkedArg = QString(currentArg).remove(0,9);
+        else if (currentArg.startsWith("-showsgd=") && selectedAction == "") {
+            reworkedArg = QString(currentArg).remove(0, 9);
             arg1 = reworkedArg;
             selectedAction = "showsgd";
         }
@@ -194,19 +194,16 @@ int main(int argc, char *argv[])
             QFile argumentFile(currentArg);
             QFileInfo argumentFileInfo(argumentFile);
             if (argumentFile.exists()) {
-                QString argumentFileName = argumentFileInfo.fileName();
-                QString argumentFileType = argumentFileName.left(4);
-                QString argumentFileExt = argumentFileName.right(4);
-
-                if (argumentFileType == "PGTA" || argumentFileExt == ".g5e") {
+                const QString argumentFileName = argumentFileInfo.fileName();
+                if (argumentFileName.startsWith("PGTA5") || argumentFileName.startsWith("PRDR3") || argumentFileName.endsWith(".g5e")) {
                     arg1 = currentArg;
                     selectedAction = "showpic";
                 }
-                else if (argumentFileType == "SGTA") {
+                else if (argumentFileName.startsWith("SGTA5") || argumentFileName.startsWith("SRDR3")) {
                     arg1 = currentArg;
                     selectedAction = "showsgd";
                 }
-                else if (argumentFileType == "MISR") {
+                else if (argumentFileName.startsWith("MISREP")) {
                     arg1 = currentArg;
                     selectedAction = "showsgd";
                 }
@@ -295,11 +292,7 @@ int main(int argc, char *argv[])
 #else
     uiWindow.setupDirEnv();
 #endif
-#ifdef Q_OS_ANDROID
-    uiWindow.showMaximized();
-#else
     uiWindow.show();
-#endif
 
     return a.exec();
 }

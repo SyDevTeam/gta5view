@@ -64,10 +64,10 @@ QString AppEnv::getGameFolder(bool *ok)
         }
     }
 
-#ifdef Q_OS_WIN
+#ifdef Q_OS_UNIX
+    // TODO: Try to locate the Steam Proton GTA V folder
     const QString GTAV_defaultFolder = StandardPaths::documentsLocation() % "/Rockstar Games/GTA V";
 #else
-    // TODO: Try to locate the Steam Proton GTA V folder
     const QString GTAV_defaultFolder = StandardPaths::documentsLocation() % "/Rockstar Games/GTA V";
 #endif
     QString GTAV_returnFolder = GTAV_defaultFolder;

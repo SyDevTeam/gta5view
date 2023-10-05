@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -28,7 +28,6 @@
 
 SavegameCopy::SavegameCopy()
 {
-
 }
 
 void SavegameCopy::copySavegame(QWidget *parent, QString sgdPath)
@@ -48,13 +47,17 @@ fileDialogPreSave: //Work?
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
     fileDialog.setOption(QFileDialog::DontConfirmOverwrite, true);
     fileDialog.setDefaultSuffix("");
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
     fileDialog.setWindowTitle(SavegameWidget::tr(("Export Savegame...")));
     fileDialog.setLabelText(QFileDialog::Accept, SavegameWidget::tr("Export"));
 
     QStringList filters;
-    filters << SavegameWidget::tr("Savegame files (SGTA*)");
-    filters << SavegameWidget::tr("All files (**)");
+    const QString fileName = sgdFileInfo.fileName();
+    if (fileName.startsWith("SGTA5"))
+        filters << SavegameWidget::tr("GTA V Savegames files (%1)").arg("SGTA5*");
+    else if (fileName.startsWith("SRDR3"))
+        filters << SavegameWidget::tr("RDR 2 Savegames files (%1)").arg("SRDR3*");
+    filters << SavegameWidget::tr("All files (%1)").arg("**");
     fileDialog.setNameFilters(filters);
 
     QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
@@ -64,38 +67,30 @@ fileDialogPreSave: //Work?
     fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geometry", "").toByteArray());
     fileDialog.selectFile(sgdFileInfo.fileName());
 
-    if (fileDialog.exec())
-    {
+    if (fileDialog.exec()) {
         QStringList selectedFiles = fileDialog.selectedFiles();
-        if (selectedFiles.length() == 1)
-        {
+        if (selectedFiles.length() == 1) {
             QString selectedFile = selectedFiles.at(0);
 
-            if (QFile::exists(selectedFile))
-            {
-                if (QMessageBox::Yes == QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Overwrite %1 with current Savegame?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes))
-                {
-                    if (!QFile::remove(selectedFile))
-                    {
+            if (QFile::exists(selectedFile)) {
+                if (QMessageBox::Yes == QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Overwrite %1 with current Savegame?").arg("\""+selectedFile+"\""), QMessageBox::Yes | QMessageBox::No, QMessageBox::Yes)) {
+                    if (!QFile::remove(selectedFile)) {
                         QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Failed to overwrite %1 with current Savegame").arg("\""+selectedFile+"\""));
                         goto fileDialogPreSave; //Work?
                     }
                 }
-                else
-                {
+                else {
                     goto fileDialogPreSave; //Work?
                 }
             }
 
             bool isCopied = QFile::copy(sgdPath, selectedFile);
-            if (!isCopied)
-            {
+            if (!isCopied) {
                 QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("Failed to export current Savegame"));
                 goto fileDialogPreSave; //Work?
             }
         }
-        else
-        {
+        else {
             QMessageBox::warning(parent, SavegameWidget::tr("Export Savegame"), SavegameWidget::tr("No valid file is selected"));
             goto fileDialogPreSave; //Work?
         }

@@ -105,10 +105,11 @@ private:
     QString language;
     QString defaultWindowTitle;
     QString GTAV_Folder;
-    QString GTAV_ProfilesFolder;
+    QString RDR2_Folder;
     QStringList GTAV_Profiles;
+    QStringList RDR2_Profiles;
     void setupProfileUi();
-    void openProfile(const QString &profileName);
+    void openProfile(const QString &profileName, quint32 gameFormat);
     void closeProfile_p();
     void openSelectProfile();
     void retranslateUi();

@@ -84,11 +84,12 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     ui->cmdBackgroundWipe->setVisible(false);
 
     // Snapmatic Resolution
-    ui->cbResolution->addItem("GTA V", QSize(960, 536));
-    ui->cbResolution->addItem("FiveM", QSize(1920, 1072));
-    ui->cbResolution->addItem("1280x720", QSize(1280, 720));
-    ui->cbResolution->addItem("1920x1080", QSize(1920, 1080));
-    ui->cbResolution->addItem("2560x1440", QSize(2560, 1440));
+    ui->cbResolution->addItem("GTA V (536p)", QSize(960, 536));
+    ui->cbResolution->addItem("FiveM (1072p)", QSize(1920, 1072));
+    ui->cbResolution->addItem("RDR 2 (1080p)", QSize(1920, 1080));
+    ui->cbResolution->addItem("Preset (720p)", QSize(1280, 720));
+    ui->cbResolution->addItem("Preset (1440p)", QSize(2560, 1440));
+    ui->cbResolution->addItem("Preset (2160p)", QSize(3840, 2160));
 
     // Set Import Settings
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
