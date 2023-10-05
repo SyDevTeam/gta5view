@@ -86,7 +86,6 @@ set(GTA5VIEW_SOURCES
     src/StringParser.cpp
     src/TranslationClass.cpp
     src/UserInterface.cpp
-    src/anpro/imagecropper.cpp
     src/pcg/pcg_basic.c
     src/uimod/JSHighlighter.cpp
     src/uimod/UiModLabel.cpp
@@ -127,7 +126,6 @@ set(GTA5VIEW_HEADERS
     src/StringParser.h
     src/TranslationClass.h
     src/UserInterface.h
-    src/anpro/imagecropper.h
     src/pcg/pcg_basic.h
     src/uimod/JSHighlighter.h
     src/uimod/UiModLabel.h

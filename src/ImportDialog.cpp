@@ -20,7 +20,6 @@
 #include "SnapmaticPicture.h"
 #include "StandardPaths.h"
 #include "ImportDialog.h"
-#include "imagecropper.h"
 #include "AppEnv.h"
 #include "config.h"
 #include <QStringBuilder>
@@ -86,9 +85,9 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
     ui->cbResolution->addItem("GTA V (536p)", QSize(960, 536));
     ui->cbResolution->addItem("FiveM (1072p)", QSize(1920, 1072));
     ui->cbResolution->addItem("RDR 2 (1080p)", QSize(1920, 1080));
-    ui->cbResolution->addItem("Preset (720p)", QSize(1280, 720));
-    ui->cbResolution->addItem("Preset (1440p)", QSize(2560, 1440));
-    ui->cbResolution->addItem("Preset (2160p)", QSize(3840, 2160));
+    ui->cbResolution->addItem("HD (720p)", QSize(1280, 720));
+    ui->cbResolution->addItem("WQHD (1440p)", QSize(2560, 1440));
+    ui->cbResolution->addItem("4K/UHD (2160p)", QSize(3840, 2160));
 
     // Set Import Settings
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
@@ -120,11 +119,10 @@ ImportDialog::ImportDialog(QString profileName, QWidget *parent) :
 #endif
 
     // Options menu
-    optionsMenu.addAction(tr("&Import new Picture..."), this, SLOT(importNewPicture()));
-    optionsMenu.addAction(tr("&Crop Picture..."), this, SLOT(cropPicture()));
+    optionsMenu.addAction(tr("&Import new Picture..."), this, &ImportDialog::importNewPicture);
     optionsMenu.addSeparator();
-    optionsMenu.addAction(tr("&Load Settings..."), this, SLOT(loadImportSettings()));
-    optionsMenu.addAction(tr("&Save Settings..."), this, SLOT(saveImportSettings()));
+    optionsMenu.addAction(tr("&Load Settings..."), this, &ImportDialog::loadImportSettings);
+    optionsMenu.addAction(tr("&Save Settings..."), this, &ImportDialog::saveImportSettings);
     ui->cmdOptions->setMenu(&optionsMenu);
 
     const QSize windowSize = sizeHint();
@@ -439,72 +437,6 @@ void ImportDialog::saveSettings(QString settingsProfile)
     settings.endGroup();
 }
 
-void ImportDialog::cropPicture()
-{
-    qreal screenRatio = AppEnv::screenRatio();
-
-    QDialog cropDialog(this);
-#if QT_VERSION >= 0x050000
-    cropDialog.setObjectName(QStringLiteral("CropDialog"));
-#else
-    cropDialog.setObjectName(QString::fromUtf8("CropDialog"));
-#endif
-    cropDialog.setWindowTitle(tr("Crop Picture..."));
-    cropDialog.setWindowFlags(cropDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
-    cropDialog.setModal(true);
-
-    QVBoxLayout cropLayout;
-#if QT_VERSION >= 0x050000
-    cropLayout.setObjectName(QStringLiteral("CropLayout"));
-#else
-    cropLayout.setObjectName(QString::fromUtf8("CropLayout"));
-#endif
-    cropLayout.setContentsMargins(0, 0, 0, 0);
-    cropLayout.setSpacing(0);
-    cropDialog.setLayout(&cropLayout);
-
-    ImageCropper imageCropper(&cropDialog);
-#if QT_VERSION >= 0x050000
-    imageCropper.setObjectName(QStringLiteral("ImageCropper"));
-#else
-    imageCropper.setObjectName(QString::fromUtf8("ImageCropper"));
-#endif
-    imageCropper.setBackgroundColor(Qt::black);
-    imageCropper.setCroppingRectBorderColor(QColor(255, 255, 255, 127));
-    imageCropper.setImage(QPixmap::fromImage(origImage, Qt::AutoColor));
-    imageCropper.setProportion(QSize(1, 1));
-    imageCropper.setFixedSize(workImage.size());
-    cropLayout.addWidget(&imageCropper);
-
-    QHBoxLayout buttonLayout;
-#if QT_VERSION >= 0x050000
-    cropLayout.setObjectName(QStringLiteral("ButtonLayout"));
-#else
-    cropLayout.setObjectName(QString::fromUtf8("ButtonLayout"));
-#endif
-    cropLayout.addLayout(&buttonLayout);
-
-    QPushButton cropButton(&cropDialog);
-#if QT_VERSION >= 0x050000
-    cropButton.setObjectName(QStringLiteral("CropButton"));
-#else
-    cropButton.setObjectName(QString::fromUtf8("CropButton"));
-#endif
-    cropButton.setMinimumSize(0, 40 * screenRatio);
-    cropButton.setText(tr("&Crop"));
-    cropButton.setToolTip(tr("Crop Picture"));
-    QObject::connect(&cropButton, SIGNAL(clicked(bool)), &cropDialog, SLOT(accept()));
-
-    buttonLayout.addWidget(&cropButton);
-
-    cropDialog.show();
-    cropDialog.setFixedSize(cropDialog.sizeHint());
-    if (cropDialog.exec() == QDialog::Accepted) {
-        QImage *croppedImage = new QImage(imageCropper.cropImage().toImage());
-        setImage(croppedImage);
-    }
-}
-
 void ImportDialog::importNewPicture()
 {
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
@@ -518,7 +450,7 @@ fileDialogPreOpen: //Work?
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
     fileDialog.setWindowTitle(QApplication::translate("ProfileInterface", "Import..."));
     fileDialog.setLabelText(QFileDialog::Accept, QApplication::translate("ProfileInterface", "Import"));
 
@@ -824,7 +756,7 @@ fileDialogPreOpen:
     fileDialog.setViewMode(QFileDialog::Detail);
     fileDialog.setAcceptMode(QFileDialog::AcceptOpen);
     fileDialog.setOption(QFileDialog::DontUseNativeDialog, dontUseNativeDialog);
-    fileDialog.setWindowFlags(fileDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+    fileDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
     fileDialog.setWindowTitle(QApplication::translate("ProfileInterface", "Import..."));
     fileDialog.setLabelText(QFileDialog::Accept, QApplication::translate("ProfileInterface", "Import"));
 

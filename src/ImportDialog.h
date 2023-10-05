@@ -45,7 +45,6 @@ public:
 private slots:
     void processImage();
     void reworkImage();
-    void cropPicture();
     void importNewPicture();
     void loadImportSettings();
     void saveImportSettings();
