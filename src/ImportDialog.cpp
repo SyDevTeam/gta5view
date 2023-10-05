@@ -18,7 +18,6 @@
 
 #include "ui_ImportDialog.h"
 #include "SnapmaticPicture.h"
-#include "SidebarGenerator.h"
 #include "StandardPaths.h"
 #include "ImportDialog.h"
 #include "imagecropper.h"
@@ -533,10 +532,6 @@ fileDialogPreOpen: //Work?
     filters << QApplication::translate("ProfileInterface", "All image files (%1)").arg(imageFormatsStr.trimmed());
     filters << QApplication::translate("ProfileInterface", "All files (**)");
     fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value(profileName % "+Directory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value(profileName % "+Geometry", "").toByteArray());
 
@@ -843,10 +838,6 @@ fileDialogPreOpen:
     filters << QApplication::translate("ProfileInterface", "All image files (%1)").arg(imageFormatsStr.trimmed());
     filters << QApplication::translate("ProfileInterface", "All files (**)");
     fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value("Geometry", "").toByteArray());
 

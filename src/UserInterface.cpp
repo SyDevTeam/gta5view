@@ -20,7 +20,6 @@
 #include "ui_UserInterface.h"
 #include "ProfileInterface.h"
 #include "SnapmaticPicture.h"
-#include "SidebarGenerator.h"
 #include "SavegameDialog.h"
 #include "StandardPaths.h"
 #include "OptionsDialog.h"
@@ -316,13 +315,13 @@ void UserInterface::setupDirEnv(bool showFolderDialog)
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
 
     bool folderExists;
-    GTAV_Folder = AppEnv::getGameFolder(&folderExists);
+    GTAV_Folder = AppEnv::getGTAVFolder(&folderExists);
     if (!folderExists && showFolderDialog) {
         const QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
         if (!GTAV_Folder_Temp.isEmpty() && QDir(GTAV_Folder_Temp).exists()) {
             GTAV_Folder = GTAV_Folder_Temp;
             folderExists = true;
-            AppEnv::setGameFolder(GTAV_Folder);
+            AppEnv::setGTAVFolder(GTAV_Folder);
 
             // First time folder selection save
             settings.beginGroup("dir");
@@ -571,10 +570,6 @@ fileDialogPreOpen:
     filters << ProfileInterface::tr("RDR 2 Photo files (%1)").arg("PRDR3*");
     filters << ProfileInterface::tr("All files (%1)").arg("**");
     fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("OpenDialogDirectory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value("OpenDialogGeometry","").toByteArray());
 
@@ -815,7 +810,7 @@ void UserInterface::on_actionSelect_GTA_Folder_triggered()
             closeProfile_p();
         }
         GTAV_Folder = GTAV_Folder_Temp;
-        AppEnv::setGameFolder(GTAV_Folder);
+        AppEnv::setGTAVFolder(GTAV_Folder);
         on_cmdReload_clicked();
     }
 }

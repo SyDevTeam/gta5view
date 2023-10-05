@@ -16,7 +16,6 @@
 * along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *****************************************************************************/
 
-#include "SidebarGenerator.h"
 #include "SavegameWidget.h"
 #include "StandardPaths.h"
 #include "SavegameCopy.h"
@@ -60,9 +59,6 @@ fileDialogPreSave: //Work?
     filters << SavegameWidget::tr("All files (%1)").arg("**");
     fileDialog.setNameFilters(filters);
 
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::picturesLocation()).toString());
     fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geometry", "").toByteArray());
     fileDialog.selectFile(sgdFileInfo.fileName());

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2020 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -21,7 +21,6 @@
 #include "PictureExport.h"
 #include "PictureDialog.h"
 #include "StandardPaths.h"
-#include "SidebarGenerator.h"
 #include <QStringBuilder>
 #include <QApplication>
 #include <QMessageBox>
@@ -96,10 +95,6 @@ fileDialogPreSave: //Work?
     filters << PictureDialog::tr("JPEG Graphics (*.jpg *.jpeg)");
     filters << PictureDialog::tr("Portable Network Graphics (*.png)");
     fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::picturesLocation()).toString());
     fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geometry", "").toByteArray());
 
@@ -241,10 +236,6 @@ fileDialogPreSave: //Work?
 #endif
     filters << PictureDialog::tr("Snapmatic pictures (PGTA*)");
     fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value("Directory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value(parent->objectName() % "+Geometry", "").toByteArray());
     fileDialog.selectFile(QString(picture->getExportPictureFileName() % ".g5e"));

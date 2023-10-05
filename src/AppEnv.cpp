@@ -51,7 +51,7 @@ QString AppEnv::getBuildCode()
 
 // Folder Stuff
 
-QString AppEnv::getGameFolder(bool *ok)
+QString AppEnv::getGTAVFolder(bool *ok)
 {
     QDir dir;
     QString GTAV_FOLDER = QString::fromUtf8(qgetenv("GTAV_FOLDER"));
@@ -108,7 +108,7 @@ QString AppEnv::getGameFolder(bool *ok)
     return QString();
 }
 
-bool AppEnv::setGameFolder(QString gameFolder)
+bool AppEnv::setGTAVFolder(QString gameFolder)
 {
     QDir dir;
     dir.setPath(gameFolder);
@@ -166,33 +166,7 @@ QString AppEnv::getShareFolder()
 
 QByteArray AppEnv::getUserAgent()
 {
-#if QT_VERSION >= 0x050400
-#ifdef Q_OS_WIN
-    QString kernelVersion = QSysInfo::kernelVersion();
-    const QStringList &kernelVersionList = kernelVersion.split(".");
-    if (kernelVersionList.length() > 2) {
-        kernelVersion = kernelVersionList.at(0) % "." % kernelVersionList.at(1);
-    }
-    QString runArch = QSysInfo::buildCpuArchitecture();
-    if (runArch == "x86_64") {
-        runArch = "Win64; x64";
-    }
-    else if (runArch == "i686") {
-        const QString &curArch = QSysInfo::currentCpuArchitecture();
-        if (curArch == "x86_64") {
-            runArch = "WOW64";
-        }
-        else if (curArch == "i686") {
-            runArch = "Win32; x86";
-        }
-    }
-    return QString("Mozilla/5.0 (Windows NT %1; %2) %3/%4").arg(kernelVersion, runArch, GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
-#else
-    return QString("Mozilla/5.0 (%1; %2) %3/%4").arg(QSysInfo::kernelType(), QSysInfo::kernelVersion(), GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
-#endif
-#else
     return QString("Mozilla/5.0 %1/%2").arg(GTA5SYNC_APPSTR, GTA5SYNC_APPVER).toUtf8();
-#endif
 }
 
 QUrl AppEnv::getCrewFetchingUrl(QString crewID)
@@ -212,7 +186,7 @@ QUrl AppEnv::getPlayerFetchingUrl(QString crewID, int pageNumber)
 
 // Game Stuff
 
-GameVersion AppEnv::getGameVersion()
+GameVersion AppEnv::getGTAVVersion()
 {
 #ifdef Q_OS_WIN
     QString argumentValue;
@@ -261,7 +235,7 @@ GameVersion AppEnv::getGameVersion()
 #endif
 }
 
-GameLanguage AppEnv::getGameLanguage(GameVersion gameVersion)
+GameLanguage AppEnv::getGTAVLanguage(GameVersion gameVersion)
 {
     if (gameVersion == GameVersion::SocialClubVersion) {
 #ifdef Q_OS_WIN
@@ -366,68 +340,6 @@ QString AppEnv::gameLanguageToString(GameLanguage gameLanguage)
     default:
         return "Undefinied";
     }
-}
-
-bool AppEnv::setGameLanguage(GameVersion gameVersion, GameLanguage gameLanguage)
-{
-    bool socialClubVersion = false;
-    bool steamVersion = false;
-    if (gameVersion == GameVersion::SocialClubVersion) {
-        socialClubVersion = true;
-    }
-    else if (gameVersion == GameVersion::SteamVersion) {
-        steamVersion = true;
-    }
-    else if (gameVersion == GameVersion::BothVersions) {
-        socialClubVersion = true;
-        steamVersion = true;
-    }
-    else {
-        return false;
-    }
-    if (socialClubVersion) {
-#ifdef Q_OS_WIN
-        QString argumentValue;
-#ifdef _WIN64
-        argumentValue = "\\WOW6432Node";
-#endif
-        QSettings registrySettingsSc(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V").arg(argumentValue), QSettings::NativeFormat);
-        if (gameLanguage != GameLanguage::Undefined) {
-            registrySettingsSc.setValue("Language", gameLanguageToString(gameLanguage));
-        }
-        else {
-            registrySettingsSc.remove("Language");
-        }
-        registrySettingsSc.sync();
-        if (registrySettingsSc.status() != QSettings::NoError) {
-            return false;
-        }
-#else
-        Q_UNUSED(gameLanguage)
-#endif
-    }
-    if (steamVersion) {
-#ifdef Q_OS_WIN
-        QString argumentValue;
-#ifdef _WIN64
-        argumentValue = "\\WOW6432Node";
-#endif
-        QSettings registrySettingsSteam(QString("HKEY_LOCAL_MACHINE\\SOFTWARE%1\\Rockstar Games\\Grand Theft Auto V Steam").arg(argumentValue), QSettings::NativeFormat);
-        if (gameLanguage != GameLanguage::Undefined) {
-            registrySettingsSteam.setValue("Language", gameLanguageToString(gameLanguage));
-        }
-        else {
-            registrySettingsSteam.remove("Language");
-        }
-        registrySettingsSteam.sync();
-        if (registrySettingsSteam.status() != QSettings::NoError) {
-            return false;
-        }
-#else
-        Q_UNUSED(gameLanguage)
-#endif
-    }
-    return true;
 }
 
 // Screen Stuff

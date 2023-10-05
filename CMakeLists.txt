@@ -78,7 +78,6 @@ set(GTA5VIEW_SOURCES
     src/SavegameData.cpp
     src/SavegameDialog.cpp
     src/SavegameWidget.cpp
-    src/SidebarGenerator.cpp
     src/SnapmaticEditor.cpp
     src/SnapmaticJson.cpp
     src/SnapmaticPicture.cpp
@@ -120,7 +119,6 @@ set(GTA5VIEW_HEADERS
     src/SavegameData.h
     src/SavegameDialog.h
     src/SavegameWidget.h
-    src/SidebarGenerator.h
     src/SnapmaticEditor.h
     src/SnapmaticJson.h
     src/SnapmaticPicture.h

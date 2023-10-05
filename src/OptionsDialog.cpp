@@ -169,7 +169,7 @@ void OptionsDialog::setupLanguageBox()
                                                                                                                                                                   "System in context of System default"));
 #ifdef Q_OS_WIN
     QString cbAutoStr;
-    if (AppEnv::getGameLanguage(AppEnv::getGameVersion()) != GameLanguage::Undefined) {
+    if (AppEnv::getGTAVLanguage(AppEnv::getGTAVVersion()) != GameLanguage::Undefined) {
         cbAutoStr = tr("%1 (Game language)", "Next closest language compared to the Game settings").arg(tr("Auto", "Automatic language choice."));
     }
     else {
@@ -661,7 +661,7 @@ void OptionsDialog::on_cbIgnoreAspectRatio_toggled(bool checked)
 void OptionsDialog::setupCustomGTAFolder()
 {
     bool ok;
-    QString defaultGameFolder = AppEnv::getGameFolder(&ok);
+    QString defaultGameFolder = AppEnv::getGTAVFolder(&ok);
     settings->beginGroup("dir");
     currentCFolder = settings->value("dir", "").toString();
     currentFFolder = settings->value("force", false).toBool();

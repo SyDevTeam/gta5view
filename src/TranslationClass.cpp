@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2017-2021 Syping
+* Copyright (C) 2017-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -484,7 +484,7 @@ QString TranslationClass::getCurrentAreaLanguage()
 {
     const QStringList areaTranslations = listAreaTranslations();
     if (userAreaLanguage == "Auto" || userAreaLanguage.trimmed().isEmpty()) {
-        const GameLanguage gameLanguage = AppEnv::getGameLanguage(AppEnv::getGameVersion());
+        const GameLanguage gameLanguage = AppEnv::getGTAVLanguage(AppEnv::getGTAVVersion());
         if (gameLanguage == GameLanguage::Undefined) {
 #ifdef GTA5SYNC_DEBUG
             qDebug() << "autoAreaLanguageModeInterface";

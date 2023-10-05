@@ -19,7 +19,6 @@
 #include "ProfileInterface.h"
 #include "ui_ProfileInterface.h"
 #include "PlayerListDialog.h"
-#include "SidebarGenerator.h"
 #include "SnapmaticWidget.h"
 #include "DatabaseThread.h"
 #include "SavegameWidget.h"
@@ -563,10 +562,6 @@ fileDialogPreOpen: //Work?
     filters << tr("All image files (%1)").arg(imageFormatsStr.trimmed());
     filters << tr("All files (%1)").arg("**");
     fileDialog.setNameFilters(filters);
-
-    QList<QUrl> sidebarUrls = SidebarGenerator::generateSidebarUrls(fileDialog.sidebarUrls());
-
-    fileDialog.setSidebarUrls(sidebarUrls);
     fileDialog.setDirectory(settings.value(profileName % "+Directory", StandardPaths::documentsLocation()).toString());
     fileDialog.restoreGeometry(settings.value(profileName % "+Geometry", "").toByteArray());
 

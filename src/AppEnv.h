@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2021 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -35,8 +35,8 @@ public:
     static QString getBuildCode();
 
     // Folder Stuff
-    static QString getGameFolder(bool *ok = 0);
-    static bool setGameFolder(QString gameFolder);
+    static QString getGTAVFolder(bool *ok = 0);
+    static bool setGTAVFolder(QString gameFolder);
     static QString getExLangFolder();
     static QString getInLangFolder();
     static QString getImagesFolder();
@@ -50,11 +50,10 @@ public:
     static QUrl getPlayerFetchingUrl(QString crewID, int pageNumber);
 
     // Game Stuff
-    static GameVersion getGameVersion();
-    static GameLanguage getGameLanguage(GameVersion gameVersion);
+    static GameVersion getGTAVVersion();
+    static GameLanguage getGTAVLanguage(GameVersion gameVersion);
     static GameLanguage gameLanguageFromString(QString gameLanguage);
     static QString gameLanguageToString(GameLanguage gameLanguage);
-    static bool setGameLanguage(GameVersion gameVersion, GameLanguage gameLanguage);
 
     // Screen Stuff
     static qreal screenRatio();
