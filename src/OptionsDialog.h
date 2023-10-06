@@ -36,12 +36,13 @@ class OptionsDialog : public QDialog
 
 public:
     explicit OptionsDialog(ProfileDatabase *profileDB, QWidget *parent = 0);
-    void commitProfiles(const QStringList &profiles);
+    void commitProfiles(const QStringList &profiles, const QString &game);
     ~OptionsDialog();
 
 private slots:
     void on_cmdOK_clicked();
     void on_cmdExploreFolder_clicked();
+    void on_cmdExploreFolder_RDR2_clicked();
     void on_cbDefaultStyle_toggled(bool checked);
     void on_cbDefaultFont_toggled(bool checked);
     void on_cmdCopyStatsID_clicked();
@@ -61,6 +62,7 @@ private:
     QString currentCFolder;
     QString currentCFolderR;
     QString defaultProfile;
+    QString defaultGame;
     QString percentString;
     bool withoutPlayers;
     bool currentFFolder;

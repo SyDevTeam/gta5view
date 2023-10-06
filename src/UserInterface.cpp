@@ -32,12 +32,14 @@
 #include <QtGlobal>
 #include <QStringBuilder>
 #include <QStyleFactory>
+#include <QToolButton>
 #include <QFileDialog>
 #include <QHBoxLayout>
 #include <QSpacerItem>
 #include <QPushButton>
 #include <QMessageBox>
 #include <QSettings>
+#include <QLineEdit>
 #include <QFileInfo>
 #include <QTimer>
 #include <QDebug>
@@ -108,10 +110,10 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 
     // Set Icon for Choose GTA V Folder Menu Item
     if (QIcon::hasThemeIcon("document-open-folder")) {
-        ui->actionSelect_GTA_Folder->setIcon(QIcon::fromTheme("document-open-folder"));
+        ui->actionSelect_Game_Folder->setIcon(QIcon::fromTheme("document-open-folder"));
     }
     else if (QIcon::hasThemeIcon("gtk-directory")) {
-        ui->actionSelect_GTA_Folder->setIcon(QIcon::fromTheme("gtk-directory"));
+        ui->actionSelect_Game_Folder->setIcon(QIcon::fromTheme("gtk-directory"));
     }
 
     // Set Icon for Open File Menu Item
@@ -302,6 +304,10 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 #endif
 #endif
 
+    // Profile UI defaults
+    ui->labGTAV->setVisible(false);
+    ui->labRDR2->setVisible(false);
+
     // DPI calculation
     qreal screenRatio = AppEnv::screenRatio();
     resize(625 * screenRatio, 500 * screenRatio);
@@ -309,18 +315,23 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->vlUserInterface->setContentsMargins(9 * screenRatio, 9 * screenRatio, 9 * screenRatio, 9 * screenRatio);
 }
 
-void UserInterface::setupDirEnv(bool showFolderWindow)
+void UserInterface::setupDirEnv()
 {
-    // settings init
     QSettings settings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
 
     bool folderExists_GTAV, folderExists_RDR2;
-    GTAV_Folder = AppEnv::getGTAVFolder(&folderExists_GTAV);
-    RDR2_Folder = AppEnv::getRDR2Folder(&folderExists_RDR2);
+    if (GTAV_Folder.isEmpty())
+        GTAV_Folder = AppEnv::getGTAVFolder(&folderExists_GTAV);
+    else
+        folderExists_GTAV = QDir(GTAV_Folder).exists();
+    if (RDR2_Folder.isEmpty())
+        RDR2_Folder = AppEnv::getRDR2Folder(&folderExists_RDR2);
+    else
+        folderExists_RDR2 = QDir(RDR2_Folder).exists();
 
-    // profiles init
     settings.beginGroup("Profile");
-    QString defaultProfile = settings.value("Default", QString()).toString();
+    const QString defaultProfile = settings.value("Default", QString()).toString();
+    const QString defaultGame = settings.value("DefaultGame", QStringLiteral("GTA V")).toString();
     settings.endGroup();
 
     contentMode = settings.value("ContentMode", 0).toInt();
@@ -351,19 +362,23 @@ void UserInterface::setupDirEnv(bool showFolderWindow)
 
     setupProfileUi();
 
-    if (GTAV_Profiles.contains(defaultProfile)) {
-        openProfile(defaultProfile, RagePhoto::PhotoFormat::GTA5);
-    }
-    else if (GTAV_Profiles.length() == 1 && RDR2_Profiles.length() == 0) {
+    if (GTAV_Profiles.length() == 1 && RDR2_Profiles.length() == 0) {
         openProfile(GTAV_Profiles.at(0), RagePhoto::PhotoFormat::GTA5);
     }
     else if (GTAV_Profiles.length() == 0 && RDR2_Profiles.length() == 1) {
         openProfile(RDR2_Profiles.at(0), RagePhoto::PhotoFormat::RDR2);
     }
+    else if (defaultGame == QStringLiteral("GTA V") && GTAV_Profiles.contains(defaultProfile)) {
+        openProfile(defaultProfile, RagePhoto::PhotoFormat::GTA5);
+    }
+    else if (defaultGame == QStringLiteral("RDR 2") && RDR2_Profiles.contains(defaultProfile)) {
+        openProfile(defaultProfile, RagePhoto::PhotoFormat::RDR2);
+    }
 }
 
 void UserInterface::setupProfileUi()
 {
+    bool profileFound = false;
     qreal screenRatio = AppEnv::screenRatio();
     if (!GTAV_Profiles.isEmpty()) {
         int row = 1;
@@ -380,6 +395,7 @@ void UserInterface::setupProfileUi()
             });
         }
         ui->labGTAV->setVisible(true);
+        profileFound = true;
     }
     else {
         ui->labGTAV->setVisible(false);
@@ -399,15 +415,23 @@ void UserInterface::setupProfileUi()
             });
         }
         ui->labRDR2->setVisible(true);
+        profileFound = true;
     }
     else {
         ui->labRDR2->setVisible(false);
+    }
+    if (profileFound) {
+        ui->cmdSelectGameFolder->setVisible(false);
+    }
+    else {
+        ui->cmdSelectGameFolder->setVisible(true);
+        ui->cmdSelectGameFolder->setFocus();
     }
 }
 
 void UserInterface::changeFolder_clicked()
 {
-    on_actionSelect_GTA_Folder_triggered();
+    on_actionSelect_Game_Folder_triggered();
 }
 
 void UserInterface::on_cmdReload_clicked()
@@ -497,12 +521,11 @@ void UserInterface::openSelectProfile()
 
 void UserInterface::on_actionAbout_gta5sync_triggered()
 {
-    AboutDialog *aboutDialog = new AboutDialog(this);
-    aboutDialog->setWindowIcon(windowIcon());
-    aboutDialog->setModal(true);
-    aboutDialog->show();
-    aboutDialog->exec();
-    delete aboutDialog;
+    AboutDialog aboutDialog(this);
+    aboutDialog.setWindowIcon(windowIcon());
+    aboutDialog.setModal(true);
+    aboutDialog.show();
+    aboutDialog.exec();
 }
 
 void UserInterface::profileLoaded()
@@ -539,7 +562,8 @@ void UserInterface::on_actionOptions_triggered()
 {
     OptionsDialog optionsDialog(profileDB, this);
     optionsDialog.setWindowIcon(windowIcon());
-    optionsDialog.commitProfiles(GTAV_Profiles); // TODO: Diff. GTA V and RDR 2 profiles
+    optionsDialog.commitProfiles(GTAV_Profiles, QStringLiteral("GTA V"));
+    optionsDialog.commitProfiles(RDR2_Profiles, QStringLiteral("RDR 2"));
     QObject::connect(&optionsDialog, &OptionsDialog::settingsApplied, this, &UserInterface::settingsApplied);
     optionsDialog.setModal(true);
     optionsDialog.show();
@@ -807,15 +831,92 @@ void UserInterface::updateCacheId(uint cacheId)
 }
 #endif
 
-void UserInterface::on_actionSelect_GTA_Folder_triggered()
+void UserInterface::on_actionSelect_Game_Folder_triggered()
 {
-    const QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(this, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
-    if (!GTAV_Folder_Temp.isEmpty() && QDir(GTAV_Folder_Temp).exists()) {
-        if (profileOpen) {
-            closeProfile_p();
+    QDialog gameFolderDialog;
+    gameFolderDialog.setWindowTitle(tr("Select Game Folder..."));
+    gameFolderDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+
+    QVBoxLayout *gameFolderLayout = new QVBoxLayout(&gameFolderDialog);
+
+    QHBoxLayout gtaFolderLayout;
+    gameFolderLayout->addLayout(&gtaFolderLayout);
+    QLabel *gtaLabel = new QLabel(tr("GTA V:"), &gameFolderDialog);
+    gtaFolderLayout.addWidget(gtaLabel);
+    QLineEdit *gtaLocation = new QLineEdit(AppEnv::getGTAVFolder(), &gameFolderDialog);
+    gtaLocation->setMinimumWidth(400);
+    gtaLocation->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+    gtaFolderLayout.addWidget(gtaLocation);
+    QToolButton *gtaSelectButton = new QToolButton(&gameFolderDialog);
+    gtaSelectButton->setText(QStringLiteral("..."));
+    QObject::connect(gtaSelectButton, &QPushButton::clicked, &gameFolderDialog, [&](){
+        const QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(&gameFolderDialog, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+        if (!GTAV_Folder_Temp.isEmpty() && QDir(GTAV_Folder_Temp).exists())
+            gtaLocation->setText(GTAV_Folder_Temp);
+    });
+    gtaFolderLayout.addWidget(gtaSelectButton);
+
+    QHBoxLayout rdrFolderLayout;
+    gameFolderLayout->addLayout(&rdrFolderLayout);
+    QLabel *rdrLabel = new QLabel(tr("RDR 2:"), &gameFolderDialog);
+    rdrFolderLayout.addWidget(rdrLabel);
+    QLineEdit *rdrLocation = new QLineEdit(AppEnv::getRDR2Folder(), &gameFolderDialog);
+    rdrLocation->setMinimumWidth(400);
+    rdrLocation->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Minimum);
+    rdrFolderLayout.addWidget(rdrLocation);
+    QToolButton *rdrSelectButton = new QToolButton(&gameFolderDialog);
+    rdrSelectButton->setText(QStringLiteral("..."));
+    QObject::connect(rdrSelectButton, &QPushButton::clicked, &gameFolderDialog, [&](){
+        const QString RDR2_Folder_Temp = QFileDialog::getExistingDirectory(&gameFolderDialog, tr("Select RDR 2 Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+        if (!RDR2_Folder_Temp.isEmpty() && QDir(RDR2_Folder_Temp).exists())
+            rdrLocation->setText(RDR2_Folder_Temp);
+    });
+    rdrFolderLayout.addWidget(rdrSelectButton);
+
+    QSpacerItem *gameFolderSpacer = new QSpacerItem(0, 0, QSizePolicy::Minimum, QSizePolicy::Expanding);
+    gameFolderLayout->addSpacerItem(gameFolderSpacer);
+
+    QHBoxLayout buttonLayout;
+    gameFolderLayout->addLayout(&buttonLayout);
+    QSpacerItem *buttonSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    buttonLayout.addSpacerItem(buttonSpacer);
+    QPushButton *selectButton = new QPushButton(tr("&Select"), &gameFolderDialog);
+    QObject::connect(selectButton, &QPushButton::clicked, &gameFolderDialog, &QDialog::accept);
+    selectButton->setFocus();
+    buttonLayout.addWidget(selectButton);
+    QPushButton *closeButton = new QPushButton(tr("&Close"), &gameFolderDialog);
+    QObject::connect(closeButton, &QPushButton::clicked, &gameFolderDialog, &QDialog::reject);
+    buttonLayout.addWidget(closeButton);
+
+    gameFolderDialog.setMinimumSize(gameFolderDialog.sizeHint());
+    gameFolderDialog.setMaximumSize(gameFolderDialog.sizeHint());
+
+    if (gameFolderDialog.exec() == QDialog::Accepted) {
+        const QString GTAV_Folder_Temp = gtaLocation->text();
+        const QString RDR2_Folder_Temp = rdrLocation->text();
+        const bool folderExists_GTAV = (!GTAV_Folder_Temp.isEmpty() && QDir(GTAV_Folder_Temp).exists());
+        const bool folderExists_RDR2 = (!RDR2_Folder_Temp.isEmpty() && QDir(RDR2_Folder_Temp).exists());
+        if (folderExists_GTAV && folderExists_RDR2) {
+            GTAV_Folder = GTAV_Folder_Temp;
+            RDR2_Folder = RDR2_Folder_Temp;
+            if (profileOpen)
+                closeProfile_p();
+            on_cmdReload_clicked();
         }
-        GTAV_Folder = GTAV_Folder_Temp;
-        on_cmdReload_clicked();
+        else if (folderExists_GTAV && !folderExists_RDR2) {
+            GTAV_Folder = GTAV_Folder_Temp;
+            RDR2_Folder = QString();
+            if (profileOpen)
+                closeProfile_p();
+            on_cmdReload_clicked();
+        }
+        else if (folderExists_RDR2 && !folderExists_GTAV) {
+            GTAV_Folder = QString();
+            RDR2_Folder = RDR2_Folder_Temp;
+            if (profileOpen)
+                closeProfile_p();
+            on_cmdReload_clicked();
+        }
     }
 }
 

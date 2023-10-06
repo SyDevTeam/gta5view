@@ -93,6 +93,22 @@
          </layout>
         </item>
         <item>
+         <widget class="QPushButton" name="cmdSelectGameFolder">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Select &amp;Game Folder...</string>
+          </property>
+          <property name="autoDefault">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="vsFooter">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -186,7 +202,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
-    <addaction name="actionSelect_GTA_Folder"/>
+    <addaction name="actionSelect_Game_Folder"/>
     <addaction name="actionOpen_File"/>
     <addaction name="actionSelect_profile"/>
     <addaction name="separator"/>
@@ -322,9 +338,9 @@
     <string notr="true">Ctrl+O</string>
    </property>
   </action>
-  <action name="actionSelect_GTA_Folder">
+  <action name="actionSelect_Game_Folder">
    <property name="text">
-    <string>Select &amp;GTA V Folder...</string>
+    <string>Select &amp;Game Folder...</string>
    </property>
    <property name="toolTip">
     <string>Select GTA V Folder...</string>
@@ -393,6 +409,22 @@
     <hint type="sourcelabel">
      <x>572</x>
      <y>476</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>312</x>
+     <y>249</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cmdSelectGameFolder</sender>
+   <signal>clicked()</signal>
+   <receiver>actionSelect_Game_Folder</receiver>
+   <slot>trigger()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>312</x>
+     <y>256</y>
     </hint>
     <hint type="destinationlabel">
      <x>312</x>

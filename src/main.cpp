@@ -150,15 +150,15 @@ int main(int argc, char *argv[])
         telemetryCheckBox->setObjectName(QStringLiteral("TelemetryCheckBox"));
         telemetryCheckBox->setText(QApplication::translate("TelemetryDialog", "Yes, I want include personal usage data."));
         telemetryLayout->addWidget(telemetryCheckBox);
-        QHBoxLayout *telemetryButtonLayout = new QHBoxLayout();
-        telemetryButtonLayout->setObjectName(QStringLiteral("TelemetryButtonLayout"));
-        telemetryLayout->addLayout(telemetryButtonLayout);
+        QHBoxLayout telemetryButtonLayout;
+        telemetryButtonLayout.setObjectName(QStringLiteral("TelemetryButtonLayout"));
+        telemetryLayout->addLayout(&telemetryButtonLayout);
         QSpacerItem *telemetryButtonSpacer = new QSpacerItem(0, 0, QSizePolicy::Expanding, QSizePolicy::Minimum);
-        telemetryButtonLayout->addSpacerItem(telemetryButtonSpacer);
+        telemetryButtonLayout.addSpacerItem(telemetryButtonSpacer);
         QPushButton *telemetryButton = new QPushButton(&telemetryDialog);
         telemetryButton->setObjectName(QStringLiteral("TelemetryButton"));
         telemetryButton->setText(QApplication::translate("TelemetryDialog", "&OK"));
-        telemetryButtonLayout->addWidget(telemetryButton);
+        telemetryButtonLayout.addWidget(telemetryButton);
         QObject::connect(telemetryButton, &QPushButton::clicked, &telemetryDialog, &QDialog::close);
         telemetryDialog.setFixedSize(telemetryDialog.sizeHint());
         telemetryDialog.exec();
@@ -287,11 +287,7 @@ int main(int argc, char *argv[])
     UserInterface uiWindow(&profileDB, &crewDB, &threadDB);
 #endif
     uiWindow.setWindowIcon(IconLoader::loadingAppIcon());
-#ifdef GTA5SYNC_FLATPAK
-    uiWindow.setupDirEnv(false);
-#else
     uiWindow.setupDirEnv();
-#endif
     uiWindow.show();
 
     return a.exec();

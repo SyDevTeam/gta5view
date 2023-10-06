@@ -185,12 +185,7 @@ void OptionsDialog::setupLanguageBox(QSettings *settings)
             ui->cbLanguage->addItem(cbLangStr, lang);
         }
         if (currentLanguage == lang) {
-#if QT_VERSION >= 0x050000
             ui->cbLanguage->setCurrentText(cbLangStr);
-#else
-            int indexOfLang = ui->cbLanguage->findText(cbLangStr);
-            ui->cbLanguage->setCurrentIndex(indexOfLang);
-#endif
         }
     }
 
@@ -352,11 +347,31 @@ void OptionsDialog::applySettings()
         newContentMode++;
     }
     settings.setValue("ContentMode", newContentMode);
-#if QT_VERSION >= 0x050000
-    settings.setValue("Default", ui->cbProfiles->currentData());
+#if QT_VERSION >= 0x060000
+    if (ui->cbProfiles->currentData().typeId() == QMetaType::QString)
 #else
-    settings->setValue("Default", ui->cbProfiles->itemData(ui->cbProfiles->currentIndex()));
+    if (ui->cbProfiles->currentData().type() == QVariant::String)
 #endif
+    {
+        settings.setValue("Default", ui->cbProfiles->currentData());
+        settings.remove("DefaultGame");
+    }
+#if QT_VERSION >= 0x060000
+    if (ui->cbProfiles->currentData().typeId() == QMetaType::QStringList)
+#else
+    if (ui->cbProfiles->currentData().type() == QVariant::StringList)
+#endif
+    {
+        const QStringList dataList = ui->cbProfiles->currentData().toStringList();
+        if (dataList.length() == 2) {
+            settings.setValue("Default", dataList.at(0));
+            settings.setValue("DefaultGame", dataList.at(1));
+        }
+        else {
+            settings.setValue("Default", QVariant());
+            settings.remove("DefaultGame");
+        }
+    }
     settings.endGroup();
 
     const bool forceCustomFolder = ui->cbForceCustomFolder->isChecked();
@@ -417,13 +432,8 @@ void OptionsDialog::applySettings()
     }
 #endif
 
-#if QT_VERSION >= 0x050000
-    bool languageChanged = ui->cbLanguage->currentData().toString() != currentLanguage;
-    bool languageAreaChanged = ui->cbAreaLanguage->currentData().toString() != currentAreaLanguage;
-#else
-    bool languageChanged = ui->cbLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentLanguage;
-    bool languageAreaChanged = ui->cbAreaLanguage->itemData(ui->cbLanguage->currentIndex()).toString() != currentAreaLanguage;
-#endif
+    const bool languageChanged = ui->cbLanguage->currentData().toString() != currentLanguage;
+    const bool languageAreaChanged = ui->cbAreaLanguage->currentData().toString() != currentAreaLanguage;
     if (languageChanged) {
         Translator->unloadTranslation(qApp);
         Translator->initUserLanguage();
@@ -436,7 +446,7 @@ void OptionsDialog::applySettings()
     settings.sync();
     emit settingsApplied(newContentMode, languageChanged);
 
-    if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder)) {
+    if ((forceCustomFolder && ui->txtFolder->text() != currentCFolder) || (forceCustomFolder != currentFFolder && forceCustomFolder) || (forceCustomFolder_RDR2 && ui->txtFolder_RDR2->text() != currentCFolderR) || (forceCustomFolder_RDR2 != currentFFolderR && forceCustomFolder_RDR2)) {
         QMessageBox::information(this, tr("%1", "%1").arg(GTA5SYNC_APPSTR), tr("The new Custom Folder will initialise after you restart %1.").arg(GTA5SYNC_APPSTR));
     }
 }
@@ -445,23 +455,19 @@ void OptionsDialog::setupDefaultProfile(QSettings *settings)
 {
     settings->beginGroup("Profile");
     defaultProfile = settings->value("Default", QString()).toString();
+    defaultGame = settings->value("DefaultGame", QStringLiteral("GTA V")).toString();
     settings->endGroup();
 
     QString cbNoneStr = tr("No Profile", "No Profile, as default");
     ui->cbProfiles->addItem(cbNoneStr, QString());
 }
 
-void OptionsDialog::commitProfiles(const QStringList &profiles)
+void OptionsDialog::commitProfiles(const QStringList &profiles, const QString &game)
 {
     for (const QString &profile : profiles) {
-        ui->cbProfiles->addItem(tr("Profile: %1").arg(profile), profile);
-        if (defaultProfile == profile) {
-#if QT_VERSION >= 0x050000
-            ui->cbProfiles->setCurrentText(tr("Profile: %1").arg(profile));
-#else
-            int indexOfProfile = ui->cbProfiles->findText(tr("Profile: %1").arg(profile));
-            ui->cbProfiles->setCurrentIndex(indexOfProfile);
-#endif
+        ui->cbProfiles->addItem(tr("%2: %1").arg(profile, game), QStringList() << profile << game);
+        if (defaultGame == game && defaultProfile == profile) {
+            ui->cbProfiles->setCurrentText(tr("%2: %1").arg(profile, game));
         }
     }
 }
@@ -604,6 +610,14 @@ void OptionsDialog::on_cmdExploreFolder_clicked()
     const QString GTAV_Folder = QFileDialog::getExistingDirectory(this, UserInterface::tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
     if (!GTAV_Folder.isEmpty() && QDir(GTAV_Folder).exists()) {
         ui->txtFolder->setText(GTAV_Folder);
+    }
+}
+
+void OptionsDialog::on_cmdExploreFolder_RDR2_clicked()
+{
+    const QString RDR2_Folder = QFileDialog::getExistingDirectory(this, UserInterface::tr("Select RDR 2 Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
+    if (!RDR2_Folder.isEmpty() && QDir(RDR2_Folder).exists()) {
+        ui->txtFolder_RDR2->setText(RDR2_Folder);
     }
 }
 

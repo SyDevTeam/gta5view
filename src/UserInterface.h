@@ -48,7 +48,7 @@ public:
 #else
     explicit UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, DatabaseThread *threadDB, QWidget *parent = 0);
 #endif
-    void setupDirEnv(bool showFolderWindow = true);
+    void setupDirEnv();
     ~UserInterface();
 
 private slots:
@@ -66,7 +66,7 @@ private slots:
     void on_actionOptions_triggered();
     void on_action_Import_triggered();
     void on_actionOpen_File_triggered();
-    void on_actionSelect_GTA_Folder_triggered();
+    void on_actionSelect_Game_Folder_triggered();
     void on_action_Enable_In_game_triggered();
     void on_action_Disable_In_game_triggered();
     void on_actionQualify_as_Avatar_triggered();
