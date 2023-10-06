@@ -36,7 +36,7 @@
 #include <QDesktopWidget>
 #endif
 
-ExportThread::ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, int exportCount, QObject *parent) : QThread(parent),
+ExportThread::ExportThread(QHash<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, int exportCount, QObject *parent) : QThread(parent),
     profileMap(profileMap), exportDirectory(exportDirectory), pictureCopyEnabled(pictureCopyEnabled), pictureExportEnabled(pictureExportEnabled), exportCount(exportCount)
 {
 }
@@ -59,9 +59,12 @@ void ExportThread::run()
                     emit exportStringUpdate(ProfileInterface::tr("Export file %1 of %2 files").arg(QString::number(intExportProgress), QString::number(exportCount)));
                     emit exportProgressUpdate(intExportProgress);
 
+                    bool isSaved = false;
                     QSaveFile exportFile(exportDirectory % "/" % exportFileName);
-                    exportFile.write(picture->getPictureStream());
-                    bool isSaved = exportFile.commit();
+                    if (exportFile.open(QIODevice::WriteOnly)) {
+                        exportFile.write(picture->getPictureStream());
+                        isSaved = exportFile.commit();
+                    }
 
                     if (!isSaved)
                         failedExportPictures += exportFileName;

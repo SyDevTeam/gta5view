@@ -169,12 +169,13 @@ void PictureDialog::setupPictureDialog()
     // Manage menu
     manageMenu = new QMenu(this);
     manageMenu->addAction(tr("Export as &Picture..."), this, &PictureDialog::exportSnapmaticPicture);
-    manageMenu->addAction(tr("Export as &Snapmatic..."), this, &PictureDialog::copySnapmaticPicture);
+    exportPhotoAction = manageMenu->addAction(tr("Export as &RAGE Photo..."), this, &PictureDialog::copySnapmaticPicture);
     manageMenu->addSeparator();
     manageMenu->addAction(tr("&Edit Properties..."), this, &PictureDialog::editSnapmaticProperties);
     manageMenu->addAction(tr("&Overwrite Image..."), this, &PictureDialog::editSnapmaticImage);
     manageMenu->addSeparator();
-    QAction *openViewerAction = manageMenu->addAction(tr("Open &Map Viewer..."), this, &PictureDialog::openPreviewMap);
+    openViewerAction = manageMenu->addAction(tr("Open &Map Viewer..."), this, &PictureDialog::openPreviewMap);
+    openViewerAction->setEnabled(false);
     openViewerAction->setShortcut(Qt::Key_M);
     manageMenu->addAction(tr("Open &JSON Editor..."), this, &PictureDialog::editSnapmaticRawJson);
     ui->cmdManage->setMenu(manageMenu);
@@ -490,6 +491,17 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         snapmaticPicture = picture->getImage();
         renderPicture();
         ui->cmdManage->setEnabled(true);
+        if (smpic->getSnapmaticFormat() == SnapmaticFormat::PGTA5_Format)
+            exportPhotoAction->setText(tr("Export as &GTA V Snapmatic..."));
+        else if (smpic->getSnapmaticFormat() == SnapmaticFormat::G5E_Format)
+            exportPhotoAction->setText(tr("Export as &GTA V Snapmatic..."));
+        else if (smpic->getSnapmaticFormat() == SnapmaticFormat::PRDR3_Format)
+            exportPhotoAction->setText(tr("Export as &RDR 2 Photo..."));
+        else
+            exportPhotoAction->setText(tr("Export as &RAGE Photo..."));
+    }
+    else {
+        exportPhotoAction->setText(tr("Export as &RAGE Photo..."));
     }
     if (picture->isJsonOk()) {
         crewStr = crewDB->getCrewName(crewID);
@@ -498,10 +510,17 @@ void PictureDialog::setSnapmaticPicture(SnapmaticPicture *picture, bool readOk, 
         else
             picAreaStr = picArea;
         ui->labJSON->setText(jsonDrawString.arg(locX, locY, locZ, generatePlayersString(), generateCrewString(), picTitl, picAreaStr, created));
+        if (smpic->getSnapmaticFormat() == SnapmaticFormat::PGTA5_Format)
+            openViewerAction->setEnabled(true);
+        else if (smpic->getSnapmaticFormat() == SnapmaticFormat::G5E_Format)
+            openViewerAction->setEnabled(true);
+        else
+            openViewerAction->setEnabled(false);
         QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);
     }
     else {
         ui->labJSON->setText(jsonDrawString.arg("0", "0", "0", tr("No Players"), tr("No Crew"), tr("Unknown Location")));
+        openViewerAction->setEnabled(false);
         QTimer::singleShot(0, this, &PictureDialog::adaptDialogSize);
     }
     QObject::connect(smpic, &SnapmaticPicture::updated, this, &PictureDialog::updated);
@@ -642,29 +661,28 @@ void PictureDialog::on_labPicture_mouseDoubleClicked(Qt::MouseButton button)
 #else
         QRect desktopRect = QApplication::desktop()->screenGeometry(this);
 #endif
-        PictureWidget *pictureWidget = new PictureWidget(this); // Work!
-        pictureWidget->setObjectName("PictureWidget");
-        pictureWidget->setWindowFlag(Qt::FramelessWindowHint, true);
-        pictureWidget->setWindowFlag(Qt::MaximizeUsingFullscreenGeometryHint, true);
-        pictureWidget->setWindowTitle(windowTitle());
-        pictureWidget->setStyleSheet("QLabel#pictureLabel{background-color:black;}");
-        pictureWidget->setImage(smpic->getImage(), desktopRect);
-        pictureWidget->setModal(true);
+        PictureWidget pictureWidget(this);
+        pictureWidget.setObjectName("PictureWidget");
+        pictureWidget.setWindowFlag(Qt::FramelessWindowHint, true);
+        pictureWidget.setWindowFlag(Qt::MaximizeUsingFullscreenGeometryHint, true);
+        pictureWidget.setWindowTitle(windowTitle());
+        pictureWidget.setStyleSheet("QLabel#pictureLabel{background-color:black;}");
+        pictureWidget.setImage(smpic->getImage(), desktopRect);
+        pictureWidget.setModal(true);
 
-        fullscreenWidget = pictureWidget;
-        QObject::connect(this, &PictureDialog::newPictureCommited, pictureWidget, QOverload<QImage>::of(&PictureWidget::setImage));
-        QObject::connect(pictureWidget, &PictureWidget::nextPictureRequested, this, &PictureDialog::dialogNextPictureRequested);
-        QObject::connect(pictureWidget, &PictureWidget::previousPictureRequested, this, &PictureDialog::dialogPreviousPictureRequested);
+        fullscreenWidget = &pictureWidget;
+        QObject::connect(this, &PictureDialog::newPictureCommited, &pictureWidget, QOverload<QImage>::of(&PictureWidget::setImage));
+        QObject::connect(&pictureWidget, &PictureWidget::nextPictureRequested, this, &PictureDialog::dialogNextPictureRequested);
+        QObject::connect(&pictureWidget, &PictureWidget::previousPictureRequested, this, &PictureDialog::dialogPreviousPictureRequested);
 
-        pictureWidget->move(desktopRect.x(), desktopRect.y());
-        pictureWidget->resize(desktopRect.width(), desktopRect.height());
-        pictureWidget->showFullScreen();
-        pictureWidget->setFocus();
-        pictureWidget->raise();
-        pictureWidget->exec();
+        pictureWidget.move(desktopRect.x(), desktopRect.y());
+        pictureWidget.resize(desktopRect.width(), desktopRect.height());
+        pictureWidget.showFullScreen();
+        pictureWidget.setFocus();
+        pictureWidget.raise();
+        pictureWidget.exec();
 
-        fullscreenWidget = nullptr; // Work!
-        delete pictureWidget; // Work!
+        fullscreenWidget = nullptr;
     }
 }
 
@@ -861,7 +879,7 @@ void PictureDialog::updated()
 void PictureDialog::customSignal(QString signal)
 {
     SnapmaticPicture *picture = smpic; // used by macro
-    if (signal == "PictureUpdated") {
+    if (signal == QStringLiteral("PictureUpdated")) {
         snapmaticPicture = picture->getImage();
         renderPicture();
     }

@@ -124,6 +124,8 @@ private:
     int avatarLocX;
     int avatarLocY;
     int avatarSize;
+    QAction *exportPhotoAction;
+    QAction *openViewerAction;
     QMenu *manageMenu;
 #ifdef Q_OS_WIN
 #if QT_VERSION >= 0x050000

@@ -1,6 +1,6 @@
 /*****************************************************************************
 * gta5view Grand Theft Auto V Profile Viewer
-* Copyright (C) 2016-2017 Syping
+* Copyright (C) 2016-2023 Syping
 *
 * This program is free software: you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
@@ -29,7 +29,7 @@ class ExportThread : public QThread
 {
     Q_OBJECT
 public:
-    explicit ExportThread(QMap<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, int exportCount, QObject *parent = 0);
+    explicit ExportThread(QHash<ProfileWidget*,QString> profileMap, QString exportDirectory, bool pictureCopyEnabled, bool pictureExportEnabled, int exportCount, QObject *parent = 0);
     QStringList getFailedSavegames();
     QStringList getFailedCopyPictures();
     QStringList getFailedExportPictures();
@@ -38,7 +38,7 @@ protected:
     void run();
 
 private:
-    QMap <ProfileWidget*, QString> profileMap;
+    QHash<ProfileWidget*,QString> profileMap;
     QString exportDirectory;
     bool pictureCopyEnabled;
     bool pictureExportEnabled;

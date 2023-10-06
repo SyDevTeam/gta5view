@@ -228,12 +228,12 @@ int main(int argc, char *argv[])
         if (!readOk)
             return 1;
 
-        QObject::connect(&threadDB, SIGNAL(crewNameFound(int, QString)), &crewDB, SLOT(setCrewName(int, QString)));
-        QObject::connect(&threadDB, SIGNAL(crewNameUpdated()), &picDialog, SLOT(crewNameUpdated()));
-        QObject::connect(&threadDB, SIGNAL(playerNameFound(int, QString)), &profileDB, SLOT(setPlayerName(int, QString)));
-        QObject::connect(&threadDB, SIGNAL(playerNameUpdated()), &picDialog, SLOT(playerNameUpdated()));
-        QObject::connect(&threadDB, SIGNAL(finished()), &a, SLOT(quit()));
-        QObject::connect(&picDialog, SIGNAL(endDatabaseThread()), &threadDB, SLOT(terminateThread()));
+        QObject::connect(&threadDB, &DatabaseThread::crewNameFound, &crewDB, &CrewDatabase::setCrewName);
+        QObject::connect(&threadDB, &DatabaseThread::crewNameUpdated, &picDialog, &PictureDialog::crewNameUpdated);
+        QObject::connect(&threadDB, &DatabaseThread::playerNameFound, &profileDB, &ProfileDatabase::setPlayerName);
+        QObject::connect(&threadDB, &DatabaseThread::playerNameUpdated, &picDialog, &PictureDialog::playerNameUpdated);
+        QObject::connect(&threadDB, &DatabaseThread::finished, &a, &QApplication::quit);
+        QObject::connect(&picDialog, &PictureDialog::endDatabaseThread, &threadDB, &DatabaseThread::terminateThread);
         threadDB.start();
 
         picDialog.show();
@@ -261,9 +261,9 @@ int main(int argc, char *argv[])
     ProfileDatabase profileDB;
     DatabaseThread threadDB(&crewDB);
 
-    QObject::connect(&threadDB, SIGNAL(crewNameFound(int,QString)), &crewDB, SLOT(setCrewName(int, QString)));
-    QObject::connect(&threadDB, SIGNAL(playerNameFound(int, QString)), &profileDB, SLOT(setPlayerName(int, QString)));
-    QObject::connect(&threadDB, SIGNAL(finished()), &a, SLOT(quit()));
+    QObject::connect(&threadDB, &DatabaseThread::crewNameFound, &crewDB, &CrewDatabase::setCrewName);
+    QObject::connect(&threadDB, &DatabaseThread::playerNameFound, &profileDB, &ProfileDatabase::setPlayerName);
+    QObject::connect(&threadDB, &DatabaseThread::finished, &a, &QApplication::quit);
     threadDB.start();
 
 #ifdef GTA5SYNC_MOTD

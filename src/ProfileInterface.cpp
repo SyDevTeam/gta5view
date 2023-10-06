@@ -925,20 +925,20 @@ bool ProfileInterface::importRemote(QUrl remoteUrl)
     urlPasteDialog.setFixedSize(urlPasteDialog.sizeHint());
     urlPasteDialog.show();
 
-    QNetworkAccessManager *netManager = new QNetworkAccessManager();
+    QNetworkAccessManager netManager;
     QNetworkRequest netRequest(remoteUrl);
     netRequest.setRawHeader("User-Agent", AppEnv::getUserAgent());
     netRequest.setRawHeader("Accept", "text/html");
     netRequest.setRawHeader("Accept-Charset", "utf-8");
     netRequest.setRawHeader("Accept-Language", "en-US,en;q=0.9");
     netRequest.setRawHeader("Connection", "keep-alive");
-    QNetworkReply *netReply = netManager->get(netRequest);
-    QEventLoop *downloadLoop = new QEventLoop();
-    QObject::connect(netReply, SIGNAL(finished()), downloadLoop, SLOT(quit()));
-    QTimer::singleShot(30000, downloadLoop, SLOT(quit()));
-    downloadLoop->exec();
-    downloadLoop->disconnect();
-    delete downloadLoop;
+    QNetworkReply *netReply = netManager.get(netRequest);
+    netReply->setParent(&netManager);
+    QEventLoop downloadLoop;
+    QObject::connect(netReply, &QNetworkReply::finished, &downloadLoop, &QEventLoop::quit);
+    QTimer::singleShot(30000, &downloadLoop, &QEventLoop::quit);
+    downloadLoop.exec();
+    downloadLoop.disconnect();
 
     urlPasteDialog.close();
 
@@ -957,8 +957,6 @@ bool ProfileInterface::importRemote(QUrl remoteUrl)
     else {
         netReply->abort();
     }
-    delete netReply;
-    delete netManager;
     return retValue;
 }
 
@@ -966,14 +964,14 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
 {
     SnapmaticPicture *picture = new SnapmaticPicture();
     picture->initialise(photoFormat);
-    ImportDialog *importDialog = new ImportDialog(profileName, this);
-    importDialog->setImage(snapmaticImage);
-    importDialog->setModal(true);
-    importDialog->show();
-    importDialog->exec();
+    ImportDialog importDialog(profileName, this);
+    importDialog.setImage(snapmaticImage);
+    importDialog.setModal(true);
+    importDialog.show();
+    importDialog.exec();
     bool success = false;
-    if (importDialog->isImportAgreed()) {
-        if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
+    if (importDialog.isImportAgreed()) {
+        if (picture->setImage(importDialog.image(), importDialog.isUnlimitedBuffer())) {
             QString fileFormat;
             switch (photoFormat) {
             case RagePhoto::PhotoFormat::GTA5:
@@ -1011,7 +1009,7 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
 #endif
             picture->setSnapmaticProperties(spJson);
             picture->setPicFileName(fileFormat.arg(QString::number(spJson.uid)));
-            picture->setPictureTitle(importDialog->getImageTitle());
+            picture->setPictureTitle(importDialog.getImageTitle());
             success = importSnapmaticPicture(picture, true);
         }
     }
@@ -1019,7 +1017,6 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
         delete picture;
         success = true;
     }
-    delete importDialog;
     if (!success)
         delete picture;
     return success;
@@ -1214,10 +1211,13 @@ void ProfileInterface::exportSelected()
 
             if (exportPictures != 0) {
                 QInputDialog inputDialog;
+                inputDialog.setWindowFlag(Qt::WindowContextHelpButtonHint, false);
+                inputDialog.setWindowFlag(Qt::WindowMinMaxButtonsHint, false);
+
                 QStringList inputDialogItems;
-                inputDialogItems << tr("JPG pictures and GTA Snapmatic");
-                inputDialogItems << tr("JPG pictures only");
-                inputDialogItems << tr("GTA Snapmatic only");
+                inputDialogItems << tr("JPEG pictures, GTA V Snapmatic and RDR 2 Photo");
+                inputDialogItems << tr("JPEG pictures");
+                inputDialogItems << tr("GTA V Snapmatic and RDR 2 Photo");
 
                 QString ExportPreSpan;
                 QString ExportPostSpan;
@@ -1230,16 +1230,16 @@ void ProfileInterface::exportSelected()
 #endif
 
                 bool itemSelected = false;
-                QString selectedItem = inputDialog.getItem(this, tr("Export selected..."), tr("%1Export Snapmatic pictures%2<br><br>JPG pictures make it possible to open the picture with a Image Viewer<br>GTA Snapmatic make it possible to import the picture into the game<br><br>Export as:").arg(ExportPreSpan, ExportPostSpan), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags()^Qt::WindowContextHelpButtonHint);
+                QString selectedItem = inputDialog.getItem(this, tr("Export selected..."), tr("%1Export GTA V Snapmatic and RDR 2 Photo%2<br><br>JPEG pictures can be open by your operating system and various software, but will lose metadata saved from the game<br>GTA V Snapmatic and RDR 2 Photo keeps all metadata, but the software compatibility is limited<br><br>Export as:").arg(ExportPreSpan, ExportPostSpan), inputDialogItems, 0, false, &itemSelected, inputDialog.windowFlags());
                 if (itemSelected) {
-                    if (selectedItem == tr("JPG pictures and GTA Snapmatic")) {
+                    if (selectedItem == tr("JPEG pictures, GTA V Snapmatic and RDR 2 Photo")) {
                         pictureExportEnabled = true;
                         pictureCopyEnabled = true;
                     }
-                    else if (selectedItem == tr("JPG pictures only")) {
+                    else if (selectedItem == tr("JPEG pictures")) {
                         pictureExportEnabled = true;
                     }
-                    else if (selectedItem == tr("GTA Snapmatic only")) {
+                    else if (selectedItem == tr("GTA V Snapmatic and RDR 2 Photo")) {
                         pictureCopyEnabled = true;
                     }
                     else {
@@ -1278,17 +1278,17 @@ void ProfileInterface::exportSelected()
             QList<QProgressBar*> pbBar = pbDialog.findChildren<QProgressBar*>();
             pbBar.at(0)->setTextVisible(false);
 
-            ExportThread *exportThread = new ExportThread(widgets, exportDirectory, pictureCopyEnabled, pictureExportEnabled, exportCount);
-            QObject::connect(exportThread, SIGNAL(exportStringUpdate(QString)), &pbDialog, SLOT(setLabelText(QString)));
-            QObject::connect(exportThread, SIGNAL(exportProgressUpdate(int)), &pbDialog, SLOT(setValue(int)));
-            QObject::connect(exportThread, SIGNAL(exportFinished()), &pbDialog, SLOT(close()));
-            exportThread->start();
+            ExportThread exportThread(widgets, exportDirectory, pictureCopyEnabled, pictureExportEnabled, exportCount);
+            QObject::connect(&exportThread, &ExportThread::exportStringUpdate, &pbDialog, &QProgressDialog::setLabelText);
+            QObject::connect(&exportThread, &ExportThread::exportProgressUpdate, &pbDialog, &QProgressDialog::setValue);
+            QObject::connect(&exportThread, &ExportThread::exportFinished, &pbDialog, &QProgressDialog::close);
+            exportThread.start();
 
             pbDialog.setAutoClose(false);
             pbDialog.exec();
-            QStringList getFailedSavegames = exportThread->getFailedSavegames();
-            QStringList getFailedCopyPictures = exportThread->getFailedCopyPictures();
-            QStringList getFailedExportPictures = exportThread->getFailedExportPictures();
+            QStringList getFailedSavegames = exportThread.getFailedSavegames();
+            QStringList getFailedCopyPictures = exportThread.getFailedCopyPictures();
+            QStringList getFailedExportPictures = exportThread.getFailedExportPictures();
 
             QString errorStr;
             QStringList errorList;
@@ -1299,33 +1299,29 @@ void ProfileInterface::exportSelected()
             for (const QString &curErrorStr : qAsConst(errorList)) {
                 errorStr += ", " % curErrorStr;
             }
-            if (errorStr != "") {
+            if (!errorStr.isEmpty()) {
                 errorStr.remove(0, 2);
                 QMessageBox::warning(this, tr("Export selected..."), tr("Export failed with...\n\n%1").arg(errorStr));
             }
 
-            if (exportThread->isFinished()) {
-                delete exportThread;
-            }
-            else {
+            if (!exportThread.isFinished()) {
                 QEventLoop threadFinishLoop;
-                QObject::connect(exportThread, SIGNAL(finished()), &threadFinishLoop, SLOT(quit()));
+                QObject::connect(&exportThread, &ExportThread::finished, &threadFinishLoop, &QEventLoop::quit);
                 threadFinishLoop.exec();
-                delete exportThread;
             }
         }
         settings.endGroup();
         settings.endGroup();
     }
     else {
-        QMessageBox::information(this, tr("Export selected..."), tr("No Snapmatic pictures or Savegames files are selected"));
+        QMessageBox::information(this, tr("Export selected..."), tr("No Snapmatic, Photo or Savegame files are selected"));
     }
 }
 
 void ProfileInterface::deleteSelectedL(bool isRemoteEmited)
 {
     if (selectedWidgts != 0) {
-        if (QMessageBox::Yes == QMessageBox::warning(this, tr("Remove selected"), tr("You really want remove the selected Snapmatic picutres and Savegame files?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
+        if (QMessageBox::Yes == QMessageBox::warning(this, tr("Remove selected"), tr("You really want remove the selected Snapmatic, Photo and Savegame files?"), QMessageBox::Yes | QMessageBox::No, QMessageBox::No)) {
             for (const QString &widgetStr : qAsConst(widgets)) {
                 ProfileWidget *widget = widgets.key(widgetStr, nullptr);
                 if (widget != nullptr) {
@@ -1348,12 +1344,12 @@ void ProfileInterface::deleteSelectedL(bool isRemoteEmited)
                 }
             }
             if (selectedWidgts != 0) {
-                QMessageBox::warning(this, tr("Remove selected"), tr("Failed to remove all selected Snapmatic pictures and/or Savegame files"));
+                QMessageBox::warning(this, tr("Remove selected"), tr("Failed to remove all selected Snapmatic, Photo and/or Savegame files"));
             }
         }
     }
     else {
-        QMessageBox::information(this, tr("Remove selected"), tr("No Snapmatic pictures or Savegames files are selected"));
+        QMessageBox::information(this, tr("Remove selected"), tr("No Snapmatic, Photo or Savegame files are selected"));
     }
 }
 
@@ -1454,7 +1450,7 @@ void ProfileInterface::enableSelected()
         }
     }
     if (snapmaticWidgets.isEmpty()) {
-        QMessageBox::information(this, QApplication::translate("UserInterface", "Show In-game"), QApplication::translate("ProfileInterface", "No Snapmatic pictures are selected"));
+        QMessageBox::information(this, QApplication::translate("UserInterface", "Show In-game"), QApplication::translate("ProfileInterface", "No Snapmatic or Photos are selected"));
         return;
     }
     QStringList fails;
@@ -1484,7 +1480,7 @@ void ProfileInterface::disableSelected()
         }
     }
     if (snapmaticWidgets.isEmpty()) {
-        QMessageBox::information(this, QApplication::translate("UserInterface", "Hide In-game"), QApplication::translate("ProfileInterface", "No Snapmatic pictures are selected"));
+        QMessageBox::information(this, QApplication::translate("UserInterface", "Hide In-game"), QApplication::translate("ProfileInterface", "No Snapmatic or Photos are selected"));
         return;
     }
     QStringList fails;
@@ -1527,11 +1523,18 @@ void ProfileInterface::contextMenuTriggeredPIC(QContextMenuEvent *ev)
         editMenu.addAction(PictureDialog::tr("&Edit Properties..."), picWidget, &SnapmaticWidget::editSnapmaticProperties);
         editMenu.addAction(PictureDialog::tr("&Overwrite Image..."), picWidget, &SnapmaticWidget::editSnapmaticImage);
         editMenu.addSeparator();
-        editMenu.addAction(PictureDialog::tr("Open &Map Viewer..."), picWidget, &SnapmaticWidget::openMapViewer);
+        QAction *openViewerAction = editMenu.addAction(PictureDialog::tr("Open &Map Viewer..."), picWidget, &SnapmaticWidget::openMapViewer);
+        if (photoFormat != RagePhoto::PhotoFormat::GTA5)
+            openViewerAction->setEnabled(false);
         editMenu.addAction(PictureDialog::tr("Open &JSON Editor..."), picWidget, &SnapmaticWidget::editSnapmaticRawJson);
         QMenu exportMenu(SnapmaticWidget::tr("&Export"), this);
         exportMenu.addAction(PictureDialog::tr("Export as &Picture..."), picWidget, &SnapmaticWidget::on_cmdExport_clicked);
-        exportMenu.addAction(PictureDialog::tr("Export as &Snapmatic..."), picWidget, &SnapmaticWidget::on_cmdCopy_clicked);
+        if (photoFormat == RagePhoto::PhotoFormat::GTA5)
+            exportMenu.addAction(PictureDialog::tr("Export as &GTA V Snapmatic..."), picWidget, &SnapmaticWidget::on_cmdCopy_clicked);
+        else if (photoFormat == RagePhoto::PhotoFormat::RDR2)
+            exportMenu.addAction(PictureDialog::tr("Export as &RDR 2 Photo..."), picWidget, &SnapmaticWidget::on_cmdCopy_clicked);
+        else
+            exportMenu.addAction(PictureDialog::tr("Export as &RAGE Photo..."), picWidget, &SnapmaticWidget::on_cmdCopy_clicked);
         contextMenu.addAction(SnapmaticWidget::tr("&View"), picWidget, &SnapmaticWidget::on_cmdView_clicked);
         contextMenu.addMenu(&editMenu);
         contextMenu.addMenu(&exportMenu);

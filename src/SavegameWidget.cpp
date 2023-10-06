@@ -96,27 +96,19 @@ void SavegameWidget::renderString(const QString &savegameString, const QString &
     QString savegameName = tr("WRONG FORMAT");
     QString savegameDate = tr("WRONG FORMAT");
     QStringList savegameNDL = QString(savegameString).split(" - ");
-    if (savegameNDL.length() >= 2)
-    {
+    if (savegameNDL.length() >= 2) {
         savegameDate = savegameNDL.at(savegameNDL.length() - 1);
         savegameName = QString(savegameString).remove(savegameString.length() - savegameDate.length() - 3, savegameDate.length() + 3);
     }
-    int savegameNumber = QString(fileName).remove(0,5).toInt(&validNumber) + 1;
-    if (validNumber)
-    {
+    int savegameNumber = QString(fileName).remove(0, 5).toInt(&validNumber) + 1;
+    if (validNumber) {
         if (savegameNumber == 16)
-        {
             ui->labSavegameStr->setText(labelAutosaveStr.arg(savegameDate, savegameName));
-        }
         else
-        {
             ui->labSavegameStr->setText(labelSaveStr.arg(savegameDate, savegameName, QString::number(savegameNumber)));
-        }
     }
     else
-    {
         ui->labSavegameStr->setText(labelSaveStr.arg(savegameDate, savegameName, tr("UNKNOWN")));
-    }
 }
 
 void SavegameWidget::retranslate()
@@ -136,18 +128,15 @@ void SavegameWidget::on_cmdCopy_clicked()
 void SavegameWidget::on_cmdDelete_clicked()
 {
     int uchoice = QMessageBox::question(this, tr("Delete Savegame"), tr("Are you sure to delete %1 from your savegames?").arg("\""+sgdStr+"\""), QMessageBox::No | QMessageBox::Yes, QMessageBox::No);
-    if (uchoice == QMessageBox::Yes)
-    {
-        if (!QFile::exists(sgdPath))
-        {
+    if (uchoice == QMessageBox::Yes) {
+        if (!QFile::exists(sgdPath)) {
             emit savegameDeleted();
 #ifdef GTA5SYNC_TELEMETRY
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "DeleteSuccess";
@@ -162,15 +151,13 @@ void SavegameWidget::on_cmdDelete_clicked()
             }
 #endif
         }
-        else if (QFile::remove(sgdPath))
-        {
+        else if (QFile::remove(sgdPath)) {
 #ifdef GTA5SYNC_TELEMETRY
             QSettings telemetrySettings(GTA5SYNC_APPVENDOR, GTA5SYNC_APPSTR);
             telemetrySettings.beginGroup("Telemetry");
             bool pushUsageData = telemetrySettings.value("PushUsageData", false).toBool();
             telemetrySettings.endGroup();
-            if (pushUsageData && Telemetry->canPush())
-            {
+            if (pushUsageData && Telemetry->canPush()) {
                 QJsonDocument jsonDocument;
                 QJsonObject jsonObject;
                 jsonObject["Type"] = "DeleteSuccess";
@@ -187,25 +174,17 @@ void SavegameWidget::on_cmdDelete_clicked()
             emit savegameDeleted();
         }
         else
-        {
             QMessageBox::warning(this, tr("Delete Savegame"), tr("Failed at deleting %1 from your savegames").arg("\""+sgdStr+"\""));
-        }
     }
 }
 
 void SavegameWidget::on_cmdView_clicked()
 {
-    SavegameDialog *savegameDialog = new SavegameDialog(this);
-    savegameDialog->setSavegameData(sgdata, sgdPath, true);
-    savegameDialog->setModal(true);
-#ifdef Q_OS_ANDROID
-    // Android ...
-    savegameDialog->showMaximized();
-#else
-    savegameDialog->show();
-#endif
-    savegameDialog->exec();
-    delete savegameDialog;
+    SavegameDialog savegameDialog(this);
+    savegameDialog.setSavegameData(sgdata, sgdPath, true);
+    savegameDialog.setModal(true);
+    savegameDialog.show();
+    savegameDialog.exec();
 }
 
 void SavegameWidget::mousePressEvent(QMouseEvent *ev)
@@ -216,31 +195,20 @@ void SavegameWidget::mousePressEvent(QMouseEvent *ev)
 void SavegameWidget::mouseReleaseEvent(QMouseEvent *ev)
 {
     ProfileWidget::mouseReleaseEvent(ev);
-    if (ui->cbSelected->isVisible())
-    {
+    if (ui->cbSelected->isVisible()) {
         if (rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
-        {
             ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
-        }
     }
-    else
-    {
+    else {
         const int contentMode = getContentMode();
-        if ((contentMode == 0 || contentMode == 10 || contentMode == 20) && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton)
-        {
+        if ((contentMode == 0 || contentMode == 10 || contentMode == 20) && rect().contains(ev->pos()) && ev->button() == Qt::LeftButton) {
             if (ev->modifiers().testFlag(Qt::ShiftModifier))
-            {
                 ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
-            }
             else
-            {
                 on_cmdView_clicked();
-            }
         }
         else if (!ui->cbSelected->isVisible() && (contentMode == 1 || contentMode == 11 || contentMode == 21) && ev->button() == Qt::LeftButton && ev->modifiers().testFlag(Qt::ShiftModifier))
-        {
             ui->cbSelected->setChecked(!ui->cbSelected->isChecked());
-        }
     }
 }
 
@@ -250,9 +218,7 @@ void SavegameWidget::mouseDoubleClickEvent(QMouseEvent *ev)
 
     const int contentMode = getContentMode();
     if (!ui->cbSelected->isVisible() && (contentMode == 1 || contentMode == 11 || contentMode == 21) && ev->button() == Qt::LeftButton)
-    {
         on_cmdView_clicked();
-    }
 }
 
 void SavegameWidget::setSelected(bool isSelected)
@@ -273,13 +239,9 @@ void SavegameWidget::contextMenuEvent(QContextMenuEvent *ev)
 void SavegameWidget::on_cbSelected_stateChanged(int arg1)
 {
     if (arg1 == Qt::Checked)
-    {
         emit widgetSelected();
-    }
     else if (arg1 == Qt::Unchecked)
-    {
         emit widgetDeselected();
-    }
 }
 
 bool SavegameWidget::isSelected()
@@ -309,5 +271,5 @@ SavegameData* SavegameWidget::getSavegame()
 
 QString SavegameWidget::getWidgetType()
 {
-    return "SavegameWidget";
+    return QStringLiteral("SavegameWidget");
 }

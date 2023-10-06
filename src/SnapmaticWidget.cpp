@@ -73,8 +73,8 @@ SnapmaticWidget::~SnapmaticWidget()
 void SnapmaticWidget::setSnapmaticPicture(SnapmaticPicture *picture)
 {
     smpic = picture;
-    QObject::connect(picture, SIGNAL(updated()), this, SLOT(snapmaticUpdated()));
-    QObject::connect(picture, SIGNAL(customSignal(QString)), this, SLOT(customSignal(QString)));
+    QObject::connect(picture, &SnapmaticPicture::updated, this, &SnapmaticWidget::snapmaticUpdated);
+    QObject::connect(picture, &SnapmaticPicture::customSignal, this, &SnapmaticWidget::customSignal);
 
     const qreal screenRatio = AppEnv::screenRatio();
     const qreal screenRatioPR = AppEnv::screenRatioPR();
@@ -116,7 +116,7 @@ void SnapmaticWidget::snapmaticUpdated()
 
 void SnapmaticWidget::customSignal(QString signal)
 {
-    if (signal == "PictureUpdated") {
+    if (signal == QStringLiteral("PictureUpdated")) {
         QPixmap SnapmaticPixmap = QPixmap::fromImage(smpic->getImage().scaled(ui->labPicture->width(), ui->labPicture->height(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation), Qt::AutoColor);
         ui->labPicture->setPixmap(SnapmaticPixmap);
     }
@@ -135,33 +135,28 @@ void SnapmaticWidget::on_cmdView_clicked()
     bool navigationBar = settings.value("NavigationBar", true).toBool();
     settings.endGroup();
 
-    PictureDialog *picDialog = new PictureDialog(profileDB, crewDB, profileName, this);
-    picDialog->setSnapmaticPicture(smpic, true);
-    picDialog->setModal(true);
+    PictureDialog picDialog(profileDB, crewDB, profileName, this);
+    picDialog.setSnapmaticPicture(smpic, true);
+    picDialog.setModal(true);
 
     // be ready for crewName and playerName updated
-    QObject::connect(threadDB, SIGNAL(crewNameUpdated()), picDialog, SLOT(crewNameUpdated()));
-    QObject::connect(threadDB, SIGNAL(playerNameUpdated()), picDialog, SLOT(playerNameUpdated()));
-    QObject::connect(picDialog, SIGNAL(nextPictureRequested()), this, SLOT(dialogNextPictureRequested()));
-    QObject::connect(picDialog, SIGNAL(previousPictureRequested()), this, SLOT(dialogPreviousPictureRequested()));
+    QObject::connect(threadDB, &DatabaseThread::crewNameUpdated, &picDialog, &PictureDialog::crewNameUpdated);
+    QObject::connect(threadDB, &DatabaseThread::playerNameUpdated, &picDialog, &PictureDialog::playerNameUpdated);
+    QObject::connect(&picDialog, &PictureDialog::nextPictureRequested, this, &SnapmaticWidget::dialogNextPictureRequested);
+    QObject::connect(&picDialog, &PictureDialog::previousPictureRequested, this, &SnapmaticWidget::dialogPreviousPictureRequested);
 
     // add previous next buttons
     if (navigationBar)
-        picDialog->addPreviousNextButtons();
+        picDialog.addPreviousNextButtons();
 
     // show picture dialog
-#ifdef Q_OS_ANDROID
-    // Android ...
-    picDialog->showMaximized();
-#else
-    picDialog->show();
-    if (navigationBar) picDialog->styliseDialog();
-    //picDialog->adaptNewDialogSize();
-    picDialog->setMinimumSize(picDialog->size());
-    picDialog->setMaximumSize(picDialog->size());
-#endif
-    picDialog->exec();
-    delete picDialog;
+    picDialog.show();
+    if (navigationBar)
+        picDialog.styliseDialog();
+
+    picDialog.setMinimumSize(picDialog.size());
+    picDialog.setMaximumSize(picDialog.size());
+    picDialog.exec();
 }
 
 void SnapmaticWidget::on_cmdCopy_clicked()
@@ -270,32 +265,28 @@ void SnapmaticWidget::contextMenuEvent(QContextMenuEvent *ev)
 
 void SnapmaticWidget::dialogNextPictureRequested()
 {
-    emit nextPictureRequested((QWidget*)sender());
+    emit nextPictureRequested(static_cast<QWidget*>(sender()));
 }
 
 void SnapmaticWidget::dialogPreviousPictureRequested()
 {
-    emit previousPictureRequested((QWidget*)sender());
+    emit previousPictureRequested(static_cast<QWidget*>(sender()));
 }
 
 void SnapmaticWidget::on_cbSelected_stateChanged(int arg1)
 {
-    if (arg1 == Qt::Checked) {
+    if (arg1 == Qt::Checked)
         emit widgetSelected();
-    }
-    else if (arg1 == Qt::Unchecked) {
+    else if (arg1 == Qt::Unchecked)
         emit widgetDeselected();
-    }
 }
 
 void SnapmaticWidget::adjustTextColor()
 {
-    if (isHidden()) {
+    if (isHidden())
         ui->labPicStr->setStyleSheet(QString("QLabel{color: rgb(%1, %2, %3);}").arg(QString::number(highlightHiddenColor.red()), QString::number(highlightHiddenColor.green()), QString::number(highlightHiddenColor.blue())));
-    }
-    else {
-        ui->labPicStr->setStyleSheet("");
-    }
+    else
+        ui->labPicStr->setStyleSheet(QString());
 }
 
 bool SnapmaticWidget::makePictureHidden()
@@ -330,35 +321,33 @@ void SnapmaticWidget::makePictureVisibleSlot()
 
 void SnapmaticWidget::editSnapmaticProperties()
 {
-    SnapmaticEditor *snapmaticEditor = new SnapmaticEditor(crewDB, profileDB, this);
-    snapmaticEditor->setSnapmaticPicture(smpic);
-    snapmaticEditor->setModal(true);
-    snapmaticEditor->show();
-    snapmaticEditor->exec();
-    delete snapmaticEditor;
+    SnapmaticEditor snapmaticEditor(crewDB, profileDB, this);
+    snapmaticEditor.setSnapmaticPicture(smpic);
+    snapmaticEditor.setModal(true);
+    snapmaticEditor.show();
+    snapmaticEditor.exec();
 }
 
 void SnapmaticWidget::editSnapmaticRawJson()
 {
-    JsonEditorDialog *jsonEditor = new JsonEditorDialog(smpic, this);
-    jsonEditor->setModal(true);
-    jsonEditor->show();
-    jsonEditor->exec();
-    delete jsonEditor;
+    JsonEditorDialog jsonEditor(smpic, this);
+    jsonEditor.setModal(true);
+    jsonEditor.show();
+    jsonEditor.exec();
 }
 
 void SnapmaticWidget::editSnapmaticImage()
 {
     QImage *currentImage = new QImage(smpic->getImage());
-    ImportDialog *importDialog = new ImportDialog(profileName, this);
-    importDialog->setImage(currentImage);
-    importDialog->enableOverwriteMode();
-    importDialog->setModal(true);
-    importDialog->exec();
-    if (importDialog->isImportAgreed()) {
+    ImportDialog importDialog(profileName, this);
+    importDialog.setImage(currentImage);
+    importDialog.enableOverwriteMode();
+    importDialog.setModal(true);
+    importDialog.exec();
+    if (importDialog.isImportAgreed()) {
         const QSize previousSize = smpic->getPictureResolution();
         const QByteArray previousPicture = smpic->getPictureStream();
-        bool success = smpic->setImage(importDialog->image(), importDialog->isUnlimitedBuffer());
+        bool success = smpic->setImage(importDialog.image(), importDialog.isUnlimitedBuffer());
         if (success) {
             QString currentFilePath = smpic->getPictureFilePath();
             QString originalFilePath = smpic->getOriginalPictureFilePath();
@@ -398,22 +387,21 @@ void SnapmaticWidget::editSnapmaticImage()
             return;
         }
     }
-    delete importDialog;
 }
 
 void SnapmaticWidget::openMapViewer()
 {
     SnapmaticPicture *picture = smpic;
     SnapmaticProperties currentProperties = picture->getSnapmaticProperties();
-    MapLocationDialog *mapLocDialog = new MapLocationDialog(currentProperties.location.x, currentProperties.location.y, this);
-    mapLocDialog->setCayoPerico(currentProperties.location.isCayoPerico);
-    mapLocDialog->setModal(true);
-    mapLocDialog->show();
-    mapLocDialog->exec();
-    if (mapLocDialog->propUpdated()) {
+    MapLocationDialog mapLocDialog(currentProperties.location.x, currentProperties.location.y, this);
+    mapLocDialog.setCayoPerico(currentProperties.location.isCayoPerico);
+    mapLocDialog.setModal(true);
+    mapLocDialog.show();
+    mapLocDialog.exec();
+    if (mapLocDialog.propUpdated()) {
         // Update Snapmatic Properties
-        currentProperties.location.x = mapLocDialog->getXpos();
-        currentProperties.location.y = mapLocDialog->getYpos();
+        currentProperties.location.x = mapLocDialog.getXpos();
+        currentProperties.location.y = mapLocDialog.getYpos();
         currentProperties.location.z = 0;
 
         // Update Snapmatic Picture
@@ -452,7 +440,6 @@ void SnapmaticWidget::openMapViewer()
         }
 #endif
     }
-    delete mapLocDialog;
 }
 
 bool SnapmaticWidget::isSelected()
@@ -492,5 +479,5 @@ QString SnapmaticWidget::getPicturePath()
 
 QString SnapmaticWidget::getWidgetType()
 {
-    return "SnapmaticWidget";
+    return QStringLiteral("SnapmaticWidget");
 }

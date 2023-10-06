@@ -83,8 +83,8 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 
     setWindowTitle(defaultWindowTitle.arg(tr("Select Profile")));
     QString appVersion = QApplication::applicationVersion();
-    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
 #ifdef GTA5SYNC_COMMIT
+    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
     if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
         appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
@@ -129,7 +129,7 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
 
     // Set Icon for Exit Menu Item
     if (QIcon::hasThemeIcon("application-exit")) {
-#ifndef Q_OS_MACOS // Setting icon for exit/quit lead to a crash in Mac OS X
+#ifndef Q_OS_MACOS // Setting icon for exit/quit lead to a crash in macOS
         ui->actionExit->setIcon(QIcon::fromTheme("application-exit"));
 #endif
     }
@@ -846,8 +846,8 @@ void UserInterface::retranslateUi()
     ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
 #endif
     QString appVersion = QApplication::applicationVersion();
-    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
 #ifdef GTA5SYNC_COMMIT
+    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
     if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
         appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
