@@ -849,7 +849,7 @@ void UserInterface::on_actionSelect_Game_Folder_triggered()
     gtaFolderLayout.addWidget(gtaLocation);
     QToolButton *gtaSelectButton = new QToolButton(&gameFolderDialog);
     gtaSelectButton->setText(QStringLiteral("..."));
-    QObject::connect(gtaSelectButton, &QPushButton::clicked, &gameFolderDialog, [&](){
+    QObject::connect(gtaSelectButton, &QPushButton::clicked, &gameFolderDialog, [&,gtaLocation](){
         const QString GTAV_Folder_Temp = QFileDialog::getExistingDirectory(&gameFolderDialog, tr("Select GTA V Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
         if (!GTAV_Folder_Temp.isEmpty() && QDir(GTAV_Folder_Temp).exists())
             gtaLocation->setText(GTAV_Folder_Temp);
@@ -866,7 +866,7 @@ void UserInterface::on_actionSelect_Game_Folder_triggered()
     rdrFolderLayout.addWidget(rdrLocation);
     QToolButton *rdrSelectButton = new QToolButton(&gameFolderDialog);
     rdrSelectButton->setText(QStringLiteral("..."));
-    QObject::connect(rdrSelectButton, &QPushButton::clicked, &gameFolderDialog, [&](){
+    QObject::connect(rdrSelectButton, &QPushButton::clicked, &gameFolderDialog, [&,rdrLocation](){
         const QString RDR2_Folder_Temp = QFileDialog::getExistingDirectory(&gameFolderDialog, tr("Select RDR 2 Folder..."), StandardPaths::documentsLocation(), QFileDialog::ShowDirsOnly);
         if (!RDR2_Folder_Temp.isEmpty() && QDir(RDR2_Folder_Temp).exists())
             rdrLocation->setText(RDR2_Folder_Temp);

@@ -82,13 +82,12 @@ ProfileInterface::ProfileInterface(ProfileDatabase *profileDB, CrewDatabase *cre
     contextMenuOpened = false;
     isProfileLoaded = false;
     previousWidget = nullptr;
-    profileLoader = nullptr;
     saSpacerItem = nullptr;
 
     updatePalette();
     QString appVersion = QApplication::applicationVersion();
-    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
 #ifdef GTA5SYNC_COMMIT
+    const char* literalBuildType = GTA5SYNC_BUILDTYPE;
     if ((strcmp(literalBuildType, REL_BUILDTYPE) != 0) && !appVersion.contains("-"))
         appVersion = appVersion % "-" % GTA5SYNC_COMMIT;
 #endif
@@ -164,8 +163,24 @@ ProfileInterface::~ProfileInterface()
     }
     pictures.clear();
 
-    delete profileLoader;
     delete ui;
+}
+
+inline QString getFileFormat(quint32 photoFormat)
+{
+    QString fileFormat;
+    switch (photoFormat) {
+    case RagePhoto::PhotoFormat::GTA5:
+        fileFormat = "PGTA5%1";
+        break;
+    case RagePhoto::PhotoFormat::RDR2:
+        fileFormat = "PRDR3%1_1";
+        break;
+    default:
+        fileFormat = "%1.lrpx";
+        break;
+    }
+    return fileFormat;
 }
 
 void ProfileInterface::setProfileFolder(QString folder, QString profile, quint32 format)
@@ -179,13 +194,16 @@ void ProfileInterface::setupProfileInterface()
 {
     fixedPictures.clear();
     ui->labProfileLoading->setText(tr("Loading..."));
-    profileLoader = new ProfileLoader(profileFolder, crewDB);
-    QObject::connect(profileLoader, SIGNAL(directoryScanned(QVector<QString>,QVector<QString>)), this, SLOT(directoryScanned(QVector<QString>,QVector<QString>)));
-    QObject::connect(profileLoader, SIGNAL(savegameLoaded(SavegameData*, QString)), this, SLOT(savegameLoaded_event(SavegameData*, QString)));
-    QObject::connect(profileLoader, SIGNAL(pictureLoaded(SnapmaticPicture*)), this, SLOT(pictureLoaded_event(SnapmaticPicture*)));
-    QObject::connect(profileLoader, SIGNAL(pictureFixed(SnapmaticPicture*)), this, SLOT(pictureFixed_event(SnapmaticPicture*)));
-    QObject::connect(profileLoader, SIGNAL(loadingProgress(int,int)), this, SLOT(loadingProgress(int,int)));
-    QObject::connect(profileLoader, SIGNAL(finished()), this, SLOT(profileLoaded_p()));
+    ProfileLoader *profileLoader = new ProfileLoader(profileFolder, crewDB);
+    QObject::connect(profileLoader, &ProfileLoader::directoryScanned, this, &ProfileInterface::directoryScanned);
+    QObject::connect(profileLoader, &ProfileLoader::savegameLoaded, this, &ProfileInterface::savegameLoaded_event);
+    QObject::connect(profileLoader, &ProfileLoader::pictureLoaded, this, &ProfileInterface::pictureLoaded_event);
+    QObject::connect(profileLoader, &ProfileLoader::pictureFixed, this, &ProfileInterface::pictureFixed_event);
+    QObject::connect(profileLoader, &ProfileLoader::loadingProgress, this, &ProfileInterface::loadingProgress);
+    QObject::connect(profileLoader, &ProfileLoader::finished, this, [=](){
+        profileLoaded_p();
+        profileLoader->deleteLater();
+    });
     profileLoader->start();
 }
 
@@ -205,12 +223,12 @@ void ProfileInterface::savegameLoaded(SavegameData *savegame, QString savegamePa
     savegames += savegame;
     if (selectedWidgts != 0 || contentMode == 2)
         sgdWidget->setSelectionMode(true);
-    QObject::connect(sgdWidget, SIGNAL(savegameDeleted()), this, SLOT(savegameDeleted_event()));
-    QObject::connect(sgdWidget, SIGNAL(widgetSelected()), this, SLOT(profileWidgetSelected()));
-    QObject::connect(sgdWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
-    QObject::connect(sgdWidget, SIGNAL(allWidgetsSelected()), this, SLOT(selectAllWidgets()));
-    QObject::connect(sgdWidget, SIGNAL(allWidgetsDeselected()), this, SLOT(deselectAllWidgets()));
-    QObject::connect(sgdWidget, SIGNAL(contextMenuTriggered(QContextMenuEvent*)), this, SLOT(contextMenuTriggeredSGD(QContextMenuEvent*)));
+    QObject::connect(sgdWidget, &SavegameWidget::savegameDeleted, this, &ProfileInterface::savegameDeleted_event);
+    QObject::connect(sgdWidget, &SavegameWidget::widgetSelected, this, &ProfileInterface::profileWidgetSelected);
+    QObject::connect(sgdWidget, &SavegameWidget::widgetDeselected, this, &ProfileInterface::profileWidgetDeselected);
+    QObject::connect(sgdWidget, &SavegameWidget::allWidgetsSelected, this, &ProfileInterface::selectAllWidgets);
+    QObject::connect(sgdWidget, &SavegameWidget::allWidgetsDeselected, this, &ProfileInterface::deselectAllWidgets);
+    QObject::connect(sgdWidget, &SavegameWidget::contextMenuTriggered, this, &ProfileInterface::contextMenuTriggeredSGD);
     if (inserted)
         insertSavegameIPI(sgdWidget);
 }
@@ -237,14 +255,14 @@ void ProfileInterface::pictureLoaded(SnapmaticPicture *picture, bool inserted)
     pictures += picture;
     if (selectedWidgts != 0 || contentMode == 2)
         picWidget->setSelectionMode(true);
-    QObject::connect(picWidget, SIGNAL(pictureDeleted()), this, SLOT(pictureDeleted_event()));
-    QObject::connect(picWidget, SIGNAL(widgetSelected()), this, SLOT(profileWidgetSelected()));
-    QObject::connect(picWidget, SIGNAL(widgetDeselected()), this, SLOT(profileWidgetDeselected()));
-    QObject::connect(picWidget, SIGNAL(allWidgetsSelected()), this, SLOT(selectAllWidgets()));
-    QObject::connect(picWidget, SIGNAL(allWidgetsDeselected()), this, SLOT(deselectAllWidgets()));
-    QObject::connect(picWidget, SIGNAL(nextPictureRequested(QWidget*)), this, SLOT(dialogNextPictureRequested(QWidget*)));
-    QObject::connect(picWidget, SIGNAL(previousPictureRequested(QWidget*)), this, SLOT(dialogPreviousPictureRequested(QWidget*)));
-    QObject::connect(picWidget, SIGNAL(contextMenuTriggered(QContextMenuEvent*)), this, SLOT(contextMenuTriggeredPIC(QContextMenuEvent*)));
+    QObject::connect(picWidget, &SnapmaticWidget::pictureDeleted, this, &ProfileInterface::pictureDeleted_event);
+    QObject::connect(picWidget, &SnapmaticWidget::widgetSelected, this, &ProfileInterface::profileWidgetSelected);
+    QObject::connect(picWidget, &SnapmaticWidget::widgetDeselected, this, &ProfileInterface::profileWidgetDeselected);
+    QObject::connect(picWidget, &SnapmaticWidget::allWidgetsSelected, this, &ProfileInterface::selectAllWidgets);
+    QObject::connect(picWidget, &SnapmaticWidget::allWidgetsDeselected, this, &ProfileInterface::deselectAllWidgets);
+    QObject::connect(picWidget, &SnapmaticWidget::nextPictureRequested, this, &ProfileInterface::dialogNextPictureRequested);
+    QObject::connect(picWidget, &SnapmaticWidget::previousPictureRequested, this, &ProfileInterface::dialogPreviousPictureRequested);
+    QObject::connect(picWidget, &SnapmaticWidget::contextMenuTriggered, this, &ProfileInterface::contextMenuTriggeredPIC);
     if (inserted)
         insertSnapmaticIPI(picWidget);
 }
@@ -265,6 +283,8 @@ void ProfileInterface::directoryChanged(const QString &path)
     QVector<QString> t_snapmaticPics;
     QVector<QString> n_savegameFiles;
     QVector<QString> n_snapmaticPics;
+
+    // TODO: We want exclude GTA V Snapmatic in RDR profiles and the other way around
 
     const QStringList files = dir.entryList(QDir::Files);
     for (const QString &fileName : files) {
@@ -549,9 +569,9 @@ fileDialogPreOpen: //Work?
     for (const QByteArray &imageFormat : QImageReader::supportedImageFormats()) {
         imageFormatsStr += QString("*.") % QString::fromUtf8(imageFormat).toLower() % " ";
     }
-    QString importableFormatsStr = QString("*.g5e PGTA5*");
+    QString importableFormatsStr = QString("*.g5e PGTA5* PRDR3*");
     if (!imageFormatsStr.trimmed().isEmpty()) {
-        importableFormatsStr = QString("*.g5e%1PGTA5*").arg(imageFormatsStr);
+        importableFormatsStr = QString("*.g5e%1PGTA5* PRDR3*").arg(imageFormatsStr);
     }
 
     QStringList filters;
@@ -638,7 +658,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 {
     QString selectedFileName = QFileInfo(selectedFile).fileName();
     if (QFile::exists(selectedFile)) {
-        if ((selectedFileName.left(4) == "PGTA" && !selectedFileName.contains('.')) || selectedFileName.right(4) == ".g5e") {
+        if ((selectedFileName.startsWith("PGTA5") && !selectedFileName.contains('.')) || selectedFileName.endsWith(".g5e")) {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
             if (picture->readingPicture(true)) {
                 bool success = importSnapmaticPicture(picture, notMultiple);
@@ -735,22 +755,23 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                 }
                 SnapmaticProperties spJson = picture->getSnapmaticProperties();
                 spJson.uid = getRandomUid();
-                bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                const QString fileFormat = getFileFormat(photoFormat);
+                bool fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)));
+                bool fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)) % ".bak");
+                bool fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)) % ".hidden");
                 int cEnough = 0;
                 while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                     spJson.uid = getRandomUid();
-                    fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                    fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                    fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                    fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)));
+                    fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)) % ".bak");
+                    fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)) % ".hidden");
                     cEnough++;
                 }
                 spJson.createdDateTime = importDateTime;
                 qint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
                 spJson.createdTimestamp = timestamp;
                 picture->setSnapmaticProperties(spJson);
-                const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
+                const QString picFileName = fileFormat.arg(QString::number(spJson.uid));
                 picture->setPicFileName(picFileName);
                 picture->setPictureTitle(customImageTitle);
                 picture->updateStrings();
@@ -786,22 +807,23 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
                     if (picture->setImage(importDialog->image(), importDialog->isUnlimitedBuffer())) {
                         SnapmaticProperties spJson = picture->getSnapmaticProperties();
                         spJson.uid = getRandomUid();
-                        bool fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                        bool fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                        bool fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                        const QString fileFormat = getFileFormat(photoFormat);
+                        bool fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)));
+                        bool fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)) % ".bak");
+                        bool fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)) % ".hidden");
                         int cEnough = 0;
                         while ((fExists || fExistsBackup || fExistsHidden) && cEnough < findRetryLimit) {
                             spJson.uid = getRandomUid();
-                            fExists = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid));
-                            fExistsBackup = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".bak");
-                            fExistsHidden = QFile::exists(profileFolder % "/PGTA5" % QString::number(spJson.uid) % ".hidden");
+                            fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)));
+                            fExistsBackup = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)) % ".bak");
+                            fExistsHidden = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)) % ".hidden");
                             cEnough++;
                         }
                         spJson.createdDateTime = importDateTime;
                         qint64 timestamp = spJson.createdDateTime.toSecsSinceEpoch();
                         spJson.createdTimestamp = timestamp;
                         picture->setSnapmaticProperties(spJson);
-                        const QString picFileName = QString("PGTA5%1").arg(QString::number(spJson.uid));
+                        const QString picFileName = fileFormat.arg(QString::number(spJson.uid));
                         picture->setPicFileName(picFileName);
                         picture->setPictureTitle(importDialog->getImageTitle());
                         picture->updateStrings();
@@ -972,18 +994,7 @@ bool ProfileInterface::importImage(QImage *snapmaticImage, QDateTime importDateT
     bool success = false;
     if (importDialog.isImportAgreed()) {
         if (picture->setImage(importDialog.image(), importDialog.isUnlimitedBuffer())) {
-            QString fileFormat;
-            switch (photoFormat) {
-            case RagePhoto::PhotoFormat::GTA5:
-                fileFormat = "PGTA5%1";
-                break;
-            case RagePhoto::PhotoFormat::RDR2:
-                fileFormat = "PRDR3%1_1";
-                break;
-            default:
-                fileFormat = "%1.lrpx";
-                break;
-            }
+            const QString fileFormat = getFileFormat(photoFormat);
             SnapmaticProperties spJson = picture->getSnapmaticProperties();
             spJson.uid = getRandomUid();
             bool fExists = QFile::exists(profileFolder % "/" % fileFormat.arg(QString::number(spJson.uid)));

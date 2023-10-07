@@ -24,7 +24,6 @@
 #include "ProfileDatabase.h"
 #include "DatabaseThread.h"
 #include "SavegameWidget.h"
-#include "ProfileLoader.h"
 #include "ProfileWidget.h"
 #include "ExportThread.h"
 #include "SavegameData.h"
@@ -102,7 +101,6 @@ private:
     DatabaseThread *threadDB;
     Ui::ProfileInterface *ui;
 
-    ProfileLoader *profileLoader;
     ProfileWidget *previousWidget;
     QList<SavegameData*> savegames;
     QList<SnapmaticPicture*> pictures;
