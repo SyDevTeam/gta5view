@@ -75,8 +75,10 @@ UserInterface::UserInterface(ProfileDatabase *profileDB, CrewDatabase *crewDB, D
     ui->actionSelect_profile->setEnabled(false);
     ui->actionAbout_gta5sync->setIcon(IconLoader::loadingAppIcon());
 #ifdef Q_OS_MAC
-    ui->actionAbout_gta5sync->setText(QApplication::translate("MAC_APPLICATION_MENU", "About %1").arg(GTA5SYNC_APPSTR));
-    ui->actionOptions->setText(QApplication::translate("MAC_APPLICATION_MENU", "Preferences..."));
+    const char* macOS_aboutString = "About %1";
+    const char* macOS_preferencesString = "Preferences...";
+    ui->actionAbout_gta5sync->setText(QApplication::translate("MAC_APPLICATION_MENU", macOS_aboutString).arg(GTA5SYNC_APPSTR));
+    ui->actionOptions->setText(QApplication::translate("MAC_APPLICATION_MENU", macOS_preferencesString));
 #else
     ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
 #endif
@@ -941,8 +943,10 @@ void UserInterface::retranslateUi()
 #endif
 #endif
 #ifdef Q_OS_MAC
-    ui->actionAbout_gta5sync->setText(QApplication::translate("MAC_APPLICATION_MENU", "About %1").arg(GTA5SYNC_APPSTR));
-    ui->actionOptions->setText(QApplication::translate("MAC_APPLICATION_MENU", "Preferences..."));
+    const char* macOS_aboutString = "About %1";
+    const char* macOS_preferencesString = "Preferences...";
+    ui->actionAbout_gta5sync->setText(QApplication::translate("MAC_APPLICATION_MENU", macOS_aboutString).arg(GTA5SYNC_APPSTR));
+    ui->actionOptions->setText(QApplication::translate("MAC_APPLICATION_MENU", macOS_preferencesString));
 #else
     ui->actionAbout_gta5sync->setText(tr("&About %1").arg(GTA5SYNC_APPSTR));
 #endif

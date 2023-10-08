@@ -658,7 +658,7 @@ bool ProfileInterface::importFile(QString selectedFile, QDateTime importDateTime
 {
     QString selectedFileName = QFileInfo(selectedFile).fileName();
     if (QFile::exists(selectedFile)) {
-        if ((selectedFileName.startsWith("PGTA5") && !selectedFileName.contains('.')) || selectedFileName.endsWith(".g5e")) {
+        if (((selectedFileName.startsWith("PGTA5") || selectedFileName.startsWith("PRDR3")) && !selectedFileName.contains('.')) || selectedFileName.endsWith(".g5e")) {
             SnapmaticPicture *picture = new SnapmaticPicture(selectedFile);
             if (picture->readingPicture(true)) {
                 bool success = importSnapmaticPicture(picture, notMultiple);
