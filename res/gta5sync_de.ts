@@ -1124,7 +1124,7 @@ Pfeiltasten - Navigieren</translation>
         <location filename="../src/PictureDialog.cpp" line="499"/>
         <location filename="../src/ProfileInterface.cpp" line="1546"/>
         <source>Export as &amp;RDR 2 Photo...</source>
-        <translation>Als &amp;RDR 2 Photo exportieren...</translation>
+        <translation>Als &amp;RDR 2 Foto exportieren...</translation>
     </message>
     <message>
         <location filename="../src/PictureDialog.cpp" line="522"/>
