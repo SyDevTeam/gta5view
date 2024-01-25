@@ -72,7 +72,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../src/config.h" line="25"/>
         <source>Release Candidate</source>
-        <translation>最終測試版本</translation>
+        <translation>發行候選版</translation>
     </message>
     <message>
         <location filename="../src/config.h" line="29"/>
@@ -87,12 +87,12 @@ Pictures and Savegames</source>
     <message>
         <location filename="../src/config.h" line="26"/>
         <source>Beta</source>
-        <translation>Beta 版本</translation>
+        <translation>測試版本</translation>
     </message>
     <message>
         <location filename="../src/config.h" line="27"/>
         <source>Alpha</source>
-        <translation>Alpha 版本</translation>
+        <translation>早期開發版本</translation>
     </message>
     <message>
         <location filename="../src/config.h" line="30"/>
@@ -107,7 +107,7 @@ Pictures and Savegames</source>
         <location filename="../src/CrewDatabase.cpp" line="102"/>
         <location filename="../src/CrewDatabase.cpp" line="113"/>
         <source>No Crew</source>
-        <translation>無</translation>
+        <translation>無幫會</translation>
     </message>
 </context>
 <context>
@@ -178,7 +178,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../src/ImportDialog.cpp" line="647"/>
         <source>Overwrite Image...</source>
-        <translation>修改圖片...</translation>
+        <translation>複寫圖片...</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.cpp" line="649"/>
@@ -188,7 +188,7 @@ Pictures and Savegames</source>
     <message>
         <location filename="../src/ImportDialog.cpp" line="648"/>
         <source>&amp;Overwrite</source>
-        <translation>修改(&amp;O)</translation>
+        <translation>複寫(&amp;O)</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.cpp" line="651"/>
@@ -242,7 +242,7 @@ Pictures and Savegames</source>
         <location filename="../src/ImportDialog.ui" line="92"/>
         <location filename="../src/ImportDialog.ui" line="189"/>
         <source>Ignore Aspect Ratio</source>
-        <translation>忽略長寬比</translation>
+        <translation>忽略比例</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.ui" line="106"/>
@@ -300,12 +300,12 @@ Pictures and Savegames</source>
     <message>
         <location filename="../src/ImportDialog.ui" line="113"/>
         <source>Crop to Aspect Ratio</source>
-        <translation>裁剪長寬比</translation>
+        <translation>裁剪來符合比例</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.ui" line="196"/>
         <source>Force Colour in Avatar Zone</source>
-        <translation>強制在大頭貼區域使用顏色</translation>
+        <translation>強制在頭貼區域使用顏色</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.ui" line="271"/>
@@ -325,22 +325,22 @@ Pictures and Savegames</source>
     <message>
         <location filename="../src/ImportDialog.ui" line="279"/>
         <source>Avoid compression and expand buffer instead, improves picture quality, but may break Snapmatic</source>
-        <translation>避免壓縮來提高圖片品質，但可能會破壞 Snapmatic 運作</translation>
+        <translation>使用擴大緩衝而非壓縮提高圖片品質，但可能會損壞 Snapmatic</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.ui" line="282"/>
         <source>Unlimited Buffer</source>
-        <translation>無限緩衝</translation>
+        <translation>無限緩衝區</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.ui" line="289"/>
         <source>Import as-is, don&apos;t change the picture at all, guaranteed to break Snapmatic unless you know what you doing</source>
-        <translation>除非你知道自己在幹什麼，否則修改圖片將使 Snapmatic 故障</translation>
+        <translation>除非你知道自己在幹嘛，否則直接匯入原始檔圖片可能損壞 Snapmatic。</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.ui" line="292"/>
         <source>Import as-is</source>
-        <translation>照原樣匯入</translation>
+        <translation>匯入原始檔</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.ui" line="343"/>
@@ -485,7 +485,7 @@ Pictures and Savegames</source>
         <location filename="../src/ImportDialog.cpp" line="878"/>
         <source>Are you sure to use a square image outside of the Avatar Zone?
 When you want to use it as Avatar the image will be detached!</source>
-        <translation>你確定要在大頭貼區域以外的地方使用方形圖片嗎? 作為大頭貼的圖片將被分離!</translation>
+        <translation>你確定要在頭貼區域以外使用方形圖片嗎? 當設為頭貼時圖片將被裁剪!</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.cpp" line="738"/>
@@ -508,7 +508,7 @@ When you want to use it as Avatar the image will be detached!</source>
         <location filename="../src/ImportDialog.cpp" line="797"/>
         <source>File</source>
         <comment>Background Image: File</comment>
-        <translation>文件</translation>
+        <translation>檔案</translation>
     </message>
 </context>
 <context>
@@ -665,7 +665,7 @@ Y: %2</translation>
     <message>
         <location filename="../src/OptionsDialog.ui" line="108"/>
         <source>Custom RDR 2 Folder</source>
-        <translation type="unfinished"></translation>
+        <translation>自訂 RDR2 資料夾</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.ui" line="152"/>
@@ -720,7 +720,7 @@ Y: %2</translation>
     <message>
         <location filename="../src/OptionsDialog.ui" line="164"/>
         <source>Enable Navigation Bar</source>
-        <translation>啟用導航欄</translation>
+        <translation>啟用導覽列</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.ui" line="188"/>
@@ -745,7 +745,7 @@ Y: %2</translation>
     <message>
         <location filename="../src/OptionsDialog.ui" line="248"/>
         <source>Social Club Version</source>
-        <translation>Social Club 版</translation>
+        <translation>Social Club 版本</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.ui" line="254"/>
@@ -776,12 +776,12 @@ Y: %2</translation>
     <message>
         <location filename="../src/OptionsDialog.ui" line="271"/>
         <source>Steam Version</source>
-        <translation>Steam 版</translation>
+        <translation>Steam 版本</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.ui" line="308"/>
         <source>Feedback</source>
-        <translation>反饋</translation>
+        <translation>回饋</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.ui" line="314"/>
@@ -802,7 +802,7 @@ Y: %2</translation>
     <message>
         <location filename="../src/OptionsDialog.ui" line="355"/>
         <source>Hardware, Application and OS Specification</source>
-        <translation>硬體、軟體和 OS 規格</translation>
+        <translation>硬體、軟體和 OS 版本</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.ui" line="368"/>
@@ -817,7 +817,7 @@ Y: %2</translation>
     <message>
         <location filename="../src/OptionsDialog.ui" line="385"/>
         <source>Personal Usage Data</source>
-        <translation>個人使用數據</translation>
+        <translation>個人使用資料</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.ui" line="395"/>
@@ -957,19 +957,19 @@ Y: %2</translation>
     <message>
         <location filename="../src/OptionsDialog.cpp" line="450"/>
         <source>The new Custom Folder will initialise after you restart %1.</source>
-        <translation>自訂資料夾將在 %1 重新啟動後初始化.</translation>
+        <translation>自訂資料夾將在 %1 重新啟動後生效</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.cpp" line="461"/>
         <source>No Profile</source>
         <comment>No Profile, as default</comment>
-        <translation>無</translation>
+        <translation>無設定檔</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.cpp" line="468"/>
         <location filename="../src/OptionsDialog.cpp" line="470"/>
         <source>%2: %1</source>
-        <translation type="unfinished"></translation>
+        <translation>%2: %1</translation>
     </message>
     <message>
         <source>Profile: %1</source>
@@ -983,7 +983,7 @@ Y: %2</translation>
     <message>
         <location filename="../src/OptionsDialog.cpp" line="495"/>
         <source>Not registered</source>
-        <translation>未註冊參與</translation>
+        <translation>未註冊</translation>
     </message>
     <message>
         <location filename="../src/OptionsDialog.cpp" line="511"/>
@@ -1066,7 +1066,7 @@ Y: %2</translation>
         <location filename="../src/PictureDialog.cpp" line="504"/>
         <location filename="../src/ProfileInterface.cpp" line="1548"/>
         <source>Export as &amp;RAGE Photo...</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出成 RAGE 照片... (&amp;R)</translation>
     </message>
     <message>
         <location filename="../src/PictureDialog.cpp" line="174"/>
@@ -1097,8 +1097,8 @@ Y: %2</translation>
         <source>Key 1 - Avatar Preview Mode
 Key 2 - Toggle Overlay
 Arrow Keys - Navigate</source>
-        <translation>數字鍵 1 - 大頭接預覽模式
-數字鍵 2 - 開關重疊層
+        <translation>數字鍵 1 - 大頭貼預覽區域
+數字鍵 2 - 說明
 方向鍵 - 導覽</translation>
     </message>
     <message>
@@ -1116,13 +1116,13 @@ Arrow Keys - Navigate</source>
         <location filename="../src/PictureDialog.cpp" line="497"/>
         <location filename="../src/ProfileInterface.cpp" line="1544"/>
         <source>Export as &amp;GTA V Snapmatic...</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出成 GTA V Snapmatic (&amp;G)</translation>
     </message>
     <message>
         <location filename="../src/PictureDialog.cpp" line="499"/>
         <location filename="../src/ProfileInterface.cpp" line="1546"/>
         <source>Export as &amp;RDR 2 Photo...</source>
-        <translation type="unfinished"></translation>
+        <translation>匯出成 RDR2 照片... (&amp;R)</translation>
     </message>
     <message>
         <location filename="../src/PictureDialog.cpp" line="522"/>
@@ -1250,7 +1250,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/PictureExport.cpp" line="221"/>
         <source>Exported Snapmatic to &quot;%1&quot; because of using the .auto extension.</source>
-        <translation>因為使用 .auto 格式，將 Snapmatic 匯出到 &quot;%1&quot;.</translation>
+        <translation>因為使用 .auto 格式， Snapmatic 將匯出到 &quot;%1&quot;.</translation>
     </message>
 </context>
 <context>
@@ -1288,7 +1288,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/PlayerListDialog.cpp" line="156"/>
         <source>Failed to add more Players because the limit of Players are %1!</source>
-        <translation>因為數量限制 %1，無法新增更多玩家!</translation>
+        <translation>無法新增更多玩家，數量限制 %1</translation>
     </message>
     <message>
         <location filename="../src/PlayerListDialog.cpp" line="172"/>
@@ -1304,7 +1304,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/PlayerListDialog.cpp" line="191"/>
         <source>Failed to add Player %1 because Player %1 is already added!</source>
-        <translation>新增 %1 失敗，因為 %1 已被新增!</translation>
+        <translation>新增 %1 失敗，%1 已被新增!</translation>
     </message>
 </context>
 <context>
@@ -1399,14 +1399,14 @@ Press 1 for Default View</source>
         <location filename="../src/ImportDialog.cpp" line="784"/>
         <location filename="../src/ProfileInterface.cpp" line="787"/>
         <source>Can&apos;t import %1 because file can&apos;t be open</source>
-        <translation>無法匯入 %1，因為檔案無法開啟</translation>
+        <translation>無法匯入 %1，檔案無法開啟</translation>
     </message>
     <message>
         <location filename="../src/ImportDialog.cpp" line="486"/>
         <location filename="../src/ImportDialog.cpp" line="792"/>
         <location filename="../src/ProfileInterface.cpp" line="796"/>
         <source>Can&apos;t import %1 because file can&apos;t be parsed properly</source>
-        <translation>無法匯入 %1，因為檔案無法正確解析</translation>
+        <translation>無法匯入 %1，檔案無法正確解析</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="79"/>
@@ -1472,22 +1472,22 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/UserInterface.cpp" line="596"/>
         <source>All profile files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>所有設定檔 (%1)</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="598"/>
         <source>GTA V Savegames files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V 存檔 (%1)</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="600"/>
         <source>RDR 2 Savegames files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>RDR 2 遊戲存檔 (%1)</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="633"/>
         <source>Failed to read Photo file</source>
-        <translation type="unfinished"></translation>
+        <translation>讀取照片失敗</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="647"/>
@@ -1497,7 +1497,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="901"/>
         <source>Can&apos;t import %1 because file format can&apos;t be detected</source>
-        <translation>無法匯入 %1，因為無法檢測該檔案格式</translation>
+        <translation>無法匯入 %1，無法檢測該檔案格式</translation>
     </message>
     <message>
         <source>Failed to import the Snapmatic picture, file not begin with PGTA or end with .g5e</source>
@@ -1561,7 +1561,7 @@ Press 1 for Default View</source>
         <location filename="../src/ProfileInterface.cpp" line="1358"/>
         <location filename="../src/ProfileInterface.cpp" line="1363"/>
         <source>Remove selected</source>
-        <translation>移除所選</translation>
+        <translation>移除已選擇</translation>
     </message>
     <message>
         <source>You really want remove the selected Snapmatic picutres and Savegame files?</source>
@@ -1597,31 +1597,31 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="578"/>
         <source>All importable files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>所有可匯入檔案 (%1)</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="579"/>
         <location filename="../src/UserInterface.cpp" line="597"/>
         <source>GTA V Export (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V 匯出 (%1)</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="580"/>
         <location filename="../src/UserInterface.cpp" line="599"/>
         <source>GTA V Snapmatic files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V Snapmatic 檔案 (%1)</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="581"/>
         <location filename="../src/UserInterface.cpp" line="601"/>
         <source>RDR 2 Photo files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>RDR 2 照片 (%1)</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="583"/>
         <location filename="../src/UserInterface.cpp" line="602"/>
         <source>All files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>所有檔案 (%1)</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="945"/>
@@ -1635,62 +1635,62 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1059"/>
         <source>Photo import failed! It is not a GTA V or RDR 2 compatible photo</source>
-        <translation type="unfinished"></translation>
+        <translation>照片匯入失敗，這不是 GTA V 或 RDR 2 相容的照片</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1065"/>
         <source>A Photo already exists with the uid %1, you want assign your import a new uid and timestamp?</source>
-        <translation type="unfinished"></translation>
+        <translation>已有與 uid %1 相同的圖片，你想要匯入新的 uid 和時間標記嗎?</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1144"/>
         <source>Photo import failed! Can not copy the file in the profile</source>
-        <translation type="unfinished"></translation>
+        <translation>照片匯入失敗，無法將檔案複製到設定檔中</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1229"/>
         <location filename="../src/ProfileInterface.cpp" line="1246"/>
         <source>JPEG pictures, GTA V Snapmatic and RDR 2 Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG 圖片，GTA V Snapmatic 與 RDR 2 照片</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1230"/>
         <location filename="../src/ProfileInterface.cpp" line="1250"/>
         <source>JPEG pictures</source>
-        <translation type="unfinished"></translation>
+        <translation>JPEG 圖片</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1231"/>
         <location filename="../src/ProfileInterface.cpp" line="1253"/>
         <source>GTA V Snapmatic and RDR 2 Photo</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V Snapmatic 與 RDR 2 照片</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1244"/>
         <source>%1Export GTA V Snapmatic and RDR 2 Photo%2&lt;br&gt;&lt;br&gt;JPEG pictures can be open by your operating system and various software, but will lose metadata saved from the game&lt;br&gt;GTA V Snapmatic and RDR 2 Photo keeps all metadata, but the software compatibility is limited&lt;br&gt;&lt;br&gt;Export as:</source>
-        <translation type="unfinished"></translation>
+        <translation>%1匯出 GTA V Snapmatic 和 RDR 2 照片%2&lt;br&gt;&lt;br&gt;JPEG 圖片可使用圖片檢視器開啟，但會失去遊戲的保存資訊&lt;br&gt;GTA V Snapmatic 和 RDR 2 圖片保留所有資訊，但軟體相容性有限&lt;br&gt;&lt;br&gt;匯出成:</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1328"/>
         <location filename="../src/ProfileInterface.cpp" line="1363"/>
         <source>No Snapmatic, Photo or Savegame files are selected</source>
-        <translation type="unfinished"></translation>
+        <translation>未選擇 Snapmatic照片或遊戲存檔。</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1335"/>
         <source>You really want remove the selected Snapmatic, Photo and Savegame files?</source>
-        <translation type="unfinished"></translation>
+        <translation>你想移除所選的 Snapmatic 照片/存檔嗎?</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1358"/>
         <source>Failed to remove all selected Snapmatic, Photo and/or Savegame files</source>
-        <translation type="unfinished"></translation>
+        <translation>無法移除所有選則的 Snapmatic 照片/存檔檔案。</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1464"/>
         <location filename="../src/ProfileInterface.cpp" line="1494"/>
         <source>No Snapmatic or Photos are selected</source>
-        <translation type="unfinished"></translation>
+        <translation>未選擇 Snapmatic 照片</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="1927"/>
@@ -1910,17 +1910,17 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/SavegameCopy.cpp" line="56"/>
         <source>GTA V Savegames files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V .遊戲存檔 (%1)</translation>
     </message>
     <message>
         <location filename="../src/SavegameCopy.cpp" line="58"/>
         <source>RDR 2 Savegames files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>RDR 2 遊戲存檔 (%1)</translation>
     </message>
     <message>
         <location filename="../src/SavegameCopy.cpp" line="59"/>
         <source>All files (%1)</source>
-        <translation type="unfinished"></translation>
+        <translation>所有檔案 (%1)</translation>
     </message>
     <message>
         <location filename="../src/SavegameCopy.cpp" line="72"/>
@@ -2022,7 +2022,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="50"/>
         <source>Editor</source>
-        <translation>編輯</translation>
+        <translation>編輯器</translation>
     </message>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="57"/>
@@ -2032,7 +2032,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="64"/>
         <source>Regular</source>
-        <translation>正常</translation>
+        <translation>一般</translation>
     </message>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="71"/>
@@ -2052,7 +2052,7 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="104"/>
         <source>Snapmatic Values</source>
-        <translation>Snapmatic 信息</translation>
+        <translation>Snapmatic 資訊</translation>
     </message>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="171"/>
@@ -2062,12 +2062,12 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="177"/>
         <source>Qualify as Avatar automatically at apply</source>
-        <translation>自動設定成符合資格的圖片</translation>
+        <translation>自動設定成大頭貼的圖片</translation>
     </message>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="190"/>
         <source>Qualify as Avatar allows you to use this Snapmatic as a Social Club profile picture</source>
-        <translation>符合資格的圖片將可以設定為 Social Club 大頭貼</translation>
+        <translation>大頭貼圖片可以設定為 Social Club 虛擬人偶</translation>
     </message>
     <message>
         <location filename="../src/SnapmaticEditor.ui" line="240"/>
@@ -2116,7 +2116,7 @@ Press 1 for Default View</source>
         <location filename="../src/ProfileInterface.cpp" line="2121"/>
         <location filename="../src/SnapmaticEditor.cpp" line="394"/>
         <source>Snapmatic Crew</source>
-        <translation>幫會</translation>
+        <translation>Snapmatic 幫會</translation>
     </message>
     <message>
         <location filename="../src/ProfileInterface.cpp" line="2121"/>
@@ -2424,18 +2424,18 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/UserInterface.ui" line="76"/>
         <source>RDR 2</source>
-        <translation type="unfinished"></translation>
+        <translation>RDR 2</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.ui" line="86"/>
         <source>GTA V</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.ui" line="104"/>
         <location filename="../src/UserInterface.ui" line="343"/>
         <source>Select &amp;Game Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇遊戲資料夾 (&amp;G)</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.ui" line="129"/>
@@ -2643,27 +2643,27 @@ Press 1 for Default View</source>
     <message>
         <location filename="../src/UserInterface.cpp" line="671"/>
         <source>Can not open %1 because file format is not valid</source>
-        <translation type="unfinished"></translation>
+        <translation>無法開啟 %1，檔案格式無效。</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="839"/>
         <source>Select Game Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇遊戲資料夾</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="846"/>
         <source>GTA V:</source>
-        <translation type="unfinished"></translation>
+        <translation>GTA V:</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="863"/>
         <source>RDR 2:</source>
-        <translation type="unfinished"></translation>
+        <translation>RDR 2:</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="885"/>
         <source>&amp;Select</source>
-        <translation type="unfinished">選擇(&amp;S)</translation>
+        <translation>選擇(&amp;S)</translation>
     </message>
     <message>
         <source>View</source>
@@ -2682,7 +2682,7 @@ Press 1 for Default View</source>
         <location filename="../src/UserInterface.cpp" line="388"/>
         <location filename="../src/UserInterface.cpp" line="408"/>
         <source>Profile: %1</source>
-        <translation type="unfinished">設定檔: %1</translation>
+        <translation>設定檔: %1</translation>
     </message>
     <message>
         <location filename="../src/UserInterface.cpp" line="593"/>
@@ -2710,7 +2710,7 @@ Press 1 for Default View</source>
         <location filename="../src/OptionsDialog.cpp" line="618"/>
         <location filename="../src/UserInterface.cpp" line="872"/>
         <source>Select RDR 2 Folder...</source>
-        <translation type="unfinished"></translation>
+        <translation>選擇 RDR 2 資料夾...</translation>
     </message>
 </context>
 </TS>
