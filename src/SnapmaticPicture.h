@@ -20,12 +20,12 @@
 #define SNAPMATICPICTURE_H
 
 #include "SnapmaticJson.h"
-#ifdef RAGEPHOTO_USE_ABI_WRAPPER
-#include <RagePhotoA>
-typedef RagePhotoA RagePhoto;
-#else
-#include <RagePhoto>
+#ifndef RAGEPHOTO_USE_ABI_WRAPPER
+#ifndef LIBRAGEPHOTO_PREFER_NATIVE
+#define LIBRAGEPHOTO_PREFER_NATIVE
 #endif
+#endif
+#include <RagePhoto>
 #include <QStringList>
 #include <QDateTime>
 #include <QObject>
